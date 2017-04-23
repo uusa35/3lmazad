@@ -1,0 +1,12 @@
+{
+   "1":{
+      "country_id":1,
+      "name_ar":"الجهراء",
+      "name_en":"Al-Jahra"
+   },
+   "2":{
+      "country_id":1,
+      "name_ar":"الشويخ",
+      "name_en":"Al-shweq"
+   }
+}

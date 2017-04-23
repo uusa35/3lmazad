@@ -1,0 +1,24 @@
+@import '../html/font/style.css';
+//<!-- Vendor CSS -->
+@import '../html/vendor/waves/waves.css';
+@import '../html/vendor/slick/slick.css';
+@import '../html/vendor/slick/slick-theme.css';
+@import '../html/vendor/bootstrap-select/bootstrap-select.css';
+//<!-- Custom CSS -->
+@import '../html/css/style.css';
+@import '../html/css/style-colors.css';
+//<!-- Custom Fonts -->
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+//<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+@import '../html/vendor/rs-plugin/css/settings.css';
+//<!-- Head Libs -->
+@media (min-width: 1300px) {
+  .container {
+    width: 1300px !important;
+  }
+}
+
+.nav-tabs--wd > li > a, .nav-tabs--wd > li.active > a, .nav-tabs--wd > li.active > a:hover, .nav-tabs--wd > li.active > a:focus {
+  padding: 8px;
+}
