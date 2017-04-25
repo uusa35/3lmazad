@@ -1,10 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Models\BaseModel;
 
 class Deal extends BaseModel
 {
-    //
+    public function ad()
+    {
+        return $this->belongsTo(Ad::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

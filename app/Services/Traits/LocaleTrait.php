@@ -44,13 +44,13 @@ trait LocaleTrait
         return parent::__get($name);
     }
 
-    public static function getPossbileStatuses(){
-        $type = DB::select(DB::raw('SHOW COLUMNS FROM pages WHERE Field = "type"'))[0]->Type;
-        preg_match('/^enum\((.*)\)$/', $type, $matches);
-        $values = array();
-        foreach(explode(',', $matches[1]) as $value){
-            $values[] = trim($value, "'");
-        }
-        return $values;
-    }
+//    public static function getPossbileStatuses(){
+//        $type = DB::select(DB::raw('SHOW COLUMNS FROM pages WHERE Field = "type"'))[0]->Type;
+//        preg_match('/^enum\((.*)\)$/', $type, $matches);
+//        $values = array();
+//        foreach(explode(',', $matches[1]) as $value){
+//            $values[] = trim($value, "'");
+//        }
+//        return $values;
+//    }
 } 

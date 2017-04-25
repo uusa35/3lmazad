@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -15,11 +14,11 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('active')->default(1);
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
             $table->string('image')->default('sample.png')->nullable();
             $table->morphs('galleryable');
+
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateGalleriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galleries');
+        Schema::drop('galleries');
     }
 }

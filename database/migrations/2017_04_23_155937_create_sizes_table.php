@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAboutusTable extends Migration
+class CreateSizesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +12,12 @@ class CreateAboutusTable extends Migration
      */
     public function up()
     {
-        Schema::create('aboutus', function (Blueprint $table) {
+        Schema::create('sizes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->nullable();
-            $table->longText('description')->nullable();
+            $table->string('name_ar');
+            $table->string('name_en');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +28,6 @@ class CreateAboutusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aboutus');
+        Schema::drop('sizes');
     }
 }

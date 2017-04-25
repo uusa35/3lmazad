@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-
     use LocaleTrait, ModelHelpers;
+    protected $localeStrings = [];
+    protected $guarded = [''];
 }

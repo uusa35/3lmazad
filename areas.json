@@ -1,12 +1,27 @@
 {
    "1":{
-      "country_id":1,
+      "country_id":118,
       "name_ar":"الجهراء",
       "name_en":"Al-Jahra"
    },
    "2":{
-      "country_id":1,
+      "country_id":118,
       "name_ar":"الشويخ",
       "name_en":"Al-shweq"
+   },
+   "3":{
+      "country_id":118,
+      "name_ar":"الفروانية",
+      "name_en":"Al-Farwanya"
+   },
+   "4":{
+      "country_id":118,
+      "name_ar":"الأحمدي",
+      "name_en":"Al-Hmadi"
+   },
+   "5":{
+      "country_id":118,
+      "name_ar":"السالمية",
+      "name_en":"Al-Salmyiah"
    }
 }

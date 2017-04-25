@@ -17,11 +17,11 @@ class CreateAdsTable extends Migration
             $table->increments('id');
             $table->string('title')->nullable();
             $table->string('description')->nullable();
-            $table->decimal('price',6,2)->unsigned()->nullable();
+            $table->decimal('price', 6, 2)->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->boolean('featured')->default(0);
             $table->boolean('phone')->default(1);
-            $table->string('condition')->nullable();
+            $table->enum('condition', ['new', 'old'])->nullable();
             $table->string('manufacturing_year')->nullable();
             $table->string('mileage')->nullable();
             $table->string('transmission')->nullable();
@@ -45,17 +45,17 @@ class CreateAdsTable extends Migration
             $table->integer('category_id')->unsigned()->index()->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 
-            $table->integer('gallery_id')->unsigned()->index()->nullable();
-            $table->foreign('gallery_id')->references('id')->on('galleries');
-
             $table->integer('area_id')->unsigned()->index()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
 
-            $table->integer('brand_id')->unsigned()->index()->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
-
             $table->integer('model_id')->unsigned()->index()->nullable();
             $table->foreign('model_id')->references('id')->on('models');
+
+            $table->integer('color_id')->unsigned()->index()->nullable();
+            $table->foreign('color_id')->references('id')->on('colors');
+
+            $table->integer('size_id')->unsigned()->index()->nullable();
+            $table->foreign('size_id')->references('id')->on('sizes');
 
             $table->timestamps();
             $table->softDeletes();

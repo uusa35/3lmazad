@@ -18,6 +18,7 @@ class CreateCommercialsTable extends Migration
             $table->string('description')->nullable();
             $table->string('image')->default('default.jpg')->nullable();
             $table->integer('duration')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

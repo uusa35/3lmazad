@@ -24,7 +24,8 @@ class CreateCountriesTable extends Migration
             $table->string('currency_sub_unit', 255)->nullable();
             $table->string('currency_symbol')->nullable();
             $table->string('full_name', 255)->nullable();
-            $table->string('name', 255)->nullable();
+            $table->string('name_en', 255)->nullable();
+            $table->string('name_ar', 255)->nullable();
             $table->string('iso_3166_2', 2)->nullable();
             $table->string('iso_3166_3', 3)->nullable();
             $table->string('region_code', 3)->nullable();

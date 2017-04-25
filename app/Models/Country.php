@@ -9,15 +9,24 @@ namespace App\Models;
  */
 class Country extends BaseModel
 {
+    protected $localeStrings = ['name'];
+    protected $guarded = [''];
+
     public function user()
     {
         return $this->hasMany(User::class);
     }
 
-    public function qualifications()
+    public function ads()
     {
-        return $this->hasMany(ItemQualification::class);
+        return $this->hasManyThrough(Ad::class, User::class);
     }
+
+    public function areas()
+    {
+        return $this->hasMany(Area::class);
+    }
+
 }
 
 ?>

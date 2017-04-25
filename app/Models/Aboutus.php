@@ -10,5 +10,6 @@ namespace App\Models;
 class Aboutus extends BaseModel
 {
     protected $table = 'aboutus';
+    protected $localeStrings = [];
     protected $guarded = [''];
 }

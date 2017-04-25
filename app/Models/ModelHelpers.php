@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\DB;
  */
 trait ModelHelpers
 {
-    public function withHas($relation)
-    {
-        return $this->has($relation)->with($relation);
-    }
-
+    /**
+     * @param $table
+     * @param $column
+     * @return array
+     * Description : Fetchs all enum values from table for specific column
+     */
     public static function getEnumValues($table, $column) {
         $type = DB::select(DB::raw("SHOW COLUMNS FROM $table WHERE Field = '{$column}'"))[0]->Type ;
         preg_match('/^enum\((.*)\)$/', $type, $matches);

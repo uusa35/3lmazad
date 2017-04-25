@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
             }
+
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {
                 $this->call(CountriesTableSeeder::class);

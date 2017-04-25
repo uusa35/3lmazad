@@ -1,10 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Models\BaseModel;
 
 class Plan extends BaseModel
 {
-    //
+
 }

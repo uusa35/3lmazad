@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Helpers\UserHelpers;
+use App\Models\Traits\UserTrait;
 use App\Scopes\ScopeActive;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserTrait, UserHelpers;
 
     /**
      * The attributes that are mass assignable.
@@ -27,9 +29,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-//
+
     protected $casts = [
         'active' => 'boolean',
+        'featured' => 'boolean'
     ];
 
     /**

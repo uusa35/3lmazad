@@ -15,7 +15,8 @@ class CreateContactusTable extends Migration
     {
         Schema::create('contactus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('instagram_url')->nullable();
