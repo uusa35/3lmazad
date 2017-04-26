@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use App\Core\PrimaryModel;
-use App\Models\Ad;
-use Illuminate\Database\Eloquent\Model;
 
-class Color extends PrimaryModel
+class Color extends BaseModel
 {
     protected $localeStrings = ['name'];
 
 
-    public function ad() {
+    public function ads() {
         return $this->hasMany(Ad::class);
     }
     /**

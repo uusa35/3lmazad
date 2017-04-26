@@ -30,7 +30,7 @@ class CreateAdsTable extends Migration
             $table->string('bathroom_no')->nullable();
             $table->string('rent_type')->nullable();
             $table->string('building_age')->nullable();
-            $table->string('furnished')->nullable();
+            $table->boolean('furnished')->nullable();
             $table->string('space')->nullable();
             $table->text('address')->nullable();
             $table->string('image')->nullable();

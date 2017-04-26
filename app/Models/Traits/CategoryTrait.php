@@ -5,6 +5,7 @@ use App\CategoryForm;
 use App\Models\Ad;
 use App\Models\Brand;
 use App\Models\Form;
+use App\Models\Type;
 
 /**
  * Created by PhpStorm.
@@ -24,9 +25,22 @@ trait CategoryTrait
         return $this->belongsTo(Form::class);
     }
 
+    /**
+     * @return mixed
+     * brands like : apple / samsung
+     */
     public function brands()
     {
         return $this->hasMany(Brand::class);
+    }
+
+    /**
+     * @return mixed
+     * types like : desktop / laptops
+     */
+    public function types()
+    {
+        return $this->hasMany(Type::class);
     }
 
     public function scopeParents($q)

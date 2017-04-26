@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModelsTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('models', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
 
-            $table->integer('brand_id')->unsigned()->index()->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->integer('category_id')->unsigned()->index()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateModelsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('models');
+        Schema::drop('types');
     }
 }
