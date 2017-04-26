@@ -2,6 +2,7 @@
 namespace App\Models\Traits;
 
 use App\Models\Ad;
+use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Deal;
 
@@ -23,8 +24,9 @@ trait UserTrait
         return $this->belongsTo(Country::class);
     }
 
-    public function deals()
+    public function comments()
     {
-        return $this->hasMany(Deal::class);
+        return $this->hasMany(Comment::class);
     }
+
 }

@@ -27,4 +27,8 @@ trait ModelHelpers
         }
         return $enum;
     }
+
+    public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

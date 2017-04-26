@@ -5,13 +5,12 @@ namespace App\Models;
 
 class Deal extends BaseModel
 {
-    public function ad()
+    public function ads()
     {
-        return $this->belongsTo(Ad::class);
+        return $this->belongsToMany(Ad::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function plan() {
+        return $this->belongsTo(Plan::class);
     }
 }

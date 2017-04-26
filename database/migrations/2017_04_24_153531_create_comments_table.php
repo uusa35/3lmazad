@@ -16,12 +16,9 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->text('body')->nullable();
 
-            $table->integer('ad_id')->unsigned()->index()->nullable();
-            $table->foreign('ad_id')->references('id')->on('ads');
-
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-
+            $table->morphs('commentable');
             $table->timestamps();
         });
     }

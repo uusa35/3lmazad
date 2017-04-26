@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Traits\CategoryTrait;
 
 /**
  * App\Models\Category
@@ -20,25 +21,9 @@ class Category extends BaseModel
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
-
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
-    }
-
-    public function items()
-    {
-        return $this->hasMany(Item::class);
-    }
-
-    /**
-     * hasMany relation
-     * Category has many branches(that are related to distributors only)
-     * Branch belongsTo Category
-     */
-    public function branch()
-    {
-        return $this->hasMany(Branch::class);
     }
 
 }

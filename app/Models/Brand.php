@@ -5,13 +5,22 @@ namespace App\Models;
 class Brand extends BaseModel
 {
 
-    public function models()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * only parent categories
+     */
+    public function category()
     {
-        return $this->hasMany(Model::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function ads()
     {
-        return $this->hasManyThrough(Ad::class, Model::class);
+        return $this->hasMany(Ad::class);
+    }
+
+    public function models()
+    {
+        return $this->hasMany(Model::class);
     }
 }

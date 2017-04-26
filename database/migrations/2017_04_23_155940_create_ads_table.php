@@ -39,14 +39,14 @@ class CreateAdsTable extends Migration
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->integer('plan_id')->unsigned()->index()->nullable();
-            $table->foreign('plan_id')->references('id')->on('plans');
-
             $table->integer('category_id')->unsigned()->index()->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
 
             $table->integer('area_id')->unsigned()->index()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
+
+            $table->integer('brand_id')->unsigned()->index()->nullable();
+            $table->foreign('brand_id')->references('id')->on('brands');
 
             $table->integer('model_id')->unsigned()->index()->nullable();
             $table->foreign('model_id')->references('id')->on('models');
