@@ -8,72 +8,93 @@
 
 return [
     // parent
-    'vehicles' => [
-        'for sale',
-        'for rent',
-        'motorcyle',
-        'plates',
-        'spareparts',
-        'trucks',
-        'boats',
-        'others',
+    0 => [
+        'parent' => 'vehicles',
+        'sub' => [
+            'for sale',
+            'for rent',
+            'motorcyle',
+            'plates',
+            'spareparts',
+            'trucks',
+            'boats',
+            'others',
+        ]
     ],
-    'mobiles' => [
-        'smart phones',
-        'tablets',
-        'special numbers',
-        'accessories',
-        'others',
+    1 => [
+        'parent' => 'mobiles',
+        'sub' => [
+            'smart phones',
+            'tablets',
+            'special numbers',
+            'accessories',
+            'others',
+        ]
     ],
-    'electronics' => [
-        'computers',
-        'tvs',
-        'speakers',
-        'modems',
-        'cameras',
-        'air conditioners',
-        'firdges',
-        'washing machines',
-        'microwave',
+    2 => [
+        'parent' => 'electronics',
+        'sub' => [
+            'computers',
+            'tvs',
+            'speakers',
+            'modems',
+            'cameras',
+            'air conditioners',
+            'firdges',
+            'washing machines',
+            'microwave',
+        ]
     ],
-    'real estate for sale' => [
-        'Villa - Palace for Sale',
-        'Commercial for Sale',
-        'Whole Building for Sale',
-        'Land for Sale',
-        'Chalets - Summerhouses for Sale',
-        'Other Real Estate for Sale',
+    3 => [
+        'parent' => 'real estate for sale',
+        'sub' => [
+            'Villa - Palace for Sale',
+            'Commercial for Sale',
+            'Whole Building for Sale',
+            'Land for Sale',
+            'Chalets - Summerhouses for Sale',
+            'Other Real Estate for Sale',
+        ]
     ],
-    'real estate for rend' => [
-        'Villa - Palace for rent',
-        'Commercial for rent',
-        'Whole Building for rent',
-        'Land for rent',
-        'Chalets - Summerhouses for rent',
-        'Other Real Estate for rent',
+    4 => [
+        'parent' => 'real estate for rend',
+        'sub' => [
+            'Villa - Palace for rent',
+            'Commercial for rent',
+            'Whole Building for rent',
+            'Land for rent',
+            'Chalets - Summerhouses for rent',
+            'Other Real Estate for rent',
+        ]
     ],
-    'kids' => [
-        'Kids Furniture',
-        'Strollers - Car Seats',
-        'Kids Clothing',
-        'Toys - Games',
-        'Others - Baby - Kids',
+    5 => [
+        'parent' => 'kids',
+        'sub' => [
+            'Kids Furniture',
+            'Strollers - Car Seats',
+            'Kids Clothing',
+            'Toys - Games',
+            'Others - Baby - Kids',
 
+        ]
     ],
-    'jobs' => [
-        'Engineering',
-        'Admin - Secretary',
-        'Accounting - Finance',
-        'Medicine - Nursing',
-        'Computer - IT',
-        'Tutoring - Training',
-        'Sales - Marketing',
-        'Drivers - Delivery',
-        'Media - Design - Creative',
-        'Recruitment - HR',
-        'Media - Advertising',
-        'Costumer Service',
-        'Maids - Home Staff',
+    6 => [
+        'parent' => 'jobs',
+        'sub' => [
+            'Engineering',
+            'Admin - Secretary',
+            'Accounting - Finance',
+            'Medicine - Nursing',
+            'Computer - IT',
+            'Tutoring - Training',
+            'Sales - Marketing',
+            'Drivers - Delivery',
+            'Media - Design - Creative',
+            'Recruitment - HR',
+            'Media - Advertising',
+            'Costumer Service',
+            'Maids - Home Staff',
+        ]
     ]
 ];
 

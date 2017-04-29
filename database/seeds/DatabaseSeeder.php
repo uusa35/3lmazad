@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
     public $tables = [
         'users', 'sliders', 'ads', 'forms','fields', 'field_form', 'comments', 'brands','models',
         'categories','galleries', 'galleryables', 'images',
-        'newsletter', 'aboutus', 'contactus',
+        'newsletter', 'aboutus', 'contactus','colors','sizes','deals','ad_deals',
         'roles', 'user_role', 'countries', 'areas'
     ];
 
@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
             }
             $this->call(FieldsTableSeeder::class);
             $this->call(FormsTableSeeder::class);
+            $this->call(UsersTableSeeder::class);
+            $this->call(ColorsTableSeeder::class);
+            $this->call(SizesTableSeeder::class);
             $this->call(CategoriesTableSeeder::class);
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {

@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Ad;
 use Illuminate\Database\Seeder;
 
-class AdsTableSeeder extends Seeder
+class AuctionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class AdsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Ad::class,10)->create();
+        //
     }
 }

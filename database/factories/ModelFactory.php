@@ -14,6 +14,7 @@ use App\Models\Aboutus;
 use App\Models\Ad;
 use App\Models\Area;
 use App\Models\Brand;
+use App\Models\BrandModel;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Contactus;
@@ -78,10 +79,11 @@ $factory->define(Type::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Model::class, function (Faker\Generator $faker) {
+$factory->define(BrandModel::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
+        'brand_id' => Brand::all()->random()->id
     ];
 });
 
@@ -102,10 +104,10 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
         'description' => $faker->word,
-        'price' => $faker->word,
-        'active' => $faker->word,
-        'featured' => $faker->word,
-        'phone' => $faker->bankAccountNumber,
+        'price' => $faker->randomDigit,
+        'active' => $faker->boolean(),
+        'featured' => $faker->boolean(),
+        'phone' => $faker->phoneNumber,
         'condition' => $faker->randomElement(['new', 'old']),
         'manufacturing_year' => $faker->year,
         'mileage' => $faker->numberBetween(10, 99999),
@@ -117,45 +119,46 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'building_age' => $faker->year,
         'furnished' => $faker->boolean(),
         'space' => $faker->randomDigit,
-        'address' => $faker->words(10),
+        'address' => $faker->address,
         'image' => 'sample.jpg',
         'user_id' => User::all()->random()->id,
-        'category_id' => Category::whereHas('children.children')->random()->id,
-        'area_id' => Area::where('category_id', 118)->random()->id,
+        'category_id' => function () {
+            return Category::where('parent_id', false)->pluck('id')->shuffle()->first();
+        },
+        'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
         'brand_id' => function ($array) {
-            return Brand::where('category_id', $array['category_id'])->random()->id;
+            return Brand::where('category_id', '=', $array['category_id'])->first()->id;
         },
         'model_id' => function ($array) {
-            return Model::where('brand_id', $array['brand_id'])->random()->id;
+            return BrandModel::where('brand_id', '=', $array['brand_id'])->first()->id;
         },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
     ];
 });
 
-//$factory->define(Brand::class, function (Faker\Generator $faker) {
-//    return [
-//        '' => $faker->,
-//        '' => $faker->,
-//        '' => $faker->,
-//    ];
-//});
-//
-//$factory->define(Brand::class, function (Faker\Generator $faker) {
-//    return [
-//        '' => $faker->,
-//        '' => $faker->,
-//        '' => $faker->,
-//    ];
-//});
+$factory->define(Size::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+    ];
+});
+
+$factory->define(Color::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'code' => $faker->rgbColor,
+    ];
+});
 
 $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
         'active' => $faker->boolean(),
         'description' => $faker->paragraph(2),
         'image' => 'sample.png',
-        'galleryable_id' => $faker->randomDigit,
-        'galleryable_type' => $faker->name,
+        'galleryable_id' => Ad::all()->random()->id,
+        'galleryable_type' => Ad::class,
     ];
 });
 $factory->define(Image::class, function (Faker\Generator $faker) {

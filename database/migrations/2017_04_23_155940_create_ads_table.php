@@ -20,7 +20,7 @@ class CreateAdsTable extends Migration
             $table->decimal('price', 6, 2)->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->boolean('featured')->default(0);
-            $table->boolean('phone')->default(1);
+            $table->string('phone')->nullable();
             $table->enum('condition', ['new', 'old'])->nullable();
             $table->string('manufacturing_year')->nullable();
             $table->string('mileage')->nullable();
@@ -34,7 +34,6 @@ class CreateAdsTable extends Migration
             $table->string('space')->nullable();
             $table->text('address')->nullable();
             $table->string('image')->nullable();
-
 
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
@@ -57,8 +56,8 @@ class CreateAdsTable extends Migration
             $table->integer('size_id')->unsigned()->index()->nullable();
             $table->foreign('size_id')->references('id')->on('sizes');
 
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

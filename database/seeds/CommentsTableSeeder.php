@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Ad;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
-class AdsTableSeeder extends Seeder
+class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class AdsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Ad::class,10)->create();
+        factory(Comment::class,10)->create();
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\Traits\CategoryTrait;
 
 /**
@@ -26,7 +27,8 @@ class Category extends BaseModel
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->hasOne(Brand::class);
     }
 

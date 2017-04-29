@@ -21,6 +21,6 @@ class Brand extends BaseModel
 
     public function models()
     {
-        return $this->hasMany(Model::class);
+        return $this->hasMany(BrandModel::class);
     }
 }

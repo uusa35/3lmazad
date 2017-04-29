@@ -3,8 +3,10 @@
 namespace App\Models;
 
 
-class Model extends BaseModel
+class BrandModel extends BaseModel
 {
+    protected $table = 'models';
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
