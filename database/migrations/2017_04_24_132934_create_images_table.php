@@ -18,8 +18,6 @@ class CreateImagesTable extends Migration
             $table->string('thumb_url')->nullable();
             $table->string('medium_url')->nullable();
             $table->string('large_url')->nullable();
-            $table->string('caption_ar')->nullable();
-            $table->string('caption_en')->nullable();
 
             $table->integer('gallery_id')->unsigned()->index()->nullable();
             $table->foreign('gallery_id')->references('id')->on('galleries')->onUpdate('cascade')->onDelete('cascade');

@@ -2,7 +2,9 @@
 namespace App\Models\Traits;
 
 use App\Deal;
+use App\Models\Ad;
 use App\Models\Area;
+use App\Models\Auction;
 use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Size;
@@ -74,6 +76,11 @@ trait AdTrait
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function auctions()
+    {
+        return $this->hasMany(Auction::class);
     }
 
 }
