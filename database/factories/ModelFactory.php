@@ -21,12 +21,15 @@ use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Contactus;
 use App\Models\Country;
+use App\Models\Deal;
+use App\Models\Favorite;
 use App\Models\Field;
 use App\Models\Form;
 use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Model;
 use App\Models\Newsletter;
+use App\Models\Plan;
 use App\Models\Role;
 use App\Models\Size;
 use App\Models\Slider;
@@ -97,8 +100,10 @@ $factory->define(Form::class, function (Faker\Generator $faker) {
 
 $factory->define(Field::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'value' => $faker->name,
+        'name' => $faker->word,
+        'value' => function ($array) {
+            return $array['name'];
+        }
     ];
 });
 
@@ -170,6 +175,37 @@ $factory->define(Color::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(Plan::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'duration' => $faker->randomDigit,
+        'price' => $faker->randomFloat(3, 4, 5),
+        'sale_price' => $faker->randomFloat(3, 2, 3),
+        'active' => $faker->boolean(true),
+    ];
+});
+
+$factory->define(Deal::class, function (Faker\Generator $faker) {
+    return [
+        'plan_id' => Plan::all()->random()->id,
+        'final_price' => function ($array) {
+            return Plan::whereId($array['plan_id'])->first()->price;
+        },
+        'duration' => function ($array) {
+            return Plan::whereId($array['plan_id'])->first()->duration;
+        },
+        'total_amount' => function ($array) {
+            return $array['final_price'] * $array['duration'];
+        },
+        'valid' => $faker->boolean(true),
+        'start_date' => $faker->dateTimeThisYear,
+        'end_date' => $faker->dateTimeThisYear,
+        'ad_id' => Ad::all()->random()->id,
+    ];
+});
+
+
 $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
         'description_ar' => $faker->paragraph(2),
@@ -191,7 +227,8 @@ $factory->define(Image::class, function (Faker\Generator $faker) {
 
 $factory->define(Contactus::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name_en' => $faker->name,
+        'name_ar' => $faker->name,
         'facebook_url' => $faker->url,
         'twitter_url' => $faker->url,
         'instagram_url' => $faker->url,
@@ -213,17 +250,28 @@ $factory->define(Newsletter::class, function (Faker\Generator $faker) {
         'active' => $faker->boolean(true),
     ];
 });
+
 $factory->define(Aboutus::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->name,
-        'description' => $faker->paragraph(2),
+        'title_ar' => $faker->name,
+        'title_en' => $faker->name,
+        'body_en' => $faker->paragraph(2),
+        'body_ar' => $faker->paragraph(2),
+    ];
+});
+
+$factory->define(Favorite::class, function (Faker\Generator $faker) {
+    return [
+        'ad_id' => Ad::all()->random()->id,
+        'user_id' => User::all()->random()->id,
     ];
 });
 
 
 $factory->define(Slider::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->name,
+        'title_ar' => $faker->name,
+        'title_en' => $faker->name,
         'url' => $faker->url,
         'image' => 'sample.png',
         'order' => $faker->numberBetween(1, 10),

@@ -6,9 +6,9 @@ namespace App\Models;
 class Form extends BaseModel
 {
 
-    public function category()
+    public function categories()
     {
-        return $this->hasOne(Category::class);
+        return $this->hasMany(Category::class);
     }
 
     public function fields() {

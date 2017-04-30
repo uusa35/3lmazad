@@ -5,9 +5,9 @@ namespace App\Models;
 
 class Deal extends BaseModel
 {
-    public function ads()
+    public function ad()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->belongsTo(Ad::class);
     }
 
     public function plan() {

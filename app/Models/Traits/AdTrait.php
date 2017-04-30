@@ -1,8 +1,7 @@
 <?php
 namespace App\Models\Traits;
 
-use App\Deal;
-use App\Models\Ad;
+use App\Models\Deal;
 use App\Models\Area;
 use App\Models\Auction;
 use App\Models\Color;
@@ -12,7 +11,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Model;
-use App\Models\Plan;
 
 /**
  * Created by PhpStorm.
@@ -58,14 +56,15 @@ trait AdTrait
         return $this->belongsTo(Size::class);
     }
 
+    /**
+     * @return mixed
+     * One To many Relation
+     * ad hasMany deals (because ad can be renewed many times)
+     * deal belongsTo only One ad
+     */
     public function deals()
     {
-        return $this->belongsToMany(Deal::class);
-    }
-
-    public function plan()
-    {
-        return $this->belongsTo(Plan::class);
+        return $this->hasMany(Deal::class);
     }
 
     public function gallery()

@@ -5,6 +5,7 @@ use App\Models\Ad;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Deal;
+use App\Models\Role;
 
 /**
  * Created by PhpStorm.
@@ -27,6 +28,11 @@ trait UserTrait
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
     }
 
 }

@@ -13,8 +13,6 @@ class FormsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Form::class,10)->create()->each(function ($form) {
-            $form->fields()->saveMany(Field::all()->random()->take(5));
-        });
+        factory(Form::class)->create();
     }
 }

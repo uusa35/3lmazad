@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Field;
+use App\Models\Form;
 use Illuminate\Database\Seeder;
 
 class FieldsTableSeeder extends Seeder
@@ -16,7 +17,7 @@ class FieldsTableSeeder extends Seeder
             'title', 'description', 'price', 'active', 'featured', 'phone', 'condition', 'manufacturing_year', 'mileage', 'transmission', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space', 'address', 'image', 'user_id', 'category_id', 'area_id', 'brand_id', 'model_id', 'color_id', 'size_id',
         ];
         foreach ($fieldsArray as $k => $v) {
-            factory(Field::class)->create(['name' => $v, 'value' => $v]);
+            factory(Field::class)->create(['name' => $v]);
         }
     }
 }

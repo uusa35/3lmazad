@@ -7,9 +7,9 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     public $tables = [
-        'users', 'sliders', 'ads', 'forms','fields', 'field_form', 'comments', 'brands','models',
-        'categories','galleries', 'galleryables', 'images',
-        'newsletter', 'aboutus', 'contactus','colors','sizes','deals','ad_deals',
+        'users', 'sliders', 'ads', 'forms', 'fields', 'field_form', 'comments', 'brands', 'models',
+        'categories', 'galleries', 'galleryables', 'images',
+        'newsletter', 'aboutus', 'contactus', 'colors', 'sizes', 'deals', 'ad_deals',
         'roles', 'user_role', 'countries', 'areas'
     ];
 
@@ -28,12 +28,20 @@ class DatabaseSeeder extends Seeder
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
             }
+            $this->call(PlansTableSeeder::class);
             $this->call(FieldsTableSeeder::class);
             $this->call(FormsTableSeeder::class);
             $this->call(UsersTableSeeder::class);
             $this->call(ColorsTableSeeder::class);
             $this->call(SizesTableSeeder::class);
+            $this->call(SlidersTableSeeder::class);
+            $this->call(AboutusTableSeeder::class);
+            $this->call(ContactusTableSeeder::class);
+            $this->call(NewsletterTableSeeder::class);
+            $this->call(RolesTableSeeder::class);
+            $this->call(RoleUserTableSeeder::class);
             $this->call(CategoriesTableSeeder::class);
+
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {
                 $this->call(CountriesTableSeeder::class);

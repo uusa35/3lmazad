@@ -6,6 +6,9 @@ use App\Models\Brand;
 use App\Models\BrandModel;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Deal;
+use App\Models\Field;
+use App\Models\Form;
 use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Type;
@@ -34,22 +37,35 @@ class CategoriesTableSeeder extends Seeder
                 // TYPES FOR EACH PARENT
                 $parent->types()->saveMany(factory(Type::class, 2)->create());
 
+                $form = factory(Form::class)->create();
+                $form->each(function ($form) {
+                    $form->fields()->attach(Field::all()->random()->pluck('id')->shuffle()->take(5));
+                });
+                $form->categories()->save($parent);
+
                 foreach ($category['sub'] as $sub) {
                     //SUB
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+                    factory(Ad::class,5)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+
                         $subCat->ads()->save($ad);
+
                         $gallery = factory(Gallery::class)->create();
+
                         // GALLERY FOR EACH ADD
                         $ad->gallery()->save($gallery);
                         // IMAGES FOR EACH GALLERY
                         factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
+
                         // COMMENTS FOR EACH AD
                         $ad->comments()->saveMany(factory(Comment::class, 2)->create());
+
                         // Auctions FOR EACH AD
                         $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
+
+                        $ad->deals()->saveMany(factory(Deal::class,2)->create());
 
                     });
 
