@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Contactus;
@@ -15,16 +15,10 @@ class ViewComposers
 {
     public function getCountries(View $view)
     {
-        $countries = Country::pluck('name', 'id');
+        $countries = Country::pluck('name_' . app()->getLocale(), 'id');
         return $view->with(compact('countries'));
     }
 
-
-    public function getCompaniesRoles(View $view)
-    {
-        $roles = Role::companies()->pluck('name', 'id');
-        return $view->with(compact('roles'));
-    }
 
     public function getIsAdmin(View $view)
     {

@@ -35,11 +35,11 @@
                     <h5 class="title text-uppercase mobile-collapse__title">My account</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
-                            @if($isAdmin)
-                                <li><a href="{{ route('backend.index') }}">Dashboard</a></li>
-                            @else
-                                <li><a href="{{ route('account') }}">My Account</a></li>
-                            @endif
+                            {{--@if($isAdmin)--}}
+                                {{--<li><a href="{{ route('backend.index') }}">Dashboard</a></li>--}}
+                            {{--@else--}}
+                                {{--<li><a href="{{ route('account') }}">My Account</a></li>--}}
+                            {{--@endif--}}
                         </ul>
                     </div>
                 </div>
