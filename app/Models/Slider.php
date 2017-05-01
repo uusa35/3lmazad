@@ -12,6 +12,7 @@ use App\Scopes\ScopeActive;
 class Slider extends BaseModel
 {
     protected $guarded = [''];
+    protected $localeStrings = ['title'];
     protected $casts = [
         'active' => 'boolean'
     ];
@@ -26,10 +27,8 @@ class Slider extends BaseModel
     {
         parent::boot();
 
-        if (!request()->is('backend/*') && app()->environment() !== 'testing') {
-
-//            static::addGlobalScope(new ScopeActive());
-
+        if (!in_array('backend', request()->segments(), true)) {
+            static::addGlobalScope(new ScopeActive());
         }
 
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aboutus;
 use App\Models\Contactus;
 use App\Models\Newsletter;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -27,9 +28,39 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $sliders = Slider::orderBy('id', 'desc')->get();
+        return view('frontend.home', compact('sliders'));
     }
 
+    /**
+     * @param HomePageSearch $request
+     * @return users || news || presentations
+     * Fields : search + type
+     */
+    public function search(Filters $filters)
+    {
+        $validator = validator(request()->all(), ['type' => 'nullable', 'search' => 'required|min:3']);
+        if ($validator->fails()) {
+            return redirect()->home()->withErrors($validator->messages());
+        }
+
+        if (request()->type === 'news') {
+            $elements = Newswe::filters($filters)->paginate(12);
+        } elseif (request()->type === 'presentation') {
+            $elements = Presentation::filters($filters)->paginate(12);
+        } elseif (request()->type === 'announcement') {
+            $elements = Announcement::filters($filters)->paginate(12);
+        } else {
+            request()->type = 'user';
+            $elements = User::filters($filters)->paginate(12);
+        }
+
+        if (!$elements->isEmpty()) {
+            return view('frontend.modules.pages.search', compact('elements'));
+        } else {
+            return redirect()->home()->with('error', title_case('no items found .. plz try again'));
+        }
+    }
 
     public function postNewsletter(NewsletterPost $request)
     {

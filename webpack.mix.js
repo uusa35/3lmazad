@@ -41,6 +41,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         ],
         'public/js/backend.js')
     .scripts([
+
         './resources/assets/html/vendor/waves/waves.min.js',
         './resources/assets/html/vendor/slick/slick.min.js',
         './resources/assets/html/vendor/bootstrap-select/bootstrap-select.min.js',
@@ -56,9 +57,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
         './resources/assets/html/vendor/form/jquery.form.js',
         './resources/assets/html/vendor/form/jquery.validate.min.js',
         //
+        './resources/assets/html/js/custom-layout4.js',
         './resources/assets/html/js/custom.js',
         './resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.tools.min.js',
-        './resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js',
+        //'./resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js',
     ], 'public/js/frontend.js');
 
 if (mix.config.inProduction) {
