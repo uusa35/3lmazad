@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Commercial;
 use App\Http\Controllers\Controller;
 use App\Models\Aboutus;
 use App\Models\Contactus;
@@ -28,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $commericals = Commercial::
         $sliders = Slider::orderBy('id', 'desc')->get();
         return view('frontend.home', compact('sliders'));
     }

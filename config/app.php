@@ -184,6 +184,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
     ],
 

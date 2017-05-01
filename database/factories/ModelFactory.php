@@ -19,6 +19,7 @@ use App\Models\BrandModel;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Comment;
+use App\Models\Commercial;
 use App\Models\Contactus;
 use App\Models\Country;
 use App\Models\Deal;
@@ -140,6 +141,8 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
+        'start_date' => $faker->dateTime,
+        'end_date' => $faker->dateTimeThisYear,
     ];
 });
 
@@ -199,7 +202,7 @@ $factory->define(Deal::class, function (Faker\Generator $faker) {
             return $array['final_price'] * $array['duration'];
         },
         'valid' => $faker->boolean(true),
-        'start_date' => $faker->dateTimeThisYear,
+        'start_date' => $faker->dateTime,
         'end_date' => $faker->dateTimeThisYear,
         'ad_id' => Ad::all()->random()->id,
     ];
@@ -276,6 +279,21 @@ $factory->define(Slider::class, function (Faker\Generator $faker) {
         'image' => 'sample.png',
         'order' => $faker->numberBetween(1, 10),
         'active' => $faker->boolean(true),
+    ];
+});
+
+$factory->define(Commercial::class, function (Faker\Generator $faker) {
+    return [
+        'title_ar' => $faker->name,
+        'title_en' => $faker->name,
+        'description_ar' => $faker->sentence(),
+        'description_en' => $faker->sentence(),
+        'url' => $faker->url,
+        'image' => 'sample.png',
+        'duration' => $faker->randomDigit,
+        'start_date' => $faker->dateTime,
+        'end_date' => $faker->dateTimeThisYear,
+        'active' => $faker->boolean(),
     ];
 });
 

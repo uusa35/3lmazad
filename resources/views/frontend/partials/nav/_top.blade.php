@@ -1,16 +1,18 @@
 <div class="header-line hidden-xs">
     <div class="container">
-        <div class="pull-left">
-            <div class="user-links">
-                <ul>
-                    <li class="user-links__item"><a href="#">Sign In</a></li>
-                    <li class="user-links__item"><a href="#">Register</a></li>
-                    <li class="user-links__item user-links__item--separate"><a href="#" class="color-twitter">TWITTER</a>
-                        / <a href="#" class="color-facebook">FACEBOOK</a> LOGIN
-                    </li>
-                </ul>
+        @if(!auth()->check())
+            <div class="pull-left">
+                <div class="user-links">
+                    <ul>
+                        <li class="user-links__item"><a href="{{ route('login') }}">Sign In</a></li>
+                        <li class="user-links__item"><a href="{{ route('register') }}">Register</a></li>
+                        <li class="user-links__item user-links__item--separate"><a href="#" class="color-twitter">TWITTER</a>
+                            / <a href="#" class="color-facebook">FACEBOOK</a> LOGIN
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        @endif
         <div class="pull-right">
             <div class="social-links social-links--colorize">
                 <ul>

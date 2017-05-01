@@ -23,10 +23,10 @@
             <li class='li-col list-user-menu'>
                 <ul>
                     @if($isAdmin)
-                        <li><a href="{{ route('backend.index') }}">Dashboard</a></li>
+                        <li><a href="{{ route('backend.home') }}">Dashboard</a></li>
                     @else
-                        <li><a href="{{ route('account') }}">My Account</a></li>
-                        <li><a href="{{ route('user.show',auth()->user()->id) }}">My Profile</a></li>
+                        {{--<li><a href="{{ route('account') }}">My Account</a></li>--}}
+                        {{--<li><a href="{{ route('user.show',auth()->user()->id) }}">My Profile</a></li>--}}
                     @endif
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 @include('frontend.partials.head')
-<body>
+<body class="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 @include('frontend.partials._loading')
 @include('frontend.partials._modal_search')
 @include('frontend.partials.components.modals._quick-view')

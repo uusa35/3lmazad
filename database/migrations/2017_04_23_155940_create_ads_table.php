@@ -56,6 +56,8 @@ class CreateAdsTable extends Migration
             $table->integer('size_id')->unsigned()->index()->nullable();
             $table->foreign('size_id')->references('id')->on('sizes');
 
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

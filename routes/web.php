@@ -18,7 +18,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('contactus', 'HomeController@contactus')->name('contactus');
     Route::post('contactus', 'HomeController@postContactus');
     Route::post('newsletter', 'HomeController@postNewsletter')->name('newsletter');
-    Route::get('/lang/{lang}', 'LanguageController@changeLocale');
+    Route::get('/lang/{lang}', 'LanguageController@changeLocale')->name('lang');
     /*
      * the following route for both (search + categories menu) === petrolet.dev/search?type=user&main=3&sub=7
      * returns all companies related to main or sub category included within the filter
@@ -31,7 +31,20 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::any('search', 'HomeController@search')->name('search');
 });
 
+
 Route::group(['namespace' => 'backend', 'prefix' => 'backend','as' => 'backend.','middleware' => ['auth','adminOnly']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 });
+
+/*
+ * for development
+ * first : admin
+ * second : user
+ * */
+if (app()->environment() === 'local' && Schema::hasTable('users')) {
+    Route::get('/logwith/{id}', function ($id) {
+        Auth::loginUsingId($id);
+        return redirect()->home();
+    });
+}
 

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        if (app()->environment() === 'local') {
+        if (app()->environment() === 'seeding') {
             $this->emptyTables($this->tables);
             $this->command->info('seeding started');
             if (DB::table('countries')->count() <= 0) {
@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             $this->call(RolesTableSeeder::class);
             $this->call(RoleUserTableSeeder::class);
             $this->call(CategoriesTableSeeder::class);
+            $this->call(CommercialsTableSeeder::class);
 
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {
