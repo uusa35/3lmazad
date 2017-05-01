@@ -4,7 +4,8 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo" style="background-color: #444F5C;">
             <a href="{{ route('backend.home') }}">
-                <img src="{{ asset('images/logo.png') }}" alt="logo" class="img-responsive"
+                <img src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}" alt="logo"
+                     class="img-responsive"
                      style="width: 100%; max-height:48px;"/> </a>
         </div>
         <!-- END LOGO -->
@@ -34,7 +35,8 @@
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true">
-                        <img alt="" class="img-circle" src="{{ asset('images/logo.png') }}"/>
+                        <img alt="" class="img-circle"
+                             src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}"/>
                         <span class="username username-hide-on-mobile"> {{ auth()->user()->name }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>

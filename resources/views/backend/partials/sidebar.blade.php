@@ -29,105 +29,15 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item ">
-                        <a href="{{ route('backend.user.index',['type' => 'company']) }}" class="nav-link ">
+                        <a href="{{ route('backend.user.index') }}" class="nav-link ">
                             <i class="icon-user"></i>
                             <span class="title">Companies</span>
                             <span class="selected"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('backend.user.index',['type' => 'user']) }}" class="nav-link ">
-                            <i class="icon-user"></i>
-                            <span class="title">Indivisuls</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
-
-            <li class="heading">
-                <h3 class="uppercase">Items</h3>
-            </li>
-            <li class="nav-item start {{ in_array('item',request()->segments(), true) ? 'active open' : null }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
-                    <span class="title">Services & Products</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
-                </a>
-                <ul class="sub-menu active open">
-                    <li class="nav-item {{ (request()->type === 'product') ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.item.index',['type' => 'product']) }}" class="nav-link ">
-                            <i class="fa fa-fw fa-tags"></i>
-                            <span class="title">Products</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ (request()->type === 'service') ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.item.index',['type' => 'service']) }}" class="nav-link ">
-                            <i class="fa fa-fw fa-info-circle"></i>
-                            <span class="title">Services</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ !request()->has('type') && in_array('item',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.item.index',['type' => 'item']) }}" class="nav-link ">
-                            <i class="fa fa-fw fa-building"></i>
-                            <span class="title">Items</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="heading">
-                <h3 class="uppercase">News & Events</h3>
-            </li>
-            <li class="nav-item start {{
-            in_array('news',request()->segments(), true) ||
-            in_array('event',request()->segments(), true) ||
-             in_array('announcement',request()->segments(), true) ||
-             in_array('presentation',request()->segments(), true)
-             ? 'active open' : null }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-home"></i>
-                    <span class="title">News,Events & Announc..</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
-                </a>
-                <ul class="sub-menu active open">
-                    <li class="nav-item {{ in_array('news',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.news.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-paperclip"></i>
-                            <span class="title">News</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ in_array('event',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.event.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-calendar"></i>
-                            <span class="title">Events</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ in_array('announcement',request()->segments(),true) ? 'active open' : null  }}">
-                        <a href="{{ route('backend.announcement.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-address-card-o"></i>
-                            <span class="title">Announcements</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ in_array('presentation',request()->segments(),true) ? 'active open' : null  }}">
-                        <a href="{{ route('backend.presentation.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-address-card-o"></i>
-                            <span class="title">Presentations</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li class="heading">
                 <h3 class="uppercase">Website Settings</h3>
             </li>

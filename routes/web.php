@@ -42,6 +42,7 @@ Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('category', 'CategoryController');
     Route::resource('gallery', 'GalleryController');
     Route::resource('image', 'ImageController');
+    Route::resource('newsletter', 'NewsletterController');
 });
 
 /*

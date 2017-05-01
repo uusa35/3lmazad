@@ -34,6 +34,7 @@ class ComposerServiceProvider extends ServiceProvider
         ], 'App\Services\ViewComposers@getCountries');
 
         view()->composer(['frontend.layouts.app',
+            'backend.partials.nav',
         ], 'App\Services\ViewComposers@getContactusInfo');
 
         view()->composer('frontend.partials._page_bar', 'App\Services\ViewComposers@getBreadCrumbs');
