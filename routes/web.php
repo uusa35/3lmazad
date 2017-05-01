@@ -29,11 +29,19 @@ Route::group(['namespace' => 'Frontend'], function () {
      * another $categories (without featured boolean) var is available for other pages needed (refer to ViewComposer.php)
      * */
     Route::any('search', 'HomeController@search')->name('search');
+    Route::resource('ad', 'AdController');
 });
 
 
-Route::group(['namespace' => 'backend', 'prefix' => 'backend','as' => 'backend.','middleware' => ['auth','adminOnly']], function () {
+Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('user', 'Usercontroller');
+    Route::resource('aboutus', 'AboutusController');
+    Route::resource('contactus', 'ContactusController');
+    Route::resource('slider', 'Slidercontroller');
+    Route::resource('category', 'CategoryController');
+    Route::resource('gallery', 'GalleryController');
+    Route::resource('image', 'ImageController');
 });
 
 /*

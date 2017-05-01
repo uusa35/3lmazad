@@ -18,9 +18,9 @@ class RolesTableSeeder extends Seeder
             factory(Role::class)->create(['name' => $v])->each(function ($role) {
                 if ($role->name === 'admin') {
                     $role->users()->attach((User::whereId(1)->first()->id));
+                } else {
+                    $role->users()->attach(User::where('id', '!=', 1)->pluck('id'));
                 }
-                $role->users()->attach(User::where('id', '!=', 1)->get()->random()->pluck('id'));
-
             });
         }
     }

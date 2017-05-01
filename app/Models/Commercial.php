@@ -11,6 +11,7 @@ class Commercial extends BaseModel
     protected $localeStrings = ['title', 'description'];
     protected $dates = ['start_date', 'end_date', 'created_at', 'deleted_at'];
     protected $casts = ['active'];
+    protected $hidden = ['created_at','updated_at'];
 
     /**
      * The "booting" method of the model.

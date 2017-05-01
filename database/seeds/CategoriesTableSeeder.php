@@ -24,7 +24,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         // ONLY 2 LEVELS NOW OF CATEGORIES PARENT AND SUB ONLY
-        if (app()->environment() === 'local') {
+        if (app()->environment() === 'seeding') {
             $categories = config('categories');
             foreach ($categories as $category) {
                 //PARENT

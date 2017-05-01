@@ -36,6 +36,7 @@ use App\Models\Size;
 use App\Models\Slider;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Visitor;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(User::class, function (Faker\Generator $faker) {
@@ -141,8 +142,8 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
-        'start_date' => $faker->dateTime,
-        'end_date' => $faker->dateTimeThisYear,
+        'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
+        'end_date' => $faker->dateTimeBetween('now', '1 week'),
     ];
 });
 
@@ -202,8 +203,8 @@ $factory->define(Deal::class, function (Faker\Generator $faker) {
             return $array['final_price'] * $array['duration'];
         },
         'valid' => $faker->boolean(true),
-        'start_date' => $faker->dateTime,
-        'end_date' => $faker->dateTimeThisYear,
+        'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
+        'end_date' => $faker->dateTimeBetween('now', '1 week'),
         'ad_id' => Ad::all()->random()->id,
     ];
 });
@@ -291,10 +292,17 @@ $factory->define(Commercial::class, function (Faker\Generator $faker) {
         'url' => $faker->url,
         'image' => 'sample.png',
         'duration' => $faker->randomDigit,
-        'start_date' => $faker->dateTime,
-        'end_date' => $faker->dateTimeThisYear,
+        'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
+        'end_date' => $faker->dateTimeBetween('now', '1 week'),
         'active' => $faker->boolean(),
     ];
 });
 
+
+$factory->define(Visitor::class, function (Faker\Generator $faker) {
+    return [
+        'ad_id' => Ad::all()->random()->id,
+        'session_id' => $faker->numberBetween(9999, 99999999),
+    ];
+});
 

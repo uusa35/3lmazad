@@ -11,6 +11,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Model;
+use App\Models\Visitor;
 
 /**
  * Created by PhpStorm.
@@ -80,6 +81,11 @@ trait AdTrait
     public function auctions()
     {
         return $this->hasMany(Auction::class);
+    }
+
+    public function visitors()
+    {
+        return $this->hasMany(Visitor::class);
     }
 
 }

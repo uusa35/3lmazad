@@ -9,7 +9,7 @@ use App\Scopes\ScopeExpired;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Ad extends Model
+class Ad extends BaseModel
 {
     use AdTrait, AdHelpers, SoftDeletes;
     protected $guarded = [''];

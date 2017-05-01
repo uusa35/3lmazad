@@ -185,6 +185,7 @@ return [
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+//        ExA2040\LaravelViewCounter\ViewCounterServiceProvider::class,
 
     ],
 

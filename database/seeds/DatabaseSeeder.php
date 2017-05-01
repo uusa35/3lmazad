@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
         'users', 'sliders', 'ads', 'forms', 'fields', 'field_form', 'comments', 'brands', 'models',
         'categories', 'galleries', 'galleryables', 'images',
         'newsletter', 'aboutus', 'contactus', 'colors', 'sizes', 'deals', 'ad_deals',
-        'roles', 'user_role', 'countries', 'areas'
+        'roles', 'user_role', 'countries', 'areas', 'commercials','types'
     ];
 
     /**
@@ -40,8 +40,9 @@ class DatabaseSeeder extends Seeder
             $this->call(NewsletterTableSeeder::class);
             $this->call(RolesTableSeeder::class);
             $this->call(RoleUserTableSeeder::class);
-            $this->call(CategoriesTableSeeder::class);
             $this->call(CommercialsTableSeeder::class);
+            $this->call(CategoriesTableSeeder::class);
+            $this->call(AdVisitorsTableSeeder::class);
 
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {
