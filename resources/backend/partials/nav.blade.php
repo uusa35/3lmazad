@@ -3,7 +3,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo" style="background-color: #444F5C;">
-            <a href="{{ route('backend.home') }}">
+            <a href="{{ route('backend.index') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" class="img-responsive"
                      style="width: 100%; max-height:48px;"/> </a>
         </div>
@@ -21,10 +21,39 @@
                         <li>
                             <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
                                 <li>
-                                    <a href="{{ route('backend.home') }}">
+                                    <a href="{{ route('backend.category.create') }}">
                                                 <span class="details">
                                                         <i class="fa fa-lg fa-plus"></i>
                                                     create main category</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('backend.event.create',['item' => 'event']) }}">
+                                        <span class="details"><i
+                                                    class="fa fa-lg fa-plus-circle"></i> new event</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('backend.slider.create') }}">
+                                                <span class="details">
+                                                        <i class="fa fa-lg fa-file"></i> create new slide</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('backend.ad.create') }}">
+                                        <span class="details"><i class="fa fa-lg fa-image"></i> create new ad</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('backend.aboutus.create') }}">
+                                        <span class="details"><i
+                                                    class="fa fa-lg fa-plus-circle"></i> new about us</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('backend.newsletter.campaign.create') }}">
+                                        <span class="details"><i
+                                                    class="fa fa-lg fa-plus-circle"></i> new campaign </span>
                                     </a>
                                 </li>
                             </ul>

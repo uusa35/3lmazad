@@ -11,8 +11,8 @@ return array(
     |
     */
     'route' => [
-        'prefix' => 'translations',
-        'middleware' => 'auth',
+        'prefix' => 'backend/translations',
+        'middleware' => ['auth','adminOnly'],
     ],
 
 	/**

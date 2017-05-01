@@ -35,4 +35,8 @@ trait UserTrait
         return $this->belongsToMany(Role::class, 'user_role');
     }
 
+    public function getIsAdminAttribute() {
+        return $this->roles()->first()->name === 'admin';
+    }
+
 }

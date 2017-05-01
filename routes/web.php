@@ -31,7 +31,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::any('search', 'HomeController@search')->name('search');
 });
 
-Route::group(['namespace' => 'backend'], function () {
-
+Route::group(['namespace' => 'backend', 'prefix' => 'backend','as' => 'backend.','middleware' => ['auth','adminOnly']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
 });
 
