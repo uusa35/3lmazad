@@ -24,8 +24,12 @@ abstract class QueryFilters
 
     public function filters()
     {
-//        return array_reverse($this->request->());
-        return $this->request->except('type');
+        $removeNull = array_filter($this->request->all(), function ($value) {
+            if (!is_null($value)) {
+                return $value;
+            }
+        });
+        return $removeNull;
     }
 
     public function apply(Builder $builder)

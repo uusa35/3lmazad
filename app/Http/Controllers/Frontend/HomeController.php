@@ -45,20 +45,22 @@ class HomeController extends Controller
      */
     public function search(Filters $filters)
     {
-        $validator = validator(request()->all(), ['type' => 'nullable', 'search' => 'required|min:3']);
+        $validator = validator(request()->all(), ['search' => 'min:3']);
         if ($validator->fails()) {
             return redirect()->home()->withErrors($validator->messages());
         }
 
-        if (request()->type === 'news') {
-            $elements = Newswe::filters($filters)->paginate(12);
-        } elseif (request()->type === 'presentation') {
-            $elements = Presentation::filters($filters)->paginate(12);
-        } elseif (request()->type === 'announcement') {
-            $elements = Announcement::filters($filters)->paginate(12);
+        if (!is_null(request()->element)) {
+            if (request()->element === 'news') {
+                $elements = News::filters($filters)->paginate(12);
+            } elseif (request()->element === 'presentation') {
+                $elements = Presentation::filters($filters)->paginate(12);
+            } elseif (request()->element === 'announcement') {
+                var_dump('ann case');
+                $elements = Announcement::filters($filters)->paginate(12);
+            }
         } else {
-            request()->type = 'user';
-            $elements = User::filters($filters)->paginate(12);
+            $elements = User::filters($filters)->active()->paginate(12);
         }
 
         if (!$elements->isEmpty()) {

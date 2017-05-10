@@ -19,31 +19,19 @@ class Filters extends QueryFilters
     public function __construct(Request $request)
     {
         parent::__construct($request);
-        $this->roles = Role::where('is_company', true)->pluck('id')->toArray();
     }
 
     public function search($search)
     {
-        $array = array_merge($this->roles, ['news', 'presentation', 'announcement', 'user']);
-//        if (!in_array(request()->type, $array)) {
-//            abort(404, 'not the right key for searching');
-//        }
-        switch (request()->get('type')) {
-            case 'news':
-                return $this->searchAll($search);
-            case 'announcement':
-                return $this->searchAll($search);
-            case 'presentation':
-                return $this->searchAll($search);
-            case 'user' :
-                if (request()->has('main')) {
-                    return $this->main($search);
-                } else {
-                    return $this->sub($search);
-                }
-            default :
-                return $this->companies($search);
+        if ($this->request->type) {
+            return $this->users($search);
+        } elseif ($this->request->element) {
+            return $this->searchAll($search);
         }
+        else {
+            $this->users($search);
+        }
+
     }
 
     /**
@@ -53,7 +41,7 @@ class Filters extends QueryFilters
      */
     public function searchAll($search)
     {
-        return $this->builder->where('title', 'like', "%{$search}%")
+        $test = $this->builder->where('title', 'like', "%{$search}%")
             ->orWhere('body', 'like', "%{$search}%");
     }
 
@@ -62,24 +50,48 @@ class Filters extends QueryFilters
      * @return mixed
      * searching the user table + user_meta with roles of contracutros + distributors + manifacturers
      */
-    public function companies($search)
+    public function users($search)
     {
-//        $role = Role::whereId(request()->type)->first()->name;
-        return $this->builder->where('name', 'like', "%{$search}%")
-            ->whereHas('user_meta', function ($q) use ($search) {
-                $q->orWhere('description', 'like', "%{$search}%");
-            })->active()->companies();
-//            ->roleOf($role);
+        if ($this->request->type === '2') {
+            /*
+             * always start with the bigger results then  where the bigger one then orWhere the rest
+             * it means that u start with the bigger results
+             * then filter with where or orWhere (or where will be applied no matter the result of the previous where)
+             * */
+            return $this->builder->whereHas('user_meta', function ($q) use ($search) {
+                $q->where('description', 'like', "%{$search}%")->orWhere('designation', 'like', "%{$search}%");
+            })->orWhere('name', 'like', "%{$search}%")->roleOf('user');
+
+        } else {
+            return $this->builder->whereHas('user_meta', function ($q) use ($search) {
+                $q->where('description', 'like', "%{$search}%");
+            })->orWhere('name', 'like', "%{$search}%")->companies();
+        }
+    }
+
+    public function type()
+    {
+        return $this->builder->whereHas('roles', function ($q) {
+            $q->where('role_id', request()->type);
+        });
+    }
+
+    public function country()
+    {
+        return $this->builder->orWhere('country_id', '=', request()->country);
+    }
+
+    public function element()
+    {
+        return $this->builder;
     }
 
     public function sub($search)
     {
         // if only search field is equal to all then it will start fetching by categories only (_category-sub-menu)
-        if ($search === 'all') {
-            return $this->builder->whereHas('items', function ($q) {
-                $q->where('category_id', '=', request()->sub);
-            })->companies();
-        }
+        return $this->builder->whereHas('items', function ($q) {
+            $q->where('category_id', '=', request()->sub);
+        })->companies();
     }
 
     public function main($search)
@@ -88,10 +100,11 @@ class Filters extends QueryFilters
         if ($search === 'all') {
             return $this->builder->whereHas('items', function ($q) {
                 $q->whereHas('category', function ($q) {
-                    $q->where('parent_id', '=', request()->main);
+                    $q->orWhere('parent_id', '=', request()->main);
                 });
-            })->companies();
+            });
         }
     }
+
 
 }

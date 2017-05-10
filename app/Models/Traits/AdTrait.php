@@ -1,6 +1,8 @@
 <?php
 namespace App\Models\Traits;
 
+use App\Models\Ad;
+use App\Models\AdMeta;
 use App\Models\Deal;
 use App\Models\Area;
 use App\Models\Auction;
@@ -11,6 +13,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Model;
+use App\Models\User;
 use App\Models\Visitor;
 
 /**
@@ -25,6 +28,11 @@ trait AdTrait
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function meta()
+    {
+        return $this->hasOne(AdMeta::class);
     }
 
     public function brand()
@@ -88,4 +96,7 @@ trait AdTrait
         return $this->hasMany(Visitor::class);
     }
 
+    public function favorites() {
+        return $this->belongsToMany(User::class,'favorites');
+    }
 }

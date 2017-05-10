@@ -12,6 +12,7 @@
 */
 use App\Models\Aboutus;
 use App\Models\Ad;
+use App\Models\AdMeta;
 use App\Models\Area;
 use App\Models\Auction;
 use App\Models\Brand;
@@ -112,23 +113,9 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 $factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
-        'description' => $faker->word,
         'price' => $faker->randomDigit,
         'active' => $faker->boolean(100),
         'featured' => $faker->boolean(100),
-        'phone' => $faker->bankAccountNumber,
-        'condition' => $faker->randomElement(['new', 'old']),
-        'manufacturing_year' => $faker->year,
-        'mileage' => $faker->numberBetween(10, 99999),
-        'transmission' => $faker->randomElement(['manual', 'automatic']),
-        'room_no' => $faker->randomDigit,
-        'floor_no' => $faker->randomDigit,
-        'bathroom_no' => $faker->randomDigit,
-        'rent_type' => $faker->word,
-        'building_age' => $faker->year,
-        'furnished' => $faker->boolean(true),
-        'space' => $faker->randomDigit,
-        'address' => $faker->address,
         'image' => 'sample.jpg',
         'user_id' => User::all()->random()->id,
         'category_id' => Category::where('parent_id', false)->pluck('id')->shuffle()->first(),
@@ -145,6 +132,26 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'type_id' => Type::all()->random()->id,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),
+    ];
+});
+
+$factory->define(AdMeta::class, function (Faker\Generator $faker) {
+    return [
+        'description' => $faker->word,
+        'phone' => $faker->bankAccountNumber,
+        'condition' => $faker->randomElement(['new', 'old']),
+        'manufacturing_year' => $faker->year,
+        'mileage' => $faker->numberBetween(10, 99999),
+        'transmission' => $faker->randomElement(['manual', 'automatic']),
+        'room_no' => $faker->randomDigit,
+        'floor_no' => $faker->randomDigit,
+        'bathroom_no' => $faker->randomDigit,
+        'rent_type' => $faker->word,
+        'building_age' => $faker->year,
+        'furnished' => $faker->boolean(true),
+        'space' => $faker->randomDigit,
+        'address' => $faker->address,
+        'ad_id' => Ad::whereDoesntHave('meta')->get()->random()->id
     ];
 });
 

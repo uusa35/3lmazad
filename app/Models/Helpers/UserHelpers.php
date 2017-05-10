@@ -9,4 +9,8 @@ namespace App\Models\Helpers;
 
 trait UserHelpers {
 
+    public function getIsAdminAttribute() {
+        return $this->roles()->first()->name === 'admin';
+    }
+
 }

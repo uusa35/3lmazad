@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AdMeta;
 use App\Models\Auction;
 use App\Models\Ad;
 use App\Models\Brand;
@@ -48,11 +49,14 @@ class CategoriesTableSeeder extends Seeder
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class,5)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+                    factory(Ad::class, 5)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
 
                         $subCat->ads()->save($ad);
 
                         $gallery = factory(Gallery::class)->create();
+
+                        // create meta for each ad
+                        $ad->meta()->save(factory(AdMeta::class)->create());
 
                         // GALLERY FOR EACH ADD
                         $ad->gallery()->save($gallery);
@@ -65,7 +69,7 @@ class CategoriesTableSeeder extends Seeder
                         // Auctions FOR EACH AD
                         $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
 
-                        $ad->deals()->saveMany(factory(Deal::class,2)->create());
+                        $ad->deals()->saveMany(factory(Deal::class, 2)->create());
 
                     });
 

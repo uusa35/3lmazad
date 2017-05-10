@@ -17,6 +17,7 @@ class Ad extends BaseModel
         'active' => 'boolean',
         'featured' => 'boolean'
     ];
+    protected $with = ['meta'];
 
     /**
      * The "booting" method of the model.
@@ -39,5 +40,4 @@ class Ad extends BaseModel
             }
         }
     }
-
 }
