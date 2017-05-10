@@ -7,6 +7,8 @@ namespace App\Models\Helpers;
  * Time: 7:37 PM
  */
 
-trait AdHelpers {
+trait AdHelpers
+{
+
 
 }

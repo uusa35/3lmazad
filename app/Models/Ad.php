@@ -8,6 +8,7 @@ use App\Scopes\ScopeActive;
 use App\Scopes\ScopeExpired;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Ad extends BaseModel
 {
@@ -39,5 +40,15 @@ class Ad extends BaseModel
                 static::addGlobalScope(new ScopeExpired());
             }
         }
+    }
+
+    public function getMostVisitedAds($take = 10)
+    {
+        return $this->selectRaw('ads.*, count(*) as ad_count')
+            ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
+            ->groupBy('ad_id')// responsible to get the sum of ads returned
+            ->orderBy('ad_count', 'DESC')
+            ->get();
+
     }
 }

@@ -35,10 +35,13 @@ class CategoriesTableSeeder extends Seeder
                     // MODEL FOR EACH BRAND
                     $brand->models()->saveMany(factory(BrandModel::class, 3)->create());
                 });
+
                 // TYPES FOR EACH PARENT
                 $parent->types()->saveMany(factory(Type::class, 2)->create());
 
+                // ASSIGN FORM FOR A PARENT CATEGORY
                 $form = factory(Form::class)->create();
+
                 $form->each(function ($form) {
                     $form->fields()->attach(Field::all()->random()->pluck('id')->shuffle()->take(5));
                 });

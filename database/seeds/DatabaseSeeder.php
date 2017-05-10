@@ -7,10 +7,10 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     public $tables = [
-        'users', 'sliders', 'ads', 'forms', 'fields', 'field_form', 'comments', 'brands', 'models',
+        'users', 'sliders', 'ads', 'ad_metas', 'forms', 'fields', 'field_form', 'comments', 'brands', 'models',
         'categories', 'galleries', 'galleryables', 'images',
         'newsletter', 'aboutus', 'contactus', 'colors', 'sizes', 'deals', 'ad_deals',
-        'roles', 'user_role', 'countries', 'areas', 'commercials','types'
+        'roles', 'user_role', 'countries', 'areas', 'commercials', 'types'
     ];
 
     /**
@@ -42,7 +42,10 @@ class DatabaseSeeder extends Seeder
             $this->call(RoleUserTableSeeder::class);
             $this->call(CommercialsTableSeeder::class);
             $this->call(CategoriesTableSeeder::class);
+            $this->command->info('categories are done');
             $this->call(AdVisitorsTableSeeder::class);
+            $this->command->info('before favorites');
+            $this->call(FavoritesTableSeeder::class);
 
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {

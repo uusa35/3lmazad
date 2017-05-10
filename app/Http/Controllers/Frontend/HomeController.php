@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
+    public $ad;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Ad $ad)
     {
 //        $this->middleware('auth');
+        $this->ad = $ad;
     }
 
     /**
@@ -30,8 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
-        return $ads;
+        $ads = $this->ad->getMostVisitedAds();
+        dd($ads);
         $commercials = Commercial::all();
 
         $sliders = Slider::orderBy('id', 'desc')->get();
