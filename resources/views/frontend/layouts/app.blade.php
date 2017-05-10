@@ -8,7 +8,7 @@
 <div class="wrapper">
     <div class="row">
         @section('header')
-            {{--@include('frontend.partials.header')--}}
+            @include('frontend.partials.header')
         @show
         <div id="pageContent" class="page-content">
             {{--<div class="col-lg-12">--}}
@@ -25,7 +25,7 @@
     </div>
 </div>
 @section('footer')
-{{--@include('frontend.partials.footer')--}}
+@include('frontend.partials.footer')
 @show
 {{--@include('frontend.partials._compare')--}}
         <!-- Scripts -->

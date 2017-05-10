@@ -30,10 +30,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Ad::all();
+        $ads = Ad::all();
+        return $ads;
         $commercials = Commercial::all();
+
         $sliders = Slider::orderBy('id', 'desc')->get();
-        return view('frontend.home', compact('sliders', 'commercials'));
+        return view('frontend.home', compact('sliders', 'commercials','ads'));
     }
 
     /**

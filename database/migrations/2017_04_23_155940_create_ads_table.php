@@ -35,6 +35,9 @@ class CreateAdsTable extends Migration
             $table->text('address')->nullable();
             $table->string('image')->nullable();
 
+            $table->integer('type_id')->unsigned()->index()->nullable();
+            $table->foreign('type_id')->references('id')->on('types');
+
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 

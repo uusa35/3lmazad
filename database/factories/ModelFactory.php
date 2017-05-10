@@ -142,6 +142,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
+        'type_id' => Type::all()->random()->id,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),
     ];

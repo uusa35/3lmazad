@@ -34,6 +34,7 @@ class Ad extends BaseModel
             }
 
             if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeExpired());
             }
         }
