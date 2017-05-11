@@ -1,5 +1,5 @@
 @if (auth()->guest())
-    <div class="dropdown pull-right"><a href="#"
+    <div class="dropdown pull-right hidden-xs"><a href="#"
                                         class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"
                                         data-toggle="dropdown"><span class="fa fa-fw fa-user"></span>
             register | login

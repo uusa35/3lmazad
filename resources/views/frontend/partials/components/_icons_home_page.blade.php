@@ -1,4 +1,4 @@
-<section class="content top-pad-none nav-submenu">
+<section class="content top-pad-none nav-submenu hidden-sm">
     <div class="container">
         <nav>
             <ul class="nav nav-justified">
