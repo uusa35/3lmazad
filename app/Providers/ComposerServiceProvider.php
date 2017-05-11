@@ -27,15 +27,14 @@ class ComposerServiceProvider extends ServiceProvider
 
         view()->composer(['frontend.partials.forms._register',
             'frontend.partials.forms._user-edit',
-            'frontend.partials.forms._create-qualification',
-            'frontend.partials.forms._edit-qualification',
-            'frontend.partials.forms._create-agency',
-            'frontend.partials.forms._edit-agency',
+            'frontend.partials.nav._search-row'
         ], 'App\Services\ViewComposers@getCountries');
 
         view()->composer(['frontend.layouts.app',
             'backend.partials.nav',
         ], 'App\Services\ViewComposers@getContactusInfo');
+
+        view()->composer('frontend.partials.components._icons_home_page', 'App\Services\ViewComposers@getOnHomePageCategories');
 
         view()->composer('frontend.partials._page_bar', 'App\Services\ViewComposers@getBreadCrumbs');
     }

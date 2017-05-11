@@ -1,11 +1,34 @@
 .logo {
   width: 200px;
-  height : 100px;
+  height: 100px;
 }
 
 .page-content {
   background-color: white;
 }
+
 .category-slider {
   max-height: 350px;
+  width: auto;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  border-radius: 0;
+}
+
+#loader:after, #modalLoader:after, .circle-loader:after {
+  border-top-color: #b8b6b2;
+}
+
+#loader, #modalLoader {
+  border-top-color: #dadada;
+}
+
+#loader:before, #modalLoader:before, .circle-loader:before {
+  border-top-color: #e0e0e0;
 }

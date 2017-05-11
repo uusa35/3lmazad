@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Traits\CategoryTrait;
+use App\Scopes\ScopeActive;
+use App\Services\Traits\LocaleTrait;
 
 /**
  * App\Models\Category
@@ -13,7 +15,28 @@ use App\Models\Traits\CategoryTrait;
  */
 class Category extends BaseModel
 {
-    use CategoryTrait;
+    use LocaleTrait, CategoryTrait;
+    protected $localeStrings = ['name'];
+    /**
+     * The "booting" method of the model.
+     * applying the scope only in the backend routes.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        if (app()->environment() !== 'seeding') {
+            if (in_array('api', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeActive());
+            }
+
+            if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeActive());
+            }
+        }
+    }
 
     protected $guarded = [''];
 

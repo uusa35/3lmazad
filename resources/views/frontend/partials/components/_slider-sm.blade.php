@@ -1,7 +1,8 @@
 <div class="category-slider single-slider">
     <ul class="animated-arrows">
         @foreach($sliders as $slider)
-            <li><img src="{{ asset('storage/uploads/images/medium/'.$slider->image) }}" alt="" style="max-height : 450px;"/>
+            <li><img src="{{ asset('storage/uploads/images/medium/'.$slider->image) }}" alt=""
+                     style="max-height : 450px;"/>
                 <div class="single-slider__text">
                     {{--<h2><strong></strong></h2>--}}
                     <h3>{{ $slider->title }}</h3>

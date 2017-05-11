@@ -17,8 +17,8 @@ class CreatePlansTable extends Migration
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->integer('duration')->nullable();
-            $table->decimal('price',6,2)->unsigned()->nullable();
-            $table->decimal('sale_price',6,2)->unsigned()->nullable();
+            $table->decimal('price',6,3)->unsigned()->nullable();
+            $table->decimal('sale_price',6,3)->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

@@ -41,7 +41,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
         ],
         'public/js/backend.js')
     .scripts([
-
         './resources/assets/html/vendor/waves/waves.min.js',
         './resources/assets/html/vendor/slick/slick.min.js',
         './resources/assets/html/vendor/bootstrap-select/bootstrap-select.min.js',

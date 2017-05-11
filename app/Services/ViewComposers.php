@@ -45,6 +45,12 @@ class ViewComposers
         return $view->with(compact('categories'));
     }
 
+    public function getOnHomePageCategories(View $view)
+    {
+        $homePageCategories = Category::parents()->where('on_homepage', true)->get();
+        return $view->with(compact('homePageCategories'));
+    }
+
     public function getBreadCrumbs(View $view)
     {
         $link = '';

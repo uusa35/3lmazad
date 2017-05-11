@@ -19,12 +19,14 @@
     </section>
 @show
 @section('middle')
-    @include('frontend.partials.components._icons')
-    @include('frontend.partials.components._product_carousel')
-    @include('frontend.partials.components._product_carousel')
-    @include('frontend.partials.components._product_carousel')
+    @include('frontend.partials.components._icons_home_page')
+    @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.most_visited')])
+    @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.latest_ads')])
+    @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.most_visited')])
 @show
 @section('bottom')
-    <h1>from bottom</h1>
+    <div class="col-lg-12">
+        <h1>from bottom</h1>
+    </div>
 @show
 @endsection

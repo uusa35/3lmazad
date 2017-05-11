@@ -15,11 +15,11 @@ class CreateDealsTable extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->increments('id');
             // related to the plan
-            $table->decimal('final_price',6,2)->unsigned()->nullable(); // per day // final_price because sometimes he may make sale !!
+            $table->decimal('final_price', 6, 3)->unsigned()->nullable(); // per day // final_price because sometimes he may make sale !!
             $table->integer('duration')->nullable(); // no of days from the plans table // later shall calculate the end date accordingly
 
 
-            $table->decimal('total_amount',6,2)->unsigned()->nullable(); // final * duration
+            $table->decimal('total_amount', 6, 3)->unsigned()->nullable(); // final * duration
             $table->boolean('valid')->default(1);
 
             $table->integer('plan_id')->unsigned()->index()->nullable();

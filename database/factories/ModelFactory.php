@@ -65,8 +65,17 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
+        'icon' => $faker->randomElement(['iphone', 'cell', 'android', 'windows', 'account', 'alert', 'access-point', 'air-conditioner', 'airballoon', 'airplane', 'airplane-landing', 'airplane-off', 'airplane-takeoff', 'airplay', 'android-studio', 'angular', 'angularjs', 'animation', 'apple', 'apple-finder', 'apple-ios', 'apple-keyboard-caps', 'apple-keyboard-command', 'apple-keyboard-control', 'apple-keyboard-option', 'border-outside', 'border-right', 'border-style', 'border-top', 'border-vertical', 'bow-tie', 'bowl', 'bowling', 'box', 'box-cutter', 'box-shadow', 'bridge', 'briefcase', 'briefcase-check', 'briefcase-download',
+        ]),
         'parent_id' => $faker->numberBetween(0, 10),
-        'featured' => 1,
+        'featured' => $faker->boolean(true),
+        'active' => $faker->boolean(true),
+        'on_homepage' => function ($array) {
+            if ($array['parent_id'] == 0) {
+                return true;
+            }
+            return false;
+        },
         'form_id' => Form::all()->random()->id
     ];
 });
@@ -113,7 +122,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 $factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
-        'price' => $faker->randomDigit,
+        'price' => $faker->randomFloat(4, 4, 5),
         'active' => $faker->boolean(100),
         'featured' => $faker->boolean(100),
         'image' => 'sample.jpg',
@@ -192,8 +201,8 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
         'duration' => $faker->randomDigit,
-        'price' => $faker->randomFloat(3, 4, 5),
-        'sale_price' => $faker->randomFloat(3, 2, 3),
+        'price' => $faker->randomFloat(4, 4, 5),
+        'sale_price' => $faker->randomFloat(4, 2, 3),
         'active' => $faker->boolean(true),
     ];
 });

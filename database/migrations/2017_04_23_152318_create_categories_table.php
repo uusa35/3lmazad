@@ -18,7 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->integer('parent_id')->default(0);
+            $table->boolean('on_homepage')->default(0)->nullable();
+            $table->boolean('active')->default(1)->nullable();
             $table->boolean('featured')->default(1);
+            $table->string('icon')->default('apps')->nullable();
 
             $table->integer('form_id')->unsigned()->index()->nullable();
             $table->foreign('form_id')->references('id')->on('forms');
