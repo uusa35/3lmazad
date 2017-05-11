@@ -3,6 +3,11 @@
   height: 100px;
 }
 
+.content {
+  margin-top : 10px;
+  padding-top : 0px;
+}
+
 .page-content {
   background-color: white;
 }
@@ -31,4 +36,10 @@
 
 #loader:before, #modalLoader:before, .circle-loader:before {
   border-top-color: #e0e0e0;
+}
+
+.commercial-homepage {
+  margin-bottom : 10px;
+  max-width : 280px !important;
+  max-height: 150px !important;
 }

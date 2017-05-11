@@ -1,13 +1,38 @@
-<div class="card"><a class="card__row card__row--icon card__row--big">
-        <div class="card__row--icon__icon"><span class="icon icon-truck"></span></div>
-        <div class="card__row--icon__text">
-            <div class="card__row__title">Free Shipping</div>
-            on orders over $200
+@if(!$fixed->isEmpty())
+    <div class="product-category commercial-homepage hover-squared">
+        <div class="product-preview__label product-preview__label--right product-preview__label--sale text-center">
+            <span class="mdi mdi-star text-center" style="color : gold;"></span></div>
+        <a href="{{ $fixed[$index]->url }}">
+            <img src="{{ asset('storage/uploads/images/thumbnail/'.$fixed[$index]->image) }}"
+                 class="img-responsive commercial-homepage"
+                 data-lazy="{{ asset('storage/uploads/images/thumbnail/'.$fixed[$index]->image) }}"
+                 alt="">
+        </a>
+        <div class="product-category__hover caption"></div>
+        <div class="product-category__info">
+            <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">{{ $fixed[$index]->title }}</h5>
+                <div class="product-category__info__ribbon__count">{{ str_limit($fixed[$index]->description,30) }}</div>
+            </div>
         </div>
-    </a> <a class="card__row card__row--icon card__row--big">
-        <div class="card__row--icon__icon"><span class="icon icon-clock-arrow"></span></div>
-        <div class="card__row--icon__text">
-            <div class="card__row__title">30-day returns</div>
-            moneyback guarantee
+    </div>
+@endif
+@if(!$notFixed->isEmpty())
+    <div class="product-category commercial-homepage hover-squared">
+        <div class="product-preview__label product-preview__label--right product-preview__label--sale text-center">
+            <span class="mdi mdi-star text-center" style="color : gold;"></span></div>
+        <a href="{{ $notFixed[$index]->url }}">
+            <img src="{{ asset('storage/uploads/images/thumbnail/'.$notFixed[$index]->image) }}"
+                 class="img-responsive commercial-homepage"
+                 data-lazy="{{ asset('storage/uploads/images/thumbnail/'.$notFixed[$index]->image) }}"
+                 alt="">
+        </a>
+        <div class="product-category__hover caption"></div>
+        <div class="product-category__info">
+            <div class="product-category__info__ribbon">
+                <h5 class="product-category__info__ribbon__title">{{ $notFixed[$index]->title }}</h5>
+                <div class="product-category__info__ribbon__count">{{ str_limit($notFixed[$index]->description,30) }}</div>
+            </div>
         </div>
-    </a></div>
+    </div>
+@endif

@@ -7,14 +7,14 @@ namespace App\Models\Helpers;
  * Time: 7:37 PM
  */
 
-trait CommericalHelpers
+trait CommercialHelpers
 {
-    public function scopeIsFixed()
+    public function scopeFixed()
     {
         return $this->where('is_fixed', true);
     }
 
-    public function scopeIsNotFixed()
+    public function scopeNotFixed()
     {
         return $this->where('is_fixed', true);
     }

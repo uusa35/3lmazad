@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\Frontend\NewsletterPost;
 use App\Models\Ad;
 use App\Models\Commercial;
 use App\Http\Controllers\Controller;
@@ -14,15 +15,18 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     public $ad;
+    public $commercial;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Ad $ad)
+    public function __construct(Ad $ad, Commercial $commercial)
     {
 //        $this->middleware('auth');
         $this->ad = $ad;
+        $this->commercial = $commercial;
     }
 
     /**
@@ -32,10 +36,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mostVisitedAds= $this->ad->getMostVisitedAds();
-        $commercials = Commercial::all();
+        $mostVisitedAds = $this->ad->getMostVisitedAds();
+        $commercialsFixed = $this->commercial->fixed()->take(2)->get();
+        $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         $sliders = Slider::orderBy('id', 'desc')->get();
-        return view('frontend.home', compact('sliders', 'commercials','mostVisitedAds'));
+        return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed'));
     }
 
     /**

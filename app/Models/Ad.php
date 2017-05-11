@@ -6,6 +6,7 @@ use App\Models\Helpers\AdHelpers;
 use App\Models\Traits\AdTrait;
 use App\Scopes\ScopeActive;
 use App\Scopes\ScopeExpired;
+use App\Scopes\ScopeIsSold;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;

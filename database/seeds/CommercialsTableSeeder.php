@@ -12,6 +12,6 @@ class CommercialsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Commercial::class,10)->create();
+        factory(Commercial::class,20)->create();
     }
 }

@@ -3,11 +3,14 @@
 namespace App\Models;
 
 
+use App\Models\Helpers\CommercialHelpers;
 use App\Scopes\ScopeActive;
 use App\Scopes\ScopeExpired;
+use App\Services\Traits\LocaleTrait;
 
 class Commercial extends BaseModel
 {
+    use CommercialHelpers, LocaleTrait;
     protected $localeStrings = ['title', 'description'];
     protected $dates = ['start_date', 'end_date', 'created_at', 'deleted_at'];
     protected $casts = ['active'];

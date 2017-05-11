@@ -12,6 +12,6 @@ class AboutusTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Aboutus::class,1)->create();
+        factory(Aboutus::class,10)->create();
     }
 }

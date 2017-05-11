@@ -125,7 +125,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(4, 4, 5),
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(),
-        'featured' => $faker->boolean(100),
+        'featured' => $faker->boolean(),
         'image' => 'sample.png',
         'user_id' => User::all()->random()->id,
         'category_id' => Category::where('parent_id', false)->pluck('id')->shuffle()->first(),
