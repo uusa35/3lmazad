@@ -124,8 +124,9 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'title' => $faker->word,
         'price' => $faker->randomFloat(4, 4, 5),
         'active' => $faker->boolean(100),
+        'is_sold' => $faker->boolean(),
         'featured' => $faker->boolean(100),
-        'image' => 'sample.jpg',
+        'image' => 'sample.png',
         'user_id' => User::all()->random()->id,
         'category_id' => Category::where('parent_id', false)->pluck('id')->shuffle()->first(),
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
@@ -312,6 +313,7 @@ $factory->define(Commercial::class, function (Faker\Generator $faker) {
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),
         'active' => $faker->boolean(),
+        'is_fixed' => $faker->boolean(),
     ];
 });
 

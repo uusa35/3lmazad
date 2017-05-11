@@ -10,8 +10,8 @@
                                 <span class="mdi mdi-star text-center" style="color : gold;"></span></div>
                         @endif
                         <a href="{{ route('ad.show',$element->id) }}">
-                            <img src="{{ asset('uploads/images/'.$element->image) }}"
-                                 data-lazy="{{ asset('images/sample.png') }}"
+                            <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                                 data-lazy="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                                  alt="{{ $element->title }}">
                         </a>
                         <div class="product-category__hover caption"></div>

@@ -19,6 +19,7 @@ class CreateAdsTable extends Migration
             $table->decimal('price', 6, 3)->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->boolean('featured')->default(0);
+            $table->boolean('is_sold')->default(0);
             $table->string('image')->nullable();
 
             $table->integer('type_id')->unsigned()->index()->nullable();
