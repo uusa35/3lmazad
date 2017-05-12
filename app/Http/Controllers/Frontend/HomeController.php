@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\Frontend\NewsletterPost;
 use App\Models\Ad;
+use App\Models\Category;
 use App\Models\Commercial;
 use App\Http\Controllers\Controller;
 use App\Models\Aboutus;
 use App\Models\Contactus;
 use App\Models\Newsletter;
 use App\Models\Slider;
+use App\Services\Search\Filters;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -50,23 +52,13 @@ class HomeController extends Controller
      */
     public function search(Filters $filters)
     {
-        $validator = validator(request()->all(), ['search' => 'min:3']);
+        $validator = validator(request()->all(), ['search' => 'min:3', 'main' => 'required_without:sub','sub' => 'required_without:main']);
         if ($validator->fails()) {
             return redirect()->home()->withErrors($validator->messages());
         }
 
-        if (!is_null(request()->element)) {
-            if (request()->element === 'news') {
-                $elements = News::filters($filters)->paginate(12);
-            } elseif (request()->element === 'presentation') {
-                $elements = Presentation::filters($filters)->paginate(12);
-            } elseif (request()->element === 'announcement') {
-                var_dump('ann case');
-                $elements = Announcement::filters($filters)->paginate(12);
-            }
-        } else {
-            $elements = User::filters($filters)->active()->paginate(12);
-        }
+        $elements = Ad::filters($filters)->get(['id','category_id','price','type_id','brand_id','model_id']);
+        return $elements;
 
         if (!$elements->isEmpty()) {
             return view('frontend.modules.pages.search', compact('elements'));

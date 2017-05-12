@@ -25,6 +25,7 @@ Route::group(['namespace' => 'Frontend'], function () {
      * parent category (product or service)
      *   main === whatever
      *      sub === whatever
+     *          children == whatever
      * also note that $categories (with featured boolean) var is available within homepage you can loop through anytime
      * another $categories (without featured boolean) var is available for other pages needed (refer to ViewComposer.php)
      * */

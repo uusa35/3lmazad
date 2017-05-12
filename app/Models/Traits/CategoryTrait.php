@@ -15,6 +15,11 @@ use App\Models\Type;
  */
 trait CategoryTrait
 {
+    public function brand()
+    {
+        return $this->hasOne(Brand::class);
+    }
+
     public function ads()
     {
         return $this->hasMany(Ad::class);
@@ -41,21 +46,6 @@ trait CategoryTrait
     public function types()
     {
         return $this->hasMany(Type::class);
-    }
-
-    public function scopeParents($q)
-    {
-        return $q->where('parent_id', 0);
-    }
-
-    public function scopeSubCategories($q)
-    {
-        return $q->where('parent_id', '!=', 0);
-    }
-
-    public function scopeFeatured($q)
-    {
-        return $q->where('featured', true);
     }
 
 }

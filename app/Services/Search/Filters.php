@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Created by PhpStorm.
@@ -15,96 +16,97 @@ use Illuminate\Http\Request;
 class Filters extends QueryFilters
 {
     public $roles;
+    public $category;
+    use RealEstateTrait;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Category $category)
     {
         parent::__construct($request);
+        $this->category = $category;
     }
 
     public function search($search)
     {
-        if ($this->request->type) {
-            return $this->users($search);
-        } elseif ($this->request->element) {
-            return $this->searchAll($search);
-        }
-        else {
-            $this->users($search);
-        }
-
+        var_dump('from search');
+        return $this->builder->where(function ($q) use ($search) {
+            $q->whereHas('meta', function ($q) use ($search) {
+                return $q->where('description', 'like', "%{$search}%");
+            })->orWhere('title', 'like', "%{$search}%");
+        });
     }
 
-    /**
-     * @param $search
-     * @return mixed
-     * searching inside news or presentations or announcements
-     */
-    public function searchAll($search)
+    public function main()
     {
-        $test = $this->builder->where('title', 'like', "%{$search}%")
-            ->orWhere('body', 'like', "%{$search}%");
+        var_dump('from main');
+        $subs = $this->category->whereId(request()->main)->first()->children()->pluck('id')->toArray();
+        return $this->sub($subs);
     }
 
-    /**
-     * @param $search
-     * @return mixed
-     * searching the user table + user_meta with roles of contracutros + distributors + manifacturers
-     */
-    public function users($search)
+    public function sub($subs = null)
     {
-        if ($this->request->type === '2') {
-            /*
-             * always start with the bigger results then  where the bigger one then orWhere the rest
-             * it means that u start with the bigger results
-             * then filter with where or orWhere (or where will be applied no matter the result of the previous where)
-             * */
-            return $this->builder->whereHas('user_meta', function ($q) use ($search) {
-                $q->where('description', 'like', "%{$search}%")->orWhere('designation', 'like', "%{$search}%");
-            })->orWhere('name', 'like', "%{$search}%")->roleOf('user');
-
+        if (request()->has('main')) {
+            var_dump('main case from sub');
+            return $this->builder->whereIn('category_id', $subs);
         } else {
-            return $this->builder->whereHas('user_meta', function ($q) use ($search) {
-                $q->where('description', 'like', "%{$search}%");
-            })->orWhere('name', 'like', "%{$search}%")->companies();
+            var_dump('one sub case');
+            return $this->builder->where('category_id', request()->sub);
         }
+    }
+
+    public function brand()
+    {
+        var_dump('brand');
+        return $this->builder->where('brand_id', request()->brand);
+    }
+
+    public function model()
+    {
+        var_dump('model');
+        return $this->builder->where('model_id', request()->model);
     }
 
     public function type()
     {
-        return $this->builder->whereHas('roles', function ($q) {
-            $q->where('role_id', request()->type);
+        var_dump('type');
+        return $this->builder->where('type_id', request()->type);
+    }
+
+    public function condition()
+    {
+        var_dump('condition');
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('condition', request()->condition);
+            });
         });
     }
 
-    public function country()
+    public function min($ads)
     {
-        return $this->builder->orWhere('country_id', '=', request()->country);
+        return $this->builder->where('price', '>=', request()->min);
     }
 
-    public function element()
+    public function max()
     {
-        return $this->builder;
+        return $this->builder->where('price', '<=', request()->max);
     }
 
-    public function sub($search)
+    public function area()
     {
-        // if only search field is equal to all then it will start fetching by categories only (_category-sub-menu)
-        return $this->builder->whereHas('items', function ($q) {
-            $q->where('category_id', '=', request()->sub);
-        })->companies();
+        var_dump('area');
+        return $this->builder->where('area', request()->area);
     }
 
-    public function main($search)
+    public function have_images()
     {
-        // all companies (users) that have items which their category_id belongs to the parent id (request()->main)
-        if ($search === 'all') {
-            return $this->builder->whereHas('items', function ($q) {
-                $q->whereHas('category', function ($q) {
-                    $q->orWhere('parent_id', '=', request()->main);
-                });
-            });
-        }
+        var_dump('have images');
+        return $this->builder->where('price', request()->have_images);
     }
 
+    public function only_premium()
+    {
+        var_dump('only premium');
+        return $this->builder->where('only_premium', request()->only_premium);
+    }
 
 }

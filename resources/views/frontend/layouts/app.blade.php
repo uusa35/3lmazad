@@ -8,7 +8,7 @@
 <div class="wrapper">
     <div class="row">
         @section('header')
-            @include('frontend.partials.header')
+{{--            @include('frontend.partials.header')--}}
         @show
         <div id="pageContent" class="page-content">
             {{--<div class="col-lg-12">--}}
@@ -33,7 +33,7 @@
     <div id="_element" class="hidden">{{ $token }}</div>
 @endif
 @section('scripts')
-    @include('frontend.partials.scripts')
+    {{--@include('frontend.partials.scripts')--}}
 @show
 </body>
 </html>

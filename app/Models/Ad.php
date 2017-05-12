@@ -19,7 +19,7 @@ class Ad extends BaseModel
         'active' => 'boolean',
         'featured' => 'boolean'
     ];
-    protected $with = ['meta'];
+//    protected $with = ['meta'];
 
     /**
      * The "booting" method of the model.
@@ -42,15 +42,5 @@ class Ad extends BaseModel
                 static::addGlobalScope(new ScopeIsSold());
             }
         }
-    }
-
-    public function getMostVisitedAds($take = 10)
-    {
-        return $this->selectRaw('ads.*, count(*) as ad_count')
-            ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
-            ->groupBy('ad_id')// responsible to get the sum of ads returned
-            ->orderBy('ad_count', 'DESC')
-            ->take($take)->get();
-
     }
 }

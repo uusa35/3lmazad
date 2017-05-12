@@ -122,7 +122,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 $factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
-        'price' => $faker->randomFloat(4, 4, 5),
+        'price' => $faker->randomFloat(4, 4, 1000),
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(),
         'featured' => $faker->boolean(),
@@ -147,7 +147,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
 
 $factory->define(AdMeta::class, function (Faker\Generator $faker) {
     return [
-        'description' => $faker->word,
+        'description' => $faker->paragraph(3),
         'phone' => $faker->bankAccountNumber,
         'condition' => $faker->randomElement(['new', 'old']),
         'manufacturing_year' => $faker->year,
@@ -202,7 +202,7 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
         'duration' => $faker->randomDigit,
-        'price' => $faker->randomFloat(4, 4, 5),
+        'price' => $faker->randomFloat(4, 4, 10),
         'sale_price' => $faker->randomFloat(4, 2, 3),
         'active' => $faker->boolean(true),
     ];

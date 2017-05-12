@@ -2,10 +2,10 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <title>{{ config('app.name') }}</title>
-    <meta name="keywords" content="HTML5 Template"/>
+    <meta name="keywords" content="{{ config('app.name') }}"/>
     <meta name="description" content="{{ config('app.name') }}">
-    <meta name="author" content="etheme.com">
-    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="author" content="{{ config('app.name') }}">
+    {{--<link rel="shortcut icon" href="favicon.ico">--}}
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Web Fonts  -->
