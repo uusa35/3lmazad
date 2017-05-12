@@ -121,7 +121,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 
 $factory->define(Ad::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->word,
+        'title' => $faker->sentence(6),
         'price' => $faker->randomFloat(4, 4, 1000),
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(),
@@ -137,9 +137,12 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'model_id' => function ($array) {
             return BrandModel::where('brand_id', '=', $array['brand_id'])->first()->id;
         },
+        'type_id' => function ($array) {
+            $parentCategoryId = Category::where('id', $array['category_id'])->first()->parent()->first()->id;
+            return Type::where('category_id', '=', $parentCategoryId)->pluck('id')->shuffle()->first();
+        },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
-        'type_id' => Type::all()->random()->id,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),
     ];

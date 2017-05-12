@@ -14,7 +14,7 @@ class CreateAdMetasTable extends Migration
     {
         Schema::create('ad_metas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->string('phone')->nullable();
             $table->enum('condition', ['new', 'old'])->nullable();
             $table->string('manufacturing_year')->nullable();

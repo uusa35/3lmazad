@@ -57,7 +57,7 @@ class HomeController extends Controller
             return redirect()->home()->withErrors($validator->messages());
         }
 
-        $elements = Ad::filters($filters)->get(['id','category_id','price','type_id','brand_id','model_id']);
+        $elements = Ad::filters($filters)->get(['id','category_id','price','type_id','brand_id','model_id','title']);
         return $elements;
 
         if (!$elements->isEmpty()) {

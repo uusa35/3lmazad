@@ -31,13 +31,13 @@ class CategoriesTableSeeder extends Seeder
                 //PARENT
                 $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent']]);
                 // BRAND FOR EACH PARENT
-                factory(Brand::class, 2)->create(['category_id' => $parent->id])->each(function ($brand) {
+                factory(Brand::class, 6)->create(['category_id' => $parent->id])->each(function ($brand) {
                     // MODEL FOR EACH BRAND
-                    $brand->models()->saveMany(factory(BrandModel::class, 3)->create());
+                    factory(BrandModel::class, 6)->create(['brand_id' => $brand->id]);
                 });
 
                 // TYPES FOR EACH PARENT
-                $parent->types()->saveMany(factory(Type::class, 2)->create());
+                factory(Type::class, 5)->create(['category_id' => $parent->id]);
 
                 // ASSIGN FORM FOR A PARENT CATEGORY
                 $form = factory(Form::class)->create();
@@ -45,6 +45,7 @@ class CategoriesTableSeeder extends Seeder
                 $form->each(function ($form) {
                     $form->fields()->attach(Field::all()->random()->pluck('id')->shuffle()->take(5));
                 });
+
                 $form->categories()->save($parent);
 
                 foreach ($category['sub'] as $sub) {
