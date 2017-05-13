@@ -94,13 +94,13 @@ class Filters extends QueryFilters
     public function area()
     {
         var_dump('area');
-        return $this->builder->where('area', request()->area);
+        return $this->builder->where('area_id', request()->area);
     }
 
     public function have_images()
     {
         var_dump('have images');
-        return $this->builder->where('price', request()->have_images);
+        return $this->builder->where('image', '!=', null);
     }
 
     public function only_premium()
