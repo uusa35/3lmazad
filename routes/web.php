@@ -29,6 +29,9 @@ Route::group(['namespace' => 'Frontend'], function () {
      * also note that $categories (with featured boolean) var is available within homepage you can loop through anytime
      * another $categories (without featured boolean) var is available for other pages needed (refer to ViewComposer.php)
      * */
+    /*
+     * ?sub=2&type=4&brand=6&model=31&have_images=1&area=3&room_no=2&floor_no=9&bathroom_no=1&furnished=1
+     * */
     Route::any('search', 'HomeController@search')->name('search');
     Route::resource('ad', 'AdController');
 });

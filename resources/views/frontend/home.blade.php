@@ -26,7 +26,7 @@
 @show
 @section('bottom')
     <div class="col-lg-12">
-        <h1>from bottom</h1>
+        {{--<h1>from bottom</h1>--}}
     </div>
 @show
 @endsection

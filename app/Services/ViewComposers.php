@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Area;
 use App\Models\Category;
 use App\Models\Contactus;
 use App\Models\Country;
@@ -18,6 +19,12 @@ class ViewComposers
     {
         $countries = Country::pluck('name_' . app()->getLocale(), 'id');
         return $view->with(compact('countries'));
+    }
+
+    public function getAreas(View $view)
+    {
+        $areas = Area::pluck('name_' . app()->getLocale(), 'id');
+        return $view->with(compact('areas'));
     }
 
 

@@ -1,4 +1,5 @@
 {
+  "/js/form-app.js": "/js/form-app.js",
   "/js/app.js": "/js/app.js",
   "/css/backend.css": "/css/backend.css",
   "/css/frontend.css": "/css/frontend.css",
@@ -9,5 +10,6 @@
   "/css/gallery.css": "/css/gallery.css",
   "/js/gallery.js": "/js/gallery.js",
   "/js/backend.js": "/js/backend.js",
-  "/js/frontend.js": "/js/frontend.js"
+  "/js/frontend.js": "/js/frontend.js",
+  "/0.hot-update.js": "/0.cc2692cc7352273ee84f.hot-update.js"
 }

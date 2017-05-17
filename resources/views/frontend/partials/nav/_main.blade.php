@@ -14,13 +14,22 @@
             <!-- End Logo -->
         </div>
         {{--SEARCH FORM--}}
-        @include('frontend.partials.nav._search-row')
-        <div class="pull-left search-focus-fade" id="slidemenu">
+        <div class="pull-left search-focus-fade" id="slidemenu" style="display: flex; justify-content: flex-end;">
             <div class="slidemenu-close visible-xs">✕</div>
             <ul class="nav navbar-nav">
                 <li class="menu-large">
                     <a href="{{ route('home') }}" class="dropdown-toggle">
                         <span class="link-name">Home</span>
+                    </a>
+                </li>
+                <li class="menu-large">
+                    <a href="{{ route('home') }}" class="dropdown-toggle">
+                        <span class="link-name">Aboutus</span>
+                    </a>
+                </li>
+                <li class="menu-large">
+                    <a href="{{ route('home') }}" class="dropdown-toggle">
+                        <span class="link-name">Contact us</span>
                     </a>
                 </li>
             </ul>

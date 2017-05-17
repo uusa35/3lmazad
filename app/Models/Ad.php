@@ -17,9 +17,8 @@ class Ad extends BaseModel
     protected $guarded = [''];
     protected $casts = [
         'active' => 'boolean',
-        'featured' => 'boolean'
     ];
-//    protected $with = ['meta'];
+    protected $with = ['meta'];
 
     /**
      * The "booting" method of the model.
@@ -37,9 +36,9 @@ class Ad extends BaseModel
             }
 
             if (!in_array('backend', request()->segments(), true)) {
-//                static::addGlobalScope(new ScopeActive());
-//                static::addGlobalScope(new ScopeExpired());
-//                static::addGlobalScope(new ScopeIsSold());
+                static::addGlobalScope(new ScopeActive());
+                static::addGlobalScope(new ScopeExpired());
+                static::addGlobalScope(new ScopeIsSold());
             }
         }
     }

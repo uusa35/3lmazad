@@ -15,6 +15,7 @@ const { mix } = require('laravel-mix');
 //   .sass('resources/assets/sass/app.scss', 'public/css');
 mix.js('resources/assets/js/app.js', 'public/js')
     //.react('resources/assets/js/pages-app.js', 'public/js')
+    .react('resources/assets/js/form-app.js', 'public/js')
     .js('./bower_components/blueimp-gallery/js/blueimp-gallery.min.js', 'public/js/gallery.js')
     .sass('resources/assets/sass/backend.scss', 'public/css')
     .sass('resources/assets/sass/frontend.scss', 'public/css')

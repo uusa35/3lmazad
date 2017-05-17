@@ -10,9 +10,10 @@ trait RealEstateTrait
 {
     public function room_no()
     {
+        var_dump('room no');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('price', '>=', request()->room_no);
+                return $q->where('room_no', '>=', request()->room_no);
             });
         });
 
@@ -23,7 +24,7 @@ trait RealEstateTrait
         var_dump('floor_no');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('floor_no', '>=', request()->floor_no);
+                return $q->where('floor_no', '<=', request()->floor_no);
             });
         });
     }
@@ -63,7 +64,9 @@ trait RealEstateTrait
         var_dump('furnished');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('furnished', true);
+                // 1 is true
+                // false is false
+                return $q->where('furnished',request()->furnished);
             });
         });
     }

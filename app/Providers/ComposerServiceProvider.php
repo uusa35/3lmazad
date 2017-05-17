@@ -25,10 +25,16 @@ class ComposerServiceProvider extends ServiceProvider
             'frontend.partials.forms._edit-item-product-and-service'
         ], 'App\Services\ViewComposers@getCategories');
 
-        view()->composer(['frontend.partials.forms._register',
-            'frontend.partials.forms._user-edit',
+        view()->composer(
+            [
+                'frontend.partials.forms._register',
+                'frontend.partials.forms._user-edit',
+                'frontend.partials.nav._search-row'
+            ], 'App\Services\ViewComposers@getCountries');
+
+        view()->composer([
             'frontend.partials.nav._search-row'
-        ], 'App\Services\ViewComposers@getCountries');
+        ], 'App\Services\ViewComposers@getAreas');
 
         view()->composer(['frontend.layouts.app',
             'backend.partials.nav',

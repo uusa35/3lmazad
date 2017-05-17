@@ -57,8 +57,9 @@ class AdController extends Controller
     public function show($id)
     {
         $element = $this->ad->whereId($id)->first();
-        dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
-        $counter = Visitor::where('ad_id', $element->id)->count();
+//        dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
+//        $counter = Visitor::where('ad_id', $element->id)->count();
+        $counter = 0;
         return view('frontend.modules.ad.show', compact('element', 'counter'));
     }
 

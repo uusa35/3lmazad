@@ -427,7 +427,7 @@ h6 .icon {
 .simple-list li:after {
   right: 0;
   left: auto;
-  content: "»";
+  content: "\BB";
 }
 .pagination {
   padding-right: 0;
@@ -644,5 +644,3 @@ th {
   margin-right: 80px;
   margin-left: 0;
 }
-
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlc291cmNlcy9hc3NldHMvc2Fzcy9jdXN0b20tYXJhYmljLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCAnLi4vaHRtbC9jc3Mvc3R5bGUtcnRsLmNzcyc7Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sQ0FBUCw4QkFBTyJ9 */
