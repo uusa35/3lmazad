@@ -18,12 +18,6 @@ require('datatables.net');
 require('datatables.net-buttons');
 require('eonasdan-bootstrap-datetimepicker');
 require('moment');
-window.$.fn.transition = require('semantic-ui-transition');
-window.$.fn.dropdown = require('semantic-ui-dropdown');
-jQuery(document).ready(function($){
-    $('.ui.dropdown').dropdown({allowCategorySelection: true});
-});
-
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

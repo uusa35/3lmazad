@@ -45,6 +45,7 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui": "^2.2.10",
     "semantic-ui-dropdown": "^2.2.10",
+    "semantic-ui-popup": "^2.2.10",
     "semantic-ui-transition": "^2.2.10",
     "url-loader": "^0.5.8"
   }

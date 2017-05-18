@@ -27,3 +27,35 @@
   padding: 8px;
 }
 
+// search_fields and form
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  border-radius: 0;
+}
+
+.search-bar .form-group {
+  margin : 10px;
+  margin-top : 0px;
+  margin-bottom: 0px;
+}
+
+.area_search_field {
+  min-wdith: 100px;
+}
+.category_search_field {
+  width : 250px;
+  max-width: 300px;
+}
+.min_search_field {
+  max-width : 70px;
+}
+.max_search_field {
+  max-width : 70px;
+}
+.keyword_search_field {
+  min-width : 150px;
+  width: 150px;
+}

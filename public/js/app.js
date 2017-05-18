@@ -1899,7 +1899,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(615)("./" + name);
+            __webpack_require__(617)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -4534,17 +4534,17 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(75)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)(module)))
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global    = __webpack_require__(5)
-  , core      = __webpack_require__(40)
-  , hide      = __webpack_require__(23)
-  , redefine  = __webpack_require__(24)
-  , ctx       = __webpack_require__(41)
+  , core      = __webpack_require__(41)
+  , hide      = __webpack_require__(24)
+  , redefine  = __webpack_require__(25)
+  , ctx       = __webpack_require__(42)
   , PROTOTYPE = 'prototype';
 
 var $export = function(type, name, source){
@@ -4937,7 +4937,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var store      = __webpack_require__(102)('wks')
-  , uid        = __webpack_require__(60)
+  , uid        = __webpack_require__(62)
   , Symbol     = __webpack_require__(5).Symbol
   , USE_SYMBOL = typeof Symbol == 'function';
 
@@ -4964,8 +4964,8 @@ module.exports = !__webpack_require__(6)(function(){
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject       = __webpack_require__(4)
-  , IE8_DOM_DEFINE = __webpack_require__(194)
-  , toPrimitive    = __webpack_require__(37)
+  , IE8_DOM_DEFINE = __webpack_require__(196)
+  , toPrimitive    = __webpack_require__(38)
   , dP             = Object.defineProperty;
 
 exports.f = __webpack_require__(13) ? Object.defineProperty : function defineProperty(O, P, Attributes){
@@ -4986,7 +4986,7 @@ exports.f = __webpack_require__(13) ? Object.defineProperty : function definePro
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.15 ToLength
-var toInteger = __webpack_require__(48)
+var toInteger = __webpack_require__(49)
   , min       = Math.min;
 module.exports = function(it){
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -4998,7 +4998,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.13 ToObject(argument)
-var defined = __webpack_require__(32);
+var defined = __webpack_require__(33);
 module.exports = function(it){
   return Object(defined(it));
 };
@@ -5013,1343 +5013,7 @@ module.exports = function(it, key){
 };
 
 /***/ }),
-/* 20 */,
-/* 21 */,
-/* 22 */
-/***/ (function(module, exports) {
-
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var dP         = __webpack_require__(14)
-  , createDesc = __webpack_require__(47);
-module.exports = __webpack_require__(13) ? function(object, key, value){
-  return dP.f(object, key, createDesc(1, value));
-} : function(object, key, value){
-  object[key] = value;
-  return object;
-};
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var global    = __webpack_require__(5)
-  , hide      = __webpack_require__(23)
-  , has       = __webpack_require__(19)
-  , SRC       = __webpack_require__(60)('src')
-  , TO_STRING = 'toString'
-  , $toString = Function[TO_STRING]
-  , TPL       = ('' + $toString).split(TO_STRING);
-
-__webpack_require__(40).inspectSource = function(it){
-  return $toString.call(it);
-};
-
-(module.exports = function(O, key, val, safe){
-  var isFunction = typeof val == 'function';
-  if(isFunction)has(val, 'name') || hide(val, 'name', key);
-  if(O[key] === val)return;
-  if(isFunction)has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
-  if(O === global){
-    O[key] = val;
-  } else {
-    if(!safe){
-      delete O[key];
-      hide(O, key, val);
-    } else {
-      if(O[key])O[key] = val;
-      else hide(O, key, val);
-    }
-  }
-// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-})(Function.prototype, TO_STRING, function toString(){
-  return typeof this == 'function' && this[SRC] || $toString.call(this);
-});
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__(1)
-  , fails   = __webpack_require__(6)
-  , defined = __webpack_require__(32)
-  , quot    = /"/g;
-// B.2.3.2.1 CreateHTML(string, tag, attribute, value)
-var createHTML = function(string, tag, attribute, value) {
-  var S  = String(defined(string))
-    , p1 = '<' + tag;
-  if(attribute !== '')p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"';
-  return p1 + '>' + S + '</' + tag + '>';
-};
-module.exports = function(NAME, exec){
-  var O = {};
-  O[NAME] = exec(createHTML);
-  $export($export.P + $export.F * fails(function(){
-    var test = ''[NAME]('"');
-    return test !== test.toLowerCase() || test.split('"').length > 3;
-  }), 'String', O);
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(83)
-  , defined = __webpack_require__(32);
-module.exports = function(it){
-  return IObject(defined(it));
-};
-
-/***/ }),
-/* 27 */,
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var pIE            = __webpack_require__(84)
-  , createDesc     = __webpack_require__(47)
-  , toIObject      = __webpack_require__(26)
-  , toPrimitive    = __webpack_require__(37)
-  , has            = __webpack_require__(19)
-  , IE8_DOM_DEFINE = __webpack_require__(194)
-  , gOPD           = Object.getOwnPropertyDescriptor;
-
-exports.f = __webpack_require__(13) ? gOPD : function getOwnPropertyDescriptor(O, P){
-  O = toIObject(O);
-  P = toPrimitive(P, true);
-  if(IE8_DOM_DEFINE)try {
-    return gOPD(O, P);
-  } catch(e){ /* empty */ }
-  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
-};
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has         = __webpack_require__(19)
-  , toObject    = __webpack_require__(18)
-  , IE_PROTO    = __webpack_require__(146)('IE_PROTO')
-  , ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function(O){
-  O = toObject(O);
-  if(has(O, IE_PROTO))return O[IE_PROTO];
-  if(typeof O.constructor == 'function' && O instanceof O.constructor){
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-
-/***/ }),
-/* 30 */,
-/* 31 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__(6);
-
-module.exports = function(method, arg){
-  return !!method && fails(function(){
-    arg ? method.call(null, function(){}, 1) : method.call(null);
-  });
-};
-
-/***/ }),
-/* 34 */,
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 0 -> Array#forEach
-// 1 -> Array#map
-// 2 -> Array#filter
-// 3 -> Array#some
-// 4 -> Array#every
-// 5 -> Array#find
-// 6 -> Array#findIndex
-var ctx      = __webpack_require__(41)
-  , IObject  = __webpack_require__(83)
-  , toObject = __webpack_require__(18)
-  , toLength = __webpack_require__(16)
-  , asc      = __webpack_require__(405);
-module.exports = function(TYPE, $create){
-  var IS_MAP        = TYPE == 1
-    , IS_FILTER     = TYPE == 2
-    , IS_SOME       = TYPE == 3
-    , IS_EVERY      = TYPE == 4
-    , IS_FIND_INDEX = TYPE == 6
-    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX
-    , create        = $create || asc;
-  return function($this, callbackfn, that){
-    var O      = toObject($this)
-      , self   = IObject(O)
-      , f      = ctx(callbackfn, that, 3)
-      , length = toLength(self.length)
-      , index  = 0
-      , result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined
-      , val, res;
-    for(;length > index; index++)if(NO_HOLES || index in self){
-      val = self[index];
-      res = f(val, index, O);
-      if(TYPE){
-        if(IS_MAP)result[index] = res;            // map
-        else if(res)switch(TYPE){
-          case 3: return true;                    // some
-          case 5: return val;                     // find
-          case 6: return index;                   // findIndex
-          case 2: result.push(val);               // filter
-        } else if(IS_EVERY)return false;          // every
-      }
-    }
-    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
-  };
-};
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// most Object methods by ES6 should accept primitives
-var $export = __webpack_require__(1)
-  , core    = __webpack_require__(40)
-  , fails   = __webpack_require__(6);
-module.exports = function(KEY, exec){
-  var fn  = (core.Object || {})[KEY] || Object[KEY]
-    , exp = {};
-  exp[KEY] = exec(fn);
-  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-};
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(8);
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function(it, S){
-  if(!isObject(it))return it;
-  var fn, val;
-  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-/***/ }),
-/* 38 */,
-/* 39 */,
-/* 40 */
-/***/ (function(module, exports) {
-
-var core = module.exports = {version: '2.4.0'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// optional / simple context binding
-var aFunction = __webpack_require__(22);
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Map     = __webpack_require__(210)
-  , $export = __webpack_require__(1)
-  , shared  = __webpack_require__(102)('metadata')
-  , store   = shared.store || (shared.store = new (__webpack_require__(213)));
-
-var getOrCreateMetadataMap = function(target, targetKey, create){
-  var targetMetadata = store.get(target);
-  if(!targetMetadata){
-    if(!create)return undefined;
-    store.set(target, targetMetadata = new Map);
-  }
-  var keyMetadata = targetMetadata.get(targetKey);
-  if(!keyMetadata){
-    if(!create)return undefined;
-    targetMetadata.set(targetKey, keyMetadata = new Map);
-  } return keyMetadata;
-};
-var ordinaryHasOwnMetadata = function(MetadataKey, O, P){
-  var metadataMap = getOrCreateMetadataMap(O, P, false);
-  return metadataMap === undefined ? false : metadataMap.has(MetadataKey);
-};
-var ordinaryGetOwnMetadata = function(MetadataKey, O, P){
-  var metadataMap = getOrCreateMetadataMap(O, P, false);
-  return metadataMap === undefined ? undefined : metadataMap.get(MetadataKey);
-};
-var ordinaryDefineOwnMetadata = function(MetadataKey, MetadataValue, O, P){
-  getOrCreateMetadataMap(O, P, true).set(MetadataKey, MetadataValue);
-};
-var ordinaryOwnMetadataKeys = function(target, targetKey){
-  var metadataMap = getOrCreateMetadataMap(target, targetKey, false)
-    , keys        = [];
-  if(metadataMap)metadataMap.forEach(function(_, key){ keys.push(key); });
-  return keys;
-};
-var toMetaKey = function(it){
-  return it === undefined || typeof it == 'symbol' ? it : String(it);
-};
-var exp = function(O){
-  $export($export.S, 'Reflect', O);
-};
-
-module.exports = {
-  store: store,
-  map: getOrCreateMetadataMap,
-  has: ordinaryHasOwnMetadata,
-  get: ordinaryGetOwnMetadata,
-  set: ordinaryDefineOwnMetadata,
-  keys: ordinaryOwnMetadataKeys,
-  key: toMetaKey,
-  exp: exp
-};
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-if(__webpack_require__(13)){
-  var LIBRARY             = __webpack_require__(53)
-    , global              = __webpack_require__(5)
-    , fails               = __webpack_require__(6)
-    , $export             = __webpack_require__(1)
-    , $typed              = __webpack_require__(103)
-    , $buffer             = __webpack_require__(153)
-    , ctx                 = __webpack_require__(41)
-    , anInstance          = __webpack_require__(52)
-    , propertyDesc        = __webpack_require__(47)
-    , hide                = __webpack_require__(23)
-    , redefineAll         = __webpack_require__(57)
-    , toInteger           = __webpack_require__(48)
-    , toLength            = __webpack_require__(16)
-    , toIndex             = __webpack_require__(59)
-    , toPrimitive         = __webpack_require__(37)
-    , has                 = __webpack_require__(19)
-    , same                = __webpack_require__(207)
-    , classof             = __webpack_require__(82)
-    , isObject            = __webpack_require__(8)
-    , toObject            = __webpack_require__(18)
-    , isArrayIter         = __webpack_require__(138)
-    , create              = __webpack_require__(54)
-    , getPrototypeOf      = __webpack_require__(29)
-    , gOPN                = __webpack_require__(55).f
-    , getIterFn           = __webpack_require__(155)
-    , uid                 = __webpack_require__(60)
-    , wks                 = __webpack_require__(10)
-    , createArrayMethod   = __webpack_require__(35)
-    , createArrayIncludes = __webpack_require__(93)
-    , speciesConstructor  = __webpack_require__(147)
-    , ArrayIterators      = __webpack_require__(156)
-    , Iterators           = __webpack_require__(69)
-    , $iterDetect         = __webpack_require__(99)
-    , setSpecies          = __webpack_require__(58)
-    , arrayFill           = __webpack_require__(131)
-    , arrayCopyWithin     = __webpack_require__(187)
-    , $DP                 = __webpack_require__(14)
-    , $GOPD               = __webpack_require__(28)
-    , dP                  = $DP.f
-    , gOPD                = $GOPD.f
-    , RangeError          = global.RangeError
-    , TypeError           = global.TypeError
-    , Uint8Array          = global.Uint8Array
-    , ARRAY_BUFFER        = 'ArrayBuffer'
-    , SHARED_BUFFER       = 'Shared' + ARRAY_BUFFER
-    , BYTES_PER_ELEMENT   = 'BYTES_PER_ELEMENT'
-    , PROTOTYPE           = 'prototype'
-    , ArrayProto          = Array[PROTOTYPE]
-    , $ArrayBuffer        = $buffer.ArrayBuffer
-    , $DataView           = $buffer.DataView
-    , arrayForEach        = createArrayMethod(0)
-    , arrayFilter         = createArrayMethod(2)
-    , arraySome           = createArrayMethod(3)
-    , arrayEvery          = createArrayMethod(4)
-    , arrayFind           = createArrayMethod(5)
-    , arrayFindIndex      = createArrayMethod(6)
-    , arrayIncludes       = createArrayIncludes(true)
-    , arrayIndexOf        = createArrayIncludes(false)
-    , arrayValues         = ArrayIterators.values
-    , arrayKeys           = ArrayIterators.keys
-    , arrayEntries        = ArrayIterators.entries
-    , arrayLastIndexOf    = ArrayProto.lastIndexOf
-    , arrayReduce         = ArrayProto.reduce
-    , arrayReduceRight    = ArrayProto.reduceRight
-    , arrayJoin           = ArrayProto.join
-    , arraySort           = ArrayProto.sort
-    , arraySlice          = ArrayProto.slice
-    , arrayToString       = ArrayProto.toString
-    , arrayToLocaleString = ArrayProto.toLocaleString
-    , ITERATOR            = wks('iterator')
-    , TAG                 = wks('toStringTag')
-    , TYPED_CONSTRUCTOR   = uid('typed_constructor')
-    , DEF_CONSTRUCTOR     = uid('def_constructor')
-    , ALL_CONSTRUCTORS    = $typed.CONSTR
-    , TYPED_ARRAY         = $typed.TYPED
-    , VIEW                = $typed.VIEW
-    , WRONG_LENGTH        = 'Wrong length!';
-
-  var $map = createArrayMethod(1, function(O, length){
-    return allocate(speciesConstructor(O, O[DEF_CONSTRUCTOR]), length);
-  });
-
-  var LITTLE_ENDIAN = fails(function(){
-    return new Uint8Array(new Uint16Array([1]).buffer)[0] === 1;
-  });
-
-  var FORCED_SET = !!Uint8Array && !!Uint8Array[PROTOTYPE].set && fails(function(){
-    new Uint8Array(1).set({});
-  });
-
-  var strictToLength = function(it, SAME){
-    if(it === undefined)throw TypeError(WRONG_LENGTH);
-    var number = +it
-      , length = toLength(it);
-    if(SAME && !same(number, length))throw RangeError(WRONG_LENGTH);
-    return length;
-  };
-
-  var toOffset = function(it, BYTES){
-    var offset = toInteger(it);
-    if(offset < 0 || offset % BYTES)throw RangeError('Wrong offset!');
-    return offset;
-  };
-
-  var validate = function(it){
-    if(isObject(it) && TYPED_ARRAY in it)return it;
-    throw TypeError(it + ' is not a typed array!');
-  };
-
-  var allocate = function(C, length){
-    if(!(isObject(C) && TYPED_CONSTRUCTOR in C)){
-      throw TypeError('It is not a typed array constructor!');
-    } return new C(length);
-  };
-
-  var speciesFromList = function(O, list){
-    return fromList(speciesConstructor(O, O[DEF_CONSTRUCTOR]), list);
-  };
-
-  var fromList = function(C, list){
-    var index  = 0
-      , length = list.length
-      , result = allocate(C, length);
-    while(length > index)result[index] = list[index++];
-    return result;
-  };
-
-  var addGetter = function(it, key, internal){
-    dP(it, key, {get: function(){ return this._d[internal]; }});
-  };
-
-  var $from = function from(source /*, mapfn, thisArg */){
-    var O       = toObject(source)
-      , aLen    = arguments.length
-      , mapfn   = aLen > 1 ? arguments[1] : undefined
-      , mapping = mapfn !== undefined
-      , iterFn  = getIterFn(O)
-      , i, length, values, result, step, iterator;
-    if(iterFn != undefined && !isArrayIter(iterFn)){
-      for(iterator = iterFn.call(O), values = [], i = 0; !(step = iterator.next()).done; i++){
-        values.push(step.value);
-      } O = values;
-    }
-    if(mapping && aLen > 2)mapfn = ctx(mapfn, arguments[2], 2);
-    for(i = 0, length = toLength(O.length), result = allocate(this, length); length > i; i++){
-      result[i] = mapping ? mapfn(O[i], i) : O[i];
-    }
-    return result;
-  };
-
-  var $of = function of(/*...items*/){
-    var index  = 0
-      , length = arguments.length
-      , result = allocate(this, length);
-    while(length > index)result[index] = arguments[index++];
-    return result;
-  };
-
-  // iOS Safari 6.x fails here
-  var TO_LOCALE_BUG = !!Uint8Array && fails(function(){ arrayToLocaleString.call(new Uint8Array(1)); });
-
-  var $toLocaleString = function toLocaleString(){
-    return arrayToLocaleString.apply(TO_LOCALE_BUG ? arraySlice.call(validate(this)) : validate(this), arguments);
-  };
-
-  var proto = {
-    copyWithin: function copyWithin(target, start /*, end */){
-      return arrayCopyWithin.call(validate(this), target, start, arguments.length > 2 ? arguments[2] : undefined);
-    },
-    every: function every(callbackfn /*, thisArg */){
-      return arrayEvery(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    fill: function fill(value /*, start, end */){ // eslint-disable-line no-unused-vars
-      return arrayFill.apply(validate(this), arguments);
-    },
-    filter: function filter(callbackfn /*, thisArg */){
-      return speciesFromList(this, arrayFilter(validate(this), callbackfn,
-        arguments.length > 1 ? arguments[1] : undefined));
-    },
-    find: function find(predicate /*, thisArg */){
-      return arrayFind(validate(this), predicate, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    findIndex: function findIndex(predicate /*, thisArg */){
-      return arrayFindIndex(validate(this), predicate, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    forEach: function forEach(callbackfn /*, thisArg */){
-      arrayForEach(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    indexOf: function indexOf(searchElement /*, fromIndex */){
-      return arrayIndexOf(validate(this), searchElement, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    includes: function includes(searchElement /*, fromIndex */){
-      return arrayIncludes(validate(this), searchElement, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    join: function join(separator){ // eslint-disable-line no-unused-vars
-      return arrayJoin.apply(validate(this), arguments);
-    },
-    lastIndexOf: function lastIndexOf(searchElement /*, fromIndex */){ // eslint-disable-line no-unused-vars
-      return arrayLastIndexOf.apply(validate(this), arguments);
-    },
-    map: function map(mapfn /*, thisArg */){
-      return $map(validate(this), mapfn, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    reduce: function reduce(callbackfn /*, initialValue */){ // eslint-disable-line no-unused-vars
-      return arrayReduce.apply(validate(this), arguments);
-    },
-    reduceRight: function reduceRight(callbackfn /*, initialValue */){ // eslint-disable-line no-unused-vars
-      return arrayReduceRight.apply(validate(this), arguments);
-    },
-    reverse: function reverse(){
-      var that   = this
-        , length = validate(that).length
-        , middle = Math.floor(length / 2)
-        , index  = 0
-        , value;
-      while(index < middle){
-        value         = that[index];
-        that[index++] = that[--length];
-        that[length]  = value;
-      } return that;
-    },
-    some: function some(callbackfn /*, thisArg */){
-      return arraySome(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-    },
-    sort: function sort(comparefn){
-      return arraySort.call(validate(this), comparefn);
-    },
-    subarray: function subarray(begin, end){
-      var O      = validate(this)
-        , length = O.length
-        , $begin = toIndex(begin, length);
-      return new (speciesConstructor(O, O[DEF_CONSTRUCTOR]))(
-        O.buffer,
-        O.byteOffset + $begin * O.BYTES_PER_ELEMENT,
-        toLength((end === undefined ? length : toIndex(end, length)) - $begin)
-      );
-    }
-  };
-
-  var $slice = function slice(start, end){
-    return speciesFromList(this, arraySlice.call(validate(this), start, end));
-  };
-
-  var $set = function set(arrayLike /*, offset */){
-    validate(this);
-    var offset = toOffset(arguments[1], 1)
-      , length = this.length
-      , src    = toObject(arrayLike)
-      , len    = toLength(src.length)
-      , index  = 0;
-    if(len + offset > length)throw RangeError(WRONG_LENGTH);
-    while(index < len)this[offset + index] = src[index++];
-  };
-
-  var $iterators = {
-    entries: function entries(){
-      return arrayEntries.call(validate(this));
-    },
-    keys: function keys(){
-      return arrayKeys.call(validate(this));
-    },
-    values: function values(){
-      return arrayValues.call(validate(this));
-    }
-  };
-
-  var isTAIndex = function(target, key){
-    return isObject(target)
-      && target[TYPED_ARRAY]
-      && typeof key != 'symbol'
-      && key in target
-      && String(+key) == String(key);
-  };
-  var $getDesc = function getOwnPropertyDescriptor(target, key){
-    return isTAIndex(target, key = toPrimitive(key, true))
-      ? propertyDesc(2, target[key])
-      : gOPD(target, key);
-  };
-  var $setDesc = function defineProperty(target, key, desc){
-    if(isTAIndex(target, key = toPrimitive(key, true))
-      && isObject(desc)
-      && has(desc, 'value')
-      && !has(desc, 'get')
-      && !has(desc, 'set')
-      // TODO: add validation descriptor w/o calling accessors
-      && !desc.configurable
-      && (!has(desc, 'writable') || desc.writable)
-      && (!has(desc, 'enumerable') || desc.enumerable)
-    ){
-      target[key] = desc.value;
-      return target;
-    } else return dP(target, key, desc);
-  };
-
-  if(!ALL_CONSTRUCTORS){
-    $GOPD.f = $getDesc;
-    $DP.f   = $setDesc;
-  }
-
-  $export($export.S + $export.F * !ALL_CONSTRUCTORS, 'Object', {
-    getOwnPropertyDescriptor: $getDesc,
-    defineProperty:           $setDesc
-  });
-
-  if(fails(function(){ arrayToString.call({}); })){
-    arrayToString = arrayToLocaleString = function toString(){
-      return arrayJoin.call(this);
-    }
-  }
-
-  var $TypedArrayPrototype$ = redefineAll({}, proto);
-  redefineAll($TypedArrayPrototype$, $iterators);
-  hide($TypedArrayPrototype$, ITERATOR, $iterators.values);
-  redefineAll($TypedArrayPrototype$, {
-    slice:          $slice,
-    set:            $set,
-    constructor:    function(){ /* noop */ },
-    toString:       arrayToString,
-    toLocaleString: $toLocaleString
-  });
-  addGetter($TypedArrayPrototype$, 'buffer', 'b');
-  addGetter($TypedArrayPrototype$, 'byteOffset', 'o');
-  addGetter($TypedArrayPrototype$, 'byteLength', 'l');
-  addGetter($TypedArrayPrototype$, 'length', 'e');
-  dP($TypedArrayPrototype$, TAG, {
-    get: function(){ return this[TYPED_ARRAY]; }
-  });
-
-  module.exports = function(KEY, BYTES, wrapper, CLAMPED){
-    CLAMPED = !!CLAMPED;
-    var NAME       = KEY + (CLAMPED ? 'Clamped' : '') + 'Array'
-      , ISNT_UINT8 = NAME != 'Uint8Array'
-      , GETTER     = 'get' + KEY
-      , SETTER     = 'set' + KEY
-      , TypedArray = global[NAME]
-      , Base       = TypedArray || {}
-      , TAC        = TypedArray && getPrototypeOf(TypedArray)
-      , FORCED     = !TypedArray || !$typed.ABV
-      , O          = {}
-      , TypedArrayPrototype = TypedArray && TypedArray[PROTOTYPE];
-    var getter = function(that, index){
-      var data = that._d;
-      return data.v[GETTER](index * BYTES + data.o, LITTLE_ENDIAN);
-    };
-    var setter = function(that, index, value){
-      var data = that._d;
-      if(CLAMPED)value = (value = Math.round(value)) < 0 ? 0 : value > 0xff ? 0xff : value & 0xff;
-      data.v[SETTER](index * BYTES + data.o, value, LITTLE_ENDIAN);
-    };
-    var addElement = function(that, index){
-      dP(that, index, {
-        get: function(){
-          return getter(this, index);
-        },
-        set: function(value){
-          return setter(this, index, value);
-        },
-        enumerable: true
-      });
-    };
-    if(FORCED){
-      TypedArray = wrapper(function(that, data, $offset, $length){
-        anInstance(that, TypedArray, NAME, '_d');
-        var index  = 0
-          , offset = 0
-          , buffer, byteLength, length, klass;
-        if(!isObject(data)){
-          length     = strictToLength(data, true)
-          byteLength = length * BYTES;
-          buffer     = new $ArrayBuffer(byteLength);
-        } else if(data instanceof $ArrayBuffer || (klass = classof(data)) == ARRAY_BUFFER || klass == SHARED_BUFFER){
-          buffer = data;
-          offset = toOffset($offset, BYTES);
-          var $len = data.byteLength;
-          if($length === undefined){
-            if($len % BYTES)throw RangeError(WRONG_LENGTH);
-            byteLength = $len - offset;
-            if(byteLength < 0)throw RangeError(WRONG_LENGTH);
-          } else {
-            byteLength = toLength($length) * BYTES;
-            if(byteLength + offset > $len)throw RangeError(WRONG_LENGTH);
-          }
-          length = byteLength / BYTES;
-        } else if(TYPED_ARRAY in data){
-          return fromList(TypedArray, data);
-        } else {
-          return $from.call(TypedArray, data);
-        }
-        hide(that, '_d', {
-          b: buffer,
-          o: offset,
-          l: byteLength,
-          e: length,
-          v: new $DataView(buffer)
-        });
-        while(index < length)addElement(that, index++);
-      });
-      TypedArrayPrototype = TypedArray[PROTOTYPE] = create($TypedArrayPrototype$);
-      hide(TypedArrayPrototype, 'constructor', TypedArray);
-    } else if(!$iterDetect(function(iter){
-      // V8 works with iterators, but fails in many other cases
-      // https://code.google.com/p/v8/issues/detail?id=4552
-      new TypedArray(null); // eslint-disable-line no-new
-      new TypedArray(iter); // eslint-disable-line no-new
-    }, true)){
-      TypedArray = wrapper(function(that, data, $offset, $length){
-        anInstance(that, TypedArray, NAME);
-        var klass;
-        // `ws` module bug, temporarily remove validation length for Uint8Array
-        // https://github.com/websockets/ws/pull/645
-        if(!isObject(data))return new Base(strictToLength(data, ISNT_UINT8));
-        if(data instanceof $ArrayBuffer || (klass = classof(data)) == ARRAY_BUFFER || klass == SHARED_BUFFER){
-          return $length !== undefined
-            ? new Base(data, toOffset($offset, BYTES), $length)
-            : $offset !== undefined
-              ? new Base(data, toOffset($offset, BYTES))
-              : new Base(data);
-        }
-        if(TYPED_ARRAY in data)return fromList(TypedArray, data);
-        return $from.call(TypedArray, data);
-      });
-      arrayForEach(TAC !== Function.prototype ? gOPN(Base).concat(gOPN(TAC)) : gOPN(Base), function(key){
-        if(!(key in TypedArray))hide(TypedArray, key, Base[key]);
-      });
-      TypedArray[PROTOTYPE] = TypedArrayPrototype;
-      if(!LIBRARY)TypedArrayPrototype.constructor = TypedArray;
-    }
-    var $nativeIterator   = TypedArrayPrototype[ITERATOR]
-      , CORRECT_ITER_NAME = !!$nativeIterator && ($nativeIterator.name == 'values' || $nativeIterator.name == undefined)
-      , $iterator         = $iterators.values;
-    hide(TypedArray, TYPED_CONSTRUCTOR, true);
-    hide(TypedArrayPrototype, TYPED_ARRAY, NAME);
-    hide(TypedArrayPrototype, VIEW, true);
-    hide(TypedArrayPrototype, DEF_CONSTRUCTOR, TypedArray);
-
-    if(CLAMPED ? new TypedArray(1)[TAG] != NAME : !(TAG in TypedArrayPrototype)){
-      dP(TypedArrayPrototype, TAG, {
-        get: function(){ return NAME; }
-      });
-    }
-
-    O[NAME] = TypedArray;
-
-    $export($export.G + $export.W + $export.F * (TypedArray != Base), O);
-
-    $export($export.S, NAME, {
-      BYTES_PER_ELEMENT: BYTES,
-      from: $from,
-      of: $of
-    });
-
-    if(!(BYTES_PER_ELEMENT in TypedArrayPrototype))hide(TypedArrayPrototype, BYTES_PER_ELEMENT, BYTES);
-
-    $export($export.P, NAME, proto);
-
-    setSpecies(NAME);
-
-    $export($export.P + $export.F * FORCED_SET, NAME, {set: $set});
-
-    $export($export.P + $export.F * !CORRECT_ITER_NAME, NAME, $iterators);
-
-    $export($export.P + $export.F * (TypedArrayPrototype.toString != arrayToString), NAME, {toString: arrayToString});
-
-    $export($export.P + $export.F * fails(function(){
-      new TypedArray(1).slice();
-    }), NAME, {slice: $slice});
-
-    $export($export.P + $export.F * (fails(function(){
-      return [1, 2].toLocaleString() != new TypedArray([1, 2]).toLocaleString()
-    }) || !fails(function(){
-      TypedArrayPrototype.toLocaleString.call([1, 2]);
-    })), NAME, {toLocaleString: $toLocaleString});
-
-    Iterators[NAME] = CORRECT_ITER_NAME ? $nativeIterator : $iterator;
-    if(!LIBRARY && !CORRECT_ITER_NAME)hide(TypedArrayPrototype, ITERATOR, $iterator);
-  };
-} else module.exports = function(){ /* empty */ };
-
-/***/ }),
-/* 44 */,
-/* 45 */,
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var META     = __webpack_require__(60)('meta')
-  , isObject = __webpack_require__(8)
-  , has      = __webpack_require__(19)
-  , setDesc  = __webpack_require__(14).f
-  , id       = 0;
-var isExtensible = Object.isExtensible || function(){
-  return true;
-};
-var FREEZE = !__webpack_require__(6)(function(){
-  return isExtensible(Object.preventExtensions({}));
-});
-var setMeta = function(it){
-  setDesc(it, META, {value: {
-    i: 'O' + ++id, // object ID
-    w: {}          // weak collections IDs
-  }});
-};
-var fastKey = function(it, create){
-  // return primitive with prefix
-  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return 'F';
-    // not necessary to add metadata
-    if(!create)return 'E';
-    // add missing metadata
-    setMeta(it);
-  // return object ID
-  } return it[META].i;
-};
-var getWeak = function(it, create){
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return true;
-    // not necessary to add metadata
-    if(!create)return false;
-    // add missing metadata
-    setMeta(it);
-  // return hash weak collections IDs
-  } return it[META].w;
-};
-// add metadata on freeze-family methods calling
-var onFreeze = function(it){
-  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
-  return it;
-};
-var meta = module.exports = {
-  KEY:      META,
-  NEED:     false,
-  fastKey:  fastKey,
-  getWeak:  getWeak,
-  onFreeze: onFreeze
-};
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports) {
-
-module.exports = function(bitmap, value){
-  return {
-    enumerable  : !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable    : !(bitmap & 4),
-    value       : value
-  };
-};
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 50 */,
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(9);
-var normalizeHeaderName = __webpack_require__(127);
-
-var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(76);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(76);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      data = data.replace(PROTECTION_PREFIX, '');
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports) {
-
-module.exports = function(it, Constructor, name, forbiddenField){
-  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
-    throw TypeError(name + ': incorrect invocation!');
-  } return it;
-};
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports) {
-
-module.exports = false;
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = __webpack_require__(4)
-  , dPs         = __webpack_require__(200)
-  , enumBugKeys = __webpack_require__(134)
-  , IE_PROTO    = __webpack_require__(146)('IE_PROTO')
-  , Empty       = function(){ /* empty */ }
-  , PROTOTYPE   = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function(){
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(133)('iframe')
-    , i      = enumBugKeys.length
-    , lt     = '<'
-    , gt     = '>'
-    , iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(136).appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties){
-  var result;
-  if(O !== null){
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty;
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = __webpack_require__(202)
-  , hiddenKeys = __webpack_require__(134).concat('length', 'prototype');
-
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
-  return $keys(O, hiddenKeys);
-};
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = __webpack_require__(202)
-  , enumBugKeys = __webpack_require__(134);
-
-module.exports = Object.keys || function keys(O){
-  return $keys(O, enumBugKeys);
-};
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var redefine = __webpack_require__(24);
-module.exports = function(target, src, safe){
-  for(var key in src)redefine(target, key, src[key], safe);
-  return target;
-};
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var global      = __webpack_require__(5)
-  , dP          = __webpack_require__(14)
-  , DESCRIPTORS = __webpack_require__(13)
-  , SPECIES     = __webpack_require__(10)('species');
-
-module.exports = function(KEY){
-  var C = global[KEY];
-  if(DESCRIPTORS && C && !C[SPECIES])dP.f(C, SPECIES, {
-    configurable: true,
-    get: function(){ return this; }
-  });
-};
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(48)
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
-
-var id = 0
-  , px = Math.random();
-module.exports = function(key){
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-/***/ }),
-/* 61 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16609,11 +15273,1375 @@ return jQuery;
 
 
 /***/ }),
-/* 62 */,
+/* 21 */,
+/* 22 */,
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = function(it){
+  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP         = __webpack_require__(14)
+  , createDesc = __webpack_require__(48);
+module.exports = __webpack_require__(13) ? function(object, key, value){
+  return dP.f(object, key, createDesc(1, value));
+} : function(object, key, value){
+  object[key] = value;
+  return object;
+};
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global    = __webpack_require__(5)
+  , hide      = __webpack_require__(24)
+  , has       = __webpack_require__(19)
+  , SRC       = __webpack_require__(62)('src')
+  , TO_STRING = 'toString'
+  , $toString = Function[TO_STRING]
+  , TPL       = ('' + $toString).split(TO_STRING);
+
+__webpack_require__(41).inspectSource = function(it){
+  return $toString.call(it);
+};
+
+(module.exports = function(O, key, val, safe){
+  var isFunction = typeof val == 'function';
+  if(isFunction)has(val, 'name') || hide(val, 'name', key);
+  if(O[key] === val)return;
+  if(isFunction)has(val, SRC) || hide(val, SRC, O[key] ? '' + O[key] : TPL.join(String(key)));
+  if(O === global){
+    O[key] = val;
+  } else {
+    if(!safe){
+      delete O[key];
+      hide(O, key, val);
+    } else {
+      if(O[key])O[key] = val;
+      else hide(O, key, val);
+    }
+  }
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+})(Function.prototype, TO_STRING, function toString(){
+  return typeof this == 'function' && this[SRC] || $toString.call(this);
+});
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $export = __webpack_require__(1)
+  , fails   = __webpack_require__(6)
+  , defined = __webpack_require__(33)
+  , quot    = /"/g;
+// B.2.3.2.1 CreateHTML(string, tag, attribute, value)
+var createHTML = function(string, tag, attribute, value) {
+  var S  = String(defined(string))
+    , p1 = '<' + tag;
+  if(attribute !== '')p1 += ' ' + attribute + '="' + String(value).replace(quot, '&quot;') + '"';
+  return p1 + '>' + S + '</' + tag + '>';
+};
+module.exports = function(NAME, exec){
+  var O = {};
+  O[NAME] = exec(createHTML);
+  $export($export.P + $export.F * fails(function(){
+    var test = ''[NAME]('"');
+    return test !== test.toLowerCase() || test.split('"').length > 3;
+  }), 'String', O);
+};
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = __webpack_require__(83)
+  , defined = __webpack_require__(33);
+module.exports = function(it){
+  return IObject(defined(it));
+};
+
+/***/ }),
+/* 28 */,
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var pIE            = __webpack_require__(84)
+  , createDesc     = __webpack_require__(48)
+  , toIObject      = __webpack_require__(27)
+  , toPrimitive    = __webpack_require__(38)
+  , has            = __webpack_require__(19)
+  , IE8_DOM_DEFINE = __webpack_require__(196)
+  , gOPD           = Object.getOwnPropertyDescriptor;
+
+exports.f = __webpack_require__(13) ? gOPD : function getOwnPropertyDescriptor(O, P){
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if(IE8_DOM_DEFINE)try {
+    return gOPD(O, P);
+  } catch(e){ /* empty */ }
+  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
+};
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has         = __webpack_require__(19)
+  , toObject    = __webpack_require__(18)
+  , IE_PROTO    = __webpack_require__(146)('IE_PROTO')
+  , ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function(O){
+  O = toObject(O);
+  if(has(O, IE_PROTO))return O[IE_PROTO];
+  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+/***/ }),
+/* 31 */,
+/* 32 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__(6);
+
+module.exports = function(method, arg){
+  return !!method && fails(function(){
+    arg ? method.call(null, function(){}, 1) : method.call(null);
+  });
+};
+
+/***/ }),
+/* 35 */,
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 0 -> Array#forEach
+// 1 -> Array#map
+// 2 -> Array#filter
+// 3 -> Array#some
+// 4 -> Array#every
+// 5 -> Array#find
+// 6 -> Array#findIndex
+var ctx      = __webpack_require__(42)
+  , IObject  = __webpack_require__(83)
+  , toObject = __webpack_require__(18)
+  , toLength = __webpack_require__(16)
+  , asc      = __webpack_require__(407);
+module.exports = function(TYPE, $create){
+  var IS_MAP        = TYPE == 1
+    , IS_FILTER     = TYPE == 2
+    , IS_SOME       = TYPE == 3
+    , IS_EVERY      = TYPE == 4
+    , IS_FIND_INDEX = TYPE == 6
+    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX
+    , create        = $create || asc;
+  return function($this, callbackfn, that){
+    var O      = toObject($this)
+      , self   = IObject(O)
+      , f      = ctx(callbackfn, that, 3)
+      , length = toLength(self.length)
+      , index  = 0
+      , result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined
+      , val, res;
+    for(;length > index; index++)if(NO_HOLES || index in self){
+      val = self[index];
+      res = f(val, index, O);
+      if(TYPE){
+        if(IS_MAP)result[index] = res;            // map
+        else if(res)switch(TYPE){
+          case 3: return true;                    // some
+          case 5: return val;                     // find
+          case 6: return index;                   // findIndex
+          case 2: result.push(val);               // filter
+        } else if(IS_EVERY)return false;          // every
+      }
+    }
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+  };
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// most Object methods by ES6 should accept primitives
+var $export = __webpack_require__(1)
+  , core    = __webpack_require__(41)
+  , fails   = __webpack_require__(6);
+module.exports = function(KEY, exec){
+  var fn  = (core.Object || {})[KEY] || Object[KEY]
+    , exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = __webpack_require__(8);
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function(it, S){
+  if(!isObject(it))return it;
+  var fn, val;
+  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+/***/ }),
+/* 39 */,
+/* 40 */,
+/* 41 */
+/***/ (function(module, exports) {
+
+var core = module.exports = {version: '2.4.0'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// optional / simple context binding
+var aFunction = __webpack_require__(23);
+module.exports = function(fn, that, length){
+  aFunction(fn);
+  if(that === undefined)return fn;
+  switch(length){
+    case 1: return function(a){
+      return fn.call(that, a);
+    };
+    case 2: return function(a, b){
+      return fn.call(that, a, b);
+    };
+    case 3: return function(a, b, c){
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function(/* ...args */){
+    return fn.apply(that, arguments);
+  };
+};
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Map     = __webpack_require__(212)
+  , $export = __webpack_require__(1)
+  , shared  = __webpack_require__(102)('metadata')
+  , store   = shared.store || (shared.store = new (__webpack_require__(215)));
+
+var getOrCreateMetadataMap = function(target, targetKey, create){
+  var targetMetadata = store.get(target);
+  if(!targetMetadata){
+    if(!create)return undefined;
+    store.set(target, targetMetadata = new Map);
+  }
+  var keyMetadata = targetMetadata.get(targetKey);
+  if(!keyMetadata){
+    if(!create)return undefined;
+    targetMetadata.set(targetKey, keyMetadata = new Map);
+  } return keyMetadata;
+};
+var ordinaryHasOwnMetadata = function(MetadataKey, O, P){
+  var metadataMap = getOrCreateMetadataMap(O, P, false);
+  return metadataMap === undefined ? false : metadataMap.has(MetadataKey);
+};
+var ordinaryGetOwnMetadata = function(MetadataKey, O, P){
+  var metadataMap = getOrCreateMetadataMap(O, P, false);
+  return metadataMap === undefined ? undefined : metadataMap.get(MetadataKey);
+};
+var ordinaryDefineOwnMetadata = function(MetadataKey, MetadataValue, O, P){
+  getOrCreateMetadataMap(O, P, true).set(MetadataKey, MetadataValue);
+};
+var ordinaryOwnMetadataKeys = function(target, targetKey){
+  var metadataMap = getOrCreateMetadataMap(target, targetKey, false)
+    , keys        = [];
+  if(metadataMap)metadataMap.forEach(function(_, key){ keys.push(key); });
+  return keys;
+};
+var toMetaKey = function(it){
+  return it === undefined || typeof it == 'symbol' ? it : String(it);
+};
+var exp = function(O){
+  $export($export.S, 'Reflect', O);
+};
+
+module.exports = {
+  store: store,
+  map: getOrCreateMetadataMap,
+  has: ordinaryHasOwnMetadata,
+  get: ordinaryGetOwnMetadata,
+  set: ordinaryDefineOwnMetadata,
+  keys: ordinaryOwnMetadataKeys,
+  key: toMetaKey,
+  exp: exp
+};
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+if(__webpack_require__(13)){
+  var LIBRARY             = __webpack_require__(55)
+    , global              = __webpack_require__(5)
+    , fails               = __webpack_require__(6)
+    , $export             = __webpack_require__(1)
+    , $typed              = __webpack_require__(103)
+    , $buffer             = __webpack_require__(153)
+    , ctx                 = __webpack_require__(42)
+    , anInstance          = __webpack_require__(54)
+    , propertyDesc        = __webpack_require__(48)
+    , hide                = __webpack_require__(24)
+    , redefineAll         = __webpack_require__(59)
+    , toInteger           = __webpack_require__(49)
+    , toLength            = __webpack_require__(16)
+    , toIndex             = __webpack_require__(61)
+    , toPrimitive         = __webpack_require__(38)
+    , has                 = __webpack_require__(19)
+    , same                = __webpack_require__(209)
+    , classof             = __webpack_require__(82)
+    , isObject            = __webpack_require__(8)
+    , toObject            = __webpack_require__(18)
+    , isArrayIter         = __webpack_require__(138)
+    , create              = __webpack_require__(56)
+    , getPrototypeOf      = __webpack_require__(30)
+    , gOPN                = __webpack_require__(57).f
+    , getIterFn           = __webpack_require__(155)
+    , uid                 = __webpack_require__(62)
+    , wks                 = __webpack_require__(10)
+    , createArrayMethod   = __webpack_require__(36)
+    , createArrayIncludes = __webpack_require__(93)
+    , speciesConstructor  = __webpack_require__(147)
+    , ArrayIterators      = __webpack_require__(156)
+    , Iterators           = __webpack_require__(70)
+    , $iterDetect         = __webpack_require__(99)
+    , setSpecies          = __webpack_require__(60)
+    , arrayFill           = __webpack_require__(131)
+    , arrayCopyWithin     = __webpack_require__(189)
+    , $DP                 = __webpack_require__(14)
+    , $GOPD               = __webpack_require__(29)
+    , dP                  = $DP.f
+    , gOPD                = $GOPD.f
+    , RangeError          = global.RangeError
+    , TypeError           = global.TypeError
+    , Uint8Array          = global.Uint8Array
+    , ARRAY_BUFFER        = 'ArrayBuffer'
+    , SHARED_BUFFER       = 'Shared' + ARRAY_BUFFER
+    , BYTES_PER_ELEMENT   = 'BYTES_PER_ELEMENT'
+    , PROTOTYPE           = 'prototype'
+    , ArrayProto          = Array[PROTOTYPE]
+    , $ArrayBuffer        = $buffer.ArrayBuffer
+    , $DataView           = $buffer.DataView
+    , arrayForEach        = createArrayMethod(0)
+    , arrayFilter         = createArrayMethod(2)
+    , arraySome           = createArrayMethod(3)
+    , arrayEvery          = createArrayMethod(4)
+    , arrayFind           = createArrayMethod(5)
+    , arrayFindIndex      = createArrayMethod(6)
+    , arrayIncludes       = createArrayIncludes(true)
+    , arrayIndexOf        = createArrayIncludes(false)
+    , arrayValues         = ArrayIterators.values
+    , arrayKeys           = ArrayIterators.keys
+    , arrayEntries        = ArrayIterators.entries
+    , arrayLastIndexOf    = ArrayProto.lastIndexOf
+    , arrayReduce         = ArrayProto.reduce
+    , arrayReduceRight    = ArrayProto.reduceRight
+    , arrayJoin           = ArrayProto.join
+    , arraySort           = ArrayProto.sort
+    , arraySlice          = ArrayProto.slice
+    , arrayToString       = ArrayProto.toString
+    , arrayToLocaleString = ArrayProto.toLocaleString
+    , ITERATOR            = wks('iterator')
+    , TAG                 = wks('toStringTag')
+    , TYPED_CONSTRUCTOR   = uid('typed_constructor')
+    , DEF_CONSTRUCTOR     = uid('def_constructor')
+    , ALL_CONSTRUCTORS    = $typed.CONSTR
+    , TYPED_ARRAY         = $typed.TYPED
+    , VIEW                = $typed.VIEW
+    , WRONG_LENGTH        = 'Wrong length!';
+
+  var $map = createArrayMethod(1, function(O, length){
+    return allocate(speciesConstructor(O, O[DEF_CONSTRUCTOR]), length);
+  });
+
+  var LITTLE_ENDIAN = fails(function(){
+    return new Uint8Array(new Uint16Array([1]).buffer)[0] === 1;
+  });
+
+  var FORCED_SET = !!Uint8Array && !!Uint8Array[PROTOTYPE].set && fails(function(){
+    new Uint8Array(1).set({});
+  });
+
+  var strictToLength = function(it, SAME){
+    if(it === undefined)throw TypeError(WRONG_LENGTH);
+    var number = +it
+      , length = toLength(it);
+    if(SAME && !same(number, length))throw RangeError(WRONG_LENGTH);
+    return length;
+  };
+
+  var toOffset = function(it, BYTES){
+    var offset = toInteger(it);
+    if(offset < 0 || offset % BYTES)throw RangeError('Wrong offset!');
+    return offset;
+  };
+
+  var validate = function(it){
+    if(isObject(it) && TYPED_ARRAY in it)return it;
+    throw TypeError(it + ' is not a typed array!');
+  };
+
+  var allocate = function(C, length){
+    if(!(isObject(C) && TYPED_CONSTRUCTOR in C)){
+      throw TypeError('It is not a typed array constructor!');
+    } return new C(length);
+  };
+
+  var speciesFromList = function(O, list){
+    return fromList(speciesConstructor(O, O[DEF_CONSTRUCTOR]), list);
+  };
+
+  var fromList = function(C, list){
+    var index  = 0
+      , length = list.length
+      , result = allocate(C, length);
+    while(length > index)result[index] = list[index++];
+    return result;
+  };
+
+  var addGetter = function(it, key, internal){
+    dP(it, key, {get: function(){ return this._d[internal]; }});
+  };
+
+  var $from = function from(source /*, mapfn, thisArg */){
+    var O       = toObject(source)
+      , aLen    = arguments.length
+      , mapfn   = aLen > 1 ? arguments[1] : undefined
+      , mapping = mapfn !== undefined
+      , iterFn  = getIterFn(O)
+      , i, length, values, result, step, iterator;
+    if(iterFn != undefined && !isArrayIter(iterFn)){
+      for(iterator = iterFn.call(O), values = [], i = 0; !(step = iterator.next()).done; i++){
+        values.push(step.value);
+      } O = values;
+    }
+    if(mapping && aLen > 2)mapfn = ctx(mapfn, arguments[2], 2);
+    for(i = 0, length = toLength(O.length), result = allocate(this, length); length > i; i++){
+      result[i] = mapping ? mapfn(O[i], i) : O[i];
+    }
+    return result;
+  };
+
+  var $of = function of(/*...items*/){
+    var index  = 0
+      , length = arguments.length
+      , result = allocate(this, length);
+    while(length > index)result[index] = arguments[index++];
+    return result;
+  };
+
+  // iOS Safari 6.x fails here
+  var TO_LOCALE_BUG = !!Uint8Array && fails(function(){ arrayToLocaleString.call(new Uint8Array(1)); });
+
+  var $toLocaleString = function toLocaleString(){
+    return arrayToLocaleString.apply(TO_LOCALE_BUG ? arraySlice.call(validate(this)) : validate(this), arguments);
+  };
+
+  var proto = {
+    copyWithin: function copyWithin(target, start /*, end */){
+      return arrayCopyWithin.call(validate(this), target, start, arguments.length > 2 ? arguments[2] : undefined);
+    },
+    every: function every(callbackfn /*, thisArg */){
+      return arrayEvery(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    fill: function fill(value /*, start, end */){ // eslint-disable-line no-unused-vars
+      return arrayFill.apply(validate(this), arguments);
+    },
+    filter: function filter(callbackfn /*, thisArg */){
+      return speciesFromList(this, arrayFilter(validate(this), callbackfn,
+        arguments.length > 1 ? arguments[1] : undefined));
+    },
+    find: function find(predicate /*, thisArg */){
+      return arrayFind(validate(this), predicate, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    findIndex: function findIndex(predicate /*, thisArg */){
+      return arrayFindIndex(validate(this), predicate, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    forEach: function forEach(callbackfn /*, thisArg */){
+      arrayForEach(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    indexOf: function indexOf(searchElement /*, fromIndex */){
+      return arrayIndexOf(validate(this), searchElement, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    includes: function includes(searchElement /*, fromIndex */){
+      return arrayIncludes(validate(this), searchElement, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    join: function join(separator){ // eslint-disable-line no-unused-vars
+      return arrayJoin.apply(validate(this), arguments);
+    },
+    lastIndexOf: function lastIndexOf(searchElement /*, fromIndex */){ // eslint-disable-line no-unused-vars
+      return arrayLastIndexOf.apply(validate(this), arguments);
+    },
+    map: function map(mapfn /*, thisArg */){
+      return $map(validate(this), mapfn, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    reduce: function reduce(callbackfn /*, initialValue */){ // eslint-disable-line no-unused-vars
+      return arrayReduce.apply(validate(this), arguments);
+    },
+    reduceRight: function reduceRight(callbackfn /*, initialValue */){ // eslint-disable-line no-unused-vars
+      return arrayReduceRight.apply(validate(this), arguments);
+    },
+    reverse: function reverse(){
+      var that   = this
+        , length = validate(that).length
+        , middle = Math.floor(length / 2)
+        , index  = 0
+        , value;
+      while(index < middle){
+        value         = that[index];
+        that[index++] = that[--length];
+        that[length]  = value;
+      } return that;
+    },
+    some: function some(callbackfn /*, thisArg */){
+      return arraySome(validate(this), callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+    },
+    sort: function sort(comparefn){
+      return arraySort.call(validate(this), comparefn);
+    },
+    subarray: function subarray(begin, end){
+      var O      = validate(this)
+        , length = O.length
+        , $begin = toIndex(begin, length);
+      return new (speciesConstructor(O, O[DEF_CONSTRUCTOR]))(
+        O.buffer,
+        O.byteOffset + $begin * O.BYTES_PER_ELEMENT,
+        toLength((end === undefined ? length : toIndex(end, length)) - $begin)
+      );
+    }
+  };
+
+  var $slice = function slice(start, end){
+    return speciesFromList(this, arraySlice.call(validate(this), start, end));
+  };
+
+  var $set = function set(arrayLike /*, offset */){
+    validate(this);
+    var offset = toOffset(arguments[1], 1)
+      , length = this.length
+      , src    = toObject(arrayLike)
+      , len    = toLength(src.length)
+      , index  = 0;
+    if(len + offset > length)throw RangeError(WRONG_LENGTH);
+    while(index < len)this[offset + index] = src[index++];
+  };
+
+  var $iterators = {
+    entries: function entries(){
+      return arrayEntries.call(validate(this));
+    },
+    keys: function keys(){
+      return arrayKeys.call(validate(this));
+    },
+    values: function values(){
+      return arrayValues.call(validate(this));
+    }
+  };
+
+  var isTAIndex = function(target, key){
+    return isObject(target)
+      && target[TYPED_ARRAY]
+      && typeof key != 'symbol'
+      && key in target
+      && String(+key) == String(key);
+  };
+  var $getDesc = function getOwnPropertyDescriptor(target, key){
+    return isTAIndex(target, key = toPrimitive(key, true))
+      ? propertyDesc(2, target[key])
+      : gOPD(target, key);
+  };
+  var $setDesc = function defineProperty(target, key, desc){
+    if(isTAIndex(target, key = toPrimitive(key, true))
+      && isObject(desc)
+      && has(desc, 'value')
+      && !has(desc, 'get')
+      && !has(desc, 'set')
+      // TODO: add validation descriptor w/o calling accessors
+      && !desc.configurable
+      && (!has(desc, 'writable') || desc.writable)
+      && (!has(desc, 'enumerable') || desc.enumerable)
+    ){
+      target[key] = desc.value;
+      return target;
+    } else return dP(target, key, desc);
+  };
+
+  if(!ALL_CONSTRUCTORS){
+    $GOPD.f = $getDesc;
+    $DP.f   = $setDesc;
+  }
+
+  $export($export.S + $export.F * !ALL_CONSTRUCTORS, 'Object', {
+    getOwnPropertyDescriptor: $getDesc,
+    defineProperty:           $setDesc
+  });
+
+  if(fails(function(){ arrayToString.call({}); })){
+    arrayToString = arrayToLocaleString = function toString(){
+      return arrayJoin.call(this);
+    }
+  }
+
+  var $TypedArrayPrototype$ = redefineAll({}, proto);
+  redefineAll($TypedArrayPrototype$, $iterators);
+  hide($TypedArrayPrototype$, ITERATOR, $iterators.values);
+  redefineAll($TypedArrayPrototype$, {
+    slice:          $slice,
+    set:            $set,
+    constructor:    function(){ /* noop */ },
+    toString:       arrayToString,
+    toLocaleString: $toLocaleString
+  });
+  addGetter($TypedArrayPrototype$, 'buffer', 'b');
+  addGetter($TypedArrayPrototype$, 'byteOffset', 'o');
+  addGetter($TypedArrayPrototype$, 'byteLength', 'l');
+  addGetter($TypedArrayPrototype$, 'length', 'e');
+  dP($TypedArrayPrototype$, TAG, {
+    get: function(){ return this[TYPED_ARRAY]; }
+  });
+
+  module.exports = function(KEY, BYTES, wrapper, CLAMPED){
+    CLAMPED = !!CLAMPED;
+    var NAME       = KEY + (CLAMPED ? 'Clamped' : '') + 'Array'
+      , ISNT_UINT8 = NAME != 'Uint8Array'
+      , GETTER     = 'get' + KEY
+      , SETTER     = 'set' + KEY
+      , TypedArray = global[NAME]
+      , Base       = TypedArray || {}
+      , TAC        = TypedArray && getPrototypeOf(TypedArray)
+      , FORCED     = !TypedArray || !$typed.ABV
+      , O          = {}
+      , TypedArrayPrototype = TypedArray && TypedArray[PROTOTYPE];
+    var getter = function(that, index){
+      var data = that._d;
+      return data.v[GETTER](index * BYTES + data.o, LITTLE_ENDIAN);
+    };
+    var setter = function(that, index, value){
+      var data = that._d;
+      if(CLAMPED)value = (value = Math.round(value)) < 0 ? 0 : value > 0xff ? 0xff : value & 0xff;
+      data.v[SETTER](index * BYTES + data.o, value, LITTLE_ENDIAN);
+    };
+    var addElement = function(that, index){
+      dP(that, index, {
+        get: function(){
+          return getter(this, index);
+        },
+        set: function(value){
+          return setter(this, index, value);
+        },
+        enumerable: true
+      });
+    };
+    if(FORCED){
+      TypedArray = wrapper(function(that, data, $offset, $length){
+        anInstance(that, TypedArray, NAME, '_d');
+        var index  = 0
+          , offset = 0
+          , buffer, byteLength, length, klass;
+        if(!isObject(data)){
+          length     = strictToLength(data, true)
+          byteLength = length * BYTES;
+          buffer     = new $ArrayBuffer(byteLength);
+        } else if(data instanceof $ArrayBuffer || (klass = classof(data)) == ARRAY_BUFFER || klass == SHARED_BUFFER){
+          buffer = data;
+          offset = toOffset($offset, BYTES);
+          var $len = data.byteLength;
+          if($length === undefined){
+            if($len % BYTES)throw RangeError(WRONG_LENGTH);
+            byteLength = $len - offset;
+            if(byteLength < 0)throw RangeError(WRONG_LENGTH);
+          } else {
+            byteLength = toLength($length) * BYTES;
+            if(byteLength + offset > $len)throw RangeError(WRONG_LENGTH);
+          }
+          length = byteLength / BYTES;
+        } else if(TYPED_ARRAY in data){
+          return fromList(TypedArray, data);
+        } else {
+          return $from.call(TypedArray, data);
+        }
+        hide(that, '_d', {
+          b: buffer,
+          o: offset,
+          l: byteLength,
+          e: length,
+          v: new $DataView(buffer)
+        });
+        while(index < length)addElement(that, index++);
+      });
+      TypedArrayPrototype = TypedArray[PROTOTYPE] = create($TypedArrayPrototype$);
+      hide(TypedArrayPrototype, 'constructor', TypedArray);
+    } else if(!$iterDetect(function(iter){
+      // V8 works with iterators, but fails in many other cases
+      // https://code.google.com/p/v8/issues/detail?id=4552
+      new TypedArray(null); // eslint-disable-line no-new
+      new TypedArray(iter); // eslint-disable-line no-new
+    }, true)){
+      TypedArray = wrapper(function(that, data, $offset, $length){
+        anInstance(that, TypedArray, NAME);
+        var klass;
+        // `ws` module bug, temporarily remove validation length for Uint8Array
+        // https://github.com/websockets/ws/pull/645
+        if(!isObject(data))return new Base(strictToLength(data, ISNT_UINT8));
+        if(data instanceof $ArrayBuffer || (klass = classof(data)) == ARRAY_BUFFER || klass == SHARED_BUFFER){
+          return $length !== undefined
+            ? new Base(data, toOffset($offset, BYTES), $length)
+            : $offset !== undefined
+              ? new Base(data, toOffset($offset, BYTES))
+              : new Base(data);
+        }
+        if(TYPED_ARRAY in data)return fromList(TypedArray, data);
+        return $from.call(TypedArray, data);
+      });
+      arrayForEach(TAC !== Function.prototype ? gOPN(Base).concat(gOPN(TAC)) : gOPN(Base), function(key){
+        if(!(key in TypedArray))hide(TypedArray, key, Base[key]);
+      });
+      TypedArray[PROTOTYPE] = TypedArrayPrototype;
+      if(!LIBRARY)TypedArrayPrototype.constructor = TypedArray;
+    }
+    var $nativeIterator   = TypedArrayPrototype[ITERATOR]
+      , CORRECT_ITER_NAME = !!$nativeIterator && ($nativeIterator.name == 'values' || $nativeIterator.name == undefined)
+      , $iterator         = $iterators.values;
+    hide(TypedArray, TYPED_CONSTRUCTOR, true);
+    hide(TypedArrayPrototype, TYPED_ARRAY, NAME);
+    hide(TypedArrayPrototype, VIEW, true);
+    hide(TypedArrayPrototype, DEF_CONSTRUCTOR, TypedArray);
+
+    if(CLAMPED ? new TypedArray(1)[TAG] != NAME : !(TAG in TypedArrayPrototype)){
+      dP(TypedArrayPrototype, TAG, {
+        get: function(){ return NAME; }
+      });
+    }
+
+    O[NAME] = TypedArray;
+
+    $export($export.G + $export.W + $export.F * (TypedArray != Base), O);
+
+    $export($export.S, NAME, {
+      BYTES_PER_ELEMENT: BYTES,
+      from: $from,
+      of: $of
+    });
+
+    if(!(BYTES_PER_ELEMENT in TypedArrayPrototype))hide(TypedArrayPrototype, BYTES_PER_ELEMENT, BYTES);
+
+    $export($export.P, NAME, proto);
+
+    setSpecies(NAME);
+
+    $export($export.P + $export.F * FORCED_SET, NAME, {set: $set});
+
+    $export($export.P + $export.F * !CORRECT_ITER_NAME, NAME, $iterators);
+
+    $export($export.P + $export.F * (TypedArrayPrototype.toString != arrayToString), NAME, {toString: arrayToString});
+
+    $export($export.P + $export.F * fails(function(){
+      new TypedArray(1).slice();
+    }), NAME, {slice: $slice});
+
+    $export($export.P + $export.F * (fails(function(){
+      return [1, 2].toLocaleString() != new TypedArray([1, 2]).toLocaleString()
+    }) || !fails(function(){
+      TypedArrayPrototype.toLocaleString.call([1, 2]);
+    })), NAME, {toLocaleString: $toLocaleString});
+
+    Iterators[NAME] = CORRECT_ITER_NAME ? $nativeIterator : $iterator;
+    if(!LIBRARY && !CORRECT_ITER_NAME)hide(TypedArrayPrototype, ITERATOR, $iterator);
+  };
+} else module.exports = function(){ /* empty */ };
+
+/***/ }),
+/* 45 */,
+/* 46 */,
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var META     = __webpack_require__(62)('meta')
+  , isObject = __webpack_require__(8)
+  , has      = __webpack_require__(19)
+  , setDesc  = __webpack_require__(14).f
+  , id       = 0;
+var isExtensible = Object.isExtensible || function(){
+  return true;
+};
+var FREEZE = !__webpack_require__(6)(function(){
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function(it){
+  setDesc(it, META, {value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  }});
+};
+var fastKey = function(it, create){
+  // return primitive with prefix
+  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if(!has(it, META)){
+    // can't set metadata to uncaught frozen object
+    if(!isExtensible(it))return 'F';
+    // not necessary to add metadata
+    if(!create)return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function(it, create){
+  if(!has(it, META)){
+    // can't set metadata to uncaught frozen object
+    if(!isExtensible(it))return true;
+    // not necessary to add metadata
+    if(!create)return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function(it){
+  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY:      META,
+  NEED:     false,
+  fastKey:  fastKey,
+  getWeak:  getWeak,
+  onFreeze: onFreeze
+};
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+module.exports = function(bitmap, value){
+  return {
+    enumerable  : !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable    : !(bitmap & 4),
+    value       : value
+  };
+};
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+// 7.1.4 ToInteger
+var ceil  = Math.ceil
+  , floor = Math.floor;
+module.exports = function(it){
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(9);
+var normalizeHeaderName = __webpack_require__(127);
+
+var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(76);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(76);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      data = data.replace(PROTECTION_PREFIX, '');
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+module.exports = function(it, Constructor, name, forbiddenField){
+  if(!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)){
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports) {
+
+module.exports = false;
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject    = __webpack_require__(4)
+  , dPs         = __webpack_require__(202)
+  , enumBugKeys = __webpack_require__(134)
+  , IE_PROTO    = __webpack_require__(146)('IE_PROTO')
+  , Empty       = function(){ /* empty */ }
+  , PROTOTYPE   = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function(){
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = __webpack_require__(133)('iframe')
+    , i      = enumBugKeys.length
+    , lt     = '<'
+    , gt     = '>'
+    , iframeDocument;
+  iframe.style.display = 'none';
+  __webpack_require__(136).appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties){
+  var result;
+  if(O !== null){
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty;
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys      = __webpack_require__(204)
+  , hiddenKeys = __webpack_require__(134).concat('length', 'prototype');
+
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
+  return $keys(O, hiddenKeys);
+};
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys       = __webpack_require__(204)
+  , enumBugKeys = __webpack_require__(134);
+
+module.exports = Object.keys || function keys(O){
+  return $keys(O, enumBugKeys);
+};
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var redefine = __webpack_require__(25);
+module.exports = function(target, src, safe){
+  for(var key in src)redefine(target, key, src[key], safe);
+  return target;
+};
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global      = __webpack_require__(5)
+  , dP          = __webpack_require__(14)
+  , DESCRIPTORS = __webpack_require__(13)
+  , SPECIES     = __webpack_require__(10)('species');
+
+module.exports = function(KEY){
+  var C = global[KEY];
+  if(DESCRIPTORS && C && !C[SPECIES])dP.f(C, SPECIES, {
+    configurable: true,
+    get: function(){ return this; }
+  });
+};
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toInteger = __webpack_require__(49)
+  , max       = Math.max
+  , min       = Math.min;
+module.exports = function(index, length){
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports) {
+
+var id = 0
+  , px = Math.random();
+module.exports = function(key){
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+/***/ }),
 /* 63 */,
 /* 64 */,
 /* 65 */,
-/* 66 */
+/* 66 */,
+/* 67 */
 /***/ (function(module, exports) {
 
 var g;
@@ -16640,23 +16668,23 @@ module.exports = g;
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.31 Array.prototype[@@unscopables]
 var UNSCOPABLES = __webpack_require__(10)('unscopables')
   , ArrayProto  = Array.prototype;
-if(ArrayProto[UNSCOPABLES] == undefined)__webpack_require__(23)(ArrayProto, UNSCOPABLES, {});
+if(ArrayProto[UNSCOPABLES] == undefined)__webpack_require__(24)(ArrayProto, UNSCOPABLES, {});
 module.exports = function(key){
   ArrayProto[UNSCOPABLES][key] = true;
 };
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx         = __webpack_require__(41)
-  , call        = __webpack_require__(196)
+var ctx         = __webpack_require__(42)
+  , call        = __webpack_require__(198)
   , isArrayIter = __webpack_require__(138)
   , anObject    = __webpack_require__(4)
   , toLength    = __webpack_require__(16)
@@ -16682,13 +16710,13 @@ exports.BREAK  = BREAK;
 exports.RETURN = RETURN;
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(14).f
@@ -16700,11 +16728,11 @@ module.exports = function(it, tag, stat){
 };
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1)
-  , defined = __webpack_require__(32)
+  , defined = __webpack_require__(33)
   , fails   = __webpack_require__(6)
   , spaces  = __webpack_require__(151)
   , space   = '[' + spaces + ']'
@@ -16735,37 +16763,9 @@ var trim = exporter.trim = function(string, TYPE){
 module.exports = exporter;
 
 /***/ }),
-/* 72 */,
 /* 73 */,
 /* 74 */,
-/* 75 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
+/* 75 */,
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17035,7 +17035,7 @@ module.exports = function bind(fn, thisArg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(31)
+var cof = __webpack_require__(32)
   , TAG = __webpack_require__(10)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -17063,7 +17063,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(31);
+var cof = __webpack_require__(32);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -17088,9 +17088,9 @@ exports.f = {}.propertyIsEnumerable;
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(26)
+var toIObject = __webpack_require__(27)
   , toLength  = __webpack_require__(16)
-  , toIndex   = __webpack_require__(59);
+  , toIndex   = __webpack_require__(61);
 module.exports = function(IS_INCLUDES){
   return function($this, el, fromIndex){
     var O      = toIObject($this)
@@ -17116,15 +17116,15 @@ module.exports = function(IS_INCLUDES){
 
 var global            = __webpack_require__(5)
   , $export           = __webpack_require__(1)
-  , redefine          = __webpack_require__(24)
-  , redefineAll       = __webpack_require__(57)
-  , meta              = __webpack_require__(46)
-  , forOf             = __webpack_require__(68)
-  , anInstance        = __webpack_require__(52)
+  , redefine          = __webpack_require__(25)
+  , redefineAll       = __webpack_require__(59)
+  , meta              = __webpack_require__(47)
+  , forOf             = __webpack_require__(69)
+  , anInstance        = __webpack_require__(54)
   , isObject          = __webpack_require__(8)
   , fails             = __webpack_require__(6)
   , $iterDetect       = __webpack_require__(99)
-  , setToStringTag    = __webpack_require__(70)
+  , setToStringTag    = __webpack_require__(71)
   , inheritIfRequired = __webpack_require__(137);
 
 module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
@@ -17205,10 +17205,10 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 
 "use strict";
 
-var hide     = __webpack_require__(23)
-  , redefine = __webpack_require__(24)
+var hide     = __webpack_require__(24)
+  , redefine = __webpack_require__(25)
   , fails    = __webpack_require__(6)
-  , defined  = __webpack_require__(32)
+  , defined  = __webpack_require__(33)
   , wks      = __webpack_require__(10);
 
 module.exports = function(KEY, length, exec){
@@ -17279,7 +17279,7 @@ module.exports = function(fn, args, that){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(8)
-  , cof      = __webpack_require__(31)
+  , cof      = __webpack_require__(32)
   , MATCH    = __webpack_require__(10)('match');
 module.exports = function(it){
   var isRegExp;
@@ -17317,7 +17317,7 @@ module.exports = function(exec, skipClosing){
 /***/ (function(module, exports, __webpack_require__) {
 
 // Forced replacement prototype accessors methods
-module.exports = __webpack_require__(53)|| !__webpack_require__(6)(function(){
+module.exports = __webpack_require__(55)|| !__webpack_require__(6)(function(){
   var K = Math.random();
   // In FF throws only define methods
   __defineSetter__.call(null, K, function(){ /* empty */});
@@ -17346,8 +17346,8 @@ module.exports = function(key){
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(5)
-  , hide   = __webpack_require__(23)
-  , uid    = __webpack_require__(60)
+  , hide   = __webpack_require__(24)
+  , uid    = __webpack_require__(62)
   , TYPED  = uid('typed_array')
   , VIEW   = uid('view')
   , ABV    = !!(global.ArrayBuffer && global.DataView)
@@ -17396,7 +17396,7 @@ module.exports = __webpack_require__(113);
 var utils = __webpack_require__(9);
 var bind = __webpack_require__(80);
 var Axios = __webpack_require__(115);
-var defaults = __webpack_require__(51);
+var defaults = __webpack_require__(53);
 
 /**
  * Create an instance of Axios
@@ -17516,7 +17516,7 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(51);
+var defaults = __webpack_require__(53);
 var utils = __webpack_require__(9);
 var InterceptorManager = __webpack_require__(116);
 var dispatchRequest = __webpack_require__(117);
@@ -17670,7 +17670,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(9);
 var transformData = __webpack_require__(120);
 var isCancel = __webpack_require__(78);
-var defaults = __webpack_require__(51);
+var defaults = __webpack_require__(53);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -18230,7 +18230,7 @@ module.exports = function spread(callback) {
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 
 var toObject = __webpack_require__(18)
-  , toIndex  = __webpack_require__(59)
+  , toIndex  = __webpack_require__(61)
   , toLength = __webpack_require__(16);
 module.exports = function fill(value /*, start = 0, end = @length */){
   var O      = toObject(this)
@@ -18250,7 +18250,7 @@ module.exports = function fill(value /*, start = 0, end = @length */){
 "use strict";
 
 var $defineProperty = __webpack_require__(14)
-  , createDesc      = __webpack_require__(47);
+  , createDesc      = __webpack_require__(48);
 
 module.exports = function(object, index, value){
   if(index in object)$defineProperty.f(object, index, createDesc(0, value));
@@ -18319,7 +18319,7 @@ module.exports = function(that, target, C){
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators  = __webpack_require__(69)
+var Iterators  = __webpack_require__(70)
   , ITERATOR   = __webpack_require__(10)('iterator')
   , ArrayProto = Array.prototype;
 
@@ -18332,7 +18332,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(31);
+var cof = __webpack_require__(32);
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
@@ -18343,13 +18343,13 @@ module.exports = Array.isArray || function isArray(arg){
 
 "use strict";
 
-var create         = __webpack_require__(54)
-  , descriptor     = __webpack_require__(47)
-  , setToStringTag = __webpack_require__(70)
+var create         = __webpack_require__(56)
+  , descriptor     = __webpack_require__(48)
+  , setToStringTag = __webpack_require__(71)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(23)(IteratorPrototype, __webpack_require__(10)('iterator'), function(){ return this; });
+__webpack_require__(24)(IteratorPrototype, __webpack_require__(10)('iterator'), function(){ return this; });
 
 module.exports = function(Constructor, NAME, next){
   Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -18362,15 +18362,15 @@ module.exports = function(Constructor, NAME, next){
 
 "use strict";
 
-var LIBRARY        = __webpack_require__(53)
+var LIBRARY        = __webpack_require__(55)
   , $export        = __webpack_require__(1)
-  , redefine       = __webpack_require__(24)
-  , hide           = __webpack_require__(23)
+  , redefine       = __webpack_require__(25)
+  , hide           = __webpack_require__(24)
   , has            = __webpack_require__(19)
-  , Iterators      = __webpack_require__(69)
+  , Iterators      = __webpack_require__(70)
   , $iterCreate    = __webpack_require__(140)
-  , setToStringTag = __webpack_require__(70)
-  , getPrototypeOf = __webpack_require__(29)
+  , setToStringTag = __webpack_require__(71)
+  , getPrototypeOf = __webpack_require__(30)
   , ITERATOR       = __webpack_require__(10)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
@@ -18465,7 +18465,7 @@ var global    = __webpack_require__(5)
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
   , process   = global.process
   , Promise   = global.Promise
-  , isNode    = __webpack_require__(31)(process) == 'process';
+  , isNode    = __webpack_require__(32)(process) == 'process';
 
 module.exports = function(){
   var head, last, notify;
@@ -18545,7 +18545,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function(test, buggy, set){
       try {
-        set = __webpack_require__(41)(Function.call, __webpack_require__(28).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(42)(Function.call, __webpack_require__(29).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch(e){ buggy = true; }
@@ -18564,7 +18564,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(102)('keys')
-  , uid    = __webpack_require__(60);
+  , uid    = __webpack_require__(62);
 module.exports = function(key){
   return shared[key] || (shared[key] = uid(key));
 };
@@ -18575,7 +18575,7 @@ module.exports = function(key){
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject  = __webpack_require__(4)
-  , aFunction = __webpack_require__(22)
+  , aFunction = __webpack_require__(23)
   , SPECIES   = __webpack_require__(10)('species');
 module.exports = function(O, D){
   var C = anObject(O).constructor, S;
@@ -18586,8 +18586,8 @@ module.exports = function(O, D){
 /* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var toInteger = __webpack_require__(48)
-  , defined   = __webpack_require__(32);
+var toInteger = __webpack_require__(49)
+  , defined   = __webpack_require__(33);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -18610,7 +18610,7 @@ module.exports = function(TO_STRING){
 
 // helper for String#{startsWith, endsWith, includes}
 var isRegExp = __webpack_require__(98)
-  , defined  = __webpack_require__(32);
+  , defined  = __webpack_require__(33);
 
 module.exports = function(that, searchString, NAME){
   if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
@@ -18623,8 +18623,8 @@ module.exports = function(that, searchString, NAME){
 
 "use strict";
 
-var toInteger = __webpack_require__(48)
-  , defined   = __webpack_require__(32);
+var toInteger = __webpack_require__(49)
+  , defined   = __webpack_require__(33);
 
 module.exports = function repeat(count){
   var str = String(defined(this))
@@ -18646,7 +18646,7 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 /* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ctx                = __webpack_require__(41)
+var ctx                = __webpack_require__(42)
   , invoke             = __webpack_require__(97)
   , html               = __webpack_require__(136)
   , cel                = __webpack_require__(133)
@@ -18685,7 +18685,7 @@ if(!setTask || !clearTask){
     delete queue[id];
   };
   // Node.js 0.8-
-  if(__webpack_require__(31)(process) == 'process'){
+  if(__webpack_require__(32)(process) == 'process'){
     defer = function(id){
       process.nextTick(ctx(run, id, 1));
     };
@@ -18730,18 +18730,18 @@ module.exports = {
 
 var global         = __webpack_require__(5)
   , DESCRIPTORS    = __webpack_require__(13)
-  , LIBRARY        = __webpack_require__(53)
+  , LIBRARY        = __webpack_require__(55)
   , $typed         = __webpack_require__(103)
-  , hide           = __webpack_require__(23)
-  , redefineAll    = __webpack_require__(57)
+  , hide           = __webpack_require__(24)
+  , redefineAll    = __webpack_require__(59)
   , fails          = __webpack_require__(6)
-  , anInstance     = __webpack_require__(52)
-  , toInteger      = __webpack_require__(48)
+  , anInstance     = __webpack_require__(54)
+  , toInteger      = __webpack_require__(49)
   , toLength       = __webpack_require__(16)
-  , gOPN           = __webpack_require__(55).f
+  , gOPN           = __webpack_require__(57).f
   , dP             = __webpack_require__(14).f
   , arrayFill      = __webpack_require__(131)
-  , setToStringTag = __webpack_require__(70)
+  , setToStringTag = __webpack_require__(71)
   , ARRAY_BUFFER   = 'ArrayBuffer'
   , DATA_VIEW      = 'DataView'
   , PROTOTYPE      = 'prototype'
@@ -19006,9 +19006,9 @@ exports[DATA_VIEW] = $DataView;
 /***/ (function(module, exports, __webpack_require__) {
 
 var global         = __webpack_require__(5)
-  , core           = __webpack_require__(40)
-  , LIBRARY        = __webpack_require__(53)
-  , wksExt         = __webpack_require__(209)
+  , core           = __webpack_require__(41)
+  , LIBRARY        = __webpack_require__(55)
+  , wksExt         = __webpack_require__(211)
   , defineProperty = __webpack_require__(14).f;
 module.exports = function(name){
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
@@ -19021,8 +19021,8 @@ module.exports = function(name){
 
 var classof   = __webpack_require__(82)
   , ITERATOR  = __webpack_require__(10)('iterator')
-  , Iterators = __webpack_require__(69);
-module.exports = __webpack_require__(40).getIteratorMethod = function(it){
+  , Iterators = __webpack_require__(70);
+module.exports = __webpack_require__(41).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
     || it['@@iterator']
     || Iterators[classof(it)];
@@ -19034,10 +19034,10 @@ module.exports = __webpack_require__(40).getIteratorMethod = function(it){
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(67)
-  , step             = __webpack_require__(197)
-  , Iterators        = __webpack_require__(69)
-  , toIObject        = __webpack_require__(26);
+var addToUnscopables = __webpack_require__(68)
+  , step             = __webpack_require__(199)
+  , Iterators        = __webpack_require__(70)
+  , toIObject        = __webpack_require__(27);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -19094,28 +19094,4921 @@ addToUnscopables('entries');
 /* 179 */,
 /* 180 */,
 /* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cof = __webpack_require__(31);
+/* WEBPACK VAR INJECTION */(function(module) {/*!
+ * # Semantic UI 2.2.10 - Dropdown
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+;(function ($, window, document, undefined) {
+
+"use strict";
+
+window = (typeof window != 'undefined' && window.Math == Math)
+  ? window
+  : (typeof self != 'undefined' && self.Math == Math)
+    ? self
+    : Function('return this')()
+;
+
+var _module = module;
+module.exports = function(parameters) {
+  var
+    $allModules    = $(this),
+    $document      = $(document),
+
+    moduleSelector = $allModules.selector || '',
+
+    hasTouch       = ('ontouchstart' in document.documentElement),
+    time           = new Date().getTime(),
+    performance    = [],
+
+    query          = arguments[0],
+    methodInvoked  = (typeof query == 'string'),
+    queryArguments = [].slice.call(arguments, 1),
+    returnedValue
+  ;
+
+  $allModules
+    .each(function(elementIndex) {
+      var
+        settings          = ( $.isPlainObject(parameters) )
+          ? $.extend(true, {}, _module.exports.settings, parameters)
+          : $.extend({}, _module.exports.settings),
+
+        className       = settings.className,
+        message         = settings.message,
+        fields          = settings.fields,
+        keys            = settings.keys,
+        metadata        = settings.metadata,
+        namespace       = settings.namespace,
+        regExp          = settings.regExp,
+        selector        = settings.selector,
+        error           = settings.error,
+        templates       = settings.templates,
+
+        eventNamespace  = '.' + namespace,
+        moduleNamespace = 'module-' + namespace,
+
+        $module         = $(this),
+        $context        = $(settings.context),
+        $text           = $module.find(selector.text),
+        $search         = $module.find(selector.search),
+        $sizer          = $module.find(selector.sizer),
+        $input          = $module.find(selector.input),
+        $icon           = $module.find(selector.icon),
+
+        $combo = ($module.prev().find(selector.text).length > 0)
+          ? $module.prev().find(selector.text)
+          : $module.prev(),
+
+        $menu           = $module.children(selector.menu),
+        $item           = $menu.find(selector.item),
+
+        activated       = false,
+        itemActivated   = false,
+        internalChange  = false,
+        element         = this,
+        instance        = $module.data(moduleNamespace),
+
+        initialLoad,
+        pageLostFocus,
+        willRefocus,
+        elementNamespace,
+        id,
+        selectObserver,
+        menuObserver,
+        module
+      ;
+
+      module = {
+
+        initialize: function() {
+          module.debug('Initializing dropdown', settings);
+
+          if( module.is.alreadySetup() ) {
+            module.setup.reference();
+          }
+          else {
+            module.setup.layout();
+            module.refreshData();
+
+            module.save.defaults();
+            module.restore.selected();
+
+            module.create.id();
+            module.bind.events();
+
+            module.observeChanges();
+            module.instantiate();
+          }
+
+        },
+
+        instantiate: function() {
+          module.verbose('Storing instance of dropdown', module);
+          instance = module;
+          $module
+            .data(moduleNamespace, module)
+          ;
+        },
+
+        destroy: function() {
+          module.verbose('Destroying previous dropdown', $module);
+          module.remove.tabbable();
+          $module
+            .off(eventNamespace)
+            .removeData(moduleNamespace)
+          ;
+          $menu
+            .off(eventNamespace)
+          ;
+          $document
+            .off(elementNamespace)
+          ;
+          module.disconnect.menuObserver();
+          module.disconnect.selectObserver();
+        },
+
+        observeChanges: function() {
+          if('MutationObserver' in window) {
+            selectObserver = new MutationObserver(module.event.select.mutation);
+            menuObserver   = new MutationObserver(module.event.menu.mutation);
+            module.debug('Setting up mutation observer', selectObserver, menuObserver);
+            module.observe.select();
+            module.observe.menu();
+          }
+        },
+
+        disconnect: {
+          menuObserver: function() {
+            if(menuObserver) {
+              menuObserver.disconnect();
+            }
+          },
+          selectObserver: function() {
+            if(selectObserver) {
+              selectObserver.disconnect();
+            }
+          }
+        },
+        observe: {
+          select: function() {
+            if(module.has.input()) {
+              selectObserver.observe($input[0], {
+                childList : true,
+                subtree   : true
+              });
+            }
+          },
+          menu: function() {
+            if(module.has.menu()) {
+              menuObserver.observe($menu[0], {
+                childList : true,
+                subtree   : true
+              });
+            }
+          }
+        },
+
+        create: {
+          id: function() {
+            id = (Math.random().toString(16) + '000000000').substr(2, 8);
+            elementNamespace = '.' + id;
+            module.verbose('Creating unique id for element', id);
+          },
+          userChoice: function(values) {
+            var
+              $userChoices,
+              $userChoice,
+              isUserValue,
+              html
+            ;
+            values = values || module.get.userValues();
+            if(!values) {
+              return false;
+            }
+            values = $.isArray(values)
+              ? values
+              : [values]
+            ;
+            $.each(values, function(index, value) {
+              if(module.get.item(value) === false) {
+                html         = settings.templates.addition( module.add.variables(message.addResult, value) );
+                $userChoice  = $('<div />')
+                  .html(html)
+                  .attr('data-' + metadata.value, value)
+                  .attr('data-' + metadata.text, value)
+                  .addClass(className.addition)
+                  .addClass(className.item)
+                ;
+                if(settings.hideAdditions) {
+                  $userChoice.addClass(className.hidden);
+                }
+                $userChoices = ($userChoices === undefined)
+                  ? $userChoice
+                  : $userChoices.add($userChoice)
+                ;
+                module.verbose('Creating user choices for value', value, $userChoice);
+              }
+            });
+            return $userChoices;
+          },
+          userLabels: function(value) {
+            var
+              userValues = module.get.userValues()
+            ;
+            if(userValues) {
+              module.debug('Adding user labels', userValues);
+              $.each(userValues, function(index, value) {
+                module.verbose('Adding custom user value');
+                module.add.label(value, value);
+              });
+            }
+          },
+          menu: function() {
+            $menu = $('<div />')
+              .addClass(className.menu)
+              .appendTo($module)
+            ;
+          },
+          sizer: function() {
+            $sizer = $('<span />')
+              .addClass(className.sizer)
+              .insertAfter($search)
+            ;
+          }
+        },
+
+        search: function(query) {
+          query = (query !== undefined)
+            ? query
+            : module.get.query()
+          ;
+          module.verbose('Searching for query', query);
+          if(module.has.minCharacters(query)) {
+            module.filter(query);
+          }
+          else {
+            module.hide();
+          }
+        },
+
+        select: {
+          firstUnfiltered: function() {
+            module.verbose('Selecting first non-filtered element');
+            module.remove.selectedItem();
+            $item
+              .not(selector.unselectable)
+              .not(selector.addition + selector.hidden)
+                .eq(0)
+                .addClass(className.selected)
+            ;
+          },
+          nextAvailable: function($selected) {
+            $selected = $selected.eq(0);
+            var
+              $nextAvailable = $selected.nextAll(selector.item).not(selector.unselectable).eq(0),
+              $prevAvailable = $selected.prevAll(selector.item).not(selector.unselectable).eq(0),
+              hasNext        = ($nextAvailable.length > 0)
+            ;
+            if(hasNext) {
+              module.verbose('Moving selection to', $nextAvailable);
+              $nextAvailable.addClass(className.selected);
+            }
+            else {
+              module.verbose('Moving selection to', $prevAvailable);
+              $prevAvailable.addClass(className.selected);
+            }
+          }
+        },
+
+        setup: {
+          api: function() {
+            var
+              apiSettings = {
+                debug   : settings.debug,
+                urlData : {
+                  value : module.get.value(),
+                  query : module.get.query()
+                },
+                on    : false
+              }
+            ;
+            module.verbose('First request, initializing API');
+            $module
+              .api(apiSettings)
+            ;
+          },
+          layout: function() {
+            if( $module.is('select') ) {
+              module.setup.select();
+              module.setup.returnedObject();
+            }
+            if( !module.has.menu() ) {
+              module.create.menu();
+            }
+            if( module.is.search() && !module.has.search() ) {
+              module.verbose('Adding search input');
+              $search = $('<input />')
+                .addClass(className.search)
+                .prop('autocomplete', 'off')
+                .insertBefore($text)
+              ;
+            }
+            if( module.is.multiple() && module.is.searchSelection() && !module.has.sizer()) {
+              module.create.sizer();
+            }
+            if(settings.allowTab) {
+              module.set.tabbable();
+            }
+          },
+          select: function() {
+            var
+              selectValues  = module.get.selectValues()
+            ;
+            module.debug('Dropdown initialized on a select', selectValues);
+            if( $module.is('select') ) {
+              $input = $module;
+            }
+            // see if select is placed correctly already
+            if($input.parent(selector.dropdown).length > 0) {
+              module.debug('UI dropdown already exists. Creating dropdown menu only');
+              $module = $input.closest(selector.dropdown);
+              if( !module.has.menu() ) {
+                module.create.menu();
+              }
+              $menu = $module.children(selector.menu);
+              module.setup.menu(selectValues);
+            }
+            else {
+              module.debug('Creating entire dropdown from select');
+              $module = $('<div />')
+                .attr('class', $input.attr('class') )
+                .addClass(className.selection)
+                .addClass(className.dropdown)
+                .html( templates.dropdown(selectValues) )
+                .insertBefore($input)
+              ;
+              if($input.hasClass(className.multiple) && $input.prop('multiple') === false) {
+                module.error(error.missingMultiple);
+                $input.prop('multiple', true);
+              }
+              if($input.is('[multiple]')) {
+                module.set.multiple();
+              }
+              if ($input.prop('disabled')) {
+                module.debug('Disabling dropdown');
+                $module.addClass(className.disabled);
+              }
+              $input
+                .removeAttr('class')
+                .detach()
+                .prependTo($module)
+              ;
+            }
+            module.refresh();
+          },
+          menu: function(values) {
+            $menu.html( templates.menu(values, fields));
+            $item = $menu.find(selector.item);
+          },
+          reference: function() {
+            module.debug('Dropdown behavior was called on select, replacing with closest dropdown');
+            // replace module reference
+            $module = $module.parent(selector.dropdown);
+            module.refresh();
+            module.setup.returnedObject();
+            // invoke method in context of current instance
+            if(methodInvoked) {
+              instance = module;
+              module.invoke(query);
+            }
+          },
+          returnedObject: function() {
+            var
+              $firstModules = $allModules.slice(0, elementIndex),
+              $lastModules = $allModules.slice(elementIndex + 1)
+            ;
+            // adjust all modules to use correct reference
+            $allModules = $firstModules.add($module).add($lastModules);
+          }
+        },
+
+        refresh: function() {
+          module.refreshSelectors();
+          module.refreshData();
+        },
+
+        refreshItems: function() {
+          $item = $menu.find(selector.item);
+        },
+
+        refreshSelectors: function() {
+          module.verbose('Refreshing selector cache');
+          $text   = $module.find(selector.text);
+          $search = $module.find(selector.search);
+          $input  = $module.find(selector.input);
+          $icon   = $module.find(selector.icon);
+          $combo  = ($module.prev().find(selector.text).length > 0)
+            ? $module.prev().find(selector.text)
+            : $module.prev()
+          ;
+          $menu    = $module.children(selector.menu);
+          $item    = $menu.find(selector.item);
+        },
+
+        refreshData: function() {
+          module.verbose('Refreshing cached metadata');
+          $item
+            .removeData(metadata.text)
+            .removeData(metadata.value)
+          ;
+        },
+
+        clearData: function() {
+          module.verbose('Clearing metadata');
+          $item
+            .removeData(metadata.text)
+            .removeData(metadata.value)
+          ;
+          $module
+            .removeData(metadata.defaultText)
+            .removeData(metadata.defaultValue)
+            .removeData(metadata.placeholderText)
+          ;
+        },
+
+        toggle: function() {
+          module.verbose('Toggling menu visibility');
+          if( !module.is.active() ) {
+            module.show();
+          }
+          else {
+            module.hide();
+          }
+        },
+
+        show: function(callback) {
+          callback = $.isFunction(callback)
+            ? callback
+            : function(){}
+          ;
+          if(!module.can.show() && module.is.remote()) {
+            module.debug('No API results retrieved, searching before show');
+            module.queryRemote(module.get.query(), module.show);
+          }
+          if( module.can.show() && !module.is.active() ) {
+            module.debug('Showing dropdown');
+            if(module.has.message() && !(module.has.maxSelections() || module.has.allResultsFiltered()) ) {
+              module.remove.message();
+            }
+            if(module.is.allFiltered()) {
+              return true;
+            }
+            if(settings.onShow.call(element) !== false) {
+              module.animate.show(function() {
+                if( module.can.click() ) {
+                  module.bind.intent();
+                }
+                if(module.has.menuSearch()) {
+                  module.focusSearch();
+                }
+                module.set.visible();
+                callback.call(element);
+              });
+            }
+          }
+        },
+
+        hide: function(callback) {
+          callback = $.isFunction(callback)
+            ? callback
+            : function(){}
+          ;
+          if( module.is.active() ) {
+            module.debug('Hiding dropdown');
+            if(settings.onHide.call(element) !== false) {
+              module.animate.hide(function() {
+                module.remove.visible();
+                callback.call(element);
+              });
+            }
+          }
+        },
+
+        hideOthers: function() {
+          module.verbose('Finding other dropdowns to hide');
+          $allModules
+            .not($module)
+              .has(selector.menu + '.' + className.visible)
+                .dropdown('hide')
+          ;
+        },
+
+        hideMenu: function() {
+          module.verbose('Hiding menu  instantaneously');
+          module.remove.active();
+          module.remove.visible();
+          $menu.transition('hide');
+        },
+
+        hideSubMenus: function() {
+          var
+            $subMenus = $menu.children(selector.item).find(selector.menu)
+          ;
+          module.verbose('Hiding sub menus', $subMenus);
+          $subMenus.transition('hide');
+        },
+
+        bind: {
+          events: function() {
+            if(hasTouch) {
+              module.bind.touchEvents();
+            }
+            module.bind.keyboardEvents();
+            module.bind.inputEvents();
+            module.bind.mouseEvents();
+          },
+          touchEvents: function() {
+            module.debug('Touch device detected binding additional touch events');
+            if( module.is.searchSelection() ) {
+              // do nothing special yet
+            }
+            else if( module.is.single() ) {
+              $module
+                .on('touchstart' + eventNamespace, module.event.test.toggle)
+              ;
+            }
+            $menu
+              .on('touchstart' + eventNamespace, selector.item, module.event.item.mouseenter)
+            ;
+          },
+          keyboardEvents: function() {
+            module.verbose('Binding keyboard events');
+            $module
+              .on('keydown' + eventNamespace, module.event.keydown)
+            ;
+            if( module.has.search() ) {
+              $module
+                .on(module.get.inputEvent() + eventNamespace, selector.search, module.event.input)
+              ;
+            }
+            if( module.is.multiple() ) {
+              $document
+                .on('keydown' + elementNamespace, module.event.document.keydown)
+              ;
+            }
+          },
+          inputEvents: function() {
+            module.verbose('Binding input change events');
+            $module
+              .on('change' + eventNamespace, selector.input, module.event.change)
+            ;
+          },
+          mouseEvents: function() {
+            module.verbose('Binding mouse events');
+            if(module.is.multiple()) {
+              $module
+                .on('click'   + eventNamespace, selector.label,  module.event.label.click)
+                .on('click'   + eventNamespace, selector.remove, module.event.remove.click)
+              ;
+            }
+            if( module.is.searchSelection() ) {
+              $module
+                .on('mousedown' + eventNamespace, module.event.mousedown)
+                .on('mouseup'   + eventNamespace, module.event.mouseup)
+                .on('mousedown' + eventNamespace, selector.menu,   module.event.menu.mousedown)
+                .on('mouseup'   + eventNamespace, selector.menu,   module.event.menu.mouseup)
+                .on('click'     + eventNamespace, selector.icon,   module.event.icon.click)
+                .on('focus'     + eventNamespace, selector.search, module.event.search.focus)
+                .on('click'     + eventNamespace, selector.search, module.event.search.focus)
+                .on('blur'      + eventNamespace, selector.search, module.event.search.blur)
+                .on('click'     + eventNamespace, selector.text,   module.event.text.focus)
+              ;
+              if(module.is.multiple()) {
+                $module
+                  .on('click' + eventNamespace, module.event.click)
+                ;
+              }
+            }
+            else {
+              if(settings.on == 'click') {
+                $module
+                  .on('click' + eventNamespace, selector.icon, module.event.icon.click)
+                  .on('click' + eventNamespace, module.event.test.toggle)
+                ;
+              }
+              else if(settings.on == 'hover') {
+                $module
+                  .on('mouseenter' + eventNamespace, module.delay.show)
+                  .on('mouseleave' + eventNamespace, module.delay.hide)
+                ;
+              }
+              else {
+                $module
+                  .on(settings.on + eventNamespace, module.toggle)
+                ;
+              }
+              $module
+                .on('mousedown' + eventNamespace, module.event.mousedown)
+                .on('mouseup'   + eventNamespace, module.event.mouseup)
+                .on('focus'     + eventNamespace, module.event.focus)
+              ;
+              if(module.has.menuSearch() ) {
+                $module
+                  .on('blur' + eventNamespace, selector.search, module.event.search.blur)
+                ;
+              }
+              else {
+                $module
+                  .on('blur' + eventNamespace, module.event.blur)
+                ;
+              }
+            }
+            $menu
+              .on('mouseenter' + eventNamespace, selector.item, module.event.item.mouseenter)
+              .on('mouseleave' + eventNamespace, selector.item, module.event.item.mouseleave)
+              .on('click'      + eventNamespace, selector.item, module.event.item.click)
+            ;
+          },
+          intent: function() {
+            module.verbose('Binding hide intent event to document');
+            if(hasTouch) {
+              $document
+                .on('touchstart' + elementNamespace, module.event.test.touch)
+                .on('touchmove'  + elementNamespace, module.event.test.touch)
+              ;
+            }
+            $document
+              .on('click' + elementNamespace, module.event.test.hide)
+            ;
+          }
+        },
+
+        unbind: {
+          intent: function() {
+            module.verbose('Removing hide intent event from document');
+            if(hasTouch) {
+              $document
+                .off('touchstart' + elementNamespace)
+                .off('touchmove' + elementNamespace)
+              ;
+            }
+            $document
+              .off('click' + elementNamespace)
+            ;
+          }
+        },
+
+        filter: function(query) {
+          var
+            searchTerm = (query !== undefined)
+              ? query
+              : module.get.query(),
+            afterFiltered = function() {
+              if(module.is.multiple()) {
+                module.filterActive();
+              }
+              module.select.firstUnfiltered();
+              if( module.has.allResultsFiltered() ) {
+                if( settings.onNoResults.call(element, searchTerm) ) {
+                  if(settings.allowAdditions) {
+                    if(settings.hideAdditions) {
+                      module.verbose('User addition with no menu, setting empty style');
+                      module.set.empty();
+                      module.hideMenu();
+                    }
+                  }
+                  else {
+                    module.verbose('All items filtered, showing message', searchTerm);
+                    module.add.message(message.noResults);
+                  }
+                }
+                else {
+                  module.verbose('All items filtered, hiding dropdown', searchTerm);
+                  module.hideMenu();
+                }
+              }
+              else {
+                module.remove.empty();
+                module.remove.message();
+              }
+              if(settings.allowAdditions) {
+                module.add.userSuggestion(query);
+              }
+              if(module.is.searchSelection() && module.can.show() && module.is.focusedOnSearch() ) {
+                module.show();
+              }
+            }
+          ;
+          if(settings.useLabels && module.has.maxSelections()) {
+            return;
+          }
+          if(settings.apiSettings) {
+            if( module.can.useAPI() ) {
+              module.queryRemote(searchTerm, function() {
+                if(settings.filterRemoteData) {
+                  module.filterItems(searchTerm);
+                }
+                afterFiltered();
+              });
+            }
+            else {
+              module.error(error.noAPI);
+            }
+          }
+          else {
+            module.filterItems(searchTerm);
+            afterFiltered();
+          }
+        },
+
+        queryRemote: function(query, callback) {
+          var
+            apiSettings = {
+              errorDuration : false,
+              cache         : 'local',
+              throttle      : settings.throttle,
+              urlData       : {
+                query: query
+              },
+              onError: function() {
+                module.add.message(message.serverError);
+                callback();
+              },
+              onFailure: function() {
+                module.add.message(message.serverError);
+                callback();
+              },
+              onSuccess : function(response) {
+                module.remove.message();
+                module.setup.menu({
+                  values: response[fields.remoteValues]
+                });
+                callback();
+              }
+            }
+          ;
+          if( !$module.api('get request') ) {
+            module.setup.api();
+          }
+          apiSettings = $.extend(true, {}, apiSettings, settings.apiSettings);
+          $module
+            .api('setting', apiSettings)
+            .api('query')
+          ;
+        },
+
+        filterItems: function(query) {
+          var
+            searchTerm = (query !== undefined)
+              ? query
+              : module.get.query(),
+            results          =  null,
+            escapedTerm      = module.escape.string(searchTerm),
+            beginsWithRegExp = new RegExp('^' + escapedTerm, 'igm')
+          ;
+          // avoid loop if we're matching nothing
+          if( module.has.query() ) {
+            results = [];
+
+            module.verbose('Searching for matching values', searchTerm);
+            $item
+              .each(function(){
+                var
+                  $choice = $(this),
+                  text,
+                  value
+                ;
+                if(settings.match == 'both' || settings.match == 'text') {
+                  text = String(module.get.choiceText($choice, false));
+                  if(text.search(beginsWithRegExp) !== -1) {
+                    results.push(this);
+                    return true;
+                  }
+                  else if (settings.fullTextSearch === 'exact' && module.exactSearch(searchTerm, text)) {
+                    results.push(this);
+                    return true;
+                  }
+                  else if (settings.fullTextSearch === true && module.fuzzySearch(searchTerm, text)) {
+                    results.push(this);
+                    return true;
+                  }
+                }
+                if(settings.match == 'both' || settings.match == 'value') {
+                  value = String(module.get.choiceValue($choice, text));
+                  if(value.search(beginsWithRegExp) !== -1) {
+                    results.push(this);
+                    return true;
+                  }
+                  else if (settings.fullTextSearch === 'exact' && module.exactSearch(searchTerm, value)) {
+                    results.push(this);
+                    return true;
+                  }
+                  else if (settings.fullTextSearch === true && module.fuzzySearch(searchTerm, value)) {
+                    results.push(this);
+                    return true;
+                  }
+                }
+              })
+            ;
+          }
+          module.debug('Showing only matched items', searchTerm);
+          module.remove.filteredItem();
+          if(results) {
+            $item
+              .not(results)
+              .addClass(className.filtered)
+            ;
+          }
+        },
+
+        fuzzySearch: function(query, term) {
+          var
+            termLength  = term.length,
+            queryLength = query.length
+          ;
+          query = query.toLowerCase();
+          term  = term.toLowerCase();
+          if(queryLength > termLength) {
+            return false;
+          }
+          if(queryLength === termLength) {
+            return (query === term);
+          }
+          search: for (var characterIndex = 0, nextCharacterIndex = 0; characterIndex < queryLength; characterIndex++) {
+            var
+              queryCharacter = query.charCodeAt(characterIndex)
+            ;
+            while(nextCharacterIndex < termLength) {
+              if(term.charCodeAt(nextCharacterIndex++) === queryCharacter) {
+                continue search;
+              }
+            }
+            return false;
+          }
+          return true;
+        },
+        exactSearch: function (query, term) {
+          query = query.toLowerCase();
+          term  = term.toLowerCase();
+          if(term.indexOf(query) > -1) {
+             return true;
+          }
+          return false;
+        },
+        filterActive: function() {
+          if(settings.useLabels) {
+            $item.filter('.' + className.active)
+              .addClass(className.filtered)
+            ;
+          }
+        },
+
+        focusSearch: function(skipHandler) {
+          if( module.has.search() && !module.is.focusedOnSearch() ) {
+            if(skipHandler) {
+              $module.off('focus' + eventNamespace, selector.search);
+              $search.focus();
+              $module.on('focus'  + eventNamespace, selector.search, module.event.search.focus);
+            }
+            else {
+              $search.focus();
+            }
+          }
+        },
+
+        forceSelection: function() {
+          var
+            $currentlySelected = $item.not(className.filtered).filter('.' + className.selected).eq(0),
+            $activeItem        = $item.not(className.filtered).filter('.' + className.active).eq(0),
+            $selectedItem      = ($currentlySelected.length > 0)
+              ? $currentlySelected
+              : $activeItem,
+            hasSelected = ($selectedItem.length > 0)
+          ;
+          if(hasSelected && !module.is.multiple()) {
+            module.debug('Forcing partial selection to selected item', $selectedItem);
+            module.event.item.click.call($selectedItem, {}, true);
+            return;
+          }
+          else {
+            if(settings.allowAdditions) {
+              module.set.selected(module.get.query());
+              module.remove.searchTerm();
+            }
+            else {
+              module.remove.searchTerm();
+            }
+          }
+        },
+
+        event: {
+          change: function() {
+            if(!internalChange) {
+              module.debug('Input changed, updating selection');
+              module.set.selected();
+            }
+          },
+          focus: function() {
+            if(settings.showOnFocus && !activated && module.is.hidden() && !pageLostFocus) {
+              module.show();
+            }
+          },
+          blur: function(event) {
+            pageLostFocus = (document.activeElement === this);
+            if(!activated && !pageLostFocus) {
+              module.remove.activeLabel();
+              module.hide();
+            }
+          },
+          mousedown: function() {
+            if(module.is.searchSelection()) {
+              // prevent menu hiding on immediate re-focus
+              willRefocus = true;
+            }
+            else {
+              // prevents focus callback from occurring on mousedown
+              activated = true;
+            }
+          },
+          mouseup: function() {
+            if(module.is.searchSelection()) {
+              // prevent menu hiding on immediate re-focus
+              willRefocus = false;
+            }
+            else {
+              activated = false;
+            }
+          },
+          click: function(event) {
+            var
+              $target = $(event.target)
+            ;
+            // focus search
+            if($target.is($module)) {
+              if(!module.is.focusedOnSearch()) {
+                module.focusSearch();
+              }
+              else {
+                module.show();
+              }
+            }
+          },
+          search: {
+            focus: function() {
+              activated = true;
+              if(module.is.multiple()) {
+                module.remove.activeLabel();
+              }
+              if(settings.showOnFocus) {
+                module.search();
+              }
+            },
+            blur: function(event) {
+              pageLostFocus = (document.activeElement === this);
+              if(module.is.searchSelection() && !willRefocus) {
+                if(!itemActivated && !pageLostFocus) {
+                  if(settings.forceSelection) {
+                    module.forceSelection();
+                  }
+                  module.hide();
+                }
+              }
+              willRefocus = false;
+            }
+          },
+          icon: {
+            click: function(event) {
+              module.toggle();
+            }
+          },
+          text: {
+            focus: function(event) {
+              activated = true;
+              module.focusSearch();
+            }
+          },
+          input: function(event) {
+            if(module.is.multiple() || module.is.searchSelection()) {
+              module.set.filtered();
+            }
+            clearTimeout(module.timer);
+            module.timer = setTimeout(module.search, settings.delay.search);
+          },
+          label: {
+            click: function(event) {
+              var
+                $label        = $(this),
+                $labels       = $module.find(selector.label),
+                $activeLabels = $labels.filter('.' + className.active),
+                $nextActive   = $label.nextAll('.' + className.active),
+                $prevActive   = $label.prevAll('.' + className.active),
+                $range = ($nextActive.length > 0)
+                  ? $label.nextUntil($nextActive).add($activeLabels).add($label)
+                  : $label.prevUntil($prevActive).add($activeLabels).add($label)
+              ;
+              if(event.shiftKey) {
+                $activeLabels.removeClass(className.active);
+                $range.addClass(className.active);
+              }
+              else if(event.ctrlKey) {
+                $label.toggleClass(className.active);
+              }
+              else {
+                $activeLabels.removeClass(className.active);
+                $label.addClass(className.active);
+              }
+              settings.onLabelSelect.apply(this, $labels.filter('.' + className.active));
+            }
+          },
+          remove: {
+            click: function() {
+              var
+                $label = $(this).parent()
+              ;
+              if( $label.hasClass(className.active) ) {
+                // remove all selected labels
+                module.remove.activeLabels();
+              }
+              else {
+                // remove this label only
+                module.remove.activeLabels( $label );
+              }
+            }
+          },
+          test: {
+            toggle: function(event) {
+              var
+                toggleBehavior = (module.is.multiple())
+                  ? module.show
+                  : module.toggle
+              ;
+              if(module.is.bubbledLabelClick(event) || module.is.bubbledIconClick(event)) {
+                return;
+              }
+              if( module.determine.eventOnElement(event, toggleBehavior) ) {
+                event.preventDefault();
+              }
+            },
+            touch: function(event) {
+              module.determine.eventOnElement(event, function() {
+                if(event.type == 'touchstart') {
+                  module.timer = setTimeout(function() {
+                    module.hide();
+                  }, settings.delay.touch);
+                }
+                else if(event.type == 'touchmove') {
+                  clearTimeout(module.timer);
+                }
+              });
+              event.stopPropagation();
+            },
+            hide: function(event) {
+              module.determine.eventInModule(event, module.hide);
+            }
+          },
+          select: {
+            mutation: function(mutations) {
+              module.debug('<select> modified, recreating menu');
+              module.setup.select();
+            }
+          },
+          menu: {
+            mutation: function(mutations) {
+              var
+                mutation   = mutations[0],
+                $addedNode = mutation.addedNodes
+                  ? $(mutation.addedNodes[0])
+                  : $(false),
+                $removedNode = mutation.removedNodes
+                  ? $(mutation.removedNodes[0])
+                  : $(false),
+                $changedNodes  = $addedNode.add($removedNode),
+                isUserAddition = $changedNodes.is(selector.addition) || $changedNodes.closest(selector.addition).length > 0,
+                isMessage      = $changedNodes.is(selector.message)  || $changedNodes.closest(selector.message).length > 0
+              ;
+              if(isUserAddition || isMessage) {
+                module.debug('Updating item selector cache');
+                module.refreshItems();
+              }
+              else {
+                module.debug('Menu modified, updating selector cache');
+                module.refresh();
+              }
+            },
+            mousedown: function() {
+              itemActivated = true;
+            },
+            mouseup: function() {
+              itemActivated = false;
+            }
+          },
+          item: {
+            mouseenter: function(event) {
+              var
+                $target        = $(event.target),
+                $item          = $(this),
+                $subMenu       = $item.children(selector.menu),
+                $otherMenus    = $item.siblings(selector.item).children(selector.menu),
+                hasSubMenu     = ($subMenu.length > 0),
+                isBubbledEvent = ($subMenu.find($target).length > 0)
+              ;
+              if( !isBubbledEvent && hasSubMenu ) {
+                clearTimeout(module.itemTimer);
+                module.itemTimer = setTimeout(function() {
+                  module.verbose('Showing sub-menu', $subMenu);
+                  $.each($otherMenus, function() {
+                    module.animate.hide(false, $(this));
+                  });
+                  module.animate.show(false, $subMenu);
+                }, settings.delay.show);
+                event.preventDefault();
+              }
+            },
+            mouseleave: function(event) {
+              var
+                $subMenu = $(this).children(selector.menu)
+              ;
+              if($subMenu.length > 0) {
+                clearTimeout(module.itemTimer);
+                module.itemTimer = setTimeout(function() {
+                  module.verbose('Hiding sub-menu', $subMenu);
+                  module.animate.hide(false, $subMenu);
+                }, settings.delay.hide);
+              }
+            },
+            click: function (event, skipRefocus) {
+              var
+                $choice        = $(this),
+                $target        = (event)
+                  ? $(event.target)
+                  : $(''),
+                $subMenu       = $choice.find(selector.menu),
+                text           = module.get.choiceText($choice),
+                value          = module.get.choiceValue($choice, text),
+                hasSubMenu     = ($subMenu.length > 0),
+                isBubbledEvent = ($subMenu.find($target).length > 0)
+              ;
+              // prevents IE11 bug where menu receives focus even though `tabindex=-1`
+              if(module.has.menuSearch()) {
+                $(document.activeElement).blur();
+              }
+              if(!isBubbledEvent && (!hasSubMenu || settings.allowCategorySelection)) {
+                if(module.is.searchSelection()) {
+                  if(settings.allowAdditions) {
+                    module.remove.userAddition();
+                  }
+                  module.remove.searchTerm();
+                  if(!module.is.focusedOnSearch() && !(skipRefocus == true)) {
+                    module.focusSearch(true);
+                  }
+                }
+                if(!settings.useLabels) {
+                  module.remove.filteredItem();
+                  module.set.scrollPosition($choice);
+                }
+                module.determine.selectAction.call(this, text, value);
+              }
+            }
+          },
+
+          document: {
+            // label selection should occur even when element has no focus
+            keydown: function(event) {
+              var
+                pressedKey    = event.which,
+                isShortcutKey = module.is.inObject(pressedKey, keys)
+              ;
+              if(isShortcutKey) {
+                var
+                  $label            = $module.find(selector.label),
+                  $activeLabel      = $label.filter('.' + className.active),
+                  activeValue       = $activeLabel.data(metadata.value),
+                  labelIndex        = $label.index($activeLabel),
+                  labelCount        = $label.length,
+                  hasActiveLabel    = ($activeLabel.length > 0),
+                  hasMultipleActive = ($activeLabel.length > 1),
+                  isFirstLabel      = (labelIndex === 0),
+                  isLastLabel       = (labelIndex + 1 == labelCount),
+                  isSearch          = module.is.searchSelection(),
+                  isFocusedOnSearch = module.is.focusedOnSearch(),
+                  isFocused         = module.is.focused(),
+                  caretAtStart      = (isFocusedOnSearch && module.get.caretPosition() === 0),
+                  $nextLabel
+                ;
+                if(isSearch && !hasActiveLabel && !isFocusedOnSearch) {
+                  return;
+                }
+
+                if(pressedKey == keys.leftArrow) {
+                  // activate previous label
+                  if((isFocused || caretAtStart) && !hasActiveLabel) {
+                    module.verbose('Selecting previous label');
+                    $label.last().addClass(className.active);
+                  }
+                  else if(hasActiveLabel) {
+                    if(!event.shiftKey) {
+                      module.verbose('Selecting previous label');
+                      $label.removeClass(className.active);
+                    }
+                    else {
+                      module.verbose('Adding previous label to selection');
+                    }
+                    if(isFirstLabel && !hasMultipleActive) {
+                      $activeLabel.addClass(className.active);
+                    }
+                    else {
+                      $activeLabel.prev(selector.siblingLabel)
+                        .addClass(className.active)
+                        .end()
+                      ;
+                    }
+                    event.preventDefault();
+                  }
+                }
+                else if(pressedKey == keys.rightArrow) {
+                  // activate first label
+                  if(isFocused && !hasActiveLabel) {
+                    $label.first().addClass(className.active);
+                  }
+                  // activate next label
+                  if(hasActiveLabel) {
+                    if(!event.shiftKey) {
+                      module.verbose('Selecting next label');
+                      $label.removeClass(className.active);
+                    }
+                    else {
+                      module.verbose('Adding next label to selection');
+                    }
+                    if(isLastLabel) {
+                      if(isSearch) {
+                        if(!isFocusedOnSearch) {
+                          module.focusSearch();
+                        }
+                        else {
+                          $label.removeClass(className.active);
+                        }
+                      }
+                      else if(hasMultipleActive) {
+                        $activeLabel.next(selector.siblingLabel).addClass(className.active);
+                      }
+                      else {
+                        $activeLabel.addClass(className.active);
+                      }
+                    }
+                    else {
+                      $activeLabel.next(selector.siblingLabel).addClass(className.active);
+                    }
+                    event.preventDefault();
+                  }
+                }
+                else if(pressedKey == keys.deleteKey || pressedKey == keys.backspace) {
+                  if(hasActiveLabel) {
+                    module.verbose('Removing active labels');
+                    if(isLastLabel) {
+                      if(isSearch && !isFocusedOnSearch) {
+                        module.focusSearch();
+                      }
+                    }
+                    $activeLabel.last().next(selector.siblingLabel).addClass(className.active);
+                    module.remove.activeLabels($activeLabel);
+                    event.preventDefault();
+                  }
+                  else if(caretAtStart && !hasActiveLabel && pressedKey == keys.backspace) {
+                    module.verbose('Removing last label on input backspace');
+                    $activeLabel = $label.last().addClass(className.active);
+                    module.remove.activeLabels($activeLabel);
+                  }
+                }
+                else {
+                  $activeLabel.removeClass(className.active);
+                }
+              }
+            }
+          },
+
+          keydown: function(event) {
+            var
+              pressedKey    = event.which,
+              isShortcutKey = module.is.inObject(pressedKey, keys)
+            ;
+            if(isShortcutKey) {
+              var
+                $currentlySelected = $item.not(selector.unselectable).filter('.' + className.selected).eq(0),
+                $activeItem        = $menu.children('.' + className.active).eq(0),
+                $selectedItem      = ($currentlySelected.length > 0)
+                  ? $currentlySelected
+                  : $activeItem,
+                $visibleItems = ($selectedItem.length > 0)
+                  ? $selectedItem.siblings(':not(.' + className.filtered +')').addBack()
+                  : $menu.children(':not(.' + className.filtered +')'),
+                $subMenu              = $selectedItem.children(selector.menu),
+                $parentMenu           = $selectedItem.closest(selector.menu),
+                inVisibleMenu         = ($parentMenu.hasClass(className.visible) || $parentMenu.hasClass(className.animating) || $parentMenu.parent(selector.menu).length > 0),
+                hasSubMenu            = ($subMenu.length> 0),
+                hasSelectedItem       = ($selectedItem.length > 0),
+                selectedIsSelectable  = ($selectedItem.not(selector.unselectable).length > 0),
+                delimiterPressed      = (pressedKey == keys.delimiter && settings.allowAdditions && module.is.multiple()),
+                isAdditionWithoutMenu = (settings.allowAdditions && settings.hideAdditions && (pressedKey == keys.enter || delimiterPressed) && selectedIsSelectable),
+                $nextItem,
+                isSubMenuItem,
+                newIndex
+              ;
+              // allow selection with menu closed
+              if(isAdditionWithoutMenu) {
+                module.verbose('Selecting item from keyboard shortcut', $selectedItem);
+                module.event.item.click.call($selectedItem, event);
+                if(module.is.searchSelection()) {
+                  module.remove.searchTerm();
+                }
+              }
+
+              // visible menu keyboard shortcuts
+              if( module.is.visible() ) {
+
+                // enter (select or open sub-menu)
+                if(pressedKey == keys.enter || delimiterPressed) {
+                  if(pressedKey == keys.enter && hasSelectedItem && hasSubMenu && !settings.allowCategorySelection) {
+                    module.verbose('Pressed enter on unselectable category, opening sub menu');
+                    pressedKey = keys.rightArrow;
+                  }
+                  else if(selectedIsSelectable) {
+                    module.verbose('Selecting item from keyboard shortcut', $selectedItem);
+                    module.event.item.click.call($selectedItem, event);
+                    if(module.is.searchSelection()) {
+                      module.remove.searchTerm();
+                    }
+                  }
+                  event.preventDefault();
+                }
+
+                // sub-menu actions
+                if(hasSelectedItem) {
+
+                  if(pressedKey == keys.leftArrow) {
+
+                    isSubMenuItem = ($parentMenu[0] !== $menu[0]);
+
+                    if(isSubMenuItem) {
+                      module.verbose('Left key pressed, closing sub-menu');
+                      module.animate.hide(false, $parentMenu);
+                      $selectedItem
+                        .removeClass(className.selected)
+                      ;
+                      $parentMenu
+                        .closest(selector.item)
+                          .addClass(className.selected)
+                      ;
+                      event.preventDefault();
+                    }
+                  }
+
+                  // right arrow (show sub-menu)
+                  if(pressedKey == keys.rightArrow) {
+                    if(hasSubMenu) {
+                      module.verbose('Right key pressed, opening sub-menu');
+                      module.animate.show(false, $subMenu);
+                      $selectedItem
+                        .removeClass(className.selected)
+                      ;
+                      $subMenu
+                        .find(selector.item).eq(0)
+                          .addClass(className.selected)
+                      ;
+                      event.preventDefault();
+                    }
+                  }
+                }
+
+                // up arrow (traverse menu up)
+                if(pressedKey == keys.upArrow) {
+                  $nextItem = (hasSelectedItem && inVisibleMenu)
+                    ? $selectedItem.prevAll(selector.item + ':not(' + selector.unselectable + ')').eq(0)
+                    : $item.eq(0)
+                  ;
+                  if($visibleItems.index( $nextItem ) < 0) {
+                    module.verbose('Up key pressed but reached top of current menu');
+                    event.preventDefault();
+                    return;
+                  }
+                  else {
+                    module.verbose('Up key pressed, changing active item');
+                    $selectedItem
+                      .removeClass(className.selected)
+                    ;
+                    $nextItem
+                      .addClass(className.selected)
+                    ;
+                    module.set.scrollPosition($nextItem);
+                    if(settings.selectOnKeydown && module.is.single()) {
+                      module.set.selectedItem($nextItem);
+                    }
+                  }
+                  event.preventDefault();
+                }
+
+                // down arrow (traverse menu down)
+                if(pressedKey == keys.downArrow) {
+                  $nextItem = (hasSelectedItem && inVisibleMenu)
+                    ? $nextItem = $selectedItem.nextAll(selector.item + ':not(' + selector.unselectable + ')').eq(0)
+                    : $item.eq(0)
+                  ;
+                  if($nextItem.length === 0) {
+                    module.verbose('Down key pressed but reached bottom of current menu');
+                    event.preventDefault();
+                    return;
+                  }
+                  else {
+                    module.verbose('Down key pressed, changing active item');
+                    $item
+                      .removeClass(className.selected)
+                    ;
+                    $nextItem
+                      .addClass(className.selected)
+                    ;
+                    module.set.scrollPosition($nextItem);
+                    if(settings.selectOnKeydown && module.is.single()) {
+                      module.set.selectedItem($nextItem);
+                    }
+                  }
+                  event.preventDefault();
+                }
+
+                // page down (show next page)
+                if(pressedKey == keys.pageUp) {
+                  module.scrollPage('up');
+                  event.preventDefault();
+                }
+                if(pressedKey == keys.pageDown) {
+                  module.scrollPage('down');
+                  event.preventDefault();
+                }
+
+                // escape (close menu)
+                if(pressedKey == keys.escape) {
+                  module.verbose('Escape key pressed, closing dropdown');
+                  module.hide();
+                }
+
+              }
+              else {
+                // delimiter key
+                if(delimiterPressed) {
+                  event.preventDefault();
+                }
+                // down arrow (open menu)
+                if(pressedKey == keys.downArrow && !module.is.visible()) {
+                  module.verbose('Down key pressed, showing dropdown');
+                  module.select.firstUnfiltered();
+                  module.show();
+                  event.preventDefault();
+                }
+              }
+            }
+            else {
+              if( !module.has.search() ) {
+                module.set.selectedLetter( String.fromCharCode(pressedKey) );
+              }
+            }
+          }
+        },
+
+        trigger: {
+          change: function() {
+            var
+              events       = document.createEvent('HTMLEvents'),
+              inputElement = $input[0]
+            ;
+            if(inputElement) {
+              module.verbose('Triggering native change event');
+              events.initEvent('change', true, false);
+              inputElement.dispatchEvent(events);
+            }
+          }
+        },
+
+        determine: {
+          selectAction: function(text, value) {
+            module.verbose('Determining action', settings.action);
+            if( $.isFunction( module.action[settings.action] ) ) {
+              module.verbose('Triggering preset action', settings.action, text, value);
+              module.action[ settings.action ].call(element, text, value, this);
+            }
+            else if( $.isFunction(settings.action) ) {
+              module.verbose('Triggering user action', settings.action, text, value);
+              settings.action.call(element, text, value, this);
+            }
+            else {
+              module.error(error.action, settings.action);
+            }
+          },
+          eventInModule: function(event, callback) {
+            var
+              $target    = $(event.target),
+              inDocument = ($target.closest(document.documentElement).length > 0),
+              inModule   = ($target.closest($module).length > 0)
+            ;
+            callback = $.isFunction(callback)
+              ? callback
+              : function(){}
+            ;
+            if(inDocument && !inModule) {
+              module.verbose('Triggering event', callback);
+              callback();
+              return true;
+            }
+            else {
+              module.verbose('Event occurred in dropdown, canceling callback');
+              return false;
+            }
+          },
+          eventOnElement: function(event, callback) {
+            var
+              $target      = $(event.target),
+              $label       = $target.closest(selector.siblingLabel),
+              inVisibleDOM = document.body.contains(event.target),
+              notOnLabel   = ($module.find($label).length === 0),
+              notInMenu    = ($target.closest($menu).length === 0)
+            ;
+            callback = $.isFunction(callback)
+              ? callback
+              : function(){}
+            ;
+            if(inVisibleDOM && notOnLabel && notInMenu) {
+              module.verbose('Triggering event', callback);
+              callback();
+              return true;
+            }
+            else {
+              module.verbose('Event occurred in dropdown menu, canceling callback');
+              return false;
+            }
+          }
+        },
+
+        action: {
+
+          nothing: function() {},
+
+          activate: function(text, value, element) {
+            value = (value !== undefined)
+              ? value
+              : text
+            ;
+            if( module.can.activate( $(element) ) ) {
+              module.set.selected(value, $(element));
+              if(module.is.multiple() && !module.is.allFiltered()) {
+                return;
+              }
+              else {
+                module.hideAndClear();
+              }
+            }
+          },
+
+          select: function(text, value, element) {
+            value = (value !== undefined)
+              ? value
+              : text
+            ;
+            if( module.can.activate( $(element) ) ) {
+              module.set.value(value, $(element));
+              if(module.is.multiple() && !module.is.allFiltered()) {
+                return;
+              }
+              else {
+                module.hideAndClear();
+              }
+            }
+          },
+
+          combo: function(text, value, element) {
+            value = (value !== undefined)
+              ? value
+              : text
+            ;
+            module.set.selected(value, $(element));
+            module.hideAndClear();
+          },
+
+          hide: function(text, value, element) {
+            module.set.value(value, text);
+            module.hideAndClear();
+          }
+
+        },
+
+        get: {
+          id: function() {
+            return id;
+          },
+          defaultText: function() {
+            return $module.data(metadata.defaultText);
+          },
+          defaultValue: function() {
+            return $module.data(metadata.defaultValue);
+          },
+          placeholderText: function() {
+            return $module.data(metadata.placeholderText) || '';
+          },
+          text: function() {
+            return $text.text();
+          },
+          query: function() {
+            return $.trim($search.val());
+          },
+          searchWidth: function(value) {
+            value = (value !== undefined)
+              ? value
+              : $search.val()
+            ;
+            $sizer.text(value);
+            // prevent rounding issues
+            return Math.ceil( $sizer.width() + 1);
+          },
+          selectionCount: function() {
+            var
+              values = module.get.values(),
+              count
+            ;
+            count = ( module.is.multiple() )
+              ? $.isArray(values)
+                ? values.length
+                : 0
+              : (module.get.value() !== '')
+                ? 1
+                : 0
+            ;
+            return count;
+          },
+          transition: function($subMenu) {
+            return (settings.transition == 'auto')
+              ? module.is.upward($subMenu)
+                ? 'slide up'
+                : 'slide down'
+              : settings.transition
+            ;
+          },
+          userValues: function() {
+            var
+              values = module.get.values()
+            ;
+            if(!values) {
+              return false;
+            }
+            values = $.isArray(values)
+              ? values
+              : [values]
+            ;
+            return $.grep(values, function(value) {
+              return (module.get.item(value) === false);
+            });
+          },
+          uniqueArray: function(array) {
+            return $.grep(array, function (value, index) {
+                return $.inArray(value, array) === index;
+            });
+          },
+          caretPosition: function() {
+            var
+              input = $search.get(0),
+              range,
+              rangeLength
+            ;
+            if('selectionStart' in input) {
+              return input.selectionStart;
+            }
+            else if (document.selection) {
+              input.focus();
+              range       = document.selection.createRange();
+              rangeLength = range.text.length;
+              range.moveStart('character', -input.value.length);
+              return range.text.length - rangeLength;
+            }
+          },
+          value: function() {
+            var
+              value = ($input.length > 0)
+                ? $input.val()
+                : $module.data(metadata.value),
+              isEmptyMultiselect = ($.isArray(value) && value.length === 1 && value[0] === '')
+            ;
+            // prevents placeholder element from being selected when multiple
+            return (value === undefined || isEmptyMultiselect)
+              ? ''
+              : value
+            ;
+          },
+          values: function() {
+            var
+              value = module.get.value()
+            ;
+            if(value === '') {
+              return '';
+            }
+            return ( !module.has.selectInput() && module.is.multiple() )
+              ? (typeof value == 'string') // delimited string
+                ? value.split(settings.delimiter)
+                : ''
+              : value
+            ;
+          },
+          remoteValues: function() {
+            var
+              values = module.get.values(),
+              remoteValues = false
+            ;
+            if(values) {
+              if(typeof values == 'string') {
+                values = [values];
+              }
+              $.each(values, function(index, value) {
+                var
+                  name = module.read.remoteData(value)
+                ;
+                module.verbose('Restoring value from session data', name, value);
+                if(name) {
+                  if(!remoteValues) {
+                    remoteValues = {};
+                  }
+                  remoteValues[value] = name;
+                }
+              });
+            }
+            return remoteValues;
+          },
+          choiceText: function($choice, preserveHTML) {
+            preserveHTML = (preserveHTML !== undefined)
+              ? preserveHTML
+              : settings.preserveHTML
+            ;
+            if($choice) {
+              if($choice.find(selector.menu).length > 0) {
+                module.verbose('Retrieving text of element with sub-menu');
+                $choice = $choice.clone();
+                $choice.find(selector.menu).remove();
+                $choice.find(selector.menuIcon).remove();
+              }
+              return ($choice.data(metadata.text) !== undefined)
+                ? $choice.data(metadata.text)
+                : (preserveHTML)
+                  ? $.trim($choice.html())
+                  : $.trim($choice.text())
+              ;
+            }
+          },
+          choiceValue: function($choice, choiceText) {
+            choiceText = choiceText || module.get.choiceText($choice);
+            if(!$choice) {
+              return false;
+            }
+            return ($choice.data(metadata.value) !== undefined)
+              ? String( $choice.data(metadata.value) )
+              : (typeof choiceText === 'string')
+                ? $.trim(choiceText.toLowerCase())
+                : String(choiceText)
+            ;
+          },
+          inputEvent: function() {
+            var
+              input = $search[0]
+            ;
+            if(input) {
+              return (input.oninput !== undefined)
+                ? 'input'
+                : (input.onpropertychange !== undefined)
+                  ? 'propertychange'
+                  : 'keyup'
+              ;
+            }
+            return false;
+          },
+          selectValues: function() {
+            var
+              select = {}
+            ;
+            select.values = [];
+            $module
+              .find('option')
+                .each(function() {
+                  var
+                    $option  = $(this),
+                    name     = $option.html(),
+                    disabled = $option.attr('disabled'),
+                    value    = ( $option.attr('value') !== undefined )
+                      ? $option.attr('value')
+                      : name
+                  ;
+                  if(settings.placeholder === 'auto' && value === '') {
+                    select.placeholder = name;
+                  }
+                  else {
+                    select.values.push({
+                      name     : name,
+                      value    : value,
+                      disabled : disabled
+                    });
+                  }
+                })
+            ;
+            if(settings.placeholder && settings.placeholder !== 'auto') {
+              module.debug('Setting placeholder value to', settings.placeholder);
+              select.placeholder = settings.placeholder;
+            }
+            if(settings.sortSelect) {
+              select.values.sort(function(a, b) {
+                return (a.name > b.name)
+                  ? 1
+                  : -1
+                ;
+              });
+              module.debug('Retrieved and sorted values from select', select);
+            }
+            else {
+              module.debug('Retrieved values from select', select);
+            }
+            return select;
+          },
+          activeItem: function() {
+            return $item.filter('.'  + className.active);
+          },
+          selectedItem: function() {
+            var
+              $selectedItem = $item.not(selector.unselectable).filter('.'  + className.selected)
+            ;
+            return ($selectedItem.length > 0)
+              ? $selectedItem
+              : $item.eq(0)
+            ;
+          },
+          itemWithAdditions: function(value) {
+            var
+              $items       = module.get.item(value),
+              $userItems   = module.create.userChoice(value),
+              hasUserItems = ($userItems && $userItems.length > 0)
+            ;
+            if(hasUserItems) {
+              $items = ($items.length > 0)
+                ? $items.add($userItems)
+                : $userItems
+              ;
+            }
+            return $items;
+          },
+          item: function(value, strict) {
+            var
+              $selectedItem = false,
+              shouldSearch,
+              isMultiple
+            ;
+            value = (value !== undefined)
+              ? value
+              : ( module.get.values() !== undefined)
+                ? module.get.values()
+                : module.get.text()
+            ;
+            shouldSearch = (isMultiple)
+              ? (value.length > 0)
+              : (value !== undefined && value !== null)
+            ;
+            isMultiple = (module.is.multiple() && $.isArray(value));
+            strict     = (value === '' || value === 0)
+              ? true
+              : strict || false
+            ;
+            if(shouldSearch) {
+              $item
+                .each(function() {
+                  var
+                    $choice       = $(this),
+                    optionText    = module.get.choiceText($choice),
+                    optionValue   = module.get.choiceValue($choice, optionText)
+                  ;
+                  // safe early exit
+                  if(optionValue === null || optionValue === undefined) {
+                    return;
+                  }
+                  if(isMultiple) {
+                    if($.inArray( String(optionValue), value) !== -1 || $.inArray(optionText, value) !== -1) {
+                      $selectedItem = ($selectedItem)
+                        ? $selectedItem.add($choice)
+                        : $choice
+                      ;
+                    }
+                  }
+                  else if(strict) {
+                    module.verbose('Ambiguous dropdown value using strict type check', $choice, value);
+                    if( optionValue === value || optionText === value) {
+                      $selectedItem = $choice;
+                      return true;
+                    }
+                  }
+                  else {
+                    if( String(optionValue) == String(value) || optionText == value) {
+                      module.verbose('Found select item by value', optionValue, value);
+                      $selectedItem = $choice;
+                      return true;
+                    }
+                  }
+                })
+              ;
+            }
+            return $selectedItem;
+          }
+        },
+
+        check: {
+          maxSelections: function(selectionCount) {
+            if(settings.maxSelections) {
+              selectionCount = (selectionCount !== undefined)
+                ? selectionCount
+                : module.get.selectionCount()
+              ;
+              if(selectionCount >= settings.maxSelections) {
+                module.debug('Maximum selection count reached');
+                if(settings.useLabels) {
+                  $item.addClass(className.filtered);
+                  module.add.message(message.maxSelections);
+                }
+                return true;
+              }
+              else {
+                module.verbose('No longer at maximum selection count');
+                module.remove.message();
+                module.remove.filteredItem();
+                if(module.is.searchSelection()) {
+                  module.filterItems();
+                }
+                return false;
+              }
+            }
+            return true;
+          }
+        },
+
+        restore: {
+          defaults: function() {
+            module.clear();
+            module.restore.defaultText();
+            module.restore.defaultValue();
+          },
+          defaultText: function() {
+            var
+              defaultText     = module.get.defaultText(),
+              placeholderText = module.get.placeholderText
+            ;
+            if(defaultText === placeholderText) {
+              module.debug('Restoring default placeholder text', defaultText);
+              module.set.placeholderText(defaultText);
+            }
+            else {
+              module.debug('Restoring default text', defaultText);
+              module.set.text(defaultText);
+            }
+          },
+          placeholderText: function() {
+            module.set.placeholderText();
+          },
+          defaultValue: function() {
+            var
+              defaultValue = module.get.defaultValue()
+            ;
+            if(defaultValue !== undefined) {
+              module.debug('Restoring default value', defaultValue);
+              if(defaultValue !== '') {
+                module.set.value(defaultValue);
+                module.set.selected();
+              }
+              else {
+                module.remove.activeItem();
+                module.remove.selectedItem();
+              }
+            }
+          },
+          labels: function() {
+            if(settings.allowAdditions) {
+              if(!settings.useLabels) {
+                module.error(error.labels);
+                settings.useLabels = true;
+              }
+              module.debug('Restoring selected values');
+              module.create.userLabels();
+            }
+            module.check.maxSelections();
+          },
+          selected: function() {
+            module.restore.values();
+            if(module.is.multiple()) {
+              module.debug('Restoring previously selected values and labels');
+              module.restore.labels();
+            }
+            else {
+              module.debug('Restoring previously selected values');
+            }
+          },
+          values: function() {
+            // prevents callbacks from occurring on initial load
+            module.set.initialLoad();
+            if(settings.apiSettings && settings.saveRemoteData && module.get.remoteValues()) {
+              module.restore.remoteValues();
+            }
+            else {
+              module.set.selected();
+            }
+            module.remove.initialLoad();
+          },
+          remoteValues: function() {
+            var
+              values = module.get.remoteValues()
+            ;
+            module.debug('Recreating selected from session data', values);
+            if(values) {
+              if( module.is.single() ) {
+                $.each(values, function(value, name) {
+                  module.set.text(name);
+                });
+              }
+              else {
+                $.each(values, function(value, name) {
+                  module.add.label(value, name);
+                });
+              }
+            }
+          }
+        },
+
+        read: {
+          remoteData: function(value) {
+            var
+              name
+            ;
+            if(window.Storage === undefined) {
+              module.error(error.noStorage);
+              return;
+            }
+            name = sessionStorage.getItem(value);
+            return (name !== undefined)
+              ? name
+              : false
+            ;
+          }
+        },
+
+        save: {
+          defaults: function() {
+            module.save.defaultText();
+            module.save.placeholderText();
+            module.save.defaultValue();
+          },
+          defaultValue: function() {
+            var
+              value = module.get.value()
+            ;
+            module.verbose('Saving default value as', value);
+            $module.data(metadata.defaultValue, value);
+          },
+          defaultText: function() {
+            var
+              text = module.get.text()
+            ;
+            module.verbose('Saving default text as', text);
+            $module.data(metadata.defaultText, text);
+          },
+          placeholderText: function() {
+            var
+              text
+            ;
+            if(settings.placeholder !== false && $text.hasClass(className.placeholder)) {
+              text = module.get.text();
+              module.verbose('Saving placeholder text as', text);
+              $module.data(metadata.placeholderText, text);
+            }
+          },
+          remoteData: function(name, value) {
+            if(window.Storage === undefined) {
+              module.error(error.noStorage);
+              return;
+            }
+            module.verbose('Saving remote data to session storage', value, name);
+            sessionStorage.setItem(value, name);
+          }
+        },
+
+        clear: function() {
+          if(module.is.multiple() && settings.useLabels) {
+            module.remove.labels();
+          }
+          else {
+            module.remove.activeItem();
+            module.remove.selectedItem();
+          }
+          module.set.placeholderText();
+          module.clearValue();
+        },
+
+        clearValue: function() {
+          module.set.value('');
+        },
+
+        scrollPage: function(direction, $selectedItem) {
+          var
+            $currentItem  = $selectedItem || module.get.selectedItem(),
+            $menu         = $currentItem.closest(selector.menu),
+            menuHeight    = $menu.outerHeight(),
+            currentScroll = $menu.scrollTop(),
+            itemHeight    = $item.eq(0).outerHeight(),
+            itemsPerPage  = Math.floor(menuHeight / itemHeight),
+            maxScroll     = $menu.prop('scrollHeight'),
+            newScroll     = (direction == 'up')
+              ? currentScroll - (itemHeight * itemsPerPage)
+              : currentScroll + (itemHeight * itemsPerPage),
+            $selectableItem = $item.not(selector.unselectable),
+            isWithinRange,
+            $nextSelectedItem,
+            elementIndex
+          ;
+          elementIndex      = (direction == 'up')
+            ? $selectableItem.index($currentItem) - itemsPerPage
+            : $selectableItem.index($currentItem) + itemsPerPage
+          ;
+          isWithinRange = (direction == 'up')
+            ? (elementIndex >= 0)
+            : (elementIndex < $selectableItem.length)
+          ;
+          $nextSelectedItem = (isWithinRange)
+            ? $selectableItem.eq(elementIndex)
+            : (direction == 'up')
+              ? $selectableItem.first()
+              : $selectableItem.last()
+          ;
+          if($nextSelectedItem.length > 0) {
+            module.debug('Scrolling page', direction, $nextSelectedItem);
+            $currentItem
+              .removeClass(className.selected)
+            ;
+            $nextSelectedItem
+              .addClass(className.selected)
+            ;
+            if(settings.selectOnKeydown && module.is.single()) {
+              module.set.selectedItem($nextSelectedItem);
+            }
+            $menu
+              .scrollTop(newScroll)
+            ;
+          }
+        },
+
+        set: {
+          filtered: function() {
+            var
+              isMultiple       = module.is.multiple(),
+              isSearch         = module.is.searchSelection(),
+              isSearchMultiple = (isMultiple && isSearch),
+              searchValue      = (isSearch)
+                ? module.get.query()
+                : '',
+              hasSearchValue   = (typeof searchValue === 'string' && searchValue.length > 0),
+              searchWidth      = module.get.searchWidth(),
+              valueIsSet       = searchValue !== ''
+            ;
+            if(isMultiple && hasSearchValue) {
+              module.verbose('Adjusting input width', searchWidth, settings.glyphWidth);
+              $search.css('width', searchWidth);
+            }
+            if(hasSearchValue || (isSearchMultiple && valueIsSet)) {
+              module.verbose('Hiding placeholder text');
+              $text.addClass(className.filtered);
+            }
+            else if(!isMultiple || (isSearchMultiple && !valueIsSet)) {
+              module.verbose('Showing placeholder text');
+              $text.removeClass(className.filtered);
+            }
+          },
+          empty: function() {
+            $module.addClass(className.empty);
+          },
+          loading: function() {
+            $module.addClass(className.loading);
+          },
+          placeholderText: function(text) {
+            text = text || module.get.placeholderText();
+            module.debug('Setting placeholder text', text);
+            module.set.text(text);
+            $text.addClass(className.placeholder);
+          },
+          tabbable: function() {
+            if( module.is.searchSelection() ) {
+              module.debug('Added tabindex to searchable dropdown');
+              $search
+                .val('')
+                .attr('tabindex', 0)
+              ;
+              $menu
+                .attr('tabindex', -1)
+              ;
+            }
+            else {
+              module.debug('Added tabindex to dropdown');
+              if( $module.attr('tabindex') === undefined) {
+                $module
+                  .attr('tabindex', 0)
+                ;
+                $menu
+                  .attr('tabindex', -1)
+                ;
+              }
+            }
+          },
+          initialLoad: function() {
+            module.verbose('Setting initial load');
+            initialLoad = true;
+          },
+          activeItem: function($item) {
+            if( settings.allowAdditions && $item.filter(selector.addition).length > 0 ) {
+              $item.addClass(className.filtered);
+            }
+            else {
+              $item.addClass(className.active);
+            }
+          },
+          partialSearch: function(text) {
+            var
+              length = module.get.query().length
+            ;
+            $search.val( text.substr(0 , length));
+          },
+          scrollPosition: function($item, forceScroll) {
+            var
+              edgeTolerance = 5,
+              $menu,
+              hasActive,
+              offset,
+              itemHeight,
+              itemOffset,
+              menuOffset,
+              menuScroll,
+              menuHeight,
+              abovePage,
+              belowPage
+            ;
+
+            $item       = $item || module.get.selectedItem();
+            $menu       = $item.closest(selector.menu);
+            hasActive   = ($item && $item.length > 0);
+            forceScroll = (forceScroll !== undefined)
+              ? forceScroll
+              : false
+            ;
+            if($item && $menu.length > 0 && hasActive) {
+              itemOffset = $item.position().top;
+
+              $menu.addClass(className.loading);
+              menuScroll = $menu.scrollTop();
+              menuOffset = $menu.offset().top;
+              itemOffset = $item.offset().top;
+              offset     = menuScroll - menuOffset + itemOffset;
+              if(!forceScroll) {
+                menuHeight = $menu.height();
+                belowPage  = menuScroll + menuHeight < (offset + edgeTolerance);
+                abovePage  = ((offset - edgeTolerance) < menuScroll);
+              }
+              module.debug('Scrolling to active item', offset);
+              if(forceScroll || abovePage || belowPage) {
+                $menu.scrollTop(offset);
+              }
+              $menu.removeClass(className.loading);
+            }
+          },
+          text: function(text) {
+            if(settings.action !== 'select') {
+              if(settings.action == 'combo') {
+                module.debug('Changing combo button text', text, $combo);
+                if(settings.preserveHTML) {
+                  $combo.html(text);
+                }
+                else {
+                  $combo.text(text);
+                }
+              }
+              else {
+                if(text !== module.get.placeholderText()) {
+                  $text.removeClass(className.placeholder);
+                }
+                module.debug('Changing text', text, $text);
+                $text
+                  .removeClass(className.filtered)
+                ;
+                if(settings.preserveHTML) {
+                  $text.html(text);
+                }
+                else {
+                  $text.text(text);
+                }
+              }
+            }
+          },
+          selectedItem: function($item) {
+            var
+              value      = module.get.choiceValue($item),
+              searchText = module.get.choiceText($item, false),
+              text       = module.get.choiceText($item, true)
+            ;
+            module.debug('Setting user selection to item', $item);
+            module.remove.activeItem();
+            module.set.partialSearch(searchText);
+            module.set.activeItem($item);
+            module.set.selected(value, $item);
+            module.set.text(text);
+          },
+          selectedLetter: function(letter) {
+            var
+              $selectedItem         = $item.filter('.' + className.selected),
+              alreadySelectedLetter = $selectedItem.length > 0 && module.has.firstLetter($selectedItem, letter),
+              $nextValue            = false,
+              $nextItem
+            ;
+            // check next of same letter
+            if(alreadySelectedLetter) {
+              $nextItem = $selectedItem.nextAll($item).eq(0);
+              if( module.has.firstLetter($nextItem, letter) ) {
+                $nextValue  = $nextItem;
+              }
+            }
+            // check all values
+            if(!$nextValue) {
+              $item
+                .each(function(){
+                  if(module.has.firstLetter($(this), letter)) {
+                    $nextValue = $(this);
+                    return false;
+                  }
+                })
+              ;
+            }
+            // set next value
+            if($nextValue) {
+              module.verbose('Scrolling to next value with letter', letter);
+              module.set.scrollPosition($nextValue);
+              $selectedItem.removeClass(className.selected);
+              $nextValue.addClass(className.selected);
+              if(settings.selectOnKeydown && module.is.single()) {
+                module.set.selectedItem($nextValue);
+              }
+            }
+          },
+          direction: function($menu) {
+            if(settings.direction == 'auto') {
+              if(module.is.onScreen($menu)) {
+                module.remove.upward($menu);
+              }
+              else {
+                module.set.upward($menu);
+              }
+            }
+            else if(settings.direction == 'upward') {
+              module.set.upward($menu);
+            }
+          },
+          upward: function($menu) {
+            var $element = $menu || $module;
+            $element.addClass(className.upward);
+          },
+          value: function(value, text, $selected) {
+            var
+              escapedValue = module.escape.value(value),
+              hasInput     = ($input.length > 0),
+              isAddition   = !module.has.value(value),
+              currentValue = module.get.values(),
+              stringValue  = (value !== undefined)
+                ? String(value)
+                : value,
+              newValue
+            ;
+            if(hasInput) {
+              if(!settings.allowReselection && stringValue == currentValue) {
+                module.verbose('Skipping value update already same value', value, currentValue);
+                if(!module.is.initialLoad()) {
+                  return;
+                }
+              }
+
+              if( module.is.single() && module.has.selectInput() && module.can.extendSelect() ) {
+                module.debug('Adding user option', value);
+                module.add.optionValue(value);
+              }
+              module.debug('Updating input value', escapedValue, currentValue);
+              internalChange = true;
+              $input
+                .val(escapedValue)
+              ;
+              if(settings.fireOnInit === false && module.is.initialLoad()) {
+                module.debug('Input native change event ignored on initial load');
+              }
+              else {
+                module.trigger.change();
+              }
+              internalChange = false;
+            }
+            else {
+              module.verbose('Storing value in metadata', escapedValue, $input);
+              if(escapedValue !== currentValue) {
+                $module.data(metadata.value, stringValue);
+              }
+            }
+            if(settings.fireOnInit === false && module.is.initialLoad()) {
+              module.verbose('No callback on initial load', settings.onChange);
+            }
+            else {
+              settings.onChange.call(element, value, text, $selected);
+            }
+          },
+          active: function() {
+            $module
+              .addClass(className.active)
+            ;
+          },
+          multiple: function() {
+            $module.addClass(className.multiple);
+          },
+          visible: function() {
+            $module.addClass(className.visible);
+          },
+          exactly: function(value, $selectedItem) {
+            module.debug('Setting selected to exact values');
+            module.clear();
+            module.set.selected(value, $selectedItem);
+          },
+          selected: function(value, $selectedItem) {
+            var
+              isMultiple = module.is.multiple(),
+              $userSelectedItem
+            ;
+            $selectedItem = (settings.allowAdditions)
+              ? $selectedItem || module.get.itemWithAdditions(value)
+              : $selectedItem || module.get.item(value)
+            ;
+            if(!$selectedItem) {
+              return;
+            }
+            module.debug('Setting selected menu item to', $selectedItem);
+            if(module.is.multiple()) {
+              module.remove.searchWidth();
+            }
+            if(module.is.single()) {
+              module.remove.activeItem();
+              module.remove.selectedItem();
+            }
+            else if(settings.useLabels) {
+              module.remove.selectedItem();
+            }
+            // select each item
+            $selectedItem
+              .each(function() {
+                var
+                  $selected      = $(this),
+                  selectedText   = module.get.choiceText($selected),
+                  selectedValue  = module.get.choiceValue($selected, selectedText),
+
+                  isFiltered     = $selected.hasClass(className.filtered),
+                  isActive       = $selected.hasClass(className.active),
+                  isUserValue    = $selected.hasClass(className.addition),
+                  shouldAnimate  = (isMultiple && $selectedItem.length == 1)
+                ;
+                if(isMultiple) {
+                  if(!isActive || isUserValue) {
+                    if(settings.apiSettings && settings.saveRemoteData) {
+                      module.save.remoteData(selectedText, selectedValue);
+                    }
+                    if(settings.useLabels) {
+                      module.add.value(selectedValue, selectedText, $selected);
+                      module.add.label(selectedValue, selectedText, shouldAnimate);
+                      module.set.activeItem($selected);
+                      module.filterActive();
+                      module.select.nextAvailable($selectedItem);
+                    }
+                    else {
+                      module.add.value(selectedValue, selectedText, $selected);
+                      module.set.text(module.add.variables(message.count));
+                      module.set.activeItem($selected);
+                    }
+                  }
+                  else if(!isFiltered) {
+                    module.debug('Selected active value, removing label');
+                    module.remove.selected(selectedValue);
+                  }
+                }
+                else {
+                  if(settings.apiSettings && settings.saveRemoteData) {
+                    module.save.remoteData(selectedText, selectedValue);
+                  }
+                  module.set.text(selectedText);
+                  module.set.value(selectedValue, selectedText, $selected);
+                  $selected
+                    .addClass(className.active)
+                    .addClass(className.selected)
+                  ;
+                }
+              })
+            ;
+          }
+        },
+
+        add: {
+          label: function(value, text, shouldAnimate) {
+            var
+              $next  = module.is.searchSelection()
+                ? $search
+                : $text,
+              escapedValue = module.escape.value(value),
+              $label
+            ;
+            $label =  $('<a />')
+              .addClass(className.label)
+              .attr('data-' + metadata.value, escapedValue)
+              .html(templates.label(escapedValue, text))
+            ;
+            $label = settings.onLabelCreate.call($label, escapedValue, text);
+
+            if(module.has.label(value)) {
+              module.debug('Label already exists, skipping', escapedValue);
+              return;
+            }
+            if(settings.label.variation) {
+              $label.addClass(settings.label.variation);
+            }
+            if(shouldAnimate === true) {
+              module.debug('Animating in label', $label);
+              $label
+                .addClass(className.hidden)
+                .insertBefore($next)
+                .transition(settings.label.transition, settings.label.duration)
+              ;
+            }
+            else {
+              module.debug('Adding selection label', $label);
+              $label
+                .insertBefore($next)
+              ;
+            }
+          },
+          message: function(message) {
+            var
+              $message = $menu.children(selector.message),
+              html     = settings.templates.message(module.add.variables(message))
+            ;
+            if($message.length > 0) {
+              $message
+                .html(html)
+              ;
+            }
+            else {
+              $message = $('<div/>')
+                .html(html)
+                .addClass(className.message)
+                .appendTo($menu)
+              ;
+            }
+          },
+          optionValue: function(value) {
+            var
+              escapedValue = module.escape.value(value),
+              $option      = $input.find('option[value="' + module.escape.string(escapedValue) + '"]'),
+              hasOption    = ($option.length > 0)
+            ;
+            if(hasOption) {
+              return;
+            }
+            // temporarily disconnect observer
+            module.disconnect.selectObserver();
+            if( module.is.single() ) {
+              module.verbose('Removing previous user addition');
+              $input.find('option.' + className.addition).remove();
+            }
+            $('<option/>')
+              .prop('value', escapedValue)
+              .addClass(className.addition)
+              .html(value)
+              .appendTo($input)
+            ;
+            module.verbose('Adding user addition as an <option>', value);
+            module.observe.select();
+          },
+          userSuggestion: function(value) {
+            var
+              $addition         = $menu.children(selector.addition),
+              $existingItem     = module.get.item(value),
+              alreadyHasValue   = $existingItem && $existingItem.not(selector.addition).length,
+              hasUserSuggestion = $addition.length > 0,
+              html
+            ;
+            if(settings.useLabels && module.has.maxSelections()) {
+              return;
+            }
+            if(value === '' || alreadyHasValue) {
+              $addition.remove();
+              return;
+            }
+            if(hasUserSuggestion) {
+              $addition
+                .data(metadata.value, value)
+                .data(metadata.text, value)
+                .attr('data-' + metadata.value, value)
+                .attr('data-' + metadata.text, value)
+                .removeClass(className.filtered)
+              ;
+              if(!settings.hideAdditions) {
+                html = settings.templates.addition( module.add.variables(message.addResult, value) );
+                $addition
+                  .html(html)
+                ;
+              }
+              module.verbose('Replacing user suggestion with new value', $addition);
+            }
+            else {
+              $addition = module.create.userChoice(value);
+              $addition
+                .prependTo($menu)
+              ;
+              module.verbose('Adding item choice to menu corresponding with user choice addition', $addition);
+            }
+            if(!settings.hideAdditions || module.is.allFiltered()) {
+              $addition
+                .addClass(className.selected)
+                .siblings()
+                .removeClass(className.selected)
+              ;
+            }
+            module.refreshItems();
+          },
+          variables: function(message, term) {
+            var
+              hasCount    = (message.search('{count}') !== -1),
+              hasMaxCount = (message.search('{maxCount}') !== -1),
+              hasTerm     = (message.search('{term}') !== -1),
+              values,
+              count,
+              query
+            ;
+            module.verbose('Adding templated variables to message', message);
+            if(hasCount) {
+              count  = module.get.selectionCount();
+              message = message.replace('{count}', count);
+            }
+            if(hasMaxCount) {
+              count  = module.get.selectionCount();
+              message = message.replace('{maxCount}', settings.maxSelections);
+            }
+            if(hasTerm) {
+              query   = term || module.get.query();
+              message = message.replace('{term}', query);
+            }
+            return message;
+          },
+          value: function(addedValue, addedText, $selectedItem) {
+            var
+              currentValue = module.get.values(),
+              newValue
+            ;
+            if(addedValue === '') {
+              module.debug('Cannot select blank values from multiselect');
+              return;
+            }
+            // extend current array
+            if($.isArray(currentValue)) {
+              newValue = currentValue.concat([addedValue]);
+              newValue = module.get.uniqueArray(newValue);
+            }
+            else {
+              newValue = [addedValue];
+            }
+            // add values
+            if( module.has.selectInput() ) {
+              if(module.can.extendSelect()) {
+                module.debug('Adding value to select', addedValue, newValue, $input);
+                module.add.optionValue(addedValue);
+              }
+            }
+            else {
+              newValue = newValue.join(settings.delimiter);
+              module.debug('Setting hidden input to delimited value', newValue, $input);
+            }
+
+            if(settings.fireOnInit === false && module.is.initialLoad()) {
+              module.verbose('Skipping onadd callback on initial load', settings.onAdd);
+            }
+            else {
+              settings.onAdd.call(element, addedValue, addedText, $selectedItem);
+            }
+            module.set.value(newValue, addedValue, addedText, $selectedItem);
+            module.check.maxSelections();
+          }
+        },
+
+        remove: {
+          active: function() {
+            $module.removeClass(className.active);
+          },
+          activeLabel: function() {
+            $module.find(selector.label).removeClass(className.active);
+          },
+          empty: function() {
+            $module.removeClass(className.empty);
+          },
+          loading: function() {
+            $module.removeClass(className.loading);
+          },
+          initialLoad: function() {
+            initialLoad = false;
+          },
+          upward: function($menu) {
+            var $element = $menu || $module;
+            $element.removeClass(className.upward);
+          },
+          visible: function() {
+            $module.removeClass(className.visible);
+          },
+          activeItem: function() {
+            $item.removeClass(className.active);
+          },
+          filteredItem: function() {
+            if(settings.useLabels && module.has.maxSelections() ) {
+              return;
+            }
+            if(settings.useLabels && module.is.multiple()) {
+              $item.not('.' + className.active).removeClass(className.filtered);
+            }
+            else {
+              $item.removeClass(className.filtered);
+            }
+            module.remove.empty();
+          },
+          optionValue: function(value) {
+            var
+              escapedValue = module.escape.value(value),
+              $option      = $input.find('option[value="' + module.escape.string(escapedValue) + '"]'),
+              hasOption    = ($option.length > 0)
+            ;
+            if(!hasOption || !$option.hasClass(className.addition)) {
+              return;
+            }
+            // temporarily disconnect observer
+            if(selectObserver) {
+              selectObserver.disconnect();
+              module.verbose('Temporarily disconnecting mutation observer');
+            }
+            $option.remove();
+            module.verbose('Removing user addition as an <option>', escapedValue);
+            if(selectObserver) {
+              selectObserver.observe($input[0], {
+                childList : true,
+                subtree   : true
+              });
+            }
+          },
+          message: function() {
+            $menu.children(selector.message).remove();
+          },
+          searchWidth: function() {
+            $search.css('width', '');
+          },
+          searchTerm: function() {
+            module.verbose('Cleared search term');
+            $search.val('');
+            module.set.filtered();
+          },
+          userAddition: function() {
+            $item.filter(selector.addition).remove();
+          },
+          selected: function(value, $selectedItem) {
+            $selectedItem = (settings.allowAdditions)
+              ? $selectedItem || module.get.itemWithAdditions(value)
+              : $selectedItem || module.get.item(value)
+            ;
+
+            if(!$selectedItem) {
+              return false;
+            }
+
+            $selectedItem
+              .each(function() {
+                var
+                  $selected     = $(this),
+                  selectedText  = module.get.choiceText($selected),
+                  selectedValue = module.get.choiceValue($selected, selectedText)
+                ;
+                if(module.is.multiple()) {
+                  if(settings.useLabels) {
+                    module.remove.value(selectedValue, selectedText, $selected);
+                    module.remove.label(selectedValue);
+                  }
+                  else {
+                    module.remove.value(selectedValue, selectedText, $selected);
+                    if(module.get.selectionCount() === 0) {
+                      module.set.placeholderText();
+                    }
+                    else {
+                      module.set.text(module.add.variables(message.count));
+                    }
+                  }
+                }
+                else {
+                  module.remove.value(selectedValue, selectedText, $selected);
+                }
+                $selected
+                  .removeClass(className.filtered)
+                  .removeClass(className.active)
+                ;
+                if(settings.useLabels) {
+                  $selected.removeClass(className.selected);
+                }
+              })
+            ;
+          },
+          selectedItem: function() {
+            $item.removeClass(className.selected);
+          },
+          value: function(removedValue, removedText, $removedItem) {
+            var
+              values = module.get.values(),
+              newValue
+            ;
+            if( module.has.selectInput() ) {
+              module.verbose('Input is <select> removing selected option', removedValue);
+              newValue = module.remove.arrayValue(removedValue, values);
+              module.remove.optionValue(removedValue);
+            }
+            else {
+              module.verbose('Removing from delimited values', removedValue);
+              newValue = module.remove.arrayValue(removedValue, values);
+              newValue = newValue.join(settings.delimiter);
+            }
+            if(settings.fireOnInit === false && module.is.initialLoad()) {
+              module.verbose('No callback on initial load', settings.onRemove);
+            }
+            else {
+              settings.onRemove.call(element, removedValue, removedText, $removedItem);
+            }
+            module.set.value(newValue, removedText, $removedItem);
+            module.check.maxSelections();
+          },
+          arrayValue: function(removedValue, values) {
+            if( !$.isArray(values) ) {
+              values = [values];
+            }
+            values = $.grep(values, function(value){
+              return (removedValue != value);
+            });
+            module.verbose('Removed value from delimited string', removedValue, values);
+            return values;
+          },
+          label: function(value, shouldAnimate) {
+            var
+              $labels       = $module.find(selector.label),
+              $removedLabel = $labels.filter('[data-' + metadata.value + '="' + module.escape.string(value) +'"]')
+            ;
+            module.verbose('Removing label', $removedLabel);
+            $removedLabel.remove();
+          },
+          activeLabels: function($activeLabels) {
+            $activeLabels = $activeLabels || $module.find(selector.label).filter('.' + className.active);
+            module.verbose('Removing active label selections', $activeLabels);
+            module.remove.labels($activeLabels);
+          },
+          labels: function($labels) {
+            $labels = $labels || $module.find(selector.label);
+            module.verbose('Removing labels', $labels);
+            $labels
+              .each(function(){
+                var
+                  $label      = $(this),
+                  value       = $label.data(metadata.value),
+                  stringValue = (value !== undefined)
+                    ? String(value)
+                    : value,
+                  isUserValue = module.is.userValue(stringValue)
+                ;
+                if(settings.onLabelRemove.call($label, value) === false) {
+                  module.debug('Label remove callback cancelled removal');
+                  return;
+                }
+                module.remove.message();
+                if(isUserValue) {
+                  module.remove.value(stringValue);
+                  module.remove.label(stringValue);
+                }
+                else {
+                  // selected will also remove label
+                  module.remove.selected(stringValue);
+                }
+              })
+            ;
+          },
+          tabbable: function() {
+            if( module.is.searchSelection() ) {
+              module.debug('Searchable dropdown initialized');
+              $search
+                .removeAttr('tabindex')
+              ;
+              $menu
+                .removeAttr('tabindex')
+              ;
+            }
+            else {
+              module.debug('Simple selection dropdown initialized');
+              $module
+                .removeAttr('tabindex')
+              ;
+              $menu
+                .removeAttr('tabindex')
+              ;
+            }
+          }
+        },
+
+        has: {
+          menuSearch: function() {
+            return (module.has.search() && $search.closest($menu).length > 0);
+          },
+          search: function() {
+            return ($search.length > 0);
+          },
+          sizer: function() {
+            return ($sizer.length > 0);
+          },
+          selectInput: function() {
+            return ( $input.is('select') );
+          },
+          minCharacters: function(searchTerm) {
+            if(settings.minCharacters) {
+              searchTerm = (searchTerm !== undefined)
+                ? String(searchTerm)
+                : String(module.get.query())
+              ;
+              return (searchTerm.length >= settings.minCharacters);
+            }
+            return true;
+          },
+          firstLetter: function($item, letter) {
+            var
+              text,
+              firstLetter
+            ;
+            if(!$item || $item.length === 0 || typeof letter !== 'string') {
+              return false;
+            }
+            text        = module.get.choiceText($item, false);
+            letter      = letter.toLowerCase();
+            firstLetter = String(text).charAt(0).toLowerCase();
+            return (letter == firstLetter);
+          },
+          input: function() {
+            return ($input.length > 0);
+          },
+          items: function() {
+            return ($item.length > 0);
+          },
+          menu: function() {
+            return ($menu.length > 0);
+          },
+          message: function() {
+            return ($menu.children(selector.message).length !== 0);
+          },
+          label: function(value) {
+            var
+              escapedValue = module.escape.value(value),
+              $labels      = $module.find(selector.label)
+            ;
+            return ($labels.filter('[data-' + metadata.value + '="' + module.escape.string(escapedValue) +'"]').length > 0);
+          },
+          maxSelections: function() {
+            return (settings.maxSelections && module.get.selectionCount() >= settings.maxSelections);
+          },
+          allResultsFiltered: function() {
+            var
+              $normalResults = $item.not(selector.addition)
+            ;
+            return ($normalResults.filter(selector.unselectable).length === $normalResults.length);
+          },
+          userSuggestion: function() {
+            return ($menu.children(selector.addition).length > 0);
+          },
+          query: function() {
+            return (module.get.query() !== '');
+          },
+          value: function(value) {
+            var
+              values   = module.get.values(),
+              hasValue = $.isArray(values)
+               ? values && ($.inArray(value, values) !== -1)
+               : (values == value)
+            ;
+            return (hasValue)
+              ? true
+              : false
+            ;
+          }
+        },
+
+        is: {
+          active: function() {
+            return $module.hasClass(className.active);
+          },
+          bubbledLabelClick: function(event) {
+            return $(event.target).is('select, input') && $module.closest('label').length > 0;
+          },
+          bubbledIconClick: function(event) {
+            return $(event.target).closest($icon).length > 0;
+          },
+          alreadySetup: function() {
+            return ($module.is('select') && $module.parent(selector.dropdown).length > 0  && $module.prev().length === 0);
+          },
+          animating: function($subMenu) {
+            return ($subMenu)
+              ? $subMenu.transition && $subMenu.transition('is animating')
+              : $menu.transition    && $menu.transition('is animating')
+            ;
+          },
+          disabled: function() {
+            return $module.hasClass(className.disabled);
+          },
+          focused: function() {
+            return (document.activeElement === $module[0]);
+          },
+          focusedOnSearch: function() {
+            return (document.activeElement === $search[0]);
+          },
+          allFiltered: function() {
+            return( (module.is.multiple() || module.has.search()) && !(settings.hideAdditions == false && module.has.userSuggestion()) && !module.has.message() && module.has.allResultsFiltered() );
+          },
+          hidden: function($subMenu) {
+            return !module.is.visible($subMenu);
+          },
+          initialLoad: function() {
+            return initialLoad;
+          },
+          onScreen: function($subMenu) {
+            var
+              $currentMenu   = $subMenu || $menu,
+              canOpenDownward = true,
+              onScreen = {},
+              calculations
+            ;
+            $currentMenu.addClass(className.loading);
+            calculations = {
+              context: {
+                scrollTop : $context.scrollTop(),
+                height    : $context.outerHeight()
+              },
+              menu : {
+                offset: $currentMenu.offset(),
+                height: $currentMenu.outerHeight()
+              }
+            };
+            if(module.is.verticallyScrollableContext()) {
+              calculations.menu.offset.top += calculations.context.scrollTop;
+            }
+            onScreen = {
+              above : (calculations.context.scrollTop) <= calculations.menu.offset.top - calculations.menu.height,
+              below : (calculations.context.scrollTop + calculations.context.height) >= calculations.menu.offset.top + calculations.menu.height
+            };
+            if(onScreen.below) {
+              module.verbose('Dropdown can fit in context downward', onScreen);
+              canOpenDownward = true;
+            }
+            else if(!onScreen.below && !onScreen.above) {
+              module.verbose('Dropdown cannot fit in either direction, favoring downward', onScreen);
+              canOpenDownward = true;
+            }
+            else {
+              module.verbose('Dropdown cannot fit below, opening upward', onScreen);
+              canOpenDownward = false;
+            }
+            $currentMenu.removeClass(className.loading);
+            return canOpenDownward;
+          },
+          inObject: function(needle, object) {
+            var
+              found = false
+            ;
+            $.each(object, function(index, property) {
+              if(property == needle) {
+                found = true;
+                return true;
+              }
+            });
+            return found;
+          },
+          multiple: function() {
+            return $module.hasClass(className.multiple);
+          },
+          remote: function() {
+            return settings.apiSettings && module.can.useAPI();
+          },
+          single: function() {
+            return !module.is.multiple();
+          },
+          selectMutation: function(mutations) {
+            var
+              selectChanged = false
+            ;
+            $.each(mutations, function(index, mutation) {
+              if(mutation.target && $(mutation.target).is('select')) {
+                selectChanged = true;
+                return true;
+              }
+            });
+            return selectChanged;
+          },
+          search: function() {
+            return $module.hasClass(className.search);
+          },
+          searchSelection: function() {
+            return ( module.has.search() && $search.parent(selector.dropdown).length === 1 );
+          },
+          selection: function() {
+            return $module.hasClass(className.selection);
+          },
+          userValue: function(value) {
+            return ($.inArray(value, module.get.userValues()) !== -1);
+          },
+          upward: function($menu) {
+            var $element = $menu || $module;
+            return $element.hasClass(className.upward);
+          },
+          visible: function($subMenu) {
+            return ($subMenu)
+              ? $subMenu.hasClass(className.visible)
+              : $menu.hasClass(className.visible)
+            ;
+          },
+          verticallyScrollableContext: function() {
+            var
+              overflowY = ($context.get(0) !== window)
+                ? $context.css('overflow-y')
+                : false
+            ;
+            return (overflowY == 'auto' || overflowY == 'scroll');
+          }
+        },
+
+        can: {
+          activate: function($item) {
+            if(settings.useLabels) {
+              return true;
+            }
+            if(!module.has.maxSelections()) {
+              return true;
+            }
+            if(module.has.maxSelections() && $item.hasClass(className.active)) {
+              return true;
+            }
+            return false;
+          },
+          click: function() {
+            return (hasTouch || settings.on == 'click');
+          },
+          extendSelect: function() {
+            return settings.allowAdditions || settings.apiSettings;
+          },
+          show: function() {
+            return !module.is.disabled() && (module.has.items() || module.has.message());
+          },
+          useAPI: function() {
+            return $.fn.api !== undefined;
+          }
+        },
+
+        animate: {
+          show: function(callback, $subMenu) {
+            var
+              $currentMenu = $subMenu || $menu,
+              start = ($subMenu)
+                ? function() {}
+                : function() {
+                  module.hideSubMenus();
+                  module.hideOthers();
+                  module.set.active();
+                },
+              transition
+            ;
+            callback = $.isFunction(callback)
+              ? callback
+              : function(){}
+            ;
+            module.verbose('Doing menu show animation', $currentMenu);
+            module.set.direction($subMenu);
+            transition = module.get.transition($subMenu);
+            if( module.is.selection() ) {
+              module.set.scrollPosition(module.get.selectedItem(), true);
+            }
+            if( module.is.hidden($currentMenu) || module.is.animating($currentMenu) ) {
+              if(transition == 'none') {
+                start();
+                $currentMenu.transition('show');
+                callback.call(element);
+              }
+              else if($.fn.transition !== undefined && $module.transition('is supported')) {
+                $currentMenu
+                  .transition({
+                    animation  : transition + ' in',
+                    debug      : settings.debug,
+                    verbose    : settings.verbose,
+                    duration   : settings.duration,
+                    queue      : true,
+                    onStart    : start,
+                    onComplete : function() {
+                      callback.call(element);
+                    }
+                  })
+                ;
+              }
+              else {
+                module.error(error.noTransition, transition);
+              }
+            }
+          },
+          hide: function(callback, $subMenu) {
+            var
+              $currentMenu = $subMenu || $menu,
+              duration = ($subMenu)
+                ? (settings.duration * 0.9)
+                : settings.duration,
+              start = ($subMenu)
+                ? function() {}
+                : function() {
+                  if( module.can.click() ) {
+                    module.unbind.intent();
+                  }
+                  module.remove.active();
+                },
+              transition = module.get.transition($subMenu)
+            ;
+            callback = $.isFunction(callback)
+              ? callback
+              : function(){}
+            ;
+            if( module.is.visible($currentMenu) || module.is.animating($currentMenu) ) {
+              module.verbose('Doing menu hide animation', $currentMenu);
+
+              if(transition == 'none') {
+                start();
+                $currentMenu.transition('hide');
+                callback.call(element);
+              }
+              else if($.fn.transition !== undefined && $module.transition('is supported')) {
+                $currentMenu
+                  .transition({
+                    animation  : transition + ' out',
+                    duration   : settings.duration,
+                    debug      : settings.debug,
+                    verbose    : settings.verbose,
+                    queue      : true,
+                    onStart    : start,
+                    onComplete : function() {
+                      if(settings.direction == 'auto') {
+                        module.remove.upward($subMenu);
+                      }
+                      callback.call(element);
+                    }
+                  })
+                ;
+              }
+              else {
+                module.error(error.transition);
+              }
+            }
+          }
+        },
+
+        hideAndClear: function() {
+          module.remove.searchTerm();
+          if( module.has.maxSelections() ) {
+            return;
+          }
+          if(module.has.search()) {
+            module.hide(function() {
+              module.remove.filteredItem();
+            });
+          }
+          else {
+            module.hide();
+          }
+        },
+
+        delay: {
+          show: function() {
+            module.verbose('Delaying show event to ensure user intent');
+            clearTimeout(module.timer);
+            module.timer = setTimeout(module.show, settings.delay.show);
+          },
+          hide: function() {
+            module.verbose('Delaying hide event to ensure user intent');
+            clearTimeout(module.timer);
+            module.timer = setTimeout(module.hide, settings.delay.hide);
+          }
+        },
+
+        escape: {
+          value: function(value) {
+            var
+              multipleValues = $.isArray(value),
+              stringValue    = (typeof value === 'string'),
+              isUnparsable   = (!stringValue && !multipleValues),
+              hasQuotes      = (stringValue && value.search(regExp.quote) !== -1),
+              values         = []
+            ;
+            if(isUnparsable || !hasQuotes) {
+              return value;
+            }
+            module.debug('Encoding quote values for use in select', value);
+            if(multipleValues) {
+              $.each(value, function(index, value){
+                values.push(value.replace(regExp.quote, '&quot;'));
+              });
+              return values;
+            }
+            return value.replace(regExp.quote, '&quot;');
+          },
+          string: function(text) {
+            text =  String(text);
+            return text.replace(regExp.escape, '\\$&');
+          }
+        },
+
+        setting: function(name, value) {
+          module.debug('Changing setting', name, value);
+          if( $.isPlainObject(name) ) {
+            $.extend(true, settings, name);
+          }
+          else if(value !== undefined) {
+            if($.isPlainObject(settings[name])) {
+              $.extend(true, settings[name], value);
+            }
+            else {
+              settings[name] = value;
+            }
+          }
+          else {
+            return settings[name];
+          }
+        },
+        internal: function(name, value) {
+          if( $.isPlainObject(name) ) {
+            $.extend(true, module, name);
+          }
+          else if(value !== undefined) {
+            module[name] = value;
+          }
+          else {
+            return module[name];
+          }
+        },
+        debug: function() {
+          if(!settings.silent && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.debug.apply(console, arguments);
+            }
+          }
+        },
+        verbose: function() {
+          if(!settings.silent && settings.verbose && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.verbose.apply(console, arguments);
+            }
+          }
+        },
+        error: function() {
+          if(!settings.silent) {
+            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
+            module.error.apply(console, arguments);
+          }
+        },
+        performance: {
+          log: function(message) {
+            var
+              currentTime,
+              executionTime,
+              previousTime
+            ;
+            if(settings.performance) {
+              currentTime   = new Date().getTime();
+              previousTime  = time || currentTime;
+              executionTime = currentTime - previousTime;
+              time          = currentTime;
+              performance.push({
+                'Name'           : message[0],
+                'Arguments'      : [].slice.call(message, 1) || '',
+                'Element'        : element,
+                'Execution Time' : executionTime
+              });
+            }
+            clearTimeout(module.performance.timer);
+            module.performance.timer = setTimeout(module.performance.display, 500);
+          },
+          display: function() {
+            var
+              title = settings.name + ':',
+              totalTime = 0
+            ;
+            time = false;
+            clearTimeout(module.performance.timer);
+            $.each(performance, function(index, data) {
+              totalTime += data['Execution Time'];
+            });
+            title += ' ' + totalTime + 'ms';
+            if(moduleSelector) {
+              title += ' \'' + moduleSelector + '\'';
+            }
+            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
+              console.groupCollapsed(title);
+              if(console.table) {
+                console.table(performance);
+              }
+              else {
+                $.each(performance, function(index, data) {
+                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
+                });
+              }
+              console.groupEnd();
+            }
+            performance = [];
+          }
+        },
+        invoke: function(query, passedArguments, context) {
+          var
+            object = instance,
+            maxDepth,
+            found,
+            response
+          ;
+          passedArguments = passedArguments || queryArguments;
+          context         = element         || context;
+          if(typeof query == 'string' && object !== undefined) {
+            query    = query.split(/[\. ]/);
+            maxDepth = query.length - 1;
+            $.each(query, function(depth, value) {
+              var camelCaseValue = (depth != maxDepth)
+                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
+                : query
+              ;
+              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
+                object = object[camelCaseValue];
+              }
+              else if( object[camelCaseValue] !== undefined ) {
+                found = object[camelCaseValue];
+                return false;
+              }
+              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
+                object = object[value];
+              }
+              else if( object[value] !== undefined ) {
+                found = object[value];
+                return false;
+              }
+              else {
+                module.error(error.method, query);
+                return false;
+              }
+            });
+          }
+          if ( $.isFunction( found ) ) {
+            response = found.apply(context, passedArguments);
+          }
+          else if(found !== undefined) {
+            response = found;
+          }
+          if($.isArray(returnedValue)) {
+            returnedValue.push(response);
+          }
+          else if(returnedValue !== undefined) {
+            returnedValue = [returnedValue, response];
+          }
+          else if(response !== undefined) {
+            returnedValue = response;
+          }
+          return found;
+        }
+      };
+
+      if(methodInvoked) {
+        if(instance === undefined) {
+          module.initialize();
+        }
+        module.invoke(query);
+      }
+      else {
+        if(instance !== undefined) {
+          instance.invoke('destroy');
+        }
+        module.initialize();
+      }
+    })
+  ;
+  return (returnedValue !== undefined)
+    ? returnedValue
+    : $allModules
+  ;
+};
+
+_module.exports.settings = {
+
+  silent                 : false,
+  debug                  : false,
+  verbose                : false,
+  performance            : true,
+
+  on                     : 'click',    // what event should show menu action on item selection
+  action                 : 'activate', // action on item selection (nothing, activate, select, combo, hide, function(){})
+
+
+  apiSettings            : false,
+  selectOnKeydown        : true,       // Whether selection should occur automatically when keyboard shortcuts used
+  minCharacters          : 0,          // Minimum characters required to trigger API call
+
+  filterRemoteData       : false,      // Whether API results should be filtered after being returned for query term
+  saveRemoteData         : true,       // Whether remote name/value pairs should be stored in sessionStorage to allow remote data to be restored on page refresh
+
+  throttle               : 200,        // How long to wait after last user input to search remotely
+
+  context                : window,     // Context to use when determining if on screen
+  direction              : 'auto',     // Whether dropdown should always open in one direction
+  keepOnScreen           : true,       // Whether dropdown should check whether it is on screen before showing
+
+  match                  : 'both',     // what to match against with search selection (both, text, or label)
+  fullTextSearch         : false,      // search anywhere in value (set to 'exact' to require exact matches)
+
+  placeholder            : 'auto',     // whether to convert blank <select> values to placeholder text
+  preserveHTML           : true,       // preserve html when selecting value
+  sortSelect             : false,      // sort selection on init
+
+  forceSelection         : true,       // force a choice on blur with search selection
+
+  allowAdditions         : false,      // whether multiple select should allow user added values
+  hideAdditions          : true,      // whether or not to hide special message prompting a user they can enter a value
+
+  maxSelections          : false,      // When set to a number limits the number of selections to this count
+  useLabels              : true,       // whether multiple select should filter currently active selections from choices
+  delimiter              : ',',        // when multiselect uses normal <input> the values will be delimited with this character
+
+  showOnFocus            : true,       // show menu on focus
+  allowReselection       : false,      // whether current value should trigger callbacks when reselected
+  allowTab               : true,       // add tabindex to element
+  allowCategorySelection : false,      // allow elements with sub-menus to be selected
+
+  fireOnInit             : false,      // Whether callbacks should fire when initializing dropdown values
+
+  transition             : 'auto',     // auto transition will slide down or up based on direction
+  duration               : 200,        // duration of transition
+
+  glyphWidth             : 1.037,      // widest glyph width in em (W is 1.037 em) used to calculate multiselect input width
+
+  // label settings on multi-select
+  label: {
+    transition : 'scale',
+    duration   : 200,
+    variation  : false
+  },
+
+  // delay before event
+  delay : {
+    hide   : 300,
+    show   : 200,
+    search : 20,
+    touch  : 50
+  },
+
+  /* Callbacks */
+  onChange      : function(value, text, $selected){},
+  onAdd         : function(value, text, $selected){},
+  onRemove      : function(value, text, $selected){},
+
+  onLabelSelect : function($selectedLabels){},
+  onLabelCreate : function(value, text) { return $(this); },
+  onLabelRemove : function(value) { return true; },
+  onNoResults   : function(searchTerm) { return true; },
+  onShow        : function(){},
+  onHide        : function(){},
+
+  /* Component */
+  name           : 'Dropdown',
+  namespace      : 'dropdown',
+
+  message: {
+    addResult     : 'Add <b>{term}</b>',
+    count         : '{count} selected',
+    maxSelections : 'Max {maxCount} selections',
+    noResults     : 'No results found.',
+    serverError   : 'There was an error contacting the server'
+  },
+
+  error : {
+    action          : 'You called a dropdown action that was not defined',
+    alreadySetup    : 'Once a select has been initialized behaviors must be called on the created ui dropdown',
+    labels          : 'Allowing user additions currently requires the use of labels.',
+    missingMultiple : '<select> requires multiple property to be set to correctly preserve multiple values',
+    method          : 'The method you called is not defined.',
+    noAPI           : 'The API module is required to load resources remotely',
+    noStorage       : 'Saving remote data requires session storage',
+    noTransition    : 'This module requires ui transitions <https://github.com/Semantic-Org/UI-Transition>'
+  },
+
+  regExp : {
+    escape   : /[-[\]{}()*+?.,\\^$|#\s]/g,
+    quote    : /"/g
+  },
+
+  metadata : {
+    defaultText     : 'defaultText',
+    defaultValue    : 'defaultValue',
+    placeholderText : 'placeholder',
+    text            : 'text',
+    value           : 'value'
+  },
+
+  // property names for remote query
+  fields: {
+    remoteValues : 'results',  // grouping for api results
+    values       : 'values',   // grouping for all dropdown values
+    disabled     : 'disabled', // whether value should be disabled
+    name         : 'name',     // displayed dropdown text
+    value        : 'value',    // actual dropdown value
+    text         : 'text'      // displayed text when selected
+  },
+
+  keys : {
+    backspace  : 8,
+    delimiter  : 188, // comma
+    deleteKey  : 46,
+    enter      : 13,
+    escape     : 27,
+    pageUp     : 33,
+    pageDown   : 34,
+    leftArrow  : 37,
+    upArrow    : 38,
+    rightArrow : 39,
+    downArrow  : 40
+  },
+
+  selector : {
+    addition     : '.addition',
+    dropdown     : '.ui.dropdown',
+    hidden       : '.hidden',
+    icon         : '> .dropdown.icon',
+    input        : '> input[type="hidden"], > select',
+    item         : '.item',
+    label        : '> .label',
+    remove       : '> .label > .delete.icon',
+    siblingLabel : '.label',
+    menu         : '.menu',
+    message      : '.message',
+    menuIcon     : '.dropdown.icon',
+    search       : 'input.search, .menu > .search > input, .menu input.search',
+    sizer        : '> input.sizer',
+    text         : '> .text:not(.icon)',
+    unselectable : '.disabled, .filtered'
+  },
+
+  className : {
+    active      : 'active',
+    addition    : 'addition',
+    animating   : 'animating',
+    disabled    : 'disabled',
+    empty       : 'empty',
+    dropdown    : 'ui dropdown',
+    filtered    : 'filtered',
+    hidden      : 'hidden transition',
+    item        : 'item',
+    label       : 'ui label',
+    loading     : 'loading',
+    menu        : 'menu',
+    message     : 'message',
+    multiple    : 'multiple',
+    placeholder : 'default',
+    sizer       : 'sizer',
+    search      : 'search',
+    selected    : 'selected',
+    selection   : 'selection',
+    upward      : 'upward',
+    visible     : 'visible'
+  }
+
+};
+
+/* Templates */
+_module.exports.settings.templates = {
+
+  // generates dropdown from select values
+  dropdown: function(select) {
+    var
+      placeholder = select.placeholder || false,
+      values      = select.values || {},
+      html        = ''
+    ;
+    html +=  '<i class="dropdown icon"></i>';
+    if(select.placeholder) {
+      html += '<div class="default text">' + placeholder + '</div>';
+    }
+    else {
+      html += '<div class="text"></div>';
+    }
+    html += '<div class="menu">';
+    $.each(select.values, function(index, option) {
+      html += (option.disabled)
+        ? '<div class="disabled item" data-value="' + option.value + '">' + option.name + '</div>'
+        : '<div class="item" data-value="' + option.value + '">' + option.name + '</div>'
+      ;
+    });
+    html += '</div>';
+    return html;
+  },
+
+  // generates just menu from select
+  menu: function(response, fields) {
+    var
+      values = response[fields.values] || {},
+      html   = ''
+    ;
+    $.each(values, function(index, option) {
+      var
+        maybeText = (option[fields.text])
+          ? 'data-text="' + option[fields.text] + '"'
+          : '',
+        maybeDisabled = (option[fields.disabled])
+          ? 'disabled '
+          : ''
+      ;
+      html += '<div class="'+ maybeDisabled +'item" data-value="' + option[fields.value] + '"' + maybeText + '>'
+      html +=   option[fields.name];
+      html += '</div>';
+    });
+    return html;
+  },
+
+  // generates label for multiselect
+  label: function(value, text) {
+    return text + '<i class="delete icon"></i>';
+  },
+
+
+  // generates messages like "No results"
+  message: function(message) {
+    return message;
+  },
+
+  // generates user addition to selection menu
+  addition: function(choice) {
+    return choice;
+  }
+
+};
+
+})( __webpack_require__(20), window, document );
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)(module)))
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {/*!
+ * # Semantic UI 2.2.10 - Transition
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+;(function ($, window, document, undefined) {
+
+"use strict";
+
+window = (typeof window != 'undefined' && window.Math == Math)
+  ? window
+  : (typeof self != 'undefined' && self.Math == Math)
+    ? self
+    : Function('return this')()
+;
+
+var _module = module;
+module.exports = function() {
+  var
+    $allModules     = $(this),
+    moduleSelector  = $allModules.selector || '',
+
+    time            = new Date().getTime(),
+    performance     = [],
+
+    moduleArguments = arguments,
+    query           = moduleArguments[0],
+    queryArguments  = [].slice.call(arguments, 1),
+    methodInvoked   = (typeof query === 'string'),
+
+    requestAnimationFrame = window.requestAnimationFrame
+      || window.mozRequestAnimationFrame
+      || window.webkitRequestAnimationFrame
+      || window.msRequestAnimationFrame
+      || function(callback) { setTimeout(callback, 0); },
+
+    returnedValue
+  ;
+  $allModules
+    .each(function(index) {
+      var
+        $module  = $(this),
+        element  = this,
+
+        // set at run time
+        settings,
+        instance,
+
+        error,
+        className,
+        metadata,
+        animationEnd,
+        animationName,
+
+        namespace,
+        moduleNamespace,
+        eventNamespace,
+        module
+      ;
+
+      module = {
+
+        initialize: function() {
+
+          // get full settings
+          settings        = module.get.settings.apply(element, moduleArguments);
+
+          // shorthand
+          className       = settings.className;
+          error           = settings.error;
+          metadata        = settings.metadata;
+
+          // define namespace
+          eventNamespace  = '.' + settings.namespace;
+          moduleNamespace = 'module-' + settings.namespace;
+          instance        = $module.data(moduleNamespace) || module;
+
+          // get vendor specific events
+          animationEnd    = module.get.animationEndEvent();
+
+          if(methodInvoked) {
+            methodInvoked = module.invoke(query);
+          }
+
+          // method not invoked, lets run an animation
+          if(methodInvoked === false) {
+            module.verbose('Converted arguments into settings object', settings);
+            if(settings.interval) {
+              module.delay(settings.animate);
+            }
+            else  {
+              module.animate();
+            }
+            module.instantiate();
+          }
+        },
+
+        instantiate: function() {
+          module.verbose('Storing instance of module', module);
+          instance = module;
+          $module
+            .data(moduleNamespace, instance)
+          ;
+        },
+
+        destroy: function() {
+          module.verbose('Destroying previous module for', element);
+          $module
+            .removeData(moduleNamespace)
+          ;
+        },
+
+        refresh: function() {
+          module.verbose('Refreshing display type on next animation');
+          delete module.displayType;
+        },
+
+        forceRepaint: function() {
+          module.verbose('Forcing element repaint');
+          var
+            $parentElement = $module.parent(),
+            $nextElement = $module.next()
+          ;
+          if($nextElement.length === 0) {
+            $module.detach().appendTo($parentElement);
+          }
+          else {
+            $module.detach().insertBefore($nextElement);
+          }
+        },
+
+        repaint: function() {
+          module.verbose('Repainting element');
+          var
+            fakeAssignment = element.offsetWidth
+          ;
+        },
+
+        delay: function(interval) {
+          var
+            direction = module.get.animationDirection(),
+            shouldReverse,
+            delay
+          ;
+          if(!direction) {
+            direction = module.can.transition()
+              ? module.get.direction()
+              : 'static'
+            ;
+          }
+          interval = (interval !== undefined)
+            ? interval
+            : settings.interval
+          ;
+          shouldReverse = (settings.reverse == 'auto' && direction == className.outward);
+          delay = (shouldReverse || settings.reverse == true)
+            ? ($allModules.length - index) * settings.interval
+            : index * settings.interval
+          ;
+          module.debug('Delaying animation by', delay);
+          setTimeout(module.animate, delay);
+        },
+
+        animate: function(overrideSettings) {
+          settings = overrideSettings || settings;
+          if(!module.is.supported()) {
+            module.error(error.support);
+            return false;
+          }
+          module.debug('Preparing animation', settings.animation);
+          if(module.is.animating()) {
+            if(settings.queue) {
+              if(!settings.allowRepeats && module.has.direction() && module.is.occurring() && module.queuing !== true) {
+                module.debug('Animation is currently occurring, preventing queueing same animation', settings.animation);
+              }
+              else {
+                module.queue(settings.animation);
+              }
+              return false;
+            }
+            else if(!settings.allowRepeats && module.is.occurring()) {
+              module.debug('Animation is already occurring, will not execute repeated animation', settings.animation);
+              return false;
+            }
+            else {
+              module.debug('New animation started, completing previous early', settings.animation);
+              instance.complete();
+            }
+          }
+          if( module.can.animate() ) {
+            module.set.animating(settings.animation);
+          }
+          else {
+            module.error(error.noAnimation, settings.animation, element);
+          }
+        },
+
+        reset: function() {
+          module.debug('Resetting animation to beginning conditions');
+          module.remove.animationCallbacks();
+          module.restore.conditions();
+          module.remove.animating();
+        },
+
+        queue: function(animation) {
+          module.debug('Queueing animation of', animation);
+          module.queuing = true;
+          $module
+            .one(animationEnd + '.queue' + eventNamespace, function() {
+              module.queuing = false;
+              module.repaint();
+              module.animate.apply(this, settings);
+            })
+          ;
+        },
+
+        complete: function (event) {
+          module.debug('Animation complete', settings.animation);
+          module.remove.completeCallback();
+          module.remove.failSafe();
+          if(!module.is.looping()) {
+            if( module.is.outward() ) {
+              module.verbose('Animation is outward, hiding element');
+              module.restore.conditions();
+              module.hide();
+            }
+            else if( module.is.inward() ) {
+              module.verbose('Animation is outward, showing element');
+              module.restore.conditions();
+              module.show();
+            }
+            else {
+              module.verbose('Static animation completed');
+              module.restore.conditions();
+              settings.onComplete.call(element);
+            }
+          }
+        },
+
+        force: {
+          visible: function() {
+            var
+              style          = $module.attr('style'),
+              userStyle      = module.get.userStyle(),
+              displayType    = module.get.displayType(),
+              overrideStyle  = userStyle + 'display: ' + displayType + ' !important;',
+              currentDisplay = $module.css('display'),
+              emptyStyle     = (style === undefined || style === '')
+            ;
+            if(currentDisplay !== displayType) {
+              module.verbose('Overriding default display to show element', displayType);
+              $module
+                .attr('style', overrideStyle)
+              ;
+            }
+            else if(emptyStyle) {
+              $module.removeAttr('style');
+            }
+          },
+          hidden: function() {
+            var
+              style          = $module.attr('style'),
+              currentDisplay = $module.css('display'),
+              emptyStyle     = (style === undefined || style === '')
+            ;
+            if(currentDisplay !== 'none' && !module.is.hidden()) {
+              module.verbose('Overriding default display to hide element');
+              $module
+                .css('display', 'none')
+              ;
+            }
+            else if(emptyStyle) {
+              $module
+                .removeAttr('style')
+              ;
+            }
+          }
+        },
+
+        has: {
+          direction: function(animation) {
+            var
+              hasDirection = false
+            ;
+            animation = animation || settings.animation;
+            if(typeof animation === 'string') {
+              animation = animation.split(' ');
+              $.each(animation, function(index, word){
+                if(word === className.inward || word === className.outward) {
+                  hasDirection = true;
+                }
+              });
+            }
+            return hasDirection;
+          },
+          inlineDisplay: function() {
+            var
+              style = $module.attr('style') || ''
+            ;
+            return $.isArray(style.match(/display.*?;/, ''));
+          }
+        },
+
+        set: {
+          animating: function(animation) {
+            var
+              animationClass,
+              direction
+            ;
+            // remove previous callbacks
+            module.remove.completeCallback();
+
+            // determine exact animation
+            animation      = animation || settings.animation;
+            animationClass = module.get.animationClass(animation);
+
+            // save animation class in cache to restore class names
+            module.save.animation(animationClass);
+
+            // override display if necessary so animation appears visibly
+            module.force.visible();
+
+            module.remove.hidden();
+            module.remove.direction();
+
+            module.start.animation(animationClass);
+
+          },
+          duration: function(animationName, duration) {
+            duration = duration || settings.duration;
+            duration = (typeof duration == 'number')
+              ? duration + 'ms'
+              : duration
+            ;
+            if(duration || duration === 0) {
+              module.verbose('Setting animation duration', duration);
+              $module
+                .css({
+                  'animation-duration':  duration
+                })
+              ;
+            }
+          },
+          direction: function(direction) {
+            direction = direction || module.get.direction();
+            if(direction == className.inward) {
+              module.set.inward();
+            }
+            else {
+              module.set.outward();
+            }
+          },
+          looping: function() {
+            module.debug('Transition set to loop');
+            $module
+              .addClass(className.looping)
+            ;
+          },
+          hidden: function() {
+            $module
+              .addClass(className.transition)
+              .addClass(className.hidden)
+            ;
+          },
+          inward: function() {
+            module.debug('Setting direction to inward');
+            $module
+              .removeClass(className.outward)
+              .addClass(className.inward)
+            ;
+          },
+          outward: function() {
+            module.debug('Setting direction to outward');
+            $module
+              .removeClass(className.inward)
+              .addClass(className.outward)
+            ;
+          },
+          visible: function() {
+            $module
+              .addClass(className.transition)
+              .addClass(className.visible)
+            ;
+          }
+        },
+
+        start: {
+          animation: function(animationClass) {
+            animationClass = animationClass || module.get.animationClass();
+            module.debug('Starting tween', animationClass);
+            $module
+              .addClass(animationClass)
+              .one(animationEnd + '.complete' + eventNamespace, module.complete)
+            ;
+            if(settings.useFailSafe) {
+              module.add.failSafe();
+            }
+            module.set.duration(settings.duration);
+            settings.onStart.call(element);
+          }
+        },
+
+        save: {
+          animation: function(animation) {
+            if(!module.cache) {
+              module.cache = {};
+            }
+            module.cache.animation = animation;
+          },
+          displayType: function(displayType) {
+            if(displayType !== 'none') {
+              $module.data(metadata.displayType, displayType);
+            }
+          },
+          transitionExists: function(animation, exists) {
+            _module.exports.exists[animation] = exists;
+            module.verbose('Saving existence of transition', animation, exists);
+          }
+        },
+
+        restore: {
+          conditions: function() {
+            var
+              animation = module.get.currentAnimation()
+            ;
+            if(animation) {
+              $module
+                .removeClass(animation)
+              ;
+              module.verbose('Removing animation class', module.cache);
+            }
+            module.remove.duration();
+          }
+        },
+
+        add: {
+          failSafe: function() {
+            var
+              duration = module.get.duration()
+            ;
+            module.timer = setTimeout(function() {
+              $module.triggerHandler(animationEnd);
+            }, duration + settings.failSafeDelay);
+            module.verbose('Adding fail safe timer', module.timer);
+          }
+        },
+
+        remove: {
+          animating: function() {
+            $module.removeClass(className.animating);
+          },
+          animationCallbacks: function() {
+            module.remove.queueCallback();
+            module.remove.completeCallback();
+          },
+          queueCallback: function() {
+            $module.off('.queue' + eventNamespace);
+          },
+          completeCallback: function() {
+            $module.off('.complete' + eventNamespace);
+          },
+          display: function() {
+            $module.css('display', '');
+          },
+          direction: function() {
+            $module
+              .removeClass(className.inward)
+              .removeClass(className.outward)
+            ;
+          },
+          duration: function() {
+            $module
+              .css('animation-duration', '')
+            ;
+          },
+          failSafe: function() {
+            module.verbose('Removing fail safe timer', module.timer);
+            if(module.timer) {
+              clearTimeout(module.timer);
+            }
+          },
+          hidden: function() {
+            $module.removeClass(className.hidden);
+          },
+          visible: function() {
+            $module.removeClass(className.visible);
+          },
+          looping: function() {
+            module.debug('Transitions are no longer looping');
+            if( module.is.looping() ) {
+              module.reset();
+              $module
+                .removeClass(className.looping)
+              ;
+            }
+          },
+          transition: function() {
+            $module
+              .removeClass(className.visible)
+              .removeClass(className.hidden)
+            ;
+          }
+        },
+        get: {
+          settings: function(animation, duration, onComplete) {
+            // single settings object
+            if(typeof animation == 'object') {
+              return $.extend(true, {}, _module.exports.settings, animation);
+            }
+            // all arguments provided
+            else if(typeof onComplete == 'function') {
+              return $.extend({}, _module.exports.settings, {
+                animation  : animation,
+                onComplete : onComplete,
+                duration   : duration
+              });
+            }
+            // only duration provided
+            else if(typeof duration == 'string' || typeof duration == 'number') {
+              return $.extend({}, _module.exports.settings, {
+                animation : animation,
+                duration  : duration
+              });
+            }
+            // duration is actually settings object
+            else if(typeof duration == 'object') {
+              return $.extend({}, _module.exports.settings, duration, {
+                animation : animation
+              });
+            }
+            // duration is actually callback
+            else if(typeof duration == 'function') {
+              return $.extend({}, _module.exports.settings, {
+                animation  : animation,
+                onComplete : duration
+              });
+            }
+            // only animation provided
+            else {
+              return $.extend({}, _module.exports.settings, {
+                animation : animation
+              });
+            }
+          },
+          animationClass: function(animation) {
+            var
+              animationClass = animation || settings.animation,
+              directionClass = (module.can.transition() && !module.has.direction())
+                ? module.get.direction() + ' '
+                : ''
+            ;
+            return className.animating + ' '
+              + className.transition + ' '
+              + directionClass
+              + animationClass
+            ;
+          },
+          currentAnimation: function() {
+            return (module.cache && module.cache.animation !== undefined)
+              ? module.cache.animation
+              : false
+            ;
+          },
+          currentDirection: function() {
+            return module.is.inward()
+              ? className.inward
+              : className.outward
+            ;
+          },
+          direction: function() {
+            return module.is.hidden() || !module.is.visible()
+              ? className.inward
+              : className.outward
+            ;
+          },
+          animationDirection: function(animation) {
+            var
+              direction
+            ;
+            animation = animation || settings.animation;
+            if(typeof animation === 'string') {
+              animation = animation.split(' ');
+              // search animation name for out/in class
+              $.each(animation, function(index, word){
+                if(word === className.inward) {
+                  direction = className.inward;
+                }
+                else if(word === className.outward) {
+                  direction = className.outward;
+                }
+              });
+            }
+            // return found direction
+            if(direction) {
+              return direction;
+            }
+            return false;
+          },
+          duration: function(duration) {
+            duration = duration || settings.duration;
+            if(duration === false) {
+              duration = $module.css('animation-duration') || 0;
+            }
+            return (typeof duration === 'string')
+              ? (duration.indexOf('ms') > -1)
+                ? parseFloat(duration)
+                : parseFloat(duration) * 1000
+              : duration
+            ;
+          },
+          displayType: function(shouldDetermine) {
+            shouldDetermine = (shouldDetermine !== undefined)
+              ? shouldDetermine
+              : true
+            ;
+            if(settings.displayType) {
+              return settings.displayType;
+            }
+            if(shouldDetermine && $module.data(metadata.displayType) === undefined) {
+              // create fake element to determine display state
+              module.can.transition(true);
+            }
+            return $module.data(metadata.displayType);
+          },
+          userStyle: function(style) {
+            style = style || $module.attr('style') || '';
+            return style.replace(/display.*?;/, '');
+          },
+          transitionExists: function(animation) {
+            return _module.exports.exists[animation];
+          },
+          animationStartEvent: function() {
+            var
+              element     = document.createElement('div'),
+              animations  = {
+                'animation'       :'animationstart',
+                'OAnimation'      :'oAnimationStart',
+                'MozAnimation'    :'mozAnimationStart',
+                'WebkitAnimation' :'webkitAnimationStart'
+              },
+              animation
+            ;
+            for(animation in animations){
+              if( element.style[animation] !== undefined ){
+                return animations[animation];
+              }
+            }
+            return false;
+          },
+          animationEndEvent: function() {
+            var
+              element     = document.createElement('div'),
+              animations  = {
+                'animation'       :'animationend',
+                'OAnimation'      :'oAnimationEnd',
+                'MozAnimation'    :'mozAnimationEnd',
+                'WebkitAnimation' :'webkitAnimationEnd'
+              },
+              animation
+            ;
+            for(animation in animations){
+              if( element.style[animation] !== undefined ){
+                return animations[animation];
+              }
+            }
+            return false;
+          }
+
+        },
+
+        can: {
+          transition: function(forced) {
+            var
+              animation         = settings.animation,
+              transitionExists  = module.get.transitionExists(animation),
+              displayType       = module.get.displayType(false),
+              elementClass,
+              tagName,
+              $clone,
+              currentAnimation,
+              inAnimation,
+              directionExists
+            ;
+            if( transitionExists === undefined || forced) {
+              module.verbose('Determining whether animation exists');
+              elementClass = $module.attr('class');
+              tagName      = $module.prop('tagName');
+
+              $clone = $('<' + tagName + ' />').addClass( elementClass ).insertAfter($module);
+              currentAnimation = $clone
+                .addClass(animation)
+                .removeClass(className.inward)
+                .removeClass(className.outward)
+                .addClass(className.animating)
+                .addClass(className.transition)
+                .css('animationName')
+              ;
+              inAnimation = $clone
+                .addClass(className.inward)
+                .css('animationName')
+              ;
+              if(!displayType) {
+                displayType = $clone
+                  .attr('class', elementClass)
+                  .removeAttr('style')
+                  .removeClass(className.hidden)
+                  .removeClass(className.visible)
+                  .show()
+                  .css('display')
+                ;
+                module.verbose('Determining final display state', displayType);
+                module.save.displayType(displayType);
+              }
+
+              $clone.remove();
+              if(currentAnimation != inAnimation) {
+                module.debug('Direction exists for animation', animation);
+                directionExists = true;
+              }
+              else if(currentAnimation == 'none' || !currentAnimation) {
+                module.debug('No animation defined in css', animation);
+                return;
+              }
+              else {
+                module.debug('Static animation found', animation, displayType);
+                directionExists = false;
+              }
+              module.save.transitionExists(animation, directionExists);
+            }
+            return (transitionExists !== undefined)
+              ? transitionExists
+              : directionExists
+            ;
+          },
+          animate: function() {
+            // can transition does not return a value if animation does not exist
+            return (module.can.transition() !== undefined);
+          }
+        },
+
+        is: {
+          animating: function() {
+            return $module.hasClass(className.animating);
+          },
+          inward: function() {
+            return $module.hasClass(className.inward);
+          },
+          outward: function() {
+            return $module.hasClass(className.outward);
+          },
+          looping: function() {
+            return $module.hasClass(className.looping);
+          },
+          occurring: function(animation) {
+            animation = animation || settings.animation;
+            animation = '.' + animation.replace(' ', '.');
+            return ( $module.filter(animation).length > 0 );
+          },
+          visible: function() {
+            return $module.is(':visible');
+          },
+          hidden: function() {
+            return $module.css('visibility') === 'hidden';
+          },
+          supported: function() {
+            return(animationEnd !== false);
+          }
+        },
+
+        hide: function() {
+          module.verbose('Hiding element');
+          if( module.is.animating() ) {
+            module.reset();
+          }
+          element.blur(); // IE will trigger focus change if element is not blurred before hiding
+          module.remove.display();
+          module.remove.visible();
+          module.set.hidden();
+          module.force.hidden();
+          settings.onHide.call(element);
+          settings.onComplete.call(element);
+          // module.repaint();
+        },
+
+        show: function(display) {
+          module.verbose('Showing element', display);
+          module.remove.hidden();
+          module.set.visible();
+          module.force.visible();
+          settings.onShow.call(element);
+          settings.onComplete.call(element);
+          // module.repaint();
+        },
+
+        toggle: function() {
+          if( module.is.visible() ) {
+            module.hide();
+          }
+          else {
+            module.show();
+          }
+        },
+
+        stop: function() {
+          module.debug('Stopping current animation');
+          $module.triggerHandler(animationEnd);
+        },
+
+        stopAll: function() {
+          module.debug('Stopping all animation');
+          module.remove.queueCallback();
+          $module.triggerHandler(animationEnd);
+        },
+
+        clear: {
+          queue: function() {
+            module.debug('Clearing animation queue');
+            module.remove.queueCallback();
+          }
+        },
+
+        enable: function() {
+          module.verbose('Starting animation');
+          $module.removeClass(className.disabled);
+        },
+
+        disable: function() {
+          module.debug('Stopping animation');
+          $module.addClass(className.disabled);
+        },
+
+        setting: function(name, value) {
+          module.debug('Changing setting', name, value);
+          if( $.isPlainObject(name) ) {
+            $.extend(true, settings, name);
+          }
+          else if(value !== undefined) {
+            if($.isPlainObject(settings[name])) {
+              $.extend(true, settings[name], value);
+            }
+            else {
+              settings[name] = value;
+            }
+          }
+          else {
+            return settings[name];
+          }
+        },
+        internal: function(name, value) {
+          if( $.isPlainObject(name) ) {
+            $.extend(true, module, name);
+          }
+          else if(value !== undefined) {
+            module[name] = value;
+          }
+          else {
+            return module[name];
+          }
+        },
+        debug: function() {
+          if(!settings.silent && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.debug.apply(console, arguments);
+            }
+          }
+        },
+        verbose: function() {
+          if(!settings.silent && settings.verbose && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.verbose.apply(console, arguments);
+            }
+          }
+        },
+        error: function() {
+          if(!settings.silent) {
+            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
+            module.error.apply(console, arguments);
+          }
+        },
+        performance: {
+          log: function(message) {
+            var
+              currentTime,
+              executionTime,
+              previousTime
+            ;
+            if(settings.performance) {
+              currentTime   = new Date().getTime();
+              previousTime  = time || currentTime;
+              executionTime = currentTime - previousTime;
+              time          = currentTime;
+              performance.push({
+                'Name'           : message[0],
+                'Arguments'      : [].slice.call(message, 1) || '',
+                'Element'        : element,
+                'Execution Time' : executionTime
+              });
+            }
+            clearTimeout(module.performance.timer);
+            module.performance.timer = setTimeout(module.performance.display, 500);
+          },
+          display: function() {
+            var
+              title = settings.name + ':',
+              totalTime = 0
+            ;
+            time = false;
+            clearTimeout(module.performance.timer);
+            $.each(performance, function(index, data) {
+              totalTime += data['Execution Time'];
+            });
+            title += ' ' + totalTime + 'ms';
+            if(moduleSelector) {
+              title += ' \'' + moduleSelector + '\'';
+            }
+            if($allModules.length > 1) {
+              title += ' ' + '(' + $allModules.length + ')';
+            }
+            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
+              console.groupCollapsed(title);
+              if(console.table) {
+                console.table(performance);
+              }
+              else {
+                $.each(performance, function(index, data) {
+                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
+                });
+              }
+              console.groupEnd();
+            }
+            performance = [];
+          }
+        },
+        // modified for transition to return invoke success
+        invoke: function(query, passedArguments, context) {
+          var
+            object = instance,
+            maxDepth,
+            found,
+            response
+          ;
+          passedArguments = passedArguments || queryArguments;
+          context         = element         || context;
+          if(typeof query == 'string' && object !== undefined) {
+            query    = query.split(/[\. ]/);
+            maxDepth = query.length - 1;
+            $.each(query, function(depth, value) {
+              var camelCaseValue = (depth != maxDepth)
+                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
+                : query
+              ;
+              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
+                object = object[camelCaseValue];
+              }
+              else if( object[camelCaseValue] !== undefined ) {
+                found = object[camelCaseValue];
+                return false;
+              }
+              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
+                object = object[value];
+              }
+              else if( object[value] !== undefined ) {
+                found = object[value];
+                return false;
+              }
+              else {
+                return false;
+              }
+            });
+          }
+          if ( $.isFunction( found ) ) {
+            response = found.apply(context, passedArguments);
+          }
+          else if(found !== undefined) {
+            response = found;
+          }
+
+          if($.isArray(returnedValue)) {
+            returnedValue.push(response);
+          }
+          else if(returnedValue !== undefined) {
+            returnedValue = [returnedValue, response];
+          }
+          else if(response !== undefined) {
+            returnedValue = response;
+          }
+          return (found !== undefined)
+            ? found
+            : false
+          ;
+        }
+      };
+      module.initialize();
+    })
+  ;
+  return (returnedValue !== undefined)
+    ? returnedValue
+    : this
+  ;
+};
+
+// Records if CSS transition is available
+_module.exports.exists = {};
+
+_module.exports.settings = {
+
+  // module info
+  name          : 'Transition',
+
+  // hide all output from this component regardless of other settings
+  silent        : false,
+
+  // debug content outputted to console
+  debug         : false,
+
+  // verbose debug output
+  verbose       : false,
+
+  // performance data output
+  performance   : true,
+
+  // event namespace
+  namespace     : 'transition',
+
+  // delay between animations in group
+  interval      : 0,
+
+  // whether group animations should be reversed
+  reverse       : 'auto',
+
+  // animation callback event
+  onStart       : function() {},
+  onComplete    : function() {},
+  onShow        : function() {},
+  onHide        : function() {},
+
+  // whether timeout should be used to ensure callback fires in cases animationend does not
+  useFailSafe   : true,
+
+  // delay in ms for fail safe
+  failSafeDelay : 100,
+
+  // whether EXACT animation can occur twice in a row
+  allowRepeats  : false,
+
+  // Override final display type on visible
+  displayType   : false,
+
+  // animation duration
+  animation     : 'fade',
+  duration      : false,
+
+  // new animations will occur after previous ones
+  queue         : true,
+
+  metadata : {
+    displayType: 'display'
+  },
+
+  className   : {
+    animating  : 'animating',
+    disabled   : 'disabled',
+    hidden     : 'hidden',
+    inward     : 'in',
+    loading    : 'loading',
+    looping    : 'looping',
+    outward    : 'out',
+    transition : 'transition',
+    visible    : 'visible'
+  },
+
+  // possible errors
+  error: {
+    noAnimation : 'Element is no longer attached to DOM. Unable to animate.  Use silent setting to surpress this warning in production.',
+    repeated    : 'That animation is already occurring, cancelling repeated animation',
+    method      : 'The method you called is not defined',
+    support     : 'This browser does not support CSS animations'
+  }
+
+};
+
+
+})( __webpack_require__(20), window, document );
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)(module)))
+
+/***/ }),
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var cof = __webpack_require__(32);
 module.exports = function(it, msg){
   if(typeof it != 'number' && cof(it) != 'Number')throw TypeError(msg);
   return +it;
 };
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 
 var toObject = __webpack_require__(18)
-  , toIndex  = __webpack_require__(59)
+  , toIndex  = __webpack_require__(61)
   , toLength = __webpack_require__(16);
 
 module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0, end = @length*/){
@@ -19140,10 +24033,10 @@ module.exports = [].copyWithin || function copyWithin(target/*= 0*/, start/*= 0,
 };
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var forOf = __webpack_require__(68);
+var forOf = __webpack_require__(69);
 
 module.exports = function(iter, ITERATOR){
   var result = [];
@@ -19153,10 +24046,10 @@ module.exports = function(iter, ITERATOR){
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aFunction = __webpack_require__(22)
+var aFunction = __webpack_require__(23)
   , toObject  = __webpack_require__(18)
   , IObject   = __webpack_require__(83)
   , toLength  = __webpack_require__(16);
@@ -19186,12 +24079,12 @@ module.exports = function(that, callbackfn, aLen, memo, isRight){
 };
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var aFunction  = __webpack_require__(22)
+var aFunction  = __webpack_require__(23)
   , isObject   = __webpack_require__(8)
   , invoke     = __webpack_require__(97)
   , arraySlice = [].slice
@@ -19216,23 +24109,23 @@ module.exports = Function.bind || function bind(that /*, args... */){
 };
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var dP          = __webpack_require__(14).f
-  , create      = __webpack_require__(54)
-  , redefineAll = __webpack_require__(57)
-  , ctx         = __webpack_require__(41)
-  , anInstance  = __webpack_require__(52)
-  , defined     = __webpack_require__(32)
-  , forOf       = __webpack_require__(68)
+  , create      = __webpack_require__(56)
+  , redefineAll = __webpack_require__(59)
+  , ctx         = __webpack_require__(42)
+  , anInstance  = __webpack_require__(54)
+  , defined     = __webpack_require__(33)
+  , forOf       = __webpack_require__(69)
   , $iterDefine = __webpack_require__(141)
-  , step        = __webpack_require__(197)
-  , setSpecies  = __webpack_require__(58)
+  , step        = __webpack_require__(199)
+  , setSpecies  = __webpack_require__(60)
   , DESCRIPTORS = __webpack_require__(13)
-  , fastKey     = __webpack_require__(46).fastKey
+  , fastKey     = __webpack_require__(47).fastKey
   , SIZE        = DESCRIPTORS ? '_s' : 'size';
 
 var getEntry = function(that, key){
@@ -19364,12 +24257,12 @@ module.exports = {
 };
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var classof = __webpack_require__(82)
-  , from    = __webpack_require__(188);
+  , from    = __webpack_require__(190);
 module.exports = function(NAME){
   return function toJSON(){
     if(classof(this) != NAME)throw TypeError(NAME + "#toJSON isn't generic");
@@ -19378,18 +24271,18 @@ module.exports = function(NAME){
 };
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var redefineAll       = __webpack_require__(57)
-  , getWeak           = __webpack_require__(46).getWeak
+var redefineAll       = __webpack_require__(59)
+  , getWeak           = __webpack_require__(47).getWeak
   , anObject          = __webpack_require__(4)
   , isObject          = __webpack_require__(8)
-  , anInstance        = __webpack_require__(52)
-  , forOf             = __webpack_require__(68)
-  , createArrayMethod = __webpack_require__(35)
+  , anInstance        = __webpack_require__(54)
+  , forOf             = __webpack_require__(69)
+  , createArrayMethod = __webpack_require__(36)
   , $has              = __webpack_require__(19)
   , arrayFind         = createArrayMethod(5)
   , arrayFindIndex    = createArrayMethod(6)
@@ -19467,7 +24360,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(13) && !__webpack_require__(6)(function(){
@@ -19475,7 +24368,7 @@ module.exports = !__webpack_require__(13) && !__webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.3 Number.isInteger(number)
@@ -19486,7 +24379,7 @@ module.exports = function isInteger(it){
 };
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -19503,7 +24396,7 @@ module.exports = function(iterator, fn, value, entries){
 };
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports) {
 
 module.exports = function(done, value){
@@ -19511,7 +24404,7 @@ module.exports = function(done, value){
 };
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports) {
 
 // 20.2.2.20 Math.log1p(x)
@@ -19520,13 +24413,13 @@ module.exports = Math.log1p || function log1p(x){
 };
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 19.1.2.1 Object.assign(target, source, ...)
-var getKeys  = __webpack_require__(56)
+var getKeys  = __webpack_require__(58)
   , gOPS     = __webpack_require__(101)
   , pIE      = __webpack_require__(84)
   , toObject = __webpack_require__(18)
@@ -19559,12 +24452,12 @@ module.exports = !$assign || __webpack_require__(6)(function(){
 } : $assign;
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP       = __webpack_require__(14)
   , anObject = __webpack_require__(4)
-  , getKeys  = __webpack_require__(56);
+  , getKeys  = __webpack_require__(58);
 
 module.exports = __webpack_require__(13) ? Object.defineProperties : function defineProperties(O, Properties){
   anObject(O);
@@ -19577,12 +24470,12 @@ module.exports = __webpack_require__(13) ? Object.defineProperties : function de
 };
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(26)
-  , gOPN      = __webpack_require__(55).f
+var toIObject = __webpack_require__(27)
+  , gOPN      = __webpack_require__(57).f
   , toString  = {}.toString;
 
 var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -19602,11 +24495,11 @@ module.exports.f = function getOwnPropertyNames(it){
 
 
 /***/ }),
-/* 202 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has          = __webpack_require__(19)
-  , toIObject    = __webpack_require__(26)
+  , toIObject    = __webpack_require__(27)
   , arrayIndexOf = __webpack_require__(93)(false)
   , IE_PROTO     = __webpack_require__(146)('IE_PROTO');
 
@@ -19624,11 +24517,11 @@ module.exports = function(object, names){
 };
 
 /***/ }),
-/* 203 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(56)
-  , toIObject = __webpack_require__(26)
+var getKeys   = __webpack_require__(58)
+  , toIObject = __webpack_require__(27)
   , isEnum    = __webpack_require__(84).f;
 module.exports = function(isEntries){
   return function(it){
@@ -19645,11 +24538,11 @@ module.exports = function(isEntries){
 };
 
 /***/ }),
-/* 204 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all object keys, includes non-enumerable and symbols
-var gOPN     = __webpack_require__(55)
+var gOPN     = __webpack_require__(57)
   , gOPS     = __webpack_require__(101)
   , anObject = __webpack_require__(4)
   , Reflect  = __webpack_require__(5).Reflect;
@@ -19660,11 +24553,11 @@ module.exports = Reflect && Reflect.ownKeys || function ownKeys(it){
 };
 
 /***/ }),
-/* 205 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $parseFloat = __webpack_require__(5).parseFloat
-  , $trim       = __webpack_require__(71).trim;
+  , $trim       = __webpack_require__(72).trim;
 
 module.exports = 1 / $parseFloat(__webpack_require__(151) + '-0') !== -Infinity ? function parseFloat(str){
   var string = $trim(String(str), 3)
@@ -19673,11 +24566,11 @@ module.exports = 1 / $parseFloat(__webpack_require__(151) + '-0') !== -Infinity 
 } : $parseFloat;
 
 /***/ }),
-/* 206 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $parseInt = __webpack_require__(5).parseInt
-  , $trim     = __webpack_require__(71).trim
+  , $trim     = __webpack_require__(72).trim
   , ws        = __webpack_require__(151)
   , hex       = /^[\-+]?0[xX]/;
 
@@ -19687,7 +24580,7 @@ module.exports = $parseInt(ws + '08') !== 8 || $parseInt(ws + '0x16') !== 22 ? f
 } : $parseInt;
 
 /***/ }),
-/* 207 */
+/* 209 */
 /***/ (function(module, exports) {
 
 // 7.2.9 SameValue(x, y)
@@ -19696,13 +24589,13 @@ module.exports = Object.is || function is(x, y){
 };
 
 /***/ }),
-/* 208 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(16)
   , repeat   = __webpack_require__(150)
-  , defined  = __webpack_require__(32);
+  , defined  = __webpack_require__(33);
 
 module.exports = function(that, maxLength, fillString, left){
   var S            = String(defined(that))
@@ -19718,18 +24611,18 @@ module.exports = function(that, maxLength, fillString, left){
 
 
 /***/ }),
-/* 209 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports.f = __webpack_require__(10);
 
 /***/ }),
-/* 210 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(191);
+var strong = __webpack_require__(193);
 
 // 23.1 Map Objects
 module.exports = __webpack_require__(94)('Map', function(get){
@@ -19747,7 +24640,7 @@ module.exports = __webpack_require__(94)('Map', function(get){
 }, strong, true);
 
 /***/ }),
-/* 211 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 21.2.5.3 get RegExp.prototype.flags()
@@ -19757,12 +24650,12 @@ if(__webpack_require__(13) && /./g.flags != 'g')__webpack_require__(14).f(RegExp
 });
 
 /***/ }),
-/* 212 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(191);
+var strong = __webpack_require__(193);
 
 // 23.2 Set Objects
 module.exports = __webpack_require__(94)('Set', function(get){
@@ -19775,16 +24668,16 @@ module.exports = __webpack_require__(94)('Set', function(get){
 }, strong);
 
 /***/ }),
-/* 213 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var each         = __webpack_require__(35)(0)
-  , redefine     = __webpack_require__(24)
-  , meta         = __webpack_require__(46)
-  , assign       = __webpack_require__(199)
-  , weak         = __webpack_require__(193)
+var each         = __webpack_require__(36)(0)
+  , redefine     = __webpack_require__(25)
+  , meta         = __webpack_require__(47)
+  , assign       = __webpack_require__(201)
+  , weak         = __webpack_require__(195)
   , isObject     = __webpack_require__(8)
   , getWeak      = meta.getWeak
   , isExtensible = Object.isExtensible
@@ -19837,7 +24730,7 @@ if(new $WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
 }
 
 /***/ }),
-/* 214 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1.10.15
@@ -19871,7 +24764,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 	if ( true ) {
 		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(61)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(20)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
 			return factory( $, window, document );
 		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -35188,14 +40081,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 
 /***/ }),
-/* 215 */,
-/* 216 */,
 /* 217 */,
 /* 218 */,
 /* 219 */,
 /* 220 */,
 /* 221 */,
-/* 222 */
+/* 222 */,
+/* 223 */,
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35273,7 +40166,7 @@ return af;
 
 
 /***/ }),
-/* 223 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35337,7 +40230,7 @@ return arDz;
 
 
 /***/ }),
-/* 224 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35401,7 +40294,7 @@ return arKw;
 
 
 /***/ }),
-/* 225 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35532,7 +40425,7 @@ return arLy;
 
 
 /***/ }),
-/* 226 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35597,7 +40490,7 @@ return arMa;
 
 
 /***/ }),
-/* 227 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35707,7 +40600,7 @@ return arSa;
 
 
 /***/ }),
-/* 228 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35771,7 +40664,7 @@ return arTn;
 
 
 /***/ }),
-/* 229 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35918,7 +40811,7 @@ return ar;
 
 
 /***/ }),
-/* 230 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36028,7 +40921,7 @@ return az;
 
 
 /***/ }),
-/* 231 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36167,7 +41060,7 @@ return be;
 
 
 /***/ }),
-/* 232 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36262,7 +41155,7 @@ return bg;
 
 
 /***/ }),
-/* 233 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36386,7 +41279,7 @@ return bn;
 
 
 /***/ }),
-/* 234 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36510,7 +41403,7 @@ return bo;
 
 
 /***/ }),
-/* 235 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36623,7 +41516,7 @@ return br;
 
 
 /***/ }),
-/* 236 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36771,7 +41664,7 @@ return bs;
 
 
 /***/ }),
-/* 237 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -36864,7 +41757,7 @@ return ca;
 
 
 /***/ }),
-/* 238 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37041,7 +41934,7 @@ return cs;
 
 
 /***/ }),
-/* 239 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37109,7 +42002,7 @@ return cv;
 
 
 /***/ }),
-/* 240 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37195,7 +42088,7 @@ return cy;
 
 
 /***/ }),
-/* 241 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37260,7 +42153,7 @@ return da;
 
 
 /***/ }),
-/* 242 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37344,7 +42237,7 @@ return deAt;
 
 
 /***/ }),
-/* 243 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37427,7 +42320,7 @@ return deCh;
 
 
 /***/ }),
-/* 244 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37510,7 +42403,7 @@ return de;
 
 
 /***/ }),
-/* 245 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37615,7 +42508,7 @@ return dv;
 
 
 /***/ }),
-/* 246 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37720,7 +42613,7 @@ return el;
 
 
 /***/ }),
-/* 247 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37792,7 +42685,7 @@ return enAu;
 
 
 /***/ }),
-/* 248 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37860,7 +42753,7 @@ return enCa;
 
 
 /***/ }),
-/* 249 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -37932,7 +42825,7 @@ return enGb;
 
 
 /***/ }),
-/* 250 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38004,7 +42897,7 @@ return enIe;
 
 
 /***/ }),
-/* 251 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38076,7 +42969,7 @@ return enNz;
 
 
 /***/ }),
-/* 252 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38154,7 +43047,7 @@ return eo;
 
 
 /***/ }),
-/* 253 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38241,7 +43134,7 @@ return esDo;
 
 
 /***/ }),
-/* 254 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38329,7 +43222,7 @@ return es;
 
 
 /***/ }),
-/* 255 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38414,7 +43307,7 @@ return et;
 
 
 /***/ }),
-/* 256 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38485,7 +43378,7 @@ return eu;
 
 
 /***/ }),
-/* 257 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38597,7 +43490,7 @@ return fa;
 
 
 /***/ }),
-/* 258 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38709,7 +43602,7 @@ return fi;
 
 
 /***/ }),
-/* 259 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38774,7 +43667,7 @@ return fo;
 
 
 /***/ }),
-/* 260 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38853,7 +43746,7 @@ return frCa;
 
 
 /***/ }),
-/* 261 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -38936,7 +43829,7 @@ return frCh;
 
 
 /***/ }),
-/* 262 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39024,7 +43917,7 @@ return fr;
 
 
 /***/ }),
-/* 263 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39104,7 +43997,7 @@ return fy;
 
 
 /***/ }),
-/* 264 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39185,7 +44078,7 @@ return gd;
 
 
 /***/ }),
-/* 265 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39267,7 +44160,7 @@ return gl;
 
 
 /***/ }),
-/* 266 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39394,7 +44287,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 267 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39498,7 +44391,7 @@ return he;
 
 
 /***/ }),
-/* 268 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39627,7 +44520,7 @@ return hi;
 
 
 /***/ }),
-/* 269 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39777,7 +44670,7 @@ return hr;
 
 
 /***/ }),
-/* 270 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39891,7 +44784,7 @@ return hu;
 
 
 /***/ }),
-/* 271 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -39991,7 +44884,7 @@ return hyAm;
 
 
 /***/ }),
-/* 272 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40079,7 +44972,7 @@ return id;
 
 
 /***/ }),
-/* 273 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40211,7 +45104,7 @@ return is;
 
 
 /***/ }),
-/* 274 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40286,7 +45179,7 @@ return it;
 
 
 /***/ }),
-/* 275 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40371,7 +45264,7 @@ return ja;
 
 
 /***/ }),
-/* 276 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40459,7 +45352,7 @@ return jv;
 
 
 /***/ }),
-/* 277 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40553,7 +45446,7 @@ return ka;
 
 
 /***/ }),
-/* 278 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40645,7 +45538,7 @@ return kk;
 
 
 /***/ }),
-/* 279 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40708,7 +45601,7 @@ return km;
 
 
 /***/ }),
-/* 280 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40839,7 +45732,7 @@ return kn;
 
 
 /***/ }),
-/* 281 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -40913,7 +45806,7 @@ return ko;
 
 
 /***/ }),
-/* 282 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41006,7 +45899,7 @@ return ky;
 
 
 /***/ }),
-/* 283 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41148,7 +46041,7 @@ return lb;
 
 
 /***/ }),
-/* 284 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41223,7 +46116,7 @@ return lo;
 
 
 /***/ }),
-/* 285 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41345,7 +46238,7 @@ return lt;
 
 
 /***/ }),
-/* 286 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41447,7 +46340,7 @@ return lv;
 
 
 /***/ }),
-/* 287 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41563,7 +46456,7 @@ return me;
 
 
 /***/ }),
-/* 288 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41632,7 +46525,7 @@ return mi;
 
 
 /***/ }),
-/* 289 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41727,7 +46620,7 @@ return mk;
 
 
 /***/ }),
-/* 290 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41813,7 +46706,7 @@ return ml;
 
 
 /***/ }),
-/* 291 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -41977,7 +46870,7 @@ return mr;
 
 
 /***/ }),
-/* 292 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42065,7 +46958,7 @@ return msMy;
 
 
 /***/ }),
-/* 293 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42152,7 +47045,7 @@ return ms;
 
 
 /***/ }),
-/* 294 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42253,7 +47146,7 @@ return my;
 
 
 /***/ }),
-/* 295 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42321,7 +47214,7 @@ return nb;
 
 
 /***/ }),
-/* 296 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42449,7 +47342,7 @@ return ne;
 
 
 /***/ }),
-/* 297 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42542,7 +47435,7 @@ return nlBe;
 
 
 /***/ }),
-/* 298 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42635,7 +47528,7 @@ return nl;
 
 
 /***/ }),
-/* 299 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42700,7 +47593,7 @@ return nn;
 
 
 /***/ }),
-/* 300 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42829,7 +47722,7 @@ return paIn;
 
 
 /***/ }),
-/* 301 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -42941,7 +47834,7 @@ return pl;
 
 
 /***/ }),
-/* 302 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43007,7 +47900,7 @@ return ptBr;
 
 
 /***/ }),
-/* 303 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43077,7 +47970,7 @@ return pt;
 
 
 /***/ }),
-/* 304 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43157,7 +48050,7 @@ return ro;
 
 
 /***/ }),
-/* 305 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43345,7 +48238,7 @@ return ru;
 
 
 /***/ }),
-/* 306 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43448,7 +48341,7 @@ return sd;
 
 
 /***/ }),
-/* 307 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43514,7 +48407,7 @@ return se;
 
 
 /***/ }),
-/* 308 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43590,7 +48483,7 @@ return si;
 
 
 /***/ }),
-/* 309 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43745,7 +48638,7 @@ return sk;
 
 
 /***/ }),
-/* 310 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43912,7 +48805,7 @@ return sl;
 
 
 /***/ }),
-/* 311 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -43987,7 +48880,7 @@ return sq;
 
 
 /***/ }),
-/* 312 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44102,7 +48995,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 313 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44217,7 +49110,7 @@ return sr;
 
 
 /***/ }),
-/* 314 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44311,7 +49204,7 @@ return ss;
 
 
 /***/ }),
-/* 315 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44385,7 +49278,7 @@ return sv;
 
 
 /***/ }),
-/* 316 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44449,7 +49342,7 @@ return sw;
 
 
 /***/ }),
-/* 317 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44584,7 +49477,7 @@ return ta;
 
 
 /***/ }),
-/* 318 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44678,7 +49571,7 @@ return te;
 
 
 /***/ }),
-/* 319 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44751,7 +49644,7 @@ return tet;
 
 
 /***/ }),
-/* 320 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44823,7 +49716,7 @@ return th;
 
 
 /***/ }),
-/* 321 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -44890,7 +49783,7 @@ return tlPh;
 
 
 /***/ }),
-/* 322 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45015,7 +49908,7 @@ return tlh;
 
 
 /***/ }),
-/* 323 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45110,7 +50003,7 @@ return tr;
 
 
 /***/ }),
-/* 324 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45206,7 +50099,7 @@ return tzl;
 
 
 /***/ }),
-/* 325 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45269,7 +50162,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 326 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45332,7 +50225,7 @@ return tzm;
 
 
 /***/ }),
-/* 327 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45488,7 +50381,7 @@ return uk;
 
 
 /***/ }),
-/* 328 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45592,7 +50485,7 @@ return ur;
 
 
 /***/ }),
-/* 329 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45655,7 +50548,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 330 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45718,7 +50611,7 @@ return uz;
 
 
 /***/ }),
-/* 331 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45802,7 +50695,7 @@ return vi;
 
 
 /***/ }),
-/* 332 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45875,7 +50768,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 333 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -45940,7 +50833,7 @@ return yo;
 
 
 /***/ }),
-/* 334 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46056,7 +50949,7 @@ return zhCn;
 
 
 /***/ }),
-/* 335 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46166,7 +51059,7 @@ return zhHk;
 
 
 /***/ }),
-/* 336 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -46275,8 +51168,6 @@ return zhTw;
 
 
 /***/ }),
-/* 337 */,
-/* 338 */,
 /* 339 */,
 /* 340 */,
 /* 341 */,
@@ -46316,7 +51207,9 @@ return zhTw;
 /* 375 */,
 /* 376 */,
 /* 377 */,
-/* 378 */
+/* 378 */,
+/* 379 */,
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -46325,7 +51218,7 @@ return zhTw;
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(398);
+__webpack_require__(400);
 
 //window.Vue = require('vue');
 
@@ -46336,20 +51229,8 @@ __webpack_require__(398);
  */
 
 /***/ }),
-/* 379 */,
-/* 380 */,
-/* 381 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 382 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
+/* 381 */,
+/* 382 */,
 /* 383 */
 /***/ (function(module, exports) {
 
@@ -46380,8 +51261,18 @@ __webpack_require__(398);
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 388 */,
-/* 389 */,
+/* 388 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 389 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
 /* 390 */,
 /* 391 */,
 /* 392 */,
@@ -46390,10 +51281,12 @@ __webpack_require__(398);
 /* 395 */,
 /* 396 */,
 /* 397 */,
-/* 398 */
+/* 398 */,
+/* 399 */,
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
-window._ = __webpack_require__(614);
+window._ = __webpack_require__(616);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -46401,23 +51294,19 @@ window._ = __webpack_require__(614);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(61);
-__webpack_require__(399);
-__webpack_require__(605);
-__webpack_require__(400);
-__webpack_require__(604);
-__webpack_require__(402);
+window.$ = window.jQuery = __webpack_require__(20);
 __webpack_require__(401);
-__webpack_require__(214);
-__webpack_require__(584);
+__webpack_require__(607);
+__webpack_require__(402);
+__webpack_require__(606);
+__webpack_require__(404);
+__webpack_require__(403);
+__webpack_require__(216);
 __webpack_require__(586);
+__webpack_require__(588);
 __webpack_require__(0);
-window.$.fn.transition = __webpack_require__(739);
-window.$.fn.dropdown = __webpack_require__(738);
-jQuery(document).ready(function ($) {
-  $('.ui.dropdown').dropdown({ allowCategorySelection: true });
-});
-
+window.$.fn.transition = __webpack_require__(183);
+window.$.fn.dropdown = __webpack_require__(182);
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -46435,17 +51324,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 /***/ }),
-/* 399 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {
 
-__webpack_require__(583);
+__webpack_require__(585);
 
-__webpack_require__(736);
+__webpack_require__(738);
 
-__webpack_require__(403);
+__webpack_require__(405);
 
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel-polyfill is allowed");
@@ -46467,10 +51356,10 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67)))
 
 /***/ }),
-/* 400 */
+/* 402 */
 /***/ (function(module, exports) {
 
 /**
@@ -46606,7 +51495,7 @@ define(String.prototype, "padRight", "".padEnd);
 
 
 /***/ }),
-/* 401 */
+/* 403 */
 /***/ (function(module, exports) {
 
 /*!
@@ -48989,7 +53878,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 402 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -49003,7 +53892,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(61)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(20)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -49782,14 +54671,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 403 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(412);
-module.exports = __webpack_require__(40).RegExp.escape;
+__webpack_require__(414);
+module.exports = __webpack_require__(41).RegExp.escape;
 
 /***/ }),
-/* 404 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(8)
@@ -49810,24 +54699,24 @@ module.exports = function(original){
 };
 
 /***/ }),
-/* 405 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-var speciesConstructor = __webpack_require__(404);
+var speciesConstructor = __webpack_require__(406);
 
 module.exports = function(original, length){
   return new (speciesConstructor(original))(length);
 };
 
 /***/ }),
-/* 406 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var anObject    = __webpack_require__(4)
-  , toPrimitive = __webpack_require__(37)
+  , toPrimitive = __webpack_require__(38)
   , NUMBER      = 'number';
 
 module.exports = function(hint){
@@ -49836,11 +54725,11 @@ module.exports = function(hint){
 };
 
 /***/ }),
-/* 407 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(56)
+var getKeys = __webpack_require__(58)
   , gOPS    = __webpack_require__(101)
   , pIE     = __webpack_require__(84);
 module.exports = function(it){
@@ -49856,11 +54745,11 @@ module.exports = function(it){
 };
 
 /***/ }),
-/* 408 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getKeys   = __webpack_require__(56)
-  , toIObject = __webpack_require__(26);
+var getKeys   = __webpack_require__(58)
+  , toIObject = __webpack_require__(27);
 module.exports = function(object, el){
   var O      = toIObject(object)
     , keys   = getKeys(O)
@@ -49871,14 +54760,14 @@ module.exports = function(object, el){
 };
 
 /***/ }),
-/* 409 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var path      = __webpack_require__(410)
+var path      = __webpack_require__(412)
   , invoke    = __webpack_require__(97)
-  , aFunction = __webpack_require__(22);
+  , aFunction = __webpack_require__(23);
 module.exports = function(/* ...pargs */){
   var fn     = aFunction(this)
     , length = arguments.length
@@ -49900,13 +54789,13 @@ module.exports = function(/* ...pargs */){
 };
 
 /***/ }),
-/* 410 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(5);
 
 /***/ }),
-/* 411 */
+/* 413 */
 /***/ (function(module, exports) {
 
 module.exports = function(regExp, replace){
@@ -49919,53 +54808,26 @@ module.exports = function(regExp, replace){
 };
 
 /***/ }),
-/* 412 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/benjamingr/RexExp.escape
 var $export = __webpack_require__(1)
-  , $re     = __webpack_require__(411)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+  , $re     = __webpack_require__(413)(/[\\^$*+?.()|[\]{}]/g, '\\$&');
 
 $export($export.S, 'RegExp', {escape: function escape(it){ return $re(it); }});
 
 
 /***/ }),
-/* 413 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 var $export = __webpack_require__(1);
 
-$export($export.P, 'Array', {copyWithin: __webpack_require__(187)});
+$export($export.P, 'Array', {copyWithin: __webpack_require__(189)});
 
-__webpack_require__(67)('copyWithin');
-
-/***/ }),
-/* 414 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $export = __webpack_require__(1)
-  , $every  = __webpack_require__(35)(4);
-
-$export($export.P + $export.F * !__webpack_require__(33)([].every, true), 'Array', {
-  // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
-  every: function every(callbackfn /* , thisArg */){
-    return $every(this, callbackfn, arguments[1]);
-  }
-});
-
-/***/ }),
-/* 415 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
-var $export = __webpack_require__(1);
-
-$export($export.P, 'Array', {fill: __webpack_require__(131)});
-
-__webpack_require__(67)('fill');
+__webpack_require__(68)('copyWithin');
 
 /***/ }),
 /* 416 */
@@ -49974,12 +54836,12 @@ __webpack_require__(67)('fill');
 "use strict";
 
 var $export = __webpack_require__(1)
-  , $filter = __webpack_require__(35)(2);
+  , $every  = __webpack_require__(36)(4);
 
-$export($export.P + $export.F * !__webpack_require__(33)([].filter, true), 'Array', {
-  // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
-  filter: function filter(callbackfn /* , thisArg */){
-    return $filter(this, callbackfn, arguments[1]);
+$export($export.P + $export.F * !__webpack_require__(34)([].every, true), 'Array', {
+  // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
+  every: function every(callbackfn /* , thisArg */){
+    return $every(this, callbackfn, arguments[1]);
   }
 });
 
@@ -49987,11 +54849,38 @@ $export($export.P + $export.F * !__webpack_require__(33)([].filter, true), 'Arra
 /* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
+var $export = __webpack_require__(1);
+
+$export($export.P, 'Array', {fill: __webpack_require__(131)});
+
+__webpack_require__(68)('fill');
+
+/***/ }),
+/* 418 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $export = __webpack_require__(1)
+  , $filter = __webpack_require__(36)(2);
+
+$export($export.P + $export.F * !__webpack_require__(34)([].filter, true), 'Array', {
+  // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
+  filter: function filter(callbackfn /* , thisArg */){
+    return $filter(this, callbackfn, arguments[1]);
+  }
+});
+
+/***/ }),
+/* 419 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
 var $export = __webpack_require__(1)
-  , $find   = __webpack_require__(35)(6)
+  , $find   = __webpack_require__(36)(6)
   , KEY     = 'findIndex'
   , forced  = true;
 // Shouldn't skip holes
@@ -50001,17 +54890,17 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(67)(KEY);
+__webpack_require__(68)(KEY);
 
 /***/ }),
-/* 418 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
 var $export = __webpack_require__(1)
-  , $find   = __webpack_require__(35)(5)
+  , $find   = __webpack_require__(36)(5)
   , KEY     = 'find'
   , forced  = true;
 // Shouldn't skip holes
@@ -50021,17 +54910,17 @@ $export($export.P + $export.F * forced, 'Array', {
     return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
   }
 });
-__webpack_require__(67)(KEY);
+__webpack_require__(68)(KEY);
 
 /***/ }),
-/* 419 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export  = __webpack_require__(1)
-  , $forEach = __webpack_require__(35)(0)
-  , STRICT   = __webpack_require__(33)([].forEach, true);
+  , $forEach = __webpack_require__(36)(0)
+  , STRICT   = __webpack_require__(34)([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
   // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
@@ -50041,15 +54930,15 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 });
 
 /***/ }),
-/* 420 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ctx            = __webpack_require__(41)
+var ctx            = __webpack_require__(42)
   , $export        = __webpack_require__(1)
   , toObject       = __webpack_require__(18)
-  , call           = __webpack_require__(196)
+  , call           = __webpack_require__(198)
   , isArrayIter    = __webpack_require__(138)
   , toLength       = __webpack_require__(16)
   , createProperty = __webpack_require__(132)
@@ -50085,7 +54974,7 @@ $export($export.S + $export.F * !__webpack_require__(99)(function(iter){ Array.f
 
 
 /***/ }),
-/* 421 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50095,7 +54984,7 @@ var $export       = __webpack_require__(1)
   , $native       = [].indexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(33)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(34)($native)), 'Array', {
   // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
   indexOf: function indexOf(searchElement /*, fromIndex = 0 */){
     return NEGATIVE_ZERO
@@ -50106,7 +54995,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(33)($nati
 });
 
 /***/ }),
-/* 422 */
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
@@ -50115,37 +55004,37 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Array', {isArray: __webpack_require__(139)});
 
 /***/ }),
-/* 423 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // 22.1.3.13 Array.prototype.join(separator)
 var $export   = __webpack_require__(1)
-  , toIObject = __webpack_require__(26)
+  , toIObject = __webpack_require__(27)
   , arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(83) != Object || !__webpack_require__(33)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(83) != Object || !__webpack_require__(34)(arrayJoin)), 'Array', {
   join: function join(separator){
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
 });
 
 /***/ }),
-/* 424 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export       = __webpack_require__(1)
-  , toIObject     = __webpack_require__(26)
-  , toInteger     = __webpack_require__(48)
+  , toIObject     = __webpack_require__(27)
+  , toInteger     = __webpack_require__(49)
   , toLength      = __webpack_require__(16)
   , $native       = [].lastIndexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(33)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(34)($native)), 'Array', {
   // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
   lastIndexOf: function lastIndexOf(searchElement /*, fromIndex = @[*-1] */){
     // convert -0 to +0
@@ -50161,15 +55050,15 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(33)($nati
 });
 
 /***/ }),
-/* 425 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(1)
-  , $map    = __webpack_require__(35)(1);
+  , $map    = __webpack_require__(36)(1);
 
-$export($export.P + $export.F * !__webpack_require__(33)([].map, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(34)([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
   map: function map(callbackfn /* , thisArg */){
     return $map(this, callbackfn, arguments[1]);
@@ -50177,7 +55066,7 @@ $export($export.P + $export.F * !__webpack_require__(33)([].map, true), 'Array',
 });
 
 /***/ }),
-/* 426 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50202,15 +55091,15 @@ $export($export.S + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 427 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(1)
-  , $reduce = __webpack_require__(189);
+  , $reduce = __webpack_require__(191);
 
-$export($export.P + $export.F * !__webpack_require__(33)([].reduceRight, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(34)([].reduceRight, true), 'Array', {
   // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
   reduceRight: function reduceRight(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
@@ -50218,15 +55107,15 @@ $export($export.P + $export.F * !__webpack_require__(33)([].reduceRight, true), 
 });
 
 /***/ }),
-/* 428 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(1)
-  , $reduce = __webpack_require__(189);
+  , $reduce = __webpack_require__(191);
 
-$export($export.P + $export.F * !__webpack_require__(33)([].reduce, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(34)([].reduce, true), 'Array', {
   // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
   reduce: function reduce(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
@@ -50234,15 +55123,15 @@ $export($export.P + $export.F * !__webpack_require__(33)([].reduce, true), 'Arra
 });
 
 /***/ }),
-/* 429 */
+/* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export    = __webpack_require__(1)
   , html       = __webpack_require__(136)
-  , cof        = __webpack_require__(31)
-  , toIndex    = __webpack_require__(59)
+  , cof        = __webpack_require__(32)
+  , toIndex    = __webpack_require__(61)
   , toLength   = __webpack_require__(16)
   , arraySlice = [].slice;
 
@@ -50268,15 +55157,15 @@ $export($export.P + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 430 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export = __webpack_require__(1)
-  , $some   = __webpack_require__(35)(3);
+  , $some   = __webpack_require__(36)(3);
 
-$export($export.P + $export.F * !__webpack_require__(33)([].some, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(34)([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
   some: function some(callbackfn /* , thisArg */){
     return $some(this, callbackfn, arguments[1]);
@@ -50284,13 +55173,13 @@ $export($export.P + $export.F * !__webpack_require__(33)([].some, true), 'Array'
 });
 
 /***/ }),
-/* 431 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export   = __webpack_require__(1)
-  , aFunction = __webpack_require__(22)
+  , aFunction = __webpack_require__(23)
   , toObject  = __webpack_require__(18)
   , fails     = __webpack_require__(6)
   , $sort     = [].sort
@@ -50303,7 +55192,7 @@ $export($export.P + $export.F * (fails(function(){
   // V8 bug
   test.sort(null);
   // Old WebKit
-}) || !__webpack_require__(33)($sort)), 'Array', {
+}) || !__webpack_require__(34)($sort)), 'Array', {
   // 22.1.3.25 Array.prototype.sort(comparefn)
   sort: function sort(comparefn){
     return comparefn === undefined
@@ -50313,13 +55202,13 @@ $export($export.P + $export.F * (fails(function(){
 });
 
 /***/ }),
-/* 432 */
+/* 434 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(58)('Array');
+__webpack_require__(60)('Array');
 
 /***/ }),
-/* 433 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.3.3.1 / 15.9.4.4 Date.now()
@@ -50328,7 +55217,7 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Date', {now: function(){ return new Date().getTime(); }});
 
 /***/ }),
-/* 434 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50362,14 +55251,14 @@ $export($export.P + $export.F * (fails(function(){
 });
 
 /***/ }),
-/* 435 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export     = __webpack_require__(1)
   , toObject    = __webpack_require__(18)
-  , toPrimitive = __webpack_require__(37);
+  , toPrimitive = __webpack_require__(38);
 
 $export($export.P + $export.F * __webpack_require__(6)(function(){
   return new Date(NaN).toJSON() !== null || Date.prototype.toJSON.call({toISOString: function(){ return 1; }}) !== 1;
@@ -50382,16 +55271,16 @@ $export($export.P + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 436 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var TO_PRIMITIVE = __webpack_require__(10)('toPrimitive')
   , proto        = Date.prototype;
 
-if(!(TO_PRIMITIVE in proto))__webpack_require__(23)(proto, TO_PRIMITIVE, __webpack_require__(406));
+if(!(TO_PRIMITIVE in proto))__webpack_require__(24)(proto, TO_PRIMITIVE, __webpack_require__(408));
 
 /***/ }),
-/* 437 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var DateProto    = Date.prototype
@@ -50400,29 +55289,29 @@ var DateProto    = Date.prototype
   , $toString    = DateProto[TO_STRING]
   , getTime      = DateProto.getTime;
 if(new Date(NaN) + '' != INVALID_DATE){
-  __webpack_require__(24)(DateProto, TO_STRING, function toString(){
+  __webpack_require__(25)(DateProto, TO_STRING, function toString(){
     var value = getTime.call(this);
     return value === value ? $toString.call(this) : INVALID_DATE;
   });
 }
 
 /***/ }),
-/* 438 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.2.3.2 / 15.3.4.5 Function.prototype.bind(thisArg, args...)
 var $export = __webpack_require__(1);
 
-$export($export.P, 'Function', {bind: __webpack_require__(190)});
+$export($export.P, 'Function', {bind: __webpack_require__(192)});
 
 /***/ }),
-/* 439 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var isObject       = __webpack_require__(8)
-  , getPrototypeOf = __webpack_require__(29)
+  , getPrototypeOf = __webpack_require__(30)
   , HAS_INSTANCE   = __webpack_require__(10)('hasInstance')
   , FunctionProto  = Function.prototype;
 // 19.2.3.6 Function.prototype[@@hasInstance](V)
@@ -50435,11 +55324,11 @@ if(!(HAS_INSTANCE in FunctionProto))__webpack_require__(14).f(FunctionProto, HAS
 }});
 
 /***/ }),
-/* 440 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP         = __webpack_require__(14).f
-  , createDesc = __webpack_require__(47)
+  , createDesc = __webpack_require__(48)
   , has        = __webpack_require__(19)
   , FProto     = Function.prototype
   , nameRE     = /^\s*function ([^ (]*)/
@@ -50465,12 +55354,12 @@ NAME in FProto || __webpack_require__(13) && dP(FProto, NAME, {
 });
 
 /***/ }),
-/* 441 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.3 Math.acosh(x)
 var $export = __webpack_require__(1)
-  , log1p   = __webpack_require__(198)
+  , log1p   = __webpack_require__(200)
   , sqrt    = Math.sqrt
   , $acosh  = Math.acosh;
 
@@ -50488,7 +55377,7 @@ $export($export.S + $export.F * !($acosh
 });
 
 /***/ }),
-/* 442 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.5 Math.asinh(x)
@@ -50503,7 +55392,7 @@ function asinh(x){
 $export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
 
 /***/ }),
-/* 443 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.7 Math.atanh(x)
@@ -50518,7 +55407,7 @@ $export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 });
 
 /***/ }),
-/* 444 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.9 Math.cbrt(x)
@@ -50532,7 +55421,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 445 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.11 Math.clz32(x)
@@ -50545,7 +55434,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 446 */
+/* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.12 Math.cosh(x)
@@ -50559,7 +55448,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 447 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.14 Math.expm1(x)
@@ -50569,7 +55458,7 @@ var $export = __webpack_require__(1)
 $export($export.S + $export.F * ($expm1 != Math.expm1), 'Math', {expm1: $expm1});
 
 /***/ }),
-/* 448 */
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.16 Math.fround(x)
@@ -50600,7 +55489,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 449 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
@@ -50630,7 +55519,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 450 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.18 Math.imul(x, y)
@@ -50652,7 +55541,7 @@ $export($export.S + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 451 */
+/* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.21 Math.log10(x)
@@ -50665,16 +55554,16 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 452 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.20 Math.log1p(x)
 var $export = __webpack_require__(1);
 
-$export($export.S, 'Math', {log1p: __webpack_require__(198)});
+$export($export.S, 'Math', {log1p: __webpack_require__(200)});
 
 /***/ }),
-/* 453 */
+/* 455 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.22 Math.log2(x)
@@ -50687,7 +55576,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 454 */
+/* 456 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.28 Math.sign(x)
@@ -50696,7 +55585,7 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Math', {sign: __webpack_require__(143)});
 
 /***/ }),
-/* 455 */
+/* 457 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.30 Math.sinh(x)
@@ -50716,7 +55605,7 @@ $export($export.S + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 456 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.33 Math.tanh(x)
@@ -50733,7 +55622,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 457 */
+/* 459 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.2.2.34 Math.trunc(x)
@@ -50746,27 +55635,27 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 458 */
+/* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var global            = __webpack_require__(5)
   , has               = __webpack_require__(19)
-  , cof               = __webpack_require__(31)
+  , cof               = __webpack_require__(32)
   , inheritIfRequired = __webpack_require__(137)
-  , toPrimitive       = __webpack_require__(37)
+  , toPrimitive       = __webpack_require__(38)
   , fails             = __webpack_require__(6)
-  , gOPN              = __webpack_require__(55).f
-  , gOPD              = __webpack_require__(28).f
+  , gOPN              = __webpack_require__(57).f
+  , gOPD              = __webpack_require__(29).f
   , dP                = __webpack_require__(14).f
-  , $trim             = __webpack_require__(71).trim
+  , $trim             = __webpack_require__(72).trim
   , NUMBER            = 'Number'
   , $Number           = global[NUMBER]
   , Base              = $Number
   , proto             = $Number.prototype
   // Opera ~12 has broken Object#toString
-  , BROKEN_COF        = cof(__webpack_require__(54)(proto)) == NUMBER
+  , BROKEN_COF        = cof(__webpack_require__(56)(proto)) == NUMBER
   , TRIM              = 'trim' in String.prototype;
 
 // 7.1.3 ToNumber(argument)
@@ -50817,11 +55706,11 @@ if(!$Number(' 0o1') || !$Number('0b1') || $Number('+0x1')){
   }
   $Number.prototype = proto;
   proto.constructor = $Number;
-  __webpack_require__(24)(global, NUMBER, $Number);
+  __webpack_require__(25)(global, NUMBER, $Number);
 }
 
 /***/ }),
-/* 459 */
+/* 461 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.1 Number.EPSILON
@@ -50830,7 +55719,7 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Number', {EPSILON: Math.pow(2, -52)});
 
 /***/ }),
-/* 460 */
+/* 462 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.2 Number.isFinite(number)
@@ -50844,16 +55733,16 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 461 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.3 Number.isInteger(number)
 var $export = __webpack_require__(1);
 
-$export($export.S, 'Number', {isInteger: __webpack_require__(195)});
+$export($export.S, 'Number', {isInteger: __webpack_require__(197)});
 
 /***/ }),
-/* 462 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.4 Number.isNaN(number)
@@ -50866,12 +55755,12 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 463 */
+/* 465 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.5 Number.isSafeInteger(number)
 var $export   = __webpack_require__(1)
-  , isInteger = __webpack_require__(195)
+  , isInteger = __webpack_require__(197)
   , abs       = Math.abs;
 
 $export($export.S, 'Number', {
@@ -50881,7 +55770,7 @@ $export($export.S, 'Number', {
 });
 
 /***/ }),
-/* 464 */
+/* 466 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.6 Number.MAX_SAFE_INTEGER
@@ -50890,7 +55779,7 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Number', {MAX_SAFE_INTEGER: 0x1fffffffffffff});
 
 /***/ }),
-/* 465 */
+/* 467 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 20.1.2.10 Number.MIN_SAFE_INTEGER
@@ -50899,32 +55788,32 @@ var $export = __webpack_require__(1);
 $export($export.S, 'Number', {MIN_SAFE_INTEGER: -0x1fffffffffffff});
 
 /***/ }),
-/* 466 */
+/* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export     = __webpack_require__(1)
-  , $parseFloat = __webpack_require__(205);
+  , $parseFloat = __webpack_require__(207);
 // 20.1.2.12 Number.parseFloat(string)
 $export($export.S + $export.F * (Number.parseFloat != $parseFloat), 'Number', {parseFloat: $parseFloat});
 
 /***/ }),
-/* 467 */
+/* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export   = __webpack_require__(1)
-  , $parseInt = __webpack_require__(206);
+  , $parseInt = __webpack_require__(208);
 // 20.1.2.13 Number.parseInt(string, radix)
 $export($export.S + $export.F * (Number.parseInt != $parseInt), 'Number', {parseInt: $parseInt});
 
 /***/ }),
-/* 468 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export      = __webpack_require__(1)
-  , toInteger    = __webpack_require__(48)
-  , aNumberValue = __webpack_require__(186)
+  , toInteger    = __webpack_require__(49)
+  , aNumberValue = __webpack_require__(188)
   , repeat       = __webpack_require__(150)
   , $toFixed     = 1..toFixed
   , floor        = Math.floor
@@ -51036,14 +55925,14 @@ $export($export.P + $export.F * (!!$toFixed && (
 });
 
 /***/ }),
-/* 469 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export      = __webpack_require__(1)
   , $fails       = __webpack_require__(6)
-  , aNumberValue = __webpack_require__(186)
+  , aNumberValue = __webpack_require__(188)
   , $toPrecision = 1..toPrecision;
 
 $export($export.P + $export.F * ($fails(function(){
@@ -51060,32 +55949,32 @@ $export($export.P + $export.F * ($fails(function(){
 });
 
 /***/ }),
-/* 470 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.3.1 Object.assign(target, source)
 var $export = __webpack_require__(1);
 
-$export($export.S + $export.F, 'Object', {assign: __webpack_require__(199)});
+$export($export.S + $export.F, 'Object', {assign: __webpack_require__(201)});
 
 /***/ }),
-/* 471 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1)
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-$export($export.S, 'Object', {create: __webpack_require__(54)});
+$export($export.S, 'Object', {create: __webpack_require__(56)});
 
 /***/ }),
-/* 472 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1);
 // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
-$export($export.S + $export.F * !__webpack_require__(13), 'Object', {defineProperties: __webpack_require__(200)});
+$export($export.S + $export.F * !__webpack_require__(13), 'Object', {defineProperties: __webpack_require__(202)});
 
 /***/ }),
-/* 473 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1);
@@ -51093,53 +55982,30 @@ var $export = __webpack_require__(1);
 $export($export.S + $export.F * !__webpack_require__(13), 'Object', {defineProperty: __webpack_require__(14).f});
 
 /***/ }),
-/* 474 */
+/* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.5 Object.freeze(O)
 var isObject = __webpack_require__(8)
-  , meta     = __webpack_require__(46).onFreeze;
+  , meta     = __webpack_require__(47).onFreeze;
 
-__webpack_require__(36)('freeze', function($freeze){
+__webpack_require__(37)('freeze', function($freeze){
   return function freeze(it){
     return $freeze && isObject(it) ? $freeze(meta(it)) : it;
   };
 });
 
 /***/ }),
-/* 475 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-var toIObject                 = __webpack_require__(26)
-  , $getOwnPropertyDescriptor = __webpack_require__(28).f;
-
-__webpack_require__(36)('getOwnPropertyDescriptor', function(){
-  return function getOwnPropertyDescriptor(it, key){
-    return $getOwnPropertyDescriptor(toIObject(it), key);
-  };
-});
-
-/***/ }),
-/* 476 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.7 Object.getOwnPropertyNames(O)
-__webpack_require__(36)('getOwnPropertyNames', function(){
-  return __webpack_require__(201).f;
-});
-
-/***/ }),
 /* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.9 Object.getPrototypeOf(O)
-var toObject        = __webpack_require__(18)
-  , $getPrototypeOf = __webpack_require__(29);
+// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+var toIObject                 = __webpack_require__(27)
+  , $getOwnPropertyDescriptor = __webpack_require__(29).f;
 
-__webpack_require__(36)('getPrototypeOf', function(){
-  return function getPrototypeOf(it){
-    return $getPrototypeOf(toObject(it));
+__webpack_require__(37)('getOwnPropertyDescriptor', function(){
+  return function getOwnPropertyDescriptor(it, key){
+    return $getOwnPropertyDescriptor(toIObject(it), key);
   };
 });
 
@@ -51147,25 +56013,22 @@ __webpack_require__(36)('getPrototypeOf', function(){
 /* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.11 Object.isExtensible(O)
-var isObject = __webpack_require__(8);
-
-__webpack_require__(36)('isExtensible', function($isExtensible){
-  return function isExtensible(it){
-    return isObject(it) ? $isExtensible ? $isExtensible(it) : true : false;
-  };
+// 19.1.2.7 Object.getOwnPropertyNames(O)
+__webpack_require__(37)('getOwnPropertyNames', function(){
+  return __webpack_require__(203).f;
 });
 
 /***/ }),
 /* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.12 Object.isFrozen(O)
-var isObject = __webpack_require__(8);
+// 19.1.2.9 Object.getPrototypeOf(O)
+var toObject        = __webpack_require__(18)
+  , $getPrototypeOf = __webpack_require__(30);
 
-__webpack_require__(36)('isFrozen', function($isFrozen){
-  return function isFrozen(it){
-    return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
+__webpack_require__(37)('getPrototypeOf', function(){
+  return function getPrototypeOf(it){
+    return $getPrototypeOf(toObject(it));
   };
 });
 
@@ -51173,12 +56036,12 @@ __webpack_require__(36)('isFrozen', function($isFrozen){
 /* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.13 Object.isSealed(O)
+// 19.1.2.11 Object.isExtensible(O)
 var isObject = __webpack_require__(8);
 
-__webpack_require__(36)('isSealed', function($isSealed){
-  return function isSealed(it){
-    return isObject(it) ? $isSealed ? $isSealed(it) : false : true;
+__webpack_require__(37)('isExtensible', function($isExtensible){
+  return function isExtensible(it){
+    return isObject(it) ? $isExtensible ? $isExtensible(it) : true : false;
   };
 });
 
@@ -51186,21 +56049,25 @@ __webpack_require__(36)('isSealed', function($isSealed){
 /* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.3.10 Object.is(value1, value2)
-var $export = __webpack_require__(1);
-$export($export.S, 'Object', {is: __webpack_require__(207)});
+// 19.1.2.12 Object.isFrozen(O)
+var isObject = __webpack_require__(8);
+
+__webpack_require__(37)('isFrozen', function($isFrozen){
+  return function isFrozen(it){
+    return isObject(it) ? $isFrozen ? $isFrozen(it) : false : true;
+  };
+});
 
 /***/ }),
 /* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__(18)
-  , $keys    = __webpack_require__(56);
+// 19.1.2.13 Object.isSealed(O)
+var isObject = __webpack_require__(8);
 
-__webpack_require__(36)('keys', function(){
-  return function keys(it){
-    return $keys(toObject(it));
+__webpack_require__(37)('isSealed', function($isSealed){
+  return function isSealed(it){
+    return isObject(it) ? $isSealed ? $isSealed(it) : false : true;
   };
 });
 
@@ -51208,27 +56075,21 @@ __webpack_require__(36)('keys', function(){
 /* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.15 Object.preventExtensions(O)
-var isObject = __webpack_require__(8)
-  , meta     = __webpack_require__(46).onFreeze;
-
-__webpack_require__(36)('preventExtensions', function($preventExtensions){
-  return function preventExtensions(it){
-    return $preventExtensions && isObject(it) ? $preventExtensions(meta(it)) : it;
-  };
-});
+// 19.1.3.10 Object.is(value1, value2)
+var $export = __webpack_require__(1);
+$export($export.S, 'Object', {is: __webpack_require__(209)});
 
 /***/ }),
 /* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// 19.1.2.17 Object.seal(O)
-var isObject = __webpack_require__(8)
-  , meta     = __webpack_require__(46).onFreeze;
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__(18)
+  , $keys    = __webpack_require__(58);
 
-__webpack_require__(36)('seal', function($seal){
-  return function seal(it){
-    return $seal && isObject(it) ? $seal(meta(it)) : it;
+__webpack_require__(37)('keys', function(){
+  return function keys(it){
+    return $keys(toObject(it));
   };
 });
 
@@ -51236,12 +56097,40 @@ __webpack_require__(36)('seal', function($seal){
 /* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// 19.1.2.15 Object.preventExtensions(O)
+var isObject = __webpack_require__(8)
+  , meta     = __webpack_require__(47).onFreeze;
+
+__webpack_require__(37)('preventExtensions', function($preventExtensions){
+  return function preventExtensions(it){
+    return $preventExtensions && isObject(it) ? $preventExtensions(meta(it)) : it;
+  };
+});
+
+/***/ }),
+/* 486 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.17 Object.seal(O)
+var isObject = __webpack_require__(8)
+  , meta     = __webpack_require__(47).onFreeze;
+
+__webpack_require__(37)('seal', function($seal){
+  return function seal(it){
+    return $seal && isObject(it) ? $seal(meta(it)) : it;
+  };
+});
+
+/***/ }),
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $export = __webpack_require__(1);
 $export($export.S, 'Object', {setPrototypeOf: __webpack_require__(145).set});
 
 /***/ }),
-/* 486 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51251,44 +56140,44 @@ var classof = __webpack_require__(82)
   , test    = {};
 test[__webpack_require__(10)('toStringTag')] = 'z';
 if(test + '' != '[object z]'){
-  __webpack_require__(24)(Object.prototype, 'toString', function toString(){
+  __webpack_require__(25)(Object.prototype, 'toString', function toString(){
     return '[object ' + classof(this) + ']';
   }, true);
 }
 
 /***/ }),
-/* 487 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export     = __webpack_require__(1)
-  , $parseFloat = __webpack_require__(205);
+  , $parseFloat = __webpack_require__(207);
 // 18.2.4 parseFloat(string)
 $export($export.G + $export.F * (parseFloat != $parseFloat), {parseFloat: $parseFloat});
 
 /***/ }),
-/* 488 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export   = __webpack_require__(1)
-  , $parseInt = __webpack_require__(206);
+  , $parseInt = __webpack_require__(208);
 // 18.2.5 parseInt(string, radix)
 $export($export.G + $export.F * (parseInt != $parseInt), {parseInt: $parseInt});
 
 /***/ }),
-/* 489 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var LIBRARY            = __webpack_require__(53)
+var LIBRARY            = __webpack_require__(55)
   , global             = __webpack_require__(5)
-  , ctx                = __webpack_require__(41)
+  , ctx                = __webpack_require__(42)
   , classof            = __webpack_require__(82)
   , $export            = __webpack_require__(1)
   , isObject           = __webpack_require__(8)
-  , aFunction          = __webpack_require__(22)
-  , anInstance         = __webpack_require__(52)
-  , forOf              = __webpack_require__(68)
+  , aFunction          = __webpack_require__(23)
+  , anInstance         = __webpack_require__(54)
+  , forOf              = __webpack_require__(69)
   , speciesConstructor = __webpack_require__(147)
   , task               = __webpack_require__(152).set
   , microtask          = __webpack_require__(144)()
@@ -51483,7 +56372,7 @@ if(!USE_NATIVE){
     this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
     this._n = false;          // <- notify
   };
-  Internal.prototype = __webpack_require__(57)($Promise.prototype, {
+  Internal.prototype = __webpack_require__(59)($Promise.prototype, {
     // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
     then: function then(onFulfilled, onRejected){
       var reaction    = newPromiseCapability(speciesConstructor(this, $Promise));
@@ -51509,9 +56398,9 @@ if(!USE_NATIVE){
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: $Promise});
-__webpack_require__(70)($Promise, PROMISE);
-__webpack_require__(58)(PROMISE);
-Wrapper = __webpack_require__(40)[PROMISE];
+__webpack_require__(71)($Promise, PROMISE);
+__webpack_require__(60)(PROMISE);
+Wrapper = __webpack_require__(41)[PROMISE];
 
 // statics
 $export($export.S + $export.F * !USE_NATIVE, PROMISE, {
@@ -51580,12 +56469,12 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(99)(function
 });
 
 /***/ }),
-/* 490 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
 var $export   = __webpack_require__(1)
-  , aFunction = __webpack_require__(22)
+  , aFunction = __webpack_require__(23)
   , anObject  = __webpack_require__(4)
   , rApply    = (__webpack_require__(5).Reflect || {}).apply
   , fApply    = Function.apply;
@@ -51601,17 +56490,17 @@ $export($export.S + $export.F * !__webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 491 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
 var $export    = __webpack_require__(1)
-  , create     = __webpack_require__(54)
-  , aFunction  = __webpack_require__(22)
+  , create     = __webpack_require__(56)
+  , aFunction  = __webpack_require__(23)
   , anObject   = __webpack_require__(4)
   , isObject   = __webpack_require__(8)
   , fails      = __webpack_require__(6)
-  , bind       = __webpack_require__(190)
+  , bind       = __webpack_require__(192)
   , rConstruct = (__webpack_require__(5).Reflect || {}).construct;
 
 // MS Edge supports only 2 arguments and argumentsList argument is optional
@@ -51653,14 +56542,14 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 });
 
 /***/ }),
-/* 492 */
+/* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
 var dP          = __webpack_require__(14)
   , $export     = __webpack_require__(1)
   , anObject    = __webpack_require__(4)
-  , toPrimitive = __webpack_require__(37);
+  , toPrimitive = __webpack_require__(38);
 
 // MS Edge has broken Reflect.defineProperty - throwing instead of returning false
 $export($export.S + $export.F * __webpack_require__(6)(function(){
@@ -51680,12 +56569,12 @@ $export($export.S + $export.F * __webpack_require__(6)(function(){
 });
 
 /***/ }),
-/* 493 */
+/* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export  = __webpack_require__(1)
-  , gOPD     = __webpack_require__(28).f
+  , gOPD     = __webpack_require__(29).f
   , anObject = __webpack_require__(4);
 
 $export($export.S, 'Reflect', {
@@ -51696,7 +56585,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 494 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51728,11 +56617,11 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 495 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
-var gOPD     = __webpack_require__(28)
+var gOPD     = __webpack_require__(29)
   , $export  = __webpack_require__(1)
   , anObject = __webpack_require__(4);
 
@@ -51743,12 +56632,12 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 496 */
+/* 498 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.8 Reflect.getPrototypeOf(target)
 var $export  = __webpack_require__(1)
-  , getProto = __webpack_require__(29)
+  , getProto = __webpack_require__(30)
   , anObject = __webpack_require__(4);
 
 $export($export.S, 'Reflect', {
@@ -51758,12 +56647,12 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 497 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
-var gOPD           = __webpack_require__(28)
-  , getPrototypeOf = __webpack_require__(29)
+var gOPD           = __webpack_require__(29)
+  , getPrototypeOf = __webpack_require__(30)
   , has            = __webpack_require__(19)
   , $export        = __webpack_require__(1)
   , isObject       = __webpack_require__(8)
@@ -51784,7 +56673,7 @@ function get(target, propertyKey/*, receiver*/){
 $export($export.S, 'Reflect', {get: get});
 
 /***/ }),
-/* 498 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.9 Reflect.has(target, propertyKey)
@@ -51797,7 +56686,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 499 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.10 Reflect.isExtensible(target)
@@ -51813,16 +56702,16 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 500 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.11 Reflect.ownKeys(target)
 var $export = __webpack_require__(1);
 
-$export($export.S, 'Reflect', {ownKeys: __webpack_require__(204)});
+$export($export.S, 'Reflect', {ownKeys: __webpack_require__(206)});
 
 /***/ }),
-/* 501 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.12 Reflect.preventExtensions(target)
@@ -51843,7 +56732,7 @@ $export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 502 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.14 Reflect.setPrototypeOf(target, proto)
@@ -51863,16 +56752,16 @@ if(setProto)$export($export.S, 'Reflect', {
 });
 
 /***/ }),
-/* 503 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP             = __webpack_require__(14)
-  , gOPD           = __webpack_require__(28)
-  , getPrototypeOf = __webpack_require__(29)
+  , gOPD           = __webpack_require__(29)
+  , getPrototypeOf = __webpack_require__(30)
   , has            = __webpack_require__(19)
   , $export        = __webpack_require__(1)
-  , createDesc     = __webpack_require__(47)
+  , createDesc     = __webpack_require__(48)
   , anObject       = __webpack_require__(4)
   , isObject       = __webpack_require__(8);
 
@@ -51899,13 +56788,13 @@ function set(target, propertyKey, V/*, receiver*/){
 $export($export.S, 'Reflect', {set: set});
 
 /***/ }),
-/* 504 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global            = __webpack_require__(5)
   , inheritIfRequired = __webpack_require__(137)
   , dP                = __webpack_require__(14).f
-  , gOPN              = __webpack_require__(55).f
+  , gOPN              = __webpack_require__(57).f
   , isRegExp          = __webpack_require__(98)
   , $flags            = __webpack_require__(96)
   , $RegExp           = global.RegExp
@@ -51941,13 +56830,13 @@ if(__webpack_require__(13) && (!CORRECT_NEW || __webpack_require__(6)(function()
   for(var keys = gOPN(Base), i = 0; keys.length > i; )proxy(keys[i++]);
   proto.constructor = $RegExp;
   $RegExp.prototype = proto;
-  __webpack_require__(24)(global, 'RegExp', $RegExp);
+  __webpack_require__(25)(global, 'RegExp', $RegExp);
 }
 
-__webpack_require__(58)('RegExp');
+__webpack_require__(60)('RegExp');
 
 /***/ }),
-/* 505 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@match logic
@@ -51962,7 +56851,7 @@ __webpack_require__(95)('match', 1, function(defined, MATCH, $match){
 });
 
 /***/ }),
-/* 506 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@replace logic
@@ -51979,7 +56868,7 @@ __webpack_require__(95)('replace', 2, function(defined, REPLACE, $replace){
 });
 
 /***/ }),
-/* 507 */
+/* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@search logic
@@ -51994,7 +56883,7 @@ __webpack_require__(95)('search', 1, function(defined, SEARCH, $search){
 });
 
 /***/ }),
-/* 508 */
+/* 510 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // @@split logic
@@ -52069,12 +56958,12 @@ __webpack_require__(95)('split', 2, function(defined, SPLIT, $split){
 });
 
 /***/ }),
-/* 509 */
+/* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-__webpack_require__(211);
+__webpack_require__(213);
 var anObject    = __webpack_require__(4)
   , $flags      = __webpack_require__(96)
   , DESCRIPTORS = __webpack_require__(13)
@@ -52082,7 +56971,7 @@ var anObject    = __webpack_require__(4)
   , $toString   = /./[TO_STRING];
 
 var define = function(fn){
-  __webpack_require__(24)(RegExp.prototype, TO_STRING, fn, true);
+  __webpack_require__(25)(RegExp.prototype, TO_STRING, fn, true);
 };
 
 // 21.2.5.14 RegExp.prototype.toString()
@@ -52100,41 +56989,15 @@ if(__webpack_require__(6)(function(){ return $toString.call({source: 'a', flags:
 }
 
 /***/ }),
-/* 510 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.2 String.prototype.anchor(name)
-__webpack_require__(25)('anchor', function(createHTML){
-  return function anchor(name){
-    return createHTML(this, 'a', 'name', name);
-  }
-});
-
-/***/ }),
-/* 511 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.3 String.prototype.big()
-__webpack_require__(25)('big', function(createHTML){
-  return function big(){
-    return createHTML(this, 'big', '', '');
-  }
-});
-
-/***/ }),
 /* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// B.2.3.4 String.prototype.blink()
-__webpack_require__(25)('blink', function(createHTML){
-  return function blink(){
-    return createHTML(this, 'blink', '', '');
+// B.2.3.2 String.prototype.anchor(name)
+__webpack_require__(26)('anchor', function(createHTML){
+  return function anchor(name){
+    return createHTML(this, 'a', 'name', name);
   }
 });
 
@@ -52144,15 +57007,41 @@ __webpack_require__(25)('blink', function(createHTML){
 
 "use strict";
 
+// B.2.3.3 String.prototype.big()
+__webpack_require__(26)('big', function(createHTML){
+  return function big(){
+    return createHTML(this, 'big', '', '');
+  }
+});
+
+/***/ }),
+/* 514 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// B.2.3.4 String.prototype.blink()
+__webpack_require__(26)('blink', function(createHTML){
+  return function blink(){
+    return createHTML(this, 'blink', '', '');
+  }
+});
+
+/***/ }),
+/* 515 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 // B.2.3.5 String.prototype.bold()
-__webpack_require__(25)('bold', function(createHTML){
+__webpack_require__(26)('bold', function(createHTML){
   return function bold(){
     return createHTML(this, 'b', '', '');
   }
 });
 
 /***/ }),
-/* 514 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52167,7 +57056,7 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 515 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52193,41 +57082,15 @@ $export($export.P + $export.F * __webpack_require__(135)(ENDS_WITH), 'String', {
 });
 
 /***/ }),
-/* 516 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.6 String.prototype.fixed()
-__webpack_require__(25)('fixed', function(createHTML){
-  return function fixed(){
-    return createHTML(this, 'tt', '', '');
-  }
-});
-
-/***/ }),
-/* 517 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.7 String.prototype.fontcolor(color)
-__webpack_require__(25)('fontcolor', function(createHTML){
-  return function fontcolor(color){
-    return createHTML(this, 'font', 'color', color);
-  }
-});
-
-/***/ }),
 /* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// B.2.3.8 String.prototype.fontsize(size)
-__webpack_require__(25)('fontsize', function(createHTML){
-  return function fontsize(size){
-    return createHTML(this, 'font', 'size', size);
+// B.2.3.6 String.prototype.fixed()
+__webpack_require__(26)('fixed', function(createHTML){
+  return function fixed(){
+    return createHTML(this, 'tt', '', '');
   }
 });
 
@@ -52235,8 +57098,34 @@ __webpack_require__(25)('fontsize', function(createHTML){
 /* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+// B.2.3.7 String.prototype.fontcolor(color)
+__webpack_require__(26)('fontcolor', function(createHTML){
+  return function fontcolor(color){
+    return createHTML(this, 'font', 'color', color);
+  }
+});
+
+/***/ }),
+/* 520 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// B.2.3.8 String.prototype.fontsize(size)
+__webpack_require__(26)('fontsize', function(createHTML){
+  return function fontsize(size){
+    return createHTML(this, 'font', 'size', size);
+  }
+});
+
+/***/ }),
+/* 521 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var $export        = __webpack_require__(1)
-  , toIndex        = __webpack_require__(59)
+  , toIndex        = __webpack_require__(61)
   , fromCharCode   = String.fromCharCode
   , $fromCodePoint = String.fromCodePoint;
 
@@ -52260,7 +57149,7 @@ $export($export.S + $export.F * (!!$fromCodePoint && $fromCodePoint.length != 1)
 });
 
 /***/ }),
-/* 520 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52278,20 +57167,20 @@ $export($export.P + $export.F * __webpack_require__(135)(INCLUDES), 'String', {
 });
 
 /***/ }),
-/* 521 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.9 String.prototype.italics()
-__webpack_require__(25)('italics', function(createHTML){
+__webpack_require__(26)('italics', function(createHTML){
   return function italics(){
     return createHTML(this, 'i', '', '');
   }
 });
 
 /***/ }),
-/* 522 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52314,24 +57203,24 @@ __webpack_require__(141)(String, 'String', function(iterated){
 });
 
 /***/ }),
-/* 523 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.10 String.prototype.link(url)
-__webpack_require__(25)('link', function(createHTML){
+__webpack_require__(26)('link', function(createHTML){
   return function link(url){
     return createHTML(this, 'a', 'href', url);
   }
 });
 
 /***/ }),
-/* 524 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export   = __webpack_require__(1)
-  , toIObject = __webpack_require__(26)
+  , toIObject = __webpack_require__(27)
   , toLength  = __webpack_require__(16);
 
 $export($export.S, 'String', {
@@ -52350,7 +57239,7 @@ $export($export.S, 'String', {
 });
 
 /***/ }),
-/* 525 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1);
@@ -52361,20 +57250,20 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 526 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // B.2.3.11 String.prototype.small()
-__webpack_require__(25)('small', function(createHTML){
+__webpack_require__(26)('small', function(createHTML){
   return function small(){
     return createHTML(this, 'small', '', '');
   }
 });
 
 /***/ }),
-/* 527 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52398,41 +57287,15 @@ $export($export.P + $export.F * __webpack_require__(135)(STARTS_WITH), 'String',
 });
 
 /***/ }),
-/* 528 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.12 String.prototype.strike()
-__webpack_require__(25)('strike', function(createHTML){
-  return function strike(){
-    return createHTML(this, 'strike', '', '');
-  }
-});
-
-/***/ }),
-/* 529 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// B.2.3.13 String.prototype.sub()
-__webpack_require__(25)('sub', function(createHTML){
-  return function sub(){
-    return createHTML(this, 'sub', '', '');
-  }
-});
-
-/***/ }),
 /* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// B.2.3.14 String.prototype.sup()
-__webpack_require__(25)('sup', function(createHTML){
-  return function sup(){
-    return createHTML(this, 'sup', '', '');
+// B.2.3.12 String.prototype.strike()
+__webpack_require__(26)('strike', function(createHTML){
+  return function strike(){
+    return createHTML(this, 'strike', '', '');
   }
 });
 
@@ -52442,15 +57305,41 @@ __webpack_require__(25)('sup', function(createHTML){
 
 "use strict";
 
+// B.2.3.13 String.prototype.sub()
+__webpack_require__(26)('sub', function(createHTML){
+  return function sub(){
+    return createHTML(this, 'sub', '', '');
+  }
+});
+
+/***/ }),
+/* 532 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// B.2.3.14 String.prototype.sup()
+__webpack_require__(26)('sup', function(createHTML){
+  return function sup(){
+    return createHTML(this, 'sup', '', '');
+  }
+});
+
+/***/ }),
+/* 533 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 // 21.1.3.25 String.prototype.trim()
-__webpack_require__(71)('trim', function($trim){
+__webpack_require__(72)('trim', function($trim){
   return function trim(){
     return $trim(this, 3);
   };
 });
 
 /***/ }),
-/* 532 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52460,27 +57349,27 @@ var global         = __webpack_require__(5)
   , has            = __webpack_require__(19)
   , DESCRIPTORS    = __webpack_require__(13)
   , $export        = __webpack_require__(1)
-  , redefine       = __webpack_require__(24)
-  , META           = __webpack_require__(46).KEY
+  , redefine       = __webpack_require__(25)
+  , META           = __webpack_require__(47).KEY
   , $fails         = __webpack_require__(6)
   , shared         = __webpack_require__(102)
-  , setToStringTag = __webpack_require__(70)
-  , uid            = __webpack_require__(60)
+  , setToStringTag = __webpack_require__(71)
+  , uid            = __webpack_require__(62)
   , wks            = __webpack_require__(10)
-  , wksExt         = __webpack_require__(209)
+  , wksExt         = __webpack_require__(211)
   , wksDefine      = __webpack_require__(154)
-  , keyOf          = __webpack_require__(408)
-  , enumKeys       = __webpack_require__(407)
+  , keyOf          = __webpack_require__(410)
+  , enumKeys       = __webpack_require__(409)
   , isArray        = __webpack_require__(139)
   , anObject       = __webpack_require__(4)
-  , toIObject      = __webpack_require__(26)
-  , toPrimitive    = __webpack_require__(37)
-  , createDesc     = __webpack_require__(47)
-  , _create        = __webpack_require__(54)
-  , gOPNExt        = __webpack_require__(201)
-  , $GOPD          = __webpack_require__(28)
+  , toIObject      = __webpack_require__(27)
+  , toPrimitive    = __webpack_require__(38)
+  , createDesc     = __webpack_require__(48)
+  , _create        = __webpack_require__(56)
+  , gOPNExt        = __webpack_require__(203)
+  , $GOPD          = __webpack_require__(29)
   , $DP            = __webpack_require__(14)
-  , $keys          = __webpack_require__(56)
+  , $keys          = __webpack_require__(58)
   , gOPD           = $GOPD.f
   , dP             = $DP.f
   , gOPN           = gOPNExt.f
@@ -52603,11 +57492,11 @@ if(!USE_NATIVE){
 
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f   = $defineProperty;
-  __webpack_require__(55).f = gOPNExt.f = $getOwnPropertyNames;
+  __webpack_require__(57).f = gOPNExt.f = $getOwnPropertyNames;
   __webpack_require__(84).f  = $propertyIsEnumerable;
   __webpack_require__(101).f = $getOwnPropertySymbols;
 
-  if(DESCRIPTORS && !__webpack_require__(53)){
+  if(DESCRIPTORS && !__webpack_require__(55)){
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -52682,7 +57571,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(23)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(24)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -52691,7 +57580,7 @@ setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
-/* 533 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52700,7 +57589,7 @@ var $export      = __webpack_require__(1)
   , $typed       = __webpack_require__(103)
   , buffer       = __webpack_require__(153)
   , anObject     = __webpack_require__(4)
-  , toIndex      = __webpack_require__(59)
+  , toIndex      = __webpack_require__(61)
   , toLength     = __webpack_require__(16)
   , isObject     = __webpack_require__(8)
   , ArrayBuffer  = __webpack_require__(5).ArrayBuffer
@@ -52740,10 +57629,10 @@ $export($export.P + $export.U + $export.F * __webpack_require__(6)(function(){
   }
 });
 
-__webpack_require__(58)(ARRAY_BUFFER);
+__webpack_require__(60)(ARRAY_BUFFER);
 
 /***/ }),
-/* 534 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1);
@@ -52752,31 +57641,11 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(103).ABV, {
 });
 
 /***/ }),
-/* 535 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(43)('Float32', 4, function(init){
-  return function Float32Array(data, byteOffset, length){
-    return init(this, data, byteOffset, length);
-  };
-});
-
-/***/ }),
-/* 536 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(43)('Float64', 8, function(init){
-  return function Float64Array(data, byteOffset, length){
-    return init(this, data, byteOffset, length);
-  };
-});
-
-/***/ }),
 /* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Int16', 2, function(init){
-  return function Int16Array(data, byteOffset, length){
+__webpack_require__(44)('Float32', 4, function(init){
+  return function Float32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52785,8 +57654,8 @@ __webpack_require__(43)('Int16', 2, function(init){
 /* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Int32', 4, function(init){
-  return function Int32Array(data, byteOffset, length){
+__webpack_require__(44)('Float64', 8, function(init){
+  return function Float64Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52795,8 +57664,8 @@ __webpack_require__(43)('Int32', 4, function(init){
 /* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Int8', 1, function(init){
-  return function Int8Array(data, byteOffset, length){
+__webpack_require__(44)('Int16', 2, function(init){
+  return function Int16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52805,8 +57674,8 @@ __webpack_require__(43)('Int8', 1, function(init){
 /* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Uint16', 2, function(init){
-  return function Uint16Array(data, byteOffset, length){
+__webpack_require__(44)('Int32', 4, function(init){
+  return function Int32Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52815,8 +57684,8 @@ __webpack_require__(43)('Uint16', 2, function(init){
 /* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Uint32', 4, function(init){
-  return function Uint32Array(data, byteOffset, length){
+__webpack_require__(44)('Int8', 1, function(init){
+  return function Int8Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52825,8 +57694,8 @@ __webpack_require__(43)('Uint32', 4, function(init){
 /* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Uint8', 1, function(init){
-  return function Uint8Array(data, byteOffset, length){
+__webpack_require__(44)('Uint16', 2, function(init){
+  return function Uint16Array(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 });
@@ -52835,19 +57704,39 @@ __webpack_require__(43)('Uint8', 1, function(init){
 /* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(43)('Uint8', 1, function(init){
+__webpack_require__(44)('Uint32', 4, function(init){
+  return function Uint32Array(data, byteOffset, length){
+    return init(this, data, byteOffset, length);
+  };
+});
+
+/***/ }),
+/* 544 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(44)('Uint8', 1, function(init){
+  return function Uint8Array(data, byteOffset, length){
+    return init(this, data, byteOffset, length);
+  };
+});
+
+/***/ }),
+/* 545 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(44)('Uint8', 1, function(init){
   return function Uint8ClampedArray(data, byteOffset, length){
     return init(this, data, byteOffset, length);
   };
 }, true);
 
 /***/ }),
-/* 544 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var weak = __webpack_require__(193);
+var weak = __webpack_require__(195);
 
 // 23.4 WeakSet Objects
 __webpack_require__(94)('WeakSet', function(get){
@@ -52860,7 +57749,7 @@ __webpack_require__(94)('WeakSet', function(get){
 }, weak, false, true);
 
 /***/ }),
-/* 545 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52875,17 +57764,17 @@ $export($export.P, 'Array', {
   }
 });
 
-__webpack_require__(67)('includes');
+__webpack_require__(68)('includes');
 
 /***/ }),
-/* 546 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/rwaldron/tc39-notes/blob/master/es6/2014-09/sept-25.md#510-globalasap-for-enqueuing-a-microtask
 var $export   = __webpack_require__(1)
   , microtask = __webpack_require__(144)()
   , process   = __webpack_require__(5).process
-  , isNode    = __webpack_require__(31)(process) == 'process';
+  , isNode    = __webpack_require__(32)(process) == 'process';
 
 $export($export.G, {
   asap: function asap(fn){
@@ -52895,12 +57784,12 @@ $export($export.G, {
 });
 
 /***/ }),
-/* 547 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/ljharb/proposal-is-error
 var $export = __webpack_require__(1)
-  , cof     = __webpack_require__(31);
+  , cof     = __webpack_require__(32);
 
 $export($export.S, 'Error', {
   isError: function isError(it){
@@ -52909,16 +57798,16 @@ $export($export.S, 'Error', {
 });
 
 /***/ }),
-/* 548 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var $export  = __webpack_require__(1);
 
-$export($export.P + $export.R, 'Map', {toJSON: __webpack_require__(192)('Map')});
+$export($export.P + $export.R, 'Map', {toJSON: __webpack_require__(194)('Map')});
 
 /***/ }),
-/* 549 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -52934,7 +57823,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 550 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -52955,7 +57844,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 551 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -52971,7 +57860,7 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 552 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://gist.github.com/BrendanEich/4294d5c212a6d2254703
@@ -52992,14 +57881,14 @@ $export($export.S, 'Math', {
 });
 
 /***/ }),
-/* 553 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export         = __webpack_require__(1)
   , toObject        = __webpack_require__(18)
-  , aFunction       = __webpack_require__(22)
+  , aFunction       = __webpack_require__(23)
   , $defineProperty = __webpack_require__(14);
 
 // B.2.2.2 Object.prototype.__defineGetter__(P, getter)
@@ -53010,14 +57899,14 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object
 });
 
 /***/ }),
-/* 554 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export         = __webpack_require__(1)
   , toObject        = __webpack_require__(18)
-  , aFunction       = __webpack_require__(22)
+  , aFunction       = __webpack_require__(23)
   , $defineProperty = __webpack_require__(14);
 
 // B.2.2.3 Object.prototype.__defineSetter__(P, setter)
@@ -53028,12 +57917,12 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object
 });
 
 /***/ }),
-/* 555 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export  = __webpack_require__(1)
-  , $entries = __webpack_require__(203)(true);
+  , $entries = __webpack_require__(205)(true);
 
 $export($export.S, 'Object', {
   entries: function entries(it){
@@ -53042,14 +57931,14 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 556 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-getownpropertydescriptors
 var $export        = __webpack_require__(1)
-  , ownKeys        = __webpack_require__(204)
-  , toIObject      = __webpack_require__(26)
-  , gOPD           = __webpack_require__(28)
+  , ownKeys        = __webpack_require__(206)
+  , toIObject      = __webpack_require__(27)
+  , gOPD           = __webpack_require__(29)
   , createProperty = __webpack_require__(132);
 
 $export($export.S, 'Object', {
@@ -53066,16 +57955,16 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 557 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export                  = __webpack_require__(1)
   , toObject                 = __webpack_require__(18)
-  , toPrimitive              = __webpack_require__(37)
-  , getPrototypeOf           = __webpack_require__(29)
-  , getOwnPropertyDescriptor = __webpack_require__(28).f;
+  , toPrimitive              = __webpack_require__(38)
+  , getPrototypeOf           = __webpack_require__(30)
+  , getOwnPropertyDescriptor = __webpack_require__(29).f;
 
 // B.2.2.4 Object.prototype.__lookupGetter__(P)
 __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object', {
@@ -53090,16 +57979,16 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object
 });
 
 /***/ }),
-/* 558 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var $export                  = __webpack_require__(1)
   , toObject                 = __webpack_require__(18)
-  , toPrimitive              = __webpack_require__(37)
-  , getPrototypeOf           = __webpack_require__(29)
-  , getOwnPropertyDescriptor = __webpack_require__(28).f;
+  , toPrimitive              = __webpack_require__(38)
+  , getPrototypeOf           = __webpack_require__(30)
+  , getOwnPropertyDescriptor = __webpack_require__(29).f;
 
 // B.2.2.5 Object.prototype.__lookupSetter__(P)
 __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object', {
@@ -53114,12 +58003,12 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(100), 'Object
 });
 
 /***/ }),
-/* 559 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/tc39/proposal-object-values-entries
 var $export = __webpack_require__(1)
-  , $values = __webpack_require__(203)(false);
+  , $values = __webpack_require__(205)(false);
 
 $export($export.S, 'Object', {
   values: function values(it){
@@ -53128,7 +58017,7 @@ $export($export.S, 'Object', {
 });
 
 /***/ }),
-/* 560 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53136,15 +58025,15 @@ $export($export.S, 'Object', {
 // https://github.com/zenparsing/es-observable
 var $export     = __webpack_require__(1)
   , global      = __webpack_require__(5)
-  , core        = __webpack_require__(40)
+  , core        = __webpack_require__(41)
   , microtask   = __webpack_require__(144)()
   , OBSERVABLE  = __webpack_require__(10)('observable')
-  , aFunction   = __webpack_require__(22)
+  , aFunction   = __webpack_require__(23)
   , anObject    = __webpack_require__(4)
-  , anInstance  = __webpack_require__(52)
-  , redefineAll = __webpack_require__(57)
-  , hide        = __webpack_require__(23)
-  , forOf       = __webpack_require__(68)
+  , anInstance  = __webpack_require__(54)
+  , redefineAll = __webpack_require__(59)
+  , hide        = __webpack_require__(24)
+  , forOf       = __webpack_require__(69)
   , RETURN      = forOf.RETURN;
 
 var getMethod = function(fn){
@@ -53330,13 +58219,13 @@ hide($Observable.prototype, OBSERVABLE, function(){ return this; });
 
 $export($export.G, {Observable: $Observable});
 
-__webpack_require__(58)('Observable');
+__webpack_require__(60)('Observable');
 
 /***/ }),
-/* 561 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                  = __webpack_require__(42)
+var metadata                  = __webpack_require__(43)
   , anObject                  = __webpack_require__(4)
   , toMetaKey                 = metadata.key
   , ordinaryDefineOwnMetadata = metadata.set;
@@ -53346,10 +58235,10 @@ metadata.exp({defineMetadata: function defineMetadata(metadataKey, metadataValue
 }});
 
 /***/ }),
-/* 562 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(42)
+var metadata               = __webpack_require__(43)
   , anObject               = __webpack_require__(4)
   , toMetaKey              = metadata.key
   , getOrCreateMetadataMap = metadata.map
@@ -53366,14 +58255,14 @@ metadata.exp({deleteMetadata: function deleteMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-/* 563 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Set                     = __webpack_require__(212)
-  , from                    = __webpack_require__(188)
-  , metadata                = __webpack_require__(42)
+var Set                     = __webpack_require__(214)
+  , from                    = __webpack_require__(190)
+  , metadata                = __webpack_require__(43)
   , anObject                = __webpack_require__(4)
-  , getPrototypeOf          = __webpack_require__(29)
+  , getPrototypeOf          = __webpack_require__(30)
   , ordinaryOwnMetadataKeys = metadata.keys
   , toMetaKey               = metadata.key;
 
@@ -53390,12 +58279,12 @@ metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */)
 }});
 
 /***/ }),
-/* 564 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(42)
+var metadata               = __webpack_require__(43)
   , anObject               = __webpack_require__(4)
-  , getPrototypeOf         = __webpack_require__(29)
+  , getPrototypeOf         = __webpack_require__(30)
   , ordinaryHasOwnMetadata = metadata.has
   , ordinaryGetOwnMetadata = metadata.get
   , toMetaKey              = metadata.key;
@@ -53412,10 +58301,10 @@ metadata.exp({getMetadata: function getMetadata(metadataKey, target /*, targetKe
 }});
 
 /***/ }),
-/* 565 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                = __webpack_require__(42)
+var metadata                = __webpack_require__(43)
   , anObject                = __webpack_require__(4)
   , ordinaryOwnMetadataKeys = metadata.keys
   , toMetaKey               = metadata.key;
@@ -53425,10 +58314,10 @@ metadata.exp({getOwnMetadataKeys: function getOwnMetadataKeys(target /*, targetK
 }});
 
 /***/ }),
-/* 566 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(42)
+var metadata               = __webpack_require__(43)
   , anObject               = __webpack_require__(4)
   , ordinaryGetOwnMetadata = metadata.get
   , toMetaKey              = metadata.key;
@@ -53439,12 +58328,12 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-/* 567 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(42)
+var metadata               = __webpack_require__(43)
   , anObject               = __webpack_require__(4)
-  , getPrototypeOf         = __webpack_require__(29)
+  , getPrototypeOf         = __webpack_require__(30)
   , ordinaryHasOwnMetadata = metadata.has
   , toMetaKey              = metadata.key;
 
@@ -53460,10 +58349,10 @@ metadata.exp({hasMetadata: function hasMetadata(metadataKey, target /*, targetKe
 }});
 
 /***/ }),
-/* 568 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata               = __webpack_require__(42)
+var metadata               = __webpack_require__(43)
   , anObject               = __webpack_require__(4)
   , ordinaryHasOwnMetadata = metadata.has
   , toMetaKey              = metadata.key;
@@ -53474,12 +58363,12 @@ metadata.exp({hasOwnMetadata: function hasOwnMetadata(metadataKey, target /*, ta
 }});
 
 /***/ }),
-/* 569 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata                  = __webpack_require__(42)
+var metadata                  = __webpack_require__(43)
   , anObject                  = __webpack_require__(4)
-  , aFunction                 = __webpack_require__(22)
+  , aFunction                 = __webpack_require__(23)
   , toMetaKey                 = metadata.key
   , ordinaryDefineOwnMetadata = metadata.set;
 
@@ -53494,16 +58383,16 @@ metadata.exp({metadata: function metadata(metadataKey, metadataValue){
 }});
 
 /***/ }),
-/* 570 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var $export  = __webpack_require__(1);
 
-$export($export.P + $export.R, 'Set', {toJSON: __webpack_require__(192)('Set')});
+$export($export.P + $export.R, 'Set', {toJSON: __webpack_require__(194)('Set')});
 
 /***/ }),
-/* 571 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53519,14 +58408,14 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 572 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://tc39.github.io/String.prototype.matchAll/
 var $export     = __webpack_require__(1)
-  , defined     = __webpack_require__(32)
+  , defined     = __webpack_require__(33)
   , toLength    = __webpack_require__(16)
   , isRegExp    = __webpack_require__(98)
   , getFlags    = __webpack_require__(96)
@@ -53555,14 +58444,14 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 573 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(1)
-  , $pad    = __webpack_require__(208);
+  , $pad    = __webpack_require__(210);
 
 $export($export.P, 'String', {
   padEnd: function padEnd(maxLength /*, fillString = ' ' */){
@@ -53571,14 +58460,14 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 574 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/tc39/proposal-string-pad-start-end
 var $export = __webpack_require__(1)
-  , $pad    = __webpack_require__(208);
+  , $pad    = __webpack_require__(210);
 
 $export($export.P, 'String', {
   padStart: function padStart(maxLength /*, fillString = ' ' */){
@@ -53587,45 +58476,45 @@ $export($export.P, 'String', {
 });
 
 /***/ }),
-/* 575 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
-__webpack_require__(71)('trimLeft', function($trim){
+__webpack_require__(72)('trimLeft', function($trim){
   return function trimLeft(){
     return $trim(this, 1);
   };
 }, 'trimStart');
 
 /***/ }),
-/* 576 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 // https://github.com/sebmarkbage/ecmascript-string-left-right-trim
-__webpack_require__(71)('trimRight', function($trim){
+__webpack_require__(72)('trimRight', function($trim){
   return function trimRight(){
     return $trim(this, 2);
   };
 }, 'trimEnd');
 
 /***/ }),
-/* 577 */
+/* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(154)('asyncIterator');
 
 /***/ }),
-/* 578 */
+/* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(154)('observable');
 
 /***/ }),
-/* 579 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/ljharb/proposal-global
@@ -53634,14 +58523,14 @@ var $export = __webpack_require__(1);
 $export($export.S, 'System', {global: __webpack_require__(5)});
 
 /***/ }),
-/* 580 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $iterators    = __webpack_require__(156)
-  , redefine      = __webpack_require__(24)
+  , redefine      = __webpack_require__(25)
   , global        = __webpack_require__(5)
-  , hide          = __webpack_require__(23)
-  , Iterators     = __webpack_require__(69)
+  , hide          = __webpack_require__(24)
+  , Iterators     = __webpack_require__(70)
   , wks           = __webpack_require__(10)
   , ITERATOR      = wks('iterator')
   , TO_STRING_TAG = wks('toStringTag')
@@ -53661,7 +58550,7 @@ for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList'
 }
 
 /***/ }),
-/* 581 */
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1)
@@ -53672,14 +58561,14 @@ $export($export.G + $export.B, {
 });
 
 /***/ }),
-/* 582 */
+/* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // ie9- setTimeout & setInterval additional parameters fix
 var global     = __webpack_require__(5)
   , $export    = __webpack_require__(1)
   , invoke     = __webpack_require__(97)
-  , partial    = __webpack_require__(409)
+  , partial    = __webpack_require__(411)
   , navigator  = global.navigator
   , MSIE       = !!navigator && /MSIE .\./.test(navigator.userAgent); // <- dirty ie9- check
 var wrap = function(set){
@@ -53697,37 +58586,35 @@ $export($export.G + $export.B + $export.F * MSIE, {
 });
 
 /***/ }),
-/* 583 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(532);
-__webpack_require__(471);
+__webpack_require__(534);
 __webpack_require__(473);
-__webpack_require__(472);
 __webpack_require__(475);
-__webpack_require__(477);
-__webpack_require__(482);
-__webpack_require__(476);
 __webpack_require__(474);
-__webpack_require__(484);
-__webpack_require__(483);
+__webpack_require__(477);
 __webpack_require__(479);
-__webpack_require__(480);
+__webpack_require__(484);
 __webpack_require__(478);
-__webpack_require__(470);
-__webpack_require__(481);
-__webpack_require__(485);
+__webpack_require__(476);
 __webpack_require__(486);
-__webpack_require__(438);
-__webpack_require__(440);
-__webpack_require__(439);
-__webpack_require__(488);
+__webpack_require__(485);
+__webpack_require__(481);
+__webpack_require__(482);
+__webpack_require__(480);
+__webpack_require__(472);
+__webpack_require__(483);
 __webpack_require__(487);
-__webpack_require__(458);
-__webpack_require__(468);
-__webpack_require__(469);
-__webpack_require__(459);
+__webpack_require__(488);
+__webpack_require__(440);
+__webpack_require__(442);
+__webpack_require__(441);
+__webpack_require__(490);
+__webpack_require__(489);
 __webpack_require__(460);
+__webpack_require__(470);
+__webpack_require__(471);
 __webpack_require__(461);
 __webpack_require__(462);
 __webpack_require__(463);
@@ -53735,8 +58622,8 @@ __webpack_require__(464);
 __webpack_require__(465);
 __webpack_require__(466);
 __webpack_require__(467);
-__webpack_require__(441);
-__webpack_require__(442);
+__webpack_require__(468);
+__webpack_require__(469);
 __webpack_require__(443);
 __webpack_require__(444);
 __webpack_require__(445);
@@ -53752,133 +58639,135 @@ __webpack_require__(454);
 __webpack_require__(455);
 __webpack_require__(456);
 __webpack_require__(457);
-__webpack_require__(519);
+__webpack_require__(458);
+__webpack_require__(459);
+__webpack_require__(521);
+__webpack_require__(526);
+__webpack_require__(533);
 __webpack_require__(524);
-__webpack_require__(531);
-__webpack_require__(522);
-__webpack_require__(514);
-__webpack_require__(515);
-__webpack_require__(520);
-__webpack_require__(525);
-__webpack_require__(527);
-__webpack_require__(510);
-__webpack_require__(511);
-__webpack_require__(512);
-__webpack_require__(513);
 __webpack_require__(516);
 __webpack_require__(517);
-__webpack_require__(518);
-__webpack_require__(521);
-__webpack_require__(523);
-__webpack_require__(526);
-__webpack_require__(528);
+__webpack_require__(522);
+__webpack_require__(527);
 __webpack_require__(529);
+__webpack_require__(512);
+__webpack_require__(513);
+__webpack_require__(514);
+__webpack_require__(515);
+__webpack_require__(518);
+__webpack_require__(519);
+__webpack_require__(520);
+__webpack_require__(523);
+__webpack_require__(525);
+__webpack_require__(528);
 __webpack_require__(530);
-__webpack_require__(433);
+__webpack_require__(531);
+__webpack_require__(532);
 __webpack_require__(435);
-__webpack_require__(434);
 __webpack_require__(437);
 __webpack_require__(436);
+__webpack_require__(439);
+__webpack_require__(438);
+__webpack_require__(424);
 __webpack_require__(422);
-__webpack_require__(420);
-__webpack_require__(426);
-__webpack_require__(423);
-__webpack_require__(429);
-__webpack_require__(431);
-__webpack_require__(419);
+__webpack_require__(428);
 __webpack_require__(425);
+__webpack_require__(431);
+__webpack_require__(433);
+__webpack_require__(421);
+__webpack_require__(427);
+__webpack_require__(418);
+__webpack_require__(432);
 __webpack_require__(416);
 __webpack_require__(430);
-__webpack_require__(414);
-__webpack_require__(428);
-__webpack_require__(427);
-__webpack_require__(421);
-__webpack_require__(424);
-__webpack_require__(413);
+__webpack_require__(429);
+__webpack_require__(423);
+__webpack_require__(426);
 __webpack_require__(415);
-__webpack_require__(418);
 __webpack_require__(417);
-__webpack_require__(432);
+__webpack_require__(420);
+__webpack_require__(419);
+__webpack_require__(434);
 __webpack_require__(156);
-__webpack_require__(504);
-__webpack_require__(509);
-__webpack_require__(211);
-__webpack_require__(505);
 __webpack_require__(506);
+__webpack_require__(511);
+__webpack_require__(213);
 __webpack_require__(507);
 __webpack_require__(508);
-__webpack_require__(489);
-__webpack_require__(210);
+__webpack_require__(509);
+__webpack_require__(510);
+__webpack_require__(491);
 __webpack_require__(212);
-__webpack_require__(213);
-__webpack_require__(544);
-__webpack_require__(533);
-__webpack_require__(534);
-__webpack_require__(539);
-__webpack_require__(542);
-__webpack_require__(543);
-__webpack_require__(537);
-__webpack_require__(540);
-__webpack_require__(538);
-__webpack_require__(541);
+__webpack_require__(214);
+__webpack_require__(215);
+__webpack_require__(546);
 __webpack_require__(535);
 __webpack_require__(536);
-__webpack_require__(490);
-__webpack_require__(491);
+__webpack_require__(541);
+__webpack_require__(544);
+__webpack_require__(545);
+__webpack_require__(539);
+__webpack_require__(542);
+__webpack_require__(540);
+__webpack_require__(543);
+__webpack_require__(537);
+__webpack_require__(538);
 __webpack_require__(492);
 __webpack_require__(493);
 __webpack_require__(494);
-__webpack_require__(497);
 __webpack_require__(495);
 __webpack_require__(496);
-__webpack_require__(498);
 __webpack_require__(499);
+__webpack_require__(497);
+__webpack_require__(498);
 __webpack_require__(500);
 __webpack_require__(501);
-__webpack_require__(503);
 __webpack_require__(502);
-__webpack_require__(545);
-__webpack_require__(571);
-__webpack_require__(574);
+__webpack_require__(503);
+__webpack_require__(505);
+__webpack_require__(504);
+__webpack_require__(547);
 __webpack_require__(573);
-__webpack_require__(575);
 __webpack_require__(576);
-__webpack_require__(572);
+__webpack_require__(575);
 __webpack_require__(577);
 __webpack_require__(578);
+__webpack_require__(574);
+__webpack_require__(579);
+__webpack_require__(580);
+__webpack_require__(558);
+__webpack_require__(561);
+__webpack_require__(557);
+__webpack_require__(555);
 __webpack_require__(556);
 __webpack_require__(559);
-__webpack_require__(555);
-__webpack_require__(553);
-__webpack_require__(554);
-__webpack_require__(557);
-__webpack_require__(558);
-__webpack_require__(548);
-__webpack_require__(570);
-__webpack_require__(579);
-__webpack_require__(547);
+__webpack_require__(560);
+__webpack_require__(550);
+__webpack_require__(572);
+__webpack_require__(581);
 __webpack_require__(549);
 __webpack_require__(551);
-__webpack_require__(550);
+__webpack_require__(553);
 __webpack_require__(552);
-__webpack_require__(561);
-__webpack_require__(562);
-__webpack_require__(564);
+__webpack_require__(554);
 __webpack_require__(563);
+__webpack_require__(564);
 __webpack_require__(566);
 __webpack_require__(565);
-__webpack_require__(567);
 __webpack_require__(568);
+__webpack_require__(567);
 __webpack_require__(569);
-__webpack_require__(546);
-__webpack_require__(560);
+__webpack_require__(570);
+__webpack_require__(571);
+__webpack_require__(548);
+__webpack_require__(562);
+__webpack_require__(584);
+__webpack_require__(583);
 __webpack_require__(582);
-__webpack_require__(581);
-__webpack_require__(580);
-module.exports = __webpack_require__(40);
+module.exports = __webpack_require__(41);
 
 /***/ }),
-/* 584 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! Buttons for DataTables 1.3.1
@@ -53888,7 +58777,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! Buttons for 
 (function( factory ){
 	if ( true ) {
 		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(61), __webpack_require__(214)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(20), __webpack_require__(216)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
 			return factory( $, window, document );
 		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -55590,8 +60479,8 @@ return Buttons;
 
 
 /***/ }),
-/* 585 */,
-/* 586 */
+/* 587 */,
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! version : 4.17.47
@@ -55633,7 +60522,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     'use strict';
     if (true) {
         // AMD is used - Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(61), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(20), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -58236,8 +63125,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 587 */,
-/* 588 */,
 /* 589 */,
 /* 590 */,
 /* 591 */,
@@ -58253,7 +63140,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* 601 */,
 /* 602 */,
 /* 603 */,
-/* 604 */
+/* 604 */,
+/* 605 */,
+/* 606 */
 /***/ (function(module, exports) {
 
 /*! Copyright (c) 2011 Piotr Rochala (http://rocha.la)
@@ -58733,7 +63622,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 605 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58785,15 +63674,15 @@ module.exports = exports["default"];
 
 
 /***/ }),
-/* 606 */,
-/* 607 */,
 /* 608 */,
 /* 609 */,
 /* 610 */,
 /* 611 */,
 /* 612 */,
 /* 613 */,
-/* 614 */
+/* 614 */,
+/* 615 */,
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -75882,243 +80771,243 @@ module.exports = exports["default"];
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66), __webpack_require__(75)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(52)(module)))
 
 /***/ }),
-/* 615 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 222,
-	"./af.js": 222,
-	"./ar": 229,
-	"./ar-dz": 223,
-	"./ar-dz.js": 223,
-	"./ar-kw": 224,
-	"./ar-kw.js": 224,
-	"./ar-ly": 225,
-	"./ar-ly.js": 225,
-	"./ar-ma": 226,
-	"./ar-ma.js": 226,
-	"./ar-sa": 227,
-	"./ar-sa.js": 227,
-	"./ar-tn": 228,
-	"./ar-tn.js": 228,
-	"./ar.js": 229,
-	"./az": 230,
-	"./az.js": 230,
-	"./be": 231,
-	"./be.js": 231,
-	"./bg": 232,
-	"./bg.js": 232,
-	"./bn": 233,
-	"./bn.js": 233,
-	"./bo": 234,
-	"./bo.js": 234,
-	"./br": 235,
-	"./br.js": 235,
-	"./bs": 236,
-	"./bs.js": 236,
-	"./ca": 237,
-	"./ca.js": 237,
-	"./cs": 238,
-	"./cs.js": 238,
-	"./cv": 239,
-	"./cv.js": 239,
-	"./cy": 240,
-	"./cy.js": 240,
-	"./da": 241,
-	"./da.js": 241,
-	"./de": 244,
-	"./de-at": 242,
-	"./de-at.js": 242,
-	"./de-ch": 243,
-	"./de-ch.js": 243,
-	"./de.js": 244,
-	"./dv": 245,
-	"./dv.js": 245,
-	"./el": 246,
-	"./el.js": 246,
-	"./en-au": 247,
-	"./en-au.js": 247,
-	"./en-ca": 248,
-	"./en-ca.js": 248,
-	"./en-gb": 249,
-	"./en-gb.js": 249,
-	"./en-ie": 250,
-	"./en-ie.js": 250,
-	"./en-nz": 251,
-	"./en-nz.js": 251,
-	"./eo": 252,
-	"./eo.js": 252,
-	"./es": 254,
-	"./es-do": 253,
-	"./es-do.js": 253,
-	"./es.js": 254,
-	"./et": 255,
-	"./et.js": 255,
-	"./eu": 256,
-	"./eu.js": 256,
-	"./fa": 257,
-	"./fa.js": 257,
-	"./fi": 258,
-	"./fi.js": 258,
-	"./fo": 259,
-	"./fo.js": 259,
-	"./fr": 262,
-	"./fr-ca": 260,
-	"./fr-ca.js": 260,
-	"./fr-ch": 261,
-	"./fr-ch.js": 261,
-	"./fr.js": 262,
-	"./fy": 263,
-	"./fy.js": 263,
-	"./gd": 264,
-	"./gd.js": 264,
-	"./gl": 265,
-	"./gl.js": 265,
-	"./gom-latn": 266,
-	"./gom-latn.js": 266,
-	"./he": 267,
-	"./he.js": 267,
-	"./hi": 268,
-	"./hi.js": 268,
-	"./hr": 269,
-	"./hr.js": 269,
-	"./hu": 270,
-	"./hu.js": 270,
-	"./hy-am": 271,
-	"./hy-am.js": 271,
-	"./id": 272,
-	"./id.js": 272,
-	"./is": 273,
-	"./is.js": 273,
-	"./it": 274,
-	"./it.js": 274,
-	"./ja": 275,
-	"./ja.js": 275,
-	"./jv": 276,
-	"./jv.js": 276,
-	"./ka": 277,
-	"./ka.js": 277,
-	"./kk": 278,
-	"./kk.js": 278,
-	"./km": 279,
-	"./km.js": 279,
-	"./kn": 280,
-	"./kn.js": 280,
-	"./ko": 281,
-	"./ko.js": 281,
-	"./ky": 282,
-	"./ky.js": 282,
-	"./lb": 283,
-	"./lb.js": 283,
-	"./lo": 284,
-	"./lo.js": 284,
-	"./lt": 285,
-	"./lt.js": 285,
-	"./lv": 286,
-	"./lv.js": 286,
-	"./me": 287,
-	"./me.js": 287,
-	"./mi": 288,
-	"./mi.js": 288,
-	"./mk": 289,
-	"./mk.js": 289,
-	"./ml": 290,
-	"./ml.js": 290,
-	"./mr": 291,
-	"./mr.js": 291,
-	"./ms": 293,
-	"./ms-my": 292,
-	"./ms-my.js": 292,
-	"./ms.js": 293,
-	"./my": 294,
-	"./my.js": 294,
-	"./nb": 295,
-	"./nb.js": 295,
-	"./ne": 296,
-	"./ne.js": 296,
-	"./nl": 298,
-	"./nl-be": 297,
-	"./nl-be.js": 297,
-	"./nl.js": 298,
-	"./nn": 299,
-	"./nn.js": 299,
-	"./pa-in": 300,
-	"./pa-in.js": 300,
-	"./pl": 301,
-	"./pl.js": 301,
-	"./pt": 303,
-	"./pt-br": 302,
-	"./pt-br.js": 302,
-	"./pt.js": 303,
-	"./ro": 304,
-	"./ro.js": 304,
-	"./ru": 305,
-	"./ru.js": 305,
-	"./sd": 306,
-	"./sd.js": 306,
-	"./se": 307,
-	"./se.js": 307,
-	"./si": 308,
-	"./si.js": 308,
-	"./sk": 309,
-	"./sk.js": 309,
-	"./sl": 310,
-	"./sl.js": 310,
-	"./sq": 311,
-	"./sq.js": 311,
-	"./sr": 313,
-	"./sr-cyrl": 312,
-	"./sr-cyrl.js": 312,
-	"./sr.js": 313,
-	"./ss": 314,
-	"./ss.js": 314,
-	"./sv": 315,
-	"./sv.js": 315,
-	"./sw": 316,
-	"./sw.js": 316,
-	"./ta": 317,
-	"./ta.js": 317,
-	"./te": 318,
-	"./te.js": 318,
-	"./tet": 319,
-	"./tet.js": 319,
-	"./th": 320,
-	"./th.js": 320,
-	"./tl-ph": 321,
-	"./tl-ph.js": 321,
-	"./tlh": 322,
-	"./tlh.js": 322,
-	"./tr": 323,
-	"./tr.js": 323,
-	"./tzl": 324,
-	"./tzl.js": 324,
-	"./tzm": 326,
-	"./tzm-latn": 325,
-	"./tzm-latn.js": 325,
-	"./tzm.js": 326,
-	"./uk": 327,
-	"./uk.js": 327,
-	"./ur": 328,
-	"./ur.js": 328,
-	"./uz": 330,
-	"./uz-latn": 329,
-	"./uz-latn.js": 329,
-	"./uz.js": 330,
-	"./vi": 331,
-	"./vi.js": 331,
-	"./x-pseudo": 332,
-	"./x-pseudo.js": 332,
-	"./yo": 333,
-	"./yo.js": 333,
-	"./zh-cn": 334,
-	"./zh-cn.js": 334,
-	"./zh-hk": 335,
-	"./zh-hk.js": 335,
-	"./zh-tw": 336,
-	"./zh-tw.js": 336
+	"./af": 224,
+	"./af.js": 224,
+	"./ar": 231,
+	"./ar-dz": 225,
+	"./ar-dz.js": 225,
+	"./ar-kw": 226,
+	"./ar-kw.js": 226,
+	"./ar-ly": 227,
+	"./ar-ly.js": 227,
+	"./ar-ma": 228,
+	"./ar-ma.js": 228,
+	"./ar-sa": 229,
+	"./ar-sa.js": 229,
+	"./ar-tn": 230,
+	"./ar-tn.js": 230,
+	"./ar.js": 231,
+	"./az": 232,
+	"./az.js": 232,
+	"./be": 233,
+	"./be.js": 233,
+	"./bg": 234,
+	"./bg.js": 234,
+	"./bn": 235,
+	"./bn.js": 235,
+	"./bo": 236,
+	"./bo.js": 236,
+	"./br": 237,
+	"./br.js": 237,
+	"./bs": 238,
+	"./bs.js": 238,
+	"./ca": 239,
+	"./ca.js": 239,
+	"./cs": 240,
+	"./cs.js": 240,
+	"./cv": 241,
+	"./cv.js": 241,
+	"./cy": 242,
+	"./cy.js": 242,
+	"./da": 243,
+	"./da.js": 243,
+	"./de": 246,
+	"./de-at": 244,
+	"./de-at.js": 244,
+	"./de-ch": 245,
+	"./de-ch.js": 245,
+	"./de.js": 246,
+	"./dv": 247,
+	"./dv.js": 247,
+	"./el": 248,
+	"./el.js": 248,
+	"./en-au": 249,
+	"./en-au.js": 249,
+	"./en-ca": 250,
+	"./en-ca.js": 250,
+	"./en-gb": 251,
+	"./en-gb.js": 251,
+	"./en-ie": 252,
+	"./en-ie.js": 252,
+	"./en-nz": 253,
+	"./en-nz.js": 253,
+	"./eo": 254,
+	"./eo.js": 254,
+	"./es": 256,
+	"./es-do": 255,
+	"./es-do.js": 255,
+	"./es.js": 256,
+	"./et": 257,
+	"./et.js": 257,
+	"./eu": 258,
+	"./eu.js": 258,
+	"./fa": 259,
+	"./fa.js": 259,
+	"./fi": 260,
+	"./fi.js": 260,
+	"./fo": 261,
+	"./fo.js": 261,
+	"./fr": 264,
+	"./fr-ca": 262,
+	"./fr-ca.js": 262,
+	"./fr-ch": 263,
+	"./fr-ch.js": 263,
+	"./fr.js": 264,
+	"./fy": 265,
+	"./fy.js": 265,
+	"./gd": 266,
+	"./gd.js": 266,
+	"./gl": 267,
+	"./gl.js": 267,
+	"./gom-latn": 268,
+	"./gom-latn.js": 268,
+	"./he": 269,
+	"./he.js": 269,
+	"./hi": 270,
+	"./hi.js": 270,
+	"./hr": 271,
+	"./hr.js": 271,
+	"./hu": 272,
+	"./hu.js": 272,
+	"./hy-am": 273,
+	"./hy-am.js": 273,
+	"./id": 274,
+	"./id.js": 274,
+	"./is": 275,
+	"./is.js": 275,
+	"./it": 276,
+	"./it.js": 276,
+	"./ja": 277,
+	"./ja.js": 277,
+	"./jv": 278,
+	"./jv.js": 278,
+	"./ka": 279,
+	"./ka.js": 279,
+	"./kk": 280,
+	"./kk.js": 280,
+	"./km": 281,
+	"./km.js": 281,
+	"./kn": 282,
+	"./kn.js": 282,
+	"./ko": 283,
+	"./ko.js": 283,
+	"./ky": 284,
+	"./ky.js": 284,
+	"./lb": 285,
+	"./lb.js": 285,
+	"./lo": 286,
+	"./lo.js": 286,
+	"./lt": 287,
+	"./lt.js": 287,
+	"./lv": 288,
+	"./lv.js": 288,
+	"./me": 289,
+	"./me.js": 289,
+	"./mi": 290,
+	"./mi.js": 290,
+	"./mk": 291,
+	"./mk.js": 291,
+	"./ml": 292,
+	"./ml.js": 292,
+	"./mr": 293,
+	"./mr.js": 293,
+	"./ms": 295,
+	"./ms-my": 294,
+	"./ms-my.js": 294,
+	"./ms.js": 295,
+	"./my": 296,
+	"./my.js": 296,
+	"./nb": 297,
+	"./nb.js": 297,
+	"./ne": 298,
+	"./ne.js": 298,
+	"./nl": 300,
+	"./nl-be": 299,
+	"./nl-be.js": 299,
+	"./nl.js": 300,
+	"./nn": 301,
+	"./nn.js": 301,
+	"./pa-in": 302,
+	"./pa-in.js": 302,
+	"./pl": 303,
+	"./pl.js": 303,
+	"./pt": 305,
+	"./pt-br": 304,
+	"./pt-br.js": 304,
+	"./pt.js": 305,
+	"./ro": 306,
+	"./ro.js": 306,
+	"./ru": 307,
+	"./ru.js": 307,
+	"./sd": 308,
+	"./sd.js": 308,
+	"./se": 309,
+	"./se.js": 309,
+	"./si": 310,
+	"./si.js": 310,
+	"./sk": 311,
+	"./sk.js": 311,
+	"./sl": 312,
+	"./sl.js": 312,
+	"./sq": 313,
+	"./sq.js": 313,
+	"./sr": 315,
+	"./sr-cyrl": 314,
+	"./sr-cyrl.js": 314,
+	"./sr.js": 315,
+	"./ss": 316,
+	"./ss.js": 316,
+	"./sv": 317,
+	"./sv.js": 317,
+	"./sw": 318,
+	"./sw.js": 318,
+	"./ta": 319,
+	"./ta.js": 319,
+	"./te": 320,
+	"./te.js": 320,
+	"./tet": 321,
+	"./tet.js": 321,
+	"./th": 322,
+	"./th.js": 322,
+	"./tl-ph": 323,
+	"./tl-ph.js": 323,
+	"./tlh": 324,
+	"./tlh.js": 324,
+	"./tr": 325,
+	"./tr.js": 325,
+	"./tzl": 326,
+	"./tzl.js": 326,
+	"./tzm": 328,
+	"./tzm-latn": 327,
+	"./tzm-latn.js": 327,
+	"./tzm.js": 328,
+	"./uk": 329,
+	"./uk.js": 329,
+	"./ur": 330,
+	"./ur.js": 330,
+	"./uz": 332,
+	"./uz-latn": 331,
+	"./uz-latn.js": 331,
+	"./uz.js": 332,
+	"./vi": 333,
+	"./vi.js": 333,
+	"./x-pseudo": 334,
+	"./x-pseudo.js": 334,
+	"./yo": 335,
+	"./yo.js": 335,
+	"./zh-cn": 336,
+	"./zh-cn.js": 336,
+	"./zh-hk": 337,
+	"./zh-hk.js": 337,
+	"./zh-tw": 338,
+	"./zh-tw.js": 338
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -76134,11 +81023,9 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 615;
+webpackContext.id = 617;
 
 /***/ }),
-/* 616 */,
-/* 617 */,
 /* 618 */,
 /* 619 */,
 /* 620 */,
@@ -76257,7 +81144,9 @@ webpackContext.id = 615;
 /* 733 */,
 /* 734 */,
 /* 735 */,
-/* 736 */
+/* 736 */,
+/* 737 */,
+/* 738 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {/**
@@ -76984,4903 +81873,10 @@ webpackContext.id = 615;
   typeof self === "object" ? self : this
 );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66), __webpack_require__(49)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(50)))
 
 /***/ }),
-/* 737 */,
-/* 738 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {/*!
- * # Semantic UI 2.2.10 - Dropdown
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */
-
-;(function ($, window, document, undefined) {
-
-"use strict";
-
-window = (typeof window != 'undefined' && window.Math == Math)
-  ? window
-  : (typeof self != 'undefined' && self.Math == Math)
-    ? self
-    : Function('return this')()
-;
-
-var _module = module;
-module.exports = function(parameters) {
-  var
-    $allModules    = $(this),
-    $document      = $(document),
-
-    moduleSelector = $allModules.selector || '',
-
-    hasTouch       = ('ontouchstart' in document.documentElement),
-    time           = new Date().getTime(),
-    performance    = [],
-
-    query          = arguments[0],
-    methodInvoked  = (typeof query == 'string'),
-    queryArguments = [].slice.call(arguments, 1),
-    returnedValue
-  ;
-
-  $allModules
-    .each(function(elementIndex) {
-      var
-        settings          = ( $.isPlainObject(parameters) )
-          ? $.extend(true, {}, _module.exports.settings, parameters)
-          : $.extend({}, _module.exports.settings),
-
-        className       = settings.className,
-        message         = settings.message,
-        fields          = settings.fields,
-        keys            = settings.keys,
-        metadata        = settings.metadata,
-        namespace       = settings.namespace,
-        regExp          = settings.regExp,
-        selector        = settings.selector,
-        error           = settings.error,
-        templates       = settings.templates,
-
-        eventNamespace  = '.' + namespace,
-        moduleNamespace = 'module-' + namespace,
-
-        $module         = $(this),
-        $context        = $(settings.context),
-        $text           = $module.find(selector.text),
-        $search         = $module.find(selector.search),
-        $sizer          = $module.find(selector.sizer),
-        $input          = $module.find(selector.input),
-        $icon           = $module.find(selector.icon),
-
-        $combo = ($module.prev().find(selector.text).length > 0)
-          ? $module.prev().find(selector.text)
-          : $module.prev(),
-
-        $menu           = $module.children(selector.menu),
-        $item           = $menu.find(selector.item),
-
-        activated       = false,
-        itemActivated   = false,
-        internalChange  = false,
-        element         = this,
-        instance        = $module.data(moduleNamespace),
-
-        initialLoad,
-        pageLostFocus,
-        willRefocus,
-        elementNamespace,
-        id,
-        selectObserver,
-        menuObserver,
-        module
-      ;
-
-      module = {
-
-        initialize: function() {
-          module.debug('Initializing dropdown', settings);
-
-          if( module.is.alreadySetup() ) {
-            module.setup.reference();
-          }
-          else {
-            module.setup.layout();
-            module.refreshData();
-
-            module.save.defaults();
-            module.restore.selected();
-
-            module.create.id();
-            module.bind.events();
-
-            module.observeChanges();
-            module.instantiate();
-          }
-
-        },
-
-        instantiate: function() {
-          module.verbose('Storing instance of dropdown', module);
-          instance = module;
-          $module
-            .data(moduleNamespace, module)
-          ;
-        },
-
-        destroy: function() {
-          module.verbose('Destroying previous dropdown', $module);
-          module.remove.tabbable();
-          $module
-            .off(eventNamespace)
-            .removeData(moduleNamespace)
-          ;
-          $menu
-            .off(eventNamespace)
-          ;
-          $document
-            .off(elementNamespace)
-          ;
-          module.disconnect.menuObserver();
-          module.disconnect.selectObserver();
-        },
-
-        observeChanges: function() {
-          if('MutationObserver' in window) {
-            selectObserver = new MutationObserver(module.event.select.mutation);
-            menuObserver   = new MutationObserver(module.event.menu.mutation);
-            module.debug('Setting up mutation observer', selectObserver, menuObserver);
-            module.observe.select();
-            module.observe.menu();
-          }
-        },
-
-        disconnect: {
-          menuObserver: function() {
-            if(menuObserver) {
-              menuObserver.disconnect();
-            }
-          },
-          selectObserver: function() {
-            if(selectObserver) {
-              selectObserver.disconnect();
-            }
-          }
-        },
-        observe: {
-          select: function() {
-            if(module.has.input()) {
-              selectObserver.observe($input[0], {
-                childList : true,
-                subtree   : true
-              });
-            }
-          },
-          menu: function() {
-            if(module.has.menu()) {
-              menuObserver.observe($menu[0], {
-                childList : true,
-                subtree   : true
-              });
-            }
-          }
-        },
-
-        create: {
-          id: function() {
-            id = (Math.random().toString(16) + '000000000').substr(2, 8);
-            elementNamespace = '.' + id;
-            module.verbose('Creating unique id for element', id);
-          },
-          userChoice: function(values) {
-            var
-              $userChoices,
-              $userChoice,
-              isUserValue,
-              html
-            ;
-            values = values || module.get.userValues();
-            if(!values) {
-              return false;
-            }
-            values = $.isArray(values)
-              ? values
-              : [values]
-            ;
-            $.each(values, function(index, value) {
-              if(module.get.item(value) === false) {
-                html         = settings.templates.addition( module.add.variables(message.addResult, value) );
-                $userChoice  = $('<div />')
-                  .html(html)
-                  .attr('data-' + metadata.value, value)
-                  .attr('data-' + metadata.text, value)
-                  .addClass(className.addition)
-                  .addClass(className.item)
-                ;
-                if(settings.hideAdditions) {
-                  $userChoice.addClass(className.hidden);
-                }
-                $userChoices = ($userChoices === undefined)
-                  ? $userChoice
-                  : $userChoices.add($userChoice)
-                ;
-                module.verbose('Creating user choices for value', value, $userChoice);
-              }
-            });
-            return $userChoices;
-          },
-          userLabels: function(value) {
-            var
-              userValues = module.get.userValues()
-            ;
-            if(userValues) {
-              module.debug('Adding user labels', userValues);
-              $.each(userValues, function(index, value) {
-                module.verbose('Adding custom user value');
-                module.add.label(value, value);
-              });
-            }
-          },
-          menu: function() {
-            $menu = $('<div />')
-              .addClass(className.menu)
-              .appendTo($module)
-            ;
-          },
-          sizer: function() {
-            $sizer = $('<span />')
-              .addClass(className.sizer)
-              .insertAfter($search)
-            ;
-          }
-        },
-
-        search: function(query) {
-          query = (query !== undefined)
-            ? query
-            : module.get.query()
-          ;
-          module.verbose('Searching for query', query);
-          if(module.has.minCharacters(query)) {
-            module.filter(query);
-          }
-          else {
-            module.hide();
-          }
-        },
-
-        select: {
-          firstUnfiltered: function() {
-            module.verbose('Selecting first non-filtered element');
-            module.remove.selectedItem();
-            $item
-              .not(selector.unselectable)
-              .not(selector.addition + selector.hidden)
-                .eq(0)
-                .addClass(className.selected)
-            ;
-          },
-          nextAvailable: function($selected) {
-            $selected = $selected.eq(0);
-            var
-              $nextAvailable = $selected.nextAll(selector.item).not(selector.unselectable).eq(0),
-              $prevAvailable = $selected.prevAll(selector.item).not(selector.unselectable).eq(0),
-              hasNext        = ($nextAvailable.length > 0)
-            ;
-            if(hasNext) {
-              module.verbose('Moving selection to', $nextAvailable);
-              $nextAvailable.addClass(className.selected);
-            }
-            else {
-              module.verbose('Moving selection to', $prevAvailable);
-              $prevAvailable.addClass(className.selected);
-            }
-          }
-        },
-
-        setup: {
-          api: function() {
-            var
-              apiSettings = {
-                debug   : settings.debug,
-                urlData : {
-                  value : module.get.value(),
-                  query : module.get.query()
-                },
-                on    : false
-              }
-            ;
-            module.verbose('First request, initializing API');
-            $module
-              .api(apiSettings)
-            ;
-          },
-          layout: function() {
-            if( $module.is('select') ) {
-              module.setup.select();
-              module.setup.returnedObject();
-            }
-            if( !module.has.menu() ) {
-              module.create.menu();
-            }
-            if( module.is.search() && !module.has.search() ) {
-              module.verbose('Adding search input');
-              $search = $('<input />')
-                .addClass(className.search)
-                .prop('autocomplete', 'off')
-                .insertBefore($text)
-              ;
-            }
-            if( module.is.multiple() && module.is.searchSelection() && !module.has.sizer()) {
-              module.create.sizer();
-            }
-            if(settings.allowTab) {
-              module.set.tabbable();
-            }
-          },
-          select: function() {
-            var
-              selectValues  = module.get.selectValues()
-            ;
-            module.debug('Dropdown initialized on a select', selectValues);
-            if( $module.is('select') ) {
-              $input = $module;
-            }
-            // see if select is placed correctly already
-            if($input.parent(selector.dropdown).length > 0) {
-              module.debug('UI dropdown already exists. Creating dropdown menu only');
-              $module = $input.closest(selector.dropdown);
-              if( !module.has.menu() ) {
-                module.create.menu();
-              }
-              $menu = $module.children(selector.menu);
-              module.setup.menu(selectValues);
-            }
-            else {
-              module.debug('Creating entire dropdown from select');
-              $module = $('<div />')
-                .attr('class', $input.attr('class') )
-                .addClass(className.selection)
-                .addClass(className.dropdown)
-                .html( templates.dropdown(selectValues) )
-                .insertBefore($input)
-              ;
-              if($input.hasClass(className.multiple) && $input.prop('multiple') === false) {
-                module.error(error.missingMultiple);
-                $input.prop('multiple', true);
-              }
-              if($input.is('[multiple]')) {
-                module.set.multiple();
-              }
-              if ($input.prop('disabled')) {
-                module.debug('Disabling dropdown');
-                $module.addClass(className.disabled);
-              }
-              $input
-                .removeAttr('class')
-                .detach()
-                .prependTo($module)
-              ;
-            }
-            module.refresh();
-          },
-          menu: function(values) {
-            $menu.html( templates.menu(values, fields));
-            $item = $menu.find(selector.item);
-          },
-          reference: function() {
-            module.debug('Dropdown behavior was called on select, replacing with closest dropdown');
-            // replace module reference
-            $module = $module.parent(selector.dropdown);
-            module.refresh();
-            module.setup.returnedObject();
-            // invoke method in context of current instance
-            if(methodInvoked) {
-              instance = module;
-              module.invoke(query);
-            }
-          },
-          returnedObject: function() {
-            var
-              $firstModules = $allModules.slice(0, elementIndex),
-              $lastModules = $allModules.slice(elementIndex + 1)
-            ;
-            // adjust all modules to use correct reference
-            $allModules = $firstModules.add($module).add($lastModules);
-          }
-        },
-
-        refresh: function() {
-          module.refreshSelectors();
-          module.refreshData();
-        },
-
-        refreshItems: function() {
-          $item = $menu.find(selector.item);
-        },
-
-        refreshSelectors: function() {
-          module.verbose('Refreshing selector cache');
-          $text   = $module.find(selector.text);
-          $search = $module.find(selector.search);
-          $input  = $module.find(selector.input);
-          $icon   = $module.find(selector.icon);
-          $combo  = ($module.prev().find(selector.text).length > 0)
-            ? $module.prev().find(selector.text)
-            : $module.prev()
-          ;
-          $menu    = $module.children(selector.menu);
-          $item    = $menu.find(selector.item);
-        },
-
-        refreshData: function() {
-          module.verbose('Refreshing cached metadata');
-          $item
-            .removeData(metadata.text)
-            .removeData(metadata.value)
-          ;
-        },
-
-        clearData: function() {
-          module.verbose('Clearing metadata');
-          $item
-            .removeData(metadata.text)
-            .removeData(metadata.value)
-          ;
-          $module
-            .removeData(metadata.defaultText)
-            .removeData(metadata.defaultValue)
-            .removeData(metadata.placeholderText)
-          ;
-        },
-
-        toggle: function() {
-          module.verbose('Toggling menu visibility');
-          if( !module.is.active() ) {
-            module.show();
-          }
-          else {
-            module.hide();
-          }
-        },
-
-        show: function(callback) {
-          callback = $.isFunction(callback)
-            ? callback
-            : function(){}
-          ;
-          if(!module.can.show() && module.is.remote()) {
-            module.debug('No API results retrieved, searching before show');
-            module.queryRemote(module.get.query(), module.show);
-          }
-          if( module.can.show() && !module.is.active() ) {
-            module.debug('Showing dropdown');
-            if(module.has.message() && !(module.has.maxSelections() || module.has.allResultsFiltered()) ) {
-              module.remove.message();
-            }
-            if(module.is.allFiltered()) {
-              return true;
-            }
-            if(settings.onShow.call(element) !== false) {
-              module.animate.show(function() {
-                if( module.can.click() ) {
-                  module.bind.intent();
-                }
-                if(module.has.menuSearch()) {
-                  module.focusSearch();
-                }
-                module.set.visible();
-                callback.call(element);
-              });
-            }
-          }
-        },
-
-        hide: function(callback) {
-          callback = $.isFunction(callback)
-            ? callback
-            : function(){}
-          ;
-          if( module.is.active() ) {
-            module.debug('Hiding dropdown');
-            if(settings.onHide.call(element) !== false) {
-              module.animate.hide(function() {
-                module.remove.visible();
-                callback.call(element);
-              });
-            }
-          }
-        },
-
-        hideOthers: function() {
-          module.verbose('Finding other dropdowns to hide');
-          $allModules
-            .not($module)
-              .has(selector.menu + '.' + className.visible)
-                .dropdown('hide')
-          ;
-        },
-
-        hideMenu: function() {
-          module.verbose('Hiding menu  instantaneously');
-          module.remove.active();
-          module.remove.visible();
-          $menu.transition('hide');
-        },
-
-        hideSubMenus: function() {
-          var
-            $subMenus = $menu.children(selector.item).find(selector.menu)
-          ;
-          module.verbose('Hiding sub menus', $subMenus);
-          $subMenus.transition('hide');
-        },
-
-        bind: {
-          events: function() {
-            if(hasTouch) {
-              module.bind.touchEvents();
-            }
-            module.bind.keyboardEvents();
-            module.bind.inputEvents();
-            module.bind.mouseEvents();
-          },
-          touchEvents: function() {
-            module.debug('Touch device detected binding additional touch events');
-            if( module.is.searchSelection() ) {
-              // do nothing special yet
-            }
-            else if( module.is.single() ) {
-              $module
-                .on('touchstart' + eventNamespace, module.event.test.toggle)
-              ;
-            }
-            $menu
-              .on('touchstart' + eventNamespace, selector.item, module.event.item.mouseenter)
-            ;
-          },
-          keyboardEvents: function() {
-            module.verbose('Binding keyboard events');
-            $module
-              .on('keydown' + eventNamespace, module.event.keydown)
-            ;
-            if( module.has.search() ) {
-              $module
-                .on(module.get.inputEvent() + eventNamespace, selector.search, module.event.input)
-              ;
-            }
-            if( module.is.multiple() ) {
-              $document
-                .on('keydown' + elementNamespace, module.event.document.keydown)
-              ;
-            }
-          },
-          inputEvents: function() {
-            module.verbose('Binding input change events');
-            $module
-              .on('change' + eventNamespace, selector.input, module.event.change)
-            ;
-          },
-          mouseEvents: function() {
-            module.verbose('Binding mouse events');
-            if(module.is.multiple()) {
-              $module
-                .on('click'   + eventNamespace, selector.label,  module.event.label.click)
-                .on('click'   + eventNamespace, selector.remove, module.event.remove.click)
-              ;
-            }
-            if( module.is.searchSelection() ) {
-              $module
-                .on('mousedown' + eventNamespace, module.event.mousedown)
-                .on('mouseup'   + eventNamespace, module.event.mouseup)
-                .on('mousedown' + eventNamespace, selector.menu,   module.event.menu.mousedown)
-                .on('mouseup'   + eventNamespace, selector.menu,   module.event.menu.mouseup)
-                .on('click'     + eventNamespace, selector.icon,   module.event.icon.click)
-                .on('focus'     + eventNamespace, selector.search, module.event.search.focus)
-                .on('click'     + eventNamespace, selector.search, module.event.search.focus)
-                .on('blur'      + eventNamespace, selector.search, module.event.search.blur)
-                .on('click'     + eventNamespace, selector.text,   module.event.text.focus)
-              ;
-              if(module.is.multiple()) {
-                $module
-                  .on('click' + eventNamespace, module.event.click)
-                ;
-              }
-            }
-            else {
-              if(settings.on == 'click') {
-                $module
-                  .on('click' + eventNamespace, selector.icon, module.event.icon.click)
-                  .on('click' + eventNamespace, module.event.test.toggle)
-                ;
-              }
-              else if(settings.on == 'hover') {
-                $module
-                  .on('mouseenter' + eventNamespace, module.delay.show)
-                  .on('mouseleave' + eventNamespace, module.delay.hide)
-                ;
-              }
-              else {
-                $module
-                  .on(settings.on + eventNamespace, module.toggle)
-                ;
-              }
-              $module
-                .on('mousedown' + eventNamespace, module.event.mousedown)
-                .on('mouseup'   + eventNamespace, module.event.mouseup)
-                .on('focus'     + eventNamespace, module.event.focus)
-              ;
-              if(module.has.menuSearch() ) {
-                $module
-                  .on('blur' + eventNamespace, selector.search, module.event.search.blur)
-                ;
-              }
-              else {
-                $module
-                  .on('blur' + eventNamespace, module.event.blur)
-                ;
-              }
-            }
-            $menu
-              .on('mouseenter' + eventNamespace, selector.item, module.event.item.mouseenter)
-              .on('mouseleave' + eventNamespace, selector.item, module.event.item.mouseleave)
-              .on('click'      + eventNamespace, selector.item, module.event.item.click)
-            ;
-          },
-          intent: function() {
-            module.verbose('Binding hide intent event to document');
-            if(hasTouch) {
-              $document
-                .on('touchstart' + elementNamespace, module.event.test.touch)
-                .on('touchmove'  + elementNamespace, module.event.test.touch)
-              ;
-            }
-            $document
-              .on('click' + elementNamespace, module.event.test.hide)
-            ;
-          }
-        },
-
-        unbind: {
-          intent: function() {
-            module.verbose('Removing hide intent event from document');
-            if(hasTouch) {
-              $document
-                .off('touchstart' + elementNamespace)
-                .off('touchmove' + elementNamespace)
-              ;
-            }
-            $document
-              .off('click' + elementNamespace)
-            ;
-          }
-        },
-
-        filter: function(query) {
-          var
-            searchTerm = (query !== undefined)
-              ? query
-              : module.get.query(),
-            afterFiltered = function() {
-              if(module.is.multiple()) {
-                module.filterActive();
-              }
-              module.select.firstUnfiltered();
-              if( module.has.allResultsFiltered() ) {
-                if( settings.onNoResults.call(element, searchTerm) ) {
-                  if(settings.allowAdditions) {
-                    if(settings.hideAdditions) {
-                      module.verbose('User addition with no menu, setting empty style');
-                      module.set.empty();
-                      module.hideMenu();
-                    }
-                  }
-                  else {
-                    module.verbose('All items filtered, showing message', searchTerm);
-                    module.add.message(message.noResults);
-                  }
-                }
-                else {
-                  module.verbose('All items filtered, hiding dropdown', searchTerm);
-                  module.hideMenu();
-                }
-              }
-              else {
-                module.remove.empty();
-                module.remove.message();
-              }
-              if(settings.allowAdditions) {
-                module.add.userSuggestion(query);
-              }
-              if(module.is.searchSelection() && module.can.show() && module.is.focusedOnSearch() ) {
-                module.show();
-              }
-            }
-          ;
-          if(settings.useLabels && module.has.maxSelections()) {
-            return;
-          }
-          if(settings.apiSettings) {
-            if( module.can.useAPI() ) {
-              module.queryRemote(searchTerm, function() {
-                if(settings.filterRemoteData) {
-                  module.filterItems(searchTerm);
-                }
-                afterFiltered();
-              });
-            }
-            else {
-              module.error(error.noAPI);
-            }
-          }
-          else {
-            module.filterItems(searchTerm);
-            afterFiltered();
-          }
-        },
-
-        queryRemote: function(query, callback) {
-          var
-            apiSettings = {
-              errorDuration : false,
-              cache         : 'local',
-              throttle      : settings.throttle,
-              urlData       : {
-                query: query
-              },
-              onError: function() {
-                module.add.message(message.serverError);
-                callback();
-              },
-              onFailure: function() {
-                module.add.message(message.serverError);
-                callback();
-              },
-              onSuccess : function(response) {
-                module.remove.message();
-                module.setup.menu({
-                  values: response[fields.remoteValues]
-                });
-                callback();
-              }
-            }
-          ;
-          if( !$module.api('get request') ) {
-            module.setup.api();
-          }
-          apiSettings = $.extend(true, {}, apiSettings, settings.apiSettings);
-          $module
-            .api('setting', apiSettings)
-            .api('query')
-          ;
-        },
-
-        filterItems: function(query) {
-          var
-            searchTerm = (query !== undefined)
-              ? query
-              : module.get.query(),
-            results          =  null,
-            escapedTerm      = module.escape.string(searchTerm),
-            beginsWithRegExp = new RegExp('^' + escapedTerm, 'igm')
-          ;
-          // avoid loop if we're matching nothing
-          if( module.has.query() ) {
-            results = [];
-
-            module.verbose('Searching for matching values', searchTerm);
-            $item
-              .each(function(){
-                var
-                  $choice = $(this),
-                  text,
-                  value
-                ;
-                if(settings.match == 'both' || settings.match == 'text') {
-                  text = String(module.get.choiceText($choice, false));
-                  if(text.search(beginsWithRegExp) !== -1) {
-                    results.push(this);
-                    return true;
-                  }
-                  else if (settings.fullTextSearch === 'exact' && module.exactSearch(searchTerm, text)) {
-                    results.push(this);
-                    return true;
-                  }
-                  else if (settings.fullTextSearch === true && module.fuzzySearch(searchTerm, text)) {
-                    results.push(this);
-                    return true;
-                  }
-                }
-                if(settings.match == 'both' || settings.match == 'value') {
-                  value = String(module.get.choiceValue($choice, text));
-                  if(value.search(beginsWithRegExp) !== -1) {
-                    results.push(this);
-                    return true;
-                  }
-                  else if (settings.fullTextSearch === 'exact' && module.exactSearch(searchTerm, value)) {
-                    results.push(this);
-                    return true;
-                  }
-                  else if (settings.fullTextSearch === true && module.fuzzySearch(searchTerm, value)) {
-                    results.push(this);
-                    return true;
-                  }
-                }
-              })
-            ;
-          }
-          module.debug('Showing only matched items', searchTerm);
-          module.remove.filteredItem();
-          if(results) {
-            $item
-              .not(results)
-              .addClass(className.filtered)
-            ;
-          }
-        },
-
-        fuzzySearch: function(query, term) {
-          var
-            termLength  = term.length,
-            queryLength = query.length
-          ;
-          query = query.toLowerCase();
-          term  = term.toLowerCase();
-          if(queryLength > termLength) {
-            return false;
-          }
-          if(queryLength === termLength) {
-            return (query === term);
-          }
-          search: for (var characterIndex = 0, nextCharacterIndex = 0; characterIndex < queryLength; characterIndex++) {
-            var
-              queryCharacter = query.charCodeAt(characterIndex)
-            ;
-            while(nextCharacterIndex < termLength) {
-              if(term.charCodeAt(nextCharacterIndex++) === queryCharacter) {
-                continue search;
-              }
-            }
-            return false;
-          }
-          return true;
-        },
-        exactSearch: function (query, term) {
-          query = query.toLowerCase();
-          term  = term.toLowerCase();
-          if(term.indexOf(query) > -1) {
-             return true;
-          }
-          return false;
-        },
-        filterActive: function() {
-          if(settings.useLabels) {
-            $item.filter('.' + className.active)
-              .addClass(className.filtered)
-            ;
-          }
-        },
-
-        focusSearch: function(skipHandler) {
-          if( module.has.search() && !module.is.focusedOnSearch() ) {
-            if(skipHandler) {
-              $module.off('focus' + eventNamespace, selector.search);
-              $search.focus();
-              $module.on('focus'  + eventNamespace, selector.search, module.event.search.focus);
-            }
-            else {
-              $search.focus();
-            }
-          }
-        },
-
-        forceSelection: function() {
-          var
-            $currentlySelected = $item.not(className.filtered).filter('.' + className.selected).eq(0),
-            $activeItem        = $item.not(className.filtered).filter('.' + className.active).eq(0),
-            $selectedItem      = ($currentlySelected.length > 0)
-              ? $currentlySelected
-              : $activeItem,
-            hasSelected = ($selectedItem.length > 0)
-          ;
-          if(hasSelected && !module.is.multiple()) {
-            module.debug('Forcing partial selection to selected item', $selectedItem);
-            module.event.item.click.call($selectedItem, {}, true);
-            return;
-          }
-          else {
-            if(settings.allowAdditions) {
-              module.set.selected(module.get.query());
-              module.remove.searchTerm();
-            }
-            else {
-              module.remove.searchTerm();
-            }
-          }
-        },
-
-        event: {
-          change: function() {
-            if(!internalChange) {
-              module.debug('Input changed, updating selection');
-              module.set.selected();
-            }
-          },
-          focus: function() {
-            if(settings.showOnFocus && !activated && module.is.hidden() && !pageLostFocus) {
-              module.show();
-            }
-          },
-          blur: function(event) {
-            pageLostFocus = (document.activeElement === this);
-            if(!activated && !pageLostFocus) {
-              module.remove.activeLabel();
-              module.hide();
-            }
-          },
-          mousedown: function() {
-            if(module.is.searchSelection()) {
-              // prevent menu hiding on immediate re-focus
-              willRefocus = true;
-            }
-            else {
-              // prevents focus callback from occurring on mousedown
-              activated = true;
-            }
-          },
-          mouseup: function() {
-            if(module.is.searchSelection()) {
-              // prevent menu hiding on immediate re-focus
-              willRefocus = false;
-            }
-            else {
-              activated = false;
-            }
-          },
-          click: function(event) {
-            var
-              $target = $(event.target)
-            ;
-            // focus search
-            if($target.is($module)) {
-              if(!module.is.focusedOnSearch()) {
-                module.focusSearch();
-              }
-              else {
-                module.show();
-              }
-            }
-          },
-          search: {
-            focus: function() {
-              activated = true;
-              if(module.is.multiple()) {
-                module.remove.activeLabel();
-              }
-              if(settings.showOnFocus) {
-                module.search();
-              }
-            },
-            blur: function(event) {
-              pageLostFocus = (document.activeElement === this);
-              if(module.is.searchSelection() && !willRefocus) {
-                if(!itemActivated && !pageLostFocus) {
-                  if(settings.forceSelection) {
-                    module.forceSelection();
-                  }
-                  module.hide();
-                }
-              }
-              willRefocus = false;
-            }
-          },
-          icon: {
-            click: function(event) {
-              module.toggle();
-            }
-          },
-          text: {
-            focus: function(event) {
-              activated = true;
-              module.focusSearch();
-            }
-          },
-          input: function(event) {
-            if(module.is.multiple() || module.is.searchSelection()) {
-              module.set.filtered();
-            }
-            clearTimeout(module.timer);
-            module.timer = setTimeout(module.search, settings.delay.search);
-          },
-          label: {
-            click: function(event) {
-              var
-                $label        = $(this),
-                $labels       = $module.find(selector.label),
-                $activeLabels = $labels.filter('.' + className.active),
-                $nextActive   = $label.nextAll('.' + className.active),
-                $prevActive   = $label.prevAll('.' + className.active),
-                $range = ($nextActive.length > 0)
-                  ? $label.nextUntil($nextActive).add($activeLabels).add($label)
-                  : $label.prevUntil($prevActive).add($activeLabels).add($label)
-              ;
-              if(event.shiftKey) {
-                $activeLabels.removeClass(className.active);
-                $range.addClass(className.active);
-              }
-              else if(event.ctrlKey) {
-                $label.toggleClass(className.active);
-              }
-              else {
-                $activeLabels.removeClass(className.active);
-                $label.addClass(className.active);
-              }
-              settings.onLabelSelect.apply(this, $labels.filter('.' + className.active));
-            }
-          },
-          remove: {
-            click: function() {
-              var
-                $label = $(this).parent()
-              ;
-              if( $label.hasClass(className.active) ) {
-                // remove all selected labels
-                module.remove.activeLabels();
-              }
-              else {
-                // remove this label only
-                module.remove.activeLabels( $label );
-              }
-            }
-          },
-          test: {
-            toggle: function(event) {
-              var
-                toggleBehavior = (module.is.multiple())
-                  ? module.show
-                  : module.toggle
-              ;
-              if(module.is.bubbledLabelClick(event) || module.is.bubbledIconClick(event)) {
-                return;
-              }
-              if( module.determine.eventOnElement(event, toggleBehavior) ) {
-                event.preventDefault();
-              }
-            },
-            touch: function(event) {
-              module.determine.eventOnElement(event, function() {
-                if(event.type == 'touchstart') {
-                  module.timer = setTimeout(function() {
-                    module.hide();
-                  }, settings.delay.touch);
-                }
-                else if(event.type == 'touchmove') {
-                  clearTimeout(module.timer);
-                }
-              });
-              event.stopPropagation();
-            },
-            hide: function(event) {
-              module.determine.eventInModule(event, module.hide);
-            }
-          },
-          select: {
-            mutation: function(mutations) {
-              module.debug('<select> modified, recreating menu');
-              module.setup.select();
-            }
-          },
-          menu: {
-            mutation: function(mutations) {
-              var
-                mutation   = mutations[0],
-                $addedNode = mutation.addedNodes
-                  ? $(mutation.addedNodes[0])
-                  : $(false),
-                $removedNode = mutation.removedNodes
-                  ? $(mutation.removedNodes[0])
-                  : $(false),
-                $changedNodes  = $addedNode.add($removedNode),
-                isUserAddition = $changedNodes.is(selector.addition) || $changedNodes.closest(selector.addition).length > 0,
-                isMessage      = $changedNodes.is(selector.message)  || $changedNodes.closest(selector.message).length > 0
-              ;
-              if(isUserAddition || isMessage) {
-                module.debug('Updating item selector cache');
-                module.refreshItems();
-              }
-              else {
-                module.debug('Menu modified, updating selector cache');
-                module.refresh();
-              }
-            },
-            mousedown: function() {
-              itemActivated = true;
-            },
-            mouseup: function() {
-              itemActivated = false;
-            }
-          },
-          item: {
-            mouseenter: function(event) {
-              var
-                $target        = $(event.target),
-                $item          = $(this),
-                $subMenu       = $item.children(selector.menu),
-                $otherMenus    = $item.siblings(selector.item).children(selector.menu),
-                hasSubMenu     = ($subMenu.length > 0),
-                isBubbledEvent = ($subMenu.find($target).length > 0)
-              ;
-              if( !isBubbledEvent && hasSubMenu ) {
-                clearTimeout(module.itemTimer);
-                module.itemTimer = setTimeout(function() {
-                  module.verbose('Showing sub-menu', $subMenu);
-                  $.each($otherMenus, function() {
-                    module.animate.hide(false, $(this));
-                  });
-                  module.animate.show(false, $subMenu);
-                }, settings.delay.show);
-                event.preventDefault();
-              }
-            },
-            mouseleave: function(event) {
-              var
-                $subMenu = $(this).children(selector.menu)
-              ;
-              if($subMenu.length > 0) {
-                clearTimeout(module.itemTimer);
-                module.itemTimer = setTimeout(function() {
-                  module.verbose('Hiding sub-menu', $subMenu);
-                  module.animate.hide(false, $subMenu);
-                }, settings.delay.hide);
-              }
-            },
-            click: function (event, skipRefocus) {
-              var
-                $choice        = $(this),
-                $target        = (event)
-                  ? $(event.target)
-                  : $(''),
-                $subMenu       = $choice.find(selector.menu),
-                text           = module.get.choiceText($choice),
-                value          = module.get.choiceValue($choice, text),
-                hasSubMenu     = ($subMenu.length > 0),
-                isBubbledEvent = ($subMenu.find($target).length > 0)
-              ;
-              // prevents IE11 bug where menu receives focus even though `tabindex=-1`
-              if(module.has.menuSearch()) {
-                $(document.activeElement).blur();
-              }
-              if(!isBubbledEvent && (!hasSubMenu || settings.allowCategorySelection)) {
-                if(module.is.searchSelection()) {
-                  if(settings.allowAdditions) {
-                    module.remove.userAddition();
-                  }
-                  module.remove.searchTerm();
-                  if(!module.is.focusedOnSearch() && !(skipRefocus == true)) {
-                    module.focusSearch(true);
-                  }
-                }
-                if(!settings.useLabels) {
-                  module.remove.filteredItem();
-                  module.set.scrollPosition($choice);
-                }
-                module.determine.selectAction.call(this, text, value);
-              }
-            }
-          },
-
-          document: {
-            // label selection should occur even when element has no focus
-            keydown: function(event) {
-              var
-                pressedKey    = event.which,
-                isShortcutKey = module.is.inObject(pressedKey, keys)
-              ;
-              if(isShortcutKey) {
-                var
-                  $label            = $module.find(selector.label),
-                  $activeLabel      = $label.filter('.' + className.active),
-                  activeValue       = $activeLabel.data(metadata.value),
-                  labelIndex        = $label.index($activeLabel),
-                  labelCount        = $label.length,
-                  hasActiveLabel    = ($activeLabel.length > 0),
-                  hasMultipleActive = ($activeLabel.length > 1),
-                  isFirstLabel      = (labelIndex === 0),
-                  isLastLabel       = (labelIndex + 1 == labelCount),
-                  isSearch          = module.is.searchSelection(),
-                  isFocusedOnSearch = module.is.focusedOnSearch(),
-                  isFocused         = module.is.focused(),
-                  caretAtStart      = (isFocusedOnSearch && module.get.caretPosition() === 0),
-                  $nextLabel
-                ;
-                if(isSearch && !hasActiveLabel && !isFocusedOnSearch) {
-                  return;
-                }
-
-                if(pressedKey == keys.leftArrow) {
-                  // activate previous label
-                  if((isFocused || caretAtStart) && !hasActiveLabel) {
-                    module.verbose('Selecting previous label');
-                    $label.last().addClass(className.active);
-                  }
-                  else if(hasActiveLabel) {
-                    if(!event.shiftKey) {
-                      module.verbose('Selecting previous label');
-                      $label.removeClass(className.active);
-                    }
-                    else {
-                      module.verbose('Adding previous label to selection');
-                    }
-                    if(isFirstLabel && !hasMultipleActive) {
-                      $activeLabel.addClass(className.active);
-                    }
-                    else {
-                      $activeLabel.prev(selector.siblingLabel)
-                        .addClass(className.active)
-                        .end()
-                      ;
-                    }
-                    event.preventDefault();
-                  }
-                }
-                else if(pressedKey == keys.rightArrow) {
-                  // activate first label
-                  if(isFocused && !hasActiveLabel) {
-                    $label.first().addClass(className.active);
-                  }
-                  // activate next label
-                  if(hasActiveLabel) {
-                    if(!event.shiftKey) {
-                      module.verbose('Selecting next label');
-                      $label.removeClass(className.active);
-                    }
-                    else {
-                      module.verbose('Adding next label to selection');
-                    }
-                    if(isLastLabel) {
-                      if(isSearch) {
-                        if(!isFocusedOnSearch) {
-                          module.focusSearch();
-                        }
-                        else {
-                          $label.removeClass(className.active);
-                        }
-                      }
-                      else if(hasMultipleActive) {
-                        $activeLabel.next(selector.siblingLabel).addClass(className.active);
-                      }
-                      else {
-                        $activeLabel.addClass(className.active);
-                      }
-                    }
-                    else {
-                      $activeLabel.next(selector.siblingLabel).addClass(className.active);
-                    }
-                    event.preventDefault();
-                  }
-                }
-                else if(pressedKey == keys.deleteKey || pressedKey == keys.backspace) {
-                  if(hasActiveLabel) {
-                    module.verbose('Removing active labels');
-                    if(isLastLabel) {
-                      if(isSearch && !isFocusedOnSearch) {
-                        module.focusSearch();
-                      }
-                    }
-                    $activeLabel.last().next(selector.siblingLabel).addClass(className.active);
-                    module.remove.activeLabels($activeLabel);
-                    event.preventDefault();
-                  }
-                  else if(caretAtStart && !hasActiveLabel && pressedKey == keys.backspace) {
-                    module.verbose('Removing last label on input backspace');
-                    $activeLabel = $label.last().addClass(className.active);
-                    module.remove.activeLabels($activeLabel);
-                  }
-                }
-                else {
-                  $activeLabel.removeClass(className.active);
-                }
-              }
-            }
-          },
-
-          keydown: function(event) {
-            var
-              pressedKey    = event.which,
-              isShortcutKey = module.is.inObject(pressedKey, keys)
-            ;
-            if(isShortcutKey) {
-              var
-                $currentlySelected = $item.not(selector.unselectable).filter('.' + className.selected).eq(0),
-                $activeItem        = $menu.children('.' + className.active).eq(0),
-                $selectedItem      = ($currentlySelected.length > 0)
-                  ? $currentlySelected
-                  : $activeItem,
-                $visibleItems = ($selectedItem.length > 0)
-                  ? $selectedItem.siblings(':not(.' + className.filtered +')').addBack()
-                  : $menu.children(':not(.' + className.filtered +')'),
-                $subMenu              = $selectedItem.children(selector.menu),
-                $parentMenu           = $selectedItem.closest(selector.menu),
-                inVisibleMenu         = ($parentMenu.hasClass(className.visible) || $parentMenu.hasClass(className.animating) || $parentMenu.parent(selector.menu).length > 0),
-                hasSubMenu            = ($subMenu.length> 0),
-                hasSelectedItem       = ($selectedItem.length > 0),
-                selectedIsSelectable  = ($selectedItem.not(selector.unselectable).length > 0),
-                delimiterPressed      = (pressedKey == keys.delimiter && settings.allowAdditions && module.is.multiple()),
-                isAdditionWithoutMenu = (settings.allowAdditions && settings.hideAdditions && (pressedKey == keys.enter || delimiterPressed) && selectedIsSelectable),
-                $nextItem,
-                isSubMenuItem,
-                newIndex
-              ;
-              // allow selection with menu closed
-              if(isAdditionWithoutMenu) {
-                module.verbose('Selecting item from keyboard shortcut', $selectedItem);
-                module.event.item.click.call($selectedItem, event);
-                if(module.is.searchSelection()) {
-                  module.remove.searchTerm();
-                }
-              }
-
-              // visible menu keyboard shortcuts
-              if( module.is.visible() ) {
-
-                // enter (select or open sub-menu)
-                if(pressedKey == keys.enter || delimiterPressed) {
-                  if(pressedKey == keys.enter && hasSelectedItem && hasSubMenu && !settings.allowCategorySelection) {
-                    module.verbose('Pressed enter on unselectable category, opening sub menu');
-                    pressedKey = keys.rightArrow;
-                  }
-                  else if(selectedIsSelectable) {
-                    module.verbose('Selecting item from keyboard shortcut', $selectedItem);
-                    module.event.item.click.call($selectedItem, event);
-                    if(module.is.searchSelection()) {
-                      module.remove.searchTerm();
-                    }
-                  }
-                  event.preventDefault();
-                }
-
-                // sub-menu actions
-                if(hasSelectedItem) {
-
-                  if(pressedKey == keys.leftArrow) {
-
-                    isSubMenuItem = ($parentMenu[0] !== $menu[0]);
-
-                    if(isSubMenuItem) {
-                      module.verbose('Left key pressed, closing sub-menu');
-                      module.animate.hide(false, $parentMenu);
-                      $selectedItem
-                        .removeClass(className.selected)
-                      ;
-                      $parentMenu
-                        .closest(selector.item)
-                          .addClass(className.selected)
-                      ;
-                      event.preventDefault();
-                    }
-                  }
-
-                  // right arrow (show sub-menu)
-                  if(pressedKey == keys.rightArrow) {
-                    if(hasSubMenu) {
-                      module.verbose('Right key pressed, opening sub-menu');
-                      module.animate.show(false, $subMenu);
-                      $selectedItem
-                        .removeClass(className.selected)
-                      ;
-                      $subMenu
-                        .find(selector.item).eq(0)
-                          .addClass(className.selected)
-                      ;
-                      event.preventDefault();
-                    }
-                  }
-                }
-
-                // up arrow (traverse menu up)
-                if(pressedKey == keys.upArrow) {
-                  $nextItem = (hasSelectedItem && inVisibleMenu)
-                    ? $selectedItem.prevAll(selector.item + ':not(' + selector.unselectable + ')').eq(0)
-                    : $item.eq(0)
-                  ;
-                  if($visibleItems.index( $nextItem ) < 0) {
-                    module.verbose('Up key pressed but reached top of current menu');
-                    event.preventDefault();
-                    return;
-                  }
-                  else {
-                    module.verbose('Up key pressed, changing active item');
-                    $selectedItem
-                      .removeClass(className.selected)
-                    ;
-                    $nextItem
-                      .addClass(className.selected)
-                    ;
-                    module.set.scrollPosition($nextItem);
-                    if(settings.selectOnKeydown && module.is.single()) {
-                      module.set.selectedItem($nextItem);
-                    }
-                  }
-                  event.preventDefault();
-                }
-
-                // down arrow (traverse menu down)
-                if(pressedKey == keys.downArrow) {
-                  $nextItem = (hasSelectedItem && inVisibleMenu)
-                    ? $nextItem = $selectedItem.nextAll(selector.item + ':not(' + selector.unselectable + ')').eq(0)
-                    : $item.eq(0)
-                  ;
-                  if($nextItem.length === 0) {
-                    module.verbose('Down key pressed but reached bottom of current menu');
-                    event.preventDefault();
-                    return;
-                  }
-                  else {
-                    module.verbose('Down key pressed, changing active item');
-                    $item
-                      .removeClass(className.selected)
-                    ;
-                    $nextItem
-                      .addClass(className.selected)
-                    ;
-                    module.set.scrollPosition($nextItem);
-                    if(settings.selectOnKeydown && module.is.single()) {
-                      module.set.selectedItem($nextItem);
-                    }
-                  }
-                  event.preventDefault();
-                }
-
-                // page down (show next page)
-                if(pressedKey == keys.pageUp) {
-                  module.scrollPage('up');
-                  event.preventDefault();
-                }
-                if(pressedKey == keys.pageDown) {
-                  module.scrollPage('down');
-                  event.preventDefault();
-                }
-
-                // escape (close menu)
-                if(pressedKey == keys.escape) {
-                  module.verbose('Escape key pressed, closing dropdown');
-                  module.hide();
-                }
-
-              }
-              else {
-                // delimiter key
-                if(delimiterPressed) {
-                  event.preventDefault();
-                }
-                // down arrow (open menu)
-                if(pressedKey == keys.downArrow && !module.is.visible()) {
-                  module.verbose('Down key pressed, showing dropdown');
-                  module.select.firstUnfiltered();
-                  module.show();
-                  event.preventDefault();
-                }
-              }
-            }
-            else {
-              if( !module.has.search() ) {
-                module.set.selectedLetter( String.fromCharCode(pressedKey) );
-              }
-            }
-          }
-        },
-
-        trigger: {
-          change: function() {
-            var
-              events       = document.createEvent('HTMLEvents'),
-              inputElement = $input[0]
-            ;
-            if(inputElement) {
-              module.verbose('Triggering native change event');
-              events.initEvent('change', true, false);
-              inputElement.dispatchEvent(events);
-            }
-          }
-        },
-
-        determine: {
-          selectAction: function(text, value) {
-            module.verbose('Determining action', settings.action);
-            if( $.isFunction( module.action[settings.action] ) ) {
-              module.verbose('Triggering preset action', settings.action, text, value);
-              module.action[ settings.action ].call(element, text, value, this);
-            }
-            else if( $.isFunction(settings.action) ) {
-              module.verbose('Triggering user action', settings.action, text, value);
-              settings.action.call(element, text, value, this);
-            }
-            else {
-              module.error(error.action, settings.action);
-            }
-          },
-          eventInModule: function(event, callback) {
-            var
-              $target    = $(event.target),
-              inDocument = ($target.closest(document.documentElement).length > 0),
-              inModule   = ($target.closest($module).length > 0)
-            ;
-            callback = $.isFunction(callback)
-              ? callback
-              : function(){}
-            ;
-            if(inDocument && !inModule) {
-              module.verbose('Triggering event', callback);
-              callback();
-              return true;
-            }
-            else {
-              module.verbose('Event occurred in dropdown, canceling callback');
-              return false;
-            }
-          },
-          eventOnElement: function(event, callback) {
-            var
-              $target      = $(event.target),
-              $label       = $target.closest(selector.siblingLabel),
-              inVisibleDOM = document.body.contains(event.target),
-              notOnLabel   = ($module.find($label).length === 0),
-              notInMenu    = ($target.closest($menu).length === 0)
-            ;
-            callback = $.isFunction(callback)
-              ? callback
-              : function(){}
-            ;
-            if(inVisibleDOM && notOnLabel && notInMenu) {
-              module.verbose('Triggering event', callback);
-              callback();
-              return true;
-            }
-            else {
-              module.verbose('Event occurred in dropdown menu, canceling callback');
-              return false;
-            }
-          }
-        },
-
-        action: {
-
-          nothing: function() {},
-
-          activate: function(text, value, element) {
-            value = (value !== undefined)
-              ? value
-              : text
-            ;
-            if( module.can.activate( $(element) ) ) {
-              module.set.selected(value, $(element));
-              if(module.is.multiple() && !module.is.allFiltered()) {
-                return;
-              }
-              else {
-                module.hideAndClear();
-              }
-            }
-          },
-
-          select: function(text, value, element) {
-            value = (value !== undefined)
-              ? value
-              : text
-            ;
-            if( module.can.activate( $(element) ) ) {
-              module.set.value(value, $(element));
-              if(module.is.multiple() && !module.is.allFiltered()) {
-                return;
-              }
-              else {
-                module.hideAndClear();
-              }
-            }
-          },
-
-          combo: function(text, value, element) {
-            value = (value !== undefined)
-              ? value
-              : text
-            ;
-            module.set.selected(value, $(element));
-            module.hideAndClear();
-          },
-
-          hide: function(text, value, element) {
-            module.set.value(value, text);
-            module.hideAndClear();
-          }
-
-        },
-
-        get: {
-          id: function() {
-            return id;
-          },
-          defaultText: function() {
-            return $module.data(metadata.defaultText);
-          },
-          defaultValue: function() {
-            return $module.data(metadata.defaultValue);
-          },
-          placeholderText: function() {
-            return $module.data(metadata.placeholderText) || '';
-          },
-          text: function() {
-            return $text.text();
-          },
-          query: function() {
-            return $.trim($search.val());
-          },
-          searchWidth: function(value) {
-            value = (value !== undefined)
-              ? value
-              : $search.val()
-            ;
-            $sizer.text(value);
-            // prevent rounding issues
-            return Math.ceil( $sizer.width() + 1);
-          },
-          selectionCount: function() {
-            var
-              values = module.get.values(),
-              count
-            ;
-            count = ( module.is.multiple() )
-              ? $.isArray(values)
-                ? values.length
-                : 0
-              : (module.get.value() !== '')
-                ? 1
-                : 0
-            ;
-            return count;
-          },
-          transition: function($subMenu) {
-            return (settings.transition == 'auto')
-              ? module.is.upward($subMenu)
-                ? 'slide up'
-                : 'slide down'
-              : settings.transition
-            ;
-          },
-          userValues: function() {
-            var
-              values = module.get.values()
-            ;
-            if(!values) {
-              return false;
-            }
-            values = $.isArray(values)
-              ? values
-              : [values]
-            ;
-            return $.grep(values, function(value) {
-              return (module.get.item(value) === false);
-            });
-          },
-          uniqueArray: function(array) {
-            return $.grep(array, function (value, index) {
-                return $.inArray(value, array) === index;
-            });
-          },
-          caretPosition: function() {
-            var
-              input = $search.get(0),
-              range,
-              rangeLength
-            ;
-            if('selectionStart' in input) {
-              return input.selectionStart;
-            }
-            else if (document.selection) {
-              input.focus();
-              range       = document.selection.createRange();
-              rangeLength = range.text.length;
-              range.moveStart('character', -input.value.length);
-              return range.text.length - rangeLength;
-            }
-          },
-          value: function() {
-            var
-              value = ($input.length > 0)
-                ? $input.val()
-                : $module.data(metadata.value),
-              isEmptyMultiselect = ($.isArray(value) && value.length === 1 && value[0] === '')
-            ;
-            // prevents placeholder element from being selected when multiple
-            return (value === undefined || isEmptyMultiselect)
-              ? ''
-              : value
-            ;
-          },
-          values: function() {
-            var
-              value = module.get.value()
-            ;
-            if(value === '') {
-              return '';
-            }
-            return ( !module.has.selectInput() && module.is.multiple() )
-              ? (typeof value == 'string') // delimited string
-                ? value.split(settings.delimiter)
-                : ''
-              : value
-            ;
-          },
-          remoteValues: function() {
-            var
-              values = module.get.values(),
-              remoteValues = false
-            ;
-            if(values) {
-              if(typeof values == 'string') {
-                values = [values];
-              }
-              $.each(values, function(index, value) {
-                var
-                  name = module.read.remoteData(value)
-                ;
-                module.verbose('Restoring value from session data', name, value);
-                if(name) {
-                  if(!remoteValues) {
-                    remoteValues = {};
-                  }
-                  remoteValues[value] = name;
-                }
-              });
-            }
-            return remoteValues;
-          },
-          choiceText: function($choice, preserveHTML) {
-            preserveHTML = (preserveHTML !== undefined)
-              ? preserveHTML
-              : settings.preserveHTML
-            ;
-            if($choice) {
-              if($choice.find(selector.menu).length > 0) {
-                module.verbose('Retrieving text of element with sub-menu');
-                $choice = $choice.clone();
-                $choice.find(selector.menu).remove();
-                $choice.find(selector.menuIcon).remove();
-              }
-              return ($choice.data(metadata.text) !== undefined)
-                ? $choice.data(metadata.text)
-                : (preserveHTML)
-                  ? $.trim($choice.html())
-                  : $.trim($choice.text())
-              ;
-            }
-          },
-          choiceValue: function($choice, choiceText) {
-            choiceText = choiceText || module.get.choiceText($choice);
-            if(!$choice) {
-              return false;
-            }
-            return ($choice.data(metadata.value) !== undefined)
-              ? String( $choice.data(metadata.value) )
-              : (typeof choiceText === 'string')
-                ? $.trim(choiceText.toLowerCase())
-                : String(choiceText)
-            ;
-          },
-          inputEvent: function() {
-            var
-              input = $search[0]
-            ;
-            if(input) {
-              return (input.oninput !== undefined)
-                ? 'input'
-                : (input.onpropertychange !== undefined)
-                  ? 'propertychange'
-                  : 'keyup'
-              ;
-            }
-            return false;
-          },
-          selectValues: function() {
-            var
-              select = {}
-            ;
-            select.values = [];
-            $module
-              .find('option')
-                .each(function() {
-                  var
-                    $option  = $(this),
-                    name     = $option.html(),
-                    disabled = $option.attr('disabled'),
-                    value    = ( $option.attr('value') !== undefined )
-                      ? $option.attr('value')
-                      : name
-                  ;
-                  if(settings.placeholder === 'auto' && value === '') {
-                    select.placeholder = name;
-                  }
-                  else {
-                    select.values.push({
-                      name     : name,
-                      value    : value,
-                      disabled : disabled
-                    });
-                  }
-                })
-            ;
-            if(settings.placeholder && settings.placeholder !== 'auto') {
-              module.debug('Setting placeholder value to', settings.placeholder);
-              select.placeholder = settings.placeholder;
-            }
-            if(settings.sortSelect) {
-              select.values.sort(function(a, b) {
-                return (a.name > b.name)
-                  ? 1
-                  : -1
-                ;
-              });
-              module.debug('Retrieved and sorted values from select', select);
-            }
-            else {
-              module.debug('Retrieved values from select', select);
-            }
-            return select;
-          },
-          activeItem: function() {
-            return $item.filter('.'  + className.active);
-          },
-          selectedItem: function() {
-            var
-              $selectedItem = $item.not(selector.unselectable).filter('.'  + className.selected)
-            ;
-            return ($selectedItem.length > 0)
-              ? $selectedItem
-              : $item.eq(0)
-            ;
-          },
-          itemWithAdditions: function(value) {
-            var
-              $items       = module.get.item(value),
-              $userItems   = module.create.userChoice(value),
-              hasUserItems = ($userItems && $userItems.length > 0)
-            ;
-            if(hasUserItems) {
-              $items = ($items.length > 0)
-                ? $items.add($userItems)
-                : $userItems
-              ;
-            }
-            return $items;
-          },
-          item: function(value, strict) {
-            var
-              $selectedItem = false,
-              shouldSearch,
-              isMultiple
-            ;
-            value = (value !== undefined)
-              ? value
-              : ( module.get.values() !== undefined)
-                ? module.get.values()
-                : module.get.text()
-            ;
-            shouldSearch = (isMultiple)
-              ? (value.length > 0)
-              : (value !== undefined && value !== null)
-            ;
-            isMultiple = (module.is.multiple() && $.isArray(value));
-            strict     = (value === '' || value === 0)
-              ? true
-              : strict || false
-            ;
-            if(shouldSearch) {
-              $item
-                .each(function() {
-                  var
-                    $choice       = $(this),
-                    optionText    = module.get.choiceText($choice),
-                    optionValue   = module.get.choiceValue($choice, optionText)
-                  ;
-                  // safe early exit
-                  if(optionValue === null || optionValue === undefined) {
-                    return;
-                  }
-                  if(isMultiple) {
-                    if($.inArray( String(optionValue), value) !== -1 || $.inArray(optionText, value) !== -1) {
-                      $selectedItem = ($selectedItem)
-                        ? $selectedItem.add($choice)
-                        : $choice
-                      ;
-                    }
-                  }
-                  else if(strict) {
-                    module.verbose('Ambiguous dropdown value using strict type check', $choice, value);
-                    if( optionValue === value || optionText === value) {
-                      $selectedItem = $choice;
-                      return true;
-                    }
-                  }
-                  else {
-                    if( String(optionValue) == String(value) || optionText == value) {
-                      module.verbose('Found select item by value', optionValue, value);
-                      $selectedItem = $choice;
-                      return true;
-                    }
-                  }
-                })
-              ;
-            }
-            return $selectedItem;
-          }
-        },
-
-        check: {
-          maxSelections: function(selectionCount) {
-            if(settings.maxSelections) {
-              selectionCount = (selectionCount !== undefined)
-                ? selectionCount
-                : module.get.selectionCount()
-              ;
-              if(selectionCount >= settings.maxSelections) {
-                module.debug('Maximum selection count reached');
-                if(settings.useLabels) {
-                  $item.addClass(className.filtered);
-                  module.add.message(message.maxSelections);
-                }
-                return true;
-              }
-              else {
-                module.verbose('No longer at maximum selection count');
-                module.remove.message();
-                module.remove.filteredItem();
-                if(module.is.searchSelection()) {
-                  module.filterItems();
-                }
-                return false;
-              }
-            }
-            return true;
-          }
-        },
-
-        restore: {
-          defaults: function() {
-            module.clear();
-            module.restore.defaultText();
-            module.restore.defaultValue();
-          },
-          defaultText: function() {
-            var
-              defaultText     = module.get.defaultText(),
-              placeholderText = module.get.placeholderText
-            ;
-            if(defaultText === placeholderText) {
-              module.debug('Restoring default placeholder text', defaultText);
-              module.set.placeholderText(defaultText);
-            }
-            else {
-              module.debug('Restoring default text', defaultText);
-              module.set.text(defaultText);
-            }
-          },
-          placeholderText: function() {
-            module.set.placeholderText();
-          },
-          defaultValue: function() {
-            var
-              defaultValue = module.get.defaultValue()
-            ;
-            if(defaultValue !== undefined) {
-              module.debug('Restoring default value', defaultValue);
-              if(defaultValue !== '') {
-                module.set.value(defaultValue);
-                module.set.selected();
-              }
-              else {
-                module.remove.activeItem();
-                module.remove.selectedItem();
-              }
-            }
-          },
-          labels: function() {
-            if(settings.allowAdditions) {
-              if(!settings.useLabels) {
-                module.error(error.labels);
-                settings.useLabels = true;
-              }
-              module.debug('Restoring selected values');
-              module.create.userLabels();
-            }
-            module.check.maxSelections();
-          },
-          selected: function() {
-            module.restore.values();
-            if(module.is.multiple()) {
-              module.debug('Restoring previously selected values and labels');
-              module.restore.labels();
-            }
-            else {
-              module.debug('Restoring previously selected values');
-            }
-          },
-          values: function() {
-            // prevents callbacks from occurring on initial load
-            module.set.initialLoad();
-            if(settings.apiSettings && settings.saveRemoteData && module.get.remoteValues()) {
-              module.restore.remoteValues();
-            }
-            else {
-              module.set.selected();
-            }
-            module.remove.initialLoad();
-          },
-          remoteValues: function() {
-            var
-              values = module.get.remoteValues()
-            ;
-            module.debug('Recreating selected from session data', values);
-            if(values) {
-              if( module.is.single() ) {
-                $.each(values, function(value, name) {
-                  module.set.text(name);
-                });
-              }
-              else {
-                $.each(values, function(value, name) {
-                  module.add.label(value, name);
-                });
-              }
-            }
-          }
-        },
-
-        read: {
-          remoteData: function(value) {
-            var
-              name
-            ;
-            if(window.Storage === undefined) {
-              module.error(error.noStorage);
-              return;
-            }
-            name = sessionStorage.getItem(value);
-            return (name !== undefined)
-              ? name
-              : false
-            ;
-          }
-        },
-
-        save: {
-          defaults: function() {
-            module.save.defaultText();
-            module.save.placeholderText();
-            module.save.defaultValue();
-          },
-          defaultValue: function() {
-            var
-              value = module.get.value()
-            ;
-            module.verbose('Saving default value as', value);
-            $module.data(metadata.defaultValue, value);
-          },
-          defaultText: function() {
-            var
-              text = module.get.text()
-            ;
-            module.verbose('Saving default text as', text);
-            $module.data(metadata.defaultText, text);
-          },
-          placeholderText: function() {
-            var
-              text
-            ;
-            if(settings.placeholder !== false && $text.hasClass(className.placeholder)) {
-              text = module.get.text();
-              module.verbose('Saving placeholder text as', text);
-              $module.data(metadata.placeholderText, text);
-            }
-          },
-          remoteData: function(name, value) {
-            if(window.Storage === undefined) {
-              module.error(error.noStorage);
-              return;
-            }
-            module.verbose('Saving remote data to session storage', value, name);
-            sessionStorage.setItem(value, name);
-          }
-        },
-
-        clear: function() {
-          if(module.is.multiple() && settings.useLabels) {
-            module.remove.labels();
-          }
-          else {
-            module.remove.activeItem();
-            module.remove.selectedItem();
-          }
-          module.set.placeholderText();
-          module.clearValue();
-        },
-
-        clearValue: function() {
-          module.set.value('');
-        },
-
-        scrollPage: function(direction, $selectedItem) {
-          var
-            $currentItem  = $selectedItem || module.get.selectedItem(),
-            $menu         = $currentItem.closest(selector.menu),
-            menuHeight    = $menu.outerHeight(),
-            currentScroll = $menu.scrollTop(),
-            itemHeight    = $item.eq(0).outerHeight(),
-            itemsPerPage  = Math.floor(menuHeight / itemHeight),
-            maxScroll     = $menu.prop('scrollHeight'),
-            newScroll     = (direction == 'up')
-              ? currentScroll - (itemHeight * itemsPerPage)
-              : currentScroll + (itemHeight * itemsPerPage),
-            $selectableItem = $item.not(selector.unselectable),
-            isWithinRange,
-            $nextSelectedItem,
-            elementIndex
-          ;
-          elementIndex      = (direction == 'up')
-            ? $selectableItem.index($currentItem) - itemsPerPage
-            : $selectableItem.index($currentItem) + itemsPerPage
-          ;
-          isWithinRange = (direction == 'up')
-            ? (elementIndex >= 0)
-            : (elementIndex < $selectableItem.length)
-          ;
-          $nextSelectedItem = (isWithinRange)
-            ? $selectableItem.eq(elementIndex)
-            : (direction == 'up')
-              ? $selectableItem.first()
-              : $selectableItem.last()
-          ;
-          if($nextSelectedItem.length > 0) {
-            module.debug('Scrolling page', direction, $nextSelectedItem);
-            $currentItem
-              .removeClass(className.selected)
-            ;
-            $nextSelectedItem
-              .addClass(className.selected)
-            ;
-            if(settings.selectOnKeydown && module.is.single()) {
-              module.set.selectedItem($nextSelectedItem);
-            }
-            $menu
-              .scrollTop(newScroll)
-            ;
-          }
-        },
-
-        set: {
-          filtered: function() {
-            var
-              isMultiple       = module.is.multiple(),
-              isSearch         = module.is.searchSelection(),
-              isSearchMultiple = (isMultiple && isSearch),
-              searchValue      = (isSearch)
-                ? module.get.query()
-                : '',
-              hasSearchValue   = (typeof searchValue === 'string' && searchValue.length > 0),
-              searchWidth      = module.get.searchWidth(),
-              valueIsSet       = searchValue !== ''
-            ;
-            if(isMultiple && hasSearchValue) {
-              module.verbose('Adjusting input width', searchWidth, settings.glyphWidth);
-              $search.css('width', searchWidth);
-            }
-            if(hasSearchValue || (isSearchMultiple && valueIsSet)) {
-              module.verbose('Hiding placeholder text');
-              $text.addClass(className.filtered);
-            }
-            else if(!isMultiple || (isSearchMultiple && !valueIsSet)) {
-              module.verbose('Showing placeholder text');
-              $text.removeClass(className.filtered);
-            }
-          },
-          empty: function() {
-            $module.addClass(className.empty);
-          },
-          loading: function() {
-            $module.addClass(className.loading);
-          },
-          placeholderText: function(text) {
-            text = text || module.get.placeholderText();
-            module.debug('Setting placeholder text', text);
-            module.set.text(text);
-            $text.addClass(className.placeholder);
-          },
-          tabbable: function() {
-            if( module.is.searchSelection() ) {
-              module.debug('Added tabindex to searchable dropdown');
-              $search
-                .val('')
-                .attr('tabindex', 0)
-              ;
-              $menu
-                .attr('tabindex', -1)
-              ;
-            }
-            else {
-              module.debug('Added tabindex to dropdown');
-              if( $module.attr('tabindex') === undefined) {
-                $module
-                  .attr('tabindex', 0)
-                ;
-                $menu
-                  .attr('tabindex', -1)
-                ;
-              }
-            }
-          },
-          initialLoad: function() {
-            module.verbose('Setting initial load');
-            initialLoad = true;
-          },
-          activeItem: function($item) {
-            if( settings.allowAdditions && $item.filter(selector.addition).length > 0 ) {
-              $item.addClass(className.filtered);
-            }
-            else {
-              $item.addClass(className.active);
-            }
-          },
-          partialSearch: function(text) {
-            var
-              length = module.get.query().length
-            ;
-            $search.val( text.substr(0 , length));
-          },
-          scrollPosition: function($item, forceScroll) {
-            var
-              edgeTolerance = 5,
-              $menu,
-              hasActive,
-              offset,
-              itemHeight,
-              itemOffset,
-              menuOffset,
-              menuScroll,
-              menuHeight,
-              abovePage,
-              belowPage
-            ;
-
-            $item       = $item || module.get.selectedItem();
-            $menu       = $item.closest(selector.menu);
-            hasActive   = ($item && $item.length > 0);
-            forceScroll = (forceScroll !== undefined)
-              ? forceScroll
-              : false
-            ;
-            if($item && $menu.length > 0 && hasActive) {
-              itemOffset = $item.position().top;
-
-              $menu.addClass(className.loading);
-              menuScroll = $menu.scrollTop();
-              menuOffset = $menu.offset().top;
-              itemOffset = $item.offset().top;
-              offset     = menuScroll - menuOffset + itemOffset;
-              if(!forceScroll) {
-                menuHeight = $menu.height();
-                belowPage  = menuScroll + menuHeight < (offset + edgeTolerance);
-                abovePage  = ((offset - edgeTolerance) < menuScroll);
-              }
-              module.debug('Scrolling to active item', offset);
-              if(forceScroll || abovePage || belowPage) {
-                $menu.scrollTop(offset);
-              }
-              $menu.removeClass(className.loading);
-            }
-          },
-          text: function(text) {
-            if(settings.action !== 'select') {
-              if(settings.action == 'combo') {
-                module.debug('Changing combo button text', text, $combo);
-                if(settings.preserveHTML) {
-                  $combo.html(text);
-                }
-                else {
-                  $combo.text(text);
-                }
-              }
-              else {
-                if(text !== module.get.placeholderText()) {
-                  $text.removeClass(className.placeholder);
-                }
-                module.debug('Changing text', text, $text);
-                $text
-                  .removeClass(className.filtered)
-                ;
-                if(settings.preserveHTML) {
-                  $text.html(text);
-                }
-                else {
-                  $text.text(text);
-                }
-              }
-            }
-          },
-          selectedItem: function($item) {
-            var
-              value      = module.get.choiceValue($item),
-              searchText = module.get.choiceText($item, false),
-              text       = module.get.choiceText($item, true)
-            ;
-            module.debug('Setting user selection to item', $item);
-            module.remove.activeItem();
-            module.set.partialSearch(searchText);
-            module.set.activeItem($item);
-            module.set.selected(value, $item);
-            module.set.text(text);
-          },
-          selectedLetter: function(letter) {
-            var
-              $selectedItem         = $item.filter('.' + className.selected),
-              alreadySelectedLetter = $selectedItem.length > 0 && module.has.firstLetter($selectedItem, letter),
-              $nextValue            = false,
-              $nextItem
-            ;
-            // check next of same letter
-            if(alreadySelectedLetter) {
-              $nextItem = $selectedItem.nextAll($item).eq(0);
-              if( module.has.firstLetter($nextItem, letter) ) {
-                $nextValue  = $nextItem;
-              }
-            }
-            // check all values
-            if(!$nextValue) {
-              $item
-                .each(function(){
-                  if(module.has.firstLetter($(this), letter)) {
-                    $nextValue = $(this);
-                    return false;
-                  }
-                })
-              ;
-            }
-            // set next value
-            if($nextValue) {
-              module.verbose('Scrolling to next value with letter', letter);
-              module.set.scrollPosition($nextValue);
-              $selectedItem.removeClass(className.selected);
-              $nextValue.addClass(className.selected);
-              if(settings.selectOnKeydown && module.is.single()) {
-                module.set.selectedItem($nextValue);
-              }
-            }
-          },
-          direction: function($menu) {
-            if(settings.direction == 'auto') {
-              if(module.is.onScreen($menu)) {
-                module.remove.upward($menu);
-              }
-              else {
-                module.set.upward($menu);
-              }
-            }
-            else if(settings.direction == 'upward') {
-              module.set.upward($menu);
-            }
-          },
-          upward: function($menu) {
-            var $element = $menu || $module;
-            $element.addClass(className.upward);
-          },
-          value: function(value, text, $selected) {
-            var
-              escapedValue = module.escape.value(value),
-              hasInput     = ($input.length > 0),
-              isAddition   = !module.has.value(value),
-              currentValue = module.get.values(),
-              stringValue  = (value !== undefined)
-                ? String(value)
-                : value,
-              newValue
-            ;
-            if(hasInput) {
-              if(!settings.allowReselection && stringValue == currentValue) {
-                module.verbose('Skipping value update already same value', value, currentValue);
-                if(!module.is.initialLoad()) {
-                  return;
-                }
-              }
-
-              if( module.is.single() && module.has.selectInput() && module.can.extendSelect() ) {
-                module.debug('Adding user option', value);
-                module.add.optionValue(value);
-              }
-              module.debug('Updating input value', escapedValue, currentValue);
-              internalChange = true;
-              $input
-                .val(escapedValue)
-              ;
-              if(settings.fireOnInit === false && module.is.initialLoad()) {
-                module.debug('Input native change event ignored on initial load');
-              }
-              else {
-                module.trigger.change();
-              }
-              internalChange = false;
-            }
-            else {
-              module.verbose('Storing value in metadata', escapedValue, $input);
-              if(escapedValue !== currentValue) {
-                $module.data(metadata.value, stringValue);
-              }
-            }
-            if(settings.fireOnInit === false && module.is.initialLoad()) {
-              module.verbose('No callback on initial load', settings.onChange);
-            }
-            else {
-              settings.onChange.call(element, value, text, $selected);
-            }
-          },
-          active: function() {
-            $module
-              .addClass(className.active)
-            ;
-          },
-          multiple: function() {
-            $module.addClass(className.multiple);
-          },
-          visible: function() {
-            $module.addClass(className.visible);
-          },
-          exactly: function(value, $selectedItem) {
-            module.debug('Setting selected to exact values');
-            module.clear();
-            module.set.selected(value, $selectedItem);
-          },
-          selected: function(value, $selectedItem) {
-            var
-              isMultiple = module.is.multiple(),
-              $userSelectedItem
-            ;
-            $selectedItem = (settings.allowAdditions)
-              ? $selectedItem || module.get.itemWithAdditions(value)
-              : $selectedItem || module.get.item(value)
-            ;
-            if(!$selectedItem) {
-              return;
-            }
-            module.debug('Setting selected menu item to', $selectedItem);
-            if(module.is.multiple()) {
-              module.remove.searchWidth();
-            }
-            if(module.is.single()) {
-              module.remove.activeItem();
-              module.remove.selectedItem();
-            }
-            else if(settings.useLabels) {
-              module.remove.selectedItem();
-            }
-            // select each item
-            $selectedItem
-              .each(function() {
-                var
-                  $selected      = $(this),
-                  selectedText   = module.get.choiceText($selected),
-                  selectedValue  = module.get.choiceValue($selected, selectedText),
-
-                  isFiltered     = $selected.hasClass(className.filtered),
-                  isActive       = $selected.hasClass(className.active),
-                  isUserValue    = $selected.hasClass(className.addition),
-                  shouldAnimate  = (isMultiple && $selectedItem.length == 1)
-                ;
-                if(isMultiple) {
-                  if(!isActive || isUserValue) {
-                    if(settings.apiSettings && settings.saveRemoteData) {
-                      module.save.remoteData(selectedText, selectedValue);
-                    }
-                    if(settings.useLabels) {
-                      module.add.value(selectedValue, selectedText, $selected);
-                      module.add.label(selectedValue, selectedText, shouldAnimate);
-                      module.set.activeItem($selected);
-                      module.filterActive();
-                      module.select.nextAvailable($selectedItem);
-                    }
-                    else {
-                      module.add.value(selectedValue, selectedText, $selected);
-                      module.set.text(module.add.variables(message.count));
-                      module.set.activeItem($selected);
-                    }
-                  }
-                  else if(!isFiltered) {
-                    module.debug('Selected active value, removing label');
-                    module.remove.selected(selectedValue);
-                  }
-                }
-                else {
-                  if(settings.apiSettings && settings.saveRemoteData) {
-                    module.save.remoteData(selectedText, selectedValue);
-                  }
-                  module.set.text(selectedText);
-                  module.set.value(selectedValue, selectedText, $selected);
-                  $selected
-                    .addClass(className.active)
-                    .addClass(className.selected)
-                  ;
-                }
-              })
-            ;
-          }
-        },
-
-        add: {
-          label: function(value, text, shouldAnimate) {
-            var
-              $next  = module.is.searchSelection()
-                ? $search
-                : $text,
-              escapedValue = module.escape.value(value),
-              $label
-            ;
-            $label =  $('<a />')
-              .addClass(className.label)
-              .attr('data-' + metadata.value, escapedValue)
-              .html(templates.label(escapedValue, text))
-            ;
-            $label = settings.onLabelCreate.call($label, escapedValue, text);
-
-            if(module.has.label(value)) {
-              module.debug('Label already exists, skipping', escapedValue);
-              return;
-            }
-            if(settings.label.variation) {
-              $label.addClass(settings.label.variation);
-            }
-            if(shouldAnimate === true) {
-              module.debug('Animating in label', $label);
-              $label
-                .addClass(className.hidden)
-                .insertBefore($next)
-                .transition(settings.label.transition, settings.label.duration)
-              ;
-            }
-            else {
-              module.debug('Adding selection label', $label);
-              $label
-                .insertBefore($next)
-              ;
-            }
-          },
-          message: function(message) {
-            var
-              $message = $menu.children(selector.message),
-              html     = settings.templates.message(module.add.variables(message))
-            ;
-            if($message.length > 0) {
-              $message
-                .html(html)
-              ;
-            }
-            else {
-              $message = $('<div/>')
-                .html(html)
-                .addClass(className.message)
-                .appendTo($menu)
-              ;
-            }
-          },
-          optionValue: function(value) {
-            var
-              escapedValue = module.escape.value(value),
-              $option      = $input.find('option[value="' + module.escape.string(escapedValue) + '"]'),
-              hasOption    = ($option.length > 0)
-            ;
-            if(hasOption) {
-              return;
-            }
-            // temporarily disconnect observer
-            module.disconnect.selectObserver();
-            if( module.is.single() ) {
-              module.verbose('Removing previous user addition');
-              $input.find('option.' + className.addition).remove();
-            }
-            $('<option/>')
-              .prop('value', escapedValue)
-              .addClass(className.addition)
-              .html(value)
-              .appendTo($input)
-            ;
-            module.verbose('Adding user addition as an <option>', value);
-            module.observe.select();
-          },
-          userSuggestion: function(value) {
-            var
-              $addition         = $menu.children(selector.addition),
-              $existingItem     = module.get.item(value),
-              alreadyHasValue   = $existingItem && $existingItem.not(selector.addition).length,
-              hasUserSuggestion = $addition.length > 0,
-              html
-            ;
-            if(settings.useLabels && module.has.maxSelections()) {
-              return;
-            }
-            if(value === '' || alreadyHasValue) {
-              $addition.remove();
-              return;
-            }
-            if(hasUserSuggestion) {
-              $addition
-                .data(metadata.value, value)
-                .data(metadata.text, value)
-                .attr('data-' + metadata.value, value)
-                .attr('data-' + metadata.text, value)
-                .removeClass(className.filtered)
-              ;
-              if(!settings.hideAdditions) {
-                html = settings.templates.addition( module.add.variables(message.addResult, value) );
-                $addition
-                  .html(html)
-                ;
-              }
-              module.verbose('Replacing user suggestion with new value', $addition);
-            }
-            else {
-              $addition = module.create.userChoice(value);
-              $addition
-                .prependTo($menu)
-              ;
-              module.verbose('Adding item choice to menu corresponding with user choice addition', $addition);
-            }
-            if(!settings.hideAdditions || module.is.allFiltered()) {
-              $addition
-                .addClass(className.selected)
-                .siblings()
-                .removeClass(className.selected)
-              ;
-            }
-            module.refreshItems();
-          },
-          variables: function(message, term) {
-            var
-              hasCount    = (message.search('{count}') !== -1),
-              hasMaxCount = (message.search('{maxCount}') !== -1),
-              hasTerm     = (message.search('{term}') !== -1),
-              values,
-              count,
-              query
-            ;
-            module.verbose('Adding templated variables to message', message);
-            if(hasCount) {
-              count  = module.get.selectionCount();
-              message = message.replace('{count}', count);
-            }
-            if(hasMaxCount) {
-              count  = module.get.selectionCount();
-              message = message.replace('{maxCount}', settings.maxSelections);
-            }
-            if(hasTerm) {
-              query   = term || module.get.query();
-              message = message.replace('{term}', query);
-            }
-            return message;
-          },
-          value: function(addedValue, addedText, $selectedItem) {
-            var
-              currentValue = module.get.values(),
-              newValue
-            ;
-            if(addedValue === '') {
-              module.debug('Cannot select blank values from multiselect');
-              return;
-            }
-            // extend current array
-            if($.isArray(currentValue)) {
-              newValue = currentValue.concat([addedValue]);
-              newValue = module.get.uniqueArray(newValue);
-            }
-            else {
-              newValue = [addedValue];
-            }
-            // add values
-            if( module.has.selectInput() ) {
-              if(module.can.extendSelect()) {
-                module.debug('Adding value to select', addedValue, newValue, $input);
-                module.add.optionValue(addedValue);
-              }
-            }
-            else {
-              newValue = newValue.join(settings.delimiter);
-              module.debug('Setting hidden input to delimited value', newValue, $input);
-            }
-
-            if(settings.fireOnInit === false && module.is.initialLoad()) {
-              module.verbose('Skipping onadd callback on initial load', settings.onAdd);
-            }
-            else {
-              settings.onAdd.call(element, addedValue, addedText, $selectedItem);
-            }
-            module.set.value(newValue, addedValue, addedText, $selectedItem);
-            module.check.maxSelections();
-          }
-        },
-
-        remove: {
-          active: function() {
-            $module.removeClass(className.active);
-          },
-          activeLabel: function() {
-            $module.find(selector.label).removeClass(className.active);
-          },
-          empty: function() {
-            $module.removeClass(className.empty);
-          },
-          loading: function() {
-            $module.removeClass(className.loading);
-          },
-          initialLoad: function() {
-            initialLoad = false;
-          },
-          upward: function($menu) {
-            var $element = $menu || $module;
-            $element.removeClass(className.upward);
-          },
-          visible: function() {
-            $module.removeClass(className.visible);
-          },
-          activeItem: function() {
-            $item.removeClass(className.active);
-          },
-          filteredItem: function() {
-            if(settings.useLabels && module.has.maxSelections() ) {
-              return;
-            }
-            if(settings.useLabels && module.is.multiple()) {
-              $item.not('.' + className.active).removeClass(className.filtered);
-            }
-            else {
-              $item.removeClass(className.filtered);
-            }
-            module.remove.empty();
-          },
-          optionValue: function(value) {
-            var
-              escapedValue = module.escape.value(value),
-              $option      = $input.find('option[value="' + module.escape.string(escapedValue) + '"]'),
-              hasOption    = ($option.length > 0)
-            ;
-            if(!hasOption || !$option.hasClass(className.addition)) {
-              return;
-            }
-            // temporarily disconnect observer
-            if(selectObserver) {
-              selectObserver.disconnect();
-              module.verbose('Temporarily disconnecting mutation observer');
-            }
-            $option.remove();
-            module.verbose('Removing user addition as an <option>', escapedValue);
-            if(selectObserver) {
-              selectObserver.observe($input[0], {
-                childList : true,
-                subtree   : true
-              });
-            }
-          },
-          message: function() {
-            $menu.children(selector.message).remove();
-          },
-          searchWidth: function() {
-            $search.css('width', '');
-          },
-          searchTerm: function() {
-            module.verbose('Cleared search term');
-            $search.val('');
-            module.set.filtered();
-          },
-          userAddition: function() {
-            $item.filter(selector.addition).remove();
-          },
-          selected: function(value, $selectedItem) {
-            $selectedItem = (settings.allowAdditions)
-              ? $selectedItem || module.get.itemWithAdditions(value)
-              : $selectedItem || module.get.item(value)
-            ;
-
-            if(!$selectedItem) {
-              return false;
-            }
-
-            $selectedItem
-              .each(function() {
-                var
-                  $selected     = $(this),
-                  selectedText  = module.get.choiceText($selected),
-                  selectedValue = module.get.choiceValue($selected, selectedText)
-                ;
-                if(module.is.multiple()) {
-                  if(settings.useLabels) {
-                    module.remove.value(selectedValue, selectedText, $selected);
-                    module.remove.label(selectedValue);
-                  }
-                  else {
-                    module.remove.value(selectedValue, selectedText, $selected);
-                    if(module.get.selectionCount() === 0) {
-                      module.set.placeholderText();
-                    }
-                    else {
-                      module.set.text(module.add.variables(message.count));
-                    }
-                  }
-                }
-                else {
-                  module.remove.value(selectedValue, selectedText, $selected);
-                }
-                $selected
-                  .removeClass(className.filtered)
-                  .removeClass(className.active)
-                ;
-                if(settings.useLabels) {
-                  $selected.removeClass(className.selected);
-                }
-              })
-            ;
-          },
-          selectedItem: function() {
-            $item.removeClass(className.selected);
-          },
-          value: function(removedValue, removedText, $removedItem) {
-            var
-              values = module.get.values(),
-              newValue
-            ;
-            if( module.has.selectInput() ) {
-              module.verbose('Input is <select> removing selected option', removedValue);
-              newValue = module.remove.arrayValue(removedValue, values);
-              module.remove.optionValue(removedValue);
-            }
-            else {
-              module.verbose('Removing from delimited values', removedValue);
-              newValue = module.remove.arrayValue(removedValue, values);
-              newValue = newValue.join(settings.delimiter);
-            }
-            if(settings.fireOnInit === false && module.is.initialLoad()) {
-              module.verbose('No callback on initial load', settings.onRemove);
-            }
-            else {
-              settings.onRemove.call(element, removedValue, removedText, $removedItem);
-            }
-            module.set.value(newValue, removedText, $removedItem);
-            module.check.maxSelections();
-          },
-          arrayValue: function(removedValue, values) {
-            if( !$.isArray(values) ) {
-              values = [values];
-            }
-            values = $.grep(values, function(value){
-              return (removedValue != value);
-            });
-            module.verbose('Removed value from delimited string', removedValue, values);
-            return values;
-          },
-          label: function(value, shouldAnimate) {
-            var
-              $labels       = $module.find(selector.label),
-              $removedLabel = $labels.filter('[data-' + metadata.value + '="' + module.escape.string(value) +'"]')
-            ;
-            module.verbose('Removing label', $removedLabel);
-            $removedLabel.remove();
-          },
-          activeLabels: function($activeLabels) {
-            $activeLabels = $activeLabels || $module.find(selector.label).filter('.' + className.active);
-            module.verbose('Removing active label selections', $activeLabels);
-            module.remove.labels($activeLabels);
-          },
-          labels: function($labels) {
-            $labels = $labels || $module.find(selector.label);
-            module.verbose('Removing labels', $labels);
-            $labels
-              .each(function(){
-                var
-                  $label      = $(this),
-                  value       = $label.data(metadata.value),
-                  stringValue = (value !== undefined)
-                    ? String(value)
-                    : value,
-                  isUserValue = module.is.userValue(stringValue)
-                ;
-                if(settings.onLabelRemove.call($label, value) === false) {
-                  module.debug('Label remove callback cancelled removal');
-                  return;
-                }
-                module.remove.message();
-                if(isUserValue) {
-                  module.remove.value(stringValue);
-                  module.remove.label(stringValue);
-                }
-                else {
-                  // selected will also remove label
-                  module.remove.selected(stringValue);
-                }
-              })
-            ;
-          },
-          tabbable: function() {
-            if( module.is.searchSelection() ) {
-              module.debug('Searchable dropdown initialized');
-              $search
-                .removeAttr('tabindex')
-              ;
-              $menu
-                .removeAttr('tabindex')
-              ;
-            }
-            else {
-              module.debug('Simple selection dropdown initialized');
-              $module
-                .removeAttr('tabindex')
-              ;
-              $menu
-                .removeAttr('tabindex')
-              ;
-            }
-          }
-        },
-
-        has: {
-          menuSearch: function() {
-            return (module.has.search() && $search.closest($menu).length > 0);
-          },
-          search: function() {
-            return ($search.length > 0);
-          },
-          sizer: function() {
-            return ($sizer.length > 0);
-          },
-          selectInput: function() {
-            return ( $input.is('select') );
-          },
-          minCharacters: function(searchTerm) {
-            if(settings.minCharacters) {
-              searchTerm = (searchTerm !== undefined)
-                ? String(searchTerm)
-                : String(module.get.query())
-              ;
-              return (searchTerm.length >= settings.minCharacters);
-            }
-            return true;
-          },
-          firstLetter: function($item, letter) {
-            var
-              text,
-              firstLetter
-            ;
-            if(!$item || $item.length === 0 || typeof letter !== 'string') {
-              return false;
-            }
-            text        = module.get.choiceText($item, false);
-            letter      = letter.toLowerCase();
-            firstLetter = String(text).charAt(0).toLowerCase();
-            return (letter == firstLetter);
-          },
-          input: function() {
-            return ($input.length > 0);
-          },
-          items: function() {
-            return ($item.length > 0);
-          },
-          menu: function() {
-            return ($menu.length > 0);
-          },
-          message: function() {
-            return ($menu.children(selector.message).length !== 0);
-          },
-          label: function(value) {
-            var
-              escapedValue = module.escape.value(value),
-              $labels      = $module.find(selector.label)
-            ;
-            return ($labels.filter('[data-' + metadata.value + '="' + module.escape.string(escapedValue) +'"]').length > 0);
-          },
-          maxSelections: function() {
-            return (settings.maxSelections && module.get.selectionCount() >= settings.maxSelections);
-          },
-          allResultsFiltered: function() {
-            var
-              $normalResults = $item.not(selector.addition)
-            ;
-            return ($normalResults.filter(selector.unselectable).length === $normalResults.length);
-          },
-          userSuggestion: function() {
-            return ($menu.children(selector.addition).length > 0);
-          },
-          query: function() {
-            return (module.get.query() !== '');
-          },
-          value: function(value) {
-            var
-              values   = module.get.values(),
-              hasValue = $.isArray(values)
-               ? values && ($.inArray(value, values) !== -1)
-               : (values == value)
-            ;
-            return (hasValue)
-              ? true
-              : false
-            ;
-          }
-        },
-
-        is: {
-          active: function() {
-            return $module.hasClass(className.active);
-          },
-          bubbledLabelClick: function(event) {
-            return $(event.target).is('select, input') && $module.closest('label').length > 0;
-          },
-          bubbledIconClick: function(event) {
-            return $(event.target).closest($icon).length > 0;
-          },
-          alreadySetup: function() {
-            return ($module.is('select') && $module.parent(selector.dropdown).length > 0  && $module.prev().length === 0);
-          },
-          animating: function($subMenu) {
-            return ($subMenu)
-              ? $subMenu.transition && $subMenu.transition('is animating')
-              : $menu.transition    && $menu.transition('is animating')
-            ;
-          },
-          disabled: function() {
-            return $module.hasClass(className.disabled);
-          },
-          focused: function() {
-            return (document.activeElement === $module[0]);
-          },
-          focusedOnSearch: function() {
-            return (document.activeElement === $search[0]);
-          },
-          allFiltered: function() {
-            return( (module.is.multiple() || module.has.search()) && !(settings.hideAdditions == false && module.has.userSuggestion()) && !module.has.message() && module.has.allResultsFiltered() );
-          },
-          hidden: function($subMenu) {
-            return !module.is.visible($subMenu);
-          },
-          initialLoad: function() {
-            return initialLoad;
-          },
-          onScreen: function($subMenu) {
-            var
-              $currentMenu   = $subMenu || $menu,
-              canOpenDownward = true,
-              onScreen = {},
-              calculations
-            ;
-            $currentMenu.addClass(className.loading);
-            calculations = {
-              context: {
-                scrollTop : $context.scrollTop(),
-                height    : $context.outerHeight()
-              },
-              menu : {
-                offset: $currentMenu.offset(),
-                height: $currentMenu.outerHeight()
-              }
-            };
-            if(module.is.verticallyScrollableContext()) {
-              calculations.menu.offset.top += calculations.context.scrollTop;
-            }
-            onScreen = {
-              above : (calculations.context.scrollTop) <= calculations.menu.offset.top - calculations.menu.height,
-              below : (calculations.context.scrollTop + calculations.context.height) >= calculations.menu.offset.top + calculations.menu.height
-            };
-            if(onScreen.below) {
-              module.verbose('Dropdown can fit in context downward', onScreen);
-              canOpenDownward = true;
-            }
-            else if(!onScreen.below && !onScreen.above) {
-              module.verbose('Dropdown cannot fit in either direction, favoring downward', onScreen);
-              canOpenDownward = true;
-            }
-            else {
-              module.verbose('Dropdown cannot fit below, opening upward', onScreen);
-              canOpenDownward = false;
-            }
-            $currentMenu.removeClass(className.loading);
-            return canOpenDownward;
-          },
-          inObject: function(needle, object) {
-            var
-              found = false
-            ;
-            $.each(object, function(index, property) {
-              if(property == needle) {
-                found = true;
-                return true;
-              }
-            });
-            return found;
-          },
-          multiple: function() {
-            return $module.hasClass(className.multiple);
-          },
-          remote: function() {
-            return settings.apiSettings && module.can.useAPI();
-          },
-          single: function() {
-            return !module.is.multiple();
-          },
-          selectMutation: function(mutations) {
-            var
-              selectChanged = false
-            ;
-            $.each(mutations, function(index, mutation) {
-              if(mutation.target && $(mutation.target).is('select')) {
-                selectChanged = true;
-                return true;
-              }
-            });
-            return selectChanged;
-          },
-          search: function() {
-            return $module.hasClass(className.search);
-          },
-          searchSelection: function() {
-            return ( module.has.search() && $search.parent(selector.dropdown).length === 1 );
-          },
-          selection: function() {
-            return $module.hasClass(className.selection);
-          },
-          userValue: function(value) {
-            return ($.inArray(value, module.get.userValues()) !== -1);
-          },
-          upward: function($menu) {
-            var $element = $menu || $module;
-            return $element.hasClass(className.upward);
-          },
-          visible: function($subMenu) {
-            return ($subMenu)
-              ? $subMenu.hasClass(className.visible)
-              : $menu.hasClass(className.visible)
-            ;
-          },
-          verticallyScrollableContext: function() {
-            var
-              overflowY = ($context.get(0) !== window)
-                ? $context.css('overflow-y')
-                : false
-            ;
-            return (overflowY == 'auto' || overflowY == 'scroll');
-          }
-        },
-
-        can: {
-          activate: function($item) {
-            if(settings.useLabels) {
-              return true;
-            }
-            if(!module.has.maxSelections()) {
-              return true;
-            }
-            if(module.has.maxSelections() && $item.hasClass(className.active)) {
-              return true;
-            }
-            return false;
-          },
-          click: function() {
-            return (hasTouch || settings.on == 'click');
-          },
-          extendSelect: function() {
-            return settings.allowAdditions || settings.apiSettings;
-          },
-          show: function() {
-            return !module.is.disabled() && (module.has.items() || module.has.message());
-          },
-          useAPI: function() {
-            return $.fn.api !== undefined;
-          }
-        },
-
-        animate: {
-          show: function(callback, $subMenu) {
-            var
-              $currentMenu = $subMenu || $menu,
-              start = ($subMenu)
-                ? function() {}
-                : function() {
-                  module.hideSubMenus();
-                  module.hideOthers();
-                  module.set.active();
-                },
-              transition
-            ;
-            callback = $.isFunction(callback)
-              ? callback
-              : function(){}
-            ;
-            module.verbose('Doing menu show animation', $currentMenu);
-            module.set.direction($subMenu);
-            transition = module.get.transition($subMenu);
-            if( module.is.selection() ) {
-              module.set.scrollPosition(module.get.selectedItem(), true);
-            }
-            if( module.is.hidden($currentMenu) || module.is.animating($currentMenu) ) {
-              if(transition == 'none') {
-                start();
-                $currentMenu.transition('show');
-                callback.call(element);
-              }
-              else if($.fn.transition !== undefined && $module.transition('is supported')) {
-                $currentMenu
-                  .transition({
-                    animation  : transition + ' in',
-                    debug      : settings.debug,
-                    verbose    : settings.verbose,
-                    duration   : settings.duration,
-                    queue      : true,
-                    onStart    : start,
-                    onComplete : function() {
-                      callback.call(element);
-                    }
-                  })
-                ;
-              }
-              else {
-                module.error(error.noTransition, transition);
-              }
-            }
-          },
-          hide: function(callback, $subMenu) {
-            var
-              $currentMenu = $subMenu || $menu,
-              duration = ($subMenu)
-                ? (settings.duration * 0.9)
-                : settings.duration,
-              start = ($subMenu)
-                ? function() {}
-                : function() {
-                  if( module.can.click() ) {
-                    module.unbind.intent();
-                  }
-                  module.remove.active();
-                },
-              transition = module.get.transition($subMenu)
-            ;
-            callback = $.isFunction(callback)
-              ? callback
-              : function(){}
-            ;
-            if( module.is.visible($currentMenu) || module.is.animating($currentMenu) ) {
-              module.verbose('Doing menu hide animation', $currentMenu);
-
-              if(transition == 'none') {
-                start();
-                $currentMenu.transition('hide');
-                callback.call(element);
-              }
-              else if($.fn.transition !== undefined && $module.transition('is supported')) {
-                $currentMenu
-                  .transition({
-                    animation  : transition + ' out',
-                    duration   : settings.duration,
-                    debug      : settings.debug,
-                    verbose    : settings.verbose,
-                    queue      : true,
-                    onStart    : start,
-                    onComplete : function() {
-                      if(settings.direction == 'auto') {
-                        module.remove.upward($subMenu);
-                      }
-                      callback.call(element);
-                    }
-                  })
-                ;
-              }
-              else {
-                module.error(error.transition);
-              }
-            }
-          }
-        },
-
-        hideAndClear: function() {
-          module.remove.searchTerm();
-          if( module.has.maxSelections() ) {
-            return;
-          }
-          if(module.has.search()) {
-            module.hide(function() {
-              module.remove.filteredItem();
-            });
-          }
-          else {
-            module.hide();
-          }
-        },
-
-        delay: {
-          show: function() {
-            module.verbose('Delaying show event to ensure user intent');
-            clearTimeout(module.timer);
-            module.timer = setTimeout(module.show, settings.delay.show);
-          },
-          hide: function() {
-            module.verbose('Delaying hide event to ensure user intent');
-            clearTimeout(module.timer);
-            module.timer = setTimeout(module.hide, settings.delay.hide);
-          }
-        },
-
-        escape: {
-          value: function(value) {
-            var
-              multipleValues = $.isArray(value),
-              stringValue    = (typeof value === 'string'),
-              isUnparsable   = (!stringValue && !multipleValues),
-              hasQuotes      = (stringValue && value.search(regExp.quote) !== -1),
-              values         = []
-            ;
-            if(isUnparsable || !hasQuotes) {
-              return value;
-            }
-            module.debug('Encoding quote values for use in select', value);
-            if(multipleValues) {
-              $.each(value, function(index, value){
-                values.push(value.replace(regExp.quote, '&quot;'));
-              });
-              return values;
-            }
-            return value.replace(regExp.quote, '&quot;');
-          },
-          string: function(text) {
-            text =  String(text);
-            return text.replace(regExp.escape, '\\$&');
-          }
-        },
-
-        setting: function(name, value) {
-          module.debug('Changing setting', name, value);
-          if( $.isPlainObject(name) ) {
-            $.extend(true, settings, name);
-          }
-          else if(value !== undefined) {
-            if($.isPlainObject(settings[name])) {
-              $.extend(true, settings[name], value);
-            }
-            else {
-              settings[name] = value;
-            }
-          }
-          else {
-            return settings[name];
-          }
-        },
-        internal: function(name, value) {
-          if( $.isPlainObject(name) ) {
-            $.extend(true, module, name);
-          }
-          else if(value !== undefined) {
-            module[name] = value;
-          }
-          else {
-            return module[name];
-          }
-        },
-        debug: function() {
-          if(!settings.silent && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.debug.apply(console, arguments);
-            }
-          }
-        },
-        verbose: function() {
-          if(!settings.silent && settings.verbose && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.verbose.apply(console, arguments);
-            }
-          }
-        },
-        error: function() {
-          if(!settings.silent) {
-            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
-            module.error.apply(console, arguments);
-          }
-        },
-        performance: {
-          log: function(message) {
-            var
-              currentTime,
-              executionTime,
-              previousTime
-            ;
-            if(settings.performance) {
-              currentTime   = new Date().getTime();
-              previousTime  = time || currentTime;
-              executionTime = currentTime - previousTime;
-              time          = currentTime;
-              performance.push({
-                'Name'           : message[0],
-                'Arguments'      : [].slice.call(message, 1) || '',
-                'Element'        : element,
-                'Execution Time' : executionTime
-              });
-            }
-            clearTimeout(module.performance.timer);
-            module.performance.timer = setTimeout(module.performance.display, 500);
-          },
-          display: function() {
-            var
-              title = settings.name + ':',
-              totalTime = 0
-            ;
-            time = false;
-            clearTimeout(module.performance.timer);
-            $.each(performance, function(index, data) {
-              totalTime += data['Execution Time'];
-            });
-            title += ' ' + totalTime + 'ms';
-            if(moduleSelector) {
-              title += ' \'' + moduleSelector + '\'';
-            }
-            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
-              console.groupCollapsed(title);
-              if(console.table) {
-                console.table(performance);
-              }
-              else {
-                $.each(performance, function(index, data) {
-                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-                });
-              }
-              console.groupEnd();
-            }
-            performance = [];
-          }
-        },
-        invoke: function(query, passedArguments, context) {
-          var
-            object = instance,
-            maxDepth,
-            found,
-            response
-          ;
-          passedArguments = passedArguments || queryArguments;
-          context         = element         || context;
-          if(typeof query == 'string' && object !== undefined) {
-            query    = query.split(/[\. ]/);
-            maxDepth = query.length - 1;
-            $.each(query, function(depth, value) {
-              var camelCaseValue = (depth != maxDepth)
-                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
-                : query
-              ;
-              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
-                object = object[camelCaseValue];
-              }
-              else if( object[camelCaseValue] !== undefined ) {
-                found = object[camelCaseValue];
-                return false;
-              }
-              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
-                object = object[value];
-              }
-              else if( object[value] !== undefined ) {
-                found = object[value];
-                return false;
-              }
-              else {
-                module.error(error.method, query);
-                return false;
-              }
-            });
-          }
-          if ( $.isFunction( found ) ) {
-            response = found.apply(context, passedArguments);
-          }
-          else if(found !== undefined) {
-            response = found;
-          }
-          if($.isArray(returnedValue)) {
-            returnedValue.push(response);
-          }
-          else if(returnedValue !== undefined) {
-            returnedValue = [returnedValue, response];
-          }
-          else if(response !== undefined) {
-            returnedValue = response;
-          }
-          return found;
-        }
-      };
-
-      if(methodInvoked) {
-        if(instance === undefined) {
-          module.initialize();
-        }
-        module.invoke(query);
-      }
-      else {
-        if(instance !== undefined) {
-          instance.invoke('destroy');
-        }
-        module.initialize();
-      }
-    })
-  ;
-  return (returnedValue !== undefined)
-    ? returnedValue
-    : $allModules
-  ;
-};
-
-_module.exports.settings = {
-
-  silent                 : false,
-  debug                  : false,
-  verbose                : false,
-  performance            : true,
-
-  on                     : 'click',    // what event should show menu action on item selection
-  action                 : 'activate', // action on item selection (nothing, activate, select, combo, hide, function(){})
-
-
-  apiSettings            : false,
-  selectOnKeydown        : true,       // Whether selection should occur automatically when keyboard shortcuts used
-  minCharacters          : 0,          // Minimum characters required to trigger API call
-
-  filterRemoteData       : false,      // Whether API results should be filtered after being returned for query term
-  saveRemoteData         : true,       // Whether remote name/value pairs should be stored in sessionStorage to allow remote data to be restored on page refresh
-
-  throttle               : 200,        // How long to wait after last user input to search remotely
-
-  context                : window,     // Context to use when determining if on screen
-  direction              : 'auto',     // Whether dropdown should always open in one direction
-  keepOnScreen           : true,       // Whether dropdown should check whether it is on screen before showing
-
-  match                  : 'both',     // what to match against with search selection (both, text, or label)
-  fullTextSearch         : false,      // search anywhere in value (set to 'exact' to require exact matches)
-
-  placeholder            : 'auto',     // whether to convert blank <select> values to placeholder text
-  preserveHTML           : true,       // preserve html when selecting value
-  sortSelect             : false,      // sort selection on init
-
-  forceSelection         : true,       // force a choice on blur with search selection
-
-  allowAdditions         : false,      // whether multiple select should allow user added values
-  hideAdditions          : true,      // whether or not to hide special message prompting a user they can enter a value
-
-  maxSelections          : false,      // When set to a number limits the number of selections to this count
-  useLabels              : true,       // whether multiple select should filter currently active selections from choices
-  delimiter              : ',',        // when multiselect uses normal <input> the values will be delimited with this character
-
-  showOnFocus            : true,       // show menu on focus
-  allowReselection       : false,      // whether current value should trigger callbacks when reselected
-  allowTab               : true,       // add tabindex to element
-  allowCategorySelection : false,      // allow elements with sub-menus to be selected
-
-  fireOnInit             : false,      // Whether callbacks should fire when initializing dropdown values
-
-  transition             : 'auto',     // auto transition will slide down or up based on direction
-  duration               : 200,        // duration of transition
-
-  glyphWidth             : 1.037,      // widest glyph width in em (W is 1.037 em) used to calculate multiselect input width
-
-  // label settings on multi-select
-  label: {
-    transition : 'scale',
-    duration   : 200,
-    variation  : false
-  },
-
-  // delay before event
-  delay : {
-    hide   : 300,
-    show   : 200,
-    search : 20,
-    touch  : 50
-  },
-
-  /* Callbacks */
-  onChange      : function(value, text, $selected){},
-  onAdd         : function(value, text, $selected){},
-  onRemove      : function(value, text, $selected){},
-
-  onLabelSelect : function($selectedLabels){},
-  onLabelCreate : function(value, text) { return $(this); },
-  onLabelRemove : function(value) { return true; },
-  onNoResults   : function(searchTerm) { return true; },
-  onShow        : function(){},
-  onHide        : function(){},
-
-  /* Component */
-  name           : 'Dropdown',
-  namespace      : 'dropdown',
-
-  message: {
-    addResult     : 'Add <b>{term}</b>',
-    count         : '{count} selected',
-    maxSelections : 'Max {maxCount} selections',
-    noResults     : 'No results found.',
-    serverError   : 'There was an error contacting the server'
-  },
-
-  error : {
-    action          : 'You called a dropdown action that was not defined',
-    alreadySetup    : 'Once a select has been initialized behaviors must be called on the created ui dropdown',
-    labels          : 'Allowing user additions currently requires the use of labels.',
-    missingMultiple : '<select> requires multiple property to be set to correctly preserve multiple values',
-    method          : 'The method you called is not defined.',
-    noAPI           : 'The API module is required to load resources remotely',
-    noStorage       : 'Saving remote data requires session storage',
-    noTransition    : 'This module requires ui transitions <https://github.com/Semantic-Org/UI-Transition>'
-  },
-
-  regExp : {
-    escape   : /[-[\]{}()*+?.,\\^$|#\s]/g,
-    quote    : /"/g
-  },
-
-  metadata : {
-    defaultText     : 'defaultText',
-    defaultValue    : 'defaultValue',
-    placeholderText : 'placeholder',
-    text            : 'text',
-    value           : 'value'
-  },
-
-  // property names for remote query
-  fields: {
-    remoteValues : 'results',  // grouping for api results
-    values       : 'values',   // grouping for all dropdown values
-    disabled     : 'disabled', // whether value should be disabled
-    name         : 'name',     // displayed dropdown text
-    value        : 'value',    // actual dropdown value
-    text         : 'text'      // displayed text when selected
-  },
-
-  keys : {
-    backspace  : 8,
-    delimiter  : 188, // comma
-    deleteKey  : 46,
-    enter      : 13,
-    escape     : 27,
-    pageUp     : 33,
-    pageDown   : 34,
-    leftArrow  : 37,
-    upArrow    : 38,
-    rightArrow : 39,
-    downArrow  : 40
-  },
-
-  selector : {
-    addition     : '.addition',
-    dropdown     : '.ui.dropdown',
-    hidden       : '.hidden',
-    icon         : '> .dropdown.icon',
-    input        : '> input[type="hidden"], > select',
-    item         : '.item',
-    label        : '> .label',
-    remove       : '> .label > .delete.icon',
-    siblingLabel : '.label',
-    menu         : '.menu',
-    message      : '.message',
-    menuIcon     : '.dropdown.icon',
-    search       : 'input.search, .menu > .search > input, .menu input.search',
-    sizer        : '> input.sizer',
-    text         : '> .text:not(.icon)',
-    unselectable : '.disabled, .filtered'
-  },
-
-  className : {
-    active      : 'active',
-    addition    : 'addition',
-    animating   : 'animating',
-    disabled    : 'disabled',
-    empty       : 'empty',
-    dropdown    : 'ui dropdown',
-    filtered    : 'filtered',
-    hidden      : 'hidden transition',
-    item        : 'item',
-    label       : 'ui label',
-    loading     : 'loading',
-    menu        : 'menu',
-    message     : 'message',
-    multiple    : 'multiple',
-    placeholder : 'default',
-    sizer       : 'sizer',
-    search      : 'search',
-    selected    : 'selected',
-    selection   : 'selection',
-    upward      : 'upward',
-    visible     : 'visible'
-  }
-
-};
-
-/* Templates */
-_module.exports.settings.templates = {
-
-  // generates dropdown from select values
-  dropdown: function(select) {
-    var
-      placeholder = select.placeholder || false,
-      values      = select.values || {},
-      html        = ''
-    ;
-    html +=  '<i class="dropdown icon"></i>';
-    if(select.placeholder) {
-      html += '<div class="default text">' + placeholder + '</div>';
-    }
-    else {
-      html += '<div class="text"></div>';
-    }
-    html += '<div class="menu">';
-    $.each(select.values, function(index, option) {
-      html += (option.disabled)
-        ? '<div class="disabled item" data-value="' + option.value + '">' + option.name + '</div>'
-        : '<div class="item" data-value="' + option.value + '">' + option.name + '</div>'
-      ;
-    });
-    html += '</div>';
-    return html;
-  },
-
-  // generates just menu from select
-  menu: function(response, fields) {
-    var
-      values = response[fields.values] || {},
-      html   = ''
-    ;
-    $.each(values, function(index, option) {
-      var
-        maybeText = (option[fields.text])
-          ? 'data-text="' + option[fields.text] + '"'
-          : '',
-        maybeDisabled = (option[fields.disabled])
-          ? 'disabled '
-          : ''
-      ;
-      html += '<div class="'+ maybeDisabled +'item" data-value="' + option[fields.value] + '"' + maybeText + '>'
-      html +=   option[fields.name];
-      html += '</div>';
-    });
-    return html;
-  },
-
-  // generates label for multiselect
-  label: function(value, text) {
-    return text + '<i class="delete icon"></i>';
-  },
-
-
-  // generates messages like "No results"
-  message: function(message) {
-    return message;
-  },
-
-  // generates user addition to selection menu
-  addition: function(choice) {
-    return choice;
-  }
-
-};
-
-})( __webpack_require__(61), window, document );
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(75)(module)))
-
-/***/ }),
-/* 739 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {/*!
- * # Semantic UI 2.2.10 - Transition
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */
-
-;(function ($, window, document, undefined) {
-
-"use strict";
-
-window = (typeof window != 'undefined' && window.Math == Math)
-  ? window
-  : (typeof self != 'undefined' && self.Math == Math)
-    ? self
-    : Function('return this')()
-;
-
-var _module = module;
-module.exports = function() {
-  var
-    $allModules     = $(this),
-    moduleSelector  = $allModules.selector || '',
-
-    time            = new Date().getTime(),
-    performance     = [],
-
-    moduleArguments = arguments,
-    query           = moduleArguments[0],
-    queryArguments  = [].slice.call(arguments, 1),
-    methodInvoked   = (typeof query === 'string'),
-
-    requestAnimationFrame = window.requestAnimationFrame
-      || window.mozRequestAnimationFrame
-      || window.webkitRequestAnimationFrame
-      || window.msRequestAnimationFrame
-      || function(callback) { setTimeout(callback, 0); },
-
-    returnedValue
-  ;
-  $allModules
-    .each(function(index) {
-      var
-        $module  = $(this),
-        element  = this,
-
-        // set at run time
-        settings,
-        instance,
-
-        error,
-        className,
-        metadata,
-        animationEnd,
-        animationName,
-
-        namespace,
-        moduleNamespace,
-        eventNamespace,
-        module
-      ;
-
-      module = {
-
-        initialize: function() {
-
-          // get full settings
-          settings        = module.get.settings.apply(element, moduleArguments);
-
-          // shorthand
-          className       = settings.className;
-          error           = settings.error;
-          metadata        = settings.metadata;
-
-          // define namespace
-          eventNamespace  = '.' + settings.namespace;
-          moduleNamespace = 'module-' + settings.namespace;
-          instance        = $module.data(moduleNamespace) || module;
-
-          // get vendor specific events
-          animationEnd    = module.get.animationEndEvent();
-
-          if(methodInvoked) {
-            methodInvoked = module.invoke(query);
-          }
-
-          // method not invoked, lets run an animation
-          if(methodInvoked === false) {
-            module.verbose('Converted arguments into settings object', settings);
-            if(settings.interval) {
-              module.delay(settings.animate);
-            }
-            else  {
-              module.animate();
-            }
-            module.instantiate();
-          }
-        },
-
-        instantiate: function() {
-          module.verbose('Storing instance of module', module);
-          instance = module;
-          $module
-            .data(moduleNamespace, instance)
-          ;
-        },
-
-        destroy: function() {
-          module.verbose('Destroying previous module for', element);
-          $module
-            .removeData(moduleNamespace)
-          ;
-        },
-
-        refresh: function() {
-          module.verbose('Refreshing display type on next animation');
-          delete module.displayType;
-        },
-
-        forceRepaint: function() {
-          module.verbose('Forcing element repaint');
-          var
-            $parentElement = $module.parent(),
-            $nextElement = $module.next()
-          ;
-          if($nextElement.length === 0) {
-            $module.detach().appendTo($parentElement);
-          }
-          else {
-            $module.detach().insertBefore($nextElement);
-          }
-        },
-
-        repaint: function() {
-          module.verbose('Repainting element');
-          var
-            fakeAssignment = element.offsetWidth
-          ;
-        },
-
-        delay: function(interval) {
-          var
-            direction = module.get.animationDirection(),
-            shouldReverse,
-            delay
-          ;
-          if(!direction) {
-            direction = module.can.transition()
-              ? module.get.direction()
-              : 'static'
-            ;
-          }
-          interval = (interval !== undefined)
-            ? interval
-            : settings.interval
-          ;
-          shouldReverse = (settings.reverse == 'auto' && direction == className.outward);
-          delay = (shouldReverse || settings.reverse == true)
-            ? ($allModules.length - index) * settings.interval
-            : index * settings.interval
-          ;
-          module.debug('Delaying animation by', delay);
-          setTimeout(module.animate, delay);
-        },
-
-        animate: function(overrideSettings) {
-          settings = overrideSettings || settings;
-          if(!module.is.supported()) {
-            module.error(error.support);
-            return false;
-          }
-          module.debug('Preparing animation', settings.animation);
-          if(module.is.animating()) {
-            if(settings.queue) {
-              if(!settings.allowRepeats && module.has.direction() && module.is.occurring() && module.queuing !== true) {
-                module.debug('Animation is currently occurring, preventing queueing same animation', settings.animation);
-              }
-              else {
-                module.queue(settings.animation);
-              }
-              return false;
-            }
-            else if(!settings.allowRepeats && module.is.occurring()) {
-              module.debug('Animation is already occurring, will not execute repeated animation', settings.animation);
-              return false;
-            }
-            else {
-              module.debug('New animation started, completing previous early', settings.animation);
-              instance.complete();
-            }
-          }
-          if( module.can.animate() ) {
-            module.set.animating(settings.animation);
-          }
-          else {
-            module.error(error.noAnimation, settings.animation, element);
-          }
-        },
-
-        reset: function() {
-          module.debug('Resetting animation to beginning conditions');
-          module.remove.animationCallbacks();
-          module.restore.conditions();
-          module.remove.animating();
-        },
-
-        queue: function(animation) {
-          module.debug('Queueing animation of', animation);
-          module.queuing = true;
-          $module
-            .one(animationEnd + '.queue' + eventNamespace, function() {
-              module.queuing = false;
-              module.repaint();
-              module.animate.apply(this, settings);
-            })
-          ;
-        },
-
-        complete: function (event) {
-          module.debug('Animation complete', settings.animation);
-          module.remove.completeCallback();
-          module.remove.failSafe();
-          if(!module.is.looping()) {
-            if( module.is.outward() ) {
-              module.verbose('Animation is outward, hiding element');
-              module.restore.conditions();
-              module.hide();
-            }
-            else if( module.is.inward() ) {
-              module.verbose('Animation is outward, showing element');
-              module.restore.conditions();
-              module.show();
-            }
-            else {
-              module.verbose('Static animation completed');
-              module.restore.conditions();
-              settings.onComplete.call(element);
-            }
-          }
-        },
-
-        force: {
-          visible: function() {
-            var
-              style          = $module.attr('style'),
-              userStyle      = module.get.userStyle(),
-              displayType    = module.get.displayType(),
-              overrideStyle  = userStyle + 'display: ' + displayType + ' !important;',
-              currentDisplay = $module.css('display'),
-              emptyStyle     = (style === undefined || style === '')
-            ;
-            if(currentDisplay !== displayType) {
-              module.verbose('Overriding default display to show element', displayType);
-              $module
-                .attr('style', overrideStyle)
-              ;
-            }
-            else if(emptyStyle) {
-              $module.removeAttr('style');
-            }
-          },
-          hidden: function() {
-            var
-              style          = $module.attr('style'),
-              currentDisplay = $module.css('display'),
-              emptyStyle     = (style === undefined || style === '')
-            ;
-            if(currentDisplay !== 'none' && !module.is.hidden()) {
-              module.verbose('Overriding default display to hide element');
-              $module
-                .css('display', 'none')
-              ;
-            }
-            else if(emptyStyle) {
-              $module
-                .removeAttr('style')
-              ;
-            }
-          }
-        },
-
-        has: {
-          direction: function(animation) {
-            var
-              hasDirection = false
-            ;
-            animation = animation || settings.animation;
-            if(typeof animation === 'string') {
-              animation = animation.split(' ');
-              $.each(animation, function(index, word){
-                if(word === className.inward || word === className.outward) {
-                  hasDirection = true;
-                }
-              });
-            }
-            return hasDirection;
-          },
-          inlineDisplay: function() {
-            var
-              style = $module.attr('style') || ''
-            ;
-            return $.isArray(style.match(/display.*?;/, ''));
-          }
-        },
-
-        set: {
-          animating: function(animation) {
-            var
-              animationClass,
-              direction
-            ;
-            // remove previous callbacks
-            module.remove.completeCallback();
-
-            // determine exact animation
-            animation      = animation || settings.animation;
-            animationClass = module.get.animationClass(animation);
-
-            // save animation class in cache to restore class names
-            module.save.animation(animationClass);
-
-            // override display if necessary so animation appears visibly
-            module.force.visible();
-
-            module.remove.hidden();
-            module.remove.direction();
-
-            module.start.animation(animationClass);
-
-          },
-          duration: function(animationName, duration) {
-            duration = duration || settings.duration;
-            duration = (typeof duration == 'number')
-              ? duration + 'ms'
-              : duration
-            ;
-            if(duration || duration === 0) {
-              module.verbose('Setting animation duration', duration);
-              $module
-                .css({
-                  'animation-duration':  duration
-                })
-              ;
-            }
-          },
-          direction: function(direction) {
-            direction = direction || module.get.direction();
-            if(direction == className.inward) {
-              module.set.inward();
-            }
-            else {
-              module.set.outward();
-            }
-          },
-          looping: function() {
-            module.debug('Transition set to loop');
-            $module
-              .addClass(className.looping)
-            ;
-          },
-          hidden: function() {
-            $module
-              .addClass(className.transition)
-              .addClass(className.hidden)
-            ;
-          },
-          inward: function() {
-            module.debug('Setting direction to inward');
-            $module
-              .removeClass(className.outward)
-              .addClass(className.inward)
-            ;
-          },
-          outward: function() {
-            module.debug('Setting direction to outward');
-            $module
-              .removeClass(className.inward)
-              .addClass(className.outward)
-            ;
-          },
-          visible: function() {
-            $module
-              .addClass(className.transition)
-              .addClass(className.visible)
-            ;
-          }
-        },
-
-        start: {
-          animation: function(animationClass) {
-            animationClass = animationClass || module.get.animationClass();
-            module.debug('Starting tween', animationClass);
-            $module
-              .addClass(animationClass)
-              .one(animationEnd + '.complete' + eventNamespace, module.complete)
-            ;
-            if(settings.useFailSafe) {
-              module.add.failSafe();
-            }
-            module.set.duration(settings.duration);
-            settings.onStart.call(element);
-          }
-        },
-
-        save: {
-          animation: function(animation) {
-            if(!module.cache) {
-              module.cache = {};
-            }
-            module.cache.animation = animation;
-          },
-          displayType: function(displayType) {
-            if(displayType !== 'none') {
-              $module.data(metadata.displayType, displayType);
-            }
-          },
-          transitionExists: function(animation, exists) {
-            _module.exports.exists[animation] = exists;
-            module.verbose('Saving existence of transition', animation, exists);
-          }
-        },
-
-        restore: {
-          conditions: function() {
-            var
-              animation = module.get.currentAnimation()
-            ;
-            if(animation) {
-              $module
-                .removeClass(animation)
-              ;
-              module.verbose('Removing animation class', module.cache);
-            }
-            module.remove.duration();
-          }
-        },
-
-        add: {
-          failSafe: function() {
-            var
-              duration = module.get.duration()
-            ;
-            module.timer = setTimeout(function() {
-              $module.triggerHandler(animationEnd);
-            }, duration + settings.failSafeDelay);
-            module.verbose('Adding fail safe timer', module.timer);
-          }
-        },
-
-        remove: {
-          animating: function() {
-            $module.removeClass(className.animating);
-          },
-          animationCallbacks: function() {
-            module.remove.queueCallback();
-            module.remove.completeCallback();
-          },
-          queueCallback: function() {
-            $module.off('.queue' + eventNamespace);
-          },
-          completeCallback: function() {
-            $module.off('.complete' + eventNamespace);
-          },
-          display: function() {
-            $module.css('display', '');
-          },
-          direction: function() {
-            $module
-              .removeClass(className.inward)
-              .removeClass(className.outward)
-            ;
-          },
-          duration: function() {
-            $module
-              .css('animation-duration', '')
-            ;
-          },
-          failSafe: function() {
-            module.verbose('Removing fail safe timer', module.timer);
-            if(module.timer) {
-              clearTimeout(module.timer);
-            }
-          },
-          hidden: function() {
-            $module.removeClass(className.hidden);
-          },
-          visible: function() {
-            $module.removeClass(className.visible);
-          },
-          looping: function() {
-            module.debug('Transitions are no longer looping');
-            if( module.is.looping() ) {
-              module.reset();
-              $module
-                .removeClass(className.looping)
-              ;
-            }
-          },
-          transition: function() {
-            $module
-              .removeClass(className.visible)
-              .removeClass(className.hidden)
-            ;
-          }
-        },
-        get: {
-          settings: function(animation, duration, onComplete) {
-            // single settings object
-            if(typeof animation == 'object') {
-              return $.extend(true, {}, _module.exports.settings, animation);
-            }
-            // all arguments provided
-            else if(typeof onComplete == 'function') {
-              return $.extend({}, _module.exports.settings, {
-                animation  : animation,
-                onComplete : onComplete,
-                duration   : duration
-              });
-            }
-            // only duration provided
-            else if(typeof duration == 'string' || typeof duration == 'number') {
-              return $.extend({}, _module.exports.settings, {
-                animation : animation,
-                duration  : duration
-              });
-            }
-            // duration is actually settings object
-            else if(typeof duration == 'object') {
-              return $.extend({}, _module.exports.settings, duration, {
-                animation : animation
-              });
-            }
-            // duration is actually callback
-            else if(typeof duration == 'function') {
-              return $.extend({}, _module.exports.settings, {
-                animation  : animation,
-                onComplete : duration
-              });
-            }
-            // only animation provided
-            else {
-              return $.extend({}, _module.exports.settings, {
-                animation : animation
-              });
-            }
-          },
-          animationClass: function(animation) {
-            var
-              animationClass = animation || settings.animation,
-              directionClass = (module.can.transition() && !module.has.direction())
-                ? module.get.direction() + ' '
-                : ''
-            ;
-            return className.animating + ' '
-              + className.transition + ' '
-              + directionClass
-              + animationClass
-            ;
-          },
-          currentAnimation: function() {
-            return (module.cache && module.cache.animation !== undefined)
-              ? module.cache.animation
-              : false
-            ;
-          },
-          currentDirection: function() {
-            return module.is.inward()
-              ? className.inward
-              : className.outward
-            ;
-          },
-          direction: function() {
-            return module.is.hidden() || !module.is.visible()
-              ? className.inward
-              : className.outward
-            ;
-          },
-          animationDirection: function(animation) {
-            var
-              direction
-            ;
-            animation = animation || settings.animation;
-            if(typeof animation === 'string') {
-              animation = animation.split(' ');
-              // search animation name for out/in class
-              $.each(animation, function(index, word){
-                if(word === className.inward) {
-                  direction = className.inward;
-                }
-                else if(word === className.outward) {
-                  direction = className.outward;
-                }
-              });
-            }
-            // return found direction
-            if(direction) {
-              return direction;
-            }
-            return false;
-          },
-          duration: function(duration) {
-            duration = duration || settings.duration;
-            if(duration === false) {
-              duration = $module.css('animation-duration') || 0;
-            }
-            return (typeof duration === 'string')
-              ? (duration.indexOf('ms') > -1)
-                ? parseFloat(duration)
-                : parseFloat(duration) * 1000
-              : duration
-            ;
-          },
-          displayType: function(shouldDetermine) {
-            shouldDetermine = (shouldDetermine !== undefined)
-              ? shouldDetermine
-              : true
-            ;
-            if(settings.displayType) {
-              return settings.displayType;
-            }
-            if(shouldDetermine && $module.data(metadata.displayType) === undefined) {
-              // create fake element to determine display state
-              module.can.transition(true);
-            }
-            return $module.data(metadata.displayType);
-          },
-          userStyle: function(style) {
-            style = style || $module.attr('style') || '';
-            return style.replace(/display.*?;/, '');
-          },
-          transitionExists: function(animation) {
-            return _module.exports.exists[animation];
-          },
-          animationStartEvent: function() {
-            var
-              element     = document.createElement('div'),
-              animations  = {
-                'animation'       :'animationstart',
-                'OAnimation'      :'oAnimationStart',
-                'MozAnimation'    :'mozAnimationStart',
-                'WebkitAnimation' :'webkitAnimationStart'
-              },
-              animation
-            ;
-            for(animation in animations){
-              if( element.style[animation] !== undefined ){
-                return animations[animation];
-              }
-            }
-            return false;
-          },
-          animationEndEvent: function() {
-            var
-              element     = document.createElement('div'),
-              animations  = {
-                'animation'       :'animationend',
-                'OAnimation'      :'oAnimationEnd',
-                'MozAnimation'    :'mozAnimationEnd',
-                'WebkitAnimation' :'webkitAnimationEnd'
-              },
-              animation
-            ;
-            for(animation in animations){
-              if( element.style[animation] !== undefined ){
-                return animations[animation];
-              }
-            }
-            return false;
-          }
-
-        },
-
-        can: {
-          transition: function(forced) {
-            var
-              animation         = settings.animation,
-              transitionExists  = module.get.transitionExists(animation),
-              displayType       = module.get.displayType(false),
-              elementClass,
-              tagName,
-              $clone,
-              currentAnimation,
-              inAnimation,
-              directionExists
-            ;
-            if( transitionExists === undefined || forced) {
-              module.verbose('Determining whether animation exists');
-              elementClass = $module.attr('class');
-              tagName      = $module.prop('tagName');
-
-              $clone = $('<' + tagName + ' />').addClass( elementClass ).insertAfter($module);
-              currentAnimation = $clone
-                .addClass(animation)
-                .removeClass(className.inward)
-                .removeClass(className.outward)
-                .addClass(className.animating)
-                .addClass(className.transition)
-                .css('animationName')
-              ;
-              inAnimation = $clone
-                .addClass(className.inward)
-                .css('animationName')
-              ;
-              if(!displayType) {
-                displayType = $clone
-                  .attr('class', elementClass)
-                  .removeAttr('style')
-                  .removeClass(className.hidden)
-                  .removeClass(className.visible)
-                  .show()
-                  .css('display')
-                ;
-                module.verbose('Determining final display state', displayType);
-                module.save.displayType(displayType);
-              }
-
-              $clone.remove();
-              if(currentAnimation != inAnimation) {
-                module.debug('Direction exists for animation', animation);
-                directionExists = true;
-              }
-              else if(currentAnimation == 'none' || !currentAnimation) {
-                module.debug('No animation defined in css', animation);
-                return;
-              }
-              else {
-                module.debug('Static animation found', animation, displayType);
-                directionExists = false;
-              }
-              module.save.transitionExists(animation, directionExists);
-            }
-            return (transitionExists !== undefined)
-              ? transitionExists
-              : directionExists
-            ;
-          },
-          animate: function() {
-            // can transition does not return a value if animation does not exist
-            return (module.can.transition() !== undefined);
-          }
-        },
-
-        is: {
-          animating: function() {
-            return $module.hasClass(className.animating);
-          },
-          inward: function() {
-            return $module.hasClass(className.inward);
-          },
-          outward: function() {
-            return $module.hasClass(className.outward);
-          },
-          looping: function() {
-            return $module.hasClass(className.looping);
-          },
-          occurring: function(animation) {
-            animation = animation || settings.animation;
-            animation = '.' + animation.replace(' ', '.');
-            return ( $module.filter(animation).length > 0 );
-          },
-          visible: function() {
-            return $module.is(':visible');
-          },
-          hidden: function() {
-            return $module.css('visibility') === 'hidden';
-          },
-          supported: function() {
-            return(animationEnd !== false);
-          }
-        },
-
-        hide: function() {
-          module.verbose('Hiding element');
-          if( module.is.animating() ) {
-            module.reset();
-          }
-          element.blur(); // IE will trigger focus change if element is not blurred before hiding
-          module.remove.display();
-          module.remove.visible();
-          module.set.hidden();
-          module.force.hidden();
-          settings.onHide.call(element);
-          settings.onComplete.call(element);
-          // module.repaint();
-        },
-
-        show: function(display) {
-          module.verbose('Showing element', display);
-          module.remove.hidden();
-          module.set.visible();
-          module.force.visible();
-          settings.onShow.call(element);
-          settings.onComplete.call(element);
-          // module.repaint();
-        },
-
-        toggle: function() {
-          if( module.is.visible() ) {
-            module.hide();
-          }
-          else {
-            module.show();
-          }
-        },
-
-        stop: function() {
-          module.debug('Stopping current animation');
-          $module.triggerHandler(animationEnd);
-        },
-
-        stopAll: function() {
-          module.debug('Stopping all animation');
-          module.remove.queueCallback();
-          $module.triggerHandler(animationEnd);
-        },
-
-        clear: {
-          queue: function() {
-            module.debug('Clearing animation queue');
-            module.remove.queueCallback();
-          }
-        },
-
-        enable: function() {
-          module.verbose('Starting animation');
-          $module.removeClass(className.disabled);
-        },
-
-        disable: function() {
-          module.debug('Stopping animation');
-          $module.addClass(className.disabled);
-        },
-
-        setting: function(name, value) {
-          module.debug('Changing setting', name, value);
-          if( $.isPlainObject(name) ) {
-            $.extend(true, settings, name);
-          }
-          else if(value !== undefined) {
-            if($.isPlainObject(settings[name])) {
-              $.extend(true, settings[name], value);
-            }
-            else {
-              settings[name] = value;
-            }
-          }
-          else {
-            return settings[name];
-          }
-        },
-        internal: function(name, value) {
-          if( $.isPlainObject(name) ) {
-            $.extend(true, module, name);
-          }
-          else if(value !== undefined) {
-            module[name] = value;
-          }
-          else {
-            return module[name];
-          }
-        },
-        debug: function() {
-          if(!settings.silent && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.debug.apply(console, arguments);
-            }
-          }
-        },
-        verbose: function() {
-          if(!settings.silent && settings.verbose && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.verbose.apply(console, arguments);
-            }
-          }
-        },
-        error: function() {
-          if(!settings.silent) {
-            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
-            module.error.apply(console, arguments);
-          }
-        },
-        performance: {
-          log: function(message) {
-            var
-              currentTime,
-              executionTime,
-              previousTime
-            ;
-            if(settings.performance) {
-              currentTime   = new Date().getTime();
-              previousTime  = time || currentTime;
-              executionTime = currentTime - previousTime;
-              time          = currentTime;
-              performance.push({
-                'Name'           : message[0],
-                'Arguments'      : [].slice.call(message, 1) || '',
-                'Element'        : element,
-                'Execution Time' : executionTime
-              });
-            }
-            clearTimeout(module.performance.timer);
-            module.performance.timer = setTimeout(module.performance.display, 500);
-          },
-          display: function() {
-            var
-              title = settings.name + ':',
-              totalTime = 0
-            ;
-            time = false;
-            clearTimeout(module.performance.timer);
-            $.each(performance, function(index, data) {
-              totalTime += data['Execution Time'];
-            });
-            title += ' ' + totalTime + 'ms';
-            if(moduleSelector) {
-              title += ' \'' + moduleSelector + '\'';
-            }
-            if($allModules.length > 1) {
-              title += ' ' + '(' + $allModules.length + ')';
-            }
-            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
-              console.groupCollapsed(title);
-              if(console.table) {
-                console.table(performance);
-              }
-              else {
-                $.each(performance, function(index, data) {
-                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-                });
-              }
-              console.groupEnd();
-            }
-            performance = [];
-          }
-        },
-        // modified for transition to return invoke success
-        invoke: function(query, passedArguments, context) {
-          var
-            object = instance,
-            maxDepth,
-            found,
-            response
-          ;
-          passedArguments = passedArguments || queryArguments;
-          context         = element         || context;
-          if(typeof query == 'string' && object !== undefined) {
-            query    = query.split(/[\. ]/);
-            maxDepth = query.length - 1;
-            $.each(query, function(depth, value) {
-              var camelCaseValue = (depth != maxDepth)
-                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
-                : query
-              ;
-              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
-                object = object[camelCaseValue];
-              }
-              else if( object[camelCaseValue] !== undefined ) {
-                found = object[camelCaseValue];
-                return false;
-              }
-              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
-                object = object[value];
-              }
-              else if( object[value] !== undefined ) {
-                found = object[value];
-                return false;
-              }
-              else {
-                return false;
-              }
-            });
-          }
-          if ( $.isFunction( found ) ) {
-            response = found.apply(context, passedArguments);
-          }
-          else if(found !== undefined) {
-            response = found;
-          }
-
-          if($.isArray(returnedValue)) {
-            returnedValue.push(response);
-          }
-          else if(returnedValue !== undefined) {
-            returnedValue = [returnedValue, response];
-          }
-          else if(response !== undefined) {
-            returnedValue = response;
-          }
-          return (found !== undefined)
-            ? found
-            : false
-          ;
-        }
-      };
-      module.initialize();
-    })
-  ;
-  return (returnedValue !== undefined)
-    ? returnedValue
-    : this
-  ;
-};
-
-// Records if CSS transition is available
-_module.exports.exists = {};
-
-_module.exports.settings = {
-
-  // module info
-  name          : 'Transition',
-
-  // hide all output from this component regardless of other settings
-  silent        : false,
-
-  // debug content outputted to console
-  debug         : false,
-
-  // verbose debug output
-  verbose       : false,
-
-  // performance data output
-  performance   : true,
-
-  // event namespace
-  namespace     : 'transition',
-
-  // delay between animations in group
-  interval      : 0,
-
-  // whether group animations should be reversed
-  reverse       : 'auto',
-
-  // animation callback event
-  onStart       : function() {},
-  onComplete    : function() {},
-  onShow        : function() {},
-  onHide        : function() {},
-
-  // whether timeout should be used to ensure callback fires in cases animationend does not
-  useFailSafe   : true,
-
-  // delay in ms for fail safe
-  failSafeDelay : 100,
-
-  // whether EXACT animation can occur twice in a row
-  allowRepeats  : false,
-
-  // Override final display type on visible
-  displayType   : false,
-
-  // animation duration
-  animation     : 'fade',
-  duration      : false,
-
-  // new animations will occur after previous ones
-  queue         : true,
-
-  metadata : {
-    displayType: 'display'
-  },
-
-  className   : {
-    animating  : 'animating',
-    disabled   : 'disabled',
-    hidden     : 'hidden',
-    inward     : 'in',
-    loading    : 'loading',
-    looping    : 'looping',
-    outward    : 'out',
-    transition : 'transition',
-    visible    : 'visible'
-  },
-
-  // possible errors
-  error: {
-    noAnimation : 'Element is no longer attached to DOM. Unable to animate.  Use silent setting to surpress this warning in production.',
-    repeated    : 'That animation is already occurring, cancelling repeated animation',
-    method      : 'The method you called is not defined',
-    support     : 'This browser does not support CSS animations'
-  }
-
-};
-
-
-})( __webpack_require__(61), window, document );
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(75)(module)))
-
-/***/ }),
+/* 739 */,
 /* 740 */,
 /* 741 */,
 /* 742 */,
@@ -81889,14 +81885,14 @@ _module.exports.settings = {
 /* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(378);
-__webpack_require__(386);
-__webpack_require__(387);
-__webpack_require__(381);
-__webpack_require__(382);
+__webpack_require__(380);
+__webpack_require__(388);
+__webpack_require__(389);
 __webpack_require__(383);
 __webpack_require__(384);
-module.exports = __webpack_require__(385);
+__webpack_require__(385);
+__webpack_require__(386);
+module.exports = __webpack_require__(387);
 
 
 /***/ })

@@ -6502,6 +6502,10 @@ semantic-ui-dropdown@^2.2.10:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/semantic-ui-dropdown/-/semantic-ui-dropdown-2.2.10.tgz#075a039f7877ad871a07939a299d8d49004b4e9c"
 
+semantic-ui-popup@^2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/semantic-ui-popup/-/semantic-ui-popup-2.2.10.tgz#fe9bf685c098663cf1eaa21b6715d43db425a4d3"
+
 semantic-ui-transition@^2.2.10:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/semantic-ui-transition/-/semantic-ui-transition-2.2.10.tgz#b0082384376d66b390f3037e9178120bcf7401a1"
