@@ -1,5 +1,4 @@
 {
-  "/js/form-app.js": "/js/form-app.js",
   "/js/app.js": "/js/app.js",
   "/css/backend.css": "/css/backend.css",
   "/css/frontend.css": "/css/frontend.css",
@@ -8,8 +7,9 @@
   "/css/custom-arabic.css": "/css/custom-arabic.css",
   "/css/custom-english.css": "/css/custom-english.css",
   "/css/gallery.css": "/css/gallery.css",
+  "/js/form-app.js": "/js/form-app.js",
   "/js/gallery.js": "/js/gallery.js",
+  "/js/frontend-custom.js": "/js/frontend-custom.js",
   "/js/backend.js": "/js/backend.js",
-  "/js/frontend.js": "/js/frontend.js",
-  "/0.hot-update.js": "/0.cc2692cc7352273ee84f.hot-update.js"
+  "/js/frontend.js": "/js/frontend.js"
 }

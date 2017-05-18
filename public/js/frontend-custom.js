@@ -63,31 +63,24 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 171);
+/******/ 	return __webpack_require__(__webpack_require__.s = 747);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 131:
+/***/ 380:
 /***/ (function(module, exports) {
 
 /**
- * Created by usamaahmed on 5/16/17.
+ * Created by usamaahmed on 5/18/17.
  */
-//window.document.(document).ready(function () {
-//    console.log('from frontend.js');
-window.$('.ui.dropdown').dropdown({
-    allowCategorySelection: true
-});
-
-//});
 
 /***/ }),
 
-/***/ 171:
+/***/ 747:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(131);
+module.exports = __webpack_require__(380);
 
 
 /***/ })

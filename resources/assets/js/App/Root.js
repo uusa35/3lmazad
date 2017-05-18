@@ -2,10 +2,14 @@
  * Created by usamaahmed on 5/17/17.
  */
 import React , { Component } from 'react';
-import { render } from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
+import { Route } from 'react-router';
 import Loader from 'react-loader';
 import langs  from './locale/langs';
+import Header from './components/partials/Header';
+import SearchForm from './components/SearchForm';
+import Contact from './pages/Contact';
+import About from  './pages/About';
+import CommercialCreate from './pages/CommercialCreate';
 
 
 export default class Root extends Component {
@@ -22,15 +26,15 @@ export default class Root extends Component {
 
     render() {
         const { langs } = this.state;
+        console.log(this.props);
         return (
-            //<Provider store={store}>
-            <Loader loaded={this.state.loaded}>
-                { this.props.children }
-            </Loader>
-            //</Provider>
+            <div>
+                <Header/>
+            </div>
         );
     }
 }
+
 
 //<button onClick={() => this.changeLocal('ar')}>change to arabic</button>
 //<button onClick={() => this.changeLocal('en')}>change to english</button>

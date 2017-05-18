@@ -1,7 +1,7 @@
 @if (auth()->guest())
-    <div class="dropdown pull-right hidden-xs"><a href="#"
-                                                  class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"
-                                                  data-toggle="dropdown"><span class="fa fa-fw fa-user"></span>
+    <div class="dropdown pull-right hidden-xs">
+        <a href="#" class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button" data-toggle="dropdown">
+            <span class="fa fa-fw fa-user"></span>
             register | login
         </a>
         <ul class="dropdown-menu ul-row animated fadeIn" role="menu" style="z-index: 9999;">

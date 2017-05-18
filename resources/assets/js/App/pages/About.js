@@ -9,6 +9,7 @@ export default class About extends Component {
     }
 
     render() {
+        console.log('from about');
         return (
             <div>
                 <h1>About us</h1>

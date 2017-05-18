@@ -11,9 +11,9 @@
         @section('header')
             @include('frontend.partials.header')
         @show
-        {{--<div id="pageContent" class="page-content">--}}
-            {{--<div class="col-lg-12">--}}
-                {{--@include('frontend.partials.notifications')--}}
+        <div id="pageContent" class="page-content">
+            <div class="col-lg-12">
+                @include('frontend.partials.notifications')
                 {{--@section('content')--}}
                 {{--@section('top')--}}
                 {{--@show--}}
@@ -21,8 +21,8 @@
                 {{--@show--}}
                 {{--@section('bottom')--}}
                 {{--@show--}}
-            {{--</div>--}}
-        {{--</div>--}}
+            </div>
+        </div>
     </div>
 </div>
 

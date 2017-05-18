@@ -14,7 +14,7 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
-
+@import "../../../node_modules/semantic-ui/dist/semantic.min.css";
 
 //<!-- Head Libs -->
 @media (min-width: 1300px) {
@@ -26,3 +26,4 @@
 .nav-tabs--wd > li > a, .nav-tabs--wd > li.active > a, .nav-tabs--wd > li.active > a:hover, .nav-tabs--wd > li.active > a:focus {
   padding: 8px;
 }
+

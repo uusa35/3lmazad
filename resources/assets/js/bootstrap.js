@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -7,20 +6,23 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.$ = window.jQuery = require('jquery');
-    require('js.cookie');
-    require('bootstrap-hover-dropdown');
-    require('jquery-slimscroll');
-    require('bootstrap-switch')
-    require('bootstrap-sass');
-    require('datatables.net');
-    require('datatables.net-buttons');
-    require('eonasdan-bootstrap-datetimepicker');
-    require('moment');
-} catch (e) {
-    console.log(e);
-}
+
+window.$ = window.jQuery = require('jquery');
+require('babel-polyfill');
+require('js.cookie');
+require('bootstrap-hover-dropdown');
+require('jquery-slimscroll');
+require('bootstrap-switch')
+require('bootstrap-sass');
+require('datatables.net');
+require('datatables.net-buttons');
+require('eonasdan-bootstrap-datetimepicker');
+require('moment');
+window.$.fn.transition = require('semantic-ui-transition');
+window.$.fn.dropdown = require('semantic-ui-dropdown');
+jQuery(document).ready(function($){
+    $('.ui.dropdown').dropdown({allowCategorySelection: true});
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -37,5 +39,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
 
 

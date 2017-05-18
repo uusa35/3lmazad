@@ -60,8 +60,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
         './resources/assets/html/js/custom-layout4.js',
         './resources/assets/html/js/custom.js',
         './resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.tools.min.js',
+        //"./../../../node_modules/semantic-ui/dist/semantic.min.js"
         //'./resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js',
-    ], 'public/js/frontend.js');
+    ], 'public/js/frontend.js')
+    .js('resources/assets/js/frontend-custom.js', 'public/js');
 
 if (mix.config.inProduction) {
     mix.version();

@@ -52,6 +52,7 @@ class HomeController extends Controller
      */
     public function search(Filters $filters)
     {
+        dd('stope from search');
         $validator = validator(request()->all(), ['search' => 'min:3', 'main' => 'required_without:sub','sub' => 'required_without:main']);
         if ($validator->fails()) {
             return redirect()->home()->withErrors($validator->messages());
