@@ -1,6 +1,6 @@
 <div class="ui floating dropdown labeled icon button area_search_field" id="area">
-    <i class="filter icon"></i>
-    <span class="text">Filter Models</span>
+    <i class="search icon"></i>
+    <span class="text">{{ trans('general.filter_by_model') }}</span>
     <div class="menu">
         <div class="ui icon search input">
             <i class="search icon"></i>

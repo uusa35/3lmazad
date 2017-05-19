@@ -11,7 +11,5 @@
   "/js/frontend-custom.js": "/js/frontend-custom.js",
   "/js/gallery.js": "/js/gallery.js",
   "/js/backend.js": "/js/backend.js",
-  "/js/frontend.js": "/js/frontend.js",
-  "/2.hot-update.js": "/2.e6c4341543a2cf16ddce.hot-update.js",
-  "/0.hot-update.js": "/0.2dddf00d6b590e5c9e17.hot-update.js"
+  "/js/frontend.js": "/js/frontend.js"
 }

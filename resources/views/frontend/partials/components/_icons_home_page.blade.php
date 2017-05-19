@@ -4,8 +4,10 @@
             <ul class="nav nav-justified">
                 @foreach($homePageCategories as $category)
                     <li><a href="#">
-                            <span class="mdi mdi-{{ $category->icon }}"></span>
-                            {{ $category->name }}
+                            <span>
+                                <i class="icon tiny {{ $category->icon }}"></i>
+                            </span>
+                            {{ title_case($category->name) }}
                         </a></li>
                 @endforeach
             </ul>

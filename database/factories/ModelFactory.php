@@ -65,7 +65,8 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
-        'icon' => $faker->randomElement(['iphone', 'cell', 'android', 'windows', 'account', 'alert', 'access-point', 'air-conditioner', 'airballoon', 'airplane', 'airplane-landing', 'airplane-off', 'airplane-takeoff', 'airplay', 'android-studio', 'angular', 'angularjs', 'animation', 'apple', 'apple-finder', 'apple-ios', 'apple-keyboard-caps', 'apple-keyboard-command', 'apple-keyboard-control', 'apple-keyboard-option', 'border-outside', 'border-right', 'border-style', 'border-top', 'border-vertical', 'bow-tie', 'bowl', 'bowling', 'box', 'box-cutter', 'box-shadow', 'bridge', 'briefcase', 'briefcase-check', 'briefcase-download',
+        'icon' => $faker->randomElement(['shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
+            'desktop', 'power', 'bus', 'car', 'ship', 'taxi', 'conffee', 'android', 'apple'
         ]),
         'parent_id' => $faker->numberBetween(0, 10),
         'featured' => $faker->boolean(true),

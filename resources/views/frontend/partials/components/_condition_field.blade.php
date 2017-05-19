@@ -1,19 +1,15 @@
-<div class="ui floating dropdown labeled icon button area_search_field" id="area">
-    <i class="filter icon"></i>
-    <span class="text">Filter Condition</span>
+<div class="ui floating labeled icon dropdown button">
+    <i class="search icon"></i>
+    <span class="text">{{ trans('general.filter_by_condition') }}</span>
     <div class="menu">
-        <div class="ui icon search input">
-            <i class="search icon"></i>
-            <input placeholder="Search Areas..." type="text"/>
+        <div class="item">
+            Important
         </div>
-        <div class="divider"></div>
-        <div class="scrolling menu">
-            @foreach($areas as $key => $value)
-                <div class="item area" value={{ $key }}>
-                    <div class="ui empty circular label"></div>
-                    {{ $value }}
-                </div>
-            @endforeach
+        <div class="item">
+            Announcement
+        </div>
+        <div class="item">
+            Discussion
         </div>
     </div>
 </div>

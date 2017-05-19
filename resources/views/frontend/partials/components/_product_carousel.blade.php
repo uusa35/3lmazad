@@ -17,8 +17,14 @@
                         <div class="product-category__hover caption"></div>
                         <div class="product-category__info">
                             <div class="product-category__info__ribbon">
-                                <h5 class="product-category__info__ribbon__title">{{ $element->title }}</h5>
-                                <div class="product-category__info__ribbon__count">{{ $element->price }} {{ trans('general.kd') }}</div>
+                                <span class="product-category__info__ribbon__title">
+                                    {{ str_limit($element->title,20,'..') }}
+                                </span>
+                                <div class="product-category__info__ribbon__count">
+                                    <a class="ui circular label">
+                                        {{ $element->price }} {{ trans('general.kd') }}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -22,6 +22,7 @@ $(document).ready(function() {
 
     $('.toottip_message').popup({
         on: 'focus',
-        position: 'bottom center'
+        position: 'top center',
+        offset : 10
     });
 });
