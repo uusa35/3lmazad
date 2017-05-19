@@ -38621,3 +38621,45 @@ zoom: 1;
 .nav-tabs--wd > li.active > a:focus {
   padding: 8px;
 }
+
+.search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  border-radius: 0;
+}
+
+.search-bar .form-group {
+  margin: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.area_search_field {
+  min-wdith: 100px;
+}
+
+.category_search_field {
+  width: 250px;
+  max-width: 300px;
+}
+
+.min_search_field {
+  max-width: 70px;
+}
+
+.max_search_field {
+  max-width: 70px;
+}
+
+.keyword_search_field {
+  min-width: 150px;
+  width: 150px;
+}

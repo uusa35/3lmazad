@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment('local', 'testing')) {
+        if ($this->app->environment('local', 'seeding','testing')) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             $this->app->register(\Laracasts\Generators\GeneratorsServiceProvider::class);
             $this->app->register(\Sven\ArtisanView\ArtisanViewServiceProvider::class);
