@@ -1,7 +1,7 @@
-<div class="ui dropdown button category_search_field" id="category">
+<div class="ui dropdown button search-dropdown search-dropdown-category" id="category">
     <i class="filter icon"></i>
     <span class="text">{{ trans('general.filter_by_category') }}</span>
-    <i class="angle {{ app()->isLocal('ar') ? 'right' : 'left' }} icon"></i>
+    <i class="angle {{ app()->isLocal('ar') ? 'left' : 'right' }} icon"></i>
     <div class="menu">
         <div class="item category" value="1">
             <span class="text">Category 1</span>

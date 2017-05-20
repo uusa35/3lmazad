@@ -20,7 +20,7 @@ $(document).ready(function() {
         console.log(area_id);
     });
 
-    $('.toottip_message').popup({
+    $('.toottip-message').popup({
         on: 'focus',
         position: 'top center',
         offset : 10

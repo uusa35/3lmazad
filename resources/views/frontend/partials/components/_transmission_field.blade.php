@@ -1,4 +1,4 @@
-<div class="ui floating labeled icon dropdown button">
+<div class="ui floating labeled icon dropdown button search-dropdown search-dropdown-transmission" id="transmission">
     <i class="search icon"></i>
     <span class="text">Filter Transmission</span>
     <div class="menu">

@@ -1,4 +1,4 @@
-<div class="ui floating dropdown labeled icon button area_search_field" id="area">
+<div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-model" id="model">
     <i class="search icon"></i>
     <span class="text">{{ trans('general.filter_by_model') }}</span>
     <div class="menu">

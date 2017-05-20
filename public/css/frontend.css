@@ -38623,75 +38623,78 @@ zoom: 1;
 }
 
 @media (min-width: 1000px) {
-  .search-bar .dropdown {
+  .search-bar > .dropdown {
     width: 255px;
   }
+}
+
+.search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  broder: 1px solid gold;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 10px;
+  border: 1px solid gold;
+  border-radius: 6px;
+}
+
+.search-bar > .search-input {
+  width: 200px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .main-fields {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  border-radius: 0;
-  border: 1px solid red;
-  z-index: 9999;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .sub-fields {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  border-radius: 0;
-  border: 1px solid green;
-  margin: 5px;
-  z-index: 999;
-}
-
-.search-bar {
-  margin: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .search-input {
   margin-right: 5px !important;
   margin-left: 5px !important;
+  margin-bottom: 8px !important;
 }
 
-.area_search_field {
-  min-wdith: 100px;
-  margin: 10px;
+.search-input-min {
+  width: 100px;
 }
 
-.category_search_field {
+.search-input-max {
+  width: 100px;
+}
+
+.search-input-keyword {
   width: 250px;
-  max-width: 300px;
 }
 
-.min_search_field {
-  width: 130px;
-}
-
-.max_search_field {
-  width: 130px;
-}
-
-.keyword_search_field {
-  width: 220px;
+.search-dropdown {
+  width: 250px;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+  margin-bottom: 8px !important;
 }

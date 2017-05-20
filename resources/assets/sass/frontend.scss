@@ -27,64 +27,114 @@
   padding: 8px;
 }
 
-// search_fields and form
+// search-fields and form
 @media (min-width: 1000px) {
-  .search-bar .dropdown {
+  .search-bar > .dropdown {
     width: 255px;
   }
 }
+
 .search-bar {
-  broder : 1px solid gold;
+  display: flex;
+  flex-direction: column;
+  broder: 1px solid gold;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: flex-start;
+  padding: 10px;
+  border: 1px solid gold;
+  border-radius: 6px;
 }
 
+.search-bar > .search-input {
+  width : 200px;
+  align-self: flex-end;
+}
 .main-fields {
   display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
-  border-radius: 0;
-  z-index: 9999;
+  flex-direction: row;
 }
 
 
 .sub-fields {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  border-radius: 0;
-  margin : 5px;
-  z-index: 999;
-}
-
-.search-bar {
-  margin: 10px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  flex-direction: row;
 }
 
 .search-input {
-  margin-right : 5px !important;
-  margin-left : 5px !important;
-}
-.area_search_field {
-  min-wdith: 100px;
-  margin: 10px;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+  margin-bottom : 8px !important;
 }
 
-.category_search_field {
+.search-input-min {
+  width: 100px;
+}
+
+.search-input-max {
+  width: 100px;
+}
+
+.search-input-keyword {
   width: 250px;
-  max-width: 300px;
 }
 
-.min_search_field {
-  width: 130px;
+.search-dropdown {
+  width: 250px;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+  margin-bottom : 8px !important;
 }
 
-.max_search_field {
-  width: 130px;
+.search-dropdown-area {
+
 }
 
-.keyword_search_field {
-  width: 220px;
+.search-dropdown-category {
+
 }
+
+.search-dropdown-brand {
+
+}
+
+.search-dropdown-model {
+
+}
+
+.search-dropdown-condition {
+
+}
+
+.search-dropdown-transmission {
+
+}
+
+//.main {
+//  display : flex;
+//  flex-direction: column;
+//  border : 1px solid red;
+//  width : 80%;
+//  margin-right : auto;
+//  margin-left: auto;
+//  //justify-content: center;
+//  //align-items: center;
+//}
+//.main > .first-row {
+//  display: flex;
+//  flex-direction: row;
+//  width: 100%;
+//  border : 1px solid green;
+//  flex-wrap: wrap;
+//}
+//.main > .second-row {
+//  display: flex;
+//  flex-direction: row;
+//  width: 100%;
+//  border: 1px solid green;
+//}
+//.item {
+//  width : 1000px;
+//  border : 1px solid yellow;
+//}

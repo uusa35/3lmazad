@@ -27,7 +27,7 @@
 </div>
 
 @section('footer')
-{{--@include('frontend.partials.footer')--}}
+@include('frontend.partials.footer')
 @show
 {{--@include('frontend.partials._compare')--}}
         <!-- Scripts -->

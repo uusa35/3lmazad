@@ -1,4 +1,4 @@
-<div class="ui floating labeled icon dropdown button">
+<div class="ui floating labeled icon dropdown button search-dropdown search-dropdown-condition" id="condition">
     <i class="search icon"></i>
     <span class="text">{{ trans('general.filter_by_condition') }}</span>
     <div class="menu">
