@@ -24,7 +24,10 @@ export const initialState = {
     properties : {
         isLoading : false,
         _token : '',
-        areas : []
+        areas : [],
+        condition : ['new','used'],
+        transmission : ['manual','automatic']
+
     }
 }
 

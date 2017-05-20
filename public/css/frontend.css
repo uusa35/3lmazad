@@ -38637,7 +38637,7 @@ zoom: 1;
       -ms-flex-direction: column;
           flex-direction: column;
   broder: 1px solid gold;
-  width: 70%;
+  width: 80%;
   margin-right: auto;
   margin-left: auto;
   -webkit-box-pack: start;
@@ -38693,7 +38693,7 @@ zoom: 1;
 }
 
 .search-dropdown {
-  width: 250px;
+  width: 280px;
   margin-right: 5px !important;
   margin-left: 5px !important;
   margin-bottom: 8px !important;

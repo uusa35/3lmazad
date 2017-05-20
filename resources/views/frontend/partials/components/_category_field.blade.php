@@ -1,6 +1,6 @@
 <div class="ui dropdown category button search-dropdown search-dropdown-category" id="category">
     <input name="cat" id="cat_input" value="0" type="hidden">
-    <i class="filter icon"></i>
+    <i class="icon filter"></i>
     <div class="default text">{{ trans('general.filter_by_category') }}</div>
     <i class="angle {{ app()->isLocal('ar') ? 'left' : 'right' }} icon"></i>
     <div class="menu">
@@ -11,7 +11,7 @@
                 <div class="menu">
                     @foreach($category->children as $sub)
                         <div class="item category_type" type="sub" data-text={{ $sub->name }} data-value="{{ $sub->id }}">
-                            <i class="{{ $sub->icon }} icon"></i>
+                            <i class="icon {{ $sub->icon }}"></i>
                             <span class="text">{{ $sub->name }}</span>
                         </div>
                     @endforeach

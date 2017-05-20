@@ -5,6 +5,7 @@ import { Link , withRouter} from 'react-router-dom';
 import * as actions from '../redux/actions';
 import { initialState } from '../Constants';
 import Header from './partials/Header';
+import AreaField from './partials/AreaField';
 import $ from 'jquery';
 $.fn.transition = require('semantic-ui-transition');
 $.fn.dropdown = require('semantic-ui-dropdown');
@@ -35,87 +36,44 @@ class SearchForm extends Component {
     render() {
         return (
             <div>
-                <Header />
-                <form className="form-inline search-bar" method="get"
-                      action="/search">
+                <form className="search-bar" method="get"
+                      action="{{ route('search') }}">
+                    <div className="main-fields">
+                        <AreaField areas={this.props.properties.areas}/>
 
-                    <div className="ui floating dropdown labeled icon button" onClick={this._onChangeArea}>
-                        <i className="filter icon"></i>
-                        <span className="text" id="areas">Filter Areas</span>
-                        <div className="menu">
-                            <div className="ui icon search input">
-                                <i className="search icon"></i>
-                                <input placeholder="Search Areas..." type="text"/>
-                            </div>
-                            <div className="divider"></div>
-                            <div className="scrolling menu">
-                                {
-                                    this.props.properties.areas.map(function(a) {
-                                        return (
-                                            <div className="item" key={a.id} value={a.id}>
-                                                <div className="ui empty circular label"></div>
-                                                {a.name_ar}
-                                            </div>
-                                        );
-                                    })
-                                }
-                            </div>
+                        <div className="ui icon input">
+                            <i className="search icon"></i>
+                            <input type="text" className="search-input search-input-keyword toottip-message"
+                                   data-content="{{ trans('message.keyword_search') }}" name="search"
+                                   data-variation="inverted"
+                                   placeholder="{`trans('general.keyword')`}"/>
+                        </div>
+
+                        <div className="ui right icon input">
+                            <i className="chevron circle down icon"></i>
+                            <input type="text" className="search-input search-input-min toottip-message" name="min"
+                                   data-content="{{ trans('message.min_search') }}"
+                                   data-variation="inverted"
+                                   placeholder={`trans('general.price_min')`}/>
+                        </div>
+
+
+                        <div className="ui icon input">
+                            <i className="chevron circle up icon"></i>
+                            <input type="text" className="search-input search-input-max toottip-message" name="max"
+                                   data-content={`trans('message.max_search')`}
+                                   data-variation="inverted"
+                                   placeholder={`trans('general.price_max')`}/>
                         </div>
                     </div>
 
-                    <div className="ui dropdown button" onClick={this._onChangeCategory}>
-                        <span className="text">Choose Category</span>
-                        <i className="dropdown icon"></i>
-                        <div className="menu">
-                            <div className="item" value="1">
-                                <span className="text">Category 1</span>
-                            </div>
-                            <div className="item">
-                                <i className="folder icon"></i>
-                                <span className="text">Cars</span>
-                                <div className="menu">
-                                    <div className="item">
-                                        <i className="folder icon"></i>
-                                        <span className="text">Cars For Sale</span>
-                                    </div>
-                                    <div className="item">Item 2B</div>
-                                    <div className="item">Item 2C</div>
-                                </div>
-                            </div>
-                            <div className="item">
-                                <i className="dropdown icon"></i>
-                                <span className="text">Category 2</span>
-                                <div className="menu">
-                                    <div className="item">Item 2A</div>
-                                    <div className="item">Item 2B</div>
-                                    <div className="item">Item 2C</div>
-                                </div>
-                            </div>
-                            <div className="item">
-                                <i className="dropdown icon"></i>
-                                <span className="text">Category 3</span>
-                                <div className="menu">
-                                    <div className="item">Item 3A</div>
-                                    <div className="item">Item 3B</div>
-                                    <div className="item">Item 3C</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="sub-fields">
                     </div>
 
-                    <div className="form-group">
-                        <input type="text" className="form-control search-input" name="search" placeholder="Name"/>
-                    </div>
-
-                    <div className="form-group">
-                        <input type="text" className="form-control search-input" name="min" placeholder="from"/>
-                    </div>
-
-                    <div className="form-group">
-                        <input type="text" className="form-control search-input" name="max" placeholder="to"/>
-                    </div>
-
-                    <button type="submit" className="btn btn--grey">Search</button>
+                    <button className="ui labeled icon brown button search-input" type="submit">
+                        <i className="search icon"></i>
+                        {`trans('general.search')`}
+                    </button>
                 </form>
             </div>
         )
