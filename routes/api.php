@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Area;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 /*
@@ -21,4 +23,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('areas', function () {
     return response()->json(Area::all(), 200);
+});
+
+Route::get('cat/{id}/brands', function ($id) {
+    $category = Category::whereId($id)->first();
+    if ($category->isParent) {
+        $brands = $category->brands()->get();
+    } else {
+        $brands = $category->parent()->first()->brands()->get();
+    }
+    return response()->json($brands, 200);
+});
+
+Route::get('brand/{id}/models', function ($id) {
+    $models = Brand::whereId($id)->first()->models()->get();
+    return response()->json($models, 200);
 });

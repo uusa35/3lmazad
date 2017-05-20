@@ -14,20 +14,20 @@
         <div id="pageContent" class="page-content">
             <div class="col-lg-12">
                 @include('frontend.partials.notifications')
-                @section('content')
-                @section('top')
-                @show
-                @section('middle')
-                @show
-                @section('bottom')
-                @show
+                {{--@section('content')--}}
+                {{--@section('top')--}}
+                {{--@show--}}
+                {{--@section('middle')--}}
+                {{--@show--}}
+                {{--@section('bottom')--}}
+                {{--@show--}}
             </div>
         </div>
     </div>
 </div>
 
 @section('footer')
-@include('frontend.partials.footer')
+{{--@include('frontend.partials.footer')--}}
 @show
 {{--@include('frontend.partials._compare')--}}
         <!-- Scripts -->

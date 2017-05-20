@@ -1,39 +1,37 @@
 /**
  * Created by usamaahmed on 5/18/17.
  */
-
 window.$ = window.jQuery = require('jquery');
 window.$.fn.transition = require('semantic-ui-transition');
 window.$.fn.dropdown = require('semantic-ui-dropdown');
 window.$.fn.popup = require('semantic-ui-popup');
+import axios from 'axios';
 
 $(document).ready(function() {
     console.log('jquery from frontend custome');
-    $('.ui.dropdown').dropdown({allowCategorySelection: true});
-    $('#test').on('click', function () {
-        let getVal = $('.ui.dropdown.category').dropdown('get value');
-        let getText = $('.ui.dropdown.category').dropdown('get text');
-        console.log(getVal);
-        console.log(getText);
+    // category selection
+    $('#category').on('click', function() {
+        let type = $('.item.category_type.active.selected').attr('type');
+        let getVal = $('.dropdown.category').dropdown('get value');
+        $('#cat_input').attr('value', getVal);
+        $('#cat_input').attr('name', type);
+        if(type === 'sub') {
+            console.log('sub started here');
+            let brands = axios.get('/api/fetch/brands').then(r => r.data).catch(e => console.log(e));
+            console.log(brands);
+        }
     });
-    //$('#category').on('click', function(e) {
-    //    let categoryValue = $('#category').find(":selected").val();
-    //    console.log(categoryValue);
-    //    let category_id = $('.item.active.selected').attr('value');
-    //    console.log(category_id);
-    //})
-    let getVal = $('.ui.dropdown#category').dropdown('get value');
-    console.log(getVal)
-
 
     $('#area').on('click', function(e) {
-        let area_id = $('.item.area.active.selected').attr('value');
-        console.log(area_id);
+        let getVal = $('.dropdown.area').dropdown('get value');
+        $('#area_input').attr('value', getVal);
     });
 
     $('.toottip-message').popup({
         on: 'focus',
         position: 'top center',
-        offset : 10
+        offset: 10
     });
+
+    $('.ui.dropdown').dropdown({allowCategorySelection: true});
 });

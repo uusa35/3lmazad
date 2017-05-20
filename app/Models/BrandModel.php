@@ -3,8 +3,12 @@
 namespace App\Models;
 
 
+use App\Services\Traits\LocaleTrait;
+
 class BrandModel extends BaseModel
 {
+    use LocaleTrait;
+    protected $localeStrings = ['name'];
     protected $table = 'models';
 
     public function brand()
