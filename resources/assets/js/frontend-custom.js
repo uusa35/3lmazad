@@ -10,10 +10,21 @@ window.$.fn.popup = require('semantic-ui-popup');
 $(document).ready(function() {
     console.log('jquery from frontend custome');
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
-    $('#category').on('click', function(e) {
-        let category_id = $('.item.category.active.selected').attr('value');
-        console.log(category_id);
-    })
+    $('#test').on('click', function () {
+        let getVal = $('.ui.dropdown.category').dropdown('get value');
+        let getText = $('.ui.dropdown.category').dropdown('get text');
+        console.log(getVal);
+        console.log(getText);
+    });
+    //$('#category').on('click', function(e) {
+    //    let categoryValue = $('#category').find(":selected").val();
+    //    console.log(categoryValue);
+    //    let category_id = $('.item.active.selected').attr('value');
+    //    console.log(category_id);
+    //})
+    let getVal = $('.ui.dropdown#category').dropdown('get value');
+    console.log(getVal)
+
 
     $('#area').on('click', function(e) {
         let area_id = $('.item.area.active.selected').attr('value');
