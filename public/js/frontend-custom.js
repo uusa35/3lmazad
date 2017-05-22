@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 748);
+/******/ 	return __webpack_require__(__webpack_require__.s = 749);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -15339,25 +15339,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 window.$ = window.jQuery = __webpack_require__(19);
 window.$.fn.transition = __webpack_require__(183);
 window.$.fn.dropdown = __webpack_require__(182);
-window.$.fn.popup = __webpack_require__(740);
+window.$.fn.popup = __webpack_require__(741);
 
 
 $(document).ready(function () {
     console.log('jquery from frontend custome');
-    // category selection
-    $('#category').on('click', function () {
-        var type = $('.item.category_type.active.selected').attr('type');
+    $('#category').on('change', function () {
+        $('div[id^="sub-fields"]').addClass('hidden');
+
+        // first : get the parent category / sub category
+        var getText = $('.dropdown.category').dropdown('get text');
+        console.log('name of the category is ' + getText);
         var getVal = $('.dropdown.category').dropdown('get value');
+        console.log('value of the category is ' + getVal);
+        var parentId = $('#cat-' + getVal).attr('parentId');
+        var type = $('#cat-' + getVal).attr('type');
+        console.log('type case : ' + type + ' parentId is ' + parentId);
+        // second : adjust the category input for main or sub + value of the category id
         $('#cat_input').attr('value', getVal);
         $('#cat_input').attr('name', type);
-        if (type === 'sub') {
-            console.log('sub started here');
-            var brands = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/fetch/brands').then(function (r) {
-                return r.data;
-            }).catch(function (e) {
-                return console.log(e);
-            });
-            console.log(brands);
+
+        // third : show the div related to the category
+        if (type === 'main') {} else if (type === 'sub') {
+            $('#sub-fields-' + parentId).toggleClass('hidden');
         }
     });
 
@@ -16169,7 +16173,7 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 740:
+/***/ 741:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {/*!
@@ -17653,7 +17657,7 @@ _module.exports.settings = {
 
 /***/ }),
 
-/***/ 748:
+/***/ 749:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(382);

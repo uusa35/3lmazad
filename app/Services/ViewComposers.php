@@ -37,7 +37,7 @@ class ViewComposers
     public function getAllCategoriesWithFeatured(View $view)
     {
         $categories = Category::parents()->with(['children' => function ($q) {
-            $q->where('featured', true)->with('children');
+            $q->where('featured', true)->with('children', 'brands.models', 'form.fields');
         }])->get()->toArray();
 
         return $view->with(compact('categories'));

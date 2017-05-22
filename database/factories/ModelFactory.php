@@ -77,7 +77,12 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
             }
             return false;
         },
-        'form_id' => Form::all()->random()->id
+        'form_id' => function ($array) {
+            if (!$array['parent_id']) {
+                return Form::all()->random()->id;
+            }
+            return NULL;
+        }
     ];
 });
 
@@ -85,6 +90,7 @@ $factory->define(Brand::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
+        'image' => 'sample.png',
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });
@@ -112,11 +118,21 @@ $factory->define(Form::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Field::class, function (Faker\Generator $faker) {
+    $fields = ['title', 'description', 'price', 'active', 'type',
+        'featured', 'phone', 'condition', 'manufacturing_year', 'mileage',
+        'transmission', 'room_no', 'floor_no', 'bathroom_no', 'rent_type',
+        'building_age', 'furnished', 'space', 'address', 'image', 'mileage',
+        'category_id', 'area_id', 'brand_id', 'model_id', 'color_id', 'size_id'];
+    $isFilterArray = ['condition', 'manufacturing_year',
+        'transmission', 'room_no', 'floor_no', 'brand', 'model', 'mileage',
+        'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
+    $isNotFilterArray = ['title', 'description', 'price', 'phone', 'color_id', 'size_id',
+        'model_id', 'brand_id', 'area_id', 'category_id', 'address', 'image'];
+    $elements = Field::all()->pluck('name')->toArray();
+//    dd(array_diff($isFilterArray, $fields));
     return [
-        'name' => $faker->word,
-        'value' => function ($array) {
-            return $array['name'];
-        }
+        'is_filter' => $faker->boolean(50),
+        'name' => $faker->name
     ];
 });
 

@@ -35,6 +35,16 @@ Route::get('cat/{id}/brands', function ($id) {
     return response()->json($brands, 200);
 });
 
+Route::get('cat/{id}/fields', function ($id) {
+    $category = Category::whereId($id)->first();
+    if ($category->isParent) {
+        $fields = $category->form()->first()->fields()->get();
+    } else {
+        $fields = $category->parent()->first()->form()->first()->fields()->get();
+    }
+    return response()->json($fields, 200);
+});
+
 Route::get('brand/{id}/models', function ($id) {
     $models = Brand::whereId($id)->first()->models()->get();
     return response()->json($models, 200);

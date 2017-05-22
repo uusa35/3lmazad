@@ -38637,7 +38637,7 @@ zoom: 1;
       -ms-flex-direction: column;
           flex-direction: column;
   broder: 1px solid gold;
-  width: 80%;
+  width: 85%;
   margin-right: auto;
   margin-left: auto;
   -webkit-box-pack: start;
@@ -38662,6 +38662,9 @@ zoom: 1;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .sub-fields {
@@ -38672,6 +38675,14 @@ zoom: 1;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .search-input {
@@ -38693,6 +38704,7 @@ zoom: 1;
 }
 
 .search-dropdown {
+  max-width: 280px;
   width: 280px;
   margin-right: 5px !important;
   margin-left: 5px !important;

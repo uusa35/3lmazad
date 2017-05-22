@@ -58,7 +58,8 @@ class HomeController extends Controller
         }
 
         $elements = Ad::filters($filters)->get();
-
+        $manufacturingYears = range(date('Y')-10, date('Y'));
+        dd($manufacturingYears);
         if (!$elements->isEmpty()) {
             return view('frontend.modules.pages.search', compact('elements'));
         } else {

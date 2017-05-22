@@ -45,7 +45,7 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        if (app()->environment() !== 'seeding') {
+        if (!app()->environment('seeding')) {
             if (in_array('api', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
             }

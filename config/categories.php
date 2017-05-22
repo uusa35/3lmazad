@@ -14,11 +14,11 @@ return [
             'for sale',
             'for rent',
             'motorcyle',
-            'plates',
-            'spareparts',
-            'trucks',
-            'boats',
-            'others',
+//            'plates',
+//            'spareparts',
+//            'trucks',
+//            'boats',
+//            'others',
         ]
     ],
     1 => [
@@ -26,9 +26,9 @@ return [
         'sub' => [
             'smart phones',
             'tablets',
-            'special numbers',
-            'accessories',
-            'others',
+//            'special numbers',
+//            'accessories',
+//            'others',
         ]
     ],
     2 => [
@@ -36,37 +36,37 @@ return [
         'sub' => [
             'computers',
             'tvs',
-            'speakers',
-            'modems',
-            'cameras',
-            'air conditioners',
-            'firdges',
-            'washing machines',
-            'microwave',
+//            'speakers',
+//            'modems',
+//            'cameras',
+//            'air conditioners',
+//            'firdges',
+//            'washing machines',
+//            'microwave',
         ]
     ],
-//    3 => [
-//        'parent' => 'real estate for sale',
-//        'sub' => [
-//            'Villa - Palace for Sale',
-//            'Commercial for Sale',
-//            'Whole Building for Sale',
+    3 => [
+        'parent' => 'properties for sale',
+        'sub' => [
+            'Villa - Palace for Sale',
+            'Commercial for Sale',
+            'Whole Building for Sale',
 //            'Land for Sale',
 //            'Chalets - Summerhouses for Sale',
 //            'Other Real Estate for Sale',
-//        ]
-//    ],
-//    4 => [
-//        'parent' => 'real estate for rend',
-//        'sub' => [
-//            'Villa - Palace for rent',
-//            'Commercial for rent',
-//            'Whole Building for rent',
+        ]
+    ],
+    4 => [
+        'parent' => 'properties for rent',
+        'sub' => [
+            'Villa - Palace for rent',
+            'Commercial for rent',
+            'Whole Building for rent',
 //            'Land for rent',
 //            'Chalets - Summerhouses for rent',
 //            'Other Real Estate for rent',
-//        ]
-//    ],
+        ]
+    ],
 //    5 => [
 //        'parent' => 'kids',
 //        'sub' => [
@@ -75,7 +75,7 @@ return [
 //            'Kids Clothing',
 //            'Toys - Games',
 //            'Others - Baby - Kids',
-//
+
 //        ]
 //    ],
 //    6 => [

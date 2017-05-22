@@ -16,6 +16,7 @@ class CreateBrandsTable extends Migration
             $table->increments('id');
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
+            $table->string('image')->default('sample.png')->nullable();
 
             $table->integer('category_id')->unsigned()->index()->nullable();
             $table->foreign('category_id')->references('id')->on('categories');

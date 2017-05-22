@@ -53,13 +53,13 @@ class Filters extends QueryFilters
         }
     }
 
-    public function brand()
+    public function brand_id()
     {
         var_dump('brand');
         return $this->builder->where('brand_id', request()->brand);
     }
 
-    public function model()
+    public function model_id()
     {
         var_dump('model');
         return $this->builder->where('model_id', request()->model);
@@ -91,7 +91,7 @@ class Filters extends QueryFilters
         return $this->builder->where('price', '<=', request()->max);
     }
 
-    public function area()
+    public function area_id()
     {
         var_dump('area');
         return $this->builder->where('area_id', request()->area);

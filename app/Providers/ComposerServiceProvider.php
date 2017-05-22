@@ -23,7 +23,7 @@ class ComposerServiceProvider extends ServiceProvider
             'frontend.partials.forms._edit-item',
             'frontend.partials.forms._create-item-product-and-service',
             'frontend.partials.forms._edit-item-product-and-service',
-            'frontend.partials.components._category_field'
+            'frontend.partials.nav._search-row',
         ], 'App\Services\ViewComposers@getCategories');
 
         view()->composer(
