@@ -15344,9 +15344,14 @@ window.$.fn.popup = __webpack_require__(741);
 
 $(document).ready(function () {
     console.log('jquery from frontend custome');
+    var lang = $('#lang').text();
+    console.log('the lang is ' + lang);
     $('#category').on('change', function () {
+        // hide all classes
         $('div[id^="sub-fields"]').addClass('hidden');
-        $('input[id^="brand-input-"]').attr('name', '');
+        // remove the input name and value of all sub-fields
+        $('input[id*="-input-"]').attr('name', '');
+        $('input[id*="-input-"]').attr('value', '');
         // first : get the parent category / sub category / type of the category chosen
         var catName = $('.dropdown.category').dropdown('get text');
         console.log('name of the category is ' + catName);
@@ -15368,8 +15373,8 @@ $(document).ready(function () {
             //'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id',
             //    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'
             // brand
-            $('#brand-input-' + catParentId).attr('name', 'brand_id');
-            $('#model-input-' + catParentId).attr('name', 'model_id');
+            $('#brand_id-input-' + catParentId).attr('name', 'brand_id');
+            $('#model_id-input-' + catParentId).attr('name', 'model_id');
             $('#condition-input-' + catParentId).attr('name', 'condition');
             $('#type-input-' + catParentId).attr('name', 'type');
             $('#manufacturing_year-input-' + catParentId).attr('name', 'manufacturing_year');
@@ -15390,8 +15395,35 @@ $(document).ready(function () {
         $('#area_input').attr('value', getVal);
     });
 
+    $('div[id^="brand_id-"]').on('change', function () {
+        var catId = $('.dropdown.category').dropdown('get value');
+        var catParentId = $('#cat-' + catId).attr('parentId');
+        var brandId = $('#brand_id-input-' + catParentId).attr('value');
+        $('#model_id-items-' + catParentId).html('');
+        console.log('brandId ' + brandId);
+        return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/brand/' + brandId + '/models').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return data.map(function (m) {
+                var name = 'name_' + lang;
+                console.log(m);
+                console.log('var name is : ' + m[name]);
+                //$('model_id-items-' + catParentId).append('<div>test</div>');
+                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <div class="ui empty circular label"></div>\n                        ' + m[name] + '\n                    </div>\n                ');
+            });
+        }).catch(function (e) {
+            return console.log(e);
+        });
+    });
+
     $('.toottip-message').popup({
         on: 'focus',
+        position: 'top center',
+        offset: 10
+    });
+
+    $('.tooltip_message_on_hover').popup({
+        on: 'hover',
         position: 'top center',
         offset: 10
     });

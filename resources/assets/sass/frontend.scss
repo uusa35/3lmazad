@@ -27,10 +27,19 @@
   padding: 8px;
 }
 
+.commercial-homepage {
+
+}
+
 // search-fields and form
-@media (min-width: 1000px) {
+@media (max-width: 1000px) {
   .search-bar > .dropdown {
-    width: 255px;
+    width: 180px;
+    max-width: 230px;
+  }
+  .main-fields, .sub-fields {
+    justify-content: center;
+    flex-wrap: nowrap;
   }
 }
 
@@ -55,6 +64,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .sub-fields {
