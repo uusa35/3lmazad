@@ -15409,7 +15409,7 @@ $(document).ready(function () {
                 console.log(m);
                 console.log('var name is : ' + m[name]);
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
-                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <div class="ui empty circular label"></div>\n                        ' + m[name] + '\n                    </div>\n                ');
+                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <img class="ui avatar image" src="public/storage/uploads/images/thumbnail/' + m.image + '">\n                        ' + m[name] + '\n                    </div>\n                ');
             });
         }).catch(function (e) {
             return console.log(e);

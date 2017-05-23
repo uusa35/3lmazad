@@ -57,11 +57,12 @@ class HomeController extends Controller
             return redirect()->home()->withErrors($validator->messages());
         }
 
-        $elements = Ad::filters($filters)->get();
-        $manufacturingYears = range(date('Y')-10, date('Y'));
-        dd($manufacturingYears);
+
+//        return Ad::filters($filters)->get();
+        $elements = Ad::filters($filters)->paginate(12);
+
         if (!$elements->isEmpty()) {
-            return view('frontend.modules.pages.search', compact('elements'));
+            return view('frontend.modules.category.index', compact('elements'));
         } else {
             return redirect()->home()->with('error', title_case('no items found .. plz try again'));
         }

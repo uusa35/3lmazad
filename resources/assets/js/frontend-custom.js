@@ -75,7 +75,7 @@ $(document).ready(function() {
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
                 return $('#model_id-items-' + catParentId).append(`
                     <div class="item area" data-value="${m.id}" data-text="${m[name]}">
-                        <div class="ui empty circular label"></div>
+                        <img class="ui avatar image" src="public/storage/uploads/images/thumbnail/${m.image}">
                         ${m[name]}
                     </div>
                 `);

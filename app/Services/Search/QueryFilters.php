@@ -29,7 +29,7 @@ abstract class QueryFilters
                 return $value;
             }
         });
-        dd($removeNull);
+//        dd($removeNull);
         return $removeNull;
     }
 

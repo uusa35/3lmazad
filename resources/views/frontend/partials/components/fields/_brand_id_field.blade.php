@@ -8,7 +8,7 @@
     <div class="menu">
         <div class="ui icon search input">
             <i class="search icon"></i>
-            <input placeholder="Search Areas..." type="text"/>
+            <input placeholder="{{ trans('general.search_brands') }}" type="text"/>
         </div>
         <div class="divider"></div>
         <div class="scrolling menu">

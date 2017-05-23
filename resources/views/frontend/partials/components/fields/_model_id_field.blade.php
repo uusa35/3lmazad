@@ -6,7 +6,7 @@
     <div class="menu">
         <div class="ui icon search input">
             <i class="search icon"></i>
-            <input placeholder="{{ trans('general.filter_by_model') }}" type="text"/>
+            <input placeholder="{{ trans('general.search_models') }}" type="text"/>
         </div>
         <div class="divider"></div>
         <div class="scrolling menu" id="model_id-items-{{ $category->id }}">

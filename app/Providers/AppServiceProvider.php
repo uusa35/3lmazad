@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(GeneratorsServiceProvider::class);
             $this->app->register(ArtisanViewServiceProvider::class);
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+            $this->app->register(DuskServiceProvider::class);
         }
     }
 }

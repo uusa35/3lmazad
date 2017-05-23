@@ -1,4 +1,4 @@
-html {
+@import url(https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css);html {
   direction: rtl;
   text-align: right;
 }

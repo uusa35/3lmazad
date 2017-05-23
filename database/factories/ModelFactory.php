@@ -110,6 +110,7 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
+        'image' => 'sample.png',
         'brand_id' => Brand::all()->random()->id
     ];
 });
@@ -176,10 +177,10 @@ $factory->define(AdMeta::class, function (Faker\Generator $faker) {
         'manufacturing_year' => $faker->year,
         'mileage' => $faker->numberBetween(10, 99999),
         'transmission' => $faker->randomElement(['manual', 'automatic']),
+        'rent_type' => $faker->randomElement(['daily', 'monthly', 'weekly', 'yearly']),
         'room_no' => $faker->randomDigit,
         'floor_no' => $faker->randomDigit,
         'bathroom_no' => $faker->randomDigit,
-        'rent_type' => $faker->word,
         'building_age' => $faker->year,
         'furnished' => $faker->boolean(true),
         'space' => $faker->randomDigit,

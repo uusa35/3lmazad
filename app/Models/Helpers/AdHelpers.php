@@ -21,6 +21,18 @@ trait AdHelpers
 
     }
 
+    public function scopeHasValidDeal($q)
+    {
+        return $q->whereHas('deals', function ($q) {
+            return $q;
+        }, '>', 0);
+    }
+
+    public function getHasValidDealAttribute()
+    {
+        return $this->deals()->count() > 0 ? true : false;
+    }
+
     /**
      * @param $q
      * @param QueryFilters $filters

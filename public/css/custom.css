@@ -35,6 +35,8 @@
 }
 
 .commercial-homepage {
+  margin-right: auto;
+  margin-left: auto;
   margin-bottom: 10px;
   width: auto;
   max-width: 314px;

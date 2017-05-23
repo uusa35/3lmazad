@@ -100,13 +100,31 @@ class Filters extends QueryFilters
     public function rent_type()
     {
         var_dump('rent_type');
-        return $this->builder->where('rent_type', request()->rent_type);
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('rent_type', request()->rent_type);
+            });
+        });
     }
 
     public function space()
     {
         var_dump('space');
-        return $this->builder->where('space', '>=', request()->space);
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('space', '>=', request()->space);
+            });
+        });
+    }
+
+    public function manufacturing_year()
+    {
+        var_dump('manufacturing_year');
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('manufacturing_year', '=>', request()->manufacturing_year);
+            });
+        });
     }
 
     public function have_images()
@@ -118,7 +136,7 @@ class Filters extends QueryFilters
     public function only_premium()
     {
         var_dump('only premium');
-        return $this->builder->where('only_premium', request()->only_premium);
+        return $this->builder->hasValidDeal();
     }
 
 }
