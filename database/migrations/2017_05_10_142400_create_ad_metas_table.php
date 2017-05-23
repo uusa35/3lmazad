@@ -23,7 +23,7 @@ class CreateAdMetasTable extends Migration
             $table->string('room_no')->nullable();
             $table->string('floor_no')->nullable();
             $table->string('bathroom_no')->nullable();
-            $table->string('rent_type')->nullable();
+            $table->enum('rent_type', ['monthly', 'weekly', 'daily', 'yearly'])->nullable();
             $table->string('building_age')->nullable();
             $table->boolean('furnished')->nullable();
             $table->string('space')->nullable();

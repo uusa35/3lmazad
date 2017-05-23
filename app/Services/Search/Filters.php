@@ -97,6 +97,18 @@ class Filters extends QueryFilters
         return $this->builder->where('area_id', request()->area);
     }
 
+    public function rent_type()
+    {
+        var_dump('rent_type');
+        return $this->builder->where('rent_type', request()->rent_type);
+    }
+
+    public function space()
+    {
+        var_dump('space');
+        return $this->builder->where('space', '>=', request()->space);
+    }
+
     public function have_images()
     {
         var_dump('have images');

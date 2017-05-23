@@ -75,6 +75,22 @@
   justify-content: flex-start;
 }
 
+.main-fields > .search-dropdown {
+  width: 274px;
+  max-width: 275px;
+  margin-right: 3px !important;
+  margin-left: 3px !important;
+  margin-bottom: 5px !important;
+}
+
+.sub-fields > .search-dropdown {
+  width: 274px;
+  max-width: 250px;
+  margin-right: 3px !important;
+  margin-left: 3px !important;
+  margin-bottom: 5px !important;
+}
+
 .search-input {
   margin-right: 5px !important;
   margin-left: 5px !important;
@@ -91,22 +107,6 @@
 
 .search-input-keyword {
   width: 250px;
-}
-
-.main-fields > .search-dropdown {
-  width: 250px;
-  max-width: 275px;
-  margin-right: 3px !important;
-  margin-left: 3px !important;
-  margin-bottom: 5px !important;
-}
-
-.sub-fields > .search-dropdown {
-  width: 244px;
-  max-width: 250px;
-  margin-right: 3px !important;
-  margin-left: 3px !important;
-  margin-bottom: 5px !important;
 }
 
 .search-dropdown-area {
