@@ -9,13 +9,8 @@
             <input placeholder="{{ trans('general.filter_by_model') }}" type="text"/>
         </div>
         <div class="divider"></div>
-        <div class="scrolling menu">
-            @foreach($areas as $key => $value)
-                <div class="item area" data-value={{ $key }} data-text={{ $value }}>
-                    <div class="ui empty circular label"></div>
-                    {{ $value }}
-                </div>
-            @endforeach
+        <div class="scrolling menu" id="model_id-items-{{ $category->id }}">
+            {{-- put the models here through jquery --}}
         </div>
     </div>
 </div>

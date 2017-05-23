@@ -9,6 +9,8 @@ import axios from 'axios';
 
 $(document).ready(function() {
     console.log('jquery from frontend custome');
+    var lang = $('#lang').text();
+    console.log('the lang is ' + lang);
     $('#category').on('change', function() {
         // hide all classes
         $('div[id^="sub-fields"]').addClass('hidden');
@@ -53,13 +55,42 @@ $(document).ready(function() {
         }
     });
 
+
     $('#area').on('click', function(e) {
         let getVal = $('.dropdown.area').dropdown('get value');
         $('#area_input').attr('value', getVal);
     });
 
+    $('div[id^="brand_id-"]').on('change', function() {
+        let catId = $('.dropdown.category').dropdown('get value');
+        let catParentId = $('#cat-' + catId).attr('parentId');
+        let brandId = $('#brand_id-input-' + catParentId).attr('value');
+        $('#model_id-items-' + catParentId).html('');
+        console.log('brandId ' + brandId);
+        return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
+            return data.map(m => {
+                let name = 'name_' + lang;
+                console.log(m);
+                console.log(`var name is : ${m[name]}`);
+                //$('model_id-items-' + catParentId).append('<div>test</div>');
+                return $('#model_id-items-' + catParentId).append(`
+                    <div class="item area" data-value="${m.id}" data-text="${m[name]}">
+                        <div class="ui empty circular label"></div>
+                        ${m[name]}
+                    </div>
+                `);
+            });
+        }).catch(e => console.log(e));
+    });
+
     $('.toottip-message').popup({
         on: 'focus',
+        position: 'top center',
+        offset: 10
+    });
+
+    $('.tooltip_message_on_hover').popup({
+        on: 'hover',
         position: 'top center',
         offset: 10
     });

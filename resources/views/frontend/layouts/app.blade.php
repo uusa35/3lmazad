@@ -27,10 +27,11 @@
 </div>
 
 @section('footer')
-{{--@include('frontend.partials.footer')--}}
-@show
-{{--@include('frontend.partials._compare')--}}
-        <!-- Scripts -->
+    <div class="hidden" id="lang">{{ app()->getLocale() }}</div>
+    {{--@include('frontend.partials.footer')--}}
+    @show
+    {{--@include('frontend.partials._compare')--}}
+            <!-- Scripts -->
 @section('scripts')
     @include('frontend.partials.scripts')
 @show

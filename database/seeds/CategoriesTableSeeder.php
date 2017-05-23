@@ -28,50 +28,43 @@ class CategoriesTableSeeder extends Seeder
         if (app()->environment('seeding')) {
             $categories = config('categories');
             foreach ($categories as $category) {
+
+                // ASSIGN FORM FOR A PARENT CATEGORY
+                $form = factory(Form::class)->create();
                 //PARENT
-                $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent']]);
+                $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent'], 'form_id' => $form->id]);
                 // BRAND FOR EACH PARENT
                 factory(Brand::class, 6)->create(['category_id' => $parent->id])->each(function ($brand) {
                     // MODEL FOR EACH BRAND
                     factory(BrandModel::class, 6)->create(['brand_id' => $brand->id]);
                 });
-
                 // TYPES FOR EACH PARENT
                 factory(Type::class, 5)->create(['category_id' => $parent->id]);
 
-                // ASSIGN FORM FOR A PARENT CATEGORY
 
-                $form = factory(Form::class)->create();
+                $isFilterArray = ['condition', 'manufacturing_year', 'type',
+                    'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id', 'mileage',
+                    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
+                $isFilterArrayCars = ['condition', 'manufacturing_year', 'type', 'transmission', 'brand_id', 'model_id', 'mileage'];
+                $isFilterArrayProperty = ['type', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
+                $isFilterArrayMobile = ['condition', 'brand_id', 'model_id', 'type',];
+                if ($parent->id == 1) {
+                    // car case
+                    $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayCars)->pluck('id'));
+                    $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id'));
+                } elseif ($parent->id == 5) {
+                    // mobile case
+                    $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayMobile)->pluck('id'));
+                    $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
+                } elseif ($parent->id == 11 || $parent->id == 15) {
+                    $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayProperty)->pluck('id'));
+                    $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
+                } elseif ($parent->id == 8) {
+                    // mobile case
+                    $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayMobile)->pluck('id'));
+                    $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
+                }
 
-                $form->each(function ($form) use ($parent) {
-                    $isFilterArray = ['condition', 'manufacturing_year', 'type',
-                        'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id', 'mileage',
-                        'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-
-                    $isFilterArrayCars = ['condition', 'manufacturing_year', 'type', 'transmission', 'brand_id', 'model_id', 'mileage'];
-
-                    $isFilterArrayProperty = ['type', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-
-                    $isFilterArrayMobile = ['condition', 'brand_id', 'model_id', 'type',];
-
-                    if ($parent->id == 1) {
-                        // car case
-                        $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayCars)->pluck('id'));
-                        $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id'));
-                    } elseif ($parent->id == 5) {
-                        // mobile case
-                        $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayMobile)->pluck('id'));
-                        $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
-                    } elseif ($parent->id == 11 || $parent->id == 15) {
-                        $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayProperty)->pluck('id'));
-                        $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
-                    } elseif ($parent->id == 8) {
-                        // mobile case
-                        $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayMobile)->pluck('id'));
-                        $form->fields()->attach(Field::where('is_filter', false)->whereNotIn('name', $isFilterArray)->pluck('id')->shuffle());
-                    }
-
-                });
 
                 $form->categories()->save($parent);
 
