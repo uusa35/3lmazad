@@ -15346,22 +15346,42 @@ $(document).ready(function () {
     console.log('jquery from frontend custome');
     $('#category').on('change', function () {
         $('div[id^="sub-fields"]').addClass('hidden');
-
-        // first : get the parent category / sub category
-        var getText = $('.dropdown.category').dropdown('get text');
-        console.log('name of the category is ' + getText);
-        var getVal = $('.dropdown.category').dropdown('get value');
-        console.log('value of the category is ' + getVal);
-        var parentId = $('#cat-' + getVal).attr('parentId');
-        var type = $('#cat-' + getVal).attr('type');
-        console.log('type case : ' + type + ' parentId is ' + parentId);
+        $('input[id^="brand-input-"]').attr('name', '');
+        // first : get the parent category / sub category / type of the category chosen
+        var catName = $('.dropdown.category').dropdown('get text');
+        console.log('name of the category is ' + catName);
+        var catId = $('.dropdown.category').dropdown('get value');
+        console.log('value of the category is ' + catId);
+        var catParentId = $('#cat-' + catId).attr('parentId');
+        var type = $('#cat-' + catId).attr('type');
+        console.log('type case : ' + type + ' and parentId is ' + catParentId);
         // second : adjust the category input for main or sub + value of the category id
-        $('#cat_input').attr('value', getVal);
+        $('#cat_input').attr('value', catId);
         $('#cat_input').attr('name', type);
 
         // third : show the div related to the category
-        if (type === 'main') {} else if (type === 'sub') {
-            $('#sub-fields-' + parentId).toggleClass('hidden');
+        if (type === 'sub') {
+            console.log('from sub case');
+            $('#sub-fields-' + catParentId).toggleClass('hidden');
+            // will repeat this for each input element
+            // condition', 'manufacturing_year', 'type',
+            //'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id',
+            //    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'
+            // brand
+            $('#brand-input-' + catParentId).attr('name', 'brand_id');
+            $('#model-input-' + catParentId).attr('name', 'model_id');
+            $('#condition-input-' + catParentId).attr('name', 'condition');
+            $('#type-input-' + catParentId).attr('name', 'type');
+            $('#manufacturing_year-input-' + catParentId).attr('name', 'manufacturing_year');
+            $('#transmission-input-' + catParentId).attr('name', 'transmission');
+            $('#room_no-input-' + catParentId).attr('name', 'room_no');
+            $('#floor_no-input-' + catParentId).attr('name', 'floor_no');
+            $('#bathroom_no-input-' + catParentId).attr('name', 'bathroom_no');
+            $('#rent_type-input-' + catParentId).attr('name', 'rent_type');
+            $('#building_age-input-' + catParentId).attr('name', 'building_age');
+            $('#furnished-input-' + catParentId).attr('name', 'furnished');
+            $('#furnished-' + catParentId).dropdown('get value');
+            $('#space-input-' + catParentId).attr('name', 'space');
         }
     });
 

@@ -99,6 +99,9 @@ $factory->define(Type::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
+        'icon' => $faker->randomElement(['shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
+            'desktop', 'power', 'bus', 'car', 'ship', 'taxi', 'conffee', 'android', 'apple'
+        ]),
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });

@@ -15,11 +15,6 @@ use App\Models\Type;
  */
 trait CategoryTrait
 {
-    public function brand()
-    {
-        return $this->hasOne(Brand::class);
-    }
-
     public function ads()
     {
         return $this->hasMany(Ad::class);

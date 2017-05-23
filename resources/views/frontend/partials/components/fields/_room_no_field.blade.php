@@ -1,5 +1,6 @@
-<div class="ui floating dropdown room_no labeled icon button search-dropdown search-dropdown-building-age" id="room_no">
-    <input name="room_no" id="room_no_field" value="0" type="hidden">
+<div class="ui floating dropdown room_no labeled icon button search-dropdown search-dropdown-building-age"
+     id="room_no-{{ $category->id }}">
+    <input name="room_no" id="room_no_-input-{{$category->id}}" value="{{ null }}" type="hidden">
     <i class="marker icon"></i>
     <span class="text">{{ trans('general.room_no') }}</span>
     <div class="menu">

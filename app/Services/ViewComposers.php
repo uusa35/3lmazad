@@ -37,7 +37,7 @@ class ViewComposers
     public function getAllCategoriesWithFeatured(View $view)
     {
         $categories = Category::parents()->with(['children' => function ($q) {
-            $q->where('featured', true)->with('children', 'brands.models', 'form.fields');
+            $q->where('featured', true)->with('children');
         }])->get()->toArray();
 
         return $view->with(compact('categories'));
@@ -54,8 +54,8 @@ class ViewComposers
 
     public function getOnHomePageCategories(View $view)
     {
-        $homePageCategories = Category::parents()->where('on_homepage', true)->get();
-        return $view->with(compact('homePageCategories'));
+        $homeCategories = Category::parents()->where('on_homepage', true)->get();
+        return $view->with(compact('homeCategories'));
     }
 
     public function getBreadCrumbs(View $view)
@@ -117,7 +117,7 @@ class ViewComposers
     public function getCategories(View $view)
     {
         $category = new Category();
-        $categories = $category->parents()->has('children')->with('children.children')->featured()->get();
+        $categories = $category->parents()->with('children.children', 'brands.models', 'form.fields', 'types')->get();
         return $view->with(compact('categories'));
 
     }

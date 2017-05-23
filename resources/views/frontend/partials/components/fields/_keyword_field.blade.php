@@ -3,5 +3,6 @@
     <input type="text" class="search-input search-input-keyword toottip-message"
            data-content="{{ trans('message.keyword_search') }}" name="search"
            data-variation="inverted"
+           value="test"
            placeholder="{{ trans('general.keyword') }}"/>
 </div>

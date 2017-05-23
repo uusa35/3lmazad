@@ -1,5 +1,5 @@
-<div class="ui floating dropdown rent_type labeled icon button search-dropdown search-dropdown-area" id="rent_type">
-    <input name="rent_type" id="rent_type" value="0" type="hidden">
+<div class="ui floating dropdown rent_type labeled icon button search-dropdown search-dropdown-area" id="rent_type-{{ $category->id }}">
+    <input name="" id="rent_type-input-{{ $category->id }}" value="0" type="hidden">
     <i class="marker icon"></i>
     <span class="text">{{ trans('general.rent_type') }}</span>
     <div class="menu">

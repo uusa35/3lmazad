@@ -11,4 +11,9 @@ class Field extends BaseModel
         return $this->belongsToMany(Form::class);
     }
 
+    public function scopeIsFilter($q)
+    {
+        return $q->where('is_filter', true);
+    }
+
 }

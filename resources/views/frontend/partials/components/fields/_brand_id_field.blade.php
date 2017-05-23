@@ -1,5 +1,5 @@
-<div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-brand" id="brand-{{ $category->id }}">
-    <input name="" id="brand-input-{{ $category->id }}" value="0" type="hidden">
+<div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-brand" id="brand_id-{{ $category->id }}">
+    <input name="" id="brand_id-input-{{ $category->id }}" value="0" type="hidden">
     <i class="search icon"></i>
     <span class="text">{{ trans('general.filter_by_brand') }}</span>
     <div class="menu">

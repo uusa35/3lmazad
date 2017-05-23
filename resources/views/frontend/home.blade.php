@@ -19,7 +19,7 @@
     </section>
 @show
 @section('middle')
-    @include('frontend.partials.components._icons_home_page')
+{{--    @include('frontend.partials.components._icons_home_page')--}}
     @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.most_visited')])
     @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.latest_ads')])
     @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.most_visited')])

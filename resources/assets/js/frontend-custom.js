@@ -10,8 +10,11 @@ import axios from 'axios';
 $(document).ready(function() {
     console.log('jquery from frontend custome');
     $('#category').on('change', function() {
+        // hide all classes
         $('div[id^="sub-fields"]').addClass('hidden');
-        $('input[id^="brand-input-"]').attr('name', '');
+        // remove the input name and value of all sub-fields
+        $('input[id*="-input-"]').attr('name', '');
+        $('input[id*="-input-"]').attr('value', '');
         // first : get the parent category / sub category / type of the category chosen
         let catName = $('.dropdown.category').dropdown('get text');
         console.log('name of the category is ' + catName);
@@ -33,8 +36,8 @@ $(document).ready(function() {
             //'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id',
             //    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'
             // brand
-            $('#brand-input-' + catParentId).attr('name', 'brand_id');
-            $('#model-input-' + catParentId).attr('name', 'model_id');
+            $('#brand_id-input-' + catParentId).attr('name', 'brand_id');
+            $('#model_id-input-' + catParentId).attr('name', 'model_id');
             $('#condition-input-' + catParentId).attr('name', 'condition');
             $('#type-input-' + catParentId).attr('name', 'type');
             $('#manufacturing_year-input-' + catParentId).attr('name', 'manufacturing_year');

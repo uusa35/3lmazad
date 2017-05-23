@@ -9,13 +9,10 @@
     </div>
 
     @foreach($categories as $category)
-        {{--@if($category->children()->first()->id == 2)--}}
-            {{--{{ dd($category->form->first()->fields->where('is_filter', true)->unique()->pluck('name')) }}--}}
-        {{--@endif--}}
         @if($category->isParent)
             <div class="sub-fields hidden" id="sub-fields-{{ $category->id }}">
                 <h1>{{ $category->name }}</h1>
-                @foreach($category->form->first()->fields->where('is_filter', true)->unique() as $field)
+                @foreach($category->form->fields->unique()->where('is_filter',true) as $field)
                     @if($field->is_filter)
                         @if(view()->exists('frontend.partials.components.fields._'.$field->name.'_field'))
                             @include('frontend.partials.components.fields._'.$field->name.'_field')
