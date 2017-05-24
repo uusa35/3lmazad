@@ -95,18 +95,4 @@ $(document).ready(function() {
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
 
-    $('.filters-row__view.link-grid-view').on('click', function() {
-        $('.product-preview__info__title.title-ad').toggleClass('title-ad-grid');
-        $('.product-preview__info__title.title-ad').toggleClass('title-ad');
-        $('.product-preview__info__description').toggleClass('hidden');
-        $('.product-preview__info__link').toggleClass('hidden');
-        $('.user-avatar-ad').toggleClass('hidden');
-    });
-    $('.filters-row__view.link-row-view').on('click', function() {
-        $('.product-preview__info__title.title-ad-grid').addClass('title-ad');
-        $('.product-preview__info__title.title-ad-grid').removeClass('title-ad-grid');
-        $('.product-preview__info__description').toggleClass('hidden');
-        $('.product-preview__info__link').toggleClass('hidden');
-        $('.user-avatar-ad').toggleClass('hidden');
-    });
 });

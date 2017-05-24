@@ -15,9 +15,9 @@ trait LocaleTrait
      */
     public function __get($name)
     {
-        if (in_array($name, array_values($this->localeStrings))) {
+        $locale = App::getLocale();
 
-            $locale = App::getLocale();
+        if (in_array($name, array_values($this->localeStrings))) {
 
             if ($locale == 'en') {
 
@@ -43,14 +43,4 @@ trait LocaleTrait
 
         return parent::__get($name);
     }
-
-//    public static function getPossbileStatuses(){
-//        $type = DB::select(DB::raw('SHOW COLUMNS FROM pages WHERE Field = "type"'))[0]->Type;
-//        preg_match('/^enum\((.*)\)$/', $type, $matches);
-//        $values = array();
-//        foreach(explode(',', $matches[1]) as $value){
-//            $values[] = trim($value, "'");
-//        }
-//        return $values;
-//    }
-} 
+}

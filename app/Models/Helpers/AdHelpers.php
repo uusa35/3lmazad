@@ -2,6 +2,7 @@
 namespace App\Models\Helpers;
 
 use App\Services\Search\QueryFilters;
+use Carbon\Carbon;
 
 /**
  * Created by PhpStorm.

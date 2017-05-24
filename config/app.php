@@ -185,6 +185,7 @@ return [
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
 //        ExA2040\LaravelViewCounter\ViewCounterServiceProvider::class,
 
     ],
@@ -237,7 +238,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Date' => Jenssegers\Date\Date::class,
     ],
 
 ];

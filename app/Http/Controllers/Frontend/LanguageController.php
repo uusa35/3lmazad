@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Jenssegers\Date\Date;
 
 
 class LanguageController extends Controller
@@ -17,9 +19,12 @@ class LanguageController extends Controller
      */
     public function changeLocale($lang)
     {
+
         App::setLocale($lang);
 
-        Session::put('locale',$lang);
+        Session::put('locale', $lang);
+
+        Date::setLocale($lang);
 
         return redirect()->back();
     }

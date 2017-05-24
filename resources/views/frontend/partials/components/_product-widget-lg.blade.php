@@ -8,7 +8,7 @@
                     </div>
                 @endif
                 <a href="{{ route('ad.show',$element->id) }}">
-                    <img class="img-responsive img-thumbnail img-ad-landescape"
+                    <img class="img-ad-landescape"
                          src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}" alt=""/>
                 </a>
             </div>
@@ -38,27 +38,21 @@
                             <button class="ui button"><i class="file icon"></i> {{ $element->brandName }}</button>
                         @endif
                         @if(!is_null($element->meta->mileage))
-                            <button class="ui button"><i class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}</button>
+                            <button class="ui button"><i
+                                        class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
+                            </button>
                         @endif
                         <button class="ui button"><i class="upload icon"></i> manufacturing year</button>
                         <button class="ui button"><i class="download icon"></i> test</button>
                     </div>
                 </div>
                 <div class="product-preview__info__link hidden-xs">
-                    <a href="#" class="compare-link">
-                        <span class="icon calendar"></span>
-                        <span class="product-preview__info__link__text"> {{ $element->created_at->diffForHumans() }}</span>
-                    </a>
-                    <a href="#">
-                        <span class="icon icon-favorite"></span>
-                        <span class="product-preview__info__link__text"> {{ $element->categoryName }}</span>
-                    </a>
-                    @if(auth()->user())
-                        <a href="#" class="compare-link">
-                            <span class="icon icon-bars"></span>
-                            <span class="product-preview__info__link__text"> {{ trans('general.add_to_favorite') }}</span>
-                        </a>
-                    @endif
+                    <div class="ui buttons">
+                        <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}</button>
+                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
+                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
+                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
+                    </div>
                 </div>
                 <div class="pull-right user-avatar-ad hidden-sm">
                     <a href="#">
