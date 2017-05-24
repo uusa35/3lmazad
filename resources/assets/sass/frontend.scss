@@ -33,13 +33,17 @@
 
 // search-fields and form
 @media (max-width: 1000px) {
+  body {
+    background-color: yellow !important;
+  }
+
   .search-bar > .dropdown {
     width: 180px;
     max-width: 230px;
   }
   .main-fields, .sub-fields {
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap !important;
   }
 }
 
@@ -64,7 +68,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .sub-fields {
@@ -76,19 +80,22 @@
 }
 
 .main-fields > .search-dropdown {
-  width: 274px;
-  max-width: 275px;
+  min-width: 275px;
   margin-right: 3px !important;
   margin-left: 3px !important;
   margin-bottom: 5px !important;
 }
 
 .sub-fields > .search-dropdown {
-  width: 274px;
+  width: 250px;
   max-width: 250px;
   margin-right: 3px !important;
   margin-left: 3px !important;
   margin-bottom: 5px !important;
+}
+
+span > .text {
+  font-size: 10px;
 }
 
 .search-input {
@@ -164,3 +171,39 @@
 //  width : 1000px;
 //  border : 1px solid yellow;
 //}
+
+// theme customization
+
+// ad .index
+.title-ad {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.title-ad-grid {
+  text-align: center;
+}
+
+.img-ad-landescape {
+  width: 369px !important;
+  max-height: 234px;
+}
+
+.product-preview__info__link {
+  position: absolute;
+  bottom: 0px;
+}
+
+.product-preview__label--sale, .paid {
+  background: #9b8337;
+  opacity: 0.8;
+}
+
+.featured {
+  background: lightblue;
+  opacity: 0.3;
+}
+
+.icon-tag {
+  padding-top: 30%;
+}

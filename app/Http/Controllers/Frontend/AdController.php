@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
+use App\Models\Category;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,7 +25,17 @@ class AdController extends Controller
      */
     public function index()
     {
-        //
+        // if the parent id is there go ahead and make the session
+        request()->has('parent') ? session()->put('parent', request()->parent) : null;
+        $parent = session('parent');
+        if (!is_null($parent)) {
+            $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
+            $ads = Ad::whereIn('category_id', $subCategories)->with('deals','category','brand','user');
+            $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
+            $elements = $ads->orderBy('created_at', 'asc')->paginate(10);
+            return view('frontend.modules.ad.index', compact('elements', 'paidAds'));
+        }
+        return redirect()->home()->with('warning', trans('message.something_wrong'));
     }
 
     /**

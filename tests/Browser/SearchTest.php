@@ -35,6 +35,7 @@ class SearchTest extends DuskTestCase
             $browser->visit('/')
                 ->assertInputValue('search', $ad->title)
                 ->assertInputValue('search', $ad->title)
+                i stopped here
                 ->click('#categories', $carCategory->name_en)
                 ->press('general.search')->stop();
         });

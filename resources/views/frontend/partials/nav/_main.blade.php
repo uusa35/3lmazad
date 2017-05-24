@@ -23,12 +23,12 @@
                     </a>
                 </li>
                 <li class="menu-large">
-                    <a href="{{ route('home') }}" class="dropdown-toggle">
+                    <a href="{{ route('aboutus') }}" class="dropdown-toggle">
                         <span class="link-name">Aboutus</span>
                     </a>
                 </li>
                 <li class="menu-large">
-                    <a href="{{ route('home') }}" class="dropdown-toggle">
+                    <a href="{{ route('contactus') }}" class="dropdown-toggle">
                         <span class="link-name">Contact us</span>
                     </a>
                 </li>

@@ -42,12 +42,12 @@ class CategoriesTableSeeder extends Seeder
                 factory(Type::class, 5)->create(['category_id' => $parent->id]);
 
 
-                $isFilterArray = ['condition', 'manufacturing_year', 'type',
-                    'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id', 'mileage',
+                $isFilterArray = ['brand_id', 'model_id', 'condition', 'manufacturing_year', 'type',
+                    'transmission', 'room_no', 'floor_no', 'mileage',
                     'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-                $isFilterArrayCars = ['condition', 'manufacturing_year', 'type', 'transmission', 'brand_id', 'model_id', 'mileage'];
+                $isFilterArrayCars = ['brand_id', 'model_id', 'condition', 'manufacturing_year', 'type', 'transmission', 'mileage'];
                 $isFilterArrayProperty = ['type', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-                $isFilterArrayMobile = ['condition', 'brand_id', 'model_id', 'type',];
+                $isFilterArrayMobile = ['brand_id', 'model_id', 'condition','type',];
                 if ($parent->id == 1) {
                     // car case
                     $form->fields()->attach(Field::where('is_filter', true)->whereIn('name', $isFilterArrayCars)->pluck('id'));

@@ -18,7 +18,7 @@ class Ad extends BaseModel
     protected $casts = [
         'active' => 'boolean',
     ];
-    protected $with = ['meta'];
+    protected $with = ['meta','deals'];
 
     /**
      * The "booting" method of the model.

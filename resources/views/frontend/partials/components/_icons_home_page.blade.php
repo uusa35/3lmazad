@@ -4,7 +4,7 @@
             <ul class="nav nav-justified">
                 @foreach($homeCategories as $category)
                     @if($category->isParent && $category->on_homepage)
-                        <li><a href="#">
+                        <li><a href="{{ route('ad.index',['parent' => $category->id]) }}">
                             <span>
                                 <i class="icon tiny {{ $category->icon }}"></i>
                             </span>

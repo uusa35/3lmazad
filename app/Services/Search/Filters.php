@@ -127,6 +127,16 @@ class Filters extends QueryFilters
         });
     }
 
+    public function transmission()
+    {
+        var_dump('transmission');
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('transmission',request()->transmission);
+            });
+        });
+    }
+
     public function have_images()
     {
         var_dump('have images');

@@ -1,8 +1,8 @@
-<div class="ui dropdown category button search-dropdown search-dropdown-category" id="category">
+
+<div class="ui floating dropdown category labeled icon button search-dropdown search-dropdown-category" id="category">
     <input name="" id="cat_input" value="0" type="hidden">
-    <i class="icon filter"></i>
+    <i class="filter icon"></i>
     <div class="default text">{{ trans('general.filter_by_category') }}</div>
-    <i class="angle {{ app()->isLocal('ar') ? 'left' : 'right' }} icon"></i>
     <div class="menu">
         @foreach($categories as $category)
             <div class="item" id="cat-{{ $category->id  }}" type="main" parent_id="{{ $category->parent_id }}" parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">

@@ -70,12 +70,10 @@ $(document).ready(function() {
         return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             return data.map(m => {
                 let name = 'name_' + lang;
-                console.log(m);
-                console.log(`var name is : ${m[name]}`);
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
                 return $('#model_id-items-' + catParentId).append(`
                     <div class="item area" data-value="${m.id}" data-text="${m[name]}">
-                        <img class="ui avatar image" src="public/storage/uploads/images/thumbnail/${m.image}">
+                        <img class="ui avatar image" src="storage/uploads/images/thumbnail/${m.image}">
                         ${m[name]}
                     </div>
                 `);
@@ -96,4 +94,19 @@ $(document).ready(function() {
     });
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
+
+    $('.filters-row__view.link-grid-view').on('click', function() {
+        $('.product-preview__info__title.title-ad').toggleClass('title-ad-grid');
+        $('.product-preview__info__title.title-ad').toggleClass('title-ad');
+        $('.product-preview__info__description').toggleClass('hidden');
+        $('.product-preview__info__link').toggleClass('hidden');
+        $('.user-avatar-ad').toggleClass('hidden');
+    });
+    $('.filters-row__view.link-row-view').on('click', function() {
+        $('.product-preview__info__title.title-ad-grid').addClass('title-ad');
+        $('.product-preview__info__title.title-ad-grid').removeClass('title-ad-grid');
+        $('.product-preview__info__description').toggleClass('hidden');
+        $('.product-preview__info__link').toggleClass('hidden');
+        $('.user-avatar-ad').toggleClass('hidden');
+    });
 });

@@ -30,7 +30,17 @@ trait AdHelpers
 
     public function getHasValidDealAttribute()
     {
-        return $this->deals()->count() > 0 ? true : false;
+        return $this->deals->count() > 0 ? true : false;
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->category->name;
+    }
+
+    public function getBrandNameAttribute()
+    {
+        return $this->brand->name;
     }
 
     /**
