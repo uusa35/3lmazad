@@ -52,7 +52,7 @@ class HomeController extends Controller
      */
     public function search(Filters $filters)
     {
-        $validator = validator(request()->all(), ['search' => 'min:3', 'main' => 'required_without:sub','sub' => 'required_without:main']);
+        $validator = validator(request()->all(), ['search' => 'min:3', 'main' => 'required_without:sub', 'sub' => 'required_without:main']);
         if ($validator->fails()) {
             return redirect()->home()->withErrors($validator->messages());
         }
@@ -62,7 +62,7 @@ class HomeController extends Controller
         $elements = Ad::filters($filters)->paginate(12);
 
         if (!$elements->isEmpty()) {
-            return view('frontend.modules.category.index', compact('elements'));
+            return redirect()->view('frontend.modules.ad.index', compact('elements'));
         } else {
             return redirect()->home()->with('error', title_case('no items found .. plz try again'));
         }

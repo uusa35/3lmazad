@@ -3,7 +3,9 @@
 @section('top')
     <section class="content top-null">
         <div class="container">
-            @include('frontend.partials.components._product_carousel',['elements' => $paidAds])
+            @if(isset($paidAds))
+                @include('frontend.partials.components._product_carousel',['elements' => $paidAds])
+            @endif
             @include('frontend.partials._divider-xs')
             <div class="filters-row">
                 @include('frontend.partials.components._bar-pagination-filters')

@@ -29,15 +29,14 @@ class SearchTest extends DuskTestCase
      */
     public function testSearchParentCars()
     {
-        $carCategory = Category::where('name_en', 'vehicles')->first();
-        $ad = Ad::where('category_id', $carCategory->children()->first()->id)->first();
-        $this->browse(function (Browser $browser) use ($carCategory, $ad) {
+        $category = Category::where('name_en', 'vehicles')->first();
+        $ad = Ad::where('category_id', $category->children()->first()->id)->first();
+        $this->browse(function (Browser $browser) use ($category, $ad) {
             $browser->visit('/')
                 ->assertInputValue('search', $ad->title)
-                ->assertInputValue('search', $ad->title)
-                i stopped here
-                ->click('#categories', $carCategory->name_en)
-                ->press('general.search')->stop();
+                ->assertInputValue('main', $category->id)
+                ->press('general.search')
+                ->waitForText(str_limit($ad->title,50));
         });
     }
 
