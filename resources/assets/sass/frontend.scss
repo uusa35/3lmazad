@@ -15,7 +15,7 @@
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
 @import "../../../node_modules/semantic-ui/dist/semantic.min.css";
-
+//@import url('https://raw.githubusercontent.com/Semantic-Org/Semantic-UI-CSS/master/semantic.min.css');
 //<!-- Head Libs -->
 @media (min-width: 1300px) {
   .container {
@@ -178,11 +178,13 @@ span > .text {
 .product-preview__image {
   margin-bottom: 153px !important;
 }
+
 .title-ad {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
 }
+
 .title-ad-grid {
   text-align: center;
 }

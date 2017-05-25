@@ -2,64 +2,84 @@
     <div class="product-preview-wrapper">
         <div class="product-preview">
             <div class="product-preview__image">
-                @if($element->hasValidDeal)
-                    <div class="product-preview__label product-preview__label--right product-preview__label--sale text-center paid">
-                        <i class="star icon text-center white icon-tag"></i>
+                <a href="{{ route('ad.show',$element->id) }}">
+                    <img style="max-height: 300px;" src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}" alt="{{ $element->title }}"/>
+                </a>
+                @if($element->featured)
+                    <div class="product-preview__label product-preview__label--left product-preview__label--new">
+                        <span>new</span>
                     </div>
                 @endif
-                <a href="{{ route('ad.show',$element->id) }}">
-                    <img class="img-ad-landescape"
-                         src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}" alt=""/>
-                </a>
+                @if($element->hasValidDeal)
+                    <div class="product-preview__label product-preview__label--right product-preview__label--sale">
+                        <span>sale<br>-10%
+                        </span>
+                    </div>
+                @endif
             </div>
             <div class="product-preview__info">
-                {{--<div class="product-preview__info__btns">--}}
-                {{--<a href="#" class="btn btn--round">--}}
-                {{--<span class="icon-ecommerce"></span>--}}
-                {{--</a>--}}
-                {{--<a href="quick-view.html" class="btn btn--round btn--dark btn-quickview"--}}
-                {{--data-toggle="modal"--}}
-                {{--data-name="test"--}}
-                {{--data-target="#quickView"><span class="icon icon-eye"></span></a>--}}
-                {{--</div>--}}
-                <div class="product-preview__info__title title-ad">
-                    <div style="font-weight: bolder;">
-                        <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,100,'..') }}</a>
-                    </div>
-                    <div class="price-box__new">{{  $element->price }} {{ trans('general.kd') }}</div>
+                <div class="product-preview__info__btns">
+                    <a href="#" class="btn btn--round"><span class="icon-ecommerce"></span></a>
+                    <a href="#" class="btn btn--round red"><span class="icon heart"></span></a>
+                    <button class="btn btn--round btn--dark triggerModal"
+                            data-title="{{ $element->title }}"
+                            data-ad-url="{{ route('ad.show',$element->id) }}"
+                            data-price="{{ $element->price }}"
+                            data-description="{{ $element->meta->description }}"
+                            data-image="{{ $element->image }}"
+                            data-category="{{ $element->categoryName }}"
+                            data-element="{{ $element }}"
+                    >
+                        <span class="icon icon-eye"></span>
+                    </button>
                 </div>
-                <hr>
+                <div class="product-preview__info__title">
+                    <h3><a href="#">{{ str_limit($element->title,'50') }}</a></h3>
+                </div>
+                @if(is_null($element->color->code))
+                    <ul class="options-swatch options-swatch--color">
+                        <li><a href="#"><span class="swatch-label"><img
+                                            src="http://placehold.it/100x100/{{ $element->color->code }}" width="10"
+                                            height="10"
+                                            alt=""/></span></a></li>
+                    </ul>
+                @endif
+                <div class="price-box "><span
+                            class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span></div>
                 <div class="product-preview__info__description">
-                    <p>{!! str_limit($element->meta->description,300,'...') !!}
-                        <a href="{{ route('ad.show',$element->id) }}">..more</a>
-                    </p>
-                    <div class="ui small basic icon buttons hidden-xs">
-                        @if(!is_null($element->brandName))
-                            <button class="ui button"><i class="file icon"></i> {{ $element->brandName }}</button>
-                        @endif
-                        @if(!is_null($element->meta->mileage))
-                            <button class="ui button"><i
-                                        class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
+                    <p>{{ str_limit($element->meta->description,'500','..more') }}</p>
+
+                    <div class="product-preview__info__link hidden-xs">
+                        <div class="ui small basic icon buttons hidden-xs">
+                            @if(!is_null($element->brandName))
+                                <button class="ui button"><i class="file icon"></i> {{ $element->brandName }}</button>
+                            @endif
+                            @if(!is_null($element->meta->mileage))
+                                <button class="ui button"><i
+                                            class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
+                                </button>
+                            @endif
+                            <button class="ui button"><i class="upload icon"></i> manufacturing year</button>
+                            <button class="ui button"><i class="download icon"></i> test</button>
+                        </div>
+                        <div class="ui buttons">
+                            <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}
                             </button>
-                        @endif
-                        <button class="ui button"><i class="upload icon"></i> manufacturing year</button>
-                        <button class="ui button"><i class="download icon"></i> test</button>
+                            <button class="ui white basic button"><i
+                                        class="icon arrow-right"></i>{{  $element->categoryName }}</button>
+                            <button class="ui white basic button"><i
+                                        class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
+                            <button class="ui white basic button"><i
+                                        class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
+                        </div>
                     </div>
                 </div>
-                <div class="product-preview__info__link hidden-xs">
-                    <div class="ui buttons">
-                        <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}</button>
-                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
-                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
-                        {{--<button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>--}}
-                    </div>
-                </div>
-                <div class="pull-right user-avatar-ad hidden-sm">
-                    <a href="#">
-                        <img class="ui mini circular image"
-                             src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}">
-                    </a>
-                </div>
+                {{--<div class="product-preview__info__link"><a href="#" class="compare-link"><span--}}
+                {{--class="icon icon-bars"></span><span--}}
+                {{--class="product-preview__info__link__text">Add to compare</span></a> <a href="#"><span--}}
+                {{--class="icon icon-favorite"></span><span class="product-preview__info__link__text">Add to wishlist</span></a><a--}}
+                {{--href="#" class="btn btn--wd buy-link"><span class="icon icon-ecommerce"></span><span--}}
+                {{--class="product-preview__info__link__text">Add to cart</span></a></div>--}}
             </div>
         </div>
     </div>

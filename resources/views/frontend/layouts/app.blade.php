@@ -4,8 +4,7 @@
 <body class="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 @include('frontend.partials._loading')
 @include('frontend.partials._modal_search')
-@include('frontend.partials.components.modals._quick-view')
-
+{{--@include('frontend.partials.components.modals._quick-view')--}}
 <div class="wrapper">
     <div class="row">
         @section('header')

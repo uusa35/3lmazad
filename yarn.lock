@@ -6498,6 +6498,10 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
+semantic-ui-dimmer@^2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/semantic-ui-dimmer/-/semantic-ui-dimmer-2.2.10.tgz#e90a151e42f672a836e444fc74e56f4faddd93b7"
+
 semantic-ui-dropdown@^2.2.10:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/semantic-ui-dropdown/-/semantic-ui-dropdown-2.2.10.tgz#075a039f7877ad871a07939a299d8d49004b4e9c"
@@ -6509,6 +6513,10 @@ semantic-ui-icon@^2.2.10:
 semantic-ui-label@^2.2.10:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/semantic-ui-label/-/semantic-ui-label-2.2.10.tgz#9be4d360d7291466b01a2e9e7f95350ff89f8b3a"
+
+semantic-ui-modal@^2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/semantic-ui-modal/-/semantic-ui-modal-2.2.10.tgz#c269cb6c50fc48521ccc5202aa8511f40694293c"
 
 semantic-ui-popup@^2.2.10:
   version "2.2.10"

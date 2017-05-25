@@ -5,6 +5,8 @@ window.$ = window.jQuery = require('jquery');
 window.$.fn.transition = require('semantic-ui-transition');
 window.$.fn.dropdown = require('semantic-ui-dropdown');
 window.$.fn.popup = require('semantic-ui-popup');
+window.$.fn.dimmer = require('semantic-ui-dimmer');
+window.$.fn.modal = require('semantic-ui-modal');
 import axios from 'axios';
 
 $(document).ready(function() {
@@ -95,4 +97,25 @@ $(document).ready(function() {
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
 
+    $('#myModal').modal('show');
+
+    $('#productModal').modal('attach events', '.triggerModal', 'show');
+
+    $('.triggerModal').on('click', function() {
+        var price = $(this).data('price');
+        var image = $(this).data('image');
+        var description = $(this).data('description');
+        var title = $(this).data('title');
+        var category = $(this).data('category');
+        var url = $(this).data('ad-url');
+        var element= $(this).data('element');
+
+        $('.modal-price').text(price);
+        $('.modal-ad-url').attr('href',url);
+        $('.modal-image').attr('src', 'storage/uploads/images/medium/' + image);
+        $('.modal-description').text(description);
+        $('.modal-title').text(title);
+        $('.modal-category').text(category);
+        $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
+    });
 });

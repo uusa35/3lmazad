@@ -20,9 +20,9 @@ class LanguageController extends Controller
     public function changeLocale($lang)
     {
 
-        App::setLocale($lang);
+        app()->setLocale($lang);
 
-        Session::put('locale', $lang);
+        session()->put('locale', $lang);
 
         Date::setLocale($lang);
 

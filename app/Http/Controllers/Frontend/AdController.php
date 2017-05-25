@@ -30,9 +30,9 @@ class AdController extends Controller
         $parent = session('parent');
         if (!is_null($parent)) {
             $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
-            $ads = Ad::whereIn('category_id', $subCategories)->with('deals','category','brand','user');
+            $ads = Ad::whereIn('category_id', $subCategories)->with('deals','category','brand','user','color','size');
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
-            $elements = $ads->orderBy('created_at', 'asc')->paginate(10);
+            $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
             return view('frontend.modules.ad.index', compact('elements', 'paidAds'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
