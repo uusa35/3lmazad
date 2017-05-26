@@ -30,7 +30,7 @@ class AdController extends Controller
         $parent = session('parent');
         if (!is_null($parent)) {
             $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
-            $ads = Ad::whereIn('category_id', $subCategories)->with('deals','category','brand','user','color','size');
+            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size');
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
             return view('frontend.modules.ad.index', compact('elements', 'paidAds'));
@@ -67,7 +67,7 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->first();
+        $element = $this->ad->whereId($id)->with('user', 'meta', 'category', 'color', 'size', 'brand','model', 'gallery', 'type', 'area')->first();
 //        dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
 //        $counter = Visitor::where('ad_id', $element->id)->count();
         $counter = 0;

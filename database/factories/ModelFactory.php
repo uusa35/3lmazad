@@ -265,9 +265,9 @@ $factory->define(Image::class, function (Faker\Generator $faker) {
     return [
         'gallery_id' => Gallery::all()->random()->id,
         'is_main' => $faker->boolean(),
-        'thumb_url' => 'image.jpg',
-        'medium_url' => 'image.jpg',
-        'large_url' => 'image.jpg'
+        'thumb' => 'sample.png',
+        'medium' => 'sample.png',
+        'large' => 'sample.png'
     ];
 });
 
@@ -278,6 +278,7 @@ $factory->define(Contactus::class, function (Faker\Generator $faker) {
         'facebook_url' => $faker->url,
         'twitter_url' => $faker->url,
         'instagram_url' => $faker->url,
+        'google_url' => $faker->url,
         'youtube_url' => $faker->url,
         'phone' => $faker->phoneNumber,
         'mobile' => $faker->phoneNumber,

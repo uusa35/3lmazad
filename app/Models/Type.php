@@ -10,4 +10,9 @@ class Type extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function ads()
+    {
+        return $this->hasMany(Ad::class);
+    }
 }

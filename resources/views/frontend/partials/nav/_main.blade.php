@@ -19,17 +19,17 @@
             <ul class="nav navbar-nav">
                 <li class="menu-large">
                     <a href="{{ route('home') }}" class="dropdown-toggle">
-                        <span class="link-name">Home</span>
+                        <span class="link-name">{{ trans("general.home") }}</span>
                     </a>
                 </li>
                 <li class="menu-large">
                     <a href="{{ route('aboutus') }}" class="dropdown-toggle">
-                        <span class="link-name">Aboutus</span>
+                        <span class="link-name">{{ trans('general.aboutus') }}</span>
                     </a>
                 </li>
                 <li class="menu-large">
                     <a href="{{ route('contactus') }}" class="dropdown-toggle">
-                        <span class="link-name">Contact us</span>
+                        <span class="link-name">{{ trans('general.contactus') }}</span>
                     </a>
                 </li>
             </ul>

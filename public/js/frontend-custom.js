@@ -15447,13 +15447,13 @@ $(document).ready(function () {
 
     $('.toottip-message').popup({
         on: 'focus',
-        position: 'top center',
+        position: 'bottom center',
         offset: 10
     });
 
     $('.tooltip_message_on_hover').popup({
         on: 'hover',
-        position: 'top center',
+        position: 'bottom center',
         offset: 10
     });
 
@@ -15478,7 +15478,7 @@ $(document).ready(function () {
         $('.modal-description').text(description);
         $('.modal-title').text(title);
         $('.modal-category').text(category);
-        $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%;');
+        $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
 });
 

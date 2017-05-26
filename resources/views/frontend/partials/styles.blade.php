@@ -15,7 +15,7 @@
 <link href="{{ mix('css/frontend.css') }}" rel="stylesheet">
 <link href="{{ mix('css/custom.css') }}" rel="stylesheet">
 
-@if(app()->getLocale() === 'ar'))
+@if(app()->getLocale() === 'ar')
 <link href="{{ mix('css/custom-arabic.css') }}" rel="stylesheet">
 @endif
 

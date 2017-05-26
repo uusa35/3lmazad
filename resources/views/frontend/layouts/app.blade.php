@@ -4,7 +4,6 @@
 <body class="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 @include('frontend.partials._loading')
 @include('frontend.partials._modal_search')
-
 <div class="wrapper">
     <div class="row">
         @section('header')

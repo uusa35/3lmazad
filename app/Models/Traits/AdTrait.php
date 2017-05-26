@@ -1,8 +1,8 @@
 <?php
 namespace App\Models\Traits;
 
-use App\Models\Ad;
 use App\Models\AdMeta;
+use App\Models\BrandModel;
 use App\Models\Deal;
 use App\Models\Area;
 use App\Models\Auction;
@@ -13,6 +13,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Model;
+use App\Models\Type;
 use App\Models\User;
 use App\Models\Visitor;
 
@@ -42,7 +43,7 @@ trait AdTrait
 
     public function model()
     {
-        return $this->belongsTo(Model::class);
+        return $this->belongsTo(BrandModel::class);
     }
 
     public function area()
@@ -63,6 +64,10 @@ trait AdTrait
     public function size()
     {
         return $this->belongsTo(Size::class);
+    }
+
+    public function type() {
+        return $this->belongsTo(Type::class);
     }
 
     /**

@@ -86,13 +86,11 @@ $(document).ready(function() {
     $('.toottip-message').popup({
         on: 'focus',
         position: 'top center',
-        offset: 10
     });
 
     $('.tooltip_message_on_hover').popup({
-        on: 'hover',
+        hoverable: true,
         position: 'top center',
-        offset: 10
     });
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});

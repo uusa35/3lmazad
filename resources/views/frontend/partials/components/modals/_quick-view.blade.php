@@ -71,5 +71,4 @@
         </div>
     </div>
 </div>
-<div class="divider divider--lg"></div>
 </div>

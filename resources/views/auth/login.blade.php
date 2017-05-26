@@ -11,7 +11,7 @@
                     <div class="card card--form"><a href="#" class="icon card--form__icon">
                             <span class="icon-user-circle"></span>
                         </a>
-{{--                        @include('frontend.partials.forms._login')--}}
+                        @include('frontend.partials.forms._login')
                         <div class="card--form__footer">
                             <div class="text-center"><a href="{{ url('/password/reset') }}"
                                                         class="btn btn--wd text-uppercase wave btn-blue">Forgot Your

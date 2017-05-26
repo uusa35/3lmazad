@@ -15,9 +15,9 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('is_main')->default(0);
-            $table->string('thumb_url')->nullable();
-            $table->string('medium_url')->nullable();
-            $table->string('large_url')->nullable();
+            $table->string('thumb')->nullable();
+            $table->string('medium')->nullable();
+            $table->string('large')->nullable();
 
             $table->integer('gallery_id')->unsigned()->index()->nullable();
             $table->foreign('gallery_id')->references('id')->on('galleries')->onUpdate('cascade')->onDelete('cascade');

@@ -34,7 +34,7 @@
                     </button>
                 </div>
                 <div class="product-preview__info__title">
-                    <h3><a href="#">{{ str_limit($element->title,'50') }}</a></h3>
+                    <h3><a href="#">{{ str_limit($element->title,'30') }}</a></h3>
                 </div>
                 @if(is_null($element->color->code))
                     <ul class="options-swatch options-swatch--color">

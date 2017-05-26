@@ -33,12 +33,10 @@
             </ul>
         </li>
         <li class='li-col list-user-menu'>
-            <h4>My Account</h4>
+            <h4>{{ trans('general.my_acount') }}</h4>
             <ul>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Wishlist</a></li>
-                <li><a href="#">Compare</a></li>
-                <li><a href="#">Checkout</a></li>
+                <li><a href="#">{{ trans('general.my_account') }}</a></li>
+                <li><a href="#">{{ trans('general.wish_list') }}</a></li>
             </ul>
         </li>
     </ul>

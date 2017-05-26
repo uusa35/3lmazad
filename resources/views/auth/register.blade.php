@@ -11,7 +11,7 @@
                 <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
                     <div class="card card--form">
                         <div class="divider divider--xs"></div>
-                        {{--@include('frontend.partials.forms._register')--}}
+                        @include('frontend.partials.forms._register')
                         <div class="card--form__footer btn--with-icon"><a href="{{ route('home') }}">
                                 <span class="fa fa-fw fa-arrow-circle-left fa-sm"></span>Back
                             </a>

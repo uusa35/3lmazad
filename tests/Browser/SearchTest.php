@@ -36,6 +36,7 @@ class SearchTest extends DuskTestCase
                 ->assertInputValue('search', $ad->title)
                 ->assertInputValue('main', $category->id)
                 ->press('general.search')
+                i stopped here
                 ->waitForText(str_limit($ad->title,50));
         });
     }

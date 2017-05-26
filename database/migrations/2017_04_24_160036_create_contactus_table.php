@@ -20,6 +20,7 @@ class CreateContactusTable extends Migration
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();
             $table->string('instagram_url')->nullable();
+            $table->string('google_url')->nullable();
             $table->string('youtube_url')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();

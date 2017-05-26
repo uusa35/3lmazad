@@ -1,6 +1,7 @@
 <section class="content">
     <div class="container">
         <h2 class="text-center text-uppercase">{{ isset($header) ? $header : null }}</h2>
+        <hr>
         <div class="product-category-carousel mobile-special-arrows animated-arrows slick">
             @if(!$elements->isEmpty())
                 @foreach($elements as $element)
