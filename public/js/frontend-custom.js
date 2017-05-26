@@ -15447,14 +15447,12 @@ $(document).ready(function () {
 
     $('.toottip-message').popup({
         on: 'focus',
-        position: 'bottom center',
-        offset: 10
+        position: 'top center'
     });
 
     $('.tooltip_message_on_hover').popup({
-        on: 'hover',
-        position: 'bottom center',
-        offset: 10
+        hoverable: true,
+        position: 'top center'
     });
 
     $('.ui.dropdown').dropdown({ allowCategorySelection: true });

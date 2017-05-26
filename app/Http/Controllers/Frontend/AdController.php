@@ -67,9 +67,10 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->with('user', 'meta', 'category', 'color', 'size', 'brand','model', 'gallery', 'type', 'area')->first();
-//        dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
-//        $counter = Visitor::where('ad_id', $element->id)->count();
+        $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
+            'color', 'size', 'brand', 'model', 'gallery', 'type', 'area', 'comments')->first();
+        /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
+        $counter = Visitor::where('ad_id', $element->id)->count();*/
         $counter = 0;
         return view('frontend.modules.ad.show', compact('element', 'counter'));
     }
