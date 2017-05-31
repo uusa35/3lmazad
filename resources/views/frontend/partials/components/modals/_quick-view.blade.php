@@ -1,5 +1,7 @@
 <div class="container-fluid" id="productModal">
-    <button type="button" class="pull-right" data-dismiss="modal"><i class=" remove red icon"></i></button>
+    <button type="button" class="ui basic button {{ app()->isLocale('ar') ? 'pull-left' : 'pull-right' }}"
+            style="box-shadow: 0 0 0 0 !important;"
+            data-dismiss="modal"><i class=" remove grey icon"></i></button>
     <div class="row">
         <div class="divider divider--sm"></div>
         <div class="col-sm-6">
@@ -43,7 +45,7 @@
                 {{--<button type="button" class="btn btn-number btn-number--minus" disabled="disabled" data-type="minus" data-field="quant[1]"> &#8211; </button>--}}
                 {{--</span> </div>--}}
                 <div class="pull-left">
-                    <button class="btn btn--wd text-uppercase">Add to Cart</button>
+                    <a href="#" class="btn btn--wd text-uppercase modal-ad-url">{{ trans('general.view_ad') }}</a>
                 </div>
                 <div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">
                     <ul>

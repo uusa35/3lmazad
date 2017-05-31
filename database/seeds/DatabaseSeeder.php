@@ -56,6 +56,8 @@ class DatabaseSeeder extends Seeder
             $this->call(RolesTableSeeder::class);
             $this->call(ContactusTableSeeder::class);
             $this->call(AboutusTableSeeder::class);
+        } else {
+            dd('please change the .env environment const to : seeding');
         }
     }
 

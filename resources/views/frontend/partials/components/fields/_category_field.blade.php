@@ -5,7 +5,7 @@
     <div class="default text">{{ trans('general.filter_by_category') }}</div>
     <div class="menu">
         @foreach($categories as $category)
-            <div class="item" id="cat-{{ $category->id  }}" type="main" parent_id="{{ $category->parent_id }}" parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
+            <div class="item" id="cat-{{ $category->id  }}" type="parent" parent_id="{{ $category->parent_id }}" parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
                 <i class="icon {{ $category->icon }}"></i>
                 <span class="text">{{ $category->name }}</span>
                 <div class="menu">

@@ -1,14 +1,6 @@
 /**
  * Created by usamaahmed on 5/18/17.
  */
-window.$ = window.jQuery = require('jquery');
-window.$.fn.transition = require('semantic-ui-transition');
-window.$.fn.dropdown = require('semantic-ui-dropdown');
-window.$.fn.popup = require('semantic-ui-popup');
-window.$.fn.dimmer = require('semantic-ui-dimmer');
-window.$.fn.modal = require('semantic-ui-modal');
-import axios from 'axios';
-
 $(document).ready(function() {
     console.log('jquery from frontend custome');
     var lang = $('#lang').text();
@@ -116,4 +108,5 @@ $(document).ready(function() {
         $('.modal-category').text(category);
         $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
+
 });

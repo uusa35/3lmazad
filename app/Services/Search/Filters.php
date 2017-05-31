@@ -35,17 +35,17 @@ class Filters extends QueryFilters
         });
     }
 
-    public function main()
+    public function parent()
     {
-        var_dump('from main');
-        $subs = $this->category->whereId(request()->main)->first()->children()->pluck('id')->toArray();
+        var_dump('from parent');
+        $subs = $this->category->whereId(request()->parent)->first()->children()->pluck('id')->toArray();
         return $this->sub($subs);
     }
 
     public function sub($subs = null)
     {
-        if (request()->has('main')) {
-            var_dump('main case from sub');
+        if (request()->has('parent')) {
+            var_dump('parent case from sub');
             return $this->builder->whereIn('category_id', $subs);
         } else {
             var_dump('one sub case');

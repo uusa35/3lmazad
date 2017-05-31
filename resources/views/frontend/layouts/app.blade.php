@@ -12,6 +12,8 @@
         <div id="pageContent" class="page-content">
             <div class="col-lg-12">
                 @include('frontend.partials.notifications')
+                @section('breadcrumbs')
+                @show
                 @section('content')
                 @section('top')
                 @show

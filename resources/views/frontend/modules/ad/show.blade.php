@@ -1,13 +1,18 @@
 @extends('frontend.layouts.app')
 
+
+@section('breadcrumbs')
+{!! Breadcrumbs::render('ad', $element) !!}
+@endsection
+
 @section('top')
         <!-- Content section -->
 <section class="content">
     <div class="container">
         <div class="row product-info-outer">
             <div class="col-sm-4 col-md-4 col-lg-4 hidden-xs">
-            @include('frontend.partials._ad-gallery')
-                </div>
+                @include('frontend.partials._ad-gallery')
+            </div>
             <div class="product-info col-sm-8 col-md-5 col-lg-5">
                 <div class="product-info__title">
                     <h2>{{ $element->title }}</h2>
@@ -18,13 +23,14 @@
                 <div class="product-info__sku pull-right">{{ trans('general.id') }}: {{ $element->id }}&nbsp;&nbsp;<span
                             class="label {{ $element->featured ? 'label-info' : 'label-default' }}">{{ trans('general.featured') }}</span>
                 </div>
-                <ul id="singleGallery" class="visible-xs">
-                    <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                <ul id="singleGallery" class="visible-xs" style="border: 1px solid blue;">
+                    <li>
+                        <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                              alt="{{ $element->title }}"/></li>
-                    <li><img src="images/products/product-big-2.jpg" alt=""/></li>
-                    <li><img src="images/products/product-big-3.jpg" alt=""/></li>
-                    <li><img src="images/products/product-big-4.jpg" alt=""/></li>
-                    <li><img src="images/products/product-big-5.jpg" alt=""/></li>
+                    @foreach($element->gallery->first()->images as $image)
+                        <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
+                                 alt="{{ $element->title }}"/></li>
+                    @endforeach
                 </ul>
                 <div class="price-box product-info__price"><span
                             class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span></div>
@@ -62,7 +68,9 @@
                 </div>
                 <div class="ui small basic icon buttons hidden-xs">
                     @if(!is_null($element->brandName))
-                        <button class="ui button"><img class="ui avatar image"  style="width: 10px; height: auto;" src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}" /> {{ $element->brandName }}</button>
+                        <button class="ui button"><img class="ui avatar image" style="width: 10px; height: auto;"
+                                                       src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
+                        </button>
                     @endif
                     @if(!is_null($element->meta->mileage))
                         <button class="ui button"><i

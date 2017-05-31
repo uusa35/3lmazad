@@ -1,5 +1,10 @@
 @extends('frontend.layouts.app')
 
+
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('category', $elements->first()->category) !!}
+@endsection
+
 @section('top')
     <section class="content top-null">
         <div class="container">

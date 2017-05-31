@@ -187,6 +187,7 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
 //        ExA2040\LaravelViewCounter\ViewCounterServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
     ],
 
@@ -239,6 +240,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Date' => Jenssegers\Date\Date::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
 
 ];
