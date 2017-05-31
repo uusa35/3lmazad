@@ -3727,10 +3727,7 @@ jQuery(function($) {
 	})
 	
 	
-//	$('.product-main-image > .product-main-image__zoom ').bind('click', function(){
-	$('.ad-click-gallery').bind('click', function(){
-
-		
+	$('.product-main-image > .product-main-image__zoom ').bind('click', function(){
 			galleryObj = [];
 			current = 0;
 			itemN = 0;

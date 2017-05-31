@@ -8,10 +8,8 @@
   "/css/custom-english.css": "/css/custom-english.css",
   "/css/gallery.css": "/css/gallery.css",
   "/js/form-app.js": "/js/form-app.js",
-  "/js/frontend-custom.js": "/js/frontend-custom.js",
   "/js/gallery.js": "/js/gallery.js",
+  "/js/frontend-custom.js": "/js/frontend-custom.js",
   "/js/backend.js": "/js/backend.js",
-  "/js/frontend.js": "/js/frontend.js",
-  "/2.hot-update.js": "/2.d82a2bf012eb28350558.hot-update.js",
-  "/0.hot-update.js": "/0.bc8d4970201b8c5fd14e.hot-update.js"
+  "/js/frontend.js": "/js/frontend.js"
 }
