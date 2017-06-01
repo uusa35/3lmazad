@@ -3,7 +3,7 @@
 @section('top')
     <section class="content">
         <div class="container">
-            <h2 class="text-uppercase">{{ trans('general.terms_of_condition') }}</h2>
+            <h2 class="text-uppercase">{{ trans('general.faq') }}</h2>
             <div class="card card--padding">
                 @foreach($elements as $element)
                     <div class="row">

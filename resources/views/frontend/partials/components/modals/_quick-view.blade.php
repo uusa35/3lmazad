@@ -70,7 +70,7 @@
                    style="float : {{ app()->isLocale('ar') ? 'left' : 'right' }} !important;">
                     {{ trans('general.view_ad') }}
                 </a>
-                
+
 
                 {{--<div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">--}}
                 {{--<ul>--}}

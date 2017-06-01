@@ -24,6 +24,7 @@ use App\Models\Commercial;
 use App\Models\Contactus;
 use App\Models\Country;
 use App\Models\Deal;
+use App\Models\Faq;
 use App\Models\Favorite;
 use App\Models\Field;
 use App\Models\Form;
@@ -35,6 +36,7 @@ use App\Models\Plan;
 use App\Models\Role;
 use App\Models\Size;
 use App\Models\Slider;
+use App\Models\Term;
 use App\Models\Type;
 use App\Models\User;
 use App\Models\Visitor;
@@ -90,7 +92,7 @@ $factory->define(Brand::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });
@@ -110,7 +112,7 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'brand_id' => Brand::all()->random()->id
     ];
 });
@@ -147,7 +149,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(),
         'featured' => $faker->boolean(),
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'user_id' => User::all()->random()->id,
         'category_id' => Category::where('parent_id', false)->pluck('id')->shuffle()->first(),
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
@@ -256,7 +258,7 @@ $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
         'description_ar' => $faker->paragraph(2),
         'description_en' => $faker->paragraph(2),
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'galleryable_id' => Ad::all()->random()->id,
         'galleryable_type' => Ad::class,
     ];
@@ -265,9 +267,9 @@ $factory->define(Image::class, function (Faker\Generator $faker) {
     return [
         'gallery_id' => Gallery::all()->random()->id,
         'is_main' => $faker->boolean(),
-        'thumb' => $faker->randomElement([$faker->randomElement(['sample.png','sample-2.png']),'sample-2.png']),
-        'medium' => $faker->randomElement(['sample.png','sample-2.png']),
-        'large' => $faker->randomElement(['sample.png','sample-2.png'])
+        'thumb' => $faker->randomElement([$faker->randomElement(['sample.png', 'sample-2.png']), 'sample-2.png']),
+        'medium' => $faker->randomElement(['sample.png', 'sample-2.png']),
+        'large' => $faker->randomElement(['sample.png', 'sample-2.png'])
     ];
 });
 
@@ -286,7 +288,7 @@ $factory->define(Contactus::class, function (Faker\Generator $faker) {
         'address' => $faker->address,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
-        'logo' => $faker->randomElement(['sample.png','sample-2.png']),
+        'logo' => $faker->randomElement(['sample.png', 'sample-2.png']),
     ];
 });
 
@@ -299,6 +301,24 @@ $factory->define(Newsletter::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Aboutus::class, function (Faker\Generator $faker) {
+    return [
+        'title_ar' => $faker->name,
+        'title_en' => $faker->name,
+        'body_en' => $faker->paragraph(2),
+        'body_ar' => $faker->paragraph(2),
+    ];
+});
+
+$factory->define(Faq::class, function (Faker\Generator $faker) {
+    return [
+        'title_ar' => $faker->name,
+        'title_en' => $faker->name,
+        'body_en' => $faker->paragraph(2),
+        'body_ar' => $faker->paragraph(2),
+    ];
+});
+
+$factory->define(Term::class, function (Faker\Generator $faker) {
     return [
         'title_ar' => $faker->name,
         'title_en' => $faker->name,
@@ -320,7 +340,7 @@ $factory->define(Slider::class, function (Faker\Generator $faker) {
         'title_ar' => $faker->name,
         'title_en' => $faker->name,
         'url' => $faker->url,
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'order' => $faker->numberBetween(1, 10),
         'active' => $faker->boolean(true),
     ];
@@ -333,7 +353,7 @@ $factory->define(Commercial::class, function (Faker\Generator $faker) {
         'description_ar' => $faker->sentence(),
         'description_en' => $faker->sentence(),
         'url' => $faker->url,
-        'image' => $faker->randomElement(['sample.png','sample-2.png']),
+        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
         'duration' => $faker->randomDigit,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),

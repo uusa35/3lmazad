@@ -26,6 +26,8 @@
                     <h5 class="title text-uppercase mobile-collapse__title">{{ trans('general.terms') }}</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
+                            <li><a href="{{ route('faq') }}">{{ trans('general.faq') }}</a></li>
+                            <li><a href="{{ route('terms') }}">{{ trans('general.terms') }}</a></li>
                             {{--<li><a href="{{ url('account/chat/1') }}">Online support</a></li>--}}
                             {{--<li><a href="{{ url('account/chat/1') }}">Online support</a></li>--}}
                         </ul>

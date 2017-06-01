@@ -9,8 +9,10 @@ use App\Models\Commercial;
 use App\Http\Controllers\Controller;
 use App\Models\Aboutus;
 use App\Models\Contactus;
+use App\Models\Faq;
 use App\Models\Newsletter;
 use App\Models\Slider;
+use App\Models\Term;
 use App\Services\Search\Filters;
 use Illuminate\Support\Facades\Mail;
 
@@ -85,6 +87,18 @@ class HomeController extends Controller
     {
         $elements = Aboutus::all();
         return view('frontend.pages.aboutus', compact('elements'));
+    }
+
+    public function faq()
+    {
+        $elements = Faq::all();
+        return view('frontend.pages.faq', compact('elements'));
+    }
+
+    public function terms()
+    {
+        $elements = Term::all();
+        return view('frontend.pages.terms', compact('elements'));
     }
 
     public function getContactus()

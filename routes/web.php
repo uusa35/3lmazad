@@ -15,6 +15,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('aboutus', 'HomeController@aboutus')->name('aboutus');
+    Route::get('faq', 'HomeController@faq')->name('faq');
+    Route::get('terms', 'HomeController@terms')->name('terms');
     Route::get('contactus', 'HomeController@getContactus')->name('contactus');
     Route::post('contactus', 'HomeController@postContactus');
     Route::post('newsletter', 'HomeController@postNewsletter')->name('newsletter');
@@ -41,6 +43,8 @@ Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('user', 'Usercontroller');
     Route::resource('aboutus', 'AboutusController');
+    Route::resource('faq', 'FaqController');
+    Route::resource('terms', 'TermController');
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
