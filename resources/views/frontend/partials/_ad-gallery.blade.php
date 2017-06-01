@@ -8,6 +8,14 @@
 </div>
 <div class="product-images-carousel">
     <ul id="smallGallery">
+        <li>
+            <a href="#" data-image="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+               data-zoom-image="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+            >
+                <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                     alt="{{ $element->title }}"/>
+            </a>
+        </li>
         @foreach($element->gallery->first()->images as $image)
             <li>
                 <a href="#" data-image="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
