@@ -98,14 +98,16 @@ $(document).ready(function() {
         var title = $(this).data('title');
         var category = $(this).data('category');
         var url = $(this).data('ad-url');
-        var element= $(this).data('element');
+        var element = $(this).data('element');
+        var fromDate = $(this).data('from-date');
 
         $('.modal-price').text(price);
-        $('.modal-ad-url').attr('href',url);
+        $('.modal-ad-url').attr('href', url);
         $('.modal-image').attr('src', 'storage/uploads/images/medium/' + image);
         $('.modal-description').text(description);
         $('.modal-title').text(title);
         $('.modal-category').text(category);
+        $('.modal-from-date').text(fromDate);
         $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
 

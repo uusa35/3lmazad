@@ -3,7 +3,9 @@
         <div class="product-preview">
             <div class="product-preview__image">
                 <a href="{{ route('ad.show',$element->id) }}">
-                    <img style="max-height: 300px;" src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}" alt="{{ $element->title }}"/>
+                    <img style="max-height: 300px;"
+                         src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                         alt="{{ $element->title }}"/>
                 </a>
                 @if($element->featured)
                     <div class="product-preview__label product-preview__label--left product-preview__label--new">
@@ -28,6 +30,7 @@
                             data-description="{{ $element->meta->description }}"
                             data-image="{{ $element->image }}"
                             data-category="{{ $element->categoryName }}"
+                            data-from-date="{{ $element->fromDate }}"
                             data-element="{{ $element }}"
                     >
                         <span class="icon icon-eye"></span>
@@ -44,8 +47,9 @@
                                             alt=""/></span></a></li>
                     </ul>
                 @endif
-                <div class="price-box "><span
-                            class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span></div>
+                <div class="price-box ">
+                    <span class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span>
+                </div>
                 <div class="product-preview__info__description">
                     <p>{{ str_limit($element->meta->description,'500','..more') }}</p>
 

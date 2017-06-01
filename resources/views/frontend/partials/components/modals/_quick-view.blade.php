@@ -8,7 +8,7 @@
             <ul class="product-main-image no-zoom" id="mainProductImg">
                 <li class="product-main-image__item active"><a href="" class="modal-ad-url">
                         <img class="img-responsive img-thumbnail modal-image" src=''
-                             style="width: 60%; max-width: 250px;"/></a></li>
+                             style="width: 60%; max-width: 250px; max-height: 400px;"/></a></li>
             </ul>
         </div>
         <div class="col-sm-6">
@@ -16,10 +16,30 @@
                 <div class="product-info__title">
                     <h2 class="modal-title"></h2>
                 </div>
-                <div class="price-box product-info__price"><span class="price-box__new modal-price"></span></div>
+                <div class="price-box product-info__price"
+                     style="float : {{ app()->isLocale('ar') ? 'left' : 'right' }} !important;">
+                    <span class="price-box__new modal-price"></span></div>
                 <div class="divider divider--xs product-info__divider"></div>
-                <div class="product-info__description modal-description"></div>
+                <div class="product-info__description modal-description {{ app()->isLocale('ar') ? 'text-right' : 'text-left' }}"></div>
+                <div class="ui buttons">
+                    <button class="ui white basic button"><i class="icon calendar"></i>
+                        <span class="modal-from-date"></span>
+                    </button>
+                    <button class="ui white basic button">
+                        <i class="icon arrow-right"></i>
+                        <span class="modal-category"></span>
+                    </button>
+                    <button class="ui white basic button">
+                        <i class="icon calendar"></i>
+                        <span class="modal-created_at"></span>
+                    </button>
+                    <button class="ui white basic button">
+                        <i class="icon calendar"></i>
+                        another testing place
+                    </button>
+                </div>
                 <div class="divider divider--xs product-info__divider"></div>
+
                 {{--<label>Color:</label>--}}
                 {{--<ul class="options-swatch options-swatch--color options-swatch--lg">                  <li><a href="#"><span class="swatch-label"><img src="images/colors/blue.png" width="10" height="10" alt=""/></span></a></li>--}}
                 {{--<li><a href="#"><span class="swatch-label"><img src="http://placehold.it/10x10/" width="10" height="10" alt=""/></span></a></li>--}}
@@ -44,25 +64,38 @@
                 {{--<button type="button" class="btn btn-number btn-number--plus" data-type="plus" data-field="quant[1]"> + </button>--}}
                 {{--<button type="button" class="btn btn-number btn-number--minus" disabled="disabled" data-type="minus" data-field="quant[1]"> &#8211; </button>--}}
                 {{--</span> </div>--}}
-                <div class="pull-left">
-                    <a href="#" class="btn btn--wd text-uppercase modal-ad-url">{{ trans('general.view_ad') }}</a>
-                </div>
-                <div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">
-                    <ul>
-                        <li class="social-links__item"><a class="icon icon-facebook tooltip-link" href="#"
-                                                          data-placement="top" data-toggle="tooltip"
-                                                          data-original-title="Share on facebook"></a></li>
-                        <li class="social-links__item"><a class="icon icon-twitter tooltip-link" href="#"
-                                                          data-placement="top" data-toggle="tooltip"
-                                                          data-original-title="Share on twitter"></a></li>
-                        <li class="social-links__item"><a class="icon icon-google tooltip-link" href="#"
-                                                          data-placement="top" data-toggle="tooltip"
-                                                          data-original-title="Share on google"></a></li>
-                        <li class="social-links__item"><a class="icon icon-pinterest tooltip-link" href="#"
-                                                          data-placement="top" data-toggle="tooltip"
-                                                          data-original-title="Share on pinterest"></a></li>
-                    </ul>
-                </div>
+
+                <a href="#"
+                   class="btn btn--wd text-uppercase modal-ad-url"
+                   style="float : {{ app()->isLocale('ar') ? 'left' : 'right' }} !important;">
+                    {{ trans('general.view_ad') }}
+                </a>
+                
+
+                {{--<div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">--}}
+                {{--<ul>--}}
+                {{--<li class="social-links__item">--}}
+                {{--<a class="icon icon-facebook tooltip-link" href="#"--}}
+                {{--data-placement="top" data-toggle="tooltip"--}}
+                {{--data-original-title="Share on facebook"></a>--}}
+                {{--</li>--}}
+                {{--<li class="social-links__item">--}}
+                {{--<a class="icon icon-twitter tooltip-link" href="#"--}}
+                {{--data-placement="top" data-toggle="tooltip"--}}
+                {{--data-original-title="Share on twitter"></a>--}}
+                {{--</li>--}}
+                {{--<li class="social-links__item">--}}
+                {{--<a class="icon icon-google tooltip-link" href="#"--}}
+                {{--data-placement="top" data-toggle="tooltip"--}}
+                {{--data-original-title="Share on google"></a>--}}
+                {{--</li>--}}
+                {{--<li class="social-links__item">--}}
+                {{--<a class="icon icon-pinterest tooltip-link" href="#"--}}
+                {{--data-placement="top" data-toggle="tooltip"--}}
+                {{--data-original-title="Share on pinterest"></a>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
+                {{--</div>--}}
             </div>
             {{--<div class="divider divider--xs"></div>--}}
             {{--<ul class="product-links product-links--inline">--}}

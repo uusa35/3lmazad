@@ -2,7 +2,7 @@
 
 
 @section('breadcrumbs')
-{!! Breadcrumbs::render('ad', $element) !!}
+{!! Breadcrumbs::render('ad.show', $element) !!}
 @endsection
 
 @section('top')

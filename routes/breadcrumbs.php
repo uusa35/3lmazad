@@ -8,15 +8,25 @@
 
 // Home
 Breadcrumbs::register('home', function ($breadcrumbs) {
-    $breadcrumbs->push(trans('general.home'), route('home'));
+    $breadcrumbs->push(trans('general.home'),route('home'));
 });
 
-Breadcrumbs::register('ad', function ($breadcrumbs, $element) {
+//ad.show
+Breadcrumbs::register('ad.show.category', function ($breadcrumbs, $element) {
+    $parent = $element->category->parent->first();
     $breadcrumbs->parent('home');
+    $breadcrumbs->push($parent->name, route('ad.index', ['parent' => $parent->id]));
+});
+
+Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {
+    $breadcrumbs->parent('ad.show.category',$element);
     $breadcrumbs->push($element->title, route('ad.show', $element->id));
 });
 
+
+// ad.index
 Breadcrumbs::register('category', function ($breadcrumbs, $element) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($element->name, route('ad.index', ['parent' => $element->parent_id]));
+    $breadcrumbs->push($element->parent->name, route('ad.index', ['parent' => $element->parent_id]));
 });
+
