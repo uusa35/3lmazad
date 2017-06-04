@@ -643,4 +643,11 @@ th {
 .comments__comment--replay {
   margin-right: 80px;
   margin-left: 0;
+}.product-info__title {
+  text-align: right;
+}
+
+.slick-next {
+  right: -35px !important;
+  left: inherit !important;
 }

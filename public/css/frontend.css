@@ -38621,6 +38621,14 @@ zoom: 1;
   padding: 8px;
 }
 
+.home-alert {
+  width: 50%;
+}
+
+.product-info__title {
+  text-align: left;
+}
+
 .aside-column {
   padding-top: 0px !important;
 }

@@ -92,7 +92,7 @@ $factory->define(Brand::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
-        'image' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'image' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });
@@ -112,7 +112,7 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
-        'image' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'image' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
         'brand_id' => Brand::all()->random()->id
     ];
 });
@@ -149,7 +149,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(),
         'featured' => $faker->boolean(),
-        'image' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'image' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
         'user_id' => User::all()->random()->id,
         'category_id' => Category::where('parent_id', false)->pluck('id')->shuffle()->first(),
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
@@ -258,7 +258,7 @@ $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
         'description_ar' => $faker->paragraph(2),
         'description_en' => $faker->paragraph(2),
-        'image' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'image' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
         'galleryable_id' => Ad::all()->random()->id,
         'galleryable_type' => Ad::class,
     ];
@@ -267,9 +267,9 @@ $factory->define(Image::class, function (Faker\Generator $faker) {
     return [
         'gallery_id' => Gallery::all()->random()->id,
         'is_main' => $faker->boolean(),
-        'thumb' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
-        'medium' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
-        'large' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'thumb' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
+        'medium' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
+        'large' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
     ];
 });
 
@@ -288,7 +288,7 @@ $factory->define(Contactus::class, function (Faker\Generator $faker) {
         'address' => $faker->address,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
-        'logo' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'logo' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
     ];
 });
 
@@ -340,7 +340,7 @@ $factory->define(Slider::class, function (Faker\Generator $faker) {
         'title_ar' => $faker->name,
         'title_en' => $faker->name,
         'url' => $faker->url,
-        'image' => 'sample'.$faker->numberBetween(1,6).'.jpeg',
+        'image' => 'sample'.$faker->numberBetween(1,10).'.jpeg',
         'order' => $faker->numberBetween(1, 10),
         'active' => $faker->boolean(true),
     ];

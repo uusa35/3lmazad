@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 {!! Breadcrumbs::render('ad.show', $element) !!}
 @endsection
-
+        
 @section('top')
         <!-- Content section -->
 <section class="content">
