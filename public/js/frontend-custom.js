@@ -146,15 +146,15 @@ $(document).ready(function () {
         });
     });
 
-    $('.toottip-message').popup({
-        on: 'focus',
-        position: 'top center'
-    });
-
-    $('.tooltip_message_on_hover').popup({
-        hoverable: true,
-        position: 'top center'
-    });
+    //$('.toottip-message').popup({
+    //    on: 'focus',
+    //    position: 'top center',
+    //});
+    //
+    //$('.tooltip_message_on_hover').popup({
+    //    hoverable: true,
+    //    position: 'top center',
+    //});
 
     $('.ui.dropdown').dropdown({ allowCategorySelection: true });
 
