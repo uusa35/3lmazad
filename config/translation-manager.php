@@ -12,7 +12,7 @@ return array(
     */
     'route' => [
         'prefix' => 'backend/translations',
-        'middleware' => ['auth','adminOnly'],
+        'middleware' => ['web','adminOnly'],
     ],
 
 	/**

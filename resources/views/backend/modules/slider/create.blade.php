@@ -53,10 +53,7 @@
             </div>
 
 
-            <div class="form-actions noborder text-right">
-                <button type="submit" class="btn blue">Submit</button>
-                <button href="{{ url()->previous() }}" class="btn default">Cancel</button>
-            </div>
+            @include('backend.partials.forms._btn-group')
         </form>
     </div>
 @endsection

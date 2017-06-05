@@ -183,6 +183,7 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
+//        Illuminate\Translation\TranslationServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,

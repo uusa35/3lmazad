@@ -8,8 +8,8 @@
             <div class="form-body">
                 <div class="form-group form-md-line-input">
                     <input type="text" class="form-control" name="name" placeholder="...">
-                    <label for="form_control_1">Main Category Name*</label>
-                    <span class="help-block">Please enter Main Category Name</span>
+                    <label for="form_control_1">Category Name*</label>
+                    <span class="help-block">Category Name</span>
                 </div>
             </div>
 

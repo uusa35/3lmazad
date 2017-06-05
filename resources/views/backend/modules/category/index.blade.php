@@ -58,17 +58,17 @@
                                     <a href="{{ route('backend.category.edit',$element->id) }}">
                                         <i class="fa fa-fw fa-user"></i>edit</a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('backend.category.index',['type' => $element->id]) }}">
-                                        <i class="fa fa-fw fa-user"></i>view sub-category</a>
-                                </li>
-                                @if($element->parent_id === 0)
-                                    {{--@if($element->parent->name === 'product' || $element->parent->name === 'service')--}}
-                                        <li>
-                                            <a href="{{ route('backend.category.create',['parent_id' => $element->id]) }}">
-                                                <i class="fa fa-fw fa-user"></i>assign sub-category</a>
-                                        </li>
-                                    {{--@endif--}}
+                                @if(!$element->isChild)
+                                    <li>
+                                        <a href="{{ route('backend.category.index',['type' => $element->id]) }}">
+                                            <i class="fa fa-fw fa-user"></i>view sub-category</a>
+                                    </li>
+                                @endif
+                                @if(!$element->isChild)
+                                    <li>
+                                        <a href="{{ route('backend.category.create',['parent_id' => $element->id]) }}">
+                                            <i class="fa fa-fw fa-user"></i>assign sub-category</a>
+                                    </li>
                                 @endif
                                 <li>
                                     <form method="post" action="{{ route('backend.category.destroy',$element->id) }}">

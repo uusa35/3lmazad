@@ -19,7 +19,7 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getCategories');
         view()->composer('frontend.partials.components._icons_home_page', 'App\Services\ViewComposers@getOnHomePageCategories');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getAreas');
-        view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getContactusInfo');
+        view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');
 //        view()->composer('frontend.partials._page_bar', 'App\Services\ViewComposers@getBreadCrumbs');
         view()->composer(
             [

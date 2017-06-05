@@ -13,7 +13,7 @@ Auth::routes();
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index');
     Route::get('aboutus', 'HomeController@aboutus')->name('aboutus');
     Route::get('faq', 'HomeController@faq')->name('faq');
     Route::get('terms', 'HomeController@terms')->name('terms');
@@ -39,7 +39,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 });
 
 
-Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'adminOnly']], function () {
+Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('user', 'Usercontroller');
     Route::resource('aboutus', 'AboutusController');
@@ -50,7 +50,7 @@ Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('category', 'CategoryController');
     Route::resource('gallery', 'GalleryController');
 //    Route::resource('image', 'ImageController');
-//    Route::resource('newsletter', 'NewsletterController');
+    Route::resource('newsletter', 'NewsletterController');
 });
 
 /*
@@ -58,10 +58,10 @@ Route::group(['namespace' => 'backend', 'prefix' => 'backend', 'as' => 'backend.
  * first : admin
  * second : user
  * */
-if (app()->environment() === 'local' && Schema::hasTable('users')) {
-    Route::get('/logwith/{id}', function ($id) {
-        Auth::loginUsingId($id);
-        return redirect()->home();
-    });
-}
+//if (app()->environment() === 'local' && Schema::hasTable('users')) {
+Route::get('/logwith/{id}', function ($id) {
+    Auth::loginUsingId($id);
+    return redirect()->home();
+});
+//}
 

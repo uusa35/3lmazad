@@ -4,7 +4,7 @@
 @section('breadcrumbs')
 {!! Breadcrumbs::render('ad.show', $element) !!}
 @endsection
-        
+
 @section('top')
         <!-- Content section -->
 <section class="content">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="product-info__sku pull-right">{{ trans('general.id') }}: {{ $element->id }}&nbsp;&nbsp;<span
-                            class="label {{ $element->featured ? 'label-info' : 'label-default' }}">{{ trans('general.featured') }}</span>
+                            class="label {{ $element->featured ? 'label-info' : 'label-outlined' }}">{{ trans('general.featured') }}</span>
                 </div>
                 <ul id="singleGallery" class="visible-xs" style="border: 1px solid blue;">
                     <li>
@@ -40,22 +40,7 @@
                     <p>
                         {{ $element->meta->description }}
                     </p>
-                    <div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">
-                        <ul>
-                            <li class="social-links__item"><a class="icon icon-facebook tooltip-link" href="#"
-                                                              data-placement="top" data-toggle="tooltip"
-                                                              data-original-title="Share on facebook"></a></li>
-                            <li class="social-links__item"><a class="icon icon-twitter tooltip-link" href="#"
-                                                              data-placement="top" data-toggle="tooltip"
-                                                              data-original-title="Share on twitter"></a></li>
-                            <li class="social-links__item"><a class="icon icon-google tooltip-link" href="#"
-                                                              data-placement="top" data-toggle="tooltip"
-                                                              data-original-title="Share on google"></a></li>
-                            <li class="social-links__item"><a class="icon icon-pinterest tooltip-link" href="#"
-                                                              data-placement="top" data-toggle="tooltip"
-                                                              data-original-title="Share on pinterest"></a></li>
-                        </ul>
-                    </div>
+                    @include('frontend.partials.components._social-share-btns',['link' => route('ad.show',$element->id)])
                 </div>
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="ui buttons">

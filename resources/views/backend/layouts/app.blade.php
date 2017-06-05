@@ -7,12 +7,9 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     @section('styles')
-    @include('backend.partials.styles')
+        @include('backend.partials.styles')
     @show
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}"/>
-    @section('scripts')
-        @include('backend.partials.scripts')
-    @show
 </head>
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
@@ -42,5 +39,8 @@
 </div>
 
 @include('backend.partials.footer')
+@section('scripts')
+    @include('backend.partials.scripts')
+@show
 </body>
 </html>
