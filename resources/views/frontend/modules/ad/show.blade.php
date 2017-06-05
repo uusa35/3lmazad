@@ -102,4 +102,5 @@
     </div>
 </section>
 <!-- End Content section -->
+@include('frontend.partials._ad-tabs')
 @endsection

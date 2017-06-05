@@ -10,8 +10,8 @@
 @import '../html/css/style-colors.css';
 @import '../html/css/style-layout4.css';
 //<!-- Custom Fonts -->
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+//@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic');
+//@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
 @import "../../../node_modules/semantic-ui/dist/semantic.min.css";
@@ -223,4 +223,8 @@ span > .text {
 
 .icon-tag {
   padding-top: 30%;
+}
+
+.ui.comments {
+  max-width: none;
 }

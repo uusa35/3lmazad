@@ -1,14 +1,19 @@
 @import '../html/css/style-rtl.css';
 @import url('https://cdn.rtlcss.com/semantic-ui/2.2.6/semantic.rtl.css');
+//@import url('../html/css/semantic.rtl.css');
+
+//@font-face {
+//  font-family: 'Cairo-SemiBold';
+//  src: url('../../../public/fonts/Cairo-SemiBold.ttf');
+//}
+//
+//html,body,div,h1,h2,h3,h4,h5,a,p,ul,li {
+//  font-family: 'Cairo-SemiBold';
+//}
 
 .product-info__title {
   text-align: right;
 }
-
-//.slick-next {
-//  right : -35px !important;
-//  left: inherit !important;
-//}
 
 [dir='rtl'] .slick-prev {
   left: -39px !important;
@@ -17,4 +22,8 @@
 [dir='rtl'] .slick-next {
   right: 0 !important;
   left: 100% !important;
+}
+
+.ui.comments {
+  max-width: none !important;
 }
