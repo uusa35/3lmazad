@@ -32,7 +32,9 @@ class User extends Authenticatable
 
     protected $casts = [
         'active' => 'boolean',
-        'featured' => 'boolean'
+        'featured' => 'boolean',
+        'is_mobile_visible' => 'boolean',
+        'is_email_visible' => 'boolean'
     ];
 
     /**

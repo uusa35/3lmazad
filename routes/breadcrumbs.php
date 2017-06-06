@@ -8,7 +8,7 @@
 
 // Home
 Breadcrumbs::register('home', function ($breadcrumbs) {
-    $breadcrumbs->push(trans('general.home'),route('home'));
+    $breadcrumbs->push(trans('general.home'), route('home'));
 });
 
 //ad.show
@@ -19,7 +19,7 @@ Breadcrumbs::register('ad.show.category', function ($breadcrumbs, $element) {
 });
 
 Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {
-    $breadcrumbs->parent('ad.show.category',$element);
+    $breadcrumbs->parent('ad.show.category', $element);
     $breadcrumbs->push($element->title, route('ad.show', $element->id));
 });
 
@@ -28,5 +28,12 @@ Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {
 Breadcrumbs::register('category', function ($breadcrumbs, $element) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push($element->parent->name, route('ad.index', ['parent' => $element->parent_id]));
+});
+
+// favorites
+
+Breadcrumbs::register('favorite', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('favorite');
 });
 

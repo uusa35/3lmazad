@@ -13,7 +13,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content tab-content--wd">
-            <div role="tabpanel" class="tab-pane" id="auctions">
+            <div role="tabpanel" class="tab-pane active" id="auctions">
                 <div class="ui comments">
                     <h3 class="ui dividing header">{{ trans('general.auctions') }}</h3>
                     @foreach($element->auctions as $auction)
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <form class="ui reply form">
+                    <form class="ui reply form" method="post" action="{{ route('auction.store',['ad_id' => $element->id]) }}">
                         <div class="field">
                             <textarea>
                             </textarea>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <form class="ui reply form">
+                    <form class="ui reply form" method="post" action="{{ route('comment.store',['ad_id' => $element->id]) }}">
                         <div class="field">
                             <textarea>
                             </textarea>

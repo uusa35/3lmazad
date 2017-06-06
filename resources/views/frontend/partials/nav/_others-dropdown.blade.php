@@ -32,12 +32,14 @@
                 </li>
             </ul>
         </li>
-        <li class='li-col list-user-menu'>
-            <h4>{{ trans('general.my_acount') }}</h4>
-            <ul>
-                <li><a href="#">{{ trans('general.my_account') }}</a></li>
-                <li><a href="#">{{ trans('general.wish_list') }}</a></li>
-            </ul>
-        </li>
+        @if(auth()->check())
+            <li class='li-col list-user-menu'>
+                <h4>{{ trans('general.account') }}</h4>
+                <ul>
+                    <li><a href="{{ route('setting.index') }}">{{ trans('general.settings') }}</a></li>
+                    <li><a href="{{ route('favorite.index') }}">{{ trans('general.wish_list') }}</a></li>
+                </ul>
+            </li>
+        @endif
     </ul>
 </div>

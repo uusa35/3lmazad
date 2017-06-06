@@ -22,26 +22,26 @@
         <ul class="dropdown-menu ul-row animated fadeIn" role="menu" style="z-index: 9999;">
             <li class='li-col list-user-menu'>
                 <ul>
-                    @if($isAdmin)
-                        <li><a href="{{ route('backend.home') }}">{{ trans('general.dashboard') }}</a></li>
-                        <li><a href="{{ url('backend/translations') }}">{{ trans('general.translations') }}</a></li>
-                    @else
-                        {{--<li><a href="{{ route('account') }}">My Account</a></li>--}}
-                        {{--<li><a href="{{ route('user.show',auth()->user()->id) }}">My Profile</a></li>--}}
-                    @endif
-                    <li><a href="{{ route('home') }}">{{ trans("general.home") }}</a></li>
-                    <li>
-                        <a href="{{ url('/logout') }}"
-                           onclick="event.preventDefault();
+                    @if(auth()->check())
+                        @if($isAdmin)
+                            <li><a href="{{ route('backend.home') }}">{{ trans('general.dashboard') }}</a></li>
+                            <li><a href="{{ url('backend/translations') }}">{{ trans('general.translations') }}</a></li>
+                        @else
+                            <li><a href="{{ route('user.show',auth()->user()->id) }}">My Profile</a></li>
+                        @endif
+                        <li>
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ trans('general.logout') }}
-                        </a>
+                                {{ trans('general.logout') }}
+                            </a>
 
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                              style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @endif
                 </ul>
             </li>
         </ul>

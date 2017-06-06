@@ -36,6 +36,13 @@ Route::group(['namespace' => 'Frontend'], function () {
      * */
     Route::any('search', 'HomeController@search')->name('search');
     Route::resource('ad', 'AdController');
+    Route::resource('user', 'UserController', ['except' => 'create', 'store', 'delete']);
+    Route::resource('auction', 'AuctionController', ['only' => 'store']);
+    Route::resource('comment', 'CommentController', ['only' => 'store']);
+    Route::resource('favorite', 'FavoriteController');
+    Route::any('setting', 'SettingController@index')->name('setting.index');
+    Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
+    Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
 });
 
 
