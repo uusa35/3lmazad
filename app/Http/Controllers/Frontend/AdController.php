@@ -25,6 +25,7 @@ class AdController extends Controller
      */
     public function index()
     {
+        return 'all details here';
         // if the parent id is there go ahead and make the session
         request()->has('parent') ? session()->put('parent', request()->parent) : null;
         $parent = session('parent');
@@ -67,6 +68,7 @@ class AdController extends Controller
      */
     public function show($id)
     {
+        return 'ad page details here';
         $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
             'color', 'size', 'brand', 'model', 'gallery', 'type', 'area', 'comments.user','auctions.user')->first();
         /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId

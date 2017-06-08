@@ -37,3 +37,9 @@ Breadcrumbs::register('favorite', function ($breadcrumbs) {
     $breadcrumbs->push('favorite');
 });
 
+// account (user.index)
+Breadcrumbs::register('user.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.my_account'), route('user.index'));
+});
+

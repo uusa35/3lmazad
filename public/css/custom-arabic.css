@@ -647,7 +647,15 @@ th {
   text-align: right;
 }
 
-.slick-next {
-  right: -35px !important;
-  left: inherit !important;
+[dir='rtl'] .slick-prev {
+  left: -39px !important;
+}
+
+[dir='rtl'] .slick-next {
+  right: 0 !important;
+  left: 100% !important;
+}
+
+.ui.comments {
+  max-width: none !important;
 }
