@@ -1,3 +1,4 @@
+@if($elements->count() > 0)
 @foreach($elements as $element)
     <div class="product-preview-wrapper">
         <div class="product-preview">
@@ -25,7 +26,7 @@
                     <button id="favorite-{{ $element->id }}"
                        data-ad-id="{{ $element->id }}"
                        data-user-id="{{ auth()->user()->id }}"
-                       class="btn btn--round btn-white">
+                       class="btn btn--round {{ in_array($element->id,$userFavorites,true) ? 'btn-red' : 'btn-light-red' }}">
                         <i class="icon {{ in_array($element->id,$userFavorites,true) ? 'heart' : 'empty heart' }}"></i>
                     </button>
                     <button class="btn btn--round btn--dark triggerModal"
@@ -93,3 +94,10 @@
         </div>
     </div>
 @endforeach
+    @else
+    <div class="col-lg-12">
+        <div class="alert alert-info">
+            {{ trans('general.no_ads') }}
+        </div>
+    </div>
+@endif

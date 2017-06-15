@@ -192,10 +192,34 @@ span > .text {
 }
 
 
+.btn-rounded {
+  background-color: lightblue;
+}
+
+.btn-rounded:hover {
+  background-color: lightgrey;
+}
+
 .btn-white {
   background-color : white;
 }
 
 .btn-white:hover {
   background-color: orangered;
+}
+
+.btn-red {
+  background-color: red;
+}
+
+.btn-red:hover {
+  background-color: darkred;
+}
+
+.btn-light-red {
+  background-color: indianred;
+}
+
+.btn-light-red:hover {
+  background-color: lightcoral;
 }

@@ -16,8 +16,9 @@ class FavoriteController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $userFavorites = auth()->user()->favorites()->pluck('ad_id')->toArray();
         $elements = $user->favorites()->paginate(12);
-        return view('frontend.modules.favorite.index', compact('elements'));
+        return view('frontend.modules.favorite.index', compact('elements','userFavorites'));
     }
 
     /**
