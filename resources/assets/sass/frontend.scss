@@ -128,64 +128,6 @@ span > .text {
   width: 250px;
 }
 
-.search-dropdown-area {
-
-}
-
-.search-dropdown-category {
-
-}
-
-.search-dropdown-brand {
-
-}
-
-.search-dropdown-model {
-
-}
-
-.search-dropdown-condition {
-
-}
-
-.search-dropdown-transmission {
-
-}
-
-.search-dropdown-manufacturing_year {
-
-}
-
-//.main {
-//  display : flex;
-//  flex-direction: column;
-//  border : 1px solid red;
-//  width : 80%;
-//  margin-right : auto;
-//  margin-left: auto;
-//  //justify-content: center;
-//  //align-items: center;
-//}
-//.main > .first-row {
-//  display: flex;
-//  flex-direction: row;
-//  width: 100%;
-//  border : 1px solid green;
-//  flex-wrap: wrap;
-//}
-//.main > .second-row {
-//  display: flex;
-//  flex-direction: row;
-//  width: 100%;
-//  border: 1px solid green;
-//}
-//.item {
-//  width : 1000px;
-//  border : 1px solid yellow;
-//}
-
-// theme customization
-
 // ad .index
 .product-preview__image {
   margin-bottom: 153px !important;
@@ -227,4 +169,33 @@ span > .text {
 
 .ui.comments {
   max-width: none;
+}
+
+// account index page
+.account-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.account-btns > a {
+  margin : 30px !important;
+}
+.icon-btn-centered {
+  margin: 30px;
+  display: block;
+  clear: both;
+}
+
+
+.btn-white {
+  background-color : white;
+}
+
+.btn-white:hover {
+  background-color: orangered;
 }

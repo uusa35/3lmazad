@@ -146,13 +146,8 @@ $(document).ready(function () {
         });
     });
 
-    $('.toottip-message').popup({
-        on: 'focus',
-        position: 'top center'
-    });
-
-    $('.tooltip_message_on_hover').popup({
-        hoverable: true,
+    $('.tooltip-message').popup({
+        on: 'hover',
         position: 'top center'
     });
 

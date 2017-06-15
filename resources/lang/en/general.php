@@ -1,7 +1,28 @@
 <?php
 
 return array (
+  'forget_password' => 'Forget Password',
+  'most_visited' => 'Most Visited',
+  'latest_ads' => 'Recentest Ads',
+  'kd' => 'KD',
   'home' => 'home',
+  'filter_by_area' => 'Filter By Area',
+  'filter_by_brand' => 'Filter By Brand',
+  'filter_by_category' => 'Choose Category ..',
+  'filter_by_condition' => 'Condition',
+  'floor_no' => 'Floor No',
+  'filter_by_furnished' => 'Furnished',
+  'keyword' => 'Search here ...',
+  'manufacturing_year' => 'Manufacturing Year',
+  'price_max' => 'Price Max',
+  'price_min' => 'Price Min',
+  'filter_by_model' => 'Model',
+  'filter_transmission' => 'Transmission',
+  'filter_by_type' => 'Type',
+  'info' => 'Info',
   'aboutus' => 'About us',
+  'language' => 'Language',
   'ar' => 'arabic',
+  'search' => 'Search',
+  'auctions' => 'Auctions',
 );

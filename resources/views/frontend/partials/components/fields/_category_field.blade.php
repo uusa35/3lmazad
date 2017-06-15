@@ -1,4 +1,6 @@
-<div class="ui floating dropdown category labeled icon button search-dropdown search-dropdown-category" id="category">
+<div class="ui floating dropdown category labeled icon button search-dropdown search-dropdown-category tooltip-message"
+     data-content="{{ trans('message.category_field') }}"
+     id="category">
     <input name="" id="cat_input" value="0" type="hidden">
     <i class="filter icon"></i>
     <div class="default text">{{ trans('general.filter_by_category') }}</div>

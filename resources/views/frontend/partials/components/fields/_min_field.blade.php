@@ -1,7 +1,5 @@
-<div class="ui right icon input">
+<div class="ui right icon input tooltip-message" data-content="{{ trans('message.min_field') }}">
     <i class="chevron circle down icon"></i>
     <input type="text" class="search-input search-input-min" name="min"
-           data-content="{{ trans('message.min_search') }}"
-           data-variation="inverted"
            placeholder="{{ trans('general.price_min') }}"/>
 </div>

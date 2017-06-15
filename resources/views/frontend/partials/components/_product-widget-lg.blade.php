@@ -22,7 +22,12 @@
             <div class="product-preview__info">
                 <div class="product-preview__info__btns">
                     <a href="#" class="btn btn--round"><span class="icon-ecommerce"></span></a>
-                    <a href="#" class="btn btn--round red"><span class="icon heart"></span></a>
+                    <button id="favorite-{{ $element->id }}"
+                       data-ad-id="{{ $element->id }}"
+                       data-user-id="{{ auth()->user()->id }}"
+                       class="btn btn--round btn-white">
+                        <i class="icon {{ in_array($element->id,$userFavorites,true) ? 'heart' : 'empty heart' }}"></i>
+                    </button>
                     <button class="btn btn--round btn--dark triggerModal"
                             data-title="{{ $element->title }}"
                             data-ad-url="{{ route('ad.show',$element->id) }}"

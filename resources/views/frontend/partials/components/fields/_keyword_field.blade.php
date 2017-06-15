@@ -1,9 +1,9 @@
-<div class="ui icon input">
+<div class="ui icon input tooltip-message"
+     data-content="{{ trans('message.keyword_field') }}">
     <i class="search icon"></i>
     <input type="text" class="search-input search-input-keyword "
            {{--toottip-message--}}
-           data-content="{{ trans('message.keyword_search') }}" name="search"
-           data-variation="inverted"
+           name="search"
            value=""
            placeholder="{{ trans('general.keyword') }}"/>
 </div>

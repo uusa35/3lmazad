@@ -75,14 +75,9 @@ $(document).ready(function() {
         }).catch(e => console.log(e));
     });
 
-    $('.toottip-message').popup({
-        on: 'focus',
-        position: 'top center',
-    });
-
-    $('.tooltip_message_on_hover').popup({
-        hoverable: true,
-        position: 'top center',
+    $('.tooltip-message').popup({
+        on: 'hover',
+        position: 'top center'
     });
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
@@ -111,4 +106,10 @@ $(document).ready(function() {
         $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
 
+    $('button[id^="favorite-"]').on('click', function() {
+        var userId = $(this).data('user-id');
+        var adId = $(this).data('ad-id');
+        console.log('userId' + userId + 'adId' + adId);
+        return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
+    });
 });

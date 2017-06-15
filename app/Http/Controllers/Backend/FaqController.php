@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Faq;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class FaqController extends Controller
 {

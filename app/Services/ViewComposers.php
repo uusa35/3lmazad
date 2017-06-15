@@ -17,7 +17,10 @@ class ViewComposers
 {
     public function getCountries(View $view)
     {
-        $countries = Country::pluck('name_' . app()->getLocale(), 'id');
+        if (cache()->has('countries_' . app()->getLocale())) {
+            $countries = Country::pluck('name_' . app()->getLocale(), 'id');
+            $countries = cache()->put('countries_' . app()->getLocale(), $countries);
+        }
         return $view->with(compact('countries'));
     }
 

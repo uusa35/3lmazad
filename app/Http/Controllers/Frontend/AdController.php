@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,16 +26,17 @@ class AdController extends Controller
      */
     public function index()
     {
-        return 'all details here';
         // if the parent id is there go ahead and make the session
         request()->has('parent') ? session()->put('parent', request()->parent) : null;
         $parent = session('parent');
         if (!is_null($parent)) {
             $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
-            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size');
+            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size','favorites');
+            $userFavorites = auth()->user()->favorites()->pluck('ad_id')->toArray();
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
-            return view('frontend.modules.ad.index', compact('elements', 'paidAds'));
+
+            return view('frontend.modules.ad.index', compact('elements', 'paidAds','userFavorites'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
     }
@@ -68,7 +70,6 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        return 'ad page details here';
         $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
             'color', 'size', 'brand', 'model', 'gallery', 'type', 'area', 'comments.user','auctions.user')->first();
         /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId

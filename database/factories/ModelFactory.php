@@ -311,6 +311,7 @@ $factory->define(Aboutus::class, function (Faker\Generator $faker) {
     ];
 });
 
+
 $factory->define(Faq::class, function (Faker\Generator $faker) {
     return [
         'title_ar' => $faker->name,
