@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Date\Date;
 
 /**
  * Created by PhpStorm.
@@ -31,4 +32,15 @@ trait ModelHelpers
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
+
+    function getFromDateAttribute()
+    {
+        Date::setLocale(app()->getLocale());
+        return Date::parse($this->attributes['created_at'])->diffForHumans();
+    }
+
+    function getCountryNameAttribute() {
+        return $this->country->name;
+    }
+
 }

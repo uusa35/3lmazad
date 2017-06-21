@@ -1,5 +1,6 @@
 <div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-brand tooltip-message"
-     data-content="{{ trans("general.brand_field") }}"
+     data-inverted=""
+     data-tooltip="{{ trans('message.'.$field->name.'_field') }}"
      id="brand_id-{{ $category->id }}">
     <input name="" id="brand_id-input-{{ $category->id }}" value="0" type="hidden">
     <i class="search icon"></i>

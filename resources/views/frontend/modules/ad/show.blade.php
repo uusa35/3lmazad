@@ -44,17 +44,15 @@
                 </div>
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="ui buttons">
-                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}
-                    </button>
-                    <button class="ui white basic button"><i
-                                class="icon {{ $element->category->icon }}"></i>{{  $element->categoryName }}</button>
-                    <button class="ui white basic button"><i
-                                class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
+                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}</button>
+                    <button class="ui white basic button"><i class="icon {{ $element->category->icon }}"></i>{{  $element->categoryName }}</button>
+                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
                 </div>
                 <div class="ui small basic icon buttons hidden-xs">
                     @if(!is_null($element->brandName))
-                        <button class="ui button"><img class="ui avatar image" style="width: 10px; height: auto;"
-                                                       src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
+                        <button class="ui button">
+                            <img class="ui avatar image" style="width: 10px; height: auto;"
+                                 src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
                         </button>
                     @endif
                     @if(!is_null($element->meta->mileage))

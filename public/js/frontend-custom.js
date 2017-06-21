@@ -176,6 +176,18 @@ $(document).ready(function () {
         $('.modal-from-date').text(fromDate);
         $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
+
+    $('button[id^="favorite-"]').on('click', function () {
+        var userId = $(this).data('user-id');
+        var adId = $(this).data('ad-id');
+        console.log(adId);
+        $('#favorite-icon-' + adId).toggleClass('outline');
+        return axios.get('api/favorites/' + adId + '/' + userId).then(function (r) {
+            return console.log(r);
+        }).catch(function (e) {
+            return console.log(e);
+        });
+    });
 });
 
 /***/ }),

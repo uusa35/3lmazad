@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\Post;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -17,10 +18,12 @@ class ViewComposers
 {
     public function getCountries(View $view)
     {
-        if (cache()->has('countries_' . app()->getLocale())) {
-            $countries = Country::pluck('name_' . app()->getLocale(), 'id');
-            $countries = cache()->put('countries_' . app()->getLocale(), $countries);
+        if (!cache()->has('countries_' . app()->getLocale())) {
+            $countries = Country::pluck('name_' . app()->getLocale(), 'id')->toArray();
+            Cache::forever('countries_' . app()->getLocale(), $countries);
         }
+        $countries = cache()->get('countries_' . app()->getLocale());
+
         return $view->with(compact('countries'));
     }
 

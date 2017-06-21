@@ -1,5 +1,5 @@
 <div class="ui floating dropdown area labeled icon button search-dropdown search-dropdown-area tooltip-message"
-     data-content="{{ trans('message.area_field') }}"
+     data-inverted="" data-tooltip="{{ trans('message.area_field') }}"
      id="area">
     <input name="area_id" id="area_input" value="0" type="hidden">
     <i class="marker icon"></i>

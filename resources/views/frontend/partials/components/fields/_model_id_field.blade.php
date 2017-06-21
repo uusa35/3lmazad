@@ -1,5 +1,7 @@
-<div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-model"
-     id="model_id-{{ $category->id }}">
+<div class="ui floating dropdown labeled icon button search-dropdown search-dropdown-model tooltip-message"
+     id="model_id-{{ $category->id }}"
+     data-inverted=""
+     data-tooltip="{{ trans('message.'.$field->name.'_field') }}">
     <input name="" id="model_id-input-{{ $category->id }}" value="" type="hidden">
     <i class="search icon"></i>
     <span class="text">{{ trans('general.filter_by_model') }}</span>

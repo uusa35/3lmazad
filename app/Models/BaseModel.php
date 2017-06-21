@@ -20,10 +20,5 @@ class BaseModel extends Model
     protected $localeStrings = [];
     protected $guarded = [''];
 
-    function getFromDateAttribute()
-    {
-        Date::setLocale(app()->getLocale());
-        return Date::parse($this->attributes['created_at'])->diffForHumans();
-    }
 
 }

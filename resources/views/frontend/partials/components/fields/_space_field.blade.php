@@ -1,9 +1,10 @@
-<div class="ui icon input">
+<div class="ui icon input tooltip-message"
+     data-inverted=""
+     data-tooltip="{{ trans('message.'.$field->name.'_field') }}">
     <i class="search icon"></i>
-    <input type="text" class="search-input search-input-keyword toottip-message"
+    <input type="text" class="search-input search-input-min"
            id="space-input-{{ $category->id }}"
-           data-content="{{ trans('message.space') }}" name="space"
+           name="space"
            value="0"
-           data-variation="inverted"
            placeholder="{{ trans('general.space') }}"/>
 </div>

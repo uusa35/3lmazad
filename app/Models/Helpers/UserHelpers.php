@@ -7,9 +7,11 @@ namespace App\Models\Helpers;
  * Time: 7:14 PM
  */
 
-trait UserHelpers {
+trait UserHelpers
+{
 
-    public function getIsAdminAttribute() {
+    public function getIsAdminAttribute()
+    {
         return $this->roles()->first()->name === 'admin';
     }
 

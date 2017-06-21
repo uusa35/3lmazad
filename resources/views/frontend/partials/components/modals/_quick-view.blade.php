@@ -4,21 +4,21 @@
             data-dismiss="modal"><i class=" remove grey icon"></i></button>
     <div class="row">
         <div class="divider divider--sm"></div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <ul class="product-main-image no-zoom" id="mainProductImg">
                 <li class="product-main-image__item active"><a href="" class="modal-ad-url">
                         <img class="img-responsive img-thumbnail modal-image" src=''
-                             style="width: 60%; max-width: 250px; max-height: 400px;"/></a></li>
+                             style="width: 60%; max-width: 355px; max-height: 300px;"/></a></li>
             </ul>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <div class="product-info">
                 <div class="product-info__title">
                     <h2 class="modal-title"></h2>
                 </div>
                 <div class="price-box product-info__price"
                      style="float : {{ app()->isLocale('ar') ? 'left' : 'right' }} !important;">
-                    <span class="price-box__new modal-price"></span></div>
+                    <span class="price-box__new modal-price"></span> {{ trans('general.kd') }}</div>
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="product-info__description modal-description {{ app()->isLocale('ar') ? 'text-right' : 'text-left' }}"></div>
                 <div class="ui buttons">
@@ -70,7 +70,7 @@
                    style="float : {{ app()->isLocale('ar') ? 'left' : 'right' }} !important;">
                     {{ trans('general.view_ad') }}
                 </a>
-
+                <div class="divider divider--md"></div>
 
                 {{--<div class="social-links social-links--colorize social-links--invert social-links--padding pull-right">--}}
                 {{--<ul>--}}

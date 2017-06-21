@@ -32,7 +32,7 @@ class AdController extends Controller
         if (!is_null($parent)) {
             $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
             $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size','favorites');
-            $userFavorites = auth()->user()->favorites()->pluck('ad_id')->toArray();
+            $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
 

@@ -109,8 +109,8 @@ $(document).ready(function() {
     $('button[id^="favorite-"]').on('click', function() {
         var userId = $(this).data('user-id');
         var adId = $(this).data('ad-id');
-        $(this).toggleClass('btn-red');
-        $(this).toggleClass('btn-light-red');
+        console.log(adId);
+        $('#favorite-icon-'+adId).toggleClass('outline');
         return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
     });
 });

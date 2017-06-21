@@ -1,5 +1,8 @@
-<div class="ui floating dropdown room_no labeled icon button search-dropdown search-dropdown-building-age"
-     id="room_no-{{ $category->id }}">
+<div class="ui floating dropdown room_no labeled icon button search-dropdown search-dropdown-building-age tooltip-message"
+     id="room_no-{{ $category->id }}"
+     data-inverted=""
+     data-tooltip="{{ trans('message.'.$field->name.'_field') }}"
+>
     <input name="room_no" id="room_no_-input-{{$category->id}}" value="{{ null }}" type="hidden">
     <i class="marker icon"></i>
     <span class="text">{{ trans('general.room_no') }}</span>

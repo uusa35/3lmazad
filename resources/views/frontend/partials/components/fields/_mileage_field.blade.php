@@ -1,7 +1,8 @@
 <div class="ui icon input">
     <i class="search icon"></i>
-    <input type="text" class="search-input search-input-mileage toottip-message"
-           data-content="{{ trans('message.mileage_less_than') }}" name="mileage"
-           data-variation="inverted"
+    <input type="text" class="search-input search-input-mileage tooltip-message"
+           data-inverted=""
+           data-tooltip="{{ trans('message.'.$field->name.'_field') }}"
+           name="mileage"
            placeholder="{{ trans('general.mileage') }}"/>
 </div>
