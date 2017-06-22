@@ -14,30 +14,33 @@
                 <div class="ui top attached button">Button before grid</div>
                 <div class="ui grid center">
                     <div class="sixteen wide column"></div>
-                    <div class="six wide center column">
-                        <div class="ui card" style="margin-right: auto; margin-left: auto; width: 85%">
-                            <div class="image">
-                                <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}">
-                            </div>
-                            <div class="content">
-                                <h3>{{ $element->name }}</h3>
-                                <div class="meta">
-                                    <span class="left floated time"><strong>{{ trans('general.memeber_from') }} :</strong></span>
-                                    <span class="right floated time">{{ $element->fromDate }}</span>
+                    <div class="five wide center column">
+                        <div class="ui items">
+                            <div class="item">
+                                <div class="ui small image">
+                                    <img src="http://placehold.it/200x200">
                                 </div>
-                                <div class="description">
-
+                                <div class="content">
+                                    <div class="header">
+                                        {{ $element->name }}
+                                    </div>
+                                    <div class="meta">
+                                        <span class="price">{{ trans('general.memeber_from') .':'. $element->fromDate }}</span>
+                                        <span class="stay">{{ trans('general.email') .':'. $element->email }}</span>
+                                    </div>
+                                    <div class="description">
+                                        <p></p>
+                                    </div>
+                                    <div class="extra">
+                                        <div class="ui left mini floated button">
+                                            <i class="right chevron icon"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="extra content">
-                                <a href="{{ route('user.edit',$element->id) }}">
-                                    <i class="user icon"></i>
-                                    {{ trans("general.edit") }}
-                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="ten wide column">
+                    <div class="eleven wide column">
                         <div class="outer">
                             <div class="products-grid products-listing products-col products-isotope four-in-row">
 
@@ -50,7 +53,8 @@
                                                style="margin: 30px; display: block; clear:both;"></i>
                                             {{ trans('general.settings') }}
                                         </a>
-                                        <a class="ui red button tooltip-message" href="{{ route('favorite.index') }}"
+                                        <a class="ui red button tooltip-message"
+                                           href="{{ route('favorite.index') }}"
                                            data-tooltip="{{ trans('message.wishlist') }}" data-inverted="">
                                             <i class="right outline heart icon big"
                                                style="margin: 30px; display: block; clear:both;"></i>

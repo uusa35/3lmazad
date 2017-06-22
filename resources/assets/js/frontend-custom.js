@@ -81,7 +81,9 @@ $(document).ready(function() {
     });
 
     $('.ui.dropdown').dropdown({allowCategorySelection: true});
-
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
     $('#myModal').modal('show');
 
     $('#productModal').modal('attach events', '.triggerModal', 'show');
@@ -113,4 +115,6 @@ $(document).ready(function() {
         $('#favorite-icon-'+adId).toggleClass('outline');
         return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
     });
+
+
 });

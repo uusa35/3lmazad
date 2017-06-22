@@ -1,21 +1,32 @@
 <div class="header-line hidden-xs">
     <div class="container">
-        @if(!auth()->check())
-            <div class="pull-left">
-                <div class="user-links">
-                    <ul>
-                        @if(!auth()->check())
-                            <li class="user-links__item"><a href="{{ route('login') }}">{{ trans('general.login') }}</a>
-                            </li>
-                        @endif
-                        @if(auth()->check())
-                            <li class="user-links__item"><a
-                                        href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
-                        @endif
-                    </ul>
-                </div>
+        <div class="pull-left">
+
+            <div class="social-links">
+                <ul>
+                    @if(!auth()->check())
+                        <li class="social-links__item"><a
+                                    href="{{ route('login') }}">{{ trans('general.login') }}</a>
+                        </li>
+                    @endif
+                    @if(auth()->check())
+                        <li class="social-links__item"><a
+                                    href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
+                    @endif
+                    <li class="social-links__item">
+                        <a href="{{ route('lang','en') }}">
+                            <img src="images/flags/us.png" alt=""/>
+                        </a>
+                    </li>
+                    <li class="social-links__item">
+                        <a href="{{ route('lang','ar') }}">
+                            <img src="images/flags/kw.png" alt=""/>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
-        @endif
+        </div>
         <div class="pull-right">
             <div class="social-links social-links--colorize">
                 <ul>

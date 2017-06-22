@@ -152,7 +152,9 @@ $(document).ready(function () {
     });
 
     $('.ui.dropdown').dropdown({ allowCategorySelection: true });
-
+    $('.special.cards .image').dimmer({
+        on: 'hover'
+    });
     $('#myModal').modal('show');
 
     $('#productModal').modal('attach events', '.triggerModal', 'show');
