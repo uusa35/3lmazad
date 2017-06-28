@@ -60,7 +60,6 @@ $(document).ready(function() {
         let catParentId = $('#cat-' + catId).attr('parentId');
         let brandId = $('#brand_id-input-' + catParentId).attr('value');
         $('#model_id-items-' + catParentId).html('');
-        console.log('brandId ' + brandId);
         return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             return data.map(m => {
                 let name = 'name_' + lang;
@@ -112,9 +111,29 @@ $(document).ready(function() {
         var userId = $(this).data('user-id');
         var adId = $(this).data('ad-id');
         console.log(adId);
-        $('#favorite-icon-'+adId).toggleClass('outline');
+        $('#favorite-icon-' + adId).toggleClass('outline');
         return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
     });
 
+    $('.checkbox.mobile').checkbox({
+        onChecked: () => {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/mobile/1/' + userId).then(r => console.log(r.data)).catch(e => console.log(e));
+        },
+        onUnchecked: () => {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/mobile/0/' + userId).then(r => console.log(r.data)).catch(e => console.log(e));
+        }
+    });
+    $('.checkbox.email').checkbox({
+        onChecked: () => {
+            var userId = $('.checkbox.email').data('user-id');
+            return axios.get('api/toggle/email/1/' + userId).then(r => console.log(r)).catch(e => console.log(e));
+        },
+        onUnchecked: () => {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/email/0/' + userId).then(r => console.log(r)).catch(e => console.log(e));
+        }
+    });
 
 });

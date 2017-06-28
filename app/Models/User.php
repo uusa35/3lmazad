@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UserCreated;
 use App\Models\Helpers\UserHelpers;
 use App\Models\Traits\UserTrait;
 use App\Scopes\ScopeActive;
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','is_mobile_visible', 'is_email_visible','country_id'
     ];
 
     /**

@@ -6502,6 +6502,10 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
+semantic-ui-checkbox@^2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/semantic-ui-checkbox/-/semantic-ui-checkbox-2.2.10.tgz#4cf3e2791202168ee6ab151df06b888764eda1f6"
+
 semantic-ui-dimmer@^2.2.10:
   version "2.2.10"
   resolved "https://registry.yarnpkg.com/semantic-ui-dimmer/-/semantic-ui-dimmer-2.2.10.tgz#e90a151e42f672a836e444fc74e56f4faddd93b7"

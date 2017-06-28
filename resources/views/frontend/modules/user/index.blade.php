@@ -13,38 +13,43 @@
                 {{--@include('frontend.partials._divider-xs')--}}
                 <div class="ui top attached button">Button before grid</div>
                 <div class="ui grid center">
-                    <div class="sixteen wide column"></div>
-                    <div class="five wide center column">
+                    <div class="six wide center column">
                         <div class="ui items">
                             <div class="item">
                                 <div class="ui small image">
-                                    <img src="http://placehold.it/200x200">
+                                    <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}">
                                 </div>
                                 <div class="content">
-                                    <div class="header">
-                                        {{ $element->name }}
+                                    <h3>{{ $element->name }}</h3>
+                                    <div class="extra">
+                                        <div class="ui mini floated button {{ app()->isLocale('ar') ? 'pull-left' : 'pull-right' }}">
+                                            <i class="edit icon"></i> {{ trans('general.edit') }}
+                                        </div>
                                     </div>
                                     <div class="meta">
-                                        <span class="price">{{ trans('general.memeber_from') .':'. $element->fromDate }}</span>
-                                        <span class="stay">{{ trans('general.email') .':'. $element->email }}</span>
+                                        <p class="price">{{ trans('general.member_from') .': '. $element->fromDate }}</p>
+                                        <p class="stay">{{ trans('general.email') .': '. $element->email }}</p>
+                                        <p class="stay">{{ trans('general.mobile') .': '. $element->phone }}</p>
+                                        <p class="stay">{{ trans('general.country') .': '. $element->countryName }}</p>
+                                        <div class="ui toggle checkbox mobile" data-user-id="{{ $element->id }}">
+                                            <label>{{ trans('general.mobile_visible') }}</label>
+                                            <input name="mobile" type="checkbox" {{ $element->is_mobile_visible ? 'checked' : null }}>
+                                        </div>
+                                        <div class="ui toggle checkbox email" data-user-id="{{ $element->id }}">
+                                            <label>{{ trans('general.email_visible') }}</label>
+                                            <input name="email" type="checkbox" {{ $element->is_email_visible ? 'checked' : null  }}>
+                                        </div>
                                     </div>
                                     <div class="description">
                                         <p></p>
-                                    </div>
-                                    <div class="extra">
-                                        <div class="ui left mini floated button">
-                                            <i class="right chevron icon"></i>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="eleven wide column">
+                    <div class="ten wide column">
                         <div class="outer">
                             <div class="products-grid products-listing products-col products-isotope four-in-row">
-
-
                                 <div class="extra">
                                     <div class="account-btns">
                                         <a class="ui default button tooltip-message" href="#"
@@ -60,7 +65,8 @@
                                                style="margin: 30px; display: block; clear:both;"></i>
                                             {{ trans('general.wishlist') }}
                                         </a>
-                                        <a class="ui pink button tooltip-message" href="#"
+                                        <a class="ui pink button tooltip-message"
+                                           href="{{ route("user.show",$element->id) }}"
                                            data-tooltip="{{ trans('message.my_ads') }}" data-inverted="">
                                             <i class="right clone icon big"
                                                style="margin: 30px; display: block; clear:both;"></i>

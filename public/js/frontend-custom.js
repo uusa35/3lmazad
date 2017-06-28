@@ -132,7 +132,6 @@ $(document).ready(function () {
         var catParentId = $('#cat-' + catId).attr('parentId');
         var brandId = $('#brand_id-input-' + catParentId).attr('value');
         $('#model_id-items-' + catParentId).html('');
-        console.log('brandId ' + brandId);
         return axios.get('api/brand/' + brandId + '/models').then(function (res) {
             return res.data;
         }).then(function (data) {
@@ -189,6 +188,43 @@ $(document).ready(function () {
         }).catch(function (e) {
             return console.log(e);
         });
+    });
+
+    $('.checkbox.mobile').checkbox({
+        onChecked: function onChecked() {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/mobile/1/' + userId).then(function (r) {
+                return console.log(r.data);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        },
+        onUnchecked: function onUnchecked() {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/mobile/0/' + userId).then(function (r) {
+                return console.log(r.data);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        }
+    });
+    $('.checkbox.email').checkbox({
+        onChecked: function onChecked() {
+            var userId = $('.checkbox.email').data('user-id');
+            return axios.get('api/toggle/email/1/' + userId).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        },
+        onUnchecked: function onUnchecked() {
+            var userId = $('.checkbox.mobile').data('user-id');
+            return axios.get('api/toggle/email/0/' + userId).then(function (r) {
+                return console.log(r);
+            }).catch(function (e) {
+                return console.log(e);
+            });
+        }
     });
 });
 

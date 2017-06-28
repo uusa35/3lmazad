@@ -24,6 +24,7 @@ window.$.fn.dropdown = require('semantic-ui-dropdown');
 window.$.fn.popup = require('semantic-ui-popup');
 window.$.fn.dimmer = require('semantic-ui-dimmer');
 window.$.fn.modal = require('semantic-ui-modal');
+window.$.fn.checkbox = require('semantic-ui-checkbox');
 import magnificPopup from 'magnific-popup';
 import axios from 'axios';
 /**

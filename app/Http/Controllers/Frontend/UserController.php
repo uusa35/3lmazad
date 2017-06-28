@@ -48,7 +48,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = auth()->user();
+        $userFavorites = auth()->user()->ads()->pluck('id')->toArray();
+        $elements = $user->favorites()->paginate(12);
+        return view('frontend.modules.user.show', compact('elements','userFavorites'));
     }
 
     /**

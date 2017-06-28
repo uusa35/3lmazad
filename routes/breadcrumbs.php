@@ -42,4 +42,9 @@ Breadcrumbs::register('user.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('general.my_account'), route('user.index'));
 });
+// my ads page
+Breadcrumbs::register('user.show', function ($breadcrumbs, $element) {
+    $breadcrumbs->parent('user.index');
+    $breadcrumbs->push(trans('general.my_ads'), route('user.show', $element->id));
+});
 
