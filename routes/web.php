@@ -35,18 +35,18 @@ Route::group(['namespace' => 'Frontend'], function () {
      * ?sub=2&type=4&brand=6&model=31&have_images=1&area=3&room_no=2&floor_no=9&bathroom_no=1&furnished=1
      * */
     Route::any('search', 'HomeController@search')->name('search');
-    Route::resource('ad', 'AdController', ['only' => 'show', 'create']);
-    Route::resource('user', 'UserController', ['only' => 'show']);
-    Route::resource('auction', 'AuctionController', ['only' => 'store']);
-    Route::resource('comment', 'CommentController', ['only' => 'store']);
+    Route::resource('ad', 'AdController', ['only' => ['show', 'create', 'index']]);
+    Route::resource('user', 'UserController', ['only' => ['show']]);
+    Route::resource('auction', 'AuctionController', ['only' => ['store']]);
+    Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('user', 'UserController', ['except' => 'create', 'store', 'delete']);
+        Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete']]);
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
         Route::resource('favorite', 'FavoriteController');
-        Route::resource('ad', 'AdController', ['except' => 'show', 'create']);
+        Route::resource('ad', 'AdController', ['except' => ['show', 'create', 'index']]);
     });
 });
 

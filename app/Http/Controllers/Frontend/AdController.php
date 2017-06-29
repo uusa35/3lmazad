@@ -31,12 +31,12 @@ class AdController extends Controller
         $parent = session('parent');
         if (!is_null($parent)) {
             $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
-            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size','favorites');
+            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites');
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
 
-            return view('frontend.modules.ad.index', compact('elements', 'paidAds','userFavorites'));
+            return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
     }
@@ -71,7 +71,11 @@ class AdController extends Controller
     public function show($id)
     {
         $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
-            'color', 'size', 'brand', 'model', 'gallery', 'type', 'area', 'comments.user','auctions.user')->first();
+            'color', 'size', 'brand', 'model', 'gallery', 'type', 'area')->with(['comments' => function ($q) {
+            $q->with('user')->orderBy('created_at', 'desc')->take(15);
+        }])->with(['auctions' => function ($q) {
+            $q->with('user')->orderBy('created_at', 'desc')->take(15);
+        }])->first();
         /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
         $counter = Visitor::where('ad_id', $element->id)->count();*/
         $counter = 0;

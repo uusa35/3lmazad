@@ -15,7 +15,7 @@
             </div>
             <div class="product-info col-sm-8 col-md-5 col-lg-5">
                 <div class="product-info__title">
-                    <h2>{{ $element->title }}</h2>
+                    <h3>{{ $element->title }}</h3>
                     <div class="rating product-info__rating visible-xs"><span class="icon-star"></span><span
                                 class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>
                     </div>

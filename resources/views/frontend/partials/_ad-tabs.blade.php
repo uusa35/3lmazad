@@ -37,7 +37,7 @@
                             <textarea>
                             </textarea>
                         </div>
-                        <div class="ui blue labeled submit icon button">
+                        <div class="ui blue labeled submit icon button" style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
                             <i class="icon edit"></i> {{ trans('general.add_reply') }}
                         </div>
                     </form>
@@ -67,7 +67,7 @@
                             <textarea>
                             </textarea>
                         </div>
-                        <div class="ui blue labeled submit icon button">
+                        <div class="ui blue labeled submit icon button" style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
                             <i class="icon edit"></i> {{ trans('general.add_reply') }}
                         </div>
                     </form>

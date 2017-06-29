@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\UserUpdate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -51,7 +52,7 @@ class UserController extends Controller
         $user = auth()->user();
         $userFavorites = auth()->user()->ads()->pluck('id')->toArray();
         $elements = $user->favorites()->paginate(12);
-        return view('frontend.modules.user.show', compact('elements','userFavorites'));
+        return view('frontend.modules.user.show', compact('elements', 'userFavorites'));
     }
 
     /**
@@ -64,7 +65,7 @@ class UserController extends Controller
     {
         $element = auth()->user();
         $this->authorize('isOwner', $element->id);
-        return view('frontend.modules.user.edit', compact('user', 'userRole'));
+        return view('frontend.modules.user.edit', compact('element', 'userRole'));
     }
 
     /**
@@ -74,9 +75,21 @@ class UserController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdate $request, $id)
     {
-        //
+        $user = auth()->user();
+        $updated = $user->update($request->request->all());
+        if ($updated) {
+            if ($request->hasFile('avatar')) {
+                $this->saveMimes($user->user_meta()->first(),
+                    $request,
+                    ['avatar'],
+                    ['500', '500'],
+                    false);
+            }
+            return redirect()->route('user.index')->with('success', trans('general.user_update_success'));
+        }
+        return redirect()->route('user.index')->with('error', trans('general.user_update_failure'));
     }
 
     /**
