@@ -2,7 +2,7 @@
  * Created by usamaahmed on 5/18/17.
  */
 $(document).ready(function() {
-    console.log('jquery from frontend custome');
+    console.log('jquery from frontend custom');
     var lang = $('#lang').text();
     console.log('the lang is ' + lang);
     $('#category').on('change', function() {
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
                 return $('#model_id-items-' + catParentId).append(`
                     <div class="item area" data-value="${m.id}" data-text="${m[name]}">
-                        <img class="ui avatar image" src="storage/uploads/images/thumbnail/${m.image}">
+                        <img class="ui avatar image" src="/storage/uploads/images/thumbnail/${m.image}">
                         ${m[name]}
                     </div>
                 `);
@@ -136,4 +136,15 @@ $(document).ready(function() {
         }
     });
 
+    // frontend // datatables
+    $('#adsTable').DataTable({
+        "order": [[0, "desc"]],
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false
+    });
+
 });
+

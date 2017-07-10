@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\UserUpdate;
+use App\Models\Ad;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    public $ad;
+
+    public function __construct(Ad $ad)
+    {
+        $this->ad = $ad;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = auth()->user();
+        $user = User::whereId($id)->first();
+        $this->authorize('isOwner', $user->id);
         $userFavorites = auth()->user()->ads()->pluck('id')->toArray();
         $elements = $user->favorites()->paginate(12);
         return view('frontend.modules.user.show', compact('elements', 'userFavorites'));
@@ -101,5 +111,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ads()
+    {
+        $elements = auth()->user()->ads()->withoutGlobalScopes()->with('category', 'meta')->get();
+        return view('frontend.modules.user.ads-list', compact('elements'));
+    }
+
+    public function toggleRepublish($id)
+    {
+        $ad = $this->ad->whereId($id)->first();
+        $this->authorize('isOwner', $ad->user_id);
     }
 }

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 752);
+/******/ 	return __webpack_require__(__webpack_require__.s = 753);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -75,7 +75,7 @@
  * Created by usamaahmed on 5/18/17.
  */
 $(document).ready(function () {
-    console.log('jquery from frontend custome');
+    console.log('jquery from frontend custom');
     var lang = $('#lang').text();
     console.log('the lang is ' + lang);
     $('#category').on('change', function () {
@@ -226,11 +226,21 @@ $(document).ready(function () {
             });
         }
     });
+
+    // frontend // datatables
+    $('#adsTable').DataTable({
+        "order": [[0, "desc"]],
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false
+    });
 });
 
 /***/ }),
 
-/***/ 752:
+/***/ 753:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(382);

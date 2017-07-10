@@ -62,7 +62,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 $factory->define(Role::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-    ];
+        'is_admin' => $faker->boolean(false)
 });
 
 $factory->define(Category::class, function (Faker\Generator $faker) {

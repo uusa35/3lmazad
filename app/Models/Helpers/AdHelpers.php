@@ -29,6 +29,11 @@ trait AdHelpers
         }, '>', 0);
     }
 
+    public function getNotExpiredAttribute()
+    {
+        return ($this->endDate > date('Y-m-d')) ? true : false;
+    }
+
     public function getHasValidDealAttribute()
     {
         return $this->deals->count() > 0 ? true : false;

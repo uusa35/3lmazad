@@ -42,6 +42,8 @@ Route::group(['namespace' => 'Frontend'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete']]);
+        Route::get('user/ads/list','UserController@ads')->name('user.ad.list');
+        Route::get('user/ad/toggle/republish','UserController@toggleRepublish')->name('user.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
@@ -76,4 +78,3 @@ Route::get('/logwith/{id}', function ($id) {
     return redirect()->home();
 });
 //}
-

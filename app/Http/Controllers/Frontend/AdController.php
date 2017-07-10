@@ -115,4 +115,18 @@ class AdController extends Controller
     {
         //
     }
+
+    public function toggleActivate($id)
+    {
+        $ad = $this->ad->whereId($id)->first();
+        $ad->update(['active' => !$ad->active]);
+        return redirect()->back()->with('success', trans('message.process_success'));
+    }
+
+    public function toggleFeatured($id)
+    {
+        $ad = $this->ad->whereId($id)->first();
+        $ad->update(['featured' => !$ad->featured]);
+        return redirect()->back()->with('success', trans('message.process_success'));
+    }
 }

@@ -33,10 +33,22 @@ trait ModelHelpers
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
 
-    function getFromDateAttribute()
+    function getCreatedDateAttribute()
     {
         Date::setLocale(app()->getLocale());
         return Date::parse($this->attributes['created_at'])->diffForHumans();
+    }
+
+    function getStartAttribute()
+    {
+        Date::setLocale(app()->getLocale());
+        return Date::parse($this->attributes['start_date'])->diffForHumans();
+    }
+
+    function getEndDateAttribute()
+    {
+        Date::setLocale(app()->getLocale());
+        return Date::parse($this->attributes['end_date'])->diffForHumans();
     }
 
     function getCountryNameAttribute() {

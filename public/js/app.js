@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 750);
+/******/ 	return __webpack_require__(__webpack_require__.s = 751);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -4534,7 +4534,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
 /* 1 */
@@ -4995,16 +4995,6 @@ module.exports = function(it){
 /***/ }),
 /* 17 */,
 /* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__(33);
-module.exports = function(it){
-  return Object(defined(it));
-};
-
-/***/ }),
-/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15264,6 +15254,16 @@ return jQuery;
 
 
 /***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.1.13 ToObject(argument)
+var defined = __webpack_require__(34);
+module.exports = function(it){
+  return Object(defined(it));
+};
+
+/***/ }),
 /* 20 */
 /***/ (function(module, exports) {
 
@@ -15339,7 +15339,7 @@ __webpack_require__(42).inspectSource = function(it){
 
 var $export = __webpack_require__(1)
   , fails   = __webpack_require__(6)
-  , defined = __webpack_require__(33)
+  , defined = __webpack_require__(34)
   , quot    = /"/g;
 // B.2.3.2.1 CreateHTML(string, tag, attribute, value)
 var createHTML = function(string, tag, attribute, value) {
@@ -15363,7 +15363,7 @@ module.exports = function(NAME, exec){
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = __webpack_require__(83)
-  , defined = __webpack_require__(33);
+  , defined = __webpack_require__(34);
 module.exports = function(it){
   return IObject(defined(it));
 };
@@ -15396,7 +15396,7 @@ exports.f = __webpack_require__(13) ? gOPD : function getOwnPropertyDescriptor(O
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has         = __webpack_require__(20)
-  , toObject    = __webpack_require__(18)
+  , toObject    = __webpack_require__(19)
   , IE_PROTO    = __webpack_require__(146)('IE_PROTO')
   , ObjectProto = Object.prototype;
 
@@ -15411,39 +15411,6 @@ module.exports = Object.getPrototypeOf || function(O){
 /***/ }),
 /* 31 */,
 /* 32 */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__(6);
-
-module.exports = function(method, arg){
-  return !!method && fails(function(){
-    arg ? method.call(null, function(){}, 1) : method.call(null);
-  });
-};
-
-/***/ }),
-/* 35 */,
-/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -15471,6 +15438,39 @@ module.exports = function(module) {
 
 
 /***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = function(it){
+  return toString.call(it).slice(8, -1);
+};
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports) {
+
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__(6);
+
+module.exports = function(method, arg){
+  return !!method && fails(function(){
+    arg ? method.call(null, function(){}, 1) : method.call(null);
+  });
+};
+
+/***/ }),
+/* 36 */,
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -15483,7 +15483,7 @@ module.exports = function(module) {
 // 6 -> Array#findIndex
 var ctx      = __webpack_require__(43)
   , IObject  = __webpack_require__(83)
-  , toObject = __webpack_require__(18)
+  , toObject = __webpack_require__(19)
   , toLength = __webpack_require__(16)
   , asc      = __webpack_require__(408);
 module.exports = function(TYPE, $create){
@@ -15667,7 +15667,7 @@ if(__webpack_require__(13)){
     , same                = __webpack_require__(209)
     , classof             = __webpack_require__(82)
     , isObject            = __webpack_require__(8)
-    , toObject            = __webpack_require__(18)
+    , toObject            = __webpack_require__(19)
     , isArrayIter         = __webpack_require__(138)
     , create              = __webpack_require__(56)
     , getPrototypeOf      = __webpack_require__(30)
@@ -16732,7 +16732,7 @@ module.exports = function(it, tag, stat){
 /***/ (function(module, exports, __webpack_require__) {
 
 var $export = __webpack_require__(1)
-  , defined = __webpack_require__(33)
+  , defined = __webpack_require__(34)
   , fails   = __webpack_require__(6)
   , spaces  = __webpack_require__(151)
   , space   = '[' + spaces + ']'
@@ -17035,7 +17035,7 @@ module.exports = function bind(fn, thisArg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
-var cof = __webpack_require__(32)
+var cof = __webpack_require__(33)
   , TAG = __webpack_require__(10)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
@@ -17063,7 +17063,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(32);
+var cof = __webpack_require__(33);
 module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
@@ -17214,7 +17214,7 @@ module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 var hide     = __webpack_require__(24)
   , redefine = __webpack_require__(25)
   , fails    = __webpack_require__(6)
-  , defined  = __webpack_require__(33)
+  , defined  = __webpack_require__(34)
   , wks      = __webpack_require__(10);
 
 module.exports = function(KEY, length, exec){
@@ -17285,7 +17285,7 @@ module.exports = function(fn, args, that){
 
 // 7.2.8 IsRegExp(argument)
 var isObject = __webpack_require__(8)
-  , cof      = __webpack_require__(32)
+  , cof      = __webpack_require__(33)
   , MATCH    = __webpack_require__(10)('match');
 module.exports = function(it){
   var isRegExp;
@@ -18229,7 +18229,7 @@ module.exports = function spread(callback) {
 "use strict";
 // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
 
-var toObject = __webpack_require__(18)
+var toObject = __webpack_require__(19)
   , toIndex  = __webpack_require__(61)
   , toLength = __webpack_require__(16);
 module.exports = function fill(value /*, start = 0, end = @length */){
@@ -18332,7 +18332,7 @@ module.exports = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
-var cof = __webpack_require__(32);
+var cof = __webpack_require__(33);
 module.exports = Array.isArray || function isArray(arg){
   return cof(arg) == 'Array';
 };
@@ -18465,7 +18465,7 @@ var global    = __webpack_require__(5)
   , Observer  = global.MutationObserver || global.WebKitMutationObserver
   , process   = global.process
   , Promise   = global.Promise
-  , isNode    = __webpack_require__(32)(process) == 'process';
+  , isNode    = __webpack_require__(33)(process) == 'process';
 
 module.exports = function(){
   var head, last, notify;
@@ -18587,7 +18587,7 @@ module.exports = function(O, D){
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(50)
-  , defined   = __webpack_require__(33);
+  , defined   = __webpack_require__(34);
 // true  -> String#at
 // false -> String#codePointAt
 module.exports = function(TO_STRING){
@@ -18610,7 +18610,7 @@ module.exports = function(TO_STRING){
 
 // helper for String#{startsWith, endsWith, includes}
 var isRegExp = __webpack_require__(99)
-  , defined  = __webpack_require__(33);
+  , defined  = __webpack_require__(34);
 
 module.exports = function(that, searchString, NAME){
   if(isRegExp(searchString))throw TypeError('String#' + NAME + " doesn't accept regex!");
@@ -18624,7 +18624,7 @@ module.exports = function(that, searchString, NAME){
 "use strict";
 
 var toInteger = __webpack_require__(50)
-  , defined   = __webpack_require__(33);
+  , defined   = __webpack_require__(34);
 
 module.exports = function repeat(count){
   var str = String(defined(this))
@@ -18685,7 +18685,7 @@ if(!setTask || !clearTask){
     delete queue[id];
   };
   // Node.js 0.8-
-  if(__webpack_require__(32)(process) == 'process'){
+  if(__webpack_require__(33)(process) == 'process'){
     defer = function(id){
       process.nextTick(ctx(run, id, 1));
     };
@@ -22879,9 +22879,9 @@ _module.exports.settings.templates = {
 
 };
 
-})( __webpack_require__(19), window, document );
+})( __webpack_require__(18), window, document );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
 /* 183 */
@@ -23982,9 +23982,9 @@ _module.exports.settings = {
 };
 
 
-})( __webpack_require__(19), window, document );
+})( __webpack_require__(18), window, document );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
 /* 184 */,
@@ -23994,7 +23994,7 @@ _module.exports.settings = {
 /* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var cof = __webpack_require__(32);
+var cof = __webpack_require__(33);
 module.exports = function(it, msg){
   if(typeof it != 'number' && cof(it) != 'Number')throw TypeError(msg);
   return +it;
@@ -24007,7 +24007,7 @@ module.exports = function(it, msg){
 "use strict";
 // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
 
-var toObject = __webpack_require__(18)
+var toObject = __webpack_require__(19)
   , toIndex  = __webpack_require__(61)
   , toLength = __webpack_require__(16);
 
@@ -24050,7 +24050,7 @@ module.exports = function(iter, ITERATOR){
 /***/ (function(module, exports, __webpack_require__) {
 
 var aFunction = __webpack_require__(23)
-  , toObject  = __webpack_require__(18)
+  , toObject  = __webpack_require__(19)
   , IObject   = __webpack_require__(83)
   , toLength  = __webpack_require__(16);
 
@@ -24119,7 +24119,7 @@ var dP          = __webpack_require__(14).f
   , redefineAll = __webpack_require__(59)
   , ctx         = __webpack_require__(43)
   , anInstance  = __webpack_require__(54)
-  , defined     = __webpack_require__(33)
+  , defined     = __webpack_require__(34)
   , forOf       = __webpack_require__(69)
   , $iterDefine = __webpack_require__(141)
   , step        = __webpack_require__(199)
@@ -24422,7 +24422,7 @@ module.exports = Math.log1p || function log1p(x){
 var getKeys  = __webpack_require__(58)
   , gOPS     = __webpack_require__(102)
   , pIE      = __webpack_require__(84)
-  , toObject = __webpack_require__(18)
+  , toObject = __webpack_require__(19)
   , IObject  = __webpack_require__(83)
   , $assign  = Object.assign;
 
@@ -24595,7 +24595,7 @@ module.exports = Object.is || function is(x, y){
 // https://github.com/tc39/proposal-string-pad-start-end
 var toLength = __webpack_require__(16)
   , repeat   = __webpack_require__(150)
-  , defined  = __webpack_require__(33);
+  , defined  = __webpack_require__(34);
 
 module.exports = function(that, maxLength, fillString, left){
   var S            = String(defined(that))
@@ -24764,7 +24764,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 	if ( true ) {
 		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(19)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
 			return factory( $, window, document );
 		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -51301,7 +51301,7 @@ window._ = __webpack_require__(617);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(19);
+window.$ = window.jQuery = __webpack_require__(18);
 __webpack_require__(402);
 __webpack_require__(608);
 __webpack_require__(403);
@@ -51315,10 +51315,10 @@ __webpack_require__(0);
 //window.$ = window.jQuery = require('jquery');
 window.$.fn.transition = __webpack_require__(183);
 window.$.fn.dropdown = __webpack_require__(182);
-window.$.fn.popup = __webpack_require__(744);
-window.$.fn.dimmer = __webpack_require__(742);
-window.$.fn.modal = __webpack_require__(743);
-window.$.fn.checkbox = __webpack_require__(914);
+window.$.fn.popup = __webpack_require__(745);
+window.$.fn.dimmer = __webpack_require__(743);
+window.$.fn.modal = __webpack_require__(744);
+window.$.fn.checkbox = __webpack_require__(742);
 
 
 /**
@@ -53906,7 +53906,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 (function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(19)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -54852,7 +54852,7 @@ __webpack_require__(68)('copyWithin');
 var $export = __webpack_require__(1)
   , $every  = __webpack_require__(37)(4);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].every, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].every, true), 'Array', {
   // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
   every: function every(callbackfn /* , thisArg */){
     return $every(this, callbackfn, arguments[1]);
@@ -54879,7 +54879,7 @@ __webpack_require__(68)('fill');
 var $export = __webpack_require__(1)
   , $filter = __webpack_require__(37)(2);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].filter, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].filter, true), 'Array', {
   // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
   filter: function filter(callbackfn /* , thisArg */){
     return $filter(this, callbackfn, arguments[1]);
@@ -54934,7 +54934,7 @@ __webpack_require__(68)(KEY);
 
 var $export  = __webpack_require__(1)
   , $forEach = __webpack_require__(37)(0)
-  , STRICT   = __webpack_require__(34)([].forEach, true);
+  , STRICT   = __webpack_require__(35)([].forEach, true);
 
 $export($export.P + $export.F * !STRICT, 'Array', {
   // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
@@ -54951,7 +54951,7 @@ $export($export.P + $export.F * !STRICT, 'Array', {
 
 var ctx            = __webpack_require__(43)
   , $export        = __webpack_require__(1)
-  , toObject       = __webpack_require__(18)
+  , toObject       = __webpack_require__(19)
   , call           = __webpack_require__(198)
   , isArrayIter    = __webpack_require__(138)
   , toLength       = __webpack_require__(16)
@@ -54998,7 +54998,7 @@ var $export       = __webpack_require__(1)
   , $native       = [].indexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].indexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(34)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(35)($native)), 'Array', {
   // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
   indexOf: function indexOf(searchElement /*, fromIndex = 0 */){
     return NEGATIVE_ZERO
@@ -55029,7 +55029,7 @@ var $export   = __webpack_require__(1)
   , arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(83) != Object || !__webpack_require__(34)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(83) != Object || !__webpack_require__(35)(arrayJoin)), 'Array', {
   join: function join(separator){
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
@@ -55048,7 +55048,7 @@ var $export       = __webpack_require__(1)
   , $native       = [].lastIndexOf
   , NEGATIVE_ZERO = !!$native && 1 / [1].lastIndexOf(1, -0) < 0;
 
-$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(34)($native)), 'Array', {
+$export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(35)($native)), 'Array', {
   // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
   lastIndexOf: function lastIndexOf(searchElement /*, fromIndex = @[*-1] */){
     // convert -0 to +0
@@ -55072,7 +55072,7 @@ $export($export.P + $export.F * (NEGATIVE_ZERO || !__webpack_require__(34)($nati
 var $export = __webpack_require__(1)
   , $map    = __webpack_require__(37)(1);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].map, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].map, true), 'Array', {
   // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
   map: function map(callbackfn /* , thisArg */){
     return $map(this, callbackfn, arguments[1]);
@@ -55113,7 +55113,7 @@ $export($export.S + $export.F * __webpack_require__(6)(function(){
 var $export = __webpack_require__(1)
   , $reduce = __webpack_require__(191);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].reduceRight, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].reduceRight, true), 'Array', {
   // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
   reduceRight: function reduceRight(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], true);
@@ -55129,7 +55129,7 @@ $export($export.P + $export.F * !__webpack_require__(34)([].reduceRight, true), 
 var $export = __webpack_require__(1)
   , $reduce = __webpack_require__(191);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].reduce, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].reduce, true), 'Array', {
   // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
   reduce: function reduce(callbackfn /* , initialValue */){
     return $reduce(this, callbackfn, arguments.length, arguments[1], false);
@@ -55144,7 +55144,7 @@ $export($export.P + $export.F * !__webpack_require__(34)([].reduce, true), 'Arra
 
 var $export    = __webpack_require__(1)
   , html       = __webpack_require__(136)
-  , cof        = __webpack_require__(32)
+  , cof        = __webpack_require__(33)
   , toIndex    = __webpack_require__(61)
   , toLength   = __webpack_require__(16)
   , arraySlice = [].slice;
@@ -55179,7 +55179,7 @@ $export($export.P + $export.F * __webpack_require__(6)(function(){
 var $export = __webpack_require__(1)
   , $some   = __webpack_require__(37)(3);
 
-$export($export.P + $export.F * !__webpack_require__(34)([].some, true), 'Array', {
+$export($export.P + $export.F * !__webpack_require__(35)([].some, true), 'Array', {
   // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
   some: function some(callbackfn /* , thisArg */){
     return $some(this, callbackfn, arguments[1]);
@@ -55194,7 +55194,7 @@ $export($export.P + $export.F * !__webpack_require__(34)([].some, true), 'Array'
 
 var $export   = __webpack_require__(1)
   , aFunction = __webpack_require__(23)
-  , toObject  = __webpack_require__(18)
+  , toObject  = __webpack_require__(19)
   , fails     = __webpack_require__(6)
   , $sort     = [].sort
   , test      = [1, 2, 3];
@@ -55206,7 +55206,7 @@ $export($export.P + $export.F * (fails(function(){
   // V8 bug
   test.sort(null);
   // Old WebKit
-}) || !__webpack_require__(34)($sort)), 'Array', {
+}) || !__webpack_require__(35)($sort)), 'Array', {
   // 22.1.3.25 Array.prototype.sort(comparefn)
   sort: function sort(comparefn){
     return comparefn === undefined
@@ -55271,7 +55271,7 @@ $export($export.P + $export.F * (fails(function(){
 "use strict";
 
 var $export     = __webpack_require__(1)
-  , toObject    = __webpack_require__(18)
+  , toObject    = __webpack_require__(19)
   , toPrimitive = __webpack_require__(39);
 
 $export($export.P + $export.F * __webpack_require__(6)(function(){
@@ -55656,7 +55656,7 @@ $export($export.S, 'Math', {
 
 var global            = __webpack_require__(5)
   , has               = __webpack_require__(20)
-  , cof               = __webpack_require__(32)
+  , cof               = __webpack_require__(33)
   , inheritIfRequired = __webpack_require__(137)
   , toPrimitive       = __webpack_require__(39)
   , fails             = __webpack_require__(6)
@@ -56037,7 +56037,7 @@ __webpack_require__(38)('getOwnPropertyNames', function(){
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 Object.getPrototypeOf(O)
-var toObject        = __webpack_require__(18)
+var toObject        = __webpack_require__(19)
   , $getPrototypeOf = __webpack_require__(30);
 
 __webpack_require__(38)('getPrototypeOf', function(){
@@ -56098,7 +56098,7 @@ $export($export.S, 'Object', {is: __webpack_require__(209)});
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__(18)
+var toObject = __webpack_require__(19)
   , $keys    = __webpack_require__(58);
 
 __webpack_require__(38)('keys', function(){
@@ -57788,7 +57788,7 @@ __webpack_require__(68)('includes');
 var $export   = __webpack_require__(1)
   , microtask = __webpack_require__(144)()
   , process   = __webpack_require__(5).process
-  , isNode    = __webpack_require__(32)(process) == 'process';
+  , isNode    = __webpack_require__(33)(process) == 'process';
 
 $export($export.G, {
   asap: function asap(fn){
@@ -57803,7 +57803,7 @@ $export($export.G, {
 
 // https://github.com/ljharb/proposal-is-error
 var $export = __webpack_require__(1)
-  , cof     = __webpack_require__(32);
+  , cof     = __webpack_require__(33);
 
 $export($export.S, 'Error', {
   isError: function isError(it){
@@ -57901,7 +57901,7 @@ $export($export.S, 'Math', {
 "use strict";
 
 var $export         = __webpack_require__(1)
-  , toObject        = __webpack_require__(18)
+  , toObject        = __webpack_require__(19)
   , aFunction       = __webpack_require__(23)
   , $defineProperty = __webpack_require__(14);
 
@@ -57919,7 +57919,7 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(101), 'Object
 "use strict";
 
 var $export         = __webpack_require__(1)
-  , toObject        = __webpack_require__(18)
+  , toObject        = __webpack_require__(19)
   , aFunction       = __webpack_require__(23)
   , $defineProperty = __webpack_require__(14);
 
@@ -57975,7 +57975,7 @@ $export($export.S, 'Object', {
 "use strict";
 
 var $export                  = __webpack_require__(1)
-  , toObject                 = __webpack_require__(18)
+  , toObject                 = __webpack_require__(19)
   , toPrimitive              = __webpack_require__(39)
   , getPrototypeOf           = __webpack_require__(30)
   , getOwnPropertyDescriptor = __webpack_require__(29).f;
@@ -57999,7 +57999,7 @@ __webpack_require__(13) && $export($export.P + __webpack_require__(101), 'Object
 "use strict";
 
 var $export                  = __webpack_require__(1)
-  , toObject                 = __webpack_require__(18)
+  , toObject                 = __webpack_require__(19)
   , toPrimitive              = __webpack_require__(39)
   , getPrototypeOf           = __webpack_require__(30)
   , getOwnPropertyDescriptor = __webpack_require__(29).f;
@@ -58429,7 +58429,7 @@ $export($export.P, 'String', {
 
 // https://tc39.github.io/String.prototype.matchAll/
 var $export     = __webpack_require__(1)
-  , defined     = __webpack_require__(33)
+  , defined     = __webpack_require__(34)
   , toLength    = __webpack_require__(16)
   , isRegExp    = __webpack_require__(99)
   , getFlags    = __webpack_require__(97)
@@ -58791,7 +58791,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! Buttons for 
 (function( factory ){
 	if ( true ) {
 		// AMD
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(19), __webpack_require__(216)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18), __webpack_require__(216)], __WEBPACK_AMD_DEFINE_RESULT__ = function ( $ ) {
 			return factory( $, window, document );
 		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -60536,7 +60536,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     'use strict';
     if (true) {
         // AMD is used - Register as an anonymous module.
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(19), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -80785,7 +80785,7 @@ module.exports = exports["default"];
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(67), __webpack_require__(32)(module)))
 
 /***/ }),
 /* 618 */
@@ -80797,7 +80797,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 ;(function (factory) { 
 if (true) { 
  // AMD. Register as an anonymous module. 
- !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(19)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+ !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(18)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); 
@@ -83763,6 +83763,845 @@ webpackContext.id = 619;
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {/*!
+ * # Semantic UI 2.2.10 - Checkbox
+ * http://github.com/semantic-org/semantic-ui/
+ *
+ *
+ * Released under the MIT license
+ * http://opensource.org/licenses/MIT
+ *
+ */
+
+;(function ($, window, document, undefined) {
+
+"use strict";
+
+window = (typeof window != 'undefined' && window.Math == Math)
+  ? window
+  : (typeof self != 'undefined' && self.Math == Math)
+    ? self
+    : Function('return this')()
+;
+
+var _module = module;
+module.exports = function(parameters) {
+  var
+    $allModules    = $(this),
+    moduleSelector = $allModules.selector || '',
+
+    time           = new Date().getTime(),
+    performance    = [],
+
+    query          = arguments[0],
+    methodInvoked  = (typeof query == 'string'),
+    queryArguments = [].slice.call(arguments, 1),
+    returnedValue
+  ;
+
+  $allModules
+    .each(function() {
+      var
+        settings        = $.extend(true, {}, _module.exports.settings, parameters),
+
+        className       = settings.className,
+        namespace       = settings.namespace,
+        selector        = settings.selector,
+        error           = settings.error,
+
+        eventNamespace  = '.' + namespace,
+        moduleNamespace = 'module-' + namespace,
+
+        $module         = $(this),
+        $label          = $(this).children(selector.label),
+        $input          = $(this).children(selector.input),
+        input           = $input[0],
+
+        initialLoad     = false,
+        shortcutPressed = false,
+        instance        = $module.data(moduleNamespace),
+
+        observer,
+        element         = this,
+        module
+      ;
+
+      module      = {
+
+        initialize: function() {
+          module.verbose('Initializing checkbox', settings);
+
+          module.create.label();
+          module.bind.events();
+
+          module.set.tabbable();
+          module.hide.input();
+
+          module.observeChanges();
+          module.instantiate();
+          module.setup();
+        },
+
+        instantiate: function() {
+          module.verbose('Storing instance of module', module);
+          instance = module;
+          $module
+            .data(moduleNamespace, module)
+          ;
+        },
+
+        destroy: function() {
+          module.verbose('Destroying module');
+          module.unbind.events();
+          module.show.input();
+          $module.removeData(moduleNamespace);
+        },
+
+        fix: {
+          reference: function() {
+            if( $module.is(selector.input) ) {
+              module.debug('Behavior called on <input> adjusting invoked element');
+              $module = $module.closest(selector.checkbox);
+              module.refresh();
+            }
+          }
+        },
+
+        setup: function() {
+          module.set.initialLoad();
+          if( module.is.indeterminate() ) {
+            module.debug('Initial value is indeterminate');
+            module.indeterminate();
+          }
+          else if( module.is.checked() ) {
+            module.debug('Initial value is checked');
+            module.check();
+          }
+          else {
+            module.debug('Initial value is unchecked');
+            module.uncheck();
+          }
+          module.remove.initialLoad();
+        },
+
+        refresh: function() {
+          $label = $module.children(selector.label);
+          $input = $module.children(selector.input);
+          input  = $input[0];
+        },
+
+        hide: {
+          input: function() {
+            module.verbose('Modifying <input> z-index to be unselectable');
+            $input.addClass(className.hidden);
+          }
+        },
+        show: {
+          input: function() {
+            module.verbose('Modifying <input> z-index to be selectable');
+            $input.removeClass(className.hidden);
+          }
+        },
+
+        observeChanges: function() {
+          if('MutationObserver' in window) {
+            observer = new MutationObserver(function(mutations) {
+              module.debug('DOM tree modified, updating selector cache');
+              module.refresh();
+            });
+            observer.observe(element, {
+              childList : true,
+              subtree   : true
+            });
+            module.debug('Setting up mutation observer', observer);
+          }
+        },
+
+        attachEvents: function(selector, event) {
+          var
+            $element = $(selector)
+          ;
+          event = $.isFunction(module[event])
+            ? module[event]
+            : module.toggle
+          ;
+          if($element.length > 0) {
+            module.debug('Attaching checkbox events to element', selector, event);
+            $element
+              .on('click' + eventNamespace, event)
+            ;
+          }
+          else {
+            module.error(error.notFound);
+          }
+        },
+
+        event: {
+          click: function(event) {
+            var
+              $target = $(event.target)
+            ;
+            if( $target.is(selector.input) ) {
+              module.verbose('Using default check action on initialized checkbox');
+              return;
+            }
+            if( $target.is(selector.link) ) {
+              module.debug('Clicking link inside checkbox, skipping toggle');
+              return;
+            }
+            module.toggle();
+            $input.focus();
+            event.preventDefault();
+          },
+          keydown: function(event) {
+            var
+              key     = event.which,
+              keyCode = {
+                enter  : 13,
+                space  : 32,
+                escape : 27
+              }
+            ;
+            if(key == keyCode.escape) {
+              module.verbose('Escape key pressed blurring field');
+              $input.blur();
+              shortcutPressed = true;
+            }
+            else if(!event.ctrlKey && ( key == keyCode.space || key == keyCode.enter) ) {
+              module.verbose('Enter/space key pressed, toggling checkbox');
+              module.toggle();
+              shortcutPressed = true;
+            }
+            else {
+              shortcutPressed = false;
+            }
+          },
+          keyup: function(event) {
+            if(shortcutPressed) {
+              event.preventDefault();
+            }
+          }
+        },
+
+        check: function() {
+          if( !module.should.allowCheck() ) {
+            return;
+          }
+          module.debug('Checking checkbox', $input);
+          module.set.checked();
+          if( !module.should.ignoreCallbacks() ) {
+            settings.onChecked.call(input);
+            settings.onChange.call(input);
+          }
+        },
+
+        uncheck: function() {
+          if( !module.should.allowUncheck() ) {
+            return;
+          }
+          module.debug('Unchecking checkbox');
+          module.set.unchecked();
+          if( !module.should.ignoreCallbacks() ) {
+            settings.onUnchecked.call(input);
+            settings.onChange.call(input);
+          }
+        },
+
+        indeterminate: function() {
+          if( module.should.allowIndeterminate() ) {
+            module.debug('Checkbox is already indeterminate');
+            return;
+          }
+          module.debug('Making checkbox indeterminate');
+          module.set.indeterminate();
+          if( !module.should.ignoreCallbacks() ) {
+            settings.onIndeterminate.call(input);
+            settings.onChange.call(input);
+          }
+        },
+
+        determinate: function() {
+          if( module.should.allowDeterminate() ) {
+            module.debug('Checkbox is already determinate');
+            return;
+          }
+          module.debug('Making checkbox determinate');
+          module.set.determinate();
+          if( !module.should.ignoreCallbacks() ) {
+            settings.onDeterminate.call(input);
+            settings.onChange.call(input);
+          }
+        },
+
+        enable: function() {
+          if( module.is.enabled() ) {
+            module.debug('Checkbox is already enabled');
+            return;
+          }
+          module.debug('Enabling checkbox');
+          module.set.enabled();
+          settings.onEnable.call(input);
+          // preserve legacy callbacks
+          settings.onEnabled.call(input);
+        },
+
+        disable: function() {
+          if( module.is.disabled() ) {
+            module.debug('Checkbox is already disabled');
+            return;
+          }
+          module.debug('Disabling checkbox');
+          module.set.disabled();
+          settings.onDisable.call(input);
+          // preserve legacy callbacks
+          settings.onDisabled.call(input);
+        },
+
+        get: {
+          radios: function() {
+            var
+              name = module.get.name()
+            ;
+            return $('input[name="' + name + '"]').closest(selector.checkbox);
+          },
+          otherRadios: function() {
+            return module.get.radios().not($module);
+          },
+          name: function() {
+            return $input.attr('name');
+          }
+        },
+
+        is: {
+          initialLoad: function() {
+            return initialLoad;
+          },
+          radio: function() {
+            return ($input.hasClass(className.radio) || $input.attr('type') == 'radio');
+          },
+          indeterminate: function() {
+            return $input.prop('indeterminate') !== undefined && $input.prop('indeterminate');
+          },
+          checked: function() {
+            return $input.prop('checked') !== undefined && $input.prop('checked');
+          },
+          disabled: function() {
+            return $input.prop('disabled') !== undefined && $input.prop('disabled');
+          },
+          enabled: function() {
+            return !module.is.disabled();
+          },
+          determinate: function() {
+            return !module.is.indeterminate();
+          },
+          unchecked: function() {
+            return !module.is.checked();
+          }
+        },
+
+        should: {
+          allowCheck: function() {
+            if(module.is.determinate() && module.is.checked() && !module.should.forceCallbacks() ) {
+              module.debug('Should not allow check, checkbox is already checked');
+              return false;
+            }
+            if(settings.beforeChecked.apply(input) === false) {
+              module.debug('Should not allow check, beforeChecked cancelled');
+              return false;
+            }
+            return true;
+          },
+          allowUncheck: function() {
+            if(module.is.determinate() && module.is.unchecked() && !module.should.forceCallbacks() ) {
+              module.debug('Should not allow uncheck, checkbox is already unchecked');
+              return false;
+            }
+            if(settings.beforeUnchecked.apply(input) === false) {
+              module.debug('Should not allow uncheck, beforeUnchecked cancelled');
+              return false;
+            }
+            return true;
+          },
+          allowIndeterminate: function() {
+            if(module.is.indeterminate() && !module.should.forceCallbacks() ) {
+              module.debug('Should not allow indeterminate, checkbox is already indeterminate');
+              return false;
+            }
+            if(settings.beforeIndeterminate.apply(input) === false) {
+              module.debug('Should not allow indeterminate, beforeIndeterminate cancelled');
+              return false;
+            }
+            return true;
+          },
+          allowDeterminate: function() {
+            if(module.is.determinate() && !module.should.forceCallbacks() ) {
+              module.debug('Should not allow determinate, checkbox is already determinate');
+              return false;
+            }
+            if(settings.beforeDeterminate.apply(input) === false) {
+              module.debug('Should not allow determinate, beforeDeterminate cancelled');
+              return false;
+            }
+            return true;
+          },
+          forceCallbacks: function() {
+            return (module.is.initialLoad() && settings.fireOnInit);
+          },
+          ignoreCallbacks: function() {
+            return (initialLoad && !settings.fireOnInit);
+          }
+        },
+
+        can: {
+          change: function() {
+            return !( $module.hasClass(className.disabled) || $module.hasClass(className.readOnly) || $input.prop('disabled') || $input.prop('readonly') );
+          },
+          uncheck: function() {
+            return (typeof settings.uncheckable === 'boolean')
+              ? settings.uncheckable
+              : !module.is.radio()
+            ;
+          }
+        },
+
+        set: {
+          initialLoad: function() {
+            initialLoad = true;
+          },
+          checked: function() {
+            module.verbose('Setting class to checked');
+            $module
+              .removeClass(className.indeterminate)
+              .addClass(className.checked)
+            ;
+            if( module.is.radio() ) {
+              module.uncheckOthers();
+            }
+            if(!module.is.indeterminate() && module.is.checked()) {
+              module.debug('Input is already checked, skipping input property change');
+              return;
+            }
+            module.verbose('Setting state to checked', input);
+            $input
+              .prop('indeterminate', false)
+              .prop('checked', true)
+            ;
+            module.trigger.change();
+          },
+          unchecked: function() {
+            module.verbose('Removing checked class');
+            $module
+              .removeClass(className.indeterminate)
+              .removeClass(className.checked)
+            ;
+            if(!module.is.indeterminate() &&  module.is.unchecked() ) {
+              module.debug('Input is already unchecked');
+              return;
+            }
+            module.debug('Setting state to unchecked');
+            $input
+              .prop('indeterminate', false)
+              .prop('checked', false)
+            ;
+            module.trigger.change();
+          },
+          indeterminate: function() {
+            module.verbose('Setting class to indeterminate');
+            $module
+              .addClass(className.indeterminate)
+            ;
+            if( module.is.indeterminate() ) {
+              module.debug('Input is already indeterminate, skipping input property change');
+              return;
+            }
+            module.debug('Setting state to indeterminate');
+            $input
+              .prop('indeterminate', true)
+            ;
+            module.trigger.change();
+          },
+          determinate: function() {
+            module.verbose('Removing indeterminate class');
+            $module
+              .removeClass(className.indeterminate)
+            ;
+            if( module.is.determinate() ) {
+              module.debug('Input is already determinate, skipping input property change');
+              return;
+            }
+            module.debug('Setting state to determinate');
+            $input
+              .prop('indeterminate', false)
+            ;
+          },
+          disabled: function() {
+            module.verbose('Setting class to disabled');
+            $module
+              .addClass(className.disabled)
+            ;
+            if( module.is.disabled() ) {
+              module.debug('Input is already disabled, skipping input property change');
+              return;
+            }
+            module.debug('Setting state to disabled');
+            $input
+              .prop('disabled', 'disabled')
+            ;
+            module.trigger.change();
+          },
+          enabled: function() {
+            module.verbose('Removing disabled class');
+            $module.removeClass(className.disabled);
+            if( module.is.enabled() ) {
+              module.debug('Input is already enabled, skipping input property change');
+              return;
+            }
+            module.debug('Setting state to enabled');
+            $input
+              .prop('disabled', false)
+            ;
+            module.trigger.change();
+          },
+          tabbable: function() {
+            module.verbose('Adding tabindex to checkbox');
+            if( $input.attr('tabindex') === undefined) {
+              $input.attr('tabindex', 0);
+            }
+          }
+        },
+
+        remove: {
+          initialLoad: function() {
+            initialLoad = false;
+          }
+        },
+
+        trigger: {
+          change: function() {
+            var
+              events       = document.createEvent('HTMLEvents'),
+              inputElement = $input[0]
+            ;
+            if(inputElement) {
+              module.verbose('Triggering native change event');
+              events.initEvent('change', true, false);
+              inputElement.dispatchEvent(events);
+            }
+          }
+        },
+
+
+        create: {
+          label: function() {
+            if($input.prevAll(selector.label).length > 0) {
+              $input.prev(selector.label).detach().insertAfter($input);
+              module.debug('Moving existing label', $label);
+            }
+            else if( !module.has.label() ) {
+              $label = $('<label>').insertAfter($input);
+              module.debug('Creating label', $label);
+            }
+          }
+        },
+
+        has: {
+          label: function() {
+            return ($label.length > 0);
+          }
+        },
+
+        bind: {
+          events: function() {
+            module.verbose('Attaching checkbox events');
+            $module
+              .on('click'   + eventNamespace, module.event.click)
+              .on('keydown' + eventNamespace, selector.input, module.event.keydown)
+              .on('keyup'   + eventNamespace, selector.input, module.event.keyup)
+            ;
+          }
+        },
+
+        unbind: {
+          events: function() {
+            module.debug('Removing events');
+            $module
+              .off(eventNamespace)
+            ;
+          }
+        },
+
+        uncheckOthers: function() {
+          var
+            $radios = module.get.otherRadios()
+          ;
+          module.debug('Unchecking other radios', $radios);
+          $radios.removeClass(className.checked);
+        },
+
+        toggle: function() {
+          if( !module.can.change() ) {
+            if(!module.is.radio()) {
+              module.debug('Checkbox is read-only or disabled, ignoring toggle');
+            }
+            return;
+          }
+          if( module.is.indeterminate() || module.is.unchecked() ) {
+            module.debug('Currently unchecked');
+            module.check();
+          }
+          else if( module.is.checked() && module.can.uncheck() ) {
+            module.debug('Currently checked');
+            module.uncheck();
+          }
+        },
+        setting: function(name, value) {
+          module.debug('Changing setting', name, value);
+          if( $.isPlainObject(name) ) {
+            $.extend(true, settings, name);
+          }
+          else if(value !== undefined) {
+            if($.isPlainObject(settings[name])) {
+              $.extend(true, settings[name], value);
+            }
+            else {
+              settings[name] = value;
+            }
+          }
+          else {
+            return settings[name];
+          }
+        },
+        internal: function(name, value) {
+          if( $.isPlainObject(name) ) {
+            $.extend(true, module, name);
+          }
+          else if(value !== undefined) {
+            module[name] = value;
+          }
+          else {
+            return module[name];
+          }
+        },
+        debug: function() {
+          if(!settings.silent && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.debug.apply(console, arguments);
+            }
+          }
+        },
+        verbose: function() {
+          if(!settings.silent && settings.verbose && settings.debug) {
+            if(settings.performance) {
+              module.performance.log(arguments);
+            }
+            else {
+              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
+              module.verbose.apply(console, arguments);
+            }
+          }
+        },
+        error: function() {
+          if(!settings.silent) {
+            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
+            module.error.apply(console, arguments);
+          }
+        },
+        performance: {
+          log: function(message) {
+            var
+              currentTime,
+              executionTime,
+              previousTime
+            ;
+            if(settings.performance) {
+              currentTime   = new Date().getTime();
+              previousTime  = time || currentTime;
+              executionTime = currentTime - previousTime;
+              time          = currentTime;
+              performance.push({
+                'Name'           : message[0],
+                'Arguments'      : [].slice.call(message, 1) || '',
+                'Element'        : element,
+                'Execution Time' : executionTime
+              });
+            }
+            clearTimeout(module.performance.timer);
+            module.performance.timer = setTimeout(module.performance.display, 500);
+          },
+          display: function() {
+            var
+              title = settings.name + ':',
+              totalTime = 0
+            ;
+            time = false;
+            clearTimeout(module.performance.timer);
+            $.each(performance, function(index, data) {
+              totalTime += data['Execution Time'];
+            });
+            title += ' ' + totalTime + 'ms';
+            if(moduleSelector) {
+              title += ' \'' + moduleSelector + '\'';
+            }
+            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
+              console.groupCollapsed(title);
+              if(console.table) {
+                console.table(performance);
+              }
+              else {
+                $.each(performance, function(index, data) {
+                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
+                });
+              }
+              console.groupEnd();
+            }
+            performance = [];
+          }
+        },
+        invoke: function(query, passedArguments, context) {
+          var
+            object = instance,
+            maxDepth,
+            found,
+            response
+          ;
+          passedArguments = passedArguments || queryArguments;
+          context         = element         || context;
+          if(typeof query == 'string' && object !== undefined) {
+            query    = query.split(/[\. ]/);
+            maxDepth = query.length - 1;
+            $.each(query, function(depth, value) {
+              var camelCaseValue = (depth != maxDepth)
+                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
+                : query
+              ;
+              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
+                object = object[camelCaseValue];
+              }
+              else if( object[camelCaseValue] !== undefined ) {
+                found = object[camelCaseValue];
+                return false;
+              }
+              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
+                object = object[value];
+              }
+              else if( object[value] !== undefined ) {
+                found = object[value];
+                return false;
+              }
+              else {
+                module.error(error.method, query);
+                return false;
+              }
+            });
+          }
+          if ( $.isFunction( found ) ) {
+            response = found.apply(context, passedArguments);
+          }
+          else if(found !== undefined) {
+            response = found;
+          }
+          if($.isArray(returnedValue)) {
+            returnedValue.push(response);
+          }
+          else if(returnedValue !== undefined) {
+            returnedValue = [returnedValue, response];
+          }
+          else if(response !== undefined) {
+            returnedValue = response;
+          }
+          return found;
+        }
+      };
+
+      if(methodInvoked) {
+        if(instance === undefined) {
+          module.initialize();
+        }
+        module.invoke(query);
+      }
+      else {
+        if(instance !== undefined) {
+          instance.invoke('destroy');
+        }
+        module.initialize();
+      }
+    })
+  ;
+
+  return (returnedValue !== undefined)
+    ? returnedValue
+    : this
+  ;
+};
+
+_module.exports.settings = {
+
+  name                : 'Checkbox',
+  namespace           : 'checkbox',
+
+  silent              : false,
+  debug               : false,
+  verbose             : true,
+  performance         : true,
+
+  // delegated event context
+  uncheckable         : 'auto',
+  fireOnInit          : false,
+
+  onChange            : function(){},
+
+  beforeChecked       : function(){},
+  beforeUnchecked     : function(){},
+  beforeDeterminate   : function(){},
+  beforeIndeterminate : function(){},
+
+  onChecked           : function(){},
+  onUnchecked         : function(){},
+
+  onDeterminate       : function() {},
+  onIndeterminate     : function() {},
+
+  onEnable            : function(){},
+  onDisable           : function(){},
+
+  // preserve misspelled callbacks (will be removed in 3.0)
+  onEnabled           : function(){},
+  onDisabled          : function(){},
+
+  className       : {
+    checked       : 'checked',
+    indeterminate : 'indeterminate',
+    disabled      : 'disabled',
+    hidden        : 'hidden',
+    radio         : 'radio',
+    readOnly      : 'read-only'
+  },
+
+  error     : {
+    method       : 'The method you called is not defined'
+  },
+
+  selector : {
+    checkbox : '.ui.checkbox',
+    label    : 'label, .box',
+    input    : 'input[type="checkbox"], input[type="radio"]',
+    link     : 'a[href]'
+  }
+
+};
+
+})( __webpack_require__(18), window, document );
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
+
+/***/ }),
+/* 743 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {/*!
  * # Semantic UI 2.2.10 - Dimmer
  * http://github.com/semantic-org/semantic-ui/
  *
@@ -84470,12 +85309,12 @@ _module.exports.settings = {
 
 };
 
-})( __webpack_require__(19), window, document );
+})( __webpack_require__(18), window, document );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
-/* 743 */
+/* 744 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {/*!
@@ -85399,12 +86238,12 @@ _module.exports.settings = {
 };
 
 
-})( __webpack_require__(19), window, document );
+})( __webpack_require__(18), window, document );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
-/* 744 */
+/* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {/*!
@@ -86882,17 +87721,17 @@ _module.exports.settings = {
 };
 
 
-})( __webpack_require__(19), window, document );
+})( __webpack_require__(18), window, document );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)(module)))
 
 /***/ }),
-/* 745 */,
 /* 746 */,
 /* 747 */,
 /* 748 */,
 /* 749 */,
-/* 750 */
+/* 750 */,
+/* 751 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(380);
@@ -86904,1008 +87743,6 @@ __webpack_require__(385);
 __webpack_require__(386);
 module.exports = __webpack_require__(387);
 
-
-/***/ }),
-/* 751 */,
-/* 752 */,
-/* 753 */,
-/* 754 */,
-/* 755 */,
-/* 756 */,
-/* 757 */,
-/* 758 */,
-/* 759 */,
-/* 760 */,
-/* 761 */,
-/* 762 */,
-/* 763 */,
-/* 764 */,
-/* 765 */,
-/* 766 */,
-/* 767 */,
-/* 768 */,
-/* 769 */,
-/* 770 */,
-/* 771 */,
-/* 772 */,
-/* 773 */,
-/* 774 */,
-/* 775 */,
-/* 776 */,
-/* 777 */,
-/* 778 */,
-/* 779 */,
-/* 780 */,
-/* 781 */,
-/* 782 */,
-/* 783 */,
-/* 784 */,
-/* 785 */,
-/* 786 */,
-/* 787 */,
-/* 788 */,
-/* 789 */,
-/* 790 */,
-/* 791 */,
-/* 792 */,
-/* 793 */,
-/* 794 */,
-/* 795 */,
-/* 796 */,
-/* 797 */,
-/* 798 */,
-/* 799 */,
-/* 800 */,
-/* 801 */,
-/* 802 */,
-/* 803 */,
-/* 804 */,
-/* 805 */,
-/* 806 */,
-/* 807 */,
-/* 808 */,
-/* 809 */,
-/* 810 */,
-/* 811 */,
-/* 812 */,
-/* 813 */,
-/* 814 */,
-/* 815 */,
-/* 816 */,
-/* 817 */,
-/* 818 */,
-/* 819 */,
-/* 820 */,
-/* 821 */,
-/* 822 */,
-/* 823 */,
-/* 824 */,
-/* 825 */,
-/* 826 */,
-/* 827 */,
-/* 828 */,
-/* 829 */,
-/* 830 */,
-/* 831 */,
-/* 832 */,
-/* 833 */,
-/* 834 */,
-/* 835 */,
-/* 836 */,
-/* 837 */,
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */,
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */,
-/* 854 */,
-/* 855 */,
-/* 856 */,
-/* 857 */,
-/* 858 */,
-/* 859 */,
-/* 860 */,
-/* 861 */,
-/* 862 */,
-/* 863 */,
-/* 864 */,
-/* 865 */,
-/* 866 */,
-/* 867 */,
-/* 868 */,
-/* 869 */,
-/* 870 */,
-/* 871 */,
-/* 872 */,
-/* 873 */,
-/* 874 */,
-/* 875 */,
-/* 876 */,
-/* 877 */,
-/* 878 */,
-/* 879 */,
-/* 880 */,
-/* 881 */,
-/* 882 */,
-/* 883 */,
-/* 884 */,
-/* 885 */,
-/* 886 */,
-/* 887 */,
-/* 888 */,
-/* 889 */,
-/* 890 */,
-/* 891 */,
-/* 892 */,
-/* 893 */,
-/* 894 */,
-/* 895 */,
-/* 896 */,
-/* 897 */,
-/* 898 */,
-/* 899 */,
-/* 900 */,
-/* 901 */,
-/* 902 */,
-/* 903 */,
-/* 904 */,
-/* 905 */,
-/* 906 */,
-/* 907 */,
-/* 908 */,
-/* 909 */,
-/* 910 */,
-/* 911 */,
-/* 912 */,
-/* 913 */,
-/* 914 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {/*!
- * # Semantic UI 2.2.10 - Checkbox
- * http://github.com/semantic-org/semantic-ui/
- *
- *
- * Released under the MIT license
- * http://opensource.org/licenses/MIT
- *
- */
-
-;(function ($, window, document, undefined) {
-
-"use strict";
-
-window = (typeof window != 'undefined' && window.Math == Math)
-  ? window
-  : (typeof self != 'undefined' && self.Math == Math)
-    ? self
-    : Function('return this')()
-;
-
-var _module = module;
-module.exports = function(parameters) {
-  var
-    $allModules    = $(this),
-    moduleSelector = $allModules.selector || '',
-
-    time           = new Date().getTime(),
-    performance    = [],
-
-    query          = arguments[0],
-    methodInvoked  = (typeof query == 'string'),
-    queryArguments = [].slice.call(arguments, 1),
-    returnedValue
-  ;
-
-  $allModules
-    .each(function() {
-      var
-        settings        = $.extend(true, {}, _module.exports.settings, parameters),
-
-        className       = settings.className,
-        namespace       = settings.namespace,
-        selector        = settings.selector,
-        error           = settings.error,
-
-        eventNamespace  = '.' + namespace,
-        moduleNamespace = 'module-' + namespace,
-
-        $module         = $(this),
-        $label          = $(this).children(selector.label),
-        $input          = $(this).children(selector.input),
-        input           = $input[0],
-
-        initialLoad     = false,
-        shortcutPressed = false,
-        instance        = $module.data(moduleNamespace),
-
-        observer,
-        element         = this,
-        module
-      ;
-
-      module      = {
-
-        initialize: function() {
-          module.verbose('Initializing checkbox', settings);
-
-          module.create.label();
-          module.bind.events();
-
-          module.set.tabbable();
-          module.hide.input();
-
-          module.observeChanges();
-          module.instantiate();
-          module.setup();
-        },
-
-        instantiate: function() {
-          module.verbose('Storing instance of module', module);
-          instance = module;
-          $module
-            .data(moduleNamespace, module)
-          ;
-        },
-
-        destroy: function() {
-          module.verbose('Destroying module');
-          module.unbind.events();
-          module.show.input();
-          $module.removeData(moduleNamespace);
-        },
-
-        fix: {
-          reference: function() {
-            if( $module.is(selector.input) ) {
-              module.debug('Behavior called on <input> adjusting invoked element');
-              $module = $module.closest(selector.checkbox);
-              module.refresh();
-            }
-          }
-        },
-
-        setup: function() {
-          module.set.initialLoad();
-          if( module.is.indeterminate() ) {
-            module.debug('Initial value is indeterminate');
-            module.indeterminate();
-          }
-          else if( module.is.checked() ) {
-            module.debug('Initial value is checked');
-            module.check();
-          }
-          else {
-            module.debug('Initial value is unchecked');
-            module.uncheck();
-          }
-          module.remove.initialLoad();
-        },
-
-        refresh: function() {
-          $label = $module.children(selector.label);
-          $input = $module.children(selector.input);
-          input  = $input[0];
-        },
-
-        hide: {
-          input: function() {
-            module.verbose('Modifying <input> z-index to be unselectable');
-            $input.addClass(className.hidden);
-          }
-        },
-        show: {
-          input: function() {
-            module.verbose('Modifying <input> z-index to be selectable');
-            $input.removeClass(className.hidden);
-          }
-        },
-
-        observeChanges: function() {
-          if('MutationObserver' in window) {
-            observer = new MutationObserver(function(mutations) {
-              module.debug('DOM tree modified, updating selector cache');
-              module.refresh();
-            });
-            observer.observe(element, {
-              childList : true,
-              subtree   : true
-            });
-            module.debug('Setting up mutation observer', observer);
-          }
-        },
-
-        attachEvents: function(selector, event) {
-          var
-            $element = $(selector)
-          ;
-          event = $.isFunction(module[event])
-            ? module[event]
-            : module.toggle
-          ;
-          if($element.length > 0) {
-            module.debug('Attaching checkbox events to element', selector, event);
-            $element
-              .on('click' + eventNamespace, event)
-            ;
-          }
-          else {
-            module.error(error.notFound);
-          }
-        },
-
-        event: {
-          click: function(event) {
-            var
-              $target = $(event.target)
-            ;
-            if( $target.is(selector.input) ) {
-              module.verbose('Using default check action on initialized checkbox');
-              return;
-            }
-            if( $target.is(selector.link) ) {
-              module.debug('Clicking link inside checkbox, skipping toggle');
-              return;
-            }
-            module.toggle();
-            $input.focus();
-            event.preventDefault();
-          },
-          keydown: function(event) {
-            var
-              key     = event.which,
-              keyCode = {
-                enter  : 13,
-                space  : 32,
-                escape : 27
-              }
-            ;
-            if(key == keyCode.escape) {
-              module.verbose('Escape key pressed blurring field');
-              $input.blur();
-              shortcutPressed = true;
-            }
-            else if(!event.ctrlKey && ( key == keyCode.space || key == keyCode.enter) ) {
-              module.verbose('Enter/space key pressed, toggling checkbox');
-              module.toggle();
-              shortcutPressed = true;
-            }
-            else {
-              shortcutPressed = false;
-            }
-          },
-          keyup: function(event) {
-            if(shortcutPressed) {
-              event.preventDefault();
-            }
-          }
-        },
-
-        check: function() {
-          if( !module.should.allowCheck() ) {
-            return;
-          }
-          module.debug('Checking checkbox', $input);
-          module.set.checked();
-          if( !module.should.ignoreCallbacks() ) {
-            settings.onChecked.call(input);
-            settings.onChange.call(input);
-          }
-        },
-
-        uncheck: function() {
-          if( !module.should.allowUncheck() ) {
-            return;
-          }
-          module.debug('Unchecking checkbox');
-          module.set.unchecked();
-          if( !module.should.ignoreCallbacks() ) {
-            settings.onUnchecked.call(input);
-            settings.onChange.call(input);
-          }
-        },
-
-        indeterminate: function() {
-          if( module.should.allowIndeterminate() ) {
-            module.debug('Checkbox is already indeterminate');
-            return;
-          }
-          module.debug('Making checkbox indeterminate');
-          module.set.indeterminate();
-          if( !module.should.ignoreCallbacks() ) {
-            settings.onIndeterminate.call(input);
-            settings.onChange.call(input);
-          }
-        },
-
-        determinate: function() {
-          if( module.should.allowDeterminate() ) {
-            module.debug('Checkbox is already determinate');
-            return;
-          }
-          module.debug('Making checkbox determinate');
-          module.set.determinate();
-          if( !module.should.ignoreCallbacks() ) {
-            settings.onDeterminate.call(input);
-            settings.onChange.call(input);
-          }
-        },
-
-        enable: function() {
-          if( module.is.enabled() ) {
-            module.debug('Checkbox is already enabled');
-            return;
-          }
-          module.debug('Enabling checkbox');
-          module.set.enabled();
-          settings.onEnable.call(input);
-          // preserve legacy callbacks
-          settings.onEnabled.call(input);
-        },
-
-        disable: function() {
-          if( module.is.disabled() ) {
-            module.debug('Checkbox is already disabled');
-            return;
-          }
-          module.debug('Disabling checkbox');
-          module.set.disabled();
-          settings.onDisable.call(input);
-          // preserve legacy callbacks
-          settings.onDisabled.call(input);
-        },
-
-        get: {
-          radios: function() {
-            var
-              name = module.get.name()
-            ;
-            return $('input[name="' + name + '"]').closest(selector.checkbox);
-          },
-          otherRadios: function() {
-            return module.get.radios().not($module);
-          },
-          name: function() {
-            return $input.attr('name');
-          }
-        },
-
-        is: {
-          initialLoad: function() {
-            return initialLoad;
-          },
-          radio: function() {
-            return ($input.hasClass(className.radio) || $input.attr('type') == 'radio');
-          },
-          indeterminate: function() {
-            return $input.prop('indeterminate') !== undefined && $input.prop('indeterminate');
-          },
-          checked: function() {
-            return $input.prop('checked') !== undefined && $input.prop('checked');
-          },
-          disabled: function() {
-            return $input.prop('disabled') !== undefined && $input.prop('disabled');
-          },
-          enabled: function() {
-            return !module.is.disabled();
-          },
-          determinate: function() {
-            return !module.is.indeterminate();
-          },
-          unchecked: function() {
-            return !module.is.checked();
-          }
-        },
-
-        should: {
-          allowCheck: function() {
-            if(module.is.determinate() && module.is.checked() && !module.should.forceCallbacks() ) {
-              module.debug('Should not allow check, checkbox is already checked');
-              return false;
-            }
-            if(settings.beforeChecked.apply(input) === false) {
-              module.debug('Should not allow check, beforeChecked cancelled');
-              return false;
-            }
-            return true;
-          },
-          allowUncheck: function() {
-            if(module.is.determinate() && module.is.unchecked() && !module.should.forceCallbacks() ) {
-              module.debug('Should not allow uncheck, checkbox is already unchecked');
-              return false;
-            }
-            if(settings.beforeUnchecked.apply(input) === false) {
-              module.debug('Should not allow uncheck, beforeUnchecked cancelled');
-              return false;
-            }
-            return true;
-          },
-          allowIndeterminate: function() {
-            if(module.is.indeterminate() && !module.should.forceCallbacks() ) {
-              module.debug('Should not allow indeterminate, checkbox is already indeterminate');
-              return false;
-            }
-            if(settings.beforeIndeterminate.apply(input) === false) {
-              module.debug('Should not allow indeterminate, beforeIndeterminate cancelled');
-              return false;
-            }
-            return true;
-          },
-          allowDeterminate: function() {
-            if(module.is.determinate() && !module.should.forceCallbacks() ) {
-              module.debug('Should not allow determinate, checkbox is already determinate');
-              return false;
-            }
-            if(settings.beforeDeterminate.apply(input) === false) {
-              module.debug('Should not allow determinate, beforeDeterminate cancelled');
-              return false;
-            }
-            return true;
-          },
-          forceCallbacks: function() {
-            return (module.is.initialLoad() && settings.fireOnInit);
-          },
-          ignoreCallbacks: function() {
-            return (initialLoad && !settings.fireOnInit);
-          }
-        },
-
-        can: {
-          change: function() {
-            return !( $module.hasClass(className.disabled) || $module.hasClass(className.readOnly) || $input.prop('disabled') || $input.prop('readonly') );
-          },
-          uncheck: function() {
-            return (typeof settings.uncheckable === 'boolean')
-              ? settings.uncheckable
-              : !module.is.radio()
-            ;
-          }
-        },
-
-        set: {
-          initialLoad: function() {
-            initialLoad = true;
-          },
-          checked: function() {
-            module.verbose('Setting class to checked');
-            $module
-              .removeClass(className.indeterminate)
-              .addClass(className.checked)
-            ;
-            if( module.is.radio() ) {
-              module.uncheckOthers();
-            }
-            if(!module.is.indeterminate() && module.is.checked()) {
-              module.debug('Input is already checked, skipping input property change');
-              return;
-            }
-            module.verbose('Setting state to checked', input);
-            $input
-              .prop('indeterminate', false)
-              .prop('checked', true)
-            ;
-            module.trigger.change();
-          },
-          unchecked: function() {
-            module.verbose('Removing checked class');
-            $module
-              .removeClass(className.indeterminate)
-              .removeClass(className.checked)
-            ;
-            if(!module.is.indeterminate() &&  module.is.unchecked() ) {
-              module.debug('Input is already unchecked');
-              return;
-            }
-            module.debug('Setting state to unchecked');
-            $input
-              .prop('indeterminate', false)
-              .prop('checked', false)
-            ;
-            module.trigger.change();
-          },
-          indeterminate: function() {
-            module.verbose('Setting class to indeterminate');
-            $module
-              .addClass(className.indeterminate)
-            ;
-            if( module.is.indeterminate() ) {
-              module.debug('Input is already indeterminate, skipping input property change');
-              return;
-            }
-            module.debug('Setting state to indeterminate');
-            $input
-              .prop('indeterminate', true)
-            ;
-            module.trigger.change();
-          },
-          determinate: function() {
-            module.verbose('Removing indeterminate class');
-            $module
-              .removeClass(className.indeterminate)
-            ;
-            if( module.is.determinate() ) {
-              module.debug('Input is already determinate, skipping input property change');
-              return;
-            }
-            module.debug('Setting state to determinate');
-            $input
-              .prop('indeterminate', false)
-            ;
-          },
-          disabled: function() {
-            module.verbose('Setting class to disabled');
-            $module
-              .addClass(className.disabled)
-            ;
-            if( module.is.disabled() ) {
-              module.debug('Input is already disabled, skipping input property change');
-              return;
-            }
-            module.debug('Setting state to disabled');
-            $input
-              .prop('disabled', 'disabled')
-            ;
-            module.trigger.change();
-          },
-          enabled: function() {
-            module.verbose('Removing disabled class');
-            $module.removeClass(className.disabled);
-            if( module.is.enabled() ) {
-              module.debug('Input is already enabled, skipping input property change');
-              return;
-            }
-            module.debug('Setting state to enabled');
-            $input
-              .prop('disabled', false)
-            ;
-            module.trigger.change();
-          },
-          tabbable: function() {
-            module.verbose('Adding tabindex to checkbox');
-            if( $input.attr('tabindex') === undefined) {
-              $input.attr('tabindex', 0);
-            }
-          }
-        },
-
-        remove: {
-          initialLoad: function() {
-            initialLoad = false;
-          }
-        },
-
-        trigger: {
-          change: function() {
-            var
-              events       = document.createEvent('HTMLEvents'),
-              inputElement = $input[0]
-            ;
-            if(inputElement) {
-              module.verbose('Triggering native change event');
-              events.initEvent('change', true, false);
-              inputElement.dispatchEvent(events);
-            }
-          }
-        },
-
-
-        create: {
-          label: function() {
-            if($input.prevAll(selector.label).length > 0) {
-              $input.prev(selector.label).detach().insertAfter($input);
-              module.debug('Moving existing label', $label);
-            }
-            else if( !module.has.label() ) {
-              $label = $('<label>').insertAfter($input);
-              module.debug('Creating label', $label);
-            }
-          }
-        },
-
-        has: {
-          label: function() {
-            return ($label.length > 0);
-          }
-        },
-
-        bind: {
-          events: function() {
-            module.verbose('Attaching checkbox events');
-            $module
-              .on('click'   + eventNamespace, module.event.click)
-              .on('keydown' + eventNamespace, selector.input, module.event.keydown)
-              .on('keyup'   + eventNamespace, selector.input, module.event.keyup)
-            ;
-          }
-        },
-
-        unbind: {
-          events: function() {
-            module.debug('Removing events');
-            $module
-              .off(eventNamespace)
-            ;
-          }
-        },
-
-        uncheckOthers: function() {
-          var
-            $radios = module.get.otherRadios()
-          ;
-          module.debug('Unchecking other radios', $radios);
-          $radios.removeClass(className.checked);
-        },
-
-        toggle: function() {
-          if( !module.can.change() ) {
-            if(!module.is.radio()) {
-              module.debug('Checkbox is read-only or disabled, ignoring toggle');
-            }
-            return;
-          }
-          if( module.is.indeterminate() || module.is.unchecked() ) {
-            module.debug('Currently unchecked');
-            module.check();
-          }
-          else if( module.is.checked() && module.can.uncheck() ) {
-            module.debug('Currently checked');
-            module.uncheck();
-          }
-        },
-        setting: function(name, value) {
-          module.debug('Changing setting', name, value);
-          if( $.isPlainObject(name) ) {
-            $.extend(true, settings, name);
-          }
-          else if(value !== undefined) {
-            if($.isPlainObject(settings[name])) {
-              $.extend(true, settings[name], value);
-            }
-            else {
-              settings[name] = value;
-            }
-          }
-          else {
-            return settings[name];
-          }
-        },
-        internal: function(name, value) {
-          if( $.isPlainObject(name) ) {
-            $.extend(true, module, name);
-          }
-          else if(value !== undefined) {
-            module[name] = value;
-          }
-          else {
-            return module[name];
-          }
-        },
-        debug: function() {
-          if(!settings.silent && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.debug.apply(console, arguments);
-            }
-          }
-        },
-        verbose: function() {
-          if(!settings.silent && settings.verbose && settings.debug) {
-            if(settings.performance) {
-              module.performance.log(arguments);
-            }
-            else {
-              module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
-              module.verbose.apply(console, arguments);
-            }
-          }
-        },
-        error: function() {
-          if(!settings.silent) {
-            module.error = Function.prototype.bind.call(console.error, console, settings.name + ':');
-            module.error.apply(console, arguments);
-          }
-        },
-        performance: {
-          log: function(message) {
-            var
-              currentTime,
-              executionTime,
-              previousTime
-            ;
-            if(settings.performance) {
-              currentTime   = new Date().getTime();
-              previousTime  = time || currentTime;
-              executionTime = currentTime - previousTime;
-              time          = currentTime;
-              performance.push({
-                'Name'           : message[0],
-                'Arguments'      : [].slice.call(message, 1) || '',
-                'Element'        : element,
-                'Execution Time' : executionTime
-              });
-            }
-            clearTimeout(module.performance.timer);
-            module.performance.timer = setTimeout(module.performance.display, 500);
-          },
-          display: function() {
-            var
-              title = settings.name + ':',
-              totalTime = 0
-            ;
-            time = false;
-            clearTimeout(module.performance.timer);
-            $.each(performance, function(index, data) {
-              totalTime += data['Execution Time'];
-            });
-            title += ' ' + totalTime + 'ms';
-            if(moduleSelector) {
-              title += ' \'' + moduleSelector + '\'';
-            }
-            if( (console.group !== undefined || console.table !== undefined) && performance.length > 0) {
-              console.groupCollapsed(title);
-              if(console.table) {
-                console.table(performance);
-              }
-              else {
-                $.each(performance, function(index, data) {
-                  console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-                });
-              }
-              console.groupEnd();
-            }
-            performance = [];
-          }
-        },
-        invoke: function(query, passedArguments, context) {
-          var
-            object = instance,
-            maxDepth,
-            found,
-            response
-          ;
-          passedArguments = passedArguments || queryArguments;
-          context         = element         || context;
-          if(typeof query == 'string' && object !== undefined) {
-            query    = query.split(/[\. ]/);
-            maxDepth = query.length - 1;
-            $.each(query, function(depth, value) {
-              var camelCaseValue = (depth != maxDepth)
-                ? value + query[depth + 1].charAt(0).toUpperCase() + query[depth + 1].slice(1)
-                : query
-              ;
-              if( $.isPlainObject( object[camelCaseValue] ) && (depth != maxDepth) ) {
-                object = object[camelCaseValue];
-              }
-              else if( object[camelCaseValue] !== undefined ) {
-                found = object[camelCaseValue];
-                return false;
-              }
-              else if( $.isPlainObject( object[value] ) && (depth != maxDepth) ) {
-                object = object[value];
-              }
-              else if( object[value] !== undefined ) {
-                found = object[value];
-                return false;
-              }
-              else {
-                module.error(error.method, query);
-                return false;
-              }
-            });
-          }
-          if ( $.isFunction( found ) ) {
-            response = found.apply(context, passedArguments);
-          }
-          else if(found !== undefined) {
-            response = found;
-          }
-          if($.isArray(returnedValue)) {
-            returnedValue.push(response);
-          }
-          else if(returnedValue !== undefined) {
-            returnedValue = [returnedValue, response];
-          }
-          else if(response !== undefined) {
-            returnedValue = response;
-          }
-          return found;
-        }
-      };
-
-      if(methodInvoked) {
-        if(instance === undefined) {
-          module.initialize();
-        }
-        module.invoke(query);
-      }
-      else {
-        if(instance !== undefined) {
-          instance.invoke('destroy');
-        }
-        module.initialize();
-      }
-    })
-  ;
-
-  return (returnedValue !== undefined)
-    ? returnedValue
-    : this
-  ;
-};
-
-_module.exports.settings = {
-
-  name                : 'Checkbox',
-  namespace           : 'checkbox',
-
-  silent              : false,
-  debug               : false,
-  verbose             : true,
-  performance         : true,
-
-  // delegated event context
-  uncheckable         : 'auto',
-  fireOnInit          : false,
-
-  onChange            : function(){},
-
-  beforeChecked       : function(){},
-  beforeUnchecked     : function(){},
-  beforeDeterminate   : function(){},
-  beforeIndeterminate : function(){},
-
-  onChecked           : function(){},
-  onUnchecked         : function(){},
-
-  onDeterminate       : function() {},
-  onIndeterminate     : function() {},
-
-  onEnable            : function(){},
-  onDisable           : function(){},
-
-  // preserve misspelled callbacks (will be removed in 3.0)
-  onEnabled           : function(){},
-  onDisabled          : function(){},
-
-  className       : {
-    checked       : 'checked',
-    indeterminate : 'indeterminate',
-    disabled      : 'disabled',
-    hidden        : 'hidden',
-    radio         : 'radio',
-    readOnly      : 'read-only'
-  },
-
-  error     : {
-    method       : 'The method you called is not defined'
-  },
-
-  selector : {
-    checkbox : '.ui.checkbox',
-    label    : 'label, .box',
-    input    : 'input[type="checkbox"], input[type="radio"]',
-    link     : 'a[href]'
-  }
-
-};
-
-})( __webpack_require__(19), window, document );
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)(module)))
 
 /***/ })
 /******/ ]);

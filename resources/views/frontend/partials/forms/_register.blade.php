@@ -75,6 +75,21 @@
         </div>
     </div>
 
+    <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+        <label for="role_id" class="col-md-4 control-label">Type</label>
+        @foreach($roles as $key => $role)
+            <div class="col-md-3">
+                <div class="col-lg-1">
+                    <input type="radio" class="" name="role_id" value="{{ $key }}"
+                           required>
+                </div>
+                <div class="col-lg-2">
+                    <span>{{ title_case($role) }}</span>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 
     <div class="form-group">
         <div class="col-md-6 pull-right">

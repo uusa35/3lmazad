@@ -80,32 +80,32 @@
                                            href="{{ route('favorite.index') }}"
                                            data-tooltip="{{ trans('message.wishlist') }}" data-inverted="">
                                             <i class="right outline heart icon big"
-                                               style="margin: 30px; display: block; clear:both;"></i>
+                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             {{ trans('general.wishlist') }}
                                         </a>
                                         <a class="ui pink button tooltip-message"
                                            href="{{ route("user.show",$element->id) }}"
-                                           data-tooltip="{{ trans('message.my_ads') }}" data-inverted="">
+                                           data-tooltip="{{ trans('message.my_active_ads') }}" data-inverted="">
                                             <i class="right clone icon big"
-                                               style="margin: 30px; display: block; clear:both;"></i>
-                                            {{ trans('general.my_ads') }}
+                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
+                                            {{ trans('general.my_active_ads') }}
+                                        </a>
+                                        <a class="ui olive button tooltip-message" href="{{ route('user.ad.list') }}"
+                                           data-tooltip="{{ trans('message.list_of_all_ads') }}" data-inverted="">
+                                            <i class="right arrow icon big"
+                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
+                                            {{ trans('general.list_of_all_ads') }}
                                         </a>
                                         <a class="ui olive button tooltip-message" href="#"
                                            data-tooltip="{{ trans('message.something') }}" data-inverted="">
                                             <i class="right arrow icon big"
-                                               style="margin: 30px; display: block; clear:both;"></i>
+                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             Read more
                                         </a>
                                         <a class="ui olive button tooltip-message" href="#"
                                            data-tooltip="{{ trans('message.something') }}" data-inverted="">
                                             <i class="right arrow icon big"
-                                               style="margin: 30px; display: block; clear:both;"></i>
-                                            Read more
-                                        </a>
-                                        <a class="ui olive button tooltip-message" href="#"
-                                           data-tooltip="{{ trans('message.something') }}" data-inverted="">
-                                            <i class="right arrow icon big"
-                                               style="margin: 30px; display: block; clear:both;"></i>
+                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             Read more
                                         </a>
                                     </div>
