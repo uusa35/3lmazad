@@ -21,6 +21,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::post('contactus', 'HomeController@postContactus');
     Route::post('newsletter', 'HomeController@postNewsletter')->name('newsletter');
     Route::get('/lang/{lang}', 'LanguageController@changeLocale')->name('lang');
+    Route::get('/user/ads/{id}', 'UserController@ads')->name('user.ads');
+    Route::resource('user', 'UserController', ['only' => ['index','show']]);
     /*
      * the following route for both (search + categories menu) === petrolet.dev/search?type=user&main=3&sub=7
      * returns all companies related to main or sub category included within the filter
@@ -41,9 +43,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete']]);
-        Route::get('user/ads/list','UserController@ads')->name('user.ad.list');
-        Route::get('user/ad/toggle/republish','UserController@toggleRepublish')->name('user.ad.republish');
+        Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete','index']]);
+        Route::get('user/ads/list', 'UserController@myAds')->name('user.my_ads.list');
+        Route::get('user/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');

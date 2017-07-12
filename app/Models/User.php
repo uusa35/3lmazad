@@ -38,6 +38,7 @@ class User extends Authenticatable
         'is_email_visible' => 'boolean'
     ];
 
+    protected $with = ['roles'];
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.

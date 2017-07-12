@@ -37,14 +37,15 @@ Breadcrumbs::register('favorite', function ($breadcrumbs) {
     $breadcrumbs->push('favorite');
 });
 
-// account (user.index)
+// all merchants  (user.index)
 Breadcrumbs::register('user.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.my_account'), route('user.index'));
+    $breadcrumbs->push(trans('general.merchant'), route('user.index'));
 });
+
 // my ads page
-Breadcrumbs::register('user.show', function ($breadcrumbs, $element) {
+Breadcrumbs::register('user.ads', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('user.index');
-    $breadcrumbs->push(trans('general.my_ads'), route('user.show', $element->id));
+    $breadcrumbs->push(trans('general.ads'), route('user.ads', $id));
 });
 

@@ -11,10 +11,12 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     public $ad;
+    public $user;
 
-    public function __construct(Ad $ad)
+    public function __construct(Ad $ad, User $user)
     {
         $this->ad = $ad;
+        $this->user = $user;
     }
 
     /**
@@ -24,9 +26,14 @@ class UserController extends Controller
      */
     public function index()
     {
+        $elements = $this->user->merchants()->with('ads')->paginate(12);
+        return view('frontend.modules.user.index', compact('elements'));
+    }
+
+    public function account()
+    {
         $element = auth()->user();
-        $this->authorize('isOwner', $element->id);
-        return view('frontend.modules.user.index', compact('element'));
+        return view('frontend.modules.user.account', compact('element'));
     }
 
     /**
@@ -58,11 +65,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::whereId($id)->first();
-        $this->authorize('isOwner', $user->id);
-        $userFavorites = auth()->user()->ads()->pluck('id')->toArray();
-        $elements = $user->favorites()->paginate(12);
-        return view('frontend.modules.user.show', compact('elements', 'userFavorites'));
+        $element = auth()->user();
+        $this->authorize('isOwner', $element->id);
+        return view('frontend.modules.user.show', compact('element'));
+    }
+
+    public function ads($id)
+    {
+        $element = $this->user->whereId($id)->with('ads')->first();
+        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
+        return view('frontend.modules.user.ads', compact('elements'));
     }
 
     /**
@@ -113,7 +125,7 @@ class UserController extends Controller
         //
     }
 
-    public function ads()
+    public function myads()
     {
         $elements = auth()->user()->ads()->withoutGlobalScopes()->with('category', 'meta')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));

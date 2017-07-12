@@ -5,9 +5,10 @@
             <ol class="breadcrumb breadcrumb--wd pull-left">
                 @foreach ($breadcrumbs as $breadcrumb)
                     @if (!$breadcrumb->last)
+                        <li><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
+                    @else
                         <li class="active">{{ $breadcrumb->title }}</li>
                     @endif
-                    <li><a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a></li>
                 @endforeach
             </ol>
             {{--<ul id="productOther" class="product-other pull-right hidden-xs">--}}

@@ -23,7 +23,7 @@
                 <div class="product-preview__info">
                     <div class="product-preview__info__btns">
                         {{--<a href="#" class="btn btn--round"><span class="icon-ecommerce"></span></a>--}}
-                        @if(auth()->check())
+                        @if(auth()->check() && isset($userFavorites))
                             <button id="favorite-{{ $element->id }}"
                                     data-ad-id="{{ $element->id }}"
                                     data-user-id="{{ auth()->user()->id }}"
@@ -55,10 +55,10 @@
                     </div>
                     @if(is_null($element->color->code))
                         <ul class="options-swatch options-swatch--color">
-                            <li><a href="#"><span class="swatch-label"><img
-                                                src="http://placehold.it/100x100/{{ $element->color->code }}" width="10"
-                                                height="10"
-                                                alt=""/></span></a></li>
+                            {{--<li><a href="#"><span class="swatch-label"><img--}}
+                            {{--src="http://placehold.it/100x100/{{ $element->color->code }}" width="10"--}}
+                            {{--height="10"--}}
+                            {{--alt=""/></span></a></li>--}}
                         </ul>
                     @endif
                     <div class="price-box ">

@@ -138,7 +138,7 @@ $(document).ready(function () {
             return data.map(function (m) {
                 var name = 'name_' + lang;
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
-                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <img class="ui avatar image" src="storage/uploads/images/thumbnail/' + m.image + '">\n                        ' + m[name] + '\n                    </div>\n                ');
+                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <img class="ui avatar image" src="/storage/uploads/images/thumbnail/' + m.image + '">\n                        ' + m[name] + '\n                    </div>\n                ');
             });
         }).catch(function (e) {
             return console.log(e);

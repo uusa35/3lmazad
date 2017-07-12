@@ -19,7 +19,9 @@ class RolesTableSeeder extends Seeder
                 if ($role->name === 'admin') {
                     $role->users()->attach((User::whereId(1)->first()->id));
                 } else {
-                    $role->users()->attach(User::where('id', '!=', 1)->pluck('id'));
+                    $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
+                        return $q;
+                    })->take(3)->pluck('id'));
                 }
             });
         }

@@ -25,13 +25,18 @@ trait UserHelpers
         return $this->roles->first()->name === 'merchant';
     }
 
-    public function scopeUsers()
+    public function scopeUsers($q)
     {
-        return $this->roles->where('role', 'user');
+        return $q->whereHas('roles', function ($r) {
+            $r->where('name', 'user');
+        });
+
     }
 
-    public function scopeMerchants()
+    public function scopeMerchants($q)
     {
-        return $this->roles->where('role', 'merchant');
+        return $q->whereHas('roles', function ($r) {
+            $r->where('name', 'merchant');
+        });
     }
 }
