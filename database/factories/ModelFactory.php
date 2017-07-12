@@ -52,6 +52,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'is_mobile_visible' => 1,
         'is_email_visible' => 1,
         'phone' => $faker->bankAccountNumber,
+        'description' => $faker->paragraph(4),
         'featured' => $faker->boolean(80),
         'remember_token' => str_random(10),
 //        'settings' => ['certificate' => $faker->name, 'height' => $faker->numberBetween(100, 200)],

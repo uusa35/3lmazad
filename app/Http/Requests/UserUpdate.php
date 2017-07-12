@@ -27,7 +27,7 @@ class UserUpdate extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'country_id' => 'required|numeric',
-            'avatar' => 'mimes:jpg,jpeg,png|nullable',
+            'avatar' => 'mimes:jpg,jpeg,png',
         ];
     }
 }

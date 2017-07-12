@@ -11,6 +11,21 @@ Breadcrumbs::register('home', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.home'), route('home'));
 });
 
+Breadcrumbs::register('login', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.login'), route('login'));
+});
+
+Breadcrumbs::register('register', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.register'), route('register'));
+});
+
+Breadcrumbs::register('reset_password', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.reset_password'), route('password.request'));
+});
+
 //ad.show
 Breadcrumbs::register('ad.show.category', function ($breadcrumbs, $element) {
     $parent = $element->category->parent->first();
@@ -44,7 +59,6 @@ Breadcrumbs::register('user.index', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.merchant'), route('user.index'));
 });
 
-
 // user profile
 Breadcrumbs::register('user.profile', function ($breadcrumbs, $id) {
     if (auth()->user()->id === $id)
@@ -64,6 +78,11 @@ Breadcrumbs::register('user.ads', function ($breadcrumbs, $id) {
 Breadcrumbs::register('account', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('general.account'), route('account'));
+});
+
+Breadcrumbs::register('user.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push(trans('general.profile_edit'), route('user.edit',auth()->user()->id));
 });
 
 // account.ads (list of ads from account)

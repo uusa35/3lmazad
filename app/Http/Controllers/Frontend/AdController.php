@@ -48,7 +48,6 @@ class AdController extends Controller
      */
     public function create()
     {
-        dd('stop');
         return view('frontend.modules.ad.create');
     }
 

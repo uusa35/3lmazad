@@ -1,5 +1,5 @@
 <form class="form-horizontal" method="post"
-      action="{{ action('Frontend\ItemController@store') }}"
+      action="{{ action('Frontend\AdController@store') }}"
       enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">

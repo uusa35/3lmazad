@@ -54,6 +54,15 @@
         </div>
     </div>
 
+
+    <div class="form-group">
+        <label for="avatar" class="col-md-4 control-label">{{ trans('general.avatar') }}</label>
+
+        <div class="col-md-6">
+            <input id="avatar" type="file" class="form-control" name="avatar" required>
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="countries" class="col-md-4 control-label">{{ trans('general.country') }}</label>
 
@@ -62,32 +71,21 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+    <div class="form-group">
         <label for="name" class="col-md-4 control-label">{{ trans('general.mobile') }}</label>
 
         <div class="col-md-6">
             <input id="phone" type="text" class="form-control" name="phone"
                    value="{{ old('phone') }}" number autofocus>
-
-            @if ($errors->has('phone'))
-                <span class="help-block"><strong>{{ $errors->first('phone') }}</strong> </span>
-            @endif
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
-        <label for="role_id" class="col-md-4 control-label">Type</label>
-        @foreach($roles as $key => $role)
-            <div class="col-md-3">
-                <div class="col-lg-1">
-                    <input type="radio" class="" name="role_id" value="{{ $key }}"
-                           required>
-                </div>
-                <div class="col-lg-2">
-                    <span>{{ title_case($role) }}</span>
-                </div>
-            </div>
-        @endforeach
+    <div class="form-group">
+        <label for="description" class="col-md-4 control-label">{{ trans('general.description') }}</label>
+
+        <div class="col-md-6">
+            <textarea type="text" class="form-control" name="description" aria-multiline="true" maxlength="1000"></textarea>
+        </div>
     </div>
 
 

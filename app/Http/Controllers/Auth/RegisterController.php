@@ -49,10 +49,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1500',
             'email' => 'required|string|email|max:255|unique:users',
+            'avatar' => 'required|mimes:jpg,jpeg,png',
             'password' => 'required|string|min:6|confirmed',
             'country_id' => 'required|numeric',
+            'description' => 'string|max:1000',
         ]);
     }
 
@@ -64,13 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'description' => $data['description'],
             'country_id' => $data['country_id'],
             'password' => bcrypt($data['password']),
+            'description' => $data['description'],
         ]);
+        $avatar = $this->saveMimes($user, request()->all(), 'avatar', ['400', '600'], true);
+        dd($avatar);
+        $user->update(['avatar' => $avatar]);
+        return $user;
     }
 }
