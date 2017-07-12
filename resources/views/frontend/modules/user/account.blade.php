@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.account',$element->id) !!}
+    {!! Breadcrumbs::render('account',$element->id) !!}
 @endsection
 
 @section('top')
@@ -89,7 +89,7 @@
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             {{ trans('general.my_active_ads') }}
                                         </a>
-                                        <a class="ui olive button tooltip-message" href="{{ route('user.account.ads') }}"
+                                        <a class="ui olive button tooltip-message" href="{{ route('account.ads') }}"
                                            data-tooltip="{{ trans('message.list_of_all_ads') }}" data-inverted="">
                                             <i class="right arrow icon big"
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>

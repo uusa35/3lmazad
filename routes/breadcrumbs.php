@@ -38,30 +38,37 @@ Breadcrumbs::register('favorite', function ($breadcrumbs) {
 });
 
 
-// user account
-Breadcrumbs::register('user.account', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.account'), route('user.account'));
-});
-
-// user profile
-Breadcrumbs::register('user.profile', function ($breadcrumbs, $id) {
-    if (auth()->user()->id === $id)
-        $breadcrumbs->parent('user.account');
-    else
-        $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.profile'), route('user.show', $id));
-});
-
 // all merchants  (user.index)
 Breadcrumbs::register('user.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('general.merchant'), route('user.index'));
 });
 
+
+// user profile
+Breadcrumbs::register('user.profile', function ($breadcrumbs, $id) {
+    if (auth()->user()->id === $id)
+        $breadcrumbs->parent('account');
+    else
+        $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.profile'), route('user.show', $id));
+});
+
 // my ads page
 Breadcrumbs::register('user.ads', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('user.index');
     $breadcrumbs->push(trans('general.ads'), route('user.ads', $id));
+});
+
+// user account
+Breadcrumbs::register('account', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.account'), route('account'));
+});
+
+// account.ads (list of ads from account)
+Breadcrumbs::register('account.ads', function ($breadcrumbs) {
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push(trans('general.ads'), route('account.ads'));
 });
 

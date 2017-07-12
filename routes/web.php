@@ -37,20 +37,20 @@ Route::group(['namespace' => 'Frontend'], function () {
      * ?sub=2&type=4&brand=6&model=31&have_images=1&area=3&room_no=2&floor_no=9&bathroom_no=1&furnished=1
      * */
     Route::any('search', 'HomeController@search')->name('search');
-    Route::resource('ad', 'AdController', ['only' => ['show', 'create', 'index']]);
+    Route::resource('ad', 'AdController', ['only' => ['show', 'index']]);
     Route::resource('auction', 'AuctionController', ['only' => ['store']]);
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete','index']]);
-        Route::get('account', 'UserController@account')->name('user.account');
-        Route::get('account/ads', 'UserController@myAds')->name('user.account.ads');
-        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
+        Route::get('account', 'UserController@account')->name('account');
+        Route::get('account/ads', 'UserController@myAds')->name('account.ads');
+        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('account.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
         Route::resource('favorite', 'FavoriteController');
-        Route::resource('ad', 'AdController', ['except' => ['show', 'create', 'index']]);
+        Route::resource('ad', 'AdController', ['except' => ['index','show']]);
     });
 });
 

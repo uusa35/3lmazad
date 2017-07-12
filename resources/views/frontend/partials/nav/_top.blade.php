@@ -14,6 +14,11 @@
                                     href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
                     @endif
                     <li class="social-links__item">
+                        <a href="{{ auth()->check() ? route('ad.create') : route('register')}}">
+                            {{ trans('general.create_ad') }}
+                        </a>
+                    </li>
+                    <li class="social-links__item">
                         <a href="{{ route('lang','en') }}">
                             <img src="images/flags/us.png" alt=""/>
                         </a>
