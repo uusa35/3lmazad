@@ -38,14 +38,14 @@ Route::group(['namespace' => 'Frontend'], function () {
      * */
     Route::any('search', 'HomeController@search')->name('search');
     Route::resource('ad', 'AdController', ['only' => ['show', 'create', 'index']]);
-    Route::resource('user', 'UserController', ['only' => ['show']]);
     Route::resource('auction', 'AuctionController', ['only' => ['store']]);
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete','index']]);
-        Route::get('user/ads/list', 'UserController@myAds')->name('user.my_ads.list');
-        Route::get('user/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.ad.republish');
+        Route::get('account', 'UserController@account')->name('user.account');
+        Route::get('account/ads', 'UserController@myAds')->name('user.account.ads');
+        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');

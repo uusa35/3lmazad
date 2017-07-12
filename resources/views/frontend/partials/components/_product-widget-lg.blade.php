@@ -32,7 +32,7 @@
                                 <i id="favorite-icon-{{ $element->id }}"
                                    class="icon {{ in_array($element->id,$userFavorites,true) ? 'heart red' : 'outline heart red' }}"></i>
                             </button>
-                        @else
+                        @elseif(!auth()->check())
                             <a class="btn btn--round btn-white" href="{{ route('register') }}">
                                 <i class="icon outline heart" style="color: red;"></i>
                             </a>
@@ -51,7 +51,7 @@
                         </button>
                     </div>
                     <div class="product-preview__info__title">
-                        <h3><a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,'30') }}</a></h3>
+                        <h4><a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,'25') }}</a></h4>
                     </div>
                     @if(is_null($element->color->code))
                         <ul class="options-swatch options-swatch--color">

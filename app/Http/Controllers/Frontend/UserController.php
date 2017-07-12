@@ -30,12 +30,6 @@ class UserController extends Controller
         return view('frontend.modules.user.index', compact('elements'));
     }
 
-    public function account()
-    {
-        $element = auth()->user();
-        return view('frontend.modules.user.account', compact('element'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -65,16 +59,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $element = auth()->user();
-        $this->authorize('isOwner', $element->id);
-        return view('frontend.modules.user.show', compact('element'));
-    }
-
-    public function ads($id)
-    {
-        $element = $this->user->whereId($id)->with('ads')->first();
-        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
-        return view('frontend.modules.user.ads', compact('elements'));
+        $element = $this->user->whereId($id)->first();
+        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
+        return view('frontend.modules.user.show', compact('element','elements'));
     }
 
     /**
@@ -125,6 +112,33 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * used to show all the CMS for frontend user
+     */
+    public function account()
+    {
+        $element = auth()->user();
+        return view('frontend.modules.user.account', compact('element'));
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * used to get all the filtered ads of merchants
+     */
+    public function ads($id)
+    {
+        $element = $this->user->whereId($id)->first();
+        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
+        return view('frontend.modules.user.profile', compact('element','elements'));
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * used to get all the unfiltered ads of any type of user
+     */
     public function myads()
     {
         $elements = auth()->user()->ads()->withoutGlobalScopes()->with('category', 'meta')->get();

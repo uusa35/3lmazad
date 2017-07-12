@@ -33,8 +33,24 @@ Breadcrumbs::register('category', function ($breadcrumbs, $element) {
 // favorites
 
 Breadcrumbs::register('favorite', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
+    $breadcrumbs->parent('user.account');
     $breadcrumbs->push('favorite');
+});
+
+
+// user account
+Breadcrumbs::register('user.account', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.account'), route('user.account'));
+});
+
+// user profile
+Breadcrumbs::register('user.profile', function ($breadcrumbs, $id) {
+    if (auth()->user()->id === $id)
+        $breadcrumbs->parent('user.account');
+    else
+        $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.profile'), route('user.show', $id));
 });
 
 // all merchants  (user.index)

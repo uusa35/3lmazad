@@ -113,7 +113,11 @@ class AdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $element = $this->ad->whereId($id)->first();
+        if ($element->delete()) {
+            return redirect()->route('user.account.ads')->with('success', trans('message.delete_success'));
+        }
+        return redirect()->route('user.account.ads')->with('error', trans('message.delete_failure'));
     }
 
     public function toggleActivate($id)

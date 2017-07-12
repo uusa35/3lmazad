@@ -36,5 +36,6 @@
 @section('scripts')
     @include('frontend.partials.scripts')
 @show
+@include('frontend.partials.components.modals._quick-view')
 </body>
 </html>

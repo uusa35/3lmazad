@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unquie();
             $table->string('password');
             $table->string('phone')->nullable();
+            $table->string('description')->nullable();
             $table->boolean('featured')->default(0);
             $table->boolean('active')->default(1);
             $table->boolean('is_mobile_visible')->default(1);

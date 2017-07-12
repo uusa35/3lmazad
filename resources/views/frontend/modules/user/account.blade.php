@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.profile',$element->id) !!}
+    {!! Breadcrumbs::render('user.account',$element->id) !!}
 @endsection
 
 @section('top')
@@ -32,7 +32,7 @@
                                     <div class="meta">
                                         <p>
                                             <span class="date">{{ trans('general.member_from')}} :</span>
-                                            <span class="date">{{  $element->fromDate }}</span>
+                                            <span class="date">{{  $element->createdDate }}</span>
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.email')}} :</span>
@@ -83,13 +83,13 @@
                                             {{ trans('general.wishlist') }}
                                         </a>
                                         <a class="ui pink button tooltip-message"
-                                           href="{{ route("user.show",$element->id) }}"
+                                           href="{{ route("user.ads",$element->id) }}"
                                            data-tooltip="{{ trans('message.my_active_ads') }}" data-inverted="">
                                             <i class="right clone icon big"
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             {{ trans('general.my_active_ads') }}
                                         </a>
-                                        <a class="ui olive button tooltip-message" href="{{ route('user.ad.list') }}"
+                                        <a class="ui olive button tooltip-message" href="{{ route('user.account.ads') }}"
                                            data-tooltip="{{ trans('message.list_of_all_ads') }}" data-inverted="">
                                             <i class="right arrow icon big"
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>

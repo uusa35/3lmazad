@@ -27,8 +27,11 @@
                             <li><a href="{{ route('backend.home') }}">{{ trans('general.dashboard') }}</a></li>
                             <li><a href="{{ url('backend/translations') }}">{{ trans('general.translations') }}</a></li>
                         @else
-                            <li><a href="{{ route('user.index') }}">{{ trans('general.my_account') }}</a></li>
-                            <li><a href="{{ route('user.show',auth()->user()->id) }}">{{ trans('general.my_ads') }}</a></li>
+                            <li>
+                                <a href="{{ route('user.account') }}">{{ trans('general.account') }}</a>
+                            </li>
+                            <li><a href="{{ route('user.ads',auth()->user()->id) }}">{{ trans('general.my_ads') }}</a>
+                            </li>
                         @endif
                         <li>
                             <a href="{{ url('/logout') }}"
