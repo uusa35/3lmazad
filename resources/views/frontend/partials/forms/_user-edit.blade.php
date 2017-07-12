@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update',$element->id) }}">
+<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update',$element->id) }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT"/>
 

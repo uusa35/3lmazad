@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('register') !!}
+@endsection
+
 @section('top')
     <section class="content content--fill top-null">
         <div class="container">

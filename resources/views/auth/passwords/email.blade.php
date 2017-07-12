@@ -2,7 +2,7 @@
 
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('login') !!}
+    {!! Breadcrumbs::render('reset_password') !!}
 @endsection
 
 

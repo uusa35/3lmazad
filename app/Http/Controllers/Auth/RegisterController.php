@@ -51,9 +51,10 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'avatar' => 'required|mimes:jpg,jpeg,png',
+            'phone' => 'required|string|max:10',
             'password' => 'required|string|min:6|confirmed',
             'country_id' => 'required|numeric',
-            'description' => 'string|max:1000',
+            'description' => 'string|max:1000|nullable',
         ]);
     }
 
@@ -73,9 +74,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'description' => $data['description'],
         ]);
-        $avatar = $this->saveMimes($user, request()->all(), 'avatar', ['400', '600'], true);
-        dd($avatar);
-        $user->update(['avatar' => $avatar]);
+        $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
         return $user;
     }
 }

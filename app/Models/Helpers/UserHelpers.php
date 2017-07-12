@@ -12,12 +12,18 @@ trait UserHelpers
 
     public function getIsAdminAttribute()
     {
-        return $this->roles->first()->name === 'admin';
+        if (!$this->roles->isEmpty())
+            return $this->roles->first()->name === 'admin';
+        else
+            false;
     }
 
     public function getIsUserAttribute()
     {
-        return $this->roles->first()->name === 'user';
+        if (!$this->roles->isEmpty())
+            return $this->roles->first()->name === 'user';
+        else
+            false;
     }
 
     public function getIsMerchantAttribute()

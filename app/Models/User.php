@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','is_mobile_visible', 'is_email_visible','country_id'
+        'name', 'email', 'password', 'phone', 'is_mobile_visible', 'is_email_visible', 'country_id', 'description', 'avatar', 'active', 'featured'
     ];
 
     /**
@@ -39,6 +39,7 @@ class User extends Authenticatable
     ];
 
     protected $with = ['roles'];
+
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.
