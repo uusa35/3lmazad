@@ -18,8 +18,10 @@ class Ad extends BaseModel
     protected $guarded = [''];
     protected $casts = [
         'active' => 'boolean',
+        'featured' => 'boolean'
     ];
-    protected $with = ['meta','deals'];
+    protected $dates = ['start_date', 'end_date', 'created_at', 'updated_at', 'deleted_at'];
+    protected $with = ['meta', 'deals'];
 
     /**
      * The "booting" method of the model.

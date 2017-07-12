@@ -39,13 +39,13 @@ trait ModelHelpers
         return Date::parse($this->attributes['created_at'])->diffForHumans();
     }
 
-    function getStartDateAttribute()
+    function getStartAtAttribute()
     {
         Date::setLocale(app()->getLocale());
         return Date::parse($this->attributes['start_date'])->diffForHumans();
     }
 
-    function getEndDateAttribute()
+    function getEndAtAttribute()
     {
         Date::setLocale(app()->getLocale());
         return Date::parse($this->attributes['end_date'])->diffForHumans();

@@ -141,7 +141,7 @@ class UserController extends Controller
      */
     public function myads()
     {
-        $elements = auth()->user()->ads()->withoutGlobalScopes()->with('category', 'meta')->get();
+        $elements = auth()->user()->ads()->withoutGlobalScopes()->withoutTrashed()->with('category', 'meta')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
     }
 

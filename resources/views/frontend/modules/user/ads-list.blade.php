@@ -42,19 +42,20 @@
                             <td class="text-justify">
                                 <div style="min-height: 150px; overflow:auto; min-width: 300px; font-size: smaller;">
                                     <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,35)}}</a>
+                                    <hr>
                                     <span style="display: block;">{{ trans('general.category') }}
                                         : {{ $element->categoryName }}</span>
                                     <span style="display: block;">{{ trans('general.created_at') }}
                                         : {{ $element->createdDate }}</span>
-                                    <span style="display: block;">{{ trans('general.expire_in') }}
-                                        : {{ $element->endDate }}</span>
+                                    <span style="display: block;">{{ trans('general.expires_in') }}
+                                        : {{ $element->endAt }}</span>
                                     <span style="display: block; margin-bottom: 10px;">{{ trans('general.active') }} :
                                         <span class="label label-xs label-{{ $element->active ? 'info' : 'danger' }}">
                                         {{ $element->active ? trans('general.active') : trans('general.not_active')}}
                                         </span>
                                      </span>
                                     <span style="display: block;">{{ trans('general.featured') }} :
-                                        <span class="label label-xs label-{{ $element->feautred ? 'info' : 'warning' }}">
+                                        <span class="label label-xs label-{{ $element->featured ? 'info' : 'warning' }}">
                                         {{ $element->featured ? trans('general.featured') : trans('general.not_featured')}}
                                         </span>
                                      </span>

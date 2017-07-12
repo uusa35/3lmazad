@@ -29,9 +29,9 @@ trait AdHelpers
         }, '>', 0);
     }
 
-    public function getNotExpiredAttribute()
+    public function getIsExpiredAttribute()
     {
-        return ($this->endDate > date('Y-m-d')) ? true : false;
+        return $this->end_date < Carbon::now() ? true : false;
     }
 
     public function getHasValidDealAttribute()
