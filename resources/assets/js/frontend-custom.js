@@ -2,9 +2,9 @@
  * Created by usamaahmed on 5/18/17.
  */
 $(document).ready(function() {
-    console.log('jquery from frontend custom');
+
+    // search form
     var lang = $('#lang').text();
-    console.log('the lang is ' + lang);
     $('#category').on('change', function() {
         // hide all classes
         $('div[id^="sub-fields"]').addClass('hidden');
@@ -74,6 +74,10 @@ $(document).ready(function() {
         }).catch(e => console.log(e));
     });
 
+    // end of search form
+
+
+    // tooltip
     $('.tooltip-message').popup({
         on: 'hover',
         position: 'top center'
@@ -83,6 +87,8 @@ $(document).ready(function() {
     $('.special.cards .image').dimmer({
         on: 'hover'
     });
+
+    // Modals
     $('#myModal').modal('show');
 
     $('#productModal').modal('attach events', '.triggerModal', 'show');
@@ -107,6 +113,7 @@ $(document).ready(function() {
         $('#productModal').attr('style', 'background-color : white; margin-top: 10%; width: 80%; min-height: 400px;');
     });
 
+    // Favorite Product Btn
     $('button[id^="favorite-"]').on('click', function() {
         var userId = $(this).data('user-id');
         var adId = $(this).data('ad-id');
@@ -115,6 +122,7 @@ $(document).ready(function() {
         return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
     });
 
+    // Email & Mobile Visibility
     $('.checkbox.mobile').checkbox({
         onChecked: () => {
             var userId = $('.checkbox.mobile').data('user-id');
@@ -144,6 +152,24 @@ $(document).ready(function() {
         "bFilter": true,
         "bInfo": false,
         "bAutoWidth": false
+    });
+
+    // ad.create categories
+    $('#mainCategory').on('change', function(e) {
+        $('div[id^="fields-"]').addClass('hidden');
+        let categoryId = e.target.value;
+        console.log(categoryId);
+        $('#parentCategory').attr('value', categoryId);
+        $('#subCategories').html('');
+        return axios.get('/api/category/' + categoryId + '/children').then(res => res.data).then(data => {
+            return data.map(m => {
+                let name = 'name_' + lang;
+                $('div[id="fields-'+categoryId+'"]').removeClass('hidden');
+                return $('#subCategories').append(`
+                    <option class="" value="${m.id}"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;${m[name]}</span></option>
+                `);
+            });
+        }).catch(e => console.log(e));
     });
 
 });

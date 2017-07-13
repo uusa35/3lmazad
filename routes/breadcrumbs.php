@@ -39,6 +39,12 @@ Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {
 });
 
 
+Breadcrumbs::register('ad.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push(trans('general.create_ad'), route('ad.create'));
+});
+
+
 // ad.index
 Breadcrumbs::register('category', function ($breadcrumbs, $element) {
     $breadcrumbs->parent('home');
@@ -82,7 +88,7 @@ Breadcrumbs::register('account', function ($breadcrumbs) {
 
 Breadcrumbs::register('user.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('account');
-    $breadcrumbs->push(trans('general.profile_edit'), route('user.edit',auth()->user()->id));
+    $breadcrumbs->push(trans('general.profile_edit'), route('user.edit', auth()->user()->id));
 });
 
 // account.ads (list of ads from account)

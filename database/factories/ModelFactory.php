@@ -142,7 +142,14 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 //    dd(array_diff($isFilterArray, $fields));
     return [
         'is_filter' => $faker->boolean(50),
-        'name' => $faker->name
+        'name' => $faker->name,
+        'label_ar' => function ($array) {
+            return $array['name'];
+        },
+        'label_en' => function ($array) {
+            return $array['name'];
+        },
+        'type' => $faker->randomElement(['text', 'hidden', 'number'])
     ];
 });
 

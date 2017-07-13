@@ -16,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@setTokenElement');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getIsAdmin');
-        view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getCategories');
+        view()->composer(['frontend.partials.header','frontend.modules.ad.create'], 'App\Services\ViewComposers@getCategories');
         view()->composer('frontend.partials.components._icons_home_page', 'App\Services\ViewComposers@getOnHomePageCategories');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getAreas');
         view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');

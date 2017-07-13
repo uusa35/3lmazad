@@ -20,7 +20,9 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->roles()->save(Role::where('name','user')->first());
+        if (!app()->environment('seeding')) {
+            $user->roles()->save(Role::where('name', 'user')->first());
+        }
     }
 
     /**

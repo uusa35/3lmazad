@@ -1,6 +1,6 @@
 <div class="form-group">
     <div class="col-md-6 pull-left">
-        <a href="{{ route('user.index') }}" class="btn btn--wd btn-blue">
+        <a href="{{ route('account') }}" class="btn btn--wd btn-blue">
             {{ trans('general.skip') }}
         </a>
     </div>

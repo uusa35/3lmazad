@@ -11,7 +11,6 @@
             <h6 class="text-uppercase text-center">{{ trans('message.create_ad') }}</h6>
             {{--            @include('frontend.partials.components._steps-process')--}}
             <div class="divider divider--sm"></div>
-
             <div class="card card--form">
                 <div class="divider divider--xs"></div>
                 @include('frontend.partials.forms._create-ad')

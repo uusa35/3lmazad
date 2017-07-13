@@ -27,6 +27,11 @@ Route::get('brand/{id}/models', function ($id) {
     return response()->json($models, 200);
 });
 
+Route::get('category/{id}/children', function ($id) {
+    $subCategories = Category::whereId($id)->first()->children()->with('form.fields')->get()->toArray();
+    return response()->json($subCategories, 200);
+});
+
 Route::get('favorites/{ad_id}/{user_id}', function ($ad_id, $user_id) {
     $ad = Ad::whereId($ad_id)->first();
     $ad->favorites()->toggle($user_id);

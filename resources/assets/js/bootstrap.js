@@ -26,7 +26,6 @@ window.$.fn.dimmer = require('semantic-ui-dimmer');
 window.$.fn.modal = require('semantic-ui-modal');
 window.$.fn.checkbox = require('semantic-ui-checkbox');
 import magnificPopup from 'magnific-popup';
-import axios from 'axios';
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

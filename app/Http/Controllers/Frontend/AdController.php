@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\AdStore;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
@@ -56,9 +57,17 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdStore $request)
     {
-        //
+        $element = $this->ad->create($request->except('image'));
+
+        if (!$element) {
+            return redirect()->route('account')->with('error', 'not stored successfully');
+        }
+        $this->saveMimes($element, $request, ['image'], ['1920', '745'], false);
+
+
+        return redirect()->route('account')->with('success', title_case('item saved successfully.'));
     }
 
     /**
