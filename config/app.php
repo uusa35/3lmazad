@@ -189,6 +189,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
 //        ExA2040\LaravelViewCounter\ViewCounterServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Usama\Tap\TapServiceProvider::class
 
     ],
 

@@ -37,7 +37,7 @@
                     </div>
                 @endforeach
             @else
-                <div class="alert alert-info">{{ trans('messages.no_preview') }}</div>
+                <div class="alert alert-info">{{ trans('message.no_preview') }}</div>
             @endif
         </div>
     </div>

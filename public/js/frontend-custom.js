@@ -247,6 +247,7 @@ $(document).ready(function () {
 
     // ad.create categories
     $('#mainCategory').on('change', function (e) {
+        $('div[id^="fields-"]').addClass('hidden');
         var categoryId = e.target.value;
         console.log(categoryId);
         $('#parentCategory').attr('value', categoryId);
@@ -254,9 +255,9 @@ $(document).ready(function () {
         return axios.get('/api/category/' + categoryId + '/children').then(function (res) {
             return res.data;
         }).then(function (data) {
-            console.log(data);
             return data.map(function (m) {
                 var name = 'name_' + lang;
+                $('div[id="fields-' + categoryId + '"]').removeClass('hidden');
                 return $('#subCategories').append('\n                    <option class="" value="' + m.id + '"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;' + m[name] + '</span></option>\n                ');
             });
         }).catch(function (e) {

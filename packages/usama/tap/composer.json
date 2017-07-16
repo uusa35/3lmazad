@@ -1,0 +1,13 @@
+{
+    "name": "usama/tap",
+    "description": "tap payment integration for laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "usama ahmed",
+            "email": "uusa35@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
