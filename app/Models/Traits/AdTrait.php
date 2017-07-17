@@ -66,7 +66,8 @@ trait AdTrait
         return $this->belongsTo(Size::class);
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(Type::class);
     }
 
@@ -78,7 +79,7 @@ trait AdTrait
      */
     public function deals()
     {
-        return $this->hasMany(Deal::class);
+        return $this->belongsToMany(Deal::class);
     }
 
     public function gallery()
@@ -101,7 +102,9 @@ trait AdTrait
         return $this->hasMany(Visitor::class);
     }
 
-    public function favorites() {
-        return $this->belongsToMany(User::class,'favorites');
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
     }
+
 }

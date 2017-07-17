@@ -9,5 +9,5 @@ namespace Usama\Tap;
 
 interface PaymentContract
 {
-    public function handlePayment();
+    public function storePayment();
 }

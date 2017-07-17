@@ -16,6 +16,9 @@ class TapServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config' => config_path(),
         ],'tap');
+        $this->publishes([
+            __DIR__ . '/Services' => app_path('Services'),
+        ],'tap');
     }
 
     /**

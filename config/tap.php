@@ -16,5 +16,8 @@ return [
     "langCode" => env('TAP_LANG_CODE', "EN"),
     "postUrl" => env('TAP_POST_URL', "http://yourdomain.post.com"),
     "returnUrl" => env('TAP_RETURN_URL', "http://yourdomain.return.com"),
-    'referenceId' => rand(999,99999)
+    'referenceId' => '123456',
+    'gatewayDefault' => "ALL",
+    'paymentUrl' => env('TAP_PAYMENT_URL','http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest')
 ];
+

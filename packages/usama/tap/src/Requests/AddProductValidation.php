@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Usama\Tap;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class AddProductValidation extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +24,15 @@ class AddProductValidation extends FormRequest
     public function rules()
     {
         return [
-            'CurrencyCode' => 'required|alpha',
-            'ImgUrl' => 'url|nullable',
-            'Quantity' => 'required|digits_between:1,10',
-            'TotalPrice' => 'required|digits',
-            'UnitDesc' => 'alpha_numeric|nullable',
-            'UnitID' => 'alpha_numeric|nullable',
-            'UnitName' => 'required|alpha_numeric',
-            'UnitPrice' => 'required|integer',
-            'VndID' => 'nullable'
+            'currencyCode' => 'alpha',
+            'imgUrl' => 'url|nullable',
+            'quantity' => 'digits_between:1,10',
+            'totalPrice' => 'digits',
+            'unitDesc' => 'alpha_numeric|nullable',
+            'unitId' => 'alpha_numeric|nullable',
+            'unitName' => 'alpha_numeric',
+            'unitPrice' => 'integer',
+            'vndID' => 'nullable'
         ];
     }
 }

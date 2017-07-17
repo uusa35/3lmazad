@@ -9,7 +9,9 @@
 namespace Usama\Tap;
 
 
-abstract  class TapBill implements PaymentContract
+abstract class Tap implements PaymentContract
 {
+
+
 
 }

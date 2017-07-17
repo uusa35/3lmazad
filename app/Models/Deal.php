@@ -39,4 +39,8 @@ class Deal extends BaseModel
     {
         return $this->belongsTo(Plan::class);
     }
+
+    public function products() {
+        return $this->belongsToMany(Ad::class);
+    }
 }
