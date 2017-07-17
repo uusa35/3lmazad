@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ad;
 use App\Models\Deal;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,10 @@ class DealsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Deal::class)->create();
+        factory(Deal::class)->create()->each(function ($deal) {
+            $deal->ads()->attach(Ad::whereDoesntHave('deals', function ($q) {
+                return $q;
+            })->get()->random()->id);
+        });
     }
 }

@@ -20,6 +20,7 @@ class CreatePlansTable extends Migration
             $table->decimal('price',6,3)->unsigned()->nullable();
             $table->decimal('sale_price',6,3)->unsigned()->nullable();
             $table->boolean('active')->default(1);
+            $table->boolean('on_sale')->default(1);
             $table->timestamps();
         });
     }

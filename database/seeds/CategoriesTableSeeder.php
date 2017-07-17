@@ -94,7 +94,7 @@ class CategoriesTableSeeder extends Seeder
                         // Auctions FOR EACH AD
                         $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
 
-                        $ad->deals()->saveMany(factory(Deal::class, 2)->create());
+                        $ad->deals()->saveMany(factory(Deal::class, 1)->create());
 
                     });
 

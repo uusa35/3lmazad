@@ -6,6 +6,7 @@ use App\Models\Ad;
 use App\Models\Brand;
 use App\Models\Form;
 use App\Models\Type;
+use App\Models\User;
 
 /**
  * Created by PhpStorm.
@@ -15,6 +16,16 @@ use App\Models\Type;
  */
 trait CategoryTrait
 {
+
+    /**
+     * @return mixed
+     * when user is company it must have category
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function ads()
     {
         return $this->hasMany(Ad::class);

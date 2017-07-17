@@ -40,12 +40,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $products = session()->get('products');
-//        dd($products->pluck('TotalPrice'));
-//        request()->session()->flush();
-//        return 'stop';
-        $products = session()->has('cart') ? session()->get('cart') : null;
-        return $products;
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
         $commercialsFixed = $this->commercial->fixed()->take(2)->get();

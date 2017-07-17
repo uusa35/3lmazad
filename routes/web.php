@@ -15,8 +15,8 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete', 'index']]);
         Route::get('account', 'UserController@account')->name('account');
-        Route::get('account/ads', 'UserController@myAds')->name('account.ads');
-        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('account.ad.republish');
+        Route::get('account/ads', 'UserController@adsList')->name('user.account.ads');
+        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');

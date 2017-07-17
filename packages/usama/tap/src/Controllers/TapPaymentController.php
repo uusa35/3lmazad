@@ -127,8 +127,9 @@ class TapPaymentController extends Controller implements TapContract
             'X_Total' . $this->getTotalPrice() . '';
     }
 
-    public function getHashString() {
-        return  hash_hmac('sha256', $this->setHashString(), config('tap.apiKey'));
+    public function getHashString()
+    {
+        return hash_hmac('sha256', $this->setHashString(), config('tap.apiKey'));
     }
 
     public function makePayment()

@@ -30,17 +30,13 @@ class Deal extends BaseModel
         }
     }
 
-    public function ad()
-    {
-        return $this->belongsTo(Ad::class);
-    }
-
     public function plan()
     {
         return $this->belongsTo(Plan::class);
     }
 
-    public function products() {
+    public function ads()
+    {
         return $this->belongsToMany(Ad::class);
     }
 }

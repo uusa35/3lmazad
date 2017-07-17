@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -53,7 +54,8 @@ class RegisterController extends Controller
             'avatar' => 'required|mimes:jpg,jpeg,png',
             'phone' => 'required|string|max:10',
             'password' => 'required|string|min:6|confirmed',
-            'country_id' => 'required|numeric',
+            'is_company' => 'required|boolean',
+            'area_id' => 'required|numeric',
             'description' => 'string|max:1000|nullable',
         ]);
     }
@@ -70,11 +72,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'country_id' => $data['country_id'],
+            'area_id' => $data['area_id'],
             'password' => bcrypt($data['password']),
             'description' => $data['description'],
         ]);
-        $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
+        $this->userCreated($data, $user); // save the role + save the avatar
         return $user;
+    }
+
+    public function userCreated($data, $user)
+    {
+        $role = $data['is_company'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
+        $user->roles()->save($role);
+        $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
     }
 }

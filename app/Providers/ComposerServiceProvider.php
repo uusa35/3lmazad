@@ -26,6 +26,12 @@ class ComposerServiceProvider extends ServiceProvider
                 'frontend.partials.forms._register',
                 'frontend.partials.forms._user-edit',
             ], 'App\Services\ViewComposers@getCountries');
+
+        view()->composer(
+            [
+                'frontend.partials.forms._register',
+                'frontend.partials.forms._user-edit',
+            ], 'App\Services\ViewComposers@getAreas');
     }
 
     /**

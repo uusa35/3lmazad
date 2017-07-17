@@ -20,9 +20,9 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if (!app()->environment('seeding')) {
-            $user->roles()->save(Role::where('name', 'user')->first());
-        }
+//        if (!app()->environment('seeding')) {
+//            $user->roles()->save(Role::where('name', 'user')->first());
+//        }
     }
 
     /**
@@ -33,6 +33,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        $user->roles()->detach(Role::where('name', 'user')->first());
+//        $user->roles()->detach(Role::where('name', 'user')->first());
     }
 }

@@ -25,8 +25,12 @@ class CreateUsersTable extends Migration
             $table->boolean('is_mobile_visible')->default(1);
             $table->boolean('is_email_visible')->default(1);
             $table->string('avatar')->default('sample.png')->nullable();
-            $table->integer('country_id')->unsigned()->index()->nullable();
+            $table->integer('country_id')->unsigned()->index()->default(118);
             $table->foreign('country_id')->references('id')->on('countries');
+            $table->integer('area_id')->unsigned()->index()->nullable();
+            $table->foreign('area_id')->references('id')->on('areas');
+            $table->integer('category_id')->unsigned()->index()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

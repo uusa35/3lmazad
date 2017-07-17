@@ -56,7 +56,8 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'featured' => $faker->boolean(80),
         'remember_token' => str_random(10),
 //        'settings' => ['certificate' => $faker->name, 'height' => $faker->numberBetween(100, 200)],
-        'country_id' => Country::all()->random()->id,
+        'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
+        'country_id' => 118,
     ];
 });
 
@@ -177,8 +178,8 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         },
         'color_id' => Color::all()->random()->id,
         'size_id' => Size::all()->random()->id,
-        'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
-        'end_date' => $faker->dateTimeBetween('now', '1 week'),
+        'start_date' => $faker->dateTimeBetween($faker->randomElement(['-1 days', 'today', '-1 days']), '1 week'),
+        'end_date' => $faker->dateTimeBetween('today', '1 week'),
     ];
 });
 
@@ -248,19 +249,18 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
 $factory->define(Deal::class, function (Faker\Generator $faker) {
     return [
         'plan_id' => Plan::all()->random()->id,
-        'final_price' => function ($array) {
+        'price' => function ($array) {
             return Plan::whereId($array['plan_id'])->first()->price;
         },
         'duration' => function ($array) {
             return Plan::whereId($array['plan_id'])->first()->duration;
         },
-        'total_amount' => function ($array) {
-            return $array['final_price'] * $array['duration'];
+        'total' => function ($array) {
+            return $array['price'] * $array['duration'];
         },
         'valid' => $faker->boolean(true),
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
-        'end_date' => $faker->dateTimeBetween('now', '1 week'),
-        'ad_id' => Ad::all()->random()->id,
+        'end_date' => $faker->dateTimeBetween('now', '1 week')
     ];
 });
 

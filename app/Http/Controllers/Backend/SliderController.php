@@ -43,7 +43,7 @@ class SliderController extends Controller
         if (!$slider) {
             return redirect()->route('backend.slider.index')->with('error', 'slide not created successfully');
         }
-        $this->saveMimes($slider, $request, ['image'], ['841', '450'], false);
+        $this->saveMimes($slider, $request, ['image'], ['590', '450'], true);
 
         return redirect()->route('backend.slider.index')->with('success', 'slide created successfully');
     }
@@ -88,7 +88,7 @@ class SliderController extends Controller
             return redirect()->route('backend.slider.index')->with('error', 'slide not created successfully');
         }
 
-        $this->saveMimes($slider, $request, ['image'], ['841', '450'], false);
+        $this->saveMimes($slider, $request, ['image'], ['590', '450'], false);
 
         return redirect()->route('backend.slider.index')->with('success', 'slide created successfully');
     }

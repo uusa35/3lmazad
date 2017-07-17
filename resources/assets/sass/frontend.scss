@@ -223,3 +223,12 @@ span > .text {
 .btn-light-red:hover {
   background-color: lightcoral;
 }
+
+.slider-img {
+  max-height : 450px;
+  width: auto;
+}
+
+.slick-slide {
+  height: auto !important;
+}

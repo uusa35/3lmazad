@@ -2,6 +2,8 @@
 namespace App\Models\Traits;
 
 use App\Models\Ad;
+use App\Models\Area;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Deal;
@@ -25,6 +27,11 @@ trait UserTrait
         return $this->belongsTo(Country::class);
     }
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -38,5 +45,9 @@ trait UserTrait
     public function favorites()
     {
         return $this->belongsToMany(Ad::class, 'favorites');
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -139,7 +139,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * used to get all the unfiltered ads of any type of user
      */
-    public function myads()
+    public function adsList()
     {
         $elements = auth()->user()->ads()->withoutGlobalScopes()->withoutTrashed()->with('category', 'meta')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
