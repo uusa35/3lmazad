@@ -67,7 +67,7 @@
         <label for="area" class="col-md-4 control-label">{{ trans('general.area') }}</label>
 
         <div class="col-md-6">
-            {{ Form::select('area_id', $areas,1, ['class' => 'form-control']) }}
+            {{ Form::select('area_id', $areas,0, ['class' => 'form-control']) }}
         </div>
     </div>
 
@@ -81,7 +81,7 @@
     </div>
 
     <div class="form-group">
-        <label for="role_id" class="col-md-4 control-label">Type</label>
+        <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
 
         <div class="col-md-3">
             <div class="col-lg-1">
@@ -104,7 +104,7 @@
     </div>
 
     <div class="form-group">
-        <label for="description" class="col-md-4 control-label">{{ trans('general.description') }}</label>
+        <label for="description" class="col-md-4 control-label">{{ trans('general.breif') }}</label>
 
         <div class="col-md-6">
             <textarea type="text" class="form-control" name="description" aria-multiline="true"

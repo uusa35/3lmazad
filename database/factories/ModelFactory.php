@@ -57,7 +57,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
 //        'settings' => ['certificate' => $faker->name, 'height' => $faker->numberBetween(100, 200)],
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
-        'country_id' => 118,
+        'country_id' => 118
     ];
 });
 
