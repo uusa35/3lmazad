@@ -3,7 +3,7 @@
         <div class="product-preview__image">
             <div class="product-preview__label product-preview__label--right product-preview__label--sale text-center">
                 <span class="fa fa-star fa-lg text-center"></span></div>
-            <a href="{{ route('user.ads',$element->id) }}"><img
+            <a href="{{ route('user.show',$element->id) }}"><img
                         src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}"
                         alt=""/></a></div>
         <div class="product-preview__info text-center">
@@ -17,7 +17,7 @@
                 {{--data-target="#quickView"><span class="icon icon-eye"></span></a>--}}
             </div>
             <div class="product-preview__info__title">
-                <h2><a href="{{ route('user.ads',$element->id) }}">{{ str_limit($element->name,50,'..') }}</a></h2>
+                <h2><a href="{{ route('user.show',$element->id) }}">{{ str_limit($element->name,50,'..') }}</a></h2>
             </div>
             {{--<div class="rating"><span class="icon-star"></span><span--}}
             {{--class="icon-star"></span><span class="icon-star"></span><span--}}

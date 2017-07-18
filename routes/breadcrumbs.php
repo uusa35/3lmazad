@@ -69,19 +69,26 @@ Breadcrumbs::register('user.index', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.merchant'), route('user.index'));
 });
 
+Breadcrumbs::register('user.merchants-categories', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.merchants_categories'), route('user.merchants-categories'));
+});
+
 // user profile
-Breadcrumbs::register('user.profile', function ($breadcrumbs, $id) {
-    if (auth()->user()->id === $id)
+Breadcrumbs::register('user.show', function ($breadcrumbs, $element) {
+    if (auth()->check() && auth()->user()->id === $element->id) {
         $breadcrumbs->parent('account');
-    else
+        $breadcrumbs->push(trans('general.profile'), route('user.show', $element->id));
+    } else {
         $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.profile'), route('user.show', $id));
+        $breadcrumbs->push(trans('general.profile'), route('user.show', $element->id));
+    }
 });
 
 // my ads page
-Breadcrumbs::register('user.ads', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('user.index');
-    $breadcrumbs->push(trans('general.ads'), route('user.ads', $id));
+Breadcrumbs::register('user.ads', function ($breadcrumbs, $element) {
+    $breadcrumbs->parent('user.show',$element);
+    $breadcrumbs->push(trans('general.ads'), route('user.ads', $element->id));
 });
 
 // user account

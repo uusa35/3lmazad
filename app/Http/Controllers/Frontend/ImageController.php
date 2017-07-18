@@ -47,7 +47,6 @@ class ImageController extends Controller
         if($image) {
             $this->saveMimes($image,$request);
             return redirect()->route('account')->with('success', trans('message.'));
-            i stopped here;
         }
 
     }

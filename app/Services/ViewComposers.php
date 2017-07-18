@@ -29,7 +29,7 @@ class ViewComposers
 
     public function getAreas(View $view)
     {
-        $areas = Area::pluck('name_' . app()->getLocale(), 'id');
+        $areas = Area::orderBy('id','asc')->pluck('name_' . app()->getLocale(), 'id');
         return $view->with(compact('areas'));
     }
 

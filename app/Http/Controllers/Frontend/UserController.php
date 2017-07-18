@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\UserUpdate;
 use App\Models\Ad;
+use App\Models\Area;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,11 +14,13 @@ class UserController extends Controller
 {
     public $ad;
     public $user;
+    public $category;
 
-    public function __construct(Ad $ad, User $user)
+    public function __construct(Ad $ad, User $user, Category $category)
     {
         $this->ad = $ad;
         $this->user = $user;
+        $this->category = $category;
     }
 
     /**
@@ -26,8 +30,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $elements = $this->user->merchants()->with('ads')->paginate(12);
+        $elements = $this->category->whereId(request()->id)->first()->users()->merchants()->orderBy('area_id','asc')->paginate(2);
         return view('frontend.modules.user.index', compact('elements'));
+    }
+
+    public function merchantsCategories()
+    {
+        $elements = $this->category->where('parent_id', 0)->get();
+        $areas = Area::all();
+        return view('frontend.modules.user.merchants-categories',compact('elements','areas'));
     }
 
     /**
@@ -59,9 +70,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $element = $this->user->whereId($id)->first();
-//        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
-        return view('frontend.modules.user.show', compact('element'));
+        $element = $this->user->whereId($id)->with('gallery.images')->first();
+        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
+        return view('frontend.modules.user.show', compact('element', 'elements'));
     }
 
     /**
@@ -118,7 +129,7 @@ class UserController extends Controller
      */
     public function account()
     {
-        $element = $this->user->whereId(auth()->user()->id)->with('gallery')->first();
+        $element = $this->user->whereId(auth()->user()->id)->with('gallery.images')->first();
         return view('frontend.modules.user.account', compact('element'));
     }
 
@@ -131,7 +142,7 @@ class UserController extends Controller
     {
         $element = $this->user->whereId($id)->first();
         $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
-        return view('frontend.modules.user.profile', compact('element','elements'));
+        return view('frontend.modules.user.ads', compact('element', 'elements'));
     }
 
 

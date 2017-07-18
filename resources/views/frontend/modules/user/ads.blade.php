@@ -2,7 +2,7 @@
 
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.ads', request()->segment(3)) !!}
+    {!! Breadcrumbs::render('user.ads', $element) !!}
 @endsection
 
 @section('top')

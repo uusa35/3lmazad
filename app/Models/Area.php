@@ -6,10 +6,8 @@ use App\Services\Traits\LocaleTrait;
 
 class Area extends BaseModel
 {
-    use LocaleTrait;
-    protected $table = 'areas';
     protected $guarded = [''];
-    protected $localStrings = ['name'];
+    protected  $localStrings = ['name'];
 
     public function country()
     {

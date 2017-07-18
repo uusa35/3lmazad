@@ -6,22 +6,30 @@
 @endsection
 
 @section('top')
-    <section class="content top-null">
+    <section class="content">
         <div class="container">
-            <div class="filters-row">
-                @include('frontend.partials.components._bar-pagination-filters')
-                {{--@include('frontend.partials._divider-xs')--}}
-                <div class="outer">
-                    <div class="products-grid products-listing products-col products-isotope four-in-row">
-                        {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
-                        @foreach($elements as $element)
-                            @include('frontend.partials.user-widget')
+            <div class="card card--padding">
+            <div class="row">
+                <div class="col-lg-12">
+                    @foreach($areas->chunk(3) as $set)
+                        {{ dd($set) }}
+                        @foreach($set as $area)
+                            {{ dd($area) }}
+                            <div class="col-lg-4">
+                                {{ dd($area) }}
+                                <h3>{{ $area->name }}</h3>
+                                {{--<ul>--}}
+                                    {{--@foreach($elements->where('area_id', $area->id) as $element)--}}
+                                        {{--<li>{{ $element->name }}</li>--}}
+                                    {{--@endforeach--}}
+                                {{--</ul>--}}
+                            </div>
                         @endforeach
-                    </div>
+                    @endforeach
                 </div>
-                @include('frontend.partials.components._bar-pagination-filters')
             </div>
+            @include('frontend.partials.components._pagination')
         </div>
-        @include('frontend.partials.components.modals._quick-view')
+        </div>
     </section>
 @endsection

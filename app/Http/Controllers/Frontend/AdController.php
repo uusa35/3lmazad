@@ -86,7 +86,7 @@ class AdController extends Controller
     public function show($id)
     {
         $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
-            'color', 'size', 'brand', 'model', 'gallery', 'type', 'area')->with(['comments' => function ($q) {
+            'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);

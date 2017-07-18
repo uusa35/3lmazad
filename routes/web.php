@@ -37,6 +37,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/lang/{lang}', 'LanguageController@changeLocale')->name('lang');
     Route::get('/user/ads/{id}', 'UserController@ads')->name('user.ads');
     Route::resource('user', 'UserController', ['only' => ['index', 'show']]);
+    Route::get('merchants-categories', 'UserController@merchantsCategories')->name('user.merchants-categories');
     Route::resource('auction', 'AuctionController', ['only' => ['store']]);
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
     Route::resource('ad', 'AdController', ['only' => ['show', 'index']]);

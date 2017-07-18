@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('account',$element->id) !!}
+    {!! Breadcrumbs::render('account',$element) !!}
 @endsection
 
 @section('top')
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 @if($element->isMerchant)
-                    @include('frontend.partials._profile-gallery',['element' => $element->gallery->first()])
+                    @include('frontend.partials._profile-gallery')
                 @endif
             </div>
         </div>

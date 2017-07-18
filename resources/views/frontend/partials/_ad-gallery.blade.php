@@ -18,10 +18,10 @@
         </li>
         @foreach($element->gallery->first()->images as $image)
             <li>
-                <a href="#" data-image="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
-                   data-zoom-image="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
+                <a href="#" data-image="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
+                   data-zoom-image="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
                 >
-                    <img src="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
+                    <img src="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
                          alt="{{ $element->title }}"/>
                 </a>
             </li>

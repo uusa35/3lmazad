@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.profile',$element->id) !!}
+    {!! Breadcrumbs::render('user.profile',$element) !!}
 @endsection
 
 @section('top')

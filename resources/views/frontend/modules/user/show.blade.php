@@ -1,13 +1,13 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.profile',$element->id) !!}
+    {!! Breadcrumbs::render('user.show',$element) !!}
 @endsection
 
 @section('top')
     <section class="content top-null">
         <div class="container">
-            @include('frontend.partials._divider-xs')
+            <div class="divider divider--xs"></div>
             <div class="filters-row">
                 {{--@include('frontend.partials._divider-xs')--}}
                 <div class="ui top attached button">
@@ -15,7 +15,7 @@
                 </div>
                 <hr>
                 <div class="ui grid center">
-                    <div class="seven wide center column">
+                    <div class="sixteen wide center column">
                         <div class="ui items">
                             <div class="item">
                                 <div class="ui small image">
@@ -44,9 +44,16 @@
                                             <span class="date">{{ trans('general.country')}} :</span>
                                             <span class="date">{{  $element->countryName }}</span>
                                         </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.account_type')}} :</span>
+                                            <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
+                                        </p>
                                     </div>
                                     <div class="description">
-                                        <p></p>
+                                        <p>{{ $element->description }}</p>
+                                    </div>
+                                    <div class="description col-lg-2 col-lg-push-10">
+                                        <a href="{{ route('user.ads',$element->id) }}" class="btn btn--wd">{{ trans('general.user_ads') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +71,13 @@
                             <div class="products-grid products-listing products-col products-isotope five-in-row">
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
-                                @include('frontend.partials._profile-gallery')
+                                @if($element->isMerchant)
+                                    <h3 class="text-center">{{ trans('general.user_gallery') }}</h3>
+                                    @include('frontend.partials._profile-gallery')
+                                @elseif($element->isUser)
+                                    <h3 class="text-center">{{ trans('general.user_ads') }}</h3>
+                                    @include('frontend.partials.components._product-widget-lg')
+                                @endif
                             </div>
                         </div>
                     </div>

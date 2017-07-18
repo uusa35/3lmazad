@@ -23,8 +23,8 @@
                     </a>
                 </li>
                 <li class="menu-large">
-                    <a href="{{ route('user.index') }}" class="dropdown-toggle">
-                        <span class="link-name">{{ trans("general.merchants") }}</span>
+                    <a href="{{ route('user.merchants-categories') }}" class="dropdown-toggle">
+                        <span class="link-name">{{ trans("general.merchants-categories") }}</span>
                     </a>
                 </li>
                 <li class="menu-large">
