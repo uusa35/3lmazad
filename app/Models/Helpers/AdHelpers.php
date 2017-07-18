@@ -49,6 +49,11 @@ trait AdHelpers
         return $this->brand->name;
     }
 
+    public function getIsOwnerAttribute()
+    {
+        return auth()->user()->id === $this->user_id;
+    }
+
     /**
      * @param $q
      * @param QueryFilters $filters

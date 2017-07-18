@@ -60,8 +60,8 @@ class UserController extends Controller
     public function show($id)
     {
         $element = $this->user->whereId($id)->first();
-        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
-        return view('frontend.modules.user.show', compact('element','elements'));
+//        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
+        return view('frontend.modules.user.show', compact('element'));
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller
      */
     public function account()
     {
-        $element = auth()->user();
+        $element = $this->user->whereId(auth()->user()->id)->with('gallery')->first();
         return view('frontend.modules.user.account', compact('element'));
     }
 

@@ -26,15 +26,15 @@ Breadcrumbs::register('reset_password', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.reset_password'), route('password.request'));
 });
 
-//ad.show
-Breadcrumbs::register('ad.show.category', function ($breadcrumbs, $element) {
-    $parent = $element->category->parent->first();
+Breadcrumbs::register('plan', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($parent->name, route('ad.index', ['parent' => $parent->id]));
+    $breadcrumbs->push(trans('general.payment_plans'), route('plan.index'));
 });
 
+
+//ad.show
 Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {
-    $breadcrumbs->parent('ad.show.category', $element);
+    $breadcrumbs->parent('sub', $element->category);
     $breadcrumbs->push($element->title, route('ad.show', $element->id));
 });
 
@@ -46,9 +46,13 @@ Breadcrumbs::register('ad.create', function ($breadcrumbs) {
 
 
 // ad.index
-Breadcrumbs::register('category', function ($breadcrumbs, $element) {
+Breadcrumbs::register('parent', function ($breadcrumbs, $element) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push($element->parent->name, route('ad.index', ['parent' => $element->parent_id]));
+    $breadcrumbs->push($element->name, route('ad.index', ['id' => $element->id]));
+});
+Breadcrumbs::register('sub', function ($breadcrumbs, $element) {
+    $breadcrumbs->parent('parent', $element->parent->first());
+    $breadcrumbs->push($element->name, route('ad.index', ['id' => $element->id]));
 });
 
 // favorites

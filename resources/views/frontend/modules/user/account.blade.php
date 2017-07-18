@@ -89,7 +89,8 @@
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             {{ trans('general.my_active_ads') }}
                                         </a>
-                                        <a class="ui olive button tooltip-message" href="{{ route('account.ads') }}"
+                                        <a class="ui olive button tooltip-message"
+                                           href="{{ route('user.account.ads') }}"
                                            data-tooltip="{{ trans('message.list_of_all_ads') }}" data-inverted="">
                                             <i class="right arrow icon big"
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
@@ -113,6 +114,9 @@
                         </div>
                     </div>
                 </div>
+                @if($element->isMerchant)
+                    @include('frontend.partials._profile-gallery',['element' => $element->gallery->first()])
+                @endif
             </div>
         </div>
     </section>

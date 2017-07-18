@@ -50,7 +50,7 @@
                             <span class="icon icon-eye"></span>
                         </button>
                     </div>
-                    <div class="product-preview__info__title">
+                    <div class="product-preview__info__title text-center">
                         <h4><a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,'25') }}</a></h4>
                     </div>
                     @if(is_null($element->color->code))
@@ -61,7 +61,7 @@
                             {{--alt=""/></span></a></li>--}}
                         </ul>
                     @endif
-                    <div class="price-box ">
+                    <div class="price-box text-center">
                         <span class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span>
                     </div>
                     <div class="product-preview__info__description">

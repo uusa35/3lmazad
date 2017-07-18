@@ -32,9 +32,13 @@ class DatabaseSeeder extends Seeder
             $this->call(FieldsTableSeeder::class);
             $this->call(FormsTableSeeder::class);
             $this->call(UsersTableSeeder::class);
+            $this->command->info('UsersTableseeder is done');
             $this->call(ColorsTableSeeder::class);
+            $this->command->info('colors are done');
             $this->call(SizesTableSeeder::class);
+            $this->command->info('sizes are done');
             $this->call(SlidersTableSeeder::class);
+            $this->command->info('sliders are done');
             $this->call(AboutusTableSeeder::class);
             $this->call(FaqsTableSeeder::class);
             $this->call(TermsTableSeeder::class);

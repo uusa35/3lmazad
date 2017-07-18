@@ -44,9 +44,12 @@
                 </div>
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="ui buttons">
-                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}</button>
-                    <button class="ui white basic button"><i class="icon {{ $element->category->icon }}"></i>{{  $element->categoryName }}</button>
-                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
+                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}
+                    </button>
+                    <button class="ui white basic button"><i
+                                class="icon {{ $element->category->icon }}"></i>{{  $element->categoryName }}</button>
+                    <button class="ui white basic button"><i
+                                class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
                 </div>
                 <div class="ui small basic icon buttons hidden-xs">
                     @if(!is_null($element->brandName))
@@ -69,25 +72,30 @@
                 <div class="divider divider--xs"></div>
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3">
-                <h4>CUSTOM HTML BLOCK</h4>
+                <h4>{{ trans('general.ad_details') }}</h4>
                 <div class="card">
                     <div class="card__row"> You can add your content here, like promotions or some additional info</div>
-                    <a href="#" class="card__row card__row--icon">
-                        <div class="card__row--icon__icon"><span class="icon icon-shop-label"></span></div>
-                        <div class="card__row--icon__text">
-                            <div class="card__row__title">Special offer: 1+1=3</div>
-                            Get a gift!
+                    <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
+                        <div class="card__row--icon__icon">
+                            <img class="img-responsive img-thumbnail" style="max-width: 40px;"
+                                 src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">
                         </div>
-                    </a> <a href="#" class="card__row card__row--icon">
-                        <div class="card__row--icon__icon"><span class="icon icon-money"></span></div>
                         <div class="card__row--icon__text">
-                            <div class="card__row__title">Free Reward Card</div>
-                            Worth $10, $50, $100. <br>
+                            <div class="card__row__title">{{ $element->user->name }}</div>
                         </div>
-                    </a> <a href="#" class="card__row card__row--icon">
+                    </a>
+                    @if($element->isOwner)
+                        <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
+                            <div class="card__row--icon__icon"><span class="icon icon-money"></span></div>
+                            <div class="card__row--icon__text">
+                                <div class="card__row__title">{{ trans('general.make_special') }}</div>
+                            </div>
+                        </a>
+                    @endif
+                    <a href="{{ route('ad.index',['id' => $element->category_id]) }}" class="card__row card__row--icon">
                         <div class="card__row--icon__icon"><span class="icon icon-identification-alt"></span></div>
                         <div class="card__row--icon__text">
-                            <div class="card__row__title">Join to our Club</div>
+                            <div class="card__row__title">{{ $element->categoryName }}</div>
                         </div>
                     </a> <a class="card__row card__row--icon">
                         <div class="card__row--icon__icon"><span class="icon icon-truck"></span></div>

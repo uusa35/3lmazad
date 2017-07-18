@@ -34,11 +34,6 @@ class Ad extends BaseModel
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            var_dump('from inside');
-            if (in_array('api', request()->segments(), true)) {
-                static::addGlobalScope(new ScopeActive());
-            }
-
             if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeExpired());

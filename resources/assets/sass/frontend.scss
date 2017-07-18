@@ -15,6 +15,7 @@
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
 @import "../../../node_modules/semantic-ui/dist/semantic.min.css";
+@import "plans-table";
 //<!-- Head Libs -->
 @media (min-width: 1300px) {
   .container {
@@ -232,3 +233,4 @@ span > .text {
 .slick-slide {
   height: auto !important;
 }
+

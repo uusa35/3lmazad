@@ -13,7 +13,10 @@ class UsersCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::doesntHave('category')->get()->shuffle()->take(3)->pluck('id');
-        $parent = Category::where('parent_id',0)->first()->uesrs()->attach($users);
+        $parents = Category::where('parent_id', 0)->doesntHave('users')->get();
+        foreach ($parents as $parent) {
+            $users = User::doesntHave('category')->get()->shuffle()->take(3);
+            $parent->users()->saveMany($users);
+        }
     }
 }

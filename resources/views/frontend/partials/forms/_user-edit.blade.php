@@ -1,4 +1,5 @@
-<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update',$element->id) }}" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update',$element->id) }}"
+      enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT"/>
 
@@ -57,11 +58,41 @@
     </div>
 
 
+    {{--<div class="form-group">--}}
+    {{--<label for="countries" class="col-md-4 control-label">Country</label>--}}
+
+    {{--<div class="col-md-6">--}}
+    {{--{{ Form::select('country_id', $countries,$element->country_id, ['class' => 'form-control']) }}--}}
+    {{--</div>--}}
+    {{--</div>--}}
     <div class="form-group">
-        <label for="countries" class="col-md-4 control-label">Country</label>
+        <label for="area" class="col-md-4 control-label">{{ trans('general.area') }}</label>
 
         <div class="col-md-6">
-            {{ Form::select('country_id', $countries,$element->country_id, ['class' => 'form-control']) }}
+            {{ Form::select('area_id', $areas, $element->area_id, ['class' => 'form-control']) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
+
+        <div class="col-md-3">
+            <div class="col-lg-1">
+                <input type="radio" class="" name="is_merchant" value="1" {{ $element->isMerchant ? 'checked' : null }}
+                required>
+            </div>
+            <div class="col-lg-2">
+                <span>{{ trans('general.merchant') }}</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="col-lg-1">
+                <input type="radio" class="" name="is_merchant" value="0" {{ $element->isMerchant ? 'checked' : null }}
+                required>
+            </div>
+            <div class="col-lg-2">
+                <span>{{ trans('general.regular_user') }}</span>
+            </div>
         </div>
     </div>
 

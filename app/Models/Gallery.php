@@ -14,7 +14,6 @@ use App\Scopes\ScopeGalleryHasImages;
 class Gallery extends BaseModel
 {
     protected $with = ['images'];
-    protected $table = 'galleries';
     protected $guarded = [''];
 
     /**
@@ -27,12 +26,11 @@ class Gallery extends BaseModel
     {
         parent::boot();
 
-        if (!request()->is('backend/*') && app()->environment() !== 'testing') {
-
-//            static::addGlobalScope(new ScopeActive());
-//            static::addGlobalScope(new ScopeGalleryHasImages());
+        if (!app()->environment('seeding')) {
+            if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeActive());
+            }
         }
-
     }
 
     public function galleryable()

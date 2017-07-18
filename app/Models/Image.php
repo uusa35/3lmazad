@@ -10,6 +10,8 @@ namespace App\Models;
  */
 class Image extends BaseModel
 {
+    protected $localeStrings = ['description'];
+
     public function gallery()
     {
         return $this->belongsTo(Gallery::class,'gallery_id');

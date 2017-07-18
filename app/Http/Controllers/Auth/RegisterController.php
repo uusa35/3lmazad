@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'avatar' => 'required|mimes:jpg,jpeg,png',
             'phone' => 'required|string|max:10',
             'password' => 'required|string|min:6|confirmed',
-            'is_company' => 'required|boolean',
+            'is_merchant' => 'required|boolean',
             'area_id' => 'required|numeric',
             'description' => 'string|max:1000|nullable',
         ]);
@@ -82,7 +82,7 @@ class RegisterController extends Controller
 
     public function userCreated($data, $user)
     {
-        $role = $data['is_company'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
+        $role = $data['is_merchant'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
         $user->roles()->save($role);
         $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
     }

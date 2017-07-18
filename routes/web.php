@@ -22,6 +22,9 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
         Route::resource('favorite', 'FavoriteController');
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
+        Route::resource('plan', 'PlanController');
+        Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
+        Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index');
@@ -37,6 +40,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::resource('auction', 'AuctionController', ['only' => ['store']]);
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
     Route::resource('ad', 'AdController', ['only' => ['show', 'index']]);
+    Route::resource('gallery', 'GalleryController', ['only' => 'show', 'index']);
     /*
      * the following route for both (search + categories menu) === petrolet.dev/search?type=user&main=3&sub=7
      * returns all companies related to main or sub category included within the filter

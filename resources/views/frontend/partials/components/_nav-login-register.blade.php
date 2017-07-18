@@ -23,7 +23,7 @@
             <li class='li-col list-user-menu'>
                 <ul>
                     @if(auth()->check())
-                        @if(auth()->user()->isAdmin))
+                        @if(auth()->user()->isAdmin)
                             <li><a href="{{ route('backend.home') }}">{{ trans('general.dashboard') }}</a></li>
                             <li><a href="{{ url('backend/translations') }}">{{ trans('general.translations') }}</a></li>
                         @else

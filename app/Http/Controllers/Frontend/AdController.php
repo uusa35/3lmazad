@@ -13,11 +13,13 @@ use App\Http\Controllers\Controller;
 
 class AdController extends Controller
 {
-    protected $ad;
+    public $ad;
+    public $category;
 
-    public function __construct(Ad $ad)
+    public function __construct(Ad $ad, Category $category)
     {
         $this->ad = $ad;
+        $this->category = $category;
     }
 
     /**
@@ -28,15 +30,20 @@ class AdController extends Controller
     public function index()
     {
         // if the parent id is there go ahead and make the session
-        request()->has('parent') ? session()->put('parent', request()->parent) : null;
-        $parent = session('parent');
-        if (!is_null($parent)) {
-            $subCategories = Category::whereId($parent)->first()->children()->pluck('id');
-            $ads = Ad::whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites');
+        $cat = request()->id;
+        if (!is_null($cat)) {
+            $category = $this->category->whereId($cat)->first();
+            if ($category->isParent) {
+                $subCategories = $this->category->whereId($cat)->first()->children()->pluck('id');
+                $ads = $this->ad->whereIn('category_id', $subCategories);
+            } else {
+                $ads = $this->ad->where('category_id', $cat);
+            }
+            $ads = $ads->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites');
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
             $paidAds = $ads->hasValidDeal()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
-            return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites'));
+            return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites','category'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
     }
@@ -87,6 +94,7 @@ class AdController extends Controller
         /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
         $counter = Visitor::where('ad_id', $element->id)->count();*/
         $counter = 0;
+        $element->isOwner ? session()->put('pay_ad_id', $element->id) : null;
         return view('frontend.modules.ad.show', compact('element', 'counter'));
     }
 

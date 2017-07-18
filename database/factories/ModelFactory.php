@@ -239,6 +239,8 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
+        'description_en' => $faker->paragraph(3),
+        'description_ar' => $faker->paragraph(3),
         'duration' => $faker->randomDigit,
         'price' => $faker->randomFloat(4, 4, 10),
         'sale_price' => $faker->randomFloat(4, 2, 3),
@@ -267,20 +269,19 @@ $factory->define(Deal::class, function (Faker\Generator $faker) {
 
 $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
-        'description_ar' => $faker->paragraph(2),
-        'description_en' => $faker->paragraph(2),
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
-        'galleryable_id' => Ad::all()->random()->id,
-        'galleryable_type' => Ad::class,
+//        'galleryable_id' => Ad::all()->random()->id,
+//        'galleryable_type' => Ad::class,
     ];
 });
+
 $factory->define(Image::class, function (Faker\Generator $faker) {
     return [
         'gallery_id' => Gallery::all()->random()->id,
         'is_main' => $faker->boolean(),
-        'thumb' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
-        'medium' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
-        'large' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'description_ar' => $faker->paragraph(1),
+        'description_en' => $faker->paragraph(1),
     ];
 });
 

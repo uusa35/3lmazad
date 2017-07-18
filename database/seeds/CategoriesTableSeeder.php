@@ -47,7 +47,7 @@ class CategoriesTableSeeder extends Seeder
                     'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
                 $isFilterArrayCars = ['brand_id', 'model_id', 'condition', 'manufacturing_year', 'type', 'transmission', 'mileage'];
                 $isFilterArrayProperty = ['type', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-                $isFilterArrayMobile = ['brand_id', 'model_id', 'condition','type',];
+                $isFilterArrayMobile = ['brand_id', 'model_id', 'condition', 'type',];
                 $form->fields()->attach(Field::inRandomOrder()->take(4)->pluck('id'));
                 $form->categories()->save($parent);
                 foreach ($category['sub'] as $sub) {
@@ -59,7 +59,7 @@ class CategoriesTableSeeder extends Seeder
 
                         $subCat->ads()->save($ad);
 
-                        $gallery = factory(Gallery::class)->create();
+                        $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
 
                         // create meta for each ad
                         $ad->meta()->save(factory(AdMeta::class)->create());

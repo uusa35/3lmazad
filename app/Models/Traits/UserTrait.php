@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Deal;
+use App\Models\Gallery;
 use App\Models\Role;
 
 /**
@@ -49,5 +50,10 @@ trait UserTrait
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function gallery()
+    {
+        return $this->morphMany(Gallery::class, 'galleryable');
     }
 }

@@ -85,7 +85,7 @@
 
         <div class="col-md-3">
             <div class="col-lg-1">
-                <input type="radio" class="" name="is_company" value="1"
+                <input type="radio" class="" name="is_merchant" value="1"
                        required>
             </div>
             <div class="col-lg-2">
@@ -94,7 +94,7 @@
         </div>
         <div class="col-md-3">
             <div class="col-lg-1">
-                <input type="radio" class="" name="is_company" value="0"
+                <input type="radio" class="" name="is_merchant" value="0"
                        required>
             </div>
             <div class="col-lg-2">

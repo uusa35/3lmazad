@@ -2,7 +2,11 @@
 
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('category', $elements->first()->category) !!}
+    @if($category->isParent)
+        {!! Breadcrumbs::render('parent', $category) !!}
+    @else
+        {!! Breadcrumbs::render('sub', $category) !!}
+    @endif
 @endsection
 
 @section('top')
@@ -11,7 +15,7 @@
             @if(isset($paidAds))
                 @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
             @endif
-            @include('frontend.partials._divider-xs')
+            <div class="divider divider--xs"></div>
             <div class="filters-row">
                 @include('frontend.partials.components._bar-pagination-filters')
                 {{--@include('frontend.partials._divider-xs')--}}
