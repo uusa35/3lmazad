@@ -172,5 +172,21 @@ $(document).ready(function() {
         }).catch(e => console.log(e));
     });
 
+    // this one for brand in ad.create route
+    $('select[id^="brand-items-"]').on('change', function(e) {
+        console.log('change occured');
+        let catParentId = $(e.target).attr('parent_id');
+        let brandId = e.target.value;
+        console.log('catId ' + catParentId + 'brandId ' + brandId);
+        return axios.get('/api/brand/' + brandId + '/models').then(res => res.data).then(data => {
+            return data.map(m => {
+                let name = 'name_' + lang;
+                return $('#model-items-' + catParentId).append(`
+                    <option value="${m.id }">${m[name]}</option>
+                `);
+            });
+        }).catch(e => console.log(e));
+    });
+
 });
 

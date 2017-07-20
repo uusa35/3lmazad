@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 hidden-xs hidden-sm">
-                    <h5 class="title text-uppercase mobile-collapse__title">{{ $contactus->name }}</h5>
+                    <h5 class=" text-uppercase mobile-collapse__title">{{ $contactus->name }}</h5>
                     <!--  Logo  -->
                     <a class="logo logo--footer"
                        href="{{ route('home') }}">
@@ -14,7 +14,7 @@
                     </a>
                     <!-- End Logo --> </div>
                 <div class="col-sm-3 col-md-2 mobile-collapse">
-                    <h5 class="title text-uppercase mobile-collapse__title">{{ trans('general.info') }} </h5>
+                    <h5 class="text-uppercase mobile-collapse__title">{{ trans('general.info') }} </h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
                             <li><a href="{{ route('aboutus') }}">{{ trans('general.aboutus') }}</a></li>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-2 mobile-collapse">
-                    <h5 class="title text-uppercase mobile-collapse__title">{{ trans('general.terms') }}</h5>
+                    <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.terms') }}</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
                             <li><a href="{{ route('faq') }}">{{ trans('general.faq') }}</a></li>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-2 mobile-collapse">
-                    <h5 class="title text-uppercase mobile-collapse__title">{{ trans('general.my_account') }}</h5>
+                    <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.my_account') }}</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
                             {{--@if($isAdmin)--}}
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3 col-md-3 mobile-collapse mobile-collapse--last">
-                    <h5 class="title text-uppercase mobile-collapse__title">{{ trans('general.our_info') }}</h5>
+                    <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.our_info') }}</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
                             <li class="icon icon-home">{{ $contactus->address }}</li>

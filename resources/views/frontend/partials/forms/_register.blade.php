@@ -75,8 +75,8 @@
         <label for="name" class="col-md-4 control-label">{{ trans('general.mobile') }}</label>
 
         <div class="col-md-6">
-            <input id="phone" type="text" class="form-control" name="phone"
-                   value="{{ old('phone') }}" number autofocus>
+            <input id="mobile" type="text" class="form-control" name="mobile"
+                   value="{{ old('mobile') }}" number autofocus>
         </div>
     </div>
 

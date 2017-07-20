@@ -36,7 +36,7 @@
                             class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span></div>
                 {{--<div class="rating product-info__rating hidden-xs"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></div>--}}
                 <div class="divider divider--xs product-info__divider"></div>
-                @include('frontend.partials.component.ad-info-ad-show')
+                @include('frontend.partials.components.ad-info-ad-show')
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="product-info__description" style="min-height: 200px;">
                     <p>

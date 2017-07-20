@@ -36,7 +36,7 @@
             <li class='li-col list-user-menu'>
                 <h4>{{ trans('general.account') }}</h4>
                 <ul>
-                    <li><a href="{{ route('setting.index') }}">{{ trans('general.settings') }}</a></li>
+                    <li><a href="{{ route('ad.create') }}">{{ trans('general.create_ad') }}</a></li>
                     <li><a href="{{ route('favorite.index') }}">{{ trans('general.wish_list') }}</a></li>
                 </ul>
             </li>

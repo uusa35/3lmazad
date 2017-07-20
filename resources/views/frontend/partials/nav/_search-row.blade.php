@@ -1,19 +1,19 @@
 <form class="search-bar" method="get"
       action="{{ route('search') }}">
     <div class="main-fields">
-        @include('frontend.partials.components.fields._area_id_field')
-        @include('frontend.partials.components.fields._category_field')
-        @include('frontend.partials.components.fields._keyword_field')
-        @include('frontend.partials.components.fields._min_field')
-        @include('frontend.partials.components.fields._max_field')
+        @include('frontend.partials.components.search-fields._area_id_field')
+        @include('frontend.partials.components.search-fields._category_field')
+        @include('frontend.partials.components.search-fields._keyword_field')
+        @include('frontend.partials.components.search-fields._min_field')
+        @include('frontend.partials.components.search-fields._max_field')
     </div>
 
     @foreach($categories as $category)
         @if($category->isParent)
             <div class="sub-fields hidden" id="sub-fields-{{ $category->id }}">
                 @foreach($category->form->fields->unique() as $field)
-                        @if(view()->exists('frontend.partials.components.fields._'.$field->name.'_field'))
-                            @include('frontend.partials.components.fields._'.$field->name.'_field')
+                        @if(view()->exists('frontend.partials.components.search-fields._'.$field->name.'_field'))
+                            @include('frontend.partials.components.search-fields._'.$field->name.'_field')
                         @endif
                 @endforeach
             </div>
@@ -25,7 +25,7 @@
         {{ trans('general.search') }}
     </button>
 </form>
-
+h
 {{--<div id="App"></div>--}}
 
 {{--<div class="main">--}}

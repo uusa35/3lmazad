@@ -264,6 +264,24 @@ $(document).ready(function () {
             return console.log(e);
         });
     });
+
+    // this one for brand in ad.create route
+    $('select[id^="brand-items-"]').on('change', function (e) {
+        console.log('change occured');
+        var catParentId = $(e.target).attr('parent_id');
+        var brandId = e.target.value;
+        console.log('catId ' + catParentId + 'brandId ' + brandId);
+        return axios.get('/api/brand/' + brandId + '/models').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            return data.map(function (m) {
+                var name = 'name_' + lang;
+                return $('#model-items-' + catParentId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
+            });
+        }).catch(function (e) {
+            return console.log(e);
+        });
+    });
 });
 
 /***/ }),

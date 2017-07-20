@@ -10,11 +10,7 @@
             @include('frontend.partials._divider-xs')
             <div class="filters-row">
                 {{--@include('frontend.partials._divider-xs')--}}
-                <div class="ui top attached button">
-                    <h1>{{ trans('general.my_account_control') }}</h1>
-                </div>
-                <hr>
-                <div class="ui grid center">
+                <div class="ui grid" style="border: 1px solid lightgrey; border-radius: 10px;">
                     <div class="seven wide center column">
                         <div class="ui items">
                             <div class="item">
@@ -22,7 +18,7 @@
                                     <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}">
                                 </div>
                                 <div class="content">
-                                    <h3>{{ $element->name }}</h3>
+                                    <h3>{{ trans('general.my_account') }} : {{ $element->name }}</h3>
                                     <div class="extra">
                                         <a href="{{ route('user.edit',$element->id) }}"
                                            class="ui mini floated button {{ app()->isLocale('ar') ? 'pull-left' : 'pull-right' }}">
@@ -39,8 +35,8 @@
                                             <span class="date">{{  $element->email }}</span>
                                         </p>
                                         <p>
-                                            <span class="date">{{ trans('general.phone')}} :</span>
-                                            <span class="date">{{  $element->phone }}</span>
+                                            <span class="date">{{ trans('general.mobile')}} :</span>
+                                            <span class="date">{{  $element->mobile }}</span>
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.country')}} :</span>
