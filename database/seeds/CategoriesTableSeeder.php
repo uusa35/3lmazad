@@ -12,6 +12,7 @@ use App\Models\Field;
 use App\Models\Form;
 use App\Models\Gallery;
 use App\Models\Image;
+use App\Models\Option;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -33,13 +34,19 @@ class CategoriesTableSeeder extends Seeder
                 // CREATE A FORM
                 $form = factory(Form::class)->create(['name' => $category['parent']]);
                 foreach ($category['fields'] as $f) {
-                    $field = Field::where('name', $f)->first();
+                    $field = Field::where('name', $f['name'])->first();
                     if ($field) {
-                        if (!in_array($field->id, $form->fields()->pluck('id')->toArray(),true)) {
+                        if (!in_array($field->id, $form->fields()->pluck('id')->toArray(), true)) {
                             $form->fields()->attach($field->id);
                         }
                     } else {
-                        $form->fields()->save(factory(Field::class)->create(['name' => $f]));
+                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'group' => $f['group']]);
+                        if(count($f['options']) > 1) {
+                            foreach ($f['options'] as $k => $v) {
+                                $field->options()->save(factory(Option::class)->create(['name' => $v, 'value' => $v]));
+                            }
+                        }
+                        $form->fields()->save($field);
                     }
                 }
                 //PARENT

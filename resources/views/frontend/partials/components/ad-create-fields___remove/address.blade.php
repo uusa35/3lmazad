@@ -3,7 +3,7 @@
         <label for="address"
                class="control-label col-sm-3">{{ title_case('address') }}</label>
         <div class="col-sm-9">
-            <input class="form-control" name="address" placeholder="{{ trans('general.address') }}" type="text">
+            <input class="form-control" name="address" value="{{ old('address') }}" placeholder="{{ trans('general.address') }}" type="text">
         </div>
     </div>
 </div>

@@ -16,12 +16,12 @@ return [
             'motorcyle',
         ],
         'fields' => [
-            'brand_id',
-            'model_id',
-            'manufacturing_year',
-            'condition',
-            'transmission',
-            'mileage'
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
+            ['name' => 'manufacturing_year', 'type' => 'number', 'group' => 'manufacturing_year','options' => [range(1980,2017)]],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
+            ['name' => 'transmission', 'type' => 'multiple', 'group' => 'transmission','options' => ['manual','automatic']],
+            ['name' => 'mileage', 'type' => 'number', 'group' => 'mileage','options' => ''],
         ]
     ],
     1 => [
@@ -31,9 +31,9 @@ return [
             'tablets',
         ],
         'fields' => [
-            'brand_id',
-            'model_id',
-            'condition'
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
         ]
     ],
     2 => [
@@ -43,9 +43,9 @@ return [
             'tvs',
         ],
         'fields' => [
-            'brand_id',
-            'model_id',
-            'condition'
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
         ]
     ],
     3 => [
@@ -56,15 +56,15 @@ return [
             'Whole Building for Sale',
         ],
         'fields' => [
-            'condition',
-            'furnished',
-            'floor_no',
-            'building_age',
-            'bathroom_no',
-            'room_no',
-            'type_id',
-            'space',
-            'rent_type'
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
+            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished','options' => [0,1]],
+            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no','options' => [range(1,5)]],
+            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age','options' => [range(1,5)]],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no','options' => [range(1,5)]],
+            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no','options' => [range(1,5)]],
+            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id','options' => ""],
+            ['name' => 'space', 'type' => 'text', 'group' => 'space','options' => ''],
+            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type','options' => ['daily','weekly','monthly','yearly']]
         ]
     ],
     4 => [
@@ -78,15 +78,15 @@ return [
             'Other Real Estate for rent',
         ],
         'fields' => [
-            'condition',
-            'furnished',
-            'floor_no',
-            'building_age',
-            'bathroom_no',
-            'room_no',
-            'type_id',
-            'space',
-            'rent_type'
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
+            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished','options' => [0,1]],
+            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no','options' => [range(1,5)]],
+            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age','options' => [range(1,5)]],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no','options' => [range(1,5)]],
+            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no','options' => [range(1,5)]],
+            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id','options' => ""],
+            ['name' => 'space', 'type' => 'text', 'group' => 'space','options' => ''],
+            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type','options' => ['daily','weekly','monthly','yearly']]
         ]
     ],
 //    5 => [

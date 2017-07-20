@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Requests\ImageStore;
+use App\Http\Requests\Frontend\ImageStore;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

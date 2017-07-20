@@ -32,6 +32,7 @@ use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Model;
 use App\Models\Newsletter;
+use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Role;
 use App\Models\Size;
@@ -129,28 +130,36 @@ $factory->define(Form::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Field::class, function (Faker\Generator $faker) {
-    $fields = ['title', 'description', 'price', 'active', 'type',
-        'featured', 'phone', 'condition', 'manufacturing_year', 'mileage',
-        'transmission', 'room_no', 'floor_no', 'bathroom_no', 'rent_type',
-        'building_age', 'furnished', 'space', 'address', 'image', 'mileage',
-        'category_id', 'area_id', 'brand_id', 'model_id', 'color_id', 'size_id'];
-    $isFilterArray = ['condition', 'manufacturing_year',
-        'transmission', 'room_no', 'floor_no', 'brand', 'model', 'mileage',
-        'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-    $isNotFilterArray = ['title', 'description', 'price', 'phone', 'color_id', 'size_id',
-        'model_id', 'brand_id', 'area_id', 'category_id', 'address', 'image'];
-    $elements = Field::all()->pluck('name')->toArray();
-//    dd(array_diff($isFilterArray, $fields));
+//    $fields = ['title', 'description', 'price', 'active', 'type',
+//        'featured', 'phone', 'condition', 'manufacturing_year', 'mileage',
+//        'transmission', 'room_no', 'floor_no', 'bathroom_no', 'rent_type',
+//        'building_age', 'furnished', 'space', 'address', 'image', 'mileage',
+//        'category_id', 'area_id', 'brand_id', 'model_id', 'color_id', 'size_id'];
+//    $isFilterArray = ['condition', 'manufacturing_year',
+//        'transmission', 'room_no', 'floor_no', 'brand', 'model', 'mileage',
+//        'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
+//    $isNotFilterArray = ['title', 'description', 'price', 'phone', 'color_id', 'size_id',
+//        'model_id', 'brand_id', 'area_id', 'category_id', 'address', 'image'];
+//    $elements = Field::all()->pluck('name')->toArray();
     return [
-        'is_filter' => $faker->boolean(50),
+        'is_required' => $faker->boolean(false),
         'name' => $faker->name,
+        'group' => $faker->name,
         'label_ar' => function ($array) {
             return $array['name'];
         },
         'label_en' => function ($array) {
             return $array['name'];
         },
-        'type' => $faker->randomElement(['text', 'hidden', 'number'])
+        'type' => $faker->randomElement(['text', 'hidden', 'multiple', 'radio'])
+    ];
+});
+
+$factory->define(Option::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'value' => $faker->name,
+        'field_id' => Field::all()->random()->id
     ];
 });
 

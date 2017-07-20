@@ -164,7 +164,7 @@ $(document).ready(function() {
         return axios.get('/api/category/' + categoryId + '/children').then(res => res.data).then(data => {
             return data.map(m => {
                 let name = 'name_' + lang;
-                $('div[id="fields-'+categoryId+'"]').removeClass('hidden');
+                $('div[id="fields-' + categoryId + '"]').removeClass('hidden');
                 return $('#subCategories').append(`
                     <option class="" value="${m.id}"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;${m[name]}</span></option>
                 `);
@@ -173,15 +173,15 @@ $(document).ready(function() {
     });
 
     // this one for brand in ad.create route
-    $('select[id^="brand-items-"]').on('change', function(e) {
+    $('select[id^="brands-items-"]').on('change', function(e) {
         console.log('change occured');
         let catParentId = $(e.target).attr('parent_id');
         let brandId = e.target.value;
-        console.log('catId ' + catParentId + 'brandId ' + brandId);
+        $('#model-items-' + catParentId).html('');
         return axios.get('/api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             return data.map(m => {
                 let name = 'name_' + lang;
-                return $('#model-items-' + catParentId).append(`
+                return $('#models-items-' + catParentId).append(`
                     <option value="${m.id }">${m[name]}</option>
                 `);
             });

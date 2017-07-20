@@ -9,9 +9,10 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="title"
-                           class="control-label col-sm-3">{{ title_case('title') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.title') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control" name="title" placeholder="Add Your Title" type="text"
+                        <input class="form-control" name="title" value="{{ old('title') }}"
+                               placeholder="{{ trans('general.title') }}" type="text"
                                required>
                     </div>
                 </div>
@@ -20,9 +21,9 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="file"
-                           class="control-label col-sm-3">{{ title_case('image') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.image') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control" name="image[]" placeholder="image" type="file" required/>
+                        <input class="form-control" name="image[]" placeholder="image" type="file" required multiple/>
                         <p class="help-block">Best Fit 800 x 1000</p>
                     </div>
                 </div>
@@ -31,20 +32,21 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="body"
-                           class="control-label col-sm-3">{{ title_case('body') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.description') }}</label>
                     <div class="col-sm-9">
-                <textarea class="form-control" name="body" placeholder="Text Maximum 500 words" maxlength="500"
-                          required></textarea>
+                <textarea class="form-control" name="description" placeholder="Text Maximum 500 words" maxlength="500"
+                          required>{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="price"
-                           class="control-label col-sm-3">{{ title_case('price') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.price') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control" name="price" placeholder="Add Your Title" type="number"
-                               required>
+                        <input class="form-control" name="price" value="{{ old('price') }}"
+                               placeholder="{{ trans('general.price') }}" type="number"
+                               required maxlength="4">
                     </div>
                 </div>
             </div>
@@ -55,15 +57,46 @@
                 <div class="col-lg-12 hidden" id="fields-{{ $category->id }}">
                     {{--<h1>{{ $category->name.'-'.$category->id }}</h1>--}}
                     @foreach($category->form->fields as $field)
-                        @if(view()->exists('frontend.partials.components.ad-create-fields.'.$field->name))
-                            @include('frontend.partials.components.ad-create-fields.'.$field->name)
+                        {{--@if(view()->exists('frontend.partials.components.ad-create-fields.'.$field->name))--}}
+                        {{--@include('frontend.partials.components.ad-create-fields.'.$field->name)--}}
+                        {{--@endif--}}
+                        @if($field->isMultiple)
+                            @if(!$field->options->isEmpty())
+                                @include('frontend.partials.components.fields.'.$field->type,['elements' => $field->options])
+                            @elseif(count($category[$field->group]) > 1)
+                                i stopped here brands-models
+                                @include('frontend.partials.components.fields.'.$field->type,['elements' => $category[$field->group]])
+                            @endif
+                        @else
+                            @include('frontend.partials.components.fields.'.$field->type)
                         @endif
                     @endforeach
                 </div>
                 @endforeach
 
-                @include('frontend.partials.components.ad-create-fields.area_id')
-                @include('frontend.partials.components.ad-create-fields.address')
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <label for="area_id" class="control-label col-sm-3">{{ trans('general.area') }}</label>
+                    <div class="col-sm-9">
+                        <select id="area_id" name="area_id" class="form-control">
+                            <option value="area">{{ trans('general.area') }}</option>
+                            @foreach($allAreas as $area)
+                                <option value="{{ $area->id }}">{{ $area->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <label for="address"
+                           class="control-label col-sm-3">{{ title_case('address') }}</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" name="address" value="{{ old('address') }}" placeholder="{{ trans('general.address') }}" type="text">
+                    </div>
+                </div>
+            </div>
                         <!-- Button http://getbootstrap.com/css/#buttons -->
                 @include('frontend.partials.forms._btn-group')
 

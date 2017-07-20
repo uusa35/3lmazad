@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdStore extends FormRequest
+class ImageStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class AdStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->authorize('isOwner', auth()->user()->id);;
     }
 
     /**
@@ -24,10 +24,9 @@ class AdStore extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:200',
-            'description' => 'required|max:1500',
-            'image' => 'required|mimes:jpg,png,jpeg,bmp',
-            'price' => 'required|numeric'
+            'image' => 'required|mimes:jpeg,png,jpg|max:2000',
+            'description_ar' => 'alpha_numeric|nullable',
+            'description_en' => 'alpha_numeric|nullable',
         ];
     }
 }

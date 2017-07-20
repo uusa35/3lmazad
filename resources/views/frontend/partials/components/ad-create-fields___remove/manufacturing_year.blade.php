@@ -3,7 +3,7 @@
         <div class="col-sm-9">
             <select id="manufacturing_year" name="manufacturing_year" class="form-control">
                 <option value="area">{{ trans('general.manufacturing_year') }}</option>
-                @foreach(array_reverse(range(date('Y')-15, date('Y'))) as $key => $value)
+                @foreach(array_reverse(range(date('Y')-25, date('Y'))) as $key => $value)
                     <option value="{{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>

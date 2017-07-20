@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Requests\UserUpdate;
+use App\Http\Requests\Frontend\UserUpdate;
 use App\Models\Ad;
-use App\Models\Area;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;

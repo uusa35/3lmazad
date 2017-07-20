@@ -17,7 +17,7 @@
     <div class="dropdown pull-right"><a href="#"
                                         class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"
                                         data-toggle="dropdown"><span class="fa fa-fw fa-lg fa-user"></span>
-            <span class="hidden-xs">{{ trans('general.welcome').' '.auth()->user()->name }}</span>
+            <span class="hidden-xs">{{ trans('general.welcome').' '.str_limit(auth()->user()->name,15) }}</span>
         </a>
         <ul class="dropdown-menu ul-row animated fadeIn" role="menu" style="z-index: 9999;">
             <li class='li-col list-user-menu'>

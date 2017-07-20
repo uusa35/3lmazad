@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Requests\AdStore;
+use App\Http\Requests\Frontend\AdStore;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -66,13 +65,33 @@ class AdController extends Controller
      */
     public function store(AdStore $request)
     {
-        $element = $this->ad->create($request->except('image'));
+        $element = $this->ad->create([
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'area_id' => $request->area_id
+        ]);
+
+        $meta = $element->meta()->create([
+            'condition' => $request->condition,
+            'manufacturing_year' => $request->manufacturing_year,
+            'mileage' => $request->mileage,
+            'transmission' => $request->transmission,
+            'room_no' => $request->room_no,
+            'floor_no' => $request->floor_no,
+            'bathroom_no' => $request->bathroom_no,
+            'rent_type' => $request->rent_type,
+            'building_age' => $request->building_age,
+            'furnished' => $request->furnished,
+            'space' => $request->space,
+            'address' => $request->address,
+        ]);
 
         if (!$element) {
             return redirect()->route('account')->with('error', 'not stored successfully');
         }
-        $this->saveMimes($element, $request, ['image'], ['1920', '745'], false);
-
+        $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
 
         return redirect()->route('account')->with('success', title_case('item saved successfully.'));
     }

@@ -270,7 +270,7 @@ $(document).ready(function () {
         console.log('change occured');
         var catParentId = $(e.target).attr('parent_id');
         var brandId = e.target.value;
-        console.log('catId ' + catParentId + 'brandId ' + brandId);
+        $('#model-items-' + catParentId).html('');
         return axios.get('/api/brand/' + brandId + '/models').then(function (res) {
             return res.data;
         }).then(function (data) {

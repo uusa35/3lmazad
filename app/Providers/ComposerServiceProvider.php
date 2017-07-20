@@ -36,7 +36,7 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             [
                 'frontend.modules.user.index',
-                'frontend.partials.components.ad-create-fields.area_id'
+                'frontend.modules.ad.create'
             ], 'App\Services\ViewComposers@getAllAreas');
     }
 
