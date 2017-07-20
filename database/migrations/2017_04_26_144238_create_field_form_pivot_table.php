@@ -17,7 +17,7 @@ class CreateFieldFormPivotTable extends Migration
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
             $table->integer('form_id')->unsigned()->index();
             $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
-//            $table->primary(['field_id', 'form_id']);
+            $table->primary(['field_id', 'form_id']);
         });
     }
 

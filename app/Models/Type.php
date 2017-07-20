@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Type extends Model
+class Type extends BaseModel
 {
+    public $localeStrings = ['name'];
+    protected $guarded = [''];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

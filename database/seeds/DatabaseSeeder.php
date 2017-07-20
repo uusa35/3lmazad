@@ -29,8 +29,6 @@ class DatabaseSeeder extends Seeder
                 $this->call(AreasTableSeeder::class);
             }
             $this->call(PlansTableSeeder::class);
-            $this->call(FieldsTableSeeder::class);
-            $this->call(FormsTableSeeder::class);
             $this->call(UsersTableSeeder::class);
             $this->command->info('UsersTableseeder is done');
             $this->call(ColorsTableSeeder::class);

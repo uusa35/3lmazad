@@ -14,11 +14,14 @@ return [
             'for sale',
             'for rent',
             'motorcyle',
-//            'plates',
-//            'spareparts',
-//            'trucks',
-//            'boats',
-//            'others',
+        ],
+        'fields' => [
+            'brand_id',
+            'model_id',
+            'manufacturing_year',
+            'condition',
+            'transmission',
+            'mileage'
         ]
     ],
     1 => [
@@ -26,9 +29,11 @@ return [
         'sub' => [
             'smart phones',
             'tablets',
-//            'special numbers',
-//            'accessories',
-//            'others',
+        ],
+        'fields' => [
+            'brand_id',
+            'model_id',
+            'condition'
         ]
     ],
     2 => [
@@ -36,13 +41,11 @@ return [
         'sub' => [
             'computers',
             'tvs',
-//            'speakers',
-//            'modems',
-//            'cameras',
-//            'air conditioners',
-//            'firdges',
-//            'washing machines',
-//            'microwave',
+        ],
+        'fields' => [
+            'brand_id',
+            'model_id',
+            'condition'
         ]
     ],
     3 => [
@@ -51,9 +54,17 @@ return [
             'Villa - Palace for Sale',
             'Commercial for Sale',
             'Whole Building for Sale',
-//            'Land for Sale',
-//            'Chalets - Summerhouses for Sale',
-//            'Other Real Estate for Sale',
+        ],
+        'fields' => [
+            'condition',
+            'furnished',
+            'floor_no',
+            'building_age',
+            'bathroom_no',
+            'room_no',
+            'type_id',
+            'space',
+            'rent_type'
         ]
     ],
     4 => [
@@ -62,9 +73,20 @@ return [
             'Villa - Palace for rent',
             'Commercial for rent',
             'Whole Building for rent',
-//            'Land for rent',
-//            'Chalets - Summerhouses for rent',
-//            'Other Real Estate for rent',
+            'Land for rent',
+            'Chalets - Summerhouses for rent',
+            'Other Real Estate for rent',
+        ],
+        'fields' => [
+            'condition',
+            'furnished',
+            'floor_no',
+            'building_age',
+            'bathroom_no',
+            'room_no',
+            'type_id',
+            'space',
+            'rent_type'
         ]
     ],
 //    5 => [

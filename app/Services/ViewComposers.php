@@ -33,6 +33,12 @@ class ViewComposers
         return $view->with(compact('areas'));
     }
 
+    public function getAllAreas(View $view)
+    {
+        $allAreas = Area::orderBy('id','asc')->get();
+        return $view->with(compact('allAreas'));
+    }
+
 
     public function getIsAdmin(View $view)
     {

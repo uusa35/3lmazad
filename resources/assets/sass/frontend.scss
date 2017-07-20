@@ -62,14 +62,14 @@
 .search-bar {
   display: flex;
   flex-direction: column;
-  broder: 1px solid gold;
   width: 86%;
   margin-right: auto;
   margin-left: auto;
   justify-content: space-between;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .search-bar > .search-input {
@@ -87,9 +87,13 @@
 .sub-fields {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  padding: 5px;
+  border : 1px dashed lightgrey;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .main-fields > .search-dropdown {
@@ -184,14 +188,14 @@ span > .text {
 }
 
 .account-btns > a {
-  margin : 30px !important;
+  margin: 30px !important;
 }
+
 .icon-btn-centered {
   margin: 30px;
   display: block;
   clear: both;
 }
-
 
 //.btn-rounded {
 //  background-color: lightblue;
@@ -202,11 +206,11 @@ span > .text {
 //}
 
 .btn-white {
-  background-color : white !important;
+  background-color: white !important;
 }
 
 .btn-white:hover, .btn-white:focus {
-  background-color : white !important;
+  background-color: white !important;
 }
 
 .btn-red {
@@ -226,7 +230,7 @@ span > .text {
 }
 
 .slider-img {
-  max-height : 450px;
+  max-height: 450px;
   width: auto;
 }
 
@@ -234,3 +238,11 @@ span > .text {
   height: auto !important;
 }
 
+.breadcrumbs {
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size : 13px;
+  text-align: center;
+}

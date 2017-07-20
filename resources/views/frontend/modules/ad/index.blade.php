@@ -2,10 +2,15 @@
 
 
 @section('breadcrumbs')
-    @if($category->isParent)
-        {!! Breadcrumbs::render('parent', $category) !!}
+    @if(isset($element))
+        @if($category->isParent)
+            {!! Breadcrumbs::render('parent', $element) !!}
+        @else
+            {!! Breadcrumbs::render('sub', $element) !!}
+        @endif
     @else
-        {!! Breadcrumbs::render('sub', $category) !!}
+        {{--if there is no category then its search case--}}
+        {!! Breadcrumbs::render('search') !!}
     @endif
 @endsection
 

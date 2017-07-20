@@ -33,6 +33,10 @@ class ComposerServiceProvider extends ServiceProvider
                 'frontend.partials.forms._user-edit',
             ], 'App\Services\ViewComposers@getAreas');
 
+        view()->composer(
+            [
+                'frontend.modules.user.index',
+            ], 'App\Services\ViewComposers@getAllAreas');
     }
 
     /**

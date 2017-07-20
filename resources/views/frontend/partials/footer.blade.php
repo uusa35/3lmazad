@@ -9,7 +9,7 @@
                     <!--  Logo  -->
                     <a class="logo logo--footer"
                        href="{{ route('home') }}">
-                        <img src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}"
+                        <img class="img-responsive" src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}"
                              alt="{{ $contactus->name }}"/>
                     </a>
                     <!-- End Logo --> </div>

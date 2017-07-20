@@ -93,19 +93,36 @@
   border-radius: 6px 0 6px 6px;
 }
 
-
 .table-high tr {
   max-height: 100px !important;
   height: 100px !important;
 }
 
 .td-wide {
-  max-width : 200px;
+  max-width: 200px;
   min-width: 100px;
   overflow: hidden;
 }
 
 .ui.comments .comment .avatar img, .ui.comments .comment img.avatar {
-  height : auto;
+  height: auto;
 }
 
+// ad.show page
+// btn-bar
+.ad-bar-details {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.ad-bar-children {
+  width: 32%;
+  max-width: 155px;
+  overflow: hidden;
+  color: black;
+  padding: 5px;
+  margin-bottom: 3px;
+}

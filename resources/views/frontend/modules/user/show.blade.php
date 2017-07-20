@@ -5,15 +5,15 @@
 @endsection
 
 @section('top')
-    <section class="content top-null">
+    <section class="content">
         <div class="container">
             <div class="divider divider--xs"></div>
             <div class="filters-row">
-                {{--@include('frontend.partials._divider-xs')--}}
-                <div class="ui top attached button">
-                    <h1>{{ trans('general.profile') }}</h1>
-                </div>
+                <h2 class="text-center">{{ trans('general.profile') }}</h2>
                 <hr>
+                {{--<div class="ui top attached button">--}}
+
+                {{--</div>--}}
                 <div class="ui grid center">
                     <div class="sixteen wide center column">
                         <div class="ui items">
@@ -48,12 +48,16 @@
                                             <span class="date">{{ trans('general.account_type')}} :</span>
                                             <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
                                         </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.description')}} :</span>
+                                        </p>
                                     </div>
                                     <div class="description">
                                         <p>{{ $element->description }}</p>
                                     </div>
                                     <div class="description col-lg-2 col-lg-push-10">
-                                        <a href="{{ route('user.ads',$element->id) }}" class="btn btn--wd">{{ trans('general.user_ads') }}</a>
+                                        <a href="{{ route('user.ads',$element->id) }}"
+                                           class="btn btn--wd">{{ trans('general.user_ads') }}</a>
                                     </div>
                                 </div>
                             </div>

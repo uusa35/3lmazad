@@ -21,6 +21,5 @@
                 @include('frontend.partials.components._bar-pagination-filters')
             </div>
         </div>
-        @include('frontend.partials.components.modals._quick-view')
     </section>
 @endsection

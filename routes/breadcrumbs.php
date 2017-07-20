@@ -54,6 +54,11 @@ Breadcrumbs::register('sub', function ($breadcrumbs, $element) {
     $breadcrumbs->parent('parent', $element->parent->first());
     $breadcrumbs->push($element->name, route('ad.index', ['id' => $element->id]));
 });
+// search case ad.index
+Breadcrumbs::register('search', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('general.search_page_title'));
+});
 
 // favorites
 
@@ -63,15 +68,16 @@ Breadcrumbs::register('favorite', function ($breadcrumbs) {
 });
 
 
-// all merchants  (user.index)
-Breadcrumbs::register('user.index', function ($breadcrumbs) {
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.merchant'), route('user.index'));
-});
-
+// all parent categories
 Breadcrumbs::register('user.merchants-categories', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('general.merchants_categories'), route('user.merchants-categories'));
+});
+
+// fetch all users according to the parent category from merchant categories // the element is the ParentCategory
+Breadcrumbs::register('user.index', function ($breadcrumbs, $element) {
+    $breadcrumbs->parent('user.merchants-categories');
+    $breadcrumbs->push($element->name, route('user.index', ['id' => $element->id]));
 });
 
 // user profile
@@ -87,7 +93,7 @@ Breadcrumbs::register('user.show', function ($breadcrumbs, $element) {
 
 // my ads page
 Breadcrumbs::register('user.ads', function ($breadcrumbs, $element) {
-    $breadcrumbs->parent('user.show',$element);
+    $breadcrumbs->parent('user.show', $element);
     $breadcrumbs->push(trans('general.ads'), route('user.ads', $element->id));
 });
 

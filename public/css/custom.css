@@ -106,3 +106,27 @@
 .ui.comments .comment img.avatar {
   height: auto;
 }
+
+.ad-bar-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.ad-bar-children {
+  width: 32%;
+  max-width: 155px;
+  overflow: hidden;
+  color: black;
+  padding: 5px;
+  margin-bottom: 3px;
+}

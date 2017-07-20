@@ -36,77 +36,21 @@
                             class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span></div>
                 {{--<div class="rating product-info__rating hidden-xs"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></div>--}}
                 <div class="divider divider--xs product-info__divider"></div>
+                @include('frontend.partials.component.ad-info-ad-show')
+                <div class="divider divider--xs product-info__divider"></div>
                 <div class="product-info__description" style="min-height: 200px;">
                     <p>
-                        {{ $element->meta->description }}
+                        {!! $element->meta->description !!}
                     </p>
                     @include('frontend.partials.components._social-share-btns',['link' => route('ad.show',$element->id)])
                 </div>
-                <div class="divider divider--xs product-info__divider"></div>
-                <div class="ui buttons">
-                    <button class="ui white basic button"><i class="icon calendar"></i>{{  $element->fromDate }}
-                    </button>
-                    <button class="ui white basic button"><i
-                                class="icon {{ $element->category->icon }}"></i>{{  $element->categoryName }}</button>
-                    <button class="ui white basic button"><i
-                                class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}</button>
-                </div>
-                <div class="ui small basic icon buttons hidden-xs">
-                    @if(!is_null($element->brandName))
-                        <button class="ui button">
-                            <img class="ui avatar image" style="width: 10px; height: auto;"
-                                 src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
-                        </button>
-                    @endif
-                    @if(!is_null($element->meta->mileage))
-                        <button class="ui button"><i
-                                    class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
-                        </button>
-                    @endif
-                    <button class="ui button"><i class="upload icon"></i> {{ $element->manufacturing_year }} </button>
-                    <button class="ui button"><i class="download icon"></i> {{ $element->type->name }}</button>
-                    <button class="ui button"><i class="download icon"></i> {{ $element->brand->name }}</button>
-                    <button class="ui button"><i class="download icon"></i> {{ $element->model->name }}</button>
-                </div>
-
                 <div class="divider divider--xs"></div>
             </div>
-            <div class="col-sm-12 col-md-3 col-lg-3">
-                <h4>{{ trans('general.ad_details') }}</h4>
-                <div class="card">
-                    <div class="card__row"> You can add your content here, like promotions or some additional info</div>
-                    <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
-                        <div class="card__row--icon__icon">
-                            <img class="img-responsive img-thumbnail" style="max-width: 40px;"
-                                 src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">
-                        </div>
-                        <div class="card__row--icon__text">
-                            <div class="card__row__title">{{ $element->user->name }}</div>
-                        </div>
-                    </a>
-                    @if($element->isOwner)
-                        <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
-                            <div class="card__row--icon__icon"><span class="icon icon-money"></span></div>
-                            <div class="card__row--icon__text">
-                                <div class="card__row__title">{{ trans('general.make_special') }}</div>
-                            </div>
-                        </a>
-                    @endif
-                    <a href="{{ route('ad.index',['id' => $element->category_id]) }}" class="card__row card__row--icon">
-                        <div class="card__row--icon__icon"><span class="icon icon-identification-alt"></span></div>
-                        <div class="card__row--icon__text">
-                            <div class="card__row__title">{{ $element->categoryName }}</div>
-                        </div>
-                    </a> <a class="card__row card__row--icon">
-                        <div class="card__row--icon__icon"><span class="icon icon-truck"></span></div>
-                        <div class="card__row--icon__text">
-                            <div class="card__row__title">Free shipping</div>
-                        </div>
-                    </a></div>
-            </div>
+            @include('frontend.partials.components.side-ad-show')
         </div>
     </div>
+    @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
+    @include('frontend.partials._ad-tabs')
 </section>
 <!-- End Content section -->
-@include('frontend.partials._ad-tabs')
 @endsection

@@ -9,6 +9,9 @@ namespace App\Models\Helpers;
 
 trait UserHelpers
 {
+    public function scopeFeatured($q) {
+        return $q->where('featured', true);
+    }
 
     public function getIsAdminAttribute()
     {

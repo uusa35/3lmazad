@@ -29,7 +29,7 @@ abstract class QueryFilters
                 return $value;
             }
         });
-        dd($removeNull);
+//        dd($removeNull);
         return $removeNull;
     }
 
@@ -37,7 +37,7 @@ abstract class QueryFilters
     {
         $this->builder = $builder;
         if (is_null($this->filters())) {
-            abort(505, 'filters are null ..');
+            abort(505, trans('message.search_not_correct'));
         }
 
         foreach ($this->filters() as $key => $value) {

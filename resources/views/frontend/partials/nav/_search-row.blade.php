@@ -11,12 +11,10 @@
     @foreach($categories as $category)
         @if($category->isParent)
             <div class="sub-fields hidden" id="sub-fields-{{ $category->id }}">
-                @foreach($category->form->fields->unique()->where('is_filter',true) as $field)
-                    @if($field->is_filter)
+                @foreach($category->form->fields->unique() as $field)
                         @if(view()->exists('frontend.partials.components.fields._'.$field->name.'_field'))
                             @include('frontend.partials.components.fields._'.$field->name.'_field')
                         @endif
-                    @endif
                 @endforeach
             </div>
         @endif

@@ -6,7 +6,6 @@ use App\Services\Traits\LocaleTrait;
 
 class Brand extends BaseModel
 {
-    use LocaleTrait;
     public $localeStrings = ['name'];
 
     /**

@@ -27,10 +27,21 @@ class CategoriesTableSeeder extends Seeder
     {
         // ONLY 2 LEVELS NOW OF CATEGORIES PARENT AND SUB ONLY
         if (app()->environment('seeding')) {
-            $categories = config('categories');
+            $categories = collect(config('categories'));
+
             foreach ($categories as $category) {
-                // ASSIGN FORM FOR A PARENT CATEGORY
-                $form = factory(Form::class)->create();
+                // CREATE A FORM
+                $form = factory(Form::class)->create(['name' => $category['parent']]);
+                foreach ($category['fields'] as $f) {
+                    $field = Field::where('name', $f)->first();
+                    if ($field) {
+                        if (!in_array($field->id, $form->fields()->pluck('id')->toArray(),true)) {
+                            $form->fields()->attach($field->id);
+                        }
+                    } else {
+                        $form->fields()->save(factory(Field::class)->create(['name' => $f]));
+                    }
+                }
                 //PARENT
                 $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent'], 'form_id' => $form->id]);
                 // BRAND FOR EACH PARENT
@@ -41,15 +52,6 @@ class CategoriesTableSeeder extends Seeder
                 // TYPES FOR EACH PARENT
                 factory(Type::class, 5)->create(['category_id' => $parent->id]);
 
-
-                $isFilterArray = ['brand_id', 'model_id', 'condition', 'manufacturing_year', 'type',
-                    'transmission', 'room_no', 'floor_no', 'mileage',
-                    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-                $isFilterArrayCars = ['brand_id', 'model_id', 'condition', 'manufacturing_year', 'type', 'transmission', 'mileage'];
-                $isFilterArrayProperty = ['type', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-                $isFilterArrayMobile = ['brand_id', 'model_id', 'condition', 'type',];
-                $form->fields()->attach(Field::inRandomOrder()->take(4)->pluck('id'));
-                $form->categories()->save($parent);
                 foreach ($category['sub'] as $sub) {
                     //SUB
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
@@ -78,7 +80,6 @@ class CategoriesTableSeeder extends Seeder
                         $ad->deals()->saveMany(factory(Deal::class, 1)->create());
 
                     });
-
                 }
             }
         } elseif (app()->environment() === 'production') {

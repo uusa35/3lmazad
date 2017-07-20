@@ -38731,7 +38731,6 @@ zoom: 1;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  broder: 1px solid gold;
   width: 86%;
   margin-right: auto;
   margin-left: auto;
@@ -38740,7 +38739,8 @@ zoom: 1;
           justify-content: space-between;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .search-bar > .search-input {
@@ -38772,14 +38772,18 @@ zoom: 1;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 5px;
+  border: 1px dashed lightgrey;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .main-fields > .search-dropdown {
@@ -38925,4 +38929,13 @@ span > .text {
 
 .slick-slide {
   height: auto !important;
+}
+
+.breadcrumbs {
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 13px;
+  text-align: center;
 }
