@@ -143,6 +143,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
 //    $elements = Field::all()->pluck('name')->toArray();
     return [
         'is_required' => $faker->boolean(false),
+        'is_modal' => $faker->boolean(false),
         'name' => $faker->name,
         'group' => $faker->name,
         'label_ar' => function ($array) {

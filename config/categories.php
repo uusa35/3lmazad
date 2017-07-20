@@ -16,12 +16,12 @@ return [
             'motorcyle',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
-            ['name' => 'manufacturing_year', 'type' => 'number', 'group' => 'manufacturing_year','options' => [range(1980,2017)]],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
-            ['name' => 'transmission', 'type' => 'multiple', 'group' => 'transmission','options' => ['manual','automatic']],
-            ['name' => 'mileage', 'type' => 'number', 'group' => 'mileage','options' => ''],
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
+            ['name' => 'manufacturing_year', 'type' => 'number', 'group' => 'manufacturing_year', 'options' => [range(1980, 2017)], 'is_modal' => 0],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
+            ['name' => 'transmission', 'type' => 'multiple', 'group' => 'transmission', 'options' => ['manual', 'automatic'], 'is_modal' => 0],
+            ['name' => 'mileage', 'type' => 'number', 'group' => 'mileage', 'options' => '', 'is_modal' => 0],
         ]
     ],
     1 => [
@@ -31,9 +31,9 @@ return [
             'tablets',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
         ]
     ],
     2 => [
@@ -43,9 +43,9 @@ return [
             'tvs',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands','options' => ''],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models','options' => ''],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
+            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
+            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
         ]
     ],
     3 => [
@@ -56,15 +56,15 @@ return [
             'Whole Building for Sale',
         ],
         'fields' => [
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
-            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished','options' => [0,1]],
-            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no','options' => [range(1,5)]],
-            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age','options' => [range(1,5)]],
-            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no','options' => [range(1,5)]],
-            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no','options' => [range(1,5)]],
-            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id','options' => ""],
-            ['name' => 'space', 'type' => 'text', 'group' => 'space','options' => ''],
-            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type','options' => ['daily','weekly','monthly','yearly']]
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
+            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished', 'options' => [0, 1], 'is_modal' => 0],
+            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id', 'options' => "", 'is_modal' => 0],
+            ['name' => 'space', 'type' => 'text', 'group' => 'space', 'options' => '', 'is_modal' => 0],
+            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type', 'options' => ['daily', 'weekly', 'monthly', 'yearly'],'is_modal' => 0]
         ]
     ],
     4 => [
@@ -78,15 +78,15 @@ return [
             'Other Real Estate for rent',
         ],
         'fields' => [
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition','options' => ['new','old']],
-            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished','options' => [0,1]],
-            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no','options' => [range(1,5)]],
-            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age','options' => [range(1,5)]],
-            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no','options' => [range(1,5)]],
-            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no','options' => [range(1,5)]],
-            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id','options' => ""],
-            ['name' => 'space', 'type' => 'text', 'group' => 'space','options' => ''],
-            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type','options' => ['daily','weekly','monthly','yearly']]
+            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
+            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished', 'options' => [0, 1], 'is_modal' => 0],
+            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no', 'options' => [range(1, 5)], 'is_modal' => 0],
+            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id', 'options' => "", 'is_modal' => 0],
+            ['name' => 'space', 'type' => 'text', 'group' => 'space', 'options' => '', 'is_modal' => 0],
+            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type', 'options' => ['daily', 'weekly', 'monthly', 'yearly'],'is_modal' => 0]
         ]
     ],
 //    5 => [

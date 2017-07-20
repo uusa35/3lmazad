@@ -20,6 +20,7 @@ class CreateFieldsTable extends Migration
             $table->string('label_en')->nullable();
             $table->enum('type', ['text', 'hidden', 'multiple', 'radio','number'])->nullable();
             $table->boolean('is_required')->default(0)->nullable();
+            $table->boolean('is_modal')->default(0)->nullable();
             $table->timestamps();
         });
     }

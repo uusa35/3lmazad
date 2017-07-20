@@ -40,8 +40,8 @@ class CategoriesTableSeeder extends Seeder
                             $form->fields()->attach($field->id);
                         }
                     } else {
-                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'group' => $f['group']]);
-                        if(count($f['options']) > 1) {
+                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'group' => $f['group'], 'is_modal' => $f['is_modal']]);
+                        if (count($f['options']) > 1) {
                             foreach ($f['options'] as $k => $v) {
                                 $field->options()->save(factory(Option::class)->create(['name' => $v, 'value' => $v]));
                             }

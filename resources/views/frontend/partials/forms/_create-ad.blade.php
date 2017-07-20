@@ -55,24 +55,23 @@
 
             @foreach($categories as $category)
                 <div class="col-lg-12 hidden" id="fields-{{ $category->id }}">
-                    {{--<h1>{{ $category->name.'-'.$category->id }}</h1>--}}
                     @foreach($category->form->fields as $field)
-                        {{--@if(view()->exists('frontend.partials.components.ad-create-fields.'.$field->name))--}}
-                        {{--@include('frontend.partials.components.ad-create-fields.'.$field->name)--}}
-                        {{--@endif--}}
                         @if($field->isMultiple)
-                            @if(!$field->options->isEmpty())
+                            @if(!$field->options->isEmpty() && !$field->is_modal)
                                 @include('frontend.partials.components.fields.'.$field->type,['elements' => $field->options])
-                            @elseif(count($category[$field->group]) > 1)
-                                i stopped here brands-models
-                                @include('frontend.partials.components.fields.'.$field->type,['elements' => $category[$field->group]])
+                            @elseif($field->is_modal)
+                                @if(count($category[$field->group]) > 1)
+                                    @include('frontend.partials.components.fields.'.$field->type,['elements' => $category[$field->group]])
+                                @else
+                                    @include('frontend.partials.components.fields.'.$field->type)
+                                @endif
                             @endif
                         @else
                             @include('frontend.partials.components.fields.'.$field->type)
                         @endif
                     @endforeach
                 </div>
-                @endforeach
+            @endforeach
 
             <div class="form-group">
                 <div class="col-lg-12">
@@ -93,12 +92,13 @@
                     <label for="address"
                            class="control-label col-sm-3">{{ title_case('address') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control" name="address" value="{{ old('address') }}" placeholder="{{ trans('general.address') }}" type="text">
+                        <input class="form-control" name="address" value="{{ old('address') }}"
+                               placeholder="{{ trans('general.address') }}" type="text">
                     </div>
                 </div>
             </div>
-                        <!-- Button http://getbootstrap.com/css/#buttons -->
-                @include('frontend.partials.forms._btn-group')
+            <!-- Button http://getbootstrap.com/css/#buttons -->
+            @include('frontend.partials.forms._btn-group')
 
         </form>
     </div>

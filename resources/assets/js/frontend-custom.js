@@ -174,10 +174,9 @@ $(document).ready(function() {
 
     // this one for brand in ad.create route
     $('select[id^="brands-items-"]').on('change', function(e) {
-        console.log('change occured');
         let catParentId = $(e.target).attr('parent_id');
         let brandId = e.target.value;
-        $('#model-items-' + catParentId).html('');
+        $('#models-items-' + catParentId).html('');
         return axios.get('/api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             return data.map(m => {
                 let name = 'name_' + lang;
