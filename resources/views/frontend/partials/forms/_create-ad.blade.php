@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-10 col-lg-push-1">
+    <div class="col-lg-10 col-lg-{{ app()->isLocale('ar') ? 'pull' : 'push' }}-1">
         <form class="form-horizontal" method="post"
               action="{{ action('Frontend\AdController@store') }}"
               enctype="multipart/form-data">
@@ -23,8 +23,19 @@
                     <label for="file"
                            class="control-label col-sm-3">{{ trans('general.image') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control" name="image[]" placeholder="image" type="file" required multiple/>
-                        <p class="help-block">Best Fit 800 x 1000</p>
+                        <input class="form-control" name="image" placeholder="image" type="file" required/>
+                        <p class="help-block text-right">{{ trans('message.create_ad_best_fit') }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <label for="file"
+                           class="control-label col-sm-3">{{ trans('general.more_images') }}</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" name="images[]" placeholder="images" type="file" multiple/>
+                        <p class="help-block text-right">{{ trans('message.create_ad_best_fit') }}</p>
                     </div>
                 </div>
             </div>
@@ -34,7 +45,7 @@
                     <label for="body"
                            class="control-label col-sm-3">{{ trans('general.description') }}</label>
                     <div class="col-sm-9">
-                <textarea class="form-control" name="description" placeholder="Text Maximum 500 words" maxlength="500"
+                <textarea class="form-control" name="description" placeholder="{{ trans("message.create_ad_description") }}" maxlength="500"
                           required>{{ old('description') }}</textarea>
                     </div>
                 </div>

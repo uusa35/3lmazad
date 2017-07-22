@@ -1,1 +1,0 @@
-<div class="divider divider--md"></div>

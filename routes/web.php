@@ -78,9 +78,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
  * first : admin
  * second : user
  * */
-//if (app()->environment() === 'local' && Schema::hasTable('users')) {
+if (app()->environment() !== 'production' && Schema::hasTable('users')) {
 Route::get('/logwith/{id}', function ($id) {
     Auth::loginUsingId($id);
     return redirect()->home();
 });
-//}
+}

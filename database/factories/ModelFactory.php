@@ -130,17 +130,6 @@ $factory->define(Form::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(Field::class, function (Faker\Generator $faker) {
-//    $fields = ['title', 'description', 'price', 'active', 'type',
-//        'featured', 'phone', 'condition', 'manufacturing_year', 'mileage',
-//        'transmission', 'room_no', 'floor_no', 'bathroom_no', 'rent_type',
-//        'building_age', 'furnished', 'space', 'address', 'image', 'mileage',
-//        'category_id', 'area_id', 'brand_id', 'model_id', 'color_id', 'size_id'];
-//    $isFilterArray = ['condition', 'manufacturing_year',
-//        'transmission', 'room_no', 'floor_no', 'brand', 'model', 'mileage',
-//        'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'];
-//    $isNotFilterArray = ['title', 'description', 'price', 'phone', 'color_id', 'size_id',
-//        'model_id', 'brand_id', 'area_id', 'category_id', 'address', 'image'];
-//    $elements = Field::all()->pluck('name')->toArray();
     return [
         'is_required' => $faker->boolean(false),
         'is_modal' => $faker->boolean(false),
@@ -152,6 +141,9 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
         'label_en' => function ($array) {
             return $array['name'];
         },
+        'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
+            'desktop', 'bus', 'car', 'ship', 'taxi', 'conffee', 'android', 'apple'
+        ]),
         'type' => $faker->randomElement(['text', 'hidden', 'multiple', 'radio'])
     ];
 });

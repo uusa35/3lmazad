@@ -11,17 +11,15 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class SearchTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
+     * Get the element shortcuts for the page.
      *
-     * @return void
+     * @return array
      */
-    public function testExample()
+    public function elements()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/')
-                ->assertSee('Laravel');
-        });
-
+        return [
+            '@catParent' => 'input[name=parent]',
+        ];
     }
 
     /**
@@ -29,23 +27,15 @@ class SearchTest extends DuskTestCase
      */
     public function testSearchParentCars()
     {
-        $category = Category::where('name_en', 'vehicles')->first();
-        $ad = Ad::where('category_id', $category->children()->first()->id)->first();
+        $category = Category::where('name_en', 'mobiles')->first();
+        $ad = Ad::whereIn('category_id', $category->children->pluck('id'))->first();
         $this->browse(function (Browser $browser) use ($category, $ad) {
             $browser->visit('/')
-                ->assertInputValue('search', $ad->title)
-                ->assertInputValue('main', $category->id)
-                ->press('general.search')
-                i stopped here
-                ->waitForText(str_limit($ad->title,50));
+                ->type('.search-input', strtok($ad->title, ' '))
+                ->value('input[name=parent]',$category->id)
+                ->press('Search')
+                ->waitForText(strtok($ad->title,' '));
         });
     }
 
-    /**
-     * @group search
-     */
-    public function testSearchSubCars()
-    {
-//        $subCarCategory = Category::where('name_en', 'vehicles')->first()->children()->first();
-    }
 }

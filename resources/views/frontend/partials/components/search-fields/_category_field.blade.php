@@ -1,7 +1,9 @@
 <div class="ui floating dropdown category labeled icon button search-dropdown search-dropdown-category tooltip-message"
      data-inverted="" data-tooltip="{{ trans('message.category_field') }}"
      id="category">
-    <input name="" id="cat_input" value="0" type="hidden">
+    <input name="parent" value="0" id="cat_input" type="hidden">
+    {{--<input name="sub" value="0" type="hidden">--}}
+    {{--<input name="" id="cat_input" value="0" type="hidden">--}}
     <i class="filter icon"></i>
     <div class="default text">{{ trans('general.filter_by_category') }}</div>
     <div class="menu">
