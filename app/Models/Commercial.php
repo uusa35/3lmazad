@@ -7,8 +7,9 @@ use App\Models\Helpers\CommercialHelpers;
 use App\Scopes\ScopeActive;
 use App\Scopes\ScopeExpired;
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Commercial extends BaseModel
+class Commercial extends Model
 {
     use CommercialHelpers, LocaleTrait;
     public $localeStrings = ['title', 'description'];

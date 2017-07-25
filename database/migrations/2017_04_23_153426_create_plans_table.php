@@ -17,12 +17,13 @@ class CreatePlansTable extends Migration
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->integer('duration')->nullable();
-            $table->decimal('price',6,3)->unsigned()->nullable();
-            $table->decimal('sale_price',6,3)->unsigned()->nullable();
-            $table->boolean('active')->default(1);
+            $table->decimal('price', 6, 3)->unsigned()->nullable();
+            $table->decimal('sale_price', 6, 3)->unsigned()->nullable();
             $table->boolean('on_sale')->default(1);
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
+            $table->boolean('is_free')->default(1);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

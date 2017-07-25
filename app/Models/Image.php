@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Image
@@ -9,7 +10,7 @@ use App\Services\Traits\LocaleTrait;
  * @property-read \App\Models\Gallery $gallery
  * @mixin \Eloquent
  */
-class Image extends BaseModel
+class Image extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['description'];

@@ -5,7 +5,10 @@ namespace App\Http\Requests\Frontend;
 use App\Models\Ad;
 use App\Models\AdMeta;
 use App\Models\Area;
+use App\Models\Brand;
+use App\Models\BrandModel;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -42,6 +45,7 @@ class AdStore extends FormRequest
      */
     public function rules()
     {
+//        dd($this->request->all());
         return [
             'title' => 'required|max:200', // required
             'description' => 'required|max:1500', // required
@@ -51,7 +55,9 @@ class AdStore extends FormRequest
             'category_id' => ['required', Rule::in(Category::all()->pluck('id')->toArray())], // required
             'mobile' => 'numeric|nullable',
             'area_id' => ['nullable', Rule::in(Area::all()->pluck('id')->toArray())],
-            'condition' => 'nullable|numeric',
+            'brand_id' => ['nullable', Rule::in(Brand::all()->pluck('id')->toArray())],
+            'model_id' => ['nullable', Rule::in(BrandModel::all()->pluck('id')->toArray())],
+            'is_new' => 'nullable|boolean',
             'manufacturing_year' => ['nullable', 'digits_between:1,4', Rule::in(range(date('Y') - 25, date('Y')))],
             'mileage' => 'numeric|nullable',
             'transmission' => 'nullable|numeric',
@@ -60,7 +66,7 @@ class AdStore extends FormRequest
             'bathroom_no' => 'nullable|digits:1',
             'rent_type' => ['nullable', Rule::in(AdMeta::getEnumValues('ad_metas', 'rent_type'))],
             'building_age' => 'nullable|digits_between:1,4',
-            'furnished' => 'nullable|boolean',
+            'is_furnished' => 'nullable|boolean',
             'space' => 'nullable|numeric',
             'address' => 'nullable|alpha_num',
         ];

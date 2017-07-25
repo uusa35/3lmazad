@@ -3,7 +3,9 @@
 namespace App\Models;
 
 
-class Visitor extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class Visitor extends Model
 {
     protected $table = 'ad_visitors';
     public $localeStrings = [''];

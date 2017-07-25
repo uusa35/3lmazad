@@ -7,7 +7,9 @@ use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Option;
+use App\Models\Plan;
 use App\Models\Visitor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -66,7 +68,6 @@ class AdController extends Controller
      */
     public function store(AdStore $request)
     {
-        dd($request->request->all());
         $element = $this->ad->create([
             'title' => $request->title,
             'category_id' => $request->category_id,
@@ -79,13 +80,14 @@ class AdController extends Controller
             'type_id' => $request->type_id,
             'color_id' => $request->color_id,
             'size_id' => $request->size_id,
-
+            'start_date' => Carbon::today(),
+            'end_date' => Carbon::now()->addDays(Plan::where('is_free', true)->first()->duration)
         ]);
 
         $meta = $element->meta()->create([
             'mobile' => $request->mobile,
-            'condition' => Option::whereId($request->condition)->first()->name,
-            'transmission' => Option::whereId($request->transmission)->first()->name,
+            'is_new' => $request->is_new,
+            'is_automatic' => $request->is_automatic,
             'manufacturing_year' => $request->manufacturing_year,
             'mileage' => $request->mileage,
             'room_no' => $request->room_no,
@@ -93,9 +95,9 @@ class AdController extends Controller
             'bathroom_no' => $request->bathroom_no,
             'rent_type' => $request->rent_type,
             'building_age' => $request->building_age,
-            'furnished' => $request->furnished,
+            'is_furnished' => $request->furnished,
             'space' => $request->space,
-            'address' => $request->address,
+            'address' => $request->address
         ]);
 
         if (!$element) {

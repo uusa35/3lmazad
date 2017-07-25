@@ -3,8 +3,12 @@
 namespace App\Models;
 
 
-class AdMeta extends BaseModel
+use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
+
+class AdMeta extends Model
 {
+    use LocaleTrait, ModelHelpers;
     public $localeStrings = [''];
     protected $casts = [
         'furnished' => 'boolean'

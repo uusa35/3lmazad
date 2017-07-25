@@ -186,12 +186,9 @@ $(document).ready(function() {
         $('#subCategories-create').html('');
         $('#input-create-brand_id').html('');
         $('#input-create-brand_id').append(`
-            <option value="0" selected><?php echo trans('general.brand_id') ?></option>
+            <option value="0">choose brand</option>
         `);
         $('#input-create-model_id').html('');
-        $('#input-create-model_id').html(`
-            <option value="0" selected><?php echo trans('general.model_id') ?></option>
-        `);
         $('div[id^="field-create-"]').addClass('hidden');
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
             data.parent.fields.map(f => {
@@ -220,9 +217,6 @@ $(document).ready(function() {
     $('#input-create-brand_id').on('change', function(e) {
         let brandId = e.target.value;
         $('#input-create-model_id').html('');
-        $('#input-create-model_id').html(`
-            <option value="0" selected><?php echo trans('general.model_id') ?></option>
-        `);
         return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             return data.models.map(m => {
                 let name = 'name_' + lang;

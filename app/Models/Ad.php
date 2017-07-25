@@ -8,14 +8,12 @@ use App\Scopes\ScopeActive;
 use App\Scopes\ScopeExpired;
 use App\Scopes\ScopeIsSold;
 use App\Services\Traits\LocaleTrait;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
-class Ad extends BaseModel
+class Ad extends Model
 {
-    use AdTrait, AdHelpers, SoftDeletes;
+    use AdTrait, AdHelpers, SoftDeletes, LocaleTrait;
     public $localeStrings = [''];
     protected $guarded = [''];
     protected $casts = [

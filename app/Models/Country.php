@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
 
 /**
@@ -8,7 +9,7 @@ use App\Services\Traits\LocaleTrait;
  *
  * @mixin \Eloquent
  */
-class Country extends BaseModel
+class Country extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];

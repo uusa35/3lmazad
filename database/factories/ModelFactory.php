@@ -233,6 +233,7 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(4, 4, 10),
         'sale_price' => $faker->randomFloat(4, 2, 3),
         'active' => $faker->boolean(true),
+        'is_free' => $faker->boolean(true),
     ];
 });
 

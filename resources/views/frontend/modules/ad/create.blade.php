@@ -4,8 +4,6 @@
     {!! Breadcrumbs::render('ad.create') !!}
 @endsection
 
-@section('search')
-@show
 @section('top')
     <section class="content content--fill top-null">
         <div class="container">

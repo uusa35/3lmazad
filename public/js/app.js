@@ -51327,6 +51327,7 @@ window.$.fn.checkbox = __webpack_require__(742);
 window.axios = __webpack_require__(112);
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = 'http://3lmazad.dev/';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

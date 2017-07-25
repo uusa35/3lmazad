@@ -4,7 +4,9 @@ namespace App\Models;
 
 
 
-class Comment extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
 {
     public $localeStrings = [''];
     public function commentable()

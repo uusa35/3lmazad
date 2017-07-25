@@ -4,9 +4,11 @@ namespace App\Models;
 
 
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Auction extends BaseModel
+class Auction extends Model
 {
+    use LocaleTrait;
     public $localeStrings = [''];
     public function ads()
     {

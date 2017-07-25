@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Field;
 use App\Models\Option;
+use App\Models\Size;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Tests\DuskTestCase;
@@ -35,22 +36,21 @@ class AdTest extends DuskTestCase
 //                ->attach('images[]', __DIR__ . $path . 'sample2.jpeg')
                 ->type('price', rand(1, 50))
                 ->type('mobile', rand(1, 10))
-                ->select('main_cat_id', $parent->id)
+                ->select('parent', $parent->id)
                 ->waitForText($parent->name_en)
                 ->select('category_id', $child->id)
-                ->waitForText('general.brands')
-                ->select('#brands-items-' . $parent->id, $parent->brands->first()->id)
-                ->select('#models-items-' . $parent->id, $parent->brands->first()->models->random()->id)
-                ->waitForText('general.condition')
-                ->value('#condition-items-' . $parent->id, Field::where('name', 'condition')->first()->options->random()->id)
-                ->value('#transmission-items-' . $parent->id, Field::where('name', 'transmission')->first()->options->random()->id)
-                ->type('#manufacturing_year-items-' . $parent->id, 1999)
-                ->type('#mileage-items-' . $parent->id, rand(222, 333))
-                ->select('#colors-items-' . $parent->id, Color::all()->random()->id)
-                ->select('#sizes-items-' . $parent->id, Color::all()->random()->id)
+                ->value('#input-create-is_new', Field::where('name', 'is_new')->first()->options->random()->value)
+                ->waitForText('general.is_new')
+                ->value('#input-create-is_automatic', Field::where('name', 'is_automatic')->first()->options->random()->value)
+                ->type('#input-create-manufacturing_year', 1999)
+                ->type('#input-create-mileage', rand(222, 333))
+                ->select('#input-create-color_id', Color::all()->random()->id)
+                ->select('#input-create-size_id', Size::all()->random()->id)
                 ->select('area_id', Area::all()->random()->id)
                 ->type('address', 'whatever')
-                ->pause(10000000000)
+                ->select('#input-create-brand_id', $parent->brands->first()->id)
+                ->select('#input-create-model_id', $parent->brands->first()->models()->get()->random()->id)
+                ->pause(100000000)
                 ->press('general.submit')
                 ->assertSee('success');
         });

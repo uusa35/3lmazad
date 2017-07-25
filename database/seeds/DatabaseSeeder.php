@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
     public $tables = [
         'users', 'sliders', 'ads', 'ad_metas', 'fields', 'options','category_form', 'comments', 'brands', 'models',
         'categories', 'galleries', 'galleryables', 'images','ad_deal',
@@ -20,8 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-        if (app()->environment() === 'seeding') {
+        if (app()->environment('seeding')) {
             $this->emptyTables($this->tables);
             $this->command->info('seeding started');
             if (DB::table('countries')->count() <= 0) {

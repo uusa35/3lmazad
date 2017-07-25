@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Scopes\ScopeActive;
-use App\Scopes\ScopeGalleryHasImages;
+use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends BaseModel
+class Gallery extends Model
 {
+    use LocaleTrait;
     protected $with = ['images'];
     public $localeStrings = [''];
     protected $guarded = [''];

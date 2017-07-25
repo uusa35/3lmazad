@@ -3,7 +3,9 @@
 namespace App\Models;
 
 
-class Favorite extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class Favorite extends Model
 {
     public $localeStrings = [''];
 //    public function ad()

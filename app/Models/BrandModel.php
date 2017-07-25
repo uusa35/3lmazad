@@ -4,8 +4,9 @@ namespace App\Models;
 
 
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class BrandModel extends BaseModel
+class BrandModel extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
