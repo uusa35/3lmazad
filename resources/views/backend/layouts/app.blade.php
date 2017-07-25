@@ -22,9 +22,10 @@
     @section('wrapper')
         <div class="page-content-wrapper">
             <div class="page-content">
-                {{--@include('backend.partials.breadcrumbs')--}}
-                <h3 class="page-title"> Dashboard ::
-                    <small>{{ request() ->route()->getName() }}</small>
+                @include('backend.partials.breadcrumbs')
+                <h3 class="page-title">
+                    @section('title')
+                    @show
                 </h3>
                 <div class="row">
                     <div class="col-lg-12">

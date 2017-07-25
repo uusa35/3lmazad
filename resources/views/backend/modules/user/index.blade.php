@@ -1,8 +1,11 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    header
+    @endsection
 @section('content')
     <div class="portlet-body">
-        <table id="userTable" class="table table-striped table-bordered table-hover" cellspacing="0"
+        <table id="dataTable" class="table table-striped table-bordered table-hover" cellspacing="0"
                width="100%">
             <thead>
             <tr>
@@ -46,35 +49,17 @@
                     </td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
                     <td>
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"
+                        <div class="btn-group">
+                            <button type="button" class="btn green btn-xs btn-outline dropdown-toggle"
                                     data-toggle="dropdown"> Actions
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
-                                @if($element->active)
                                     <li>
-                                        <a href="{{ route('backend.user.deactivate',$element->id) }}">
-                                            <i class="fa fa-fw fa-times"></i> De-activate</a>
+                                        <a href="{{ route('backend.user.edit',$element->id) }}">
+                                            <i class="fa fa-fw fa-check-circle"></i> Edit</a>
                                     </li>
-                                @else
-                                    <li>
-                                        <a href="{{ route('backend.user.activate',$element->id) }}">
-                                            <i class="fa fa-fw fa-check-circle"></i> Activate</a>
-                                    </li>
-                                @endif
                                 <li class="divider"></li>
-                                @if($element->featured)
-                                    <li>
-                                        <a href="{{ route('backend.user.feature.disable',$element->id) }}">
-                                            <i class="fa fa-fw fa-times-circle fa-red"></i> disable featured</a>
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="{{ route('backend.user.feature.enable',$element->id) }}">
-                                            <i class="fa fa-fw fa-check"></i> enable featured</a>
-                                    </li>
-                                @endif
                             </ul>
                         </div>
                     </td>

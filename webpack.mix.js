@@ -16,6 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .react('resources/assets/js/form-app.js', 'public/js')
     .js('./bower_components/blueimp-gallery/js/blueimp-gallery.min.js', 'public/js/gallery.js')
     .sass('resources/assets/sass/backend.scss', 'public/css')
+    .sass('resources/assets/sass/backend-custom.scss', 'public/css')
     .sass('resources/assets/sass/frontend.scss', 'public/css')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/custom.scss', 'public/css')
@@ -23,22 +24,32 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/custom-english.scss', 'public/css')
     .sass('resources/assets/sass/gallery.scss', 'public/css')
     .scripts([
+            './../../metronic_v4.5.6/theme/assets/global/plugins/respond.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/excanvas.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/jquery.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js',
+
+            './../../metronic_v4.5.6/theme/assets/global/scripts/datatable.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/datatables/datatables.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js',
+
+            './../../metronic_v4.5.6/theme/assets/global/plugins/js.cookie.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery.blockui.min.js',
-            //'./../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
-            //<!-- END CORE PLUGINS -->
-            //<!-- BEGIN THEME GLOBAL SCRIPTS -->
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/ckeditor/ckeditor.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-pwstrength/pwstrength-bootstrap.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/autosize/autosize.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js',
             './../../metronic_v4.5.6/theme/assets/global/scripts/app.min.js',
-            //<!-- END THEME GLOBAL SCRIPTS -->
-            //<!-- BEGIN PAGE LEVEL SCRIPTS -->
-            './../../metronic_v4.5.6/theme/assets/pages/scripts/dashboard.min.js',
-            //<!-- END PAGE LEVEL SCRIPTS -->
-            //<!-- BEGIN THEME LAYOUT SCRIPTS -->
+            './../../metronic_v4.5.6/theme/assets/pages/scripts/components-form-tools.min.js',
             './../../metronic_v4.5.6/theme/assets/layouts/layout/scripts/layout.min.js',
             './../../metronic_v4.5.6/theme/assets/layouts/layout/scripts/demo.min.js',
             './../../metronic_v4.5.6/theme/assets/layouts/global/scripts/quick-sidebar.min.js',
-            //<!-- END THEME LAYOUT SCRIPTS -->
         ],
         'public/js/backend.js')
+    .scripts('resources/assets/js/backend-custom.js', 'public/js/backend-custom.js')
     .scripts([
         './resources/assets/html/vendor/waves/waves.min.js',
         './resources/assets/html/vendor/slick/slick.min.js',

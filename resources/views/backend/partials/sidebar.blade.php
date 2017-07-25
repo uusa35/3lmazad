@@ -1,5 +1,5 @@
 <div class="page-sidebar-wrapper">
-    <!-- END SIDEBAR -->
+    <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
     <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
     <div class="page-sidebar navbar-collapse collapse">
@@ -10,92 +10,187 @@
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu page-sidebar-menu-closed "
-            data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-
-            <li class="heading">
-                <h3 class="uppercase">Petrolet Admin</h3>
+        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <li class="sidebar-toggler-wrapper hide">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler">
+                    <span></span>
+                </div>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
             </li>
-
-            <li class="heading">
-                <h3 class="uppercase">All Users</h3>
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                <form class="sidebar-search  " action="page_general_search_3.html" method="POST">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <a href="javascript:;" class="btn submit">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
+                                    </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item start {{ in_array('user',request()->segments(), true) ? 'active open' : null }}">
+            <li class="nav-item start ">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Users & Companies</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
+                    <i class="fa fa-fw fa-male" aria-hidden="true"></i>
+                    <span class="title">Users</span>
+                    <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item ">
-                        <a href="{{ route('backend.user.index') }}" class="nav-link ">
-                            <i class="icon-user"></i>
-                            <span class="title">Companies</span>
-                            <span class="selected"></span>
+                    <li class="nav-item start ">
+                        <a href="{{ route('backend.user.index',['role' => 'user']) }}" class="nav-link ">
+                            <i class="fa fa-fw fa-user"></i>
+                            <span class="title">Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start ">
+                        <a href="{{ route('backend.user.index',['role' => 'merchant']) }}" class="nav-link ">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span class="title">Merchants</span>
                         </a>
                     </li>
                 </ul>
             </li>
-
             <li class="heading">
-                <h3 class="uppercase">Website Settings</h3>
+                <h3 class="uppercase">Advertisement Section</h3>
             </li>
-            <li class="nav-item  start
-            {{
-            in_array('slider',request()->segments(), true) ||
-            in_array('category',request()->segments(), true) ||
-            in_array('category',request()->segments(), true) ||
-             in_array('contactus',request()->segments(), true) ||
-             in_array('aboutus',request()->segments(), true)
-             ? 'active open' : null }}
-                    ">
+            <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-fw fa-gears fa-lg"></i>
-                    <span class="title">Settings</span>
-                    <span class="selected"></span>
-                    <span class="arrow open"></span>
+                    <i class="fa fa-fw fa-shopping-basket"></i>
+                    <span class="title">Ads</span>
+                    <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item {{ in_array('category',request()->segments(),true) && request()->type == 0  ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.category.index',['type' => 0]) }}" class="nav-link ">
-                            <i class="fa fa-fw fa-file"></i>
-                            <span class="title">Main Categories</span>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Free Ads</span>
                         </a>
                     </li>
-                    {{--<li class="nav-item {{ in_array('slider',request()->segments(),true) ? 'active open' : ''  }}">--}}
-                    {{--<a href="{{ route('backend.slider.index') }}" class="nav-link ">--}}
-                    {{--<i class="fa fa-fw fa-file"></i>--}}
-                    {{--<span class="title">Sliders</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="nav-item {{ in_array('ad',request()->segments(),true) ? 'active open' : ''  }}">--}}
-                    {{--<a href="{{ route('backend.ad.index') }}" class="nav-link ">--}}
-                    {{--<i class="fa fa-fw fa-file"></i>--}}
-                    {{--<span class="title">Ads</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    <li class="nav-item {{ in_array('contactus',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.contactus.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-file"></i>
-                            <span class="title">Contactus</span>
+                    <li class="nav-item  ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Paid Ads</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="ui_page_progress_style_1.html" class="nav-link "> Valid Paid Ads </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="ui_page_progress_style_2.html" class="nav-link "> Due Paid Ads</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Paid Plans Section</h3>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-fw fa-money"></i>
+                    <span class="title">Plans</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Plans</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ in_array('aboutus',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.aboutus.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-file"></i>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Galleries & Comments</h3>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-fw fa-comments"></i>
+                    <span class="title">Galleries</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Galleries</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Comments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Auctions</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="heading">
+                <h3 class="uppercase">Settings Section</h3>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-fw fa-cogs"></i>
+                    <span class="title">Settings</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Deals</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Categories & Options</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="ui_page_progress_style_1.html" class="nav-link "> Categories </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="ui_page_progress_style_2.html" class="nav-link "> Options </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="ui_page_progress_style_2.html" class="nav-link "> Feilds</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Slider</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
                             <span class="title">Aboutus</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ in_array('newsletter',request()->segments(),true) ? 'active open' : ''  }}">
-                        <a href="{{ route('backend.newsletter.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-file"></i>
-                            <span class="title">Newletter</span>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Contactus</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="ui_colors.html" class="nav-link ">
+                            <span class="title">Faq</span>
                         </a>
                     </li>
                 </ul>
             </li>
         </ul>
+        <!-- END SIDEBAR MENU -->
         <!-- END SIDEBAR MENU -->
     </div>
     <!-- END SIDEBAR -->

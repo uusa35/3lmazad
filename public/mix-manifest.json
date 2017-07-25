@@ -1,6 +1,7 @@
 {
   "/js/app.js": "/js/app.js",
   "/css/backend.css": "/css/backend.css",
+  "/css/backend-custom.css": "/css/backend-custom.css",
   "/css/frontend.css": "/css/frontend.css",
   "/css/app.css": "/css/app.css",
   "/css/custom.css": "/css/custom.css",
@@ -11,5 +12,6 @@
   "/js/gallery.js": "/js/gallery.js",
   "/js/frontend-custom.js": "/js/frontend-custom.js",
   "/js/backend.js": "/js/backend.js",
+  "/js/backend-custom.js": "/js/backend-custom.js",
   "/js/frontend.js": "/js/frontend.js"
 }

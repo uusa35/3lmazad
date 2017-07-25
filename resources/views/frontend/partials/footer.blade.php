@@ -64,16 +64,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-8">
-                    <form class="subscribe-form"
-                          action="{{ action('Frontend\HomeController@postNewsletter') }}" method="post">
-                        {{ csrf_field() }}
-                        <label class="subscribe-form__label text-uppercase pull-left">{{ trans('general.subscribe') }}</label>
-                        <input type="text" class="subscribe-form__input input--wd" name="email"
-                               placeholder="{{ trans("general.your_email") }}">
-                        <button class="btn btn--wd text-uppercase wave"><span
-                                    class="hidden-xs">{{ trans('general.subscribe') }}</span><span
-                                    class="icon icon-mail-fill visible-xs"></span></button>
-                    </form>
+                    {{--<form class="subscribe-form"--}}
+                          {{--action="{{ action('Frontend\HomeController@postNewsletter') }}" method="post">--}}
+                        {{--{{ csrf_field() }}--}}
+                        {{--<label class="subscribe-form__label text-uppercase pull-left">{{ trans('general.subscribe') }}</label>--}}
+                        {{--<input type="text" class="subscribe-form__input input--wd" name="email"--}}
+                               {{--placeholder="{{ trans("general.your_email") }}">--}}
+                        {{--<button class="btn btn--wd text-uppercase wave"><span--}}
+                                    {{--class="hidden-xs">{{ trans('general.subscribe') }}</span><span--}}
+                                    {{--class="icon icon-mail-fill visible-xs"></span></button>--}}
+                    {{--</form>--}}
                 </div>
                 <div class="col-sm-4 col-md-4">
                     @include('frontend.partials.components._social-icons')

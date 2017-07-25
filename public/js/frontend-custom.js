@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 753);
+/******/ 	return __webpack_require__(__webpack_require__.s = 754);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -273,9 +273,8 @@ $(document).ready(function () {
         // remove all sub categories
         $('#subCategories-create').html('');
         $('#input-create-brand_id').html('');
-        $('#input-create-brand_id').append('\n            <option value="0" selected><?php echo trans(\'general.brand_id\') ?></option>\n        ');
+        $('#input-create-brand_id').append('\n            <option value="0">choose brand</option>\n        ');
         $('#input-create-model_id').html('');
-        $('#input-create-model_id').html('\n            <option value="0" selected><?php echo trans(\'general.model_id\') ?></option>\n        ');
         $('div[id^="field-create-"]').addClass('hidden');
         return axios.get('api/category/' + catId).then(function (res) {
             return res.data;
@@ -304,7 +303,6 @@ $(document).ready(function () {
     $('#input-create-brand_id').on('change', function (e) {
         var brandId = e.target.value;
         $('#input-create-model_id').html('');
-        $('#input-create-model_id').html('\n            <option value="0" selected><?php echo trans(\'general.model_id\') ?></option>\n        ');
         return axios.get('api/brand/' + brandId + '/models').then(function (res) {
             return res.data;
         }).then(function (data) {
@@ -320,7 +318,7 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ 753:
+/***/ 754:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(382);

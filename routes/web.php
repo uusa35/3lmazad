@@ -64,13 +64,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('user', 'Usercontroller');
     Route::resource('aboutus', 'AboutusController');
     Route::resource('faq', 'FaqController');
-    Route::resource('terms', 'TermController');
+//    Route::resource('terms', 'TermController');
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
     Route::resource('gallery', 'GalleryController');
 //    Route::resource('image', 'ImageController');
-    Route::resource('newsletter', 'NewsletterController');
+//    Route::resource('newsletter', 'NewsletterController');
 });
 
 /*

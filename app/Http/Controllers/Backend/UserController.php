@@ -14,15 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (request()->type == 'company') {
-            $elements = User::where('id', '!=', 1)->whereHas('roles', function ($q) {
-                $q->where('is_company', true);
-            })->get();
-        } else {
-            $elements = User::where('id', '!=', 1)->whereHas('roles', function ($q) {
-                $q->where('is_company', false);
-            })->get();
-        }
+        $elements = User::where('id', '!=', 1)->whereHas('roles', function ($q) {
+            $q->where('name', request()->role);
+        })->get();
 
         return view('backend.modules.user.index', compact('elements'));
     }
