@@ -86,7 +86,6 @@ $(document).ready(function () {
         $('input[id*="-input-"]').attr('value', '');
         // first : get the parent category / sub category / type of the category chosen
         var catName = $('.dropdown.category').dropdown('get text');
-        console.log('name of the category is ' + catName);
         var catId = $('.dropdown.category').dropdown('get value');
         console.log('value of the category is ' + catId);
         var catParentId = $('#cat-' + catId).attr('parentId');
@@ -138,7 +137,7 @@ $(document).ready(function () {
             return data.map(function (m) {
                 var name = 'name_' + lang;
                 //$('model_id-items-' + catParentId).append('<div>test</div>');
-                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <img class="ui avatar image" src="/storage/uploads/images/thumbnail/' + m.image + '">\n                        ' + m[name] + '\n                    </div>\n                ');
+                return $('#model_id-items-' + catParentId).append('\n                    <div class="item area" data-value="' + m.id + '" data-text="' + m[name] + '">\n                        <img class="ui avatar image" src="' + m.image + '">\n                        ' + m[name] + '\n                    </div>\n                ');
             });
         }).catch(function (e) {
             return console.log(e);
@@ -173,7 +172,6 @@ $(document).ready(function () {
         var url = $(this).data('ad-url');
         var element = $(this).data('element');
         var fromDate = $(this).data('from-date');
-
         $('.modal-price').text(price);
         $('.modal-ad-url').attr('href', url);
         $('.modal-image').attr('src', 'storage/uploads/images/medium/' + image);
@@ -188,7 +186,6 @@ $(document).ready(function () {
     $('button[id^="favorite-"]').on('click', function () {
         var userId = $(this).data('user-id');
         var adId = $(this).data('ad-id');
-        console.log(adId);
         $('#favorite-icon-' + adId).toggleClass('outline');
         return axios.get('api/favorites/' + adId + '/' + userId).then(function (r) {
             return console.log(r);
@@ -249,16 +246,40 @@ $(document).ready(function () {
     $('#mainCategory').on('change', function (e) {
         $('div[id^="fields-"]').addClass('hidden');
         var categoryId = e.target.value;
-        console.log(categoryId);
         $('#parentCategory').attr('value', categoryId);
         $('#subCategories').html('');
-        return axios.get('/api/category/' + categoryId + '/children').then(function (res) {
+        axios.get('/api/category/' + categoryId + '/children').then(function (res) {
             return res.data;
         }).then(function (data) {
-            return data.map(function (m) {
+            data.subCategories.map(function (m) {
                 var name = 'name_' + lang;
                 $('div[id="fields-' + categoryId + '"]').removeClass('hidden');
-                return $('#subCategories').append('\n                    <option class="" value="' + m.id + '"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;' + m[name] + '</span></option>\n                ');
+                $('#subCategories').append('\n                    <option class="" value="' + m.id + '"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;' + m[name] + '</span></option>\n                ');
+            });
+            data.brands.map(function (m) {
+                var name = 'name_' + lang;
+                //$('div[id="brands-items-' + categoryId + '"]').removeClass('hidden');
+                $('#brands-items-' + categoryId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
+            });
+        }).catch(function (e) {
+            return console.log(e);
+        });
+        axios.get('/api/colors').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            data.map(function (m) {
+                var name = 'name_' + lang;
+                $('#colors-items-' + categoryId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
+            });
+        }).catch(function (e) {
+            return console.log(e);
+        });
+        axios.get('/api/sizes').then(function (res) {
+            return res.data;
+        }).then(function (data) {
+            data.map(function (m) {
+                var name = 'name_' + lang;
+                $('#sizes-items-' + categoryId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
             });
         }).catch(function (e) {
             return console.log(e);
@@ -266,17 +287,16 @@ $(document).ready(function () {
     });
 
     // this one for brand in ad.create route
-    $('select[id^="brand-items-"]').on('change', function (e) {
-        console.log('change occured');
+    $('select[id^="brands-items-"]').on('change', function (e) {
         var catParentId = $(e.target).attr('parent_id');
         var brandId = e.target.value;
-        $('#model-items-' + catParentId).html('');
+        $('#models-items-' + catParentId).html('');
         return axios.get('/api/brand/' + brandId + '/models').then(function (res) {
             return res.data;
         }).then(function (data) {
             return data.map(function (m) {
                 var name = 'name_' + lang;
-                return $('#model-items-' + catParentId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
+                return $('#models-items-' + catParentId).append('\n                    <option value="' + m.id + '">' + m[name] + '</option>\n                ');
             });
         }).catch(function (e) {
             return console.log(e);

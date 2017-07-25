@@ -3,10 +3,12 @@
 namespace App\Models;
 
 
+use App\Services\Traits\LocaleTrait;
+
 class Color extends BaseModel
 {
-    protected $localeStrings = ['name'];
-
+    use LocaleTrait;
+    public $localeStrings = ['name'];
 
     public function ads() {
         return $this->hasMany(Ad::class);

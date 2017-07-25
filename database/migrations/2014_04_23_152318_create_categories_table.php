@@ -23,8 +23,6 @@ class CreateCategoriesTable extends Migration
             $table->boolean('featured')->default(1);
             $table->string('icon')->default('apps')->nullable();
 
-            $table->integer('form_id')->unsigned()->index()->nullable();
-            $table->foreign('form_id')->references('id')->on('forms');
             $table->timestamps();
         });
     }

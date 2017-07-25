@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('account.ads') !!}
+    {!! Breadcrumbs::render('user.account.ads') !!}
 @endsection
 
 @section('top')
@@ -87,7 +87,7 @@
                                         @endif
                                         @if($element->isExpired)
                                             <li>
-                                                <a href="{{ route('account.ad.republish',$element->id) }}">
+                                                <a href="{{ route('user.account.ad.republish',$element->id) }}">
                                                     <i class="icon refresh"></i>{{ trans('general.republish') }}</a>
                                             </li>
                                         @endif

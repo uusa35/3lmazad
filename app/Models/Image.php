@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Services\Traits\LocaleTrait;
 
 /**
  * App\Models\Image
@@ -10,7 +11,8 @@ namespace App\Models;
  */
 class Image extends BaseModel
 {
-    protected $localeStrings = ['description'];
+    use LocaleTrait;
+    public $localeStrings = ['description'];
 
     public function gallery()
     {

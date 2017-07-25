@@ -8,7 +8,7 @@
 @section('top')
     <section class="content top-null">
         <div class="container">
-            @include('frontend.partials._divider-xs')
+            <div class="divider divider-xs"></div>
             <div class="filters-row">
                 @include('frontend.partials.components._bar-pagination-filters')
                 {{--@include('frontend.partials._divider-xs')--}}

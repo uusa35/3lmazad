@@ -8,6 +8,7 @@ namespace App\Services\Traits;
  * Time: 8:21 AM
  */
 
+use App\Models\Gallery;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -128,27 +129,52 @@ trait ImageHelpers
         }
     }
 
+
     /**
+     * @param Model $model
      * @param Request $request
-     * @param $gallery
-     * @param string $width
-     * @param string $height
-     * @return mixed
+     * @param string $inputName
+     * @param array $dimensions
+     * @param bool $ratio
+     * @param array $sizes
      */
-    public function saveGallery(Request $request, $gallery, $width = '450', $height = '450')
+    public function saveGallery(Model $model,
+                                Request $request,
+                                $inputName = 'images',
+                                $dimensions = ['1052', '1320'],
+                                $ratio = true,
+                                $sizes = ['large', 'medium', 'thumbnail'])
     {
-        if (count($request->gallery) >= 1 && ($request->gallery[0] != null)) {
-            foreach ($request->gallery as $item) {
-                $imagePath = $item->store('/public/uploads/images');
-                $imagePath = str_replace('public/', '', $imagePath);
-                $img = Image::make(storage_path('app/public/' . $imagePath));
-                $img = Image::make(storage_path('app/public/' . $imagePath));
-                $img->resize($width, $height);
-                $img->save();
-                $gallery->images()->create(['image_url' => $imagePath]);
+        try {
+            if ($request->has($inputName)) {
+                $gallery = $model->gallery->create([
+                    'image' => $model->image,
+                ]);
+                foreach ($inputName as $image) {
+                    $imagePath = $image->store('public/uploads/images');
+                    $imagePath = str_replace('public/uploads/images/', '', $imagePath);
+                    $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
+                    foreach ($sizes as $key => $value) {
+                        if ($value === 'large') {
+                            $img->resize($dimensions[0], $dimensions[1]);
+                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                        } elseif ($value === 'medium') {
+                            $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
+                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                        } elseif ($value === 'thumbnail') {
+                            $img->resize('292', '347');
+                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                        }
+                    }
+                    $gallery->images->create([
+                        $inputName => $imagePath,
+                    ]);
+                    Storage::delete('public/uploads/images/' . $imagePath);
+                }
             }
+        } catch (\Exception $e) {
+            abort(404, 'save Error : ' . $e->getMessage());
         }
-        return $gallery;
     }
 
     public function saveIt($img, $width, $sizeType, $imagePath)

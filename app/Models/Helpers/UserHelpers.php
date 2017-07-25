@@ -9,7 +9,8 @@ namespace App\Models\Helpers;
 
 trait UserHelpers
 {
-    public function scopeFeatured($q) {
+    public function scopeFeatured($q)
+    {
         return $q->where('featured', true);
     }
 
@@ -31,7 +32,10 @@ trait UserHelpers
 
     public function getIsMerchantAttribute()
     {
-        return $this->roles->first()->name === 'merchant';
+        if (!$this->roles->isEmpty())
+            return $this->roles->first()->name === 'merchant';
+        else
+            return false;
     }
 
     public function scopeUsers($q)

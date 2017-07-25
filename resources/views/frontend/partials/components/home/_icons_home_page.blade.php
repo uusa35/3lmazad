@@ -2,7 +2,7 @@
     <div class="container">
         <nav>
             <ul class="nav nav-justified">
-                @foreach($homeCategories as $category)
+                @foreach($categories->where('on_homepage', true) as $category)
                     @if($category->on_homepage)
                         <li><a href="{{ route('ad.index',['id' => $category->id]) }}">
                             <span>

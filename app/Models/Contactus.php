@@ -9,6 +9,7 @@ namespace App\Models;
  */
 class Contactus extends BaseModel
 {
+    public $localeStrings = [''];
     protected $table = 'contactus';
     protected $guarded = [''];
 }

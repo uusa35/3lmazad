@@ -5,7 +5,7 @@
                 {{--<span class="icon icon-search"></span>--}}
             {{--</a>--}}
         {{--</div>--}}
-        @include('frontend.partials.components._nav-login-register')
+        @include('frontend.partials.components.home._nav-login-register')
         {{--@include('frontend.partials.nav._cart-dropdown')--}}
         @include('frontend.partials.nav._others-dropdown')
     </div>

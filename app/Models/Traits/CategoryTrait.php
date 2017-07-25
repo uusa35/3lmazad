@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 use App\CategoryForm;
 use App\Models\Ad;
 use App\Models\Brand;
+use App\Models\Field;
 use App\Models\Form;
 use App\Models\Type;
 use App\Models\User;
@@ -31,9 +32,9 @@ trait CategoryTrait
         return $this->hasMany(Ad::class);
     }
 
-    public function form()
+    public function fields()
     {
-        return $this->belongsTo(Form::class);
+        return $this->belongsToMany(Field::class);
     }
 
     /**

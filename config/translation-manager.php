@@ -17,7 +17,7 @@ return array(
 
 	/**
 	 * Enable deletion of translations
-	 *
+	 *co
 	 * @type boolean
 	 */
 	'delete_enabled' => true,

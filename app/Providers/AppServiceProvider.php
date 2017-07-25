@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Observers\UserObserver;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Fitztrev\QueryTracer\Providers\QueryTracerServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laracasts\Generators\GeneratorsServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         User::observe(UserObserver::class);
+        Blade::directive('checkTrans', function ($element) {
+            !emptyString(trans($element)) ? trans($element) : null;
+        });
     }
 
     /**

@@ -15,19 +15,19 @@ class CreateAdMetasTable extends Migration
         Schema::create('ad_metas', function (Blueprint $table) {
             $table->increments('id');
             $table->mediumText('description')->nullable();
-            $table->string('phone')->nullable();
-            $table->enum('condition', ['new', 'old'])->nullable();
+            $table->string('mobile')->nullable();
             $table->string('manufacturing_year')->nullable();
             $table->string('mileage')->nullable();
-            $table->enum('transmission', ['manual', 'automatic'])->default('manual')->nullable();
             $table->string('room_no')->nullable();
             $table->string('floor_no')->nullable();
             $table->string('bathroom_no')->nullable();
             $table->enum('rent_type', ['monthly', 'weekly', 'daily', 'yearly'])->nullable();
             $table->string('building_age')->nullable();
-            $table->boolean('furnished')->nullable();
             $table->string('space')->nullable();
             $table->text('address')->nullable();
+            $table->boolean('is_new')->default(0)->nullable();
+            $table->boolean('is_automatic')->default(1)->nullable();
+            $table->boolean('is_furnished')->nullable();
 
             $table->integer('ad_id')->unsigned()->index()->nullable();
             $table->foreign('ad_id')->references('id')->on('ads');

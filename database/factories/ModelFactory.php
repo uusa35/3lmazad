@@ -22,12 +22,10 @@ use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Commercial;
 use App\Models\Contactus;
-use App\Models\Country;
 use App\Models\Deal;
 use App\Models\Faq;
 use App\Models\Favorite;
 use App\Models\Field;
-use App\Models\Form;
 use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Model;
@@ -84,12 +82,6 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
                 return true;
             }
             return false;
-        },
-        'form_id' => function ($array) {
-            if (!$array['parent_id']) {
-                return Form::all()->random()->id;
-            }
-            return NULL;
         }
     ];
 });
@@ -123,18 +115,11 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Form::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->word,
-    ];
-});
 
 $factory->define(Field::class, function (Faker\Generator $faker) {
     return [
         'is_required' => $faker->boolean(false),
-        'is_modal' => $faker->boolean(false),
         'name' => $faker->name,
-        'group' => $faker->name,
         'label_ar' => function ($array) {
             return $array['name'];
         },
@@ -144,13 +129,14 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
         'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
             'desktop', 'bus', 'car', 'ship', 'taxi', 'conffee', 'android', 'apple'
         ]),
-        'type' => $faker->randomElement(['text', 'hidden', 'multiple', 'radio'])
+        'type' => $faker->randomElement(['text', 'hidden', 'multiple', 'radio']),
     ];
 });
 
 $factory->define(Option::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
         'value' => $faker->name,
         'field_id' => Field::all()->random()->id
     ];
@@ -188,19 +174,19 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
 $factory->define(AdMeta::class, function (Faker\Generator $faker) {
     return [
         'description' => $faker->paragraph(3),
-        'phone' => $faker->bankAccountNumber,
-        'condition' => $faker->randomElement(['new', 'old']),
+        'mobile' => $faker->bankAccountNumber,
         'manufacturing_year' => $faker->year,
         'mileage' => $faker->numberBetween(10, 99999),
-        'transmission' => $faker->randomElement(['manual', 'automatic']),
         'rent_type' => $faker->randomElement(['daily', 'monthly', 'weekly', 'yearly']),
         'room_no' => $faker->randomDigit,
         'floor_no' => $faker->randomDigit,
         'bathroom_no' => $faker->randomDigit,
         'building_age' => $faker->year,
-        'furnished' => $faker->boolean(true),
         'space' => $faker->randomDigit,
         'address' => $faker->address,
+        'is_new' => $faker->boolean(),
+        'is_furnished' => $faker->boolean(true),
+        'is_automatic' => $faker->boolean(),
         'ad_id' => Ad::whereDoesntHave('meta')->get()->random()->id
     ];
 });

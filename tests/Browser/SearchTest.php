@@ -3,7 +3,9 @@
 namespace Tests\Browser;
 
 use App\Models\Ad;
+use App\Models\Area;
 use App\Models\Category;
+use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -32,9 +34,9 @@ class SearchTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($category, $ad) {
             $browser->visit('/')
                 ->type('.search-input', strtok($ad->title, ' '))
-                ->value('input[name=parent]',$category->id)
+                ->value('input[name=parent]', $category->id)
                 ->press('Search')
-                ->waitForText(strtok($ad->title,' '));
+                ->waitForText(strtok($ad->title, ' '));
         });
     }
 

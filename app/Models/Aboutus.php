@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 use App\Services\Traits\LocaleTrait;
 
@@ -11,7 +10,7 @@ use App\Services\Traits\LocaleTrait;
 class Aboutus extends BaseModel
 {
     use LocaleTrait;
+    public $localeStrings = ['title','body'];
     protected $table = 'aboutus';
-    protected $localeStrings = ['title','body'];
     protected $guarded = [''];
 }

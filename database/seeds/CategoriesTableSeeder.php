@@ -9,12 +9,10 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Deal;
 use App\Models\Field;
-use App\Models\Form;
 use App\Models\Gallery;
 use App\Models\Image;
 use App\Models\Option;
 use App\Models\Type;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
@@ -31,26 +29,23 @@ class CategoriesTableSeeder extends Seeder
             $categories = collect(config('categories'));
 
             foreach ($categories as $category) {
-                // CREATE A FORM
-                $form = factory(Form::class)->create(['name' => $category['parent']]);
+                //PARENT
+                $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent']]);
+
                 foreach ($category['fields'] as $f) {
-                    $field = Field::where('name', $f['name'])->first();
-                    if ($field) {
-                        if (!in_array($field->id, $form->fields()->pluck('id')->toArray(), true)) {
-                            $form->fields()->attach($field->id);
-                        }
+                    $fieldExist = Field::where('name', $f['name'])->first();
+                    if ($fieldExist) {
+                        $parent->fields()->save($fieldExist);
                     } else {
-                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'group' => $f['group'], 'is_modal' => $f['is_modal']]);
+                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'is_modal' => $f['is_modal'], 'collection_name' => $f['collection_name']]);
+                        $field->categories()->attach($parent->id);
                         if (count($f['options']) > 1) {
                             foreach ($f['options'] as $k => $v) {
-                                $field->options()->save(factory(Option::class)->create(['name' => $v, 'value' => $v]));
+                                $field->options()->save(factory(Option::class)->create(['name_ar' => $k.'_Ar', 'name_en' => $k.'_En','value' => $v]));
                             }
                         }
-                        $form->fields()->save($field);
                     }
                 }
-                //PARENT
-                $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent'], 'form_id' => $form->id]);
                 // BRAND FOR EACH PARENT
                 factory(Brand::class, 6)->create(['category_id' => $parent->id])->each(function ($brand) {
                     // MODEL FOR EACH BRAND

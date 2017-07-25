@@ -6,6 +6,7 @@ use App\Http\Requests\Frontend\AdStore;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Option;
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -65,19 +66,28 @@ class AdController extends Controller
      */
     public function store(AdStore $request)
     {
+        dd($request->request->all());
         $element = $this->ad->create([
             'title' => $request->title,
             'category_id' => $request->category_id,
+            'user_id' => auth()->user()->id,
             'price' => $request->price,
             'category_id' => $request->category_id,
-            'area_id' => $request->area_id
+            'area_id' => $request->area_id,
+            'brand_id' => $request->brand_id,
+            'model_id' => $request->model_id,
+            'type_id' => $request->type_id,
+            'color_id' => $request->color_id,
+            'size_id' => $request->size_id,
+
         ]);
 
         $meta = $element->meta()->create([
-            'condition' => $request->condition,
+            'mobile' => $request->mobile,
+            'condition' => Option::whereId($request->condition)->first()->name,
+            'transmission' => Option::whereId($request->transmission)->first()->name,
             'manufacturing_year' => $request->manufacturing_year,
             'mileage' => $request->mileage,
-            'transmission' => $request->transmission,
             'room_no' => $request->room_no,
             'floor_no' => $request->floor_no,
             'bathroom_no' => $request->bathroom_no,
@@ -89,11 +99,12 @@ class AdController extends Controller
         ]);
 
         if (!$element) {
-            return redirect()->route('account')->with('error', 'not stored successfully');
+            return redirect()->route('account')->with('error', trans('message.error_ad_store'));
         }
         $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
+        $this->saveGallery($element, $request, ['images'], ['600', '450'], false);
 
-        return redirect()->route('account')->with('success', title_case('item saved successfully.'));
+        return redirect()->route('account')->with('success', trans('message.success_ad_store'));
     }
 
     /**

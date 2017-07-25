@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 @include('frontend.partials.head')
-<body class="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
+<body class="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
 @include('frontend.partials._loading')
 @include('frontend.partials._modal_search')
 <div class="wrapper">
@@ -30,7 +30,7 @@
     <div class="divider divider--lg"></div>
     <div class="hidden" id="lang">{{ app()->getLocale() }}</div>
     @include('frontend.partials.footer')
-    @show
+@show
 @section('scripts')
     @include('frontend.partials.scripts')
 @show

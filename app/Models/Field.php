@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
+use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Field extends BaseModel
+class Field extends Model
 {
-    protected $localeStrings = ['label'];
+    use LocaleTrait;
+    public $localeStrings = ['label'];
     protected $guarded = [''];
     protected $with = ['options'];
 
-    public function forms()
+    public function categories()
     {
-        return $this->belongsToMany(Form::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function options() {
@@ -26,6 +29,11 @@ class Field extends BaseModel
     public function getIsMultipleAttribute()
     {
         return ($this->type === 'multiple') ? true : false;
+    }
+
+    public function getIsTextAttribute()
+    {
+        return ($this->type === 'text') ? true : false;
     }
 
 }

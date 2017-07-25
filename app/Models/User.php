@@ -6,12 +6,13 @@ use App\Events\UserCreated;
 use App\Models\Helpers\UserHelpers;
 use App\Models\Traits\UserTrait;
 use App\Scopes\ScopeActive;
+use App\Services\Traits\LocaleTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, UserTrait, UserHelpers, ModelHelpers;
+    use Notifiable, UserTrait, UserHelpers, ModelHelpers, LocaleTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'mobile', 'is_mobile_visible', 'is_email_visible', 'country_id', 'description', 'avatar', 'active', 'featured'
     ];
+    public $localeStrings = [''];
 
     /**
      * The attributes that should be hidden for arrays.

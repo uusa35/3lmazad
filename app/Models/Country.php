@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Services\Traits\LocaleTrait;
 
 
 /**
@@ -9,7 +10,8 @@ namespace App\Models;
  */
 class Country extends BaseModel
 {
-    protected $localeStrings = ['name'];
+    use LocaleTrait;
+    public $localeStrings = ['name'];
     protected $guarded = [''];
 
     public function user()

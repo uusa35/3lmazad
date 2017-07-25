@@ -4,11 +4,11 @@ namespace App\Models;
 
 
 use App\Scopes\ScopeExpired;
+use Illuminate\Database\Eloquent\Model;
 
-class Deal extends BaseModel
+class Deal extends Model
 {
-
-
+    public $localeStrings = [];
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.

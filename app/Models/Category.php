@@ -6,6 +6,7 @@ use App\Models\Helpers\CategoryHelpers;
 use App\Models\Traits\CategoryTrait;
 use App\Scopes\ScopeActive;
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Category
@@ -14,11 +15,10 @@ use App\Services\Traits\LocaleTrait;
  * @property-read \App\Models\Category $parent
  * @mixin \Eloquent
  */
-class Category extends BaseModel
+class Category extends Model
 {
-    use LocaleTrait, CategoryTrait, CategoryHelpers;
-    protected $localeStrings = ['name'];
-//    protected $with = ['parent','children'];
+    use CategoryTrait, CategoryHelpers, LocaleTrait, ModelHelpers;
+    public $localeStrings = ['name'];
 
     /**
      * The "booting" method of the model.

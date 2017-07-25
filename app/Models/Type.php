@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Services\Traits\LocaleTrait;
+
 class Type extends BaseModel
 {
+    use LocaleTrait;
     public $localeStrings = ['name'];
     protected $guarded = [''];
 

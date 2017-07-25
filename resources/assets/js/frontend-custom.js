@@ -3,72 +3,97 @@
  */
 $(document).ready(function() {
 
-    // search form
+    // home (search form)
     var lang = $('#lang').text();
     $('#category').on('change', function() {
-        // hide all classes
-        $('div[id^="sub-fields"]').addClass('hidden');
-        // remove the input name and value of all sub-fields
-        $('input[id*="-input-"]').attr('name', '');
-        $('input[id*="-input-"]').attr('value', '');
-        // first : get the parent category / sub category / type of the category chosen
-        let catName = $('.dropdown.category').dropdown('get text');
-        console.log('name of the category is ' + catName);
+        // fetch the catId
         let catId = $('.dropdown.category').dropdown('get value');
-        console.log('value of the category is ' + catId)
-        let catParentId = $('#cat-' + catId).attr('parentId');
-        let type = $('#cat-' + catId).attr('type');
-        console.log('type case : ' + type + ' and parentId is ' + catParentId);
-        // second : adjust the category input for main or sub + value of the category id
-        $('#cat_input').attr('value', catId);
-        $('#cat_input').attr('name', type);
-
-        // third : show the div related to the category
-        if (type === 'sub') {
-            console.log('from sub case');
-            $('#sub-fields-' + catParentId).toggleClass('hidden');
-            // will repeat this for each input element
-            // condition', 'manufacturing_year', 'type',
-            //'transmission', 'room_no', 'floor_no', 'brand_id', 'model_id',
-            //    'bathroom_no', 'rent_type', 'building_age', 'furnished', 'space'
-            // brand
-            $('#brand_id-input-' + catParentId).attr('name', 'brand_id');
-            $('#model_id-input-' + catParentId).attr('name', 'model_id');
-            $('#condition-input-' + catParentId).attr('name', 'condition');
-            $('#type-input-' + catParentId).attr('name', 'type');
-            $('#manufacturing_year-input-' + catParentId).attr('name', 'manufacturing_year');
-            $('#transmission-input-' + catParentId).attr('name', 'transmission');
-            $('#room_no-input-' + catParentId).attr('name', 'room_no');
-            $('#floor_no-input-' + catParentId).attr('name', 'floor_no');
-            $('#bathroom_no-input-' + catParentId).attr('name', 'bathroom_no');
-            $('#rent_type-input-' + catParentId).attr('name', 'rent_type');
-            $('#building_age-input-' + catParentId).attr('name', 'building_age');
-            $('#furnished-input-' + catParentId).attr('name', 'furnished');
-            $('#furnished-' + catParentId).dropdown('get value');
-            $('#space-input-' + catParentId).attr('name', 'space');
-        }
+        // fetch the cat type
+        let catType = $('.dropdown.category').dropdown('get text');
+        // assign it to the input responsible for the cat --> wont make difference because i check in the api for the sub and main
+        $('#cat_input').attr('name', catType);
+        // hide all fields to start over
+        $('.fields').addClass('hidden');
+        // remove all html from brands and models
+        $('#options-brand_id').html('');
+        $('#options-model_id').html('');
+        // fetch the brands only + all sub fields related to catID
+        return axios.get('api/category/' + catId).then(res => res.data).then(data => {
+            // show only the fields related + set the value to zero + set the text to default
+            data.parent.fields.map(f => {
+                $('#' + f.name).removeClass('hidden');
+                $('#' + f.name).dropdown('set value', 0);
+                $('#' + f.name).dropdown('set text', f.name);
+            });
+            // check if there are brands then move to brand_id div for models
+            if ('brands' in data.parent) {
+                data.parent.brands.map(b => {
+                    let name = 'name_' + lang;
+                    $('#options-brand_id').append(`
+                        <div class="item" data-value="${b.id}" data-text="${b[name]}">
+                            <img class="ui avatar image" src="storage/uploads/images/thumbnail/${b.image}">
+                            ${b[name]}
+                        </div>
+                    `);
+                });
+            }
+        }).catch(e =>console.log(e));
     });
 
-
-    $('#area').on('click', function(e) {
-        let getVal = $('.dropdown.area').dropdown('get value');
-        $('#area_input').attr('value', getVal);
+    // home (search form) : after fetching brands .. prepare the models related
+    $('#brand_id').on('change', function() {
+        let brandId = $('.brand_id').dropdown('get value');
+        console.log(brandId);
+        $('#options-model_id').html('');
+        axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
+            let name = 'name_' + lang;
+            data.models.map(m => {
+                $('#options-model_id').append(`
+                        <div class="item" data-value="${m.id}" data-text="${m[name]}">
+                            ${m[name]}
+                        </div>
+                        `);
+            });
+        }).catch(e => console.log(e));
     });
 
-    $('div[id^="brand_id-"]').on('change', function() {
-        let catId = $('.dropdown.category').dropdown('get value');
-        let catParentId = $('#cat-' + catId).attr('parentId');
-        let brandId = $('#brand_id-input-' + catParentId).attr('value');
-        $('#model_id-items-' + catParentId).html('');
-        return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
-            return data.map(m => {
-                let name = 'name_' + lang;
-                //$('model_id-items-' + catParentId).append('<div>test</div>');
-                return $('#model_id-items-' + catParentId).append(`
-                    <div class="item area" data-value="${m.id}" data-text="${m[name]}">
-                        <img class="ui avatar image" src="/storage/uploads/images/thumbnail/${m.image}">
-                        ${m[name]}
-                    </div>
+    // fetch all colors and sizes once the divs are ready
+    // for the create-form
+    $('#input-create-color_id').ready(function() {
+        return axios.get('api/colors').then(res => res.data).then(data => {
+            console.log(data);
+            let name = 'name_' + lang;
+            data.colors.map(c => {
+                $('#input-create-color_id').append(`
+                <option value="${c.id }">${c[name]}</option>
+                `);
+            });
+
+            data.sizes.map(s => {
+                $('#input-create-size_id').append(`
+                        <option value="${s.id }">${s[name]}</option>
+                `);
+            });
+        }).catch(e => console.log(e));
+    });
+    // for the search-form
+    $('#options-color_id').ready(function() {
+        console.log('read color id started')
+        return axios.get('api/colors').then(res => res.data).then(data => {
+            let name = 'name_' + lang;
+            data.colors.map(c => {
+                $('#options-color_id').append(`
+                <div class="item" data-value="${c.id}" data-text="${c[name]}">
+                            ${c[name]}
+                        </div>
+                `);
+            });
+
+            data.sizes.map(s => {
+                $('#options-size_id').append(`
+                <div class="item" data-value="${s.id}" data-text="${s[name]}">
+                            ${s[name]}
+                        </div>
                 `);
             });
         }).catch(e => console.log(e));
@@ -102,7 +127,6 @@ $(document).ready(function() {
         var url = $(this).data('ad-url');
         var element = $(this).data('element');
         var fromDate = $(this).data('from-date');
-
         $('.modal-price').text(price);
         $('.modal-ad-url').attr('href', url);
         $('.modal-image').attr('src', 'storage/uploads/images/medium/' + image);
@@ -117,7 +141,6 @@ $(document).ready(function() {
     $('button[id^="favorite-"]').on('click', function() {
         var userId = $(this).data('user-id');
         var adId = $(this).data('ad-id');
-        console.log(adId);
         $('#favorite-icon-' + adId).toggleClass('outline');
         return axios.get('api/favorites/' + adId + '/' + userId).then(r => console.log(r)).catch(e => console.log(e));
     });
@@ -155,32 +178,55 @@ $(document).ready(function() {
     });
 
     // ad.create categories
-    $('#mainCategory').on('change', function(e) {
-        $('div[id^="fields-"]').addClass('hidden');
-        let categoryId = e.target.value;
-        console.log(categoryId);
-        $('#parentCategory').attr('value', categoryId);
-        $('#subCategories').html('');
-        return axios.get('/api/category/' + categoryId + '/children').then(res => res.data).then(data => {
-            return data.map(m => {
+    $('#category-create').on('change', function(e) {
+        // fetch the parent categoryID
+        let catId = e.target.value;
+        console.log(catId);
+        // remove all sub categories
+        $('#subCategories-create').html('');
+        $('#input-create-brand_id').html('');
+        $('#input-create-brand_id').append(`
+            <option value="0" selected><?php echo trans('general.brand_id') ?></option>
+        `);
+        $('#input-create-model_id').html('');
+        $('#input-create-model_id').html(`
+            <option value="0" selected><?php echo trans('general.model_id') ?></option>
+        `);
+        $('div[id^="field-create-"]').addClass('hidden');
+        return axios.get('api/category/' + catId).then(res => res.data).then(data => {
+            data.parent.fields.map(f => {
+                let nameField = 'name_' + lang;
+                $('#field-create-' + f.name).removeClass('hidden');
+                $('#input-create-' + f.name).val(nameField);
+            });
+            data.parent.children.map(m => {
                 let name = 'name_' + lang;
-                $('div[id="fields-' + categoryId + '"]').removeClass('hidden');
-                return $('#subCategories').append(`
+                $('#subCategories-create').append(`
                     <option class="" value="${m.id}"><span style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;${m[name]}</span></option>
                 `);
             });
+            if ('brands' in data.parent) {
+                data.parent.brands.map(m => {
+                    let name = 'name_' + lang;
+                    $('#input-create-brand_id').append(`
+                        <option value="${m.id }">${m[name]}</option>
+                    `);
+                });
+            }
         }).catch(e => console.log(e));
     });
 
     // this one for brand in ad.create route
-    $('select[id^="brands-items-"]').on('change', function(e) {
-        let catParentId = $(e.target).attr('parent_id');
+    $('#input-create-brand_id').on('change', function(e) {
         let brandId = e.target.value;
-        $('#models-items-' + catParentId).html('');
-        return axios.get('/api/brand/' + brandId + '/models').then(res => res.data).then(data => {
-            return data.map(m => {
+        $('#input-create-model_id').html('');
+        $('#input-create-model_id').html(`
+            <option value="0" selected><?php echo trans('general.model_id') ?></option>
+        `);
+        return axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
+            return data.models.map(m => {
                 let name = 'name_' + lang;
-                return $('#models-items-' + catParentId).append(`
+                return $('#input-create-model_id').append(`
                     <option value="${m.id }">${m[name]}</option>
                 `);
             });

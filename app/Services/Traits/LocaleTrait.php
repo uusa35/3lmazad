@@ -1,9 +1,7 @@
 <?php
 namespace App\Services\Traits;
 
-
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 
 trait LocaleTrait
 {
@@ -15,9 +13,10 @@ trait LocaleTrait
      */
     public function __get($name)
     {
-        $locale = App::getLocale();
 
         if (in_array($name, array_values($this->localeStrings))) {
+
+            $locale = App::getLocale();
 
             if ($locale == 'en') {
 

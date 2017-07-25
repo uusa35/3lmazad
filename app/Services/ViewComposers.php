@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Contactus;
 use App\Models\Country;
+use App\Models\Field;
 use App\Models\Post;
-use App\Models\Role;
+use App\Models\Size;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -23,19 +25,30 @@ class ViewComposers
             Cache::forever('countries_' . app()->getLocale(), $countries);
         }
         $countries = cache()->get('countries_' . app()->getLocale());
-
         return $view->with(compact('countries'));
     }
 
     public function getAreas(View $view)
     {
-        $areas = Area::orderBy('id','asc')->pluck('name_' . app()->getLocale(), 'id');
+        $areas = Area::orderBy('id', 'asc')->pluck('name_' . app()->getLocale(), 'id');
         return $view->with(compact('areas'));
+    }
+
+    public function getColors(View $view)
+    {
+        $elements = Color::orderBy('id', 'asc')->get();
+        return $view->with(compact('elements'));
+    }
+
+    public function getSizes(View $view)
+    {
+        $elements = Size::orderBy('id', 'asc')->get();
+        return $view->with(compact('elements'));
     }
 
     public function getAllAreas(View $view)
     {
-        $allAreas = Area::orderBy('id','asc')->get();
+        $allAreas = Area::orderBy('id', 'asc')->get();
         return $view->with(compact('allAreas'));
     }
 
@@ -62,35 +75,6 @@ class ViewComposers
         }])->get()->toArray();
 
         return $view->with(compact('categories'));
-    }
-
-    public function getOnHomePageCategories(View $view)
-    {
-        $homeCategories = Category::parents()->where('on_homepage', true)->get();
-        return $view->with(compact('homeCategories'));
-    }
-
-    public function getBreadCrumbs(View $view)
-    {
-        $link = '';
-
-        $arrayFilter = ['index', 'create', 'update', 'store', 'destroy', 'delete', 'meta', 'attribute', 'edit'];
-
-        $name = Route::currentRouteName();
-
-        $routes = explode('.', $name);
-
-        $routes = array_filter($routes, function ($item) use ($arrayFilter) {
-
-            if (!in_array($item, $arrayFilter, true)) {
-
-                return $item;
-
-            }
-
-        });
-
-        $view->with('breadCrumbs', $routes);
     }
 
     public function getContactusInfo(View $view)
@@ -129,9 +113,16 @@ class ViewComposers
     public function getCategories(View $view)
     {
         $category = new Category();
-        $categories = $category->parents()->with('children.children', 'brands.models', 'form.fields', 'types')->get();
+        $categories = $category->parents()->with('children')->get();
         return $view->with(compact('categories'));
+    }
 
+    public function getFields(View $view)
+    {
+        $fields = Field::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        return $view->with(compact('fields', 'colors', 'sizes'));
     }
 }
 

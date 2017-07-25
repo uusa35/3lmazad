@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 class Newsletter extends Model
 {
     use Notifiable;
+    public $localeStrings = [''];
     protected $table = 'newsletter';
     protected $guarded = [''];
 

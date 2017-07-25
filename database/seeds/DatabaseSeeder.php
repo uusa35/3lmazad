@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     public $tables = [
-        'users', 'sliders', 'ads', 'ad_metas', 'forms', 'fields', 'options','field_form', 'comments', 'brands', 'models',
+        'users', 'sliders', 'ads', 'ad_metas', 'fields', 'options','category_form', 'comments', 'brands', 'models',
         'categories', 'galleries', 'galleryables', 'images','ad_deal',
         'newsletter', 'aboutus', 'contactus', 'colors', 'sizes', 'deals', 'ad_deals',
         'roles', 'user_role', 'countries', 'areas', 'commercials', 'types'

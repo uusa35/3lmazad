@@ -12,10 +12,10 @@
  */
 function checkTrans($element)
 {
-    if (strpos(trans($element), 'message.') || strpos(trans($element), 'general.')) {
-        return trans($element);
+    if (strpos(trans($element), 'message.') === 0 || strpos(trans($element), 'general.') === 0) {
+        return null;
     }
-    return null;
+    return trans($element);
 }
 
 

@@ -6,7 +6,7 @@ use App\Scopes\ScopeActive;
 
 class Plan extends BaseModel
 {
-    protected $localeStrings = ['name'];
+    public $localeStrings = ['name'];
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.

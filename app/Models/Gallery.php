@@ -5,15 +5,10 @@ namespace App\Models;
 use App\Scopes\ScopeActive;
 use App\Scopes\ScopeGalleryHasImages;
 
-/**
- * App\Models\Gallery
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Image[] $images
- * @mixin \Eloquent
- */
 class Gallery extends BaseModel
 {
     protected $with = ['images'];
+    public $localeStrings = [''];
     protected $guarded = [''];
 
     /**

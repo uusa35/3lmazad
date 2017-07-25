@@ -4,6 +4,8 @@ use App\Models\Ad;
 use App\Models\Area;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\Size;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,12 +26,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('brand/{id}/models', function ($id) {
     $models = Brand::whereId($id)->first()->models()->get()->toArray();
-    return response()->json($models, 200);
+    return response()->json(['models' => $models], 200);
 });
 
-Route::get('category/{id}/children', function ($id) {
-    $subCategories = Category::whereId($id)->first()->children()->with('form.fields')->get()->toArray();
-    return response()->json($subCategories, 200);
+Route::get('category/{id}', function ($id) {
+    $parent = Category::whereId($id)->with('fields.options', 'brands', 'children')->first();
+    if (!$parent->is_parent) {
+        $parent = $parent->parent()->with('fields.options', 'brands', 'children')->first();
+    }
+    return response()->json(['parent' => $parent], 200);
+
+});
+
+Route::get('colors', function () {
+    $colors = Color::all()->toArray();
+    $sizes = Size::all()->toArray();
+    return response()->json(['colors' => $colors, 'sizes' => $sizes], 200);
+});
+
+Route::get('sizes', function () {
+    $colors = Color::all()->toArray();
+    $sizes = Size::all()->toArray();
+    return response()->json(['colors' => $colors, 'sizes' => $sizes], 200);
 });
 
 Route::get('favorites/{ad_id}/{user_id}', function ($ad_id, $user_id) {

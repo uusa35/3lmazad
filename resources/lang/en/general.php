@@ -25,4 +25,7 @@ return array (
   'ar' => 'arabic',
   'search' => 'Search',
   'auctions' => 'Auctions',
+  'register' => 'register',
+  'rent_type' => 'Rent Type',
+  'room_no' => 'room number',
 );

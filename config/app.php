@@ -90,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -183,11 +183,10 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\TranslationManager\ManagerServiceProvider::class,
-//        Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-//        ExA2040\LaravelViewCounter\ViewCounterServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Usama\Tap\TapServiceProvider::class
 
@@ -244,5 +243,4 @@ return [
         'Date' => Jenssegers\Date\Date::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
     ],
-
 ];

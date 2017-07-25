@@ -7,6 +7,6 @@ use App\Services\Traits\LocaleTrait;
 class Faq extends BaseModel
 {
     use LocaleTrait;
-    protected $localeStrings = ['title','body'];
+    public $localeStrings = ['title','body'];
     protected $guarded = [''];
 }

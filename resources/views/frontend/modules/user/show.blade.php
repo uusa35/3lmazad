@@ -67,10 +67,9 @@
                 </div>
                 <hr>
                 <div class="col-lg-12">
-                    @include('frontend.partials._divider-xs')
+                    <div class="divider divider-xs"></div>
                     <div class="filters-row">
                         {{--@include('frontend.partials.components._bar-pagination-filters')--}}
-                        {{--@include('frontend.partials._divider-xs')--}}
                         <div class="outer">
                             <div class="products-grid products-listing products-col products-isotope five-in-row">
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}

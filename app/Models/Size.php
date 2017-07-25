@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
-class Size extends BaseModel
+use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Model;
+
+class Size extends Model
 {
-    protected $localeStrings = ['name'];
+    use LocaleTrait;
+    public $localeStrings = ['name'];
 
     public function ad()
     {

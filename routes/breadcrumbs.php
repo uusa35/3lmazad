@@ -103,6 +103,13 @@ Breadcrumbs::register('account', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.account'), route('account'));
 });
 
+
+Breadcrumbs::register('user.account.ads', function ($breadcrumbs) {
+    $breadcrumbs->parent('account');
+    $breadcrumbs->push(trans('general.my_ads_list'), route('user.account.ads'));
+});
+
+
 Breadcrumbs::register('user.edit', function ($breadcrumbs) {
     $breadcrumbs->parent('account');
     $breadcrumbs->push(trans('general.profile_edit'), route('user.edit', auth()->user()->id));

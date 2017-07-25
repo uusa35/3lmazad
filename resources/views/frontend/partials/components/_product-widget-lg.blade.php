@@ -42,7 +42,7 @@
                                 data-ad-url="{{ route('ad.show',$element->id) }}"
                                 data-price="{{ $element->price }}"
                                 data-description="{{ $element->meta->description }}"
-                                data-image="{{ $element->image }}"
+                                data-image="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                                 data-category="{{ $element->categoryName }}"
                                 data-from-date="{{ $element->fromDate }}"
                                 data-element="{{ $element }}"

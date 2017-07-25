@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+
 use App\Services\Traits\LocaleTrait;
 
 class Area extends BaseModel
 {
+    use LocaleTrait;
     public  $localeStrings = ['name'];
     protected $guarded = [''];
 

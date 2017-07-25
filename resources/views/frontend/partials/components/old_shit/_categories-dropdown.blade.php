@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <label for="category_id" class="control-label col-sm-3">{{ trans("general.category") }}</label>
         <div class="col-sm-9" id="categories">
-            <select id="mainCategory" name="main_cat_id" class="form-control">
+            <select id="mainCategory" name="main_cat_id" class="form-control tooltip-message" data-content="{{ trans("message.parent_cat_ad_create") }}">
                 <option value="main category">{{ trans('message.choose_main_category') }}</option>
                 @foreach($categories->where('parent_id',0) as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -15,7 +15,7 @@
     <div class="col-lg-12">
         <label for="category_id" class="control-label col-sm-3">{{ trans("general.sub_category") }}</label>
         <div class="col-sm-9" id="categories">
-            <select id="subCategories" name="category_id" class="form-control">
+            <select id="subCategories" name="category_id" class="form-control tooltip-message" data-content="{{ trans("message.sub_cat_ad_create") }}">
                 <option value="null">{{ trans('message.choose_sub_category') }}</option>
             </select>
         </div>

@@ -16,9 +16,13 @@ use Jenssegers\Date\Date;
 
 class BaseModel extends Model
 {
-    use LocaleTrait, ModelHelpers;
-    protected $localeStrings = [];
+    use ModelHelpers;
     protected $guarded = [''];
+
+    public function __get($key)
+    {
+        return parent::__get($key);
+    }
 
 
 }

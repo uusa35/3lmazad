@@ -16,12 +16,14 @@ return [
             'motorcyle',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
-            ['name' => 'manufacturing_year', 'type' => 'number', 'group' => 'manufacturing_year', 'options' => [range(1980, 2017)], 'is_modal' => 0],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
-            ['name' => 'transmission', 'type' => 'multiple', 'group' => 'transmission', 'options' => ['manual', 'automatic'], 'is_modal' => 0],
-            ['name' => 'mileage', 'type' => 'number', 'group' => 'mileage', 'options' => '', 'is_modal' => 0],
+            ['name' => 'brand_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => 'brands'], // means related to the category
+            ['name' => 'model_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => 'models'],
+            ['name' => 'color_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => 'colors'],
+            ['name' => 'size_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => 'sizes'],
+            ['name' => 'manufacturing_year', 'type' => 'number', 'options' => [1999 => 1999, 2000 => 2000, 2017 => 2017],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_new', 'type' => 'multiple', 'options' => ['new' => 1, 'old' => 0],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_automatic', 'type' => 'multiple', 'options' => ['manual' => 0, 'automatic' => 1],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'mileage', 'type' => 'number', 'options' => '','is_modal' => false, 'collection_name' => ''],
         ]
     ],
     1 => [
@@ -31,9 +33,12 @@ return [
             'tablets',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
+            ['name' => 'brand_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => 'brands'], // means related to the category
+            ['name' => 'model_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => ''],
+            ['name' => 'color_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'size_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'manufacturing_year', 'type' => 'number', 'options' => [1999 => 1999, 2000 => 2000, 2017 => 2017],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_new', 'type' => 'multiple', 'options' => ['new' => 1, 'old' => 0],'is_modal' => false, 'collection_name' => ''],
         ]
     ],
     2 => [
@@ -43,9 +48,12 @@ return [
             'tvs',
         ],
         'fields' => [
-            ['name' => 'brand_id', 'type' => 'multiple', 'group' => 'brands', 'options' => '', 'is_modal' => 1],
-            ['name' => 'model_id', 'type' => 'multiple', 'group' => 'models', 'options' => '', 'is_modal' => 1],
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
+            ['name' => 'brand_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => 'brands'], // means related to the category
+            ['name' => 'model_id', 'type' => 'multiple', 'options' => '','is_modal' => true, 'collection_name' => ''],
+            ['name' => 'color_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'size_id', 'type' => 'multiple', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'manufacturing_year', 'type' => 'number', 'options' => [1999 => 1999, 2000 => 2000, 2017 => 2017],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_new', 'type' => 'multiple', 'options' => ['new' => 1, 'old' => 0],'is_modal' => false, 'collection_name' => ''],
         ]
     ],
     3 => [
@@ -56,15 +64,15 @@ return [
             'Whole Building for Sale',
         ],
         'fields' => [
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
-            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished', 'options' => [0, 1], 'is_modal' => 0],
-            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id', 'options' => "", 'is_modal' => 0],
-            ['name' => 'space', 'type' => 'text', 'group' => 'space', 'options' => '', 'is_modal' => 0],
-            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type', 'options' => ['daily', 'weekly', 'monthly', 'yearly'],'is_modal' => 0]
+            ['name' => 'is_new', 'type' => 'multiple', 'options' => ['new' => 1, 'old' => 0],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_furnished', 'type' => 'multiple', 'options' => ['no' => 0, 'yes' => 1],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'floor_no', 'type' => 'number', 'options' => ['ground' => 0, 'first' => 1, 'second' => 2],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'building_age', 'type' => 'multiple', 'options' => ['one year' => 1, 'tow years' => 2],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'options' => ['one' => 1, 'tow' => 2, 'three' => 3],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'room_no', 'type' => 'multiple', 'options' => ['one' => 1, 'tow' => 2, 'three' => 3],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'type_id', 'type' => 'multiple', 'options' => "",'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'space', 'type' => 'text', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'rent_type', 'type' => 'multiple', 'options' => ['daily' => 'daily', 'weekly' => 'weekly', 'monthly' => 'montly', 'yearly' => 'yearly'],'is_modal' => false, 'collection_name' => '']
         ]
     ],
     4 => [
@@ -78,15 +86,15 @@ return [
             'Other Real Estate for rent',
         ],
         'fields' => [
-            ['name' => 'condition', 'type' => 'multiple', 'group' => 'condition', 'options' => ['new', 'old'], 'is_modal' => 0],
-            ['name' => 'furnished', 'type' => 'multiple', 'group' => 'furnished', 'options' => [0, 1], 'is_modal' => 0],
-            ['name' => 'floor_no', 'type' => 'number', 'group' => 'floor_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'building_age', 'type' => 'multiple', 'group' => 'building_age', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'bathroom_no', 'type' => 'multiple', 'group' => 'bathroom_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'room_no', 'type' => 'multiple', 'group' => 'room_no', 'options' => [range(1, 5)], 'is_modal' => 0],
-            ['name' => 'type_id', 'type' => 'multiple', 'group' => 'type_id', 'options' => "", 'is_modal' => 0],
-            ['name' => 'space', 'type' => 'text', 'group' => 'space', 'options' => '', 'is_modal' => 0],
-            ['name' => 'rent_type', 'type' => 'multiple', 'group' => 'rent_type', 'options' => ['daily', 'weekly', 'monthly', 'yearly'],'is_modal' => 0]
+            ['name' => 'is_new', 'type' => 'multiple', 'options' => ['new' => 1, 'old' => 0],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'is_furnished', 'type' => 'multiple', 'options' => ['no' => 0, 'yes' => 1],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'floor_no', 'type' => 'number', 'options' => ['ground' => 0, 'first' => 1, 'second' => 2],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'building_age', 'type' => 'multiple', 'options' => ['one year' => 1, 'tow years' => 2],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'bathroom_no', 'type' => 'multiple', 'options' => ['one' => 1, 'tow' => 2, 'three' => 3],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'room_no', 'type' => 'multiple', 'options' => ['one' => 1, 'tow' => 2, 'three' => 3],'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'type_id', 'type' => 'multiple', 'options' => "",'is_modal' => false, 'collection_name' => ''],
+            ['name' => 'space', 'type' => 'text', 'options' => '','is_modal' => false, 'collection_name' => ''],
+            ['name' => 'rent_type', 'type' => 'multiple', 'options' => ['daily' => 'daily', 'weekly' => 'weekly', 'monthly' => 'montly', 'yearly' => 'yearly'],'is_modal' => false, 'collection_name' => '']
         ]
     ],
 //    5 => [
