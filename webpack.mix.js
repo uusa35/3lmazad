@@ -12,11 +12,9 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    //.react('resources/assets/js/pages-app.js', 'public/js')
     .react('resources/assets/js/form-app.js', 'public/js')
     .js('./bower_components/blueimp-gallery/js/blueimp-gallery.min.js', 'public/js/gallery.js')
     .sass('resources/assets/sass/backend.scss', 'public/css')
-    .sass('resources/assets/sass/backend-custom.scss', 'public/css')
     .sass('resources/assets/sass/frontend.scss', 'public/css')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/custom.scss', 'public/css')
@@ -29,9 +27,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js',
 
-            './../../metronic_v4.5.6/theme/assets/global/scripts/datatable.js',
-            './../../metronic_v4.5.6/theme/assets/global/plugins/datatables/datatables.min.js',
-            './../../metronic_v4.5.6/theme/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js',
+            './node_modules/datatables/media/js/jquery.dataTables.min.js',
+            //'./../../metronic_v4.5.6/theme/assets/global/scripts/datatable.js',
+            //'./../../metronic_v4.5.6/theme/assets/global/plugins/datatables/datatables.all.min.js',
+            //'./../../metronic_v4.5.6/theme/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js',
 
             './../../metronic_v4.5.6/theme/assets/global/plugins/js.cookie.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js',

@@ -39,14 +39,14 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item start ">
+            <li class="nav-item start {{ activeItem('user') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-male" aria-hidden="true"></i>
-                    <span class="title">Users</span>
+                    <span class="title">Users Section</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start ">
+                    <li class="nav-item start">
                         <a href="{{ route('backend.user.index',['role' => 'user']) }}" class="nav-link ">
                             <i class="fa fa-fw fa-user"></i>
                             <span class="title">Users</span>
@@ -63,7 +63,7 @@
             <li class="heading">
                 <h3 class="uppercase">Advertisement Section</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item  {{ activeItem('ad') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-shopping-basket"></i>
                     <span class="title">Ads</span>
@@ -94,7 +94,7 @@
             <li class="heading">
                 <h3 class="uppercase">Paid Plans Section</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item  {{ activeItem('plan') }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-money"></i>
                     <span class="title">Plans</span>

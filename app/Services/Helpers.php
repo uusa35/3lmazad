@@ -5,6 +5,7 @@
  * Date: 7/23/17
  * Time: 9:02 AM
  */
+use Illuminate\Support\Facades\Route;
 
 
 /**
@@ -18,11 +19,14 @@ function checkTrans($element)
     return trans($element);
 }
 
-
 /**
- * @return mixed
+ * @param $element
+ * @return null|string
  */
-function testing()
+function activeItem($element)
 {
-    dd('testing fun');
+    if (strpos(Route::currentRouteName(), $element)) {
+        return 'active';
+    }
+    return null;
 }
