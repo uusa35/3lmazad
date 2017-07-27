@@ -12,7 +12,7 @@ class Deal extends Model
     use ModelHelpers;
     public $localeStrings = [''];
     protected $guarded = [''];
-    protected $dates = ['created_at','updated_at','start_date','end_date'];
+    protected $dates = ['created_at', 'updated_at', 'start_date', 'end_date'];
 
     /**
      * The "booting" method of the model.
@@ -24,7 +24,9 @@ class Deal extends Model
     {
         parent::boot();
         if (!app()->environment('seeding')) {
-            static::addGlobalScope(new ScopeExpired());
+            if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeExpired());
+            }
         }
     }
 

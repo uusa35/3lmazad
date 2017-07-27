@@ -3,7 +3,6 @@
 namespace App\Models;
 
 
-
 use App\Scopes\ScopeItemMustHaveUserWithRole;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +23,9 @@ class Comment extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
+            if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
+            }
         }
     }
 
@@ -33,7 +34,8 @@ class Comment extends Model
         return $this->morphTo();
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

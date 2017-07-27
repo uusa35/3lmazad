@@ -26,6 +26,6 @@ class ScopeExpired implements Scope
     {
         // last date is smaller than now آخر يوم لو اكبر من انهرده يبقى لسه فيه وقت والعكس صحيح
         $model->where('end_date', '>', Carbon::now());
-//        $builder->where('end_date', '>', Carbon::now());
+        $builder->where('end_date', '>', Carbon::now());
     }
 }

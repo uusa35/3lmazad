@@ -24,21 +24,20 @@ class AdController extends Controller
      */
     public function index()
     {
-        $elements = $this->ad->withoutGlobalScopes()->whereHas('user', function ($q) {
-            return $q;
-        })->whereHas('deals', function ($q) {
+        $elements = $this->ad->with('deals.plan')->whereHas('deals', function ($q) {
             if (request()->type === 'due') {
-                i stopped here
-                return $q->withoutGlobalScopes()->where(function ($q) {
-                    return $q->where('end_date', '<', Carbon::now())->whereHas('plan', function ($q) {
-                        return $q->withoutGlobalScopes()->where('is_paid', true);
-                    });
+                return $q->where('end_date', '<', Carbon::now())->whereHas('plan', function ($q) {
+                    return $q->where('is_paid', true);
                 });
             } else {
-                return $q->whereHas('plan', function ($q) {
-                    return $q->withoutGlobalScopes()->where('is_paid', request()->type === 'paid' ? true : false);
+                return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                    return $q->where('is_paid', request()->type === 'paid' ? true : false);
                 });
             }
+        })->whereHas('user', function ($q) {
+            return $q->whereHas('roles', function ($q) {
+                return $q;
+            });
         })->get();
         return view('backend.modules.ad.index', compact('elements'));
     }

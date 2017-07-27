@@ -23,7 +23,9 @@ class Auction extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
+            if (!in_array('backend', request()->segments(), true)) {
+                static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
+            }
         }
     }
 

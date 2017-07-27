@@ -23,7 +23,6 @@ trait AdHelpers
             ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
-            ->has('user.comments','user.roles')->has('deals')
             ->take($take)->get();
 
     }
@@ -35,11 +34,11 @@ trait AdHelpers
      */
     public function scopeHasFreePlans($q)
     {
-        return $q->whereHas('deals', function ($q) {
-            return $q->whereHas('plan', function ($q) {
+        return $q->where(function ($q) {
+            return $q->whereHas('deals.plan', function ($q) {
                 return $q->where('is_paid', false);
             });
-        }, '>', 0);
+        });
     }
 
 
@@ -50,11 +49,11 @@ trait AdHelpers
      */
     public function scopeHasPaidPlans($q)
     {
-        return $q->whereHas('deals', function ($d) {
-            return $d->whereHas('plan', function ($p) {
-                return $p->where('is_paid', true);
+        return $q->where(function ($q) {
+            return $q->whereHas('deals.plan', function ($q) {
+                return $q->where('is_paid', true);
             });
-        }, '>', 0);
+        });
     }
 
     public function getWillExpireAtAttribute()
