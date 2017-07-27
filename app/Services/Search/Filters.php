@@ -59,6 +59,16 @@ class Filters extends QueryFilters
         return $this->builder->where('brand_id', request()->brand);
     }
 
+    public function color_id()
+    {
+        return $this->builder->where('color_id', request()->color_id);
+    }
+
+    public function size_id()
+    {
+        return $this->builder->where('size_id', request()->size_id);
+    }
+
     public function model_id()
     {
         var_dump('model');
@@ -71,12 +81,12 @@ class Filters extends QueryFilters
         return $this->builder->where('type_id', request()->type);
     }
 
-    public function condition()
+    public function is_new()
     {
         var_dump('condition');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('condition', request()->condition);
+                return $q->where('is_new', request()->condition);
             });
         });
     }
@@ -127,12 +137,11 @@ class Filters extends QueryFilters
         });
     }
 
-    public function transmission()
+    public function is_automatic()
     {
-        var_dump('transmission');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('transmission',request()->transmission);
+                return $q->where('is_automatic',request()->transmission);
             });
         });
     }

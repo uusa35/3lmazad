@@ -8,11 +8,12 @@
 
 namespace App\Scopes;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class ScopeHasGallery implements Scope
+class ScopeAdHasValidDeal implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -23,8 +24,12 @@ class ScopeHasGallery implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $model->has('gallery');
-        $builder->has('gallery');
+        // once ad is created a free deal will be attached to such ad.
+        $model->whereHas('deals', function ($q) {
+            return $q;
+        });
+        $builder->whereHas('deals', function ($q) {
+            return $q;
+        });
     }
-
 }

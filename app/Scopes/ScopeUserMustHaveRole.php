@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class ScopeHasGallery implements Scope
+class ScopeUserMustHaveRole implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -23,8 +23,12 @@ class ScopeHasGallery implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $model->has('gallery');
-        $builder->has('gallery');
+        $model->whereHas('roles', function ($q) {
+            return $q;
+        }, '>', 0);
+        $builder->whereHas('roles', function ($q) {
+            return $q;
+        }, '>', 0);
     }
 
 }

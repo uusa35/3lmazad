@@ -4,14 +4,15 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="index.html">
-                <img src="../assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" /> </a>
+                <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo-default"/> </a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>
             </div>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse">
             <span></span>
         </a>
         <!-- END RESPONSIVE MENU TOGGLER -->
@@ -21,7 +22,8 @@
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
                         <i class="icon-bell"></i>
                         <span class="badge badge-default"> 7 </span>
                     </a>
@@ -122,7 +124,8 @@
                 <!-- BEGIN INBOX DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
                         <i class="icon-envelope-open"></i>
                         <span class="badge badge-default"> 4 </span>
                     </a>
@@ -137,7 +140,8 @@
                                 <li>
                                     <a href="#">
                                                 <span class="photo">
-                                                    <img src="../assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="../assets/layouts/layout3/img/avatar2.jpg"
+                                                         class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Lisa Wong </span>
                                                     <span class="time">Just Now </span>
@@ -148,7 +152,8 @@
                                 <li>
                                     <a href="#">
                                                 <span class="photo">
-                                                    <img src="../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="../assets/layouts/layout3/img/avatar3.jpg"
+                                                         class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Richard Doe </span>
                                                     <span class="time">16 mins </span>
@@ -159,7 +164,8 @@
                                 <li>
                                     <a href="#">
                                                 <span class="photo">
-                                                    <img src="../assets/layouts/layout3/img/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="../assets/layouts/layout3/img/avatar1.jpg"
+                                                         class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Bob Nilson </span>
                                                     <span class="time">2 hrs </span>
@@ -170,7 +176,8 @@
                                 <li>
                                     <a href="#">
                                                 <span class="photo">
-                                                    <img src="../assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="../assets/layouts/layout3/img/avatar2.jpg"
+                                                         class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Lisa Wong </span>
                                                     <span class="time">40 mins </span>
@@ -181,7 +188,8 @@
                                 <li>
                                     <a href="#">
                                                 <span class="photo">
-                                                    <img src="../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                    <img src="../assets/layouts/layout3/img/avatar3.jpg"
+                                                         class="img-circle" alt=""> </span>
                                                 <span class="subject">
                                                     <span class="from"> Richard Doe </span>
                                                     <span class="time">46 mins </span>
@@ -197,7 +205,8 @@
                 <!-- BEGIN TODO DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
                         <i class="icon-calendar"></i>
                         <span class="badge badge-default"> 3 </span>
                     </a>
@@ -216,7 +225,8 @@
                                                     <span class="percent">30%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 40%;" class="progress-bar progress-bar-success"
+                                                          aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">40% Complete</span>
                                                     </span>
                                                 </span>
@@ -229,7 +239,8 @@
                                                     <span class="percent">65%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 65%;" class="progress-bar progress-bar-danger"
+                                                          aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">65% Complete</span>
                                                     </span>
                                                 </span>
@@ -242,7 +253,8 @@
                                                     <span class="percent">98%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 98%;" class="progress-bar progress-bar-success"
+                                                          aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">98% Complete</span>
                                                     </span>
                                                 </span>
@@ -255,7 +267,8 @@
                                                     <span class="percent">10%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 10%;" class="progress-bar progress-bar-warning"
+                                                          aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">10% Complete</span>
                                                     </span>
                                                 </span>
@@ -268,7 +281,8 @@
                                                     <span class="percent">58%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 58%;" class="progress-bar progress-bar-info"
+                                                          aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">58% Complete</span>
                                                     </span>
                                                 </span>
@@ -281,7 +295,8 @@
                                                     <span class="percent">85%</span>
                                                 </span>
                                                 <span class="progress">
-                                                    <span style="width: 85%;" class="progress-bar progress-bar-success" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 85%;" class="progress-bar progress-bar-success"
+                                                          aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">85% Complete</span>
                                                     </span>
                                                 </span>
@@ -294,7 +309,9 @@
                                                     <span class="percent">38%</span>
                                                 </span>
                                                 <span class="progress progress-striped">
-                                                    <span style="width: 38%;" class="progress-bar progress-bar-important" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
+                                                    <span style="width: 38%;"
+                                                          class="progress-bar progress-bar-important" aria-valuenow="18"
+                                                          aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">38% Complete</span>
                                                     </span>
                                                 </span>
@@ -308,15 +325,17 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
-                        <span class="username username-hide-on-mobile"> Nick </span>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
+                        <img alt="" class="img-circle"
+                             src="{{ asset('storage/uploads/images/thumbnail/'.$user->avatar) }}"/>
+                        <span class="username username-hide-on-mobile"> {{ $user->name }} </span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="page_user_profile_1.html">
-                                <i class="icon-user"></i> My Profile </a>
+                            <a href="{{ route('home') }}">
+                                <i class="icon-user"></i> Back To Home page</a>
                         </li>
                         <li>
                             <a href="app_calendar.html">
@@ -334,14 +353,21 @@
                                 <span class="badge badge-success"> 7 </span>
                             </a>
                         </li>
-                        <li class="divider"> </li>
+                        <li class="divider"></li>
                         <li>
-                            <a href="page_user_lock_1.html">
-                                <i class="icon-lock"></i> Lock Screen </a>
+                            <a href="{{ url('backend/translations') }}">
+                                <i class="icon-lock"></i> Translations </a>
                         </li>
                         <li>
-                            <a href="page_user_login_1.html">
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                 <i class="icon-key"></i> Log Out </a>
+                            </a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                  style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
                     </ul>
                 </li>

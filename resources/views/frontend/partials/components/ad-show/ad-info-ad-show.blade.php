@@ -4,10 +4,11 @@
                     class="text-uppercase">{{  $element->categoryName }}</span></a>
 
         <a class="ad-bar-children"><i class="icon calendar"></i>{{  $element->createdDate }}</a>
-        <a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->endAt }}</a>
+        <a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->willExpireAt }}</a>
         @if(!is_null($element->brandName))
             <a class="ad-bar-children">
-                <img class="ui avatar image" style="width: 10px; height: auto;" src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
+                <img class="ui avatar image" style="width: 10px; height: auto;"
+                     src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
             </a>
         @endif
         @if(!is_null($element->meta->mileage))

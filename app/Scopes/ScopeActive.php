@@ -24,6 +24,7 @@ class ScopeActive implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $builder->where('active', true);
+        $model->where('active', true);
     }
 
 }

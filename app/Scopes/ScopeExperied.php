@@ -24,7 +24,8 @@ class ScopeExpired implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        // last date is smaller than today آخر يوم لو اكبر من انهرده يبقى لسه فيه وقت والعكس صحيح
-        $builder->where('end_date', '>', Carbon::today());
+        // last date is smaller than now آخر يوم لو اكبر من انهرده يبقى لسه فيه وقت والعكس صحيح
+        $model->where('end_date', '>', Carbon::now());
+//        $builder->where('end_date', '>', Carbon::now());
     }
 }

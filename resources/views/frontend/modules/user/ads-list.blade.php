@@ -13,7 +13,7 @@
             <div class="divider divider--sm"></div>
             <div class="card card--form">
                 <div class="divider divider--xs"></div>
-                <table id="adsTable" class="table table-striped table-hover table-condensed table-responsive table-high"
+                <table id="dataTable" class="table table-striped table-hover table-condensed table-responsive table-high"
                        cellspacing="0" style="font-size: x-small !important;">
                     <thead>
                     <tr>

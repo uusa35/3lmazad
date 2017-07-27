@@ -79,7 +79,7 @@ trait AdTrait
      */
     public function deals()
     {
-        return $this->belongsToMany(Deal::class);
+        return $this->hasMany(Deal::class);
     }
 
     public function gallery()

@@ -12,26 +12,54 @@ use Carbon\Carbon;
  */
 trait AdHelpers
 {
+    /**
+     * @param int $take
+     * @return mixed
+     * $this is the class
+     */
     public function getMostVisitedAds($take = 10)
     {
         return $this->selectRaw('ads.*, count(*) as ad_count')
             ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
+            ->has('user.comments','user.roles')->has('deals')
             ->take($take)->get();
 
     }
 
-    public function scopeHasValidDeal($q)
+    /**
+     * @param $q
+     * @return mixed
+     * scope ads that have active and valid free deals only
+     */
+    public function scopeHasFreePlans($q)
     {
         return $q->whereHas('deals', function ($q) {
-            return $q;
+            return $q->whereHas('plan', function ($q) {
+                return $q->where('is_paid', false);
+            });
         }, '>', 0);
     }
 
-    public function getIsExpiredAttribute()
+
+    /**
+     * @param $q
+     * @return mixed
+     * scope ads that have active and free deals only
+     */
+    public function scopeHasPaidPlans($q)
     {
-        return $this->end_date < Carbon::now() ? true : false;
+        return $q->whereHas('deals', function ($d) {
+            return $d->whereHas('plan', function ($p) {
+                return $p->where('is_paid', true);
+            });
+        }, '>', 0);
+    }
+
+    public function getWillExpireAtAttribute()
+    {
+        return $this->deals->first()->end_date;
     }
 
     public function getHasValidDealAttribute()

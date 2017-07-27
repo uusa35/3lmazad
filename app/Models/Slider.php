@@ -28,12 +28,12 @@ class Slider extends Model
      */
     protected static function boot()
     {
-        parent::boot();
-
-        if (!in_array('backend', request()->segments(), true)) {
+        if (!app()->environment('seeding')) {
+            parent::boot();
+//        if (!in_array('backend', request()->segments(), true)) {
             static::addGlobalScope(new ScopeActive());
+//        }
         }
-
     }
 
 }

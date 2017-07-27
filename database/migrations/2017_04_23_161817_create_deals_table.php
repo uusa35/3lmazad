@@ -26,6 +26,9 @@ class CreateDealsTable extends Migration
             $table->integer('plan_id')->unsigned()->index()->nullable();
             $table->foreign('plan_id')->references('id')->on('plans');
 
+            $table->integer('ad_id')->unsigned()->index()->nullable();
+            $table->foreign('ad_id')->references('id')->on('ads');
+
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamps();

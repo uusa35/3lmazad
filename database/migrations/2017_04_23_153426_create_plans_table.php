@@ -22,7 +22,7 @@ class CreatePlansTable extends Migration
             $table->boolean('on_sale')->default(1);
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
-            $table->boolean('is_free')->default(1);
+            $table->boolean('is_paid')->default(1);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

@@ -10,7 +10,6 @@
 
     <div class="sub-fields" id="sub-fields">
         @foreach($fields->unique() as $field)
-            <h5>{{ $field->name }}</h5></br>
             @include('frontend.partials.components.search-form.'.$field->type)
         @endforeach
     </div>

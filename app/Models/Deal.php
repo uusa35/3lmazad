@@ -4,11 +4,16 @@ namespace App\Models;
 
 
 use App\Scopes\ScopeExpired;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Deal extends Model
 {
-    public $localeStrings = [];
+    use ModelHelpers;
+    public $localeStrings = [''];
+    protected $guarded = [''];
+    protected $dates = ['created_at','updated_at','start_date','end_date'];
+
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.
@@ -18,15 +23,8 @@ class Deal extends Model
     protected static function boot()
     {
         parent::boot();
-
         if (!app()->environment('seeding')) {
-            if (in_array('api', request()->segments(), true)) {
-                static::addGlobalScope(new ScopeExpired());
-            }
-
-            if (!in_array('backend', request()->segments(), true)) {
-                static::addGlobalScope(new ScopeExpired());
-            }
+            static::addGlobalScope(new ScopeExpired());
         }
     }
 
@@ -35,8 +33,18 @@ class Deal extends Model
         return $this->belongsTo(Plan::class);
     }
 
-    public function ads()
+    public function ad()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->belongsTo(Ad::class);
+    }
+
+    public function getPlanIsPaidAttribute()
+    {
+        return $this->plan->is_free;
+    }
+
+    public function getIsValidAttribute()
+    {
+        return ($this->end_date > Carbon::today()) ? true : false;
     }
 }

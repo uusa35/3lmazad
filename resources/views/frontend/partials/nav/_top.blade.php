@@ -20,12 +20,12 @@
                     </li>
                     <li class="social-links__item">
                         <a href="{{ route('lang','en') }}">
-                            <img src="images/flags/us.png" alt=""/>
+                            <img src="{{ asset('images/flags/us.png') }}" alt=""/>
                         </a>
                     </li>
                     <li class="social-links__item">
                         <a href="{{ route('lang','ar') }}">
-                            <img src="images/flags/kw.png" alt=""/>
+                            <img src="{{ asset('images/flags/kw.png') }}" alt=""/>
                         </a>
                     </li>
                 </ul>
@@ -37,14 +37,16 @@
                 <ul>
                     @if(!is_null($contactus->facebook_url))
                         <li class="social-links__item"><a class="icon icon-facebook"
-                                                          href="http://www.facebook.com/"></a></li>
+                                                          href="{{ $contactus->facebook_url }}"></a></li>
                     @endif
                     @if(!is_null($contactus->twitter_url))
-                        <li class="social-links__item"><a class="icon icon-twitter" href="http://www.twitter.com/"></a>
+                        <li class="social-links__item"><a class="icon icon-twitter"
+                                                          href="{{ $contactus->twitter_url }}"></a>
                         </li>
                     @endif
-                    @if(!is_null($contactus->google_url))
-                        <li class="social-links__item"><a class="icon icon-google" href="http://www.google.com/"></a>
+                    @if(!is_null($contactus->youtube_url))
+                        <li class="social-links__item"><a class="icon icon-youtube"
+                                                          href="{{ $contactus->youtube_url }}"></a>
                         </li>
                     @endif
                     {{--<li class="social-links__item"><a class="icon icon-linkedin"--}}

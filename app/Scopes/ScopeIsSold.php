@@ -23,6 +23,7 @@ class ScopeIsSold implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
+        $model->where('is_sold', false);
         $builder->where('is_sold', false);
     }
 

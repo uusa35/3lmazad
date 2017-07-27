@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $elements = User::where('id', '!=', 1)->whereHas('roles', function ($q) {
-            $q->where('name', request()->role);
+            $q->where('name', request()->type);
         })->get();
 
         return view('backend.modules.user.index', compact('elements'));

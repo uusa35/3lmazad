@@ -41,7 +41,7 @@ class CategoriesTableSeeder extends Seeder
                         $field->categories()->attach($parent->id);
                         if (count($f['options']) > 1) {
                             foreach ($f['options'] as $k => $v) {
-                                $field->options()->save(factory(Option::class)->create(['name_ar' => $k.'_Ar', 'name_en' => $k.'_En','value' => $v]));
+                                $field->options()->save(factory(Option::class)->create(['name_ar' => $k . '_Ar', 'name_en' => $k . '_En', 'value' => $v]));
                             }
                         }
                     }
@@ -80,7 +80,6 @@ class CategoriesTableSeeder extends Seeder
                         $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
 
                         $ad->deals()->saveMany(factory(Deal::class, 1)->create());
-
                     });
                 }
             }

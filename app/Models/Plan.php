@@ -10,6 +10,7 @@ class Plan extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
+
     /**
      * The "booting" method of the model.
      * applying the scope only in the backend routes.
@@ -21,11 +22,10 @@ class Plan extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
-                static::addGlobalScope(new ScopeActive());
-            }
+            static::addGlobalScope(new ScopeActive());
         }
     }
+
     public function deals()
     {
         return $this->hasMany(Plan::class);

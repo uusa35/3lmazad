@@ -30,14 +30,10 @@ class Category extends Model
     {
         parent::boot();
 
-        if (app()->environment() !== 'seeding') {
-            if (in_array('api', request()->segments(), true)) {
+        if (!app()->environment('seeding')) {
+//            if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
-            }
-
-            if (!in_array('backend', request()->segments(), true)) {
-                static::addGlobalScope(new ScopeActive());
-            }
+//            }
         }
     }
 

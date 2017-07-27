@@ -22,6 +22,11 @@ trait UserHelpers
             false;
     }
 
+    public function getTypeAttribute()
+    {
+        return $this->roles->first()->name;
+    }
+
     public function getIsUserAttribute()
     {
         if (!$this->roles->isEmpty())

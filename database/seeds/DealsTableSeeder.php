@@ -13,10 +13,6 @@ class DealsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Deal::class)->create()->each(function ($deal) {
-            $deal->ads()->attach(Ad::whereDoesntHave('deals', function ($q) {
-                return $q;
-            })->get()->random()->id);
-        });
+        factory(Deal::class)->create();
     }
 }

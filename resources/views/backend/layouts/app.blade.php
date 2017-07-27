@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Metronic | Dashboard</title>
+    <title>{{ env('APP_NAME') }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="description"/>
@@ -9,13 +9,12 @@
     @section('styles')
         @include('backend.partials.styles')
     @show
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}"/>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 </head>
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
 
 @include('backend.partials.nav')
-
 <div class="clearfix"></div>
 <div class="page-container">
     @include('backend.partials.sidebar')
@@ -23,10 +22,6 @@
         <div class="page-content-wrapper">
             <div class="page-content">
                 @include('backend.partials.breadcrumbs')
-                <h3 class="page-title">
-                    @section('title')
-                    @show
-                </h3>
                 <div class="row">
                     <div class="col-lg-12">
                         @include('backend.partials.notifications')

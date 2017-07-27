@@ -165,9 +165,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
             return Type::where('category_id', '=', $parentCategoryId)->pluck('id')->shuffle()->first();
         },
         'color_id' => Color::all()->random()->id,
-        'size_id' => Size::all()->random()->id,
-        'start_date' => $faker->dateTimeBetween($faker->randomElement(['-1 days', 'today', '-1 days']), '1 week'),
-        'end_date' => $faker->dateTimeBetween('today', '1 week'),
+        'size_id' => Size::all()->random()->id
     ];
 });
 
@@ -233,7 +231,7 @@ $factory->define(Plan::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(4, 4, 10),
         'sale_price' => $faker->randomFloat(4, 2, 3),
         'active' => $faker->boolean(true),
-        'is_free' => $faker->boolean(true),
+        'is_paid' => $faker->boolean(),
     ];
 });
 
@@ -250,8 +248,9 @@ $factory->define(Deal::class, function (Faker\Generator $faker) {
             return $array['price'] * $array['duration'];
         },
         'valid' => $faker->boolean(true),
-        'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
-        'end_date' => $faker->dateTimeBetween('now', '1 week')
+        'ad_id' => Ad::all()->random()->id,
+        'start_date' => $faker->dateTimeBetween($faker->randomElement(['-1 days', 'today', '-1 days']), '1 week'),
+        'end_date' => $faker->dateTimeBetween('today', '1 week'),
     ];
 });
 

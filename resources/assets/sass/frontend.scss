@@ -14,6 +14,7 @@
 //@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
+@import '../../../node_modules/semantic-ui-dropdown/dropdown.min.css';
 @import "../../../node_modules/semantic-ui/dist/semantic.min.css";
 @import "plans-table";
 //<!-- Head Libs -->
@@ -91,7 +92,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 5px;
-  border : 1px dashed lightgrey;
+  border: 1px dashed lightgrey;
   border-radius: 10px;
   margin: 10px;
 }
@@ -243,6 +244,7 @@ span > .text {
 }
 
 .title {
-  font-size : 13px;
+  font-size: 13px;
   text-align: center;
 }
+

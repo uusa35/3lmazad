@@ -59,6 +59,12 @@ class ViewComposers
         return $view->with(compact('isAdmin'));
     }
 
+    public function getUser(View $view)
+    {
+        $user = auth()->user();
+        return $view->with(compact('user'));
+    }
+
     public function getAllCategoriesWithFeatured(View $view)
     {
         $categories = Category::parents()->with(['children' => function ($q) {

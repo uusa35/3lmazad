@@ -7,22 +7,24 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Active</th>
-                <th>Featured</th>
-                <th>Type</th>
+                <th>User Type</th>
+                <th>Plan Type</th>
                 <th>Created At</th>
+                <th>End At</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Active</th>
-                <th>Featured</th>
-                <th>Type</th>
+                <th>User Type</th>
+                <th>Plan Type</th>
                 <th>Created At</th>
+                <th>End At</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -30,21 +32,14 @@
             @foreach($elements as $element)
                 <tr>
                     <td>{{ $element->id }}</td>
-                    <td>{{ $element->name }}</td>
+                    <td>{{ str_limit($element->title,20) }}</td>
                     <td>
-                        <span class="label {{ $element->active ? 'label-success' : 'label-danger' }}">{{ $element->active  ? 'active' : 'N/A'}}</span>
+                        <span class="label {{ activeLabel($element->active) }}">{{ activeText($element->active) }}</span>
                     </td>
-                    <td>
-                        <span class="label {{ $element->featured ? 'label-success' : 'label-danger' }}">{{ $element->featured  ? 'featured' : 'N/A'}}</span>
-                    </td>
-                    <td>
-                        @if(!$element->roles->isEmpty())
-                            <span class="label label-info">{{ $element->roles->first()->name }}</span>
-                        @else
-                            <span class="label label-warning">N/A</span>
-                        @endif
-                    </td>
+                    <td><span class="label label-warning">{{ $element->user->type }}</span></td>
+                    <td><span class="label label-default">{{ $element->deals->first()->plan->name }}</span></td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
+                    <td>{{ $element->deals->first()->endDate }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn green btn-xs btn-outline dropdown-toggle"
@@ -53,16 +48,16 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
-                                    <a href="{{ route('backend.activation',['model' => 'user','id' => $element->id]) }}">
+                                    <a href="{{ route('backend.activation',['model' => 'ad','id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> toggle active</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('backend.featured',['model' => 'user','id' => $element->id]) }}">
+                                    <a href="{{ route('backend.featured',['model' => 'ad','id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> toggle featured</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('user.show',$element->id) }}">
-                                        <i class="fa fa-fw fa-check-circle"></i> View User</a>
+                                    <a href="{{ route('ad.show',$element->id) }}">
+                                        <i class="fa fa-fw fa-check-circle"></i> View Ad</a>
                                 </li>
                             </ul>
                         </div>

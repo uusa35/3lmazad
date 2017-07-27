@@ -6,6 +6,7 @@ use App\Events\UserCreated;
 use App\Models\Helpers\UserHelpers;
 use App\Models\Traits\UserTrait;
 use App\Scopes\ScopeActive;
+use App\Scopes\ScopeUserMustHaveRole;
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,12 +54,8 @@ class User extends Authenticatable
         parent::boot();
 
         if (!app()->environment('seeding')) {
-//            if (in_array('api', request()->segments(), true)) {
-//                static::addGlobalScope(new ScopeActive());
-//            }
-            if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
-            }
+                static::addGlobalScope(new ScopeUserMustHaveRole());
         }
     }
 }

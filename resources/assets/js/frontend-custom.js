@@ -9,7 +9,7 @@ $(document).ready(function() {
         // fetch the catId
         let catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
-        let catType = $('.dropdown.category').dropdown('get text');
+        let catType = $('#cat-'+catId).data('type');
         // assign it to the input responsible for the cat --> wont make difference because i check in the api for the sub and main
         $('#cat_input').attr('name', catType);
         // hide all fields to start over
@@ -43,7 +43,6 @@ $(document).ready(function() {
     // home (search form) : after fetching brands .. prepare the models related
     $('#brand_id').on('change', function() {
         let brandId = $('.brand_id').dropdown('get value');
-        console.log(brandId);
         $('#options-model_id').html('');
         axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             let name = 'name_' + lang;
@@ -156,6 +155,7 @@ $(document).ready(function() {
             return axios.get('api/toggle/mobile/0/' + userId).then(r => console.log(r.data)).catch(e => console.log(e));
         }
     });
+
     $('.checkbox.email').checkbox({
         onChecked: () => {
             var userId = $('.checkbox.email').data('user-id');
@@ -168,7 +168,7 @@ $(document).ready(function() {
     });
 
     // frontend // datatables
-    $('#adsTable').DataTable({
+    $('#dataTable').DataTable({
         "order": [[0, "desc"]],
         "bPaginate": true,
         "bLengthChange": false,

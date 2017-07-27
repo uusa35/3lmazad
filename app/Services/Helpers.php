@@ -30,3 +30,13 @@ function activeItem($element)
     }
     return null;
 }
+
+function activeLabel($element)
+{
+    return $element ? 'label-success' : 'label-danger';
+}
+
+function activeText($element)
+{
+    return $element ? 'Active' : 'N/A';
+}

@@ -14,6 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // frontend
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@setTokenElement');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getIsAdmin');
         view()->composer(['frontend.partials.nav._search-row', 'frontend.home', 'frontend.modules.ad.create'], 'App\Services\ViewComposers@getCategories');
@@ -37,6 +38,9 @@ class ComposerServiceProvider extends ServiceProvider
                 'frontend.modules.user.index',
                 'frontend.modules.ad.create'
             ], 'App\Services\ViewComposers@getAllAreas');
+
+        //backend
+        view()->composer('backend.partials.nav', 'App\Services\ViewComposers@getUser');
     }
 
     /**

@@ -54,7 +54,7 @@
                             <div class="content">
                                 <a class="author">{{ $comment->user->name }}</a>
                                 <div class="metadata">
-                                    <span class="date">{{ $comment->fromDate }}</span>
+                                    <span class="date">{{ $comment->createdDate }}</span>
                                 </div>
                                 <div class="text">
                                     {{ $comment->body }}

@@ -24,9 +24,9 @@ class Gallery extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
+//            if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
-            }
+//            }
         }
     }
 
