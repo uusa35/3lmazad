@@ -26,12 +26,11 @@ mix.js('resources/assets/js/app.js', 'public/js')
             './../../metronic_v4.5.6/theme/assets/global/plugins/excanvas.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js',
-
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/select2/js/select2.full.min.js',
+            './../../metronic_v4.5.6/theme/assets/pages/scripts/components-multi-select.min.js',
             './node_modules/datatables/media/js/jquery.dataTables.min.js',
-            //'./../../metronic_v4.5.6/theme/assets/global/scripts/datatable.js',
-            //'./../../metronic_v4.5.6/theme/assets/global/plugins/datatables/datatables.all.min.js',
-            //'./../../metronic_v4.5.6/theme/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js',
-
             './../../metronic_v4.5.6/theme/assets/global/plugins/js.cookie.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js',

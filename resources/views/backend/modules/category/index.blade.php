@@ -7,15 +7,15 @@
     </div>
     <div class="clearfix"></div>
     <div class="portlet-body">
-        <table id="userTable" class="table table-striped table-bordered table-hover" cellspacing="0"
+        <table id="dataTable" class="table table-striped table-bordered table-hover" cellspacing="0"
                width="100%">
             <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Parent Category</th>
                 <th>Sub Categories</th>
                 <th>Created At</th>
+                <th>active</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -23,9 +23,9 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Parent Category</th>
                 <th>Sub Categories</th>
                 <th>Created At</th>
+                <th>active</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -33,8 +33,11 @@
             @foreach($elements as $element)
                 <tr>
                     <td>{{ $element->id }}</td>
-                    <td>{{ $element->name }}</td>
-                    <td>{{ (!is_null($element->parent)) ? $element->parent->name : 'N/A'}}</td>
+                    <td>
+                        <h2>
+                            <span class="label label-lg {{ activeLabel($element->isParent) }}">{{ $element->name }}</span>
+                        </h2>
+                    </td>
                     <td>
                         @if(!$element->children->isEmpty())
                             <ul>
@@ -47,6 +50,9 @@
                         @endif
                     </td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
+                    <td>
+                        <span class="label label-lg {{ activeLabel($element->active) }}">Active</span>
+                    </td>
                     <td>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"
@@ -64,18 +70,26 @@
                                             <i class="fa fa-fw fa-user"></i>view sub-category</a>
                                     </li>
                                 @endif
-                                @if(!$element->isChild)
+                                @if($element->isParent)
                                     <li>
                                         <a href="{{ route('backend.category.create',['parent_id' => $element->id]) }}">
                                             <i class="fa fa-fw fa-user"></i>assign sub-category</a>
                                     </li>
+                                @else
+                                    <li>
+                                        <form method="post"
+                                              action="{{ route('backend.category.destroy',$element->id) }}">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="_method" value="delete"/>
+                                            <button type="submit" class="btn btn-outline btn-sm red">
+                                                <i class="fa fa-remove"></i>delete category
+                                            </button>
+                                        </form>
+                                    </li>
                                 @endif
                                 <li>
-                                    <form method="post" action="{{ route('backend.category.destroy',$element->id) }}">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="_method" value="delete"/>
-                                        <button type="submit" class="btn btn-danger">delete</button>
-                                    </form>
+                                    <a href="{{ route('backend.activation',['model' => 'category','id' => $element->id]) }}">
+                                        <i class="fa fa-fw fa-user"></i>toggle category activation</a>
                                 </li>
                             </ul>
                         </div>

@@ -154,20 +154,20 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  ">
+                    <li class="nav-item  {{ activeItem('category') }}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <span class="title">Categories & Options</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item ">
-                                <a href="ui_page_progress_style_1.html" class="nav-link "> Categories </a>
+                                <a href="{{ route('backend.category.index',['type' => 0]) }}" class="nav-link "> Categories </a>
                             </li>
                             <li class="nav-item ">
-                                <a href="ui_page_progress_style_2.html" class="nav-link "> Options </a>
+                                <a href="{{ route('backend.option.index') }}" class="nav-link "> Options </a>
                             </li>
                             <li class="nav-item ">
-                                <a href="ui_page_progress_style_2.html" class="nav-link "> Feilds</a>
+                                <a href="{{ route('backend.field.index') }}" class="nav-link "> Fields</a>
                             </li>
                         </ul>
                     </li>

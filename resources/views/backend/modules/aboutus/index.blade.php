@@ -2,13 +2,15 @@
 
 @section('content')
     <div class="portlet-body">
-        <table id="aboutusTable" class="table table-striped table-bordered table-hover" cellspacing="0"
+        <table id="dataTable" class="table table-striped table-bordered table-hover" cellspacing="0"
                width="100%">
             <thead>
             <tr>
                 <th>Id</th>
-                <th>title</th>
-                <th>description</th>
+                <th>title ar</th>
+                <th>title en</th>
+                <th>body ar</th>
+                <th>body en</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
@@ -16,8 +18,10 @@
             <tfoot>
             <tr>
                 <th>Id</th>
-                <th>title</th>
-                <th>description</th>
+                <th>title ar</th>
+                <th>title en</th>
+                <th>body ar</th>
+                <th>body en</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
@@ -26,10 +30,12 @@
             @foreach($elements as $element)
                 <tr>
                     <td>{{ $element->id }}</td>
-                    <td>{{ str_limit($element->title,20,'..') }}</td>
+                    <td>{{ str_limit($element->title_ar,20,'..') }}</td>
+                    <td>{{ str_limit($element->title_en,20,'..') }}</td>
                     <td>
-                        {{ str_limit($element->description,50,'..') }}
+                        {{ str_limit($element->body_ar,50,'..') }}
                     </td>
+                    <td>{{ str_limit($element->body_en,50,'..') }}</td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
                     <td>
                         <div class="btn-group pull-right">

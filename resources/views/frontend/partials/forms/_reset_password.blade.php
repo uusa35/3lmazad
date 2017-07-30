@@ -7,6 +7,8 @@
 <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
     {{ csrf_field() }}
 
+    <input type="hidden" name="token" value="{{ $token }}">
+
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -46,7 +48,7 @@
                                     </span>
             @endif
         </div>
-    </div>
+    {{--</div>--}}
 
     <div class="form-group">
         <div class="col-md-6 col-md-push-6">

@@ -47,6 +47,11 @@
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> New about us Section</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('backend.category.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- END NOTIFICATION DROPDOWN -->

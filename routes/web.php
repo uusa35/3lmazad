@@ -74,6 +74,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
+    Route::resource('option', 'OptionController');
+    Route::resource('field', 'FieldController');
     Route::resource('gallery', 'GalleryController');
     Route::resource('abuse', 'AbuseReportController');
     Route::resource('comment', 'CommentController');
