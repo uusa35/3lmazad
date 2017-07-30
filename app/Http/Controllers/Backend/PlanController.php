@@ -64,7 +64,8 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $element = Plan::whereId($id)->first();
+        return view('backend.modules.plan.edit', compact('element'));
     }
 
     /**

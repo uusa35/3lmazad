@@ -63,17 +63,20 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('user', 'Usercontroller');
     Route::resource('ad', 'AdController');
-    Route::get('activation','HomeController@toggleActivate')->name('activation');
-    Route::get('featured','HomeController@toggleFeatured')->name('featured');
+    Route::get('activation', 'HomeController@toggleActivate')->name('activation');
+    Route::get('featured', 'HomeController@toggleFeatured')->name('featured');
     Route::resource('aboutus', 'AboutusController');
     Route::resource('faq', 'FaqController');
 //    Route::resource('terms', 'TermController');
-    Route::resource('deal','DealController');
-    Route::resource('plan','PlanController');
+    Route::resource('deal', 'DealController');
+    Route::resource('plan', 'PlanController');
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
     Route::resource('gallery', 'GalleryController');
+    Route::resource('abuse', 'AbuseController');
+    Route::resource('comment', 'CommentController');
+    Route::resource('auction', 'AuctionController');
 //    Route::resource('image', 'ImageController');
 //    Route::resource('newsletter', 'NewsletterController');
 });
@@ -84,8 +87,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
  * second : user
  * */
 if (app()->environment() !== 'production' && Schema::hasTable('users')) {
-Route::get('/logwith/{id}', function ($id) {
-    Auth::loginUsingId($id);
-    return redirect()->home();
-});
+    Route::get('/logwith/{id}', function ($id) {
+        Auth::loginUsingId($id);
+        return redirect()->home();
+    });
 }

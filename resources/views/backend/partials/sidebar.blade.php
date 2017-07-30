@@ -109,43 +109,43 @@
             <li class="heading">
                 <h3 class="uppercase">Galleries & Abuse Reports</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item  {{ activeItem('gallery',['comment','auction','abuse']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-comments"></i>
                     <span class="title">Galleries & Comments</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  ">
+                    <li class="nav-item {{ activeItem('gallery') }} open">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <span class="title">Galleries</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item ">
-                                <a href="ui_page_progress_style_1.html" class="nav-link ">
+                                <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
                                     Ads
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a href="ui_page_progress_style_2.html" class="nav-link ">
+                                <a href="{{ route('backend.gallery.index',['type' => 'merchant']) }}" class="nav-link ">
                                     Merchants
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.comment.index') }}" class="nav-link ">
                             <span class="title">Comments</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.auction.index') }}" class="nav-link ">
                             <span class="title">Auctions</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.abuse.index') }}" class="nav-link ">
                             <span class="title">Abuse Reports</span>
                         </a>
                     </li>
