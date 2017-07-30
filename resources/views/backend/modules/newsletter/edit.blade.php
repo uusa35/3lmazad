@@ -9,7 +9,6 @@
             </div>
             <div class="panel-body">
                 {{ Form::model($subscriber,['route' => ['backend.newsletter.update',$subscriber->id], 'method'=>'PATCH','class' => 'form-horizontal','files' => true]) }}
-
                 <div class="form-group">
                     <div class="col-sm-5">
                         <label for="title_ar" class="control-label">name</label>
@@ -32,7 +31,14 @@
                     </div>
                 </div>
 
-                @include('backend.partials.forms._btn-group')
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn green">Submit</button>
+                            <button type="button" class="btn default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
                 {{ Form::close() }}
             </div>
         </div>

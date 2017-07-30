@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Plan extends Model
 {
     use LocaleTrait;
-    public $localeStrings = ['name'];
+    protected $guarded = [''];
+    public $localeStrings = ['name','description'];
 
     /**
      * The "booting" method of the model.

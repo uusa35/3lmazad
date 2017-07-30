@@ -6,25 +6,34 @@
             {{ csrf_field() }}
             <div class="form-body">
                 <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="title" placeholder="..."/>
-                    <label for="form_control_1">title*</label>
-                    <span class="help-block">title</span>
+                    <input type="text" class="form-control" name="title_ar" placeholder="..." required/>
+                    <label for="form_control_1">title ar*</label>
+                </div>
+            </div>
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control" name="title_en" placeholder="..." required/>
+                    <label for="form_control_1">title en*</label>
                 </div>
             </div>
 
             <div class="form-body">
                 <div class="form-group form-md-line-input">
-                    <textarea class="form-control" name="description" placeholder="description ...">
+                    <textarea class="form-control" name="body_ar" placeholder="description ..." required>
                     </textarea>
-                    <label for="form_control_1">Description*</label>
+                    <label for="form_control_1">Description Arabic*</label>
                     <span class="help-block">description</span>
                 </div>
             </div>
-
-            <div class="form-actions noborder text-right">
-                <button type="submit" class="btn blue">Submit</button>
-                <button href="{{ url()->previous() }}" class="btn default">Cancel</button>
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <textarea class="form-control" name="body_en" placeholder="description ..." required>
+                    </textarea>
+                    <label for="form_control_1">Description English*</label>
+                    <span class="help-block">description</span>
+                </div>
             </div>
+            @include('backend.partials.forms._btn-group')
         </form>
     </div>
 @endsection

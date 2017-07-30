@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Faq;
+use App\Models\Aboutus;
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class FaqController extends Controller
 {
@@ -96,6 +98,10 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $faq = Faq::whereId($id)->first();
+        if($faq->delete()) {
+            return redirect()->route('backend.faq.index')->with('success', 'updated successfully');
+        }
+        return redirect()->route('backend.faq.index')->with('error', 'not updated successfully');
     }
 }

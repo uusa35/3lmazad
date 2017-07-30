@@ -90,8 +90,6 @@
                     <span class="help-block">longitude</span>
                 </div>
             </div>
-
-
             @include('backend.partials.forms._btn-group')
         </form>
     </div>

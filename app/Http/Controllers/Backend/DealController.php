@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Plan;
+use App\Models\Deal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 
-class PlanController extends Controller
+class DealController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,10 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $elements = Plan::all();
-        return view('backend.modules.plan.index', compact('elements'));
+        $elements = Deal::whereHas('plan', function ($q) {
+            return $q->where('is_paid', true);
+        })->with('plan')->get();
+        return view('backend.modules.deal.index', compact('elements'));
     }
 
     /**
@@ -27,28 +28,24 @@ class PlanController extends Controller
      */
     public function create()
     {
-        return view('backend.modules.plan.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $ad = Plan::create($request->request->all());
-        if ($ad) {
-            return redirect()->route('backend.plan.index')->with('success', 'Process success');
-        }
-        return redirect()->to('backend.plan.create')->with('error', 'Process error')->withInput(Input::all());
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +56,7 @@ class PlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +67,8 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +79,7 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

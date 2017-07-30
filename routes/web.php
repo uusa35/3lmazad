@@ -68,6 +68,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('aboutus', 'AboutusController');
     Route::resource('faq', 'FaqController');
 //    Route::resource('terms', 'TermController');
+    Route::resource('deal','DealController');
+    Route::resource('plan','PlanController');
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');

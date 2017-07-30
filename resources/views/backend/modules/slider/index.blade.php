@@ -61,7 +61,9 @@
                                     <form method="post" action="{{ route('backend.slider.destroy',$element->id) }}">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete"/>
-                                        <button type="submit" class="btn btn-danger">delete</button>
+                                        <button type="submit" class="btn btn-outline btn-sm red">
+                                            <i class="fa fa-remove"></i>delete
+                                        </button>
                                     </form>
                                 </li>
 

@@ -23,10 +23,17 @@ function checkTrans($element)
  * @param $element
  * @return null|string
  */
-function activeItem($element)
+function activeItem($element, $another = [])
 {
     if (strpos(Route::currentRouteName(), $element)) {
         return 'active';
+    }
+    if (!empty($another)) {
+        foreach ($another as $k => $value)
+            if (strpos(Route::currentRouteName(), $value)) {
+                return 'active';
+                break;
+            }
     }
     return null;
 }

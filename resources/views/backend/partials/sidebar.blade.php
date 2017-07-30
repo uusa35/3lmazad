@@ -47,7 +47,7 @@
             <li class="heading">
                 <h3 class="uppercase">Advertisement Section</h3>
             </li>
-            <li class="nav-item {{ activeItem('ad') }}">
+            <li class="nav-item {{ activeItem('ad',['deal']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-shopping-basket"></i>
                     <span class="title">Ads & Other Modules</span>
@@ -77,8 +77,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item ">
-                        <a href="{{ route('backend.ad.index',['type' => 'free']) }}" class="nav-link ">
+                    <li class="nav-item">
+                        <a href="{{ route('backend.deal.index') }}" class="nav-link ">
                             <span class="title">Deals</span>
                         </a>
                     </li>
@@ -95,12 +95,12 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.plan.index') }}" class="nav-link ">
                             <span class="title">Plans Index</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.plan.create') }}" class="nav-link ">
                             <span class="title">Create New Plan</span>
                         </a>
                     </li>
@@ -155,18 +155,13 @@
             <li class="heading">
                 <h3 class="uppercase">Settings Section</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="title">Settings</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
-                            <span class="title">Deals</span>
-                        </a>
-                    </li>
                     <li class="nav-item  ">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <span class="title">Categories & Options</span>
@@ -185,22 +180,22 @@
                         </ul>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.slider.index') }}" class="nav-link ">
                             <span class="title">Slider</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.aboutus.index') }}" class="nav-link ">
                             <span class="title">Aboutus</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.contactus.index') }}" class="nav-link ">
                             <span class="title">Contactus</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="ui_colors.html" class="nav-link ">
+                        <a href="{{ route('backend.faq.index') }}" class="nav-link ">
                             <span class="title">Faq</span>
                         </a>
                     </li>

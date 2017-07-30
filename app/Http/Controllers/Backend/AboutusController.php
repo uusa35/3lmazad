@@ -66,8 +66,7 @@ class AboutusController extends Controller
      */
     public function edit($id)
     {
-        $element = Aboutus::first();
-
+        $element = Aboutus::whereId($id)->first();
         return view('backend.modules.aboutus.edit', compact('element'));
     }
 
@@ -81,11 +80,9 @@ class AboutusController extends Controller
     public function update(Request $request, $id)
     {
         $aboutus = Aboutus::whereId($id)->first();
-
         if (!$aboutus->update($request->request->all())) {
             return redirect()->route('backend.aboutus.index')->with('error', 'not updated successfully');
         }
-
         return redirect()->route('backend.aboutus.index')->with('success', 'updated successfully');
     }
 
@@ -97,6 +94,7 @@ class AboutusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Aboutus::whereId($id)->delete();
+        return redirect()->route('backend.aboutus.index')->with('success', 'deleted successfully');
     }
 }
