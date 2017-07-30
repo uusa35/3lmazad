@@ -10,6 +10,7 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+use App\AbuseReport;
 use App\Models\Aboutus;
 use App\Models\Ad;
 use App\Models\AdMeta;
@@ -257,7 +258,7 @@ $factory->define(Deal::class, function (Faker\Generator $faker) {
 
 $factory->define(Gallery::class, function (Faker\Generator $faker) {
     return [
-        'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'active' => true,
 //        'galleryable_id' => Ad::all()->random()->id,
 //        'galleryable_type' => Ad::class,
     ];
@@ -358,7 +359,7 @@ $factory->define(Commercial::class, function (Faker\Generator $faker) {
         'duration' => $faker->randomDigit,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),
-        'active' => $faker->boolean(),
+        'active' => $faker->boolean(true),
         'is_fixed' => $faker->boolean(),
     ];
 });
@@ -368,6 +369,14 @@ $factory->define(Visitor::class, function (Faker\Generator $faker) {
     return [
         'ad_id' => Ad::all()->random()->id,
         'session_id' => $faker->numberBetween(9999, 99999999),
+    ];
+});
+
+$factory->define(AbuseReport::class, function (Faker\Generator $faker) {
+    return [
+        'ad_id' => Ad::all()->random()->id,
+        'abuser_id' => User::all()->random()->id,
+        'reporter_id' => User::all()->random()->id,
     ];
 });
 

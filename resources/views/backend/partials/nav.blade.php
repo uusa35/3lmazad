@@ -24,7 +24,7 @@
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true">
-                        <i class="fa fa-fw fa-users"></i>
+                        <i class="fa fa-fw fa-plus-circle"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
@@ -34,7 +34,17 @@
                         </li>
                         <li>
                             <a href="{{ route('backend.faq.create') }}">
-                                <span class="details"><i class="fa fa-lg fa-plus"></i>Create New Faq</span>
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Faq</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.slider.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Slider</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.aboutus.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> New about us Section</span>
                             </a>
                         </li>
                     </ul>

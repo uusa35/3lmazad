@@ -55,6 +55,11 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item ">
+                        <a href="{{ route('backend.ad.index') }}" class="nav-link ">
+                            <span class="title">All Valid Ads</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a href="{{ route('backend.ad.index',['type' => 'free']) }}" class="nav-link ">
                             <span class="title">Valid Free Ads</span>
                         </a>
@@ -116,23 +121,10 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item {{ activeItem('gallery') }} open">
-                        <a href="javascript:;" class="nav-link nav-toggle">
-                            <span class="title">Galleries</span>
-                            <span class="arrow"></span>
+                    <li class="nav-item">
+                        <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
+                            Galleries
                         </a>
-                        <ul class="sub-menu">
-                            <li class="nav-item ">
-                                <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
-                                    Ads
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a href="{{ route('backend.gallery.index',['type' => 'merchant']) }}" class="nav-link ">
-                                    Merchants
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item ">
                         <a href="{{ route('backend.comment.index') }}" class="nav-link ">

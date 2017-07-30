@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Comment;
+use App\AbuseReport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommentController extends Controller
+class AbuseReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $elements = Comment::orderBy('created_at', 'desc')->get();
-        return view('backend.modules.comment.index', compact('elements'));
+        $elements = AbuseReport::with('abuser','reporter')->orderby('created_at','desc')->get();
+        return view('backend.modules.abuse.index', compact('elements'));
     }
 
     /**
@@ -32,7 +32,7 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +43,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,7 +54,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -65,8 +65,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -77,15 +77,15 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $element = Comment::whereId($id)->first();
+        $element = AbuseReport::whereId($id)->first();
         if ($element->delete()) {
-            return redirect()->route('backend.comment.index')->with('success', 'process success');
+            return redirect()->route('backend.abuse.index')->with('success', 'process success');
         }
-        return redirect()->route('backend.comment.index')->with('error', 'process failure');
+        return redirect()->route('backend.abuse.index')->with('error', 'process failure');
     }
 }

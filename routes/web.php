@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
         Route::resource('favorite', 'FavoriteController');
+        Route::resource('abuse', 'AbuseReportController');
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
         Route::resource('plan', 'PlanController');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
@@ -74,7 +75,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
     Route::resource('gallery', 'GalleryController');
-    Route::resource('abuse', 'AbuseController');
+    Route::resource('abuse', 'AbuseReportController');
     Route::resource('comment', 'CommentController');
     Route::resource('auction', 'AuctionController');
 //    Route::resource('image', 'ImageController');

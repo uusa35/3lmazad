@@ -28,7 +28,6 @@ class HomeController extends Controller
      */
     public function __construct(Ad $ad, Commercial $commercial)
     {
-//        $this->middleware('auth');
         $this->ad = $ad;
         $this->commercial = $commercial;
     }
@@ -42,9 +41,9 @@ class HomeController extends Controller
     {
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
-        $commercialsFixed = $this->commercial->fixed()->take(2)->get();
+        $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
-        $sliders = Slider::orderBy('id', 'desc')->get();
+        $sliders = Slider::orderBy('order', 'desc')->get();
         return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed','latestAds'));
     }
 

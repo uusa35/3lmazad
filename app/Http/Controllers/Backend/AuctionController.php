@@ -15,7 +15,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $elements = Auction::orderBy('created_at', 'desc')->get();
+        $elements = Auction::with('user')->orderBy('created_at', 'desc')->get();
         return view('backend.modules.auction.index', compact('elements'));
     }
 

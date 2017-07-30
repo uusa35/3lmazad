@@ -7,10 +7,11 @@
             <thead>
             <tr>
                 <th>Id</th>
-                <th>user</th>
-                <th>body</th>
-                <th>modal_id</th>
-                <th>modal_type</th>
+                <th>abuser name</th>
+                <th>abuser id</th>
+                <th>reporter name</th>
+                <th>reporter id</th>
+                <th>ad_id</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
@@ -18,10 +19,9 @@
             <tfoot>
             <tr>
                 <th>Id</th>
-                <th>user</th>
-                <th>body</th>
-                <th>modal_id</th>
-                <th>modal_type</th>
+                <th>abuser</th>
+                <th>reporter</th>
+                <th>ad_id</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
@@ -30,10 +30,11 @@
             @foreach($elements as $element)
                 <tr>
                     <td>{{ $element->id }}</td>
-                    <td>{{ $element->user->name }}</td>
-                    <td>{!! $element->body !!}</td>
-                    <td>{{ $element->commentable_id }}</td>
-                    <td>{{ $element->commentable_type }}</td>
+                    <td>{{ $element->abuser->name }}</td>
+                    <td>{{ $element->abuser->id }}</td>
+                    <td>{{ $element->reporter->name }}</td>
+                    <td>{{ $element->reporter->id}}</td>
+                    <td>{{ $element->ad_id }}</td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
                     <td>
                         <div class="btn-group pull-right">
@@ -43,16 +44,20 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
-                                    <a href="{{ route('backend.activation',['model' => 'user', 'id' => $element->user_id]) }}">
-                                        <i class="fa fa-fw fa-user"></i>Deactivate User</a>
+                                    <a href="{{ route('backend.activation',['model' => 'ad', 'id' => $element->ad_id]) }}">
+                                        <i class="fa fa-fw fa-user"></i>Deactivate Ad</a>
                                 </li>
                                 <li>
-                                    <form method="post" action="{{ route('backend.comment.destroy',$element->id) }}"
+                                    <a href="{{ route('ad.show',$element->ad_id) }}">
+                                        <i class="fa fa-fw fa-user"></i>View Ad</a>
+                                </li>
+                                <li>
+                                    <form method="post" action="{{ route('backend.abuse.destroy',$element->id) }}"
                                           class="col-lg-12">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete"/>
                                         <button type="submit" class="btn btn-outline btn-sm red">
-                                            <i class="fa fa-remove"></i>delete comment
+                                            <i class="fa fa-remove"></i>delete report
                                         </button>
                                     </form>
                                 </li>

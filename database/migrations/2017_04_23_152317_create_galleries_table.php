@@ -14,7 +14,6 @@ class CreateGalleriesTable extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image')->default('sample.png')->nullable();
             $table->boolean('active')->default(1);
             $table->morphs('galleryable');
 

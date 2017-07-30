@@ -257,7 +257,7 @@ $(document).ready(function () {
 
     // frontend // datatables
     $('#dataTable').DataTable({
-        "order": [[0, "desc"]],
+        //"order": [[0, "desc"]],
         "bPaginate": true,
         "bLengthChange": false,
         "bFilter": true,

@@ -6,13 +6,13 @@
         <div class="container">
             <div class="col-lg-12">
                 <div class="col-lg-3 col-md-12 aside-column text-center">
-                    @include('frontend.partials.components.home._commerical-ad',['fixed' => $commercialsFixed,'notFixed' => $commercialsNotFixed,'index' => 0])
+                    @include('frontend.partials.components.home._commerical-ad',['commercials' => $commercialsFixed])
                 </div>
                 <div class="col-lg-6 col-md-12 aside-column text-center">
                     @include('frontend.partials.components.home._slider-sm')
                 </div>
                 <div class="col-lg-3 col-md-12 aside-column text-center">
-                    @include('frontend.partials.components.home._commerical-ad',['fixed' => $commercialsFixed,'notFixed' => $commercialsNotFixed,'index' => 1])
+                    @include('frontend.partials.components.home._commerical-ad',['commercials' => $commercialsNotFixed])
                 </div>
             </div>
         </div>

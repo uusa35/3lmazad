@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\Traits;
 
+use App\AbuseReport;
 use App\Models\Ad;
 use App\Models\Area;
 use App\Models\Category;
@@ -48,12 +49,23 @@ trait UserTrait
         return $this->belongsToMany(Ad::class, 'favorites');
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
     public function gallery()
     {
         return $this->morphMany(Gallery::class, 'galleryable');
+    }
+
+    public function abuser()
+    {
+        return $this->hasMany(AbuseReport::class);
+    }
+
+    public function reporter()
+    {
+        return $this->hasMany(AbuseReport::class);
     }
 }

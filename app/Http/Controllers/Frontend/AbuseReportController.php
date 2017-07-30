@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Frontend;
 
-use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CommentController extends Controller
+class AbuseReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $elements = Comment::orderBy('created_at', 'desc')->get();
-        return view('backend.modules.comment.index', compact('elements'));
+        //
     }
 
     /**
@@ -82,10 +80,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $element = Comment::whereId($id)->first();
-        if ($element->delete()) {
-            return redirect()->route('backend.comment.index')->with('success', 'process success');
-        }
-        return redirect()->route('backend.comment.index')->with('error', 'process failure');
+        //
     }
 }

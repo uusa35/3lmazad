@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Commercial;
+use App\AbuseReport;
 use Illuminate\Database\Seeder;
 
-class CommercialsTableSeeder extends Seeder
+class AbuseReportsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class CommercialsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Commercial::class,10)->create();
+        factory(AbuseReport::class,50)->create();
     }
 }

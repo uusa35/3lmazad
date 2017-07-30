@@ -16,6 +16,6 @@ trait CommercialHelpers
 
     public function scopeNotFixed()
     {
-        return $this->where('is_fixed', true);
+        return $this->where('is_fixed', false);
     }
 }

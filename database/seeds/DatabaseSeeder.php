@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             $this->command->info('before favorites');
             $this->call(FavoritesTableSeeder::class);
             $this->call(UsersCategoriesSeeder::class);
+            $this->call(AbuseReportsTableSeeder::class);
 
         } elseif (app()->environment() === 'production') {
             if (DB::table('countries')->count() <= 0) {
