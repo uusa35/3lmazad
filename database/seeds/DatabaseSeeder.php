@@ -8,8 +8,8 @@ class DatabaseSeeder extends Seeder
 {
 
     public $tables = [
-        'users', 'sliders', 'ads', 'ad_metas', 'fields', 'options','category_field', 'comments', 'brands', 'models',
-        'categories', 'galleries', 'galleryables', 'images','ad_deal',
+        'users', 'sliders', 'ads', 'ad_metas', 'fields', 'options', 'category_field', 'comments', 'brands', 'models',
+        'categories', 'galleries', 'galleryables', 'images', 'ad_deal',
         'newsletter', 'aboutus', 'contactus', 'colors', 'sizes', 'deals', 'ad_deals',
         'roles', 'user_role', 'countries', 'areas', 'commercials', 'types'
     ];
@@ -53,15 +53,23 @@ class DatabaseSeeder extends Seeder
             $this->call(UsersCategoriesSeeder::class);
             $this->call(AbuseReportsTableSeeder::class);
 
-        } elseif (app()->environment() === 'production') {
+        } elseif (app()->environment('production')) {
             if (DB::table('countries')->count() <= 0) {
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
+                $this->call(AreasTableSeeder::class);
+                $this->call(PlansTableSeeder::class);
+                $this->call(UsersTableSeeder::class);
+                $this->call(ColorsTableSeeder::class);
+                $this->call(SizesTableSeeder::class);
+                $this->call(SlidersTableSeeder::class);
+                $this->command->info('sliders are done');
+                $this->call(CategoriesTableSeeder::class);
+                $this->call(RolesTableSeeder::class);
+                $this->call(ContactusTableSeeder::class);
+                $this->call(AboutusTableSeeder::class);
+                $this->call(TermsTableSeeder::class);
             }
-            $this->call(CategoriesTableSeeder::class);
-            $this->call(RolesTableSeeder::class);
-            $this->call(ContactusTableSeeder::class);
-            $this->call(AboutusTableSeeder::class);
         } else {
             dd('please change the .env environment const to : seeding');
         }

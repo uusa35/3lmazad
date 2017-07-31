@@ -19,6 +19,7 @@ class CreateOptionsTable extends Migration
             $table->string('value')->nullable();
             $table->integer('field_id')->unsigned()->index();
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Field;
 use App\Models\Post;
 use App\Models\Size;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,17 @@ class ViewComposers
     {
         $areas = Area::orderBy('id', 'asc')->pluck('name_' . app()->getLocale(), 'id');
         return $view->with(compact('areas'));
+    }
+
+    public function getIcons(View $view)
+    {
+        $icons = config('icons');
+        return $view->with(compact('icons'));
+    }
+
+    public function getFieldTypes(View $view) {
+        $types = Field::getEnumValues('fields','type');
+        return $view->with(compact('types'));
     }
 
     public function getColors(View $view)

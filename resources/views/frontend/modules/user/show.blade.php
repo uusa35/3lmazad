@@ -46,6 +46,10 @@
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.account_type')}} :</span>
+                                            <span class="date">{{  $element->roles->first()->name }}</span>
+                                        </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.account_type')}} :</span>
                                             <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
                                         </p>
                                         <p>

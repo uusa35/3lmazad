@@ -38,6 +38,10 @@
                                             <span class="date">{{  $element->mobile }}</span>
                                         </p>
                                         <p>
+                                            <span class="date">{{ trans('general.account_type')}} :</span>
+                                            <span class="date">{{  $element->roles->first()->name }}</span>
+                                        </p>
+                                        <p>
                                             <span class="date">{{ trans('general.country')}} :</span>
                                             <span class="date">{{  $element->countryName }}</span>
                                         </p>

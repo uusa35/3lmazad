@@ -89,8 +89,7 @@
 
                 <div class="col-md-3">
                     <div class="col-lg-1">
-                        <input type="radio" class="" name="is_merchant" value="1"
-                               required>
+                        <input type="radio" class="" name="is_merchant" value="1">
                     </div>
                     <div class="col-lg-2">
                         <span>{{ trans('general.merchant') }}</span>
@@ -98,8 +97,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="col-lg-1">
-                        <input type="radio" class="" name="is_merchant" value="0"
-                               required>
+                        <input type="radio" class="" name="is_merchant" value="0" checked>
                     </div>
                     <div class="col-lg-2">
                         <span>{{ trans('general.regular_user') }}</span>
@@ -107,8 +105,20 @@
                 </div>
             </div>
 
+            <div class="form-group hidden" id="category-register">
+                <label for="category_id" class="control-label col-sm-4">Choose Main Category</label>
+                <div class="col-sm-6" id="categories">
+                    <select name="category_id" class="form-control">
+                        <option value="main category">Choose Main Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <div class="form-group">
-                <label for="description" class="col-md-4 control-label">{{ trans('general.breif') }}</label>
+                <label for="description" class="col-md-4 control-label">{{ trans('general.brief') }}</label>
 
                 <div class="col-md-6">
             <textarea type="text" class="form-control" name="description" aria-multiline="true"

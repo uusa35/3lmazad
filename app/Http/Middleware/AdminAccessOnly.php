@@ -15,6 +15,7 @@ class AdminAccessOnly
      */
     public function handle($request, Closure $next)
     {
+        app()->setLocale('en');
         abort_if(!auth()->user()->isAdmin, '404', 'Admin zone only !!!');
         return $next($request);
     }

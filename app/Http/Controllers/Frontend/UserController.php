@@ -30,14 +30,18 @@ class UserController extends Controller
     public function index()
     {
         $element = $this->category->whereId(request()->id)->first();
-        $elements = $element->users()->featured()->merchants()->orderBy('area_id','asc')->get();
-        return view('frontend.modules.user.index', compact('element','elements','areas'));
+        $elements = $element->users()->featured()->merchants()->orderBy('area_id', 'asc')->get();
+        return view('frontend.modules.user.index', compact('element', 'elements'));
     }
 
     public function merchantsCategories()
     {
-        $elements = $this->category->where('parent_id', 0)->get();
-        return view('frontend.modules.user.merchants-categories',compact('elements','areas'));
+        $elements = $this->category->where('parent_id', 0)->whereHas('users', function ($q) {
+            return $q->where('featured', true)->whereHas('roles', function ($q) {
+                return $q->where('name','merchant');
+            });
+        })->get();
+        return view('frontend.modules.user.merchants-categories', compact('elements'));
     }
 
     /**

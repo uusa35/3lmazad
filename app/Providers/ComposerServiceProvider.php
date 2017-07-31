@@ -17,7 +17,12 @@ class ComposerServiceProvider extends ServiceProvider
         // frontend
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@setTokenElement');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getIsAdmin');
-        view()->composer(['frontend.partials.nav._search-row', 'frontend.home', 'frontend.modules.ad.create'], 'App\Services\ViewComposers@getCategories');
+        view()->composer([
+            'frontend.partials.nav._search-row',
+            'frontend.home', 'frontend.modules.ad.create',
+            'frontend.partials.forms._register'
+        ],
+            'App\Services\ViewComposers@getCategories');
         view()->composer(['frontend.partials.nav._search-row', 'frontend.modules.ad.create'], 'App\Services\ViewComposers@getFields');
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getAreas');
         view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');
@@ -41,6 +46,8 @@ class ComposerServiceProvider extends ServiceProvider
 
         //backend
         view()->composer('backend.partials.nav', 'App\Services\ViewComposers@getUser');
+        view()->composer('backend.modules.field.create', 'App\Services\ViewComposers@getIcons');
+        view()->composer('backend.modules.field.create', 'App\Services\ViewComposers@getFieldTypes');
     }
 
     /**

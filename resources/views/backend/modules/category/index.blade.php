@@ -75,21 +75,20 @@
                                         <a href="{{ route('backend.category.create',['parent_id' => $element->id]) }}">
                                             <i class="fa fa-fw fa-user"></i>assign sub-category</a>
                                     </li>
-                                @else
-                                    <li>
-                                        <form method="post"
-                                              action="{{ route('backend.category.destroy',$element->id) }}">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="_method" value="delete"/>
-                                            <button type="submit" class="btn btn-outline btn-sm red">
-                                                <i class="fa fa-remove"></i>delete category
-                                            </button>
-                                        </form>
-                                    </li>
                                 @endif
                                 <li>
-                                    <a href="{{ route('backend.activation',['model' => 'category','id' => $element->id]) }}">
+                                <a href="{{ route('backend.activation',['model' => 'category','id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-user"></i>toggle category activation</a>
+                                </li>
+                                <li>
+                                    <form method="post"
+                                          action="{{ route('backend.category.destroy',$element->id) }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <button type="submit" class="btn btn-outline btn-sm red">
+                                            <i class="fa fa-remove"></i>delete category
+                                        </button>
+                                    </form>
                                 </li>
                             </ul>
                         </div>

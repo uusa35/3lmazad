@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form class="form-horizontal" role="form" method="post" action="{{ route('backend.plan.create') }}">
+            <form class="form-horizontal" role="form" method="post" action="{{ route('backend.plan.store') }}">
                 {{ csrf_field() }}
                 <div class="form-body">
                     <div class="form-group">

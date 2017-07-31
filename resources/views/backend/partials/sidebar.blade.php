@@ -154,7 +154,7 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  {{ activeItem('category') }}">
+                    <li class="nav-item  {{ activeItem('category',['field','option']) }}">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <span class="title">Categories & Options</span>
                             <span class="arrow"></span>
@@ -164,10 +164,10 @@
                                 <a href="{{ route('backend.category.index',['type' => 0]) }}" class="nav-link "> Categories </a>
                             </li>
                             <li class="nav-item ">
-                                <a href="{{ route('backend.option.index') }}" class="nav-link "> Options </a>
+                                <a href="{{ route('backend.field.index') }}" class="nav-link "> Fields</a>
                             </li>
                             <li class="nav-item ">
-                                <a href="{{ route('backend.field.index') }}" class="nav-link "> Fields</a>
+                                <a href="{{ route('backend.option.index') }}" class="nav-link "> Options </a>
                             </li>
                         </ul>
                     </li>

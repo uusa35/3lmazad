@@ -21,6 +21,7 @@ class CreateFieldsTable extends Migration
             $table->enum('type', ['text', 'hidden', 'multiple', 'radio','number','checkbox'])->nullable();
             $table->boolean('is_required')->default(0)->nullable();
             $table->boolean('is_modal')->default(0)->nullable();
+            $table->boolean('active')->default(1);
             $table->string('collection_name')->nullable();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class FieldController extends Controller
     public function index()
     {
         $elements = Field::with('options')->orderBy('created_at','desc')->get();
-        return view('backend.modules.option.index',compact('elements'));
+        return view('backend.modules.field.index',compact('elements'));
     }
 
     /**
@@ -26,7 +26,7 @@ class FieldController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.modules.field.create');
     }
 
     /**

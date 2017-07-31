@@ -43,13 +43,24 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('backend.plan.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Plan</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('backend.aboutus.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> New about us Section</span>
+                                <span class="details"><i
+                                            class="fa fa-fw fa-plus-square"></i> New about us Section</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('backend.category.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category</span>
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Parent Category</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.field.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
                             </a>
                         </li>
                     </ul>

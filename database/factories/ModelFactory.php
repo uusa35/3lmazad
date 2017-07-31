@@ -121,6 +121,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
     return [
         'is_required' => $faker->boolean(false),
         'name' => $faker->name,
+        'active' => true,
         'label_ar' => function ($array) {
             return $array['name'];
         },
@@ -139,7 +140,8 @@ $factory->define(Option::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
         'value' => $faker->name,
-        'field_id' => Field::all()->random()->id
+        'field_id' => Field::all()->random()->id,
+        'active' => true
     ];
 });
 

@@ -108,11 +108,10 @@ class CategoryController extends Controller
     {
         $category = Category::whereId($id)->with('children')->first();
 
-        if (!$category->children->isEmpty()) {
-
+        if($category->ads()->count() > 0 || !$category->children->isEmpty()) {
             return redirect()->back()->with('error', 'category not deleted .. remove any products or services attached to this product before deleting');
-
         }
+
         Category::whereId($id)->first()->delete();
 
         return redirect()->back()->with('success', 'category deleted');

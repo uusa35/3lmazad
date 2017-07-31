@@ -9,7 +9,7 @@ $(document).ready(function() {
         // fetch the catId
         let catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
-        let catType = $('#cat-'+catId).data('type');
+        let catType = $('#cat-' + catId).data('type');
         // assign it to the input responsible for the cat --> wont make difference because i check in the api for the sub and main
         $('#cat_input').attr('name', catType);
         // hide all fields to start over
@@ -227,5 +227,14 @@ $(document).ready(function() {
         }).catch(e => console.log(e));
     });
 
+    $('input[name="is_merchant"]').on('click', function(e) {
+        let isMerchant = e.target.value;
+        console.log(isMerchant);
+        if (isMerchant == 1) {
+            $('#category-register').removeClass('hidden');
+        } else {
+            $('#category-register').addClass('hidden');
+        }
+    });
 });
 
