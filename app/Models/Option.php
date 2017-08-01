@@ -10,6 +10,7 @@ class Option extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
+    protected $guarded = [''];
 
     /**
      * The "booting" method of the model.
@@ -31,5 +32,9 @@ class Option extends Model
     public function field()
     {
         return $this->belongsTo(Field::class);
+    }
+
+    public function getFieldNameAttribute() {
+        return $this->field->name;
     }
 }

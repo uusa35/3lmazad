@@ -12,11 +12,11 @@
 Auth::routes();
 
 Route::group(['namespace' => 'Frontend'], function () {
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth'], 'prefix' => 'account'], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete', 'index']]);
-        Route::get('account', 'UserController@account')->name('account');
-        Route::get('account/ads', 'UserController@adsList')->name('user.account.ads');
-        Route::get('account/ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
+        Route::get('/', 'UserController@account')->name('account');
+        Route::get('/ads', 'UserController@adsList')->name('user.account.ads');
+        Route::get('ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
@@ -74,6 +74,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('contactus', 'ContactusController');
     Route::resource('slider', 'Slidercontroller');
     Route::resource('category', 'CategoryController');
+    Route::get('assign/category/{id}', 'CategoryController@getAssignField')->name('category.assign');
+    Route::post('assign/category/{id}', 'CategoryController@postAssignField')->name('category.assign');
     Route::resource('option', 'OptionController');
     Route::resource('field', 'FieldController');
     Route::resource('gallery', 'GalleryController');

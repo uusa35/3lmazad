@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdate extends FormRequest
+class NewsletterStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UserUpdate extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->id === request()->user()->id;
+        return true;
     }
 
     /**
@@ -24,10 +24,9 @@ class UserUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'area_id' => 'required|numeric',
-            'avatar' => 'mimes:jpg,jpeg,png',
+            'name' => 'required:min:3',
+            'email' => 'required|email|unique:newsletter,email',
+            'active' => 'required|boolean'
         ];
     }
 }

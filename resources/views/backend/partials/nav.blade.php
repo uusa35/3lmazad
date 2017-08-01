@@ -3,8 +3,11 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html">
-                <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo-default"/> </a>
+            <a href="{{ route('backend.home') }}">
+                <img src="{{ asset('storage/uploads/images/thumbnail/'.$contactus->logo) }}"
+                         style="max-width: 160px; height: 50px; padding: 0px; margin: 0px;"
+                     alt="logo" class="img-responsive logo-default"/>
+            </a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>
             </div>
@@ -61,6 +64,11 @@
                         <li>
                             <a href="{{ route('backend.field.create') }}">
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.option.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Option Field</span>
                             </a>
                         </li>
                     </ul>

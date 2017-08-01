@@ -52,7 +52,7 @@
                                     <span style="display: block;">{{ trans('general.created_at') }}
                                         : {{ $element->createdDate }}</span>
                                     <span style="display: block;">{{ trans('general.expires_in') }}
-                                        : {{ $element->endAt }}</span>
+                                        : {{ $element->deals->first()->endDate }}</span>
                                     <span style="display: block; margin-bottom: 10px;">{{ trans('general.active') }} :
                                         <span class="label label-xs label-{{ $element->active ? 'info' : 'danger' }}">
                                         {{ $element->active ? trans('general.active') : trans('general.not_active')}}

@@ -85,7 +85,7 @@ trait ImageHelpers
      * @param string $height
      */
     public function saveImage(Request $request,
-                              $inputNames = ['image'],
+                              $inputNames = 'image',
                               $dimensions = ['1200', '560'],
                               $sizes = ['large', 'medium', 'thumbnail'])
     {
@@ -146,31 +146,31 @@ trait ImageHelpers
                                 $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
-            if ($request->has($inputName)) {
-                $gallery = $model->gallery->create([
-                    'image' => $model->image,
-                ]);
-                foreach ($inputName as $image) {
+            if ($request->files->get($inputName)) {
+                foreach ($request->$inputName as $image) {
                     $imagePath = $image->store('public/uploads/images');
                     $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-                    $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
+                    $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
                     foreach ($sizes as $key => $value) {
                         if ($value === 'large') {
                             $img->resize($dimensions[0], $dimensions[1]);
-                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
                         } elseif ($value === 'medium') {
                             $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
-                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
                         } elseif ($value === 'thumbnail') {
                             $img->resize('292', '347');
-                            $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
+                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
                         }
                     }
-                    $gallery->images->create([
-                        $inputName => $imagePath,
+                    $model->images()->create([
+                        'image' => $imagePath,
                     ]);
-                    Storage::delete('public/uploads/images/' . $imagePath);
+                    Storage::delete(public_path('storage/uploads/images/' . $imagePath));
+                    return $imagePath;
                 }
+            } else {
+                return null;
             }
         } catch (\Exception $e) {
             abort(404, 'save Error : ' . $e->getMessage());

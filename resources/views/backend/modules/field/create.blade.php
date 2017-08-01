@@ -15,19 +15,19 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="name" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">label Ar</label>
                         <div class="col-md-10">
-                            <input type="text" name="label_ar" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="label_ar" value="{{ old('label_ar') }}" class="form-control" placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">label En</label>
                         <div class="col-md-10">
-                            <input type="text" name="label_en" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="label_en" value="{{ old('label_en') }}" class="form-control" placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,11 +56,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">is_modal</label>
+                        <label class="col-md-2 control-label">is_model</label>
                         <div class="col-md-10">
                             <div class="mt-checkbox-list">
                                 <label class="mt-checkbox">
-                                    <input type="checkbox" name="is_modal" value="1"> is modal
+                                    <input type="checkbox" name="is_model" value="1"> is model
                                     <span></span>
                                 </label>
                             </div>

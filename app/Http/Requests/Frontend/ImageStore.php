@@ -13,7 +13,19 @@ class ImageStore extends FormRequest
      */
     public function authorize()
     {
-        return $this->authorize('isOwner', auth()->user()->id);;
+        return true;
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            '*.between' => trans('message.image_store_error_exceed_the_limit'),
+        ];
     }
 
     /**
@@ -24,7 +36,9 @@ class ImageStore extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|mimes:jpeg,png,jpg|max:2000',
+            'gallery_id' => 'required|numeric',
+            'remaining' => 'numeric|between:1,'.$this->remaining,
+            'images' => 'array|required',
             'description_ar' => 'alpha_numeric|nullable',
             'description_en' => 'alpha_numeric|nullable',
         ];

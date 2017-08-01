@@ -39,7 +39,11 @@
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.account_type')}} :</span>
-                                            <span class="date">{{  $element->roles->first()->name }}</span>
+                                            <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
+                                        </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.area')}} :</span>
+                                            <span class="date">{{  $element->areaName }}</span>
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.country')}} :</span>
@@ -94,18 +98,6 @@
                                             <i class="right arrow icon big"
                                                style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                             {{ trans('general.list_of_all_ads') }}
-                                        </a>
-                                        <a class="ui olive button tooltip-message" href="#"
-                                           data-tooltip="{{ trans('message.something') }}" data-inverted="">
-                                            <i class="right arrow icon big"
-                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
-                                            Read more
-                                        </a>
-                                        <a class="ui olive button tooltip-message" href="#"
-                                           data-tooltip="{{ trans('message.something') }}" data-inverted="">
-                                            <i class="right arrow icon big"
-                                               style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
-                                            Read more
                                         </a>
                                     </div>
                                 </div>

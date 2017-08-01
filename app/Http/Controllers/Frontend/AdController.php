@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Visitor;
+use App\Scopes\ScopeIsSold;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -123,6 +124,9 @@ class AdController extends Controller
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->first();
+        if (is_null($element)) {
+            abort(404, trans('message.ad_missing_our_terms_and_conditions'));
+        }
         /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
         $counter = Visitor::where('ad_id', $element->id)->count();*/
         $counter = 0;
@@ -139,7 +143,8 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $element = Ad::withoutGlobalScopes([ScopeIsSold::class])->whereId($id)->first();
+        return view('frontend.modules.ad.edit', compact('element'));
     }
 
     /**

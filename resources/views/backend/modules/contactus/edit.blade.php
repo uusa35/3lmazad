@@ -7,9 +7,16 @@
             <input type="hidden" name="_method" value="patch">
             <div class="form-body">
                 <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="name" placeholder="..." value="{{ $element->name }}">
-                    <label for="form_control_1">Name*</label>
-                    <span class="help-block">Website or Company Name</span>
+                    <input type="text" class="form-control" name="name_ar" placeholder="..." value="{{ $element->name_ar }}">
+                    <label for="form_control_1">Name Ar*</label>
+                    <span class="help-block">Website or Company Name Ar</span>
+                </div>
+            </div>
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control" name="name_en" placeholder="..." value="{{ $element->name_en }}">
+                    <label for="form_control_1">Name En*</label>
+                    <span class="help-block">Website or Company Name En</span>
                 </div>
             </div>
             <div class="form-body">

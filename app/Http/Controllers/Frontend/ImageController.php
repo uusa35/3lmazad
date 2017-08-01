@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\Frontend\ImageStore;
+use App\Models\Gallery;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Controller;
 class ImageController extends Controller
 {
     public $image;
+
     public function __construct(Image $image)
     {
         $this->image = $image;
@@ -32,7 +34,9 @@ class ImageController extends Controller
      */
     public function create()
     {
-        return view('frontend.modules.images.create');
+        $gallery = auth()->user()->gallery()->first();
+        $countImages = env('MAX_IMAGES') - auth()->user()->gallery()->first()->images()->count();
+        return view('frontend.modules.image.create', compact('countImages', 'gallery'));
     }
 
     /**
@@ -43,11 +47,9 @@ class ImageController extends Controller
      */
     public function store(ImageStore $request)
     {
-        $image = $this->image->create($request->request->all());
-        if($image) {
-            $this->saveMimes($image,$request);
-            return redirect()->route('account')->with('success', trans('message.'));
-        }
+        $user = auth()->user();
+        $this->saveGallery($user->gallery()->first(), $request, 'images', ['600', '450'], true);
+        return redirect()->route('account')->with('success', trans('message.image_success'));
 
     }
 
@@ -94,8 +96,8 @@ class ImageController extends Controller
     public function destroy($id)
     {
         if ($this->image->whereId($id)->delete()) {
-            return redirect()->route('user.account')->with('success', trans('message.success_image_destroy'));
+            return redirect()->route('account')->with('success', trans('message.success_image_destroy'));
         }
-        return redirect()->route('user.account')->with('error', trans('message.error_image_destroy'));
+        return redirect()->route('account')->with('error', trans('message.error_image_destroy'));
     }
 }

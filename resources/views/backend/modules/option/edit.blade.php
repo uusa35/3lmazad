@@ -1,43 +1,56 @@
 @extends('backend.layouts.app')
+
 @section('content')
-    <div class="clearfix"></div>
-    <div class="portlet-body form">
-        <form role="form" method="post" action="{{ route('backend.aboutus.update',$element->id) }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="patch">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase">Create New Option</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form class="form-horizontal" role="form" method="post" action="{{ route('backend.option.store') }}">
+                {{ csrf_field() }}
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">name Ar</label>
+                        <div class="col-md-10">
+                            <input type="text" name="name_ar" value="{{ $element->name_ar }}" class="form-control" placeholder="Enter text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">name En</label>
+                        <div class="col-md-10">
+                            <input type="text" name="name_en" value="{{ $element->name_en }}" class="form-control" placeholder="Enter text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">value</label>
+                        <div class="col-md-10">
+                            <input type="text" name="value" value="{{ $element->value }}" class="form-control" placeholder="Enter text" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="icon" class="col-md-2 control-label">{{ trans('general.field') }}</label>
 
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="title_ar" value="{{ $element->title_ar }}" required/>
-                    <label for="form_control_1">title ar*</label>
+                        <div class="col-md-10">
+                            {{ Form::select('field_id', $fields->where('is_model',false)->pluck('name','id'),$element->field->id, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">active</label>
+                        <div class="col-md-10">
+                            <div class="mt-checkbox-list">
+                                <label class="mt-checkbox">
+                                    <input type="checkbox" name="active" value="1" {{ $element->active ? 'checked' : null }}> active
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    @include('backend.partials.forms._btn-group')
                 </div>
-            </div>
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="title_en" value="{{ $element->title_en }}" required/>
-                    <label for="form_control_1">title en*</label>
-                </div>
-            </div>
-
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <textarea class="form-control" name="body_ar" placeholder="description ..." required>
-                        {{ $element->body_ar }}
-                    </textarea>
-                    <label for="form_control_1">Description Arabic*</label>
-                    <span class="help-block">description</span>
-                </div>
-            </div>
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <textarea class="form-control" name="body_en" placeholder="description ..." required>
-                        {{ $element->body_en }}
-                    </textarea>
-                    <label for="form_control_1">Description English*</label>
-                    <span class="help-block">description</span>
-                </div>
-            </div>
-            @include('backend.partials.forms._btn-group')
-        </form>
+            </form>
+        </div>
     </div>
 @endsection

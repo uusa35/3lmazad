@@ -51,6 +51,11 @@ trait UserHelpers
 
     }
 
+    public function getIsOwnerAttribute()
+    {
+        return auth()->check() && auth()->user()->id === $this->id ? true : false;
+    }
+
     public function scopeMerchants($q)
     {
         return $q->whereHas('roles', function ($r) {

@@ -14,8 +14,9 @@
                 <th>type</th>
                 <th>is_required</th>
                 <th>is_modal</th>
-                <th>collection_name</th>
+                <th>coll_name</th>
                 <th>options</th>
+                <th>active</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -29,8 +30,9 @@
                 <th>type</th>
                 <th>is_required</th>
                 <th>is_modal</th>
-                <th>collection_name</th>
+                <th>coll_name</th>
                 <th>options</th>
+                <th>active</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -47,7 +49,7 @@
                         <span class="label {{ activeLabel($element->is_required) }}">required</span>
                     </td>
                     <td>
-                        <span class="label {{ activeLabel($element->is_modal) }}">modal</span>
+                        <span class="label {{ activeLabel($element->is_model) }}">model</span>
                     </td>
                     <td>{{ $element->collection_name }}</td>
                     <td>
@@ -56,6 +58,9 @@
                                 <li>{{ $option->name }}</li>
                             @endforeach
                         </ul>
+                    </td>
+                    <td>
+                        <span class="label {{ activeLabel($element->active) }}">active</span>
                     </td>
                     <td>
                         <div class="btn-group pull-right">
@@ -69,8 +74,8 @@
                                         <i class="fa fa-fw fa-user"></i>edit</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('backend.activation',['modal' => 'field', 'id' => $element->id]) }}">
-                                        <i class="fa fa-fw fa-user"></i>edit</a>
+                                    <a href="{{ route('backend.activation',['model' => 'field', 'id' => $element->id]) }}">
+                                        <i class="fa fa-fw fa-user"></i>toggle activation</a>
                                 </li>
                                 @if($element->type === 'multiple')
                                     <li>

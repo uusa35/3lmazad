@@ -14,6 +14,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Sub Categories</th>
+                <th>Fields Related</th>
                 <th>Created At</th>
                 <th>active</th>
                 <th>Action</th>
@@ -24,6 +25,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Sub Categories</th>
+                <th>Fields Related</th>
                 <th>Created At</th>
                 <th>active</th>
                 <th>Action</th>
@@ -43,6 +45,17 @@
                             <ul>
                                 @foreach($element->children as $child)
                                     <li>{{ $child->name }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <span class="label label-info">no sub categories</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if(!$element->fields->isEmpty())
+                            <ul>
+                                @foreach($element->fields as $field)
+                                    <li>{{ $field->name }}</li>
                                 @endforeach
                             </ul>
                         @else
@@ -74,6 +87,10 @@
                                     <li>
                                         <a href="{{ route('backend.category.create',['parent_id' => $element->id]) }}">
                                             <i class="fa fa-fw fa-user"></i>assign sub-category</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('backend.category.assign',$element->id) }}">
+                                            <i class="fa fa-fw fa-user"></i>assign field</a>
                                     </li>
                                 @endif
                                 <li>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Field;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -15,9 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if (request()->type == 0) {
+        if (request()->type == 0 || !request()->has('type')) {
 
-            $elements = Category::where('parent_id', '=', request()->type)->with('children')->get();
+            $elements = Category::where('parent_id', '=', request()->type)->with('children', 'fields')->get();
 
         } elseif (request()->type !== 0) {
 
@@ -108,7 +110,7 @@ class CategoryController extends Controller
     {
         $category = Category::whereId($id)->with('children')->first();
 
-        if($category->ads()->count() > 0 || !$category->children->isEmpty()) {
+        if ($category->ads()->count() > 0 || !$category->children->isEmpty()) {
             return redirect()->back()->with('error', 'category not deleted .. remove any products or services attached to this product before deleting');
         }
 
@@ -116,5 +118,22 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('success', 'category deleted');
 
+    }
+
+    public function getAssignField($id)
+    {
+        $element = Category::whereId($id)->with('fields')->first();
+        return view('backend.modules.category.assign', compact('element'));
+    }
+
+    public function postAssignField(Request $request, $id)
+    {
+//        dd($request->all());
+        $element = Category::whereId($id)->first();
+        $element->fields()->sync($request->except('_token'));
+        if($element) {
+            return redirect()->route('backend.category.index',['type' => 0])->with('success','process success');
+        }
+        return redirect()->route('backend.category.assign')->with('error','process success');
     }
 }

@@ -55,4 +55,8 @@ trait ModelHelpers
         return $this->country->name;
     }
 
+    function getAreaNameAttribute() {
+        return $this->area->name;
+    }
+
 }

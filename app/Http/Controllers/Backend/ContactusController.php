@@ -77,10 +77,10 @@ class ContactusController extends Controller
         $contactus = Contactus::first();
 
         if (!$contactus->update($request->request->all())) {
-            return 'view with error';
+            return redirect()->route('backend.contactus.index')->with('error','contactus error');
         }
 
-        $this->saveMimes($contactus, $request, ['logo'], ['600', '225'], false);
+        $this->saveMimes($contactus, $request, ['logo'], ['300', '100'], true);
 
         return redirect()->route('backend.contactus.index')->with('success','contactus updated');
     }

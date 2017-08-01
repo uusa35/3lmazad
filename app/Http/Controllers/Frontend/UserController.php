@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Requests\Frontend\UserUpdate;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Role;
 use App\Models\User;
+use App\Scopes\ScopeIsSold;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -102,17 +104,24 @@ class UserController extends Controller
     {
         $user = auth()->user();
         $updated = $user->update($request->request->all());
+        if($request->is_merchant) {
+            $role = Role::where('name','merchant')->first();
+            $user->roles()->sync($role->id);
+        } else {
+            $role = Role::where('name','user')->first();
+            $user->roles()->sync($role->id);
+        }
         if ($updated) {
             if ($request->hasFile('avatar')) {
-                $this->saveMimes($user->user_meta()->first(),
+                $this->saveMimes($user,
                     $request,
                     ['avatar'],
                     ['500', '500'],
                     false);
             }
-            return redirect()->route('user.index')->with('success', trans('general.user_update_success'));
+            return redirect()->route('account')->with('success', trans('general.user_update_success'));
         }
-        return redirect()->route('user.index')->with('error', trans('general.user_update_failure'));
+        return redirect()->route('account')->with('error', trans('general.user_update_failure'));
     }
 
     /**
@@ -143,8 +152,8 @@ class UserController extends Controller
      */
     public function ads($id)
     {
-        $element = $this->user->whereId($id)->first();
-        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
+        $element = $this->user->whereId($id)->with('ads')->first();
+        $elements = $element->ads()->paginate(12);
         return view('frontend.modules.user.ads', compact('element', 'elements'));
     }
 
@@ -155,7 +164,7 @@ class UserController extends Controller
      */
     public function adsList()
     {
-        $elements = auth()->user()->ads()->withoutGlobalScopes()->withoutTrashed()->with('category', 'meta')->get();
+        $elements = Ad::withoutGlobalScope(ScopeIsSold::class)->where('user_id', auth()->user()->id)->withoutTrashed()->with('category', 'meta')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
     }
 

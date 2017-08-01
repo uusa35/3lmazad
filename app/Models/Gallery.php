@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    use LocaleTrait;
     protected $with = ['images'];
-    public $localeStrings = [''];
     protected $guarded = [''];
 
     /**

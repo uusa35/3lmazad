@@ -20,10 +20,25 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer([
             'frontend.partials.nav._search-row',
             'frontend.home', 'frontend.modules.ad.create',
-            'frontend.partials.forms._register'
+            'frontend.home', 'frontend.modules.ad.edit',
+            'frontend.partials.forms._register',
+            'backend.modules.category.assign',
         ],
             'App\Services\ViewComposers@getCategories');
-        view()->composer(['frontend.partials.nav._search-row', 'frontend.modules.ad.create'], 'App\Services\ViewComposers@getFields');
+        view()->composer([
+            'frontend.partials.nav._search-row',
+            'frontend.modules.ad.create',
+            'frontend.modules.ad.edit',
+            'backend.modules.option.create',
+            'backend.modules.option.edit',
+            'backend.modules.color.create',
+            'backend.modules.color.edit',
+            'backend.modules.size.create',
+            'backend.modules.size.edit',
+            'backend.modules.category.assign',
+        ],
+            'App\Services\ViewComposers@getFields');
+
         view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getAreas');
         view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');
         view()->composer(
@@ -41,13 +56,23 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             [
                 'frontend.modules.user.index',
-                'frontend.modules.ad.create'
+                'frontend.modules.ad.create',
+                'frontend.modules.ad.edit',
             ], 'App\Services\ViewComposers@getAllAreas');
 
         //backend
         view()->composer('backend.partials.nav', 'App\Services\ViewComposers@getUser');
-        view()->composer('backend.modules.field.create', 'App\Services\ViewComposers@getIcons');
-        view()->composer('backend.modules.field.create', 'App\Services\ViewComposers@getFieldTypes');
+        view()->composer([
+            'backend.modules.field.create',
+            'backend.modules.field.edit',
+        ],
+            'App\Services\ViewComposers@getIcons');
+
+        view()->composer([
+            'backend.modules.field.create',
+            'backend.modules.field.edit',
+        ],
+            'App\Services\ViewComposers@getFieldTypes');
     }
 
     /**

@@ -38,7 +38,7 @@
 
         <div class="col-md-6">
             <input id="phone" type="number" class="form-control" name="phone"
-                   value="{{ $element->phone }}">
+                   value="{{ $element->mobile }}">
 
             @if ($errors->has('email'))
                 <span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
@@ -87,7 +87,7 @@
         </div>
         <div class="col-md-3">
             <div class="col-lg-1">
-                <input type="radio" class="" name="is_merchant" value="0" {{ $element->isMerchant ? 'checked' : null }}
+                <input type="radio" class="" name="is_merchant" value="0" {{ !$element->isMerchant ? 'checked' : null }}
                 required>
             </div>
             <div class="col-lg-2">

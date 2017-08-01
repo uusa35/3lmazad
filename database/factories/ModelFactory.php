@@ -122,6 +122,7 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
         'is_required' => $faker->boolean(false),
         'name' => $faker->name,
         'active' => true,
+        'is_model' => true,
         'label_ar' => function ($array) {
             return $array['name'];
         },

@@ -45,8 +45,8 @@
                                             <span class="date">{{  $element->countryName }}</span>
                                         </p>
                                         <p>
-                                            <span class="date">{{ trans('general.account_type')}} :</span>
-                                            <span class="date">{{  $element->roles->first()->name }}</span>
+                                            <span class="date">{{ trans('general.area')}} :</span>
+                                            <span class="date">{{  $element->areaName }}</span>
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.account_type')}} :</span>

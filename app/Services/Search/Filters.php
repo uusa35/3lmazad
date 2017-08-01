@@ -86,7 +86,16 @@ class Filters extends QueryFilters
         var_dump('condition');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('is_new', request()->condition);
+                return $q->where('is_new', request()->is_new);
+            });
+        });
+    }
+
+    public function mileage()
+    {
+        return $this->builder->where(function ($q) {
+            return $q->whereHas('meta', function ($q) {
+                return $q->where('mileage', '<=', request()->mileage);
             });
         });
     }
@@ -141,7 +150,7 @@ class Filters extends QueryFilters
     {
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
-                return $q->where('is_automatic',request()->transmission);
+                return $q->where('is_automatic', request()->is_automatic);
             });
         });
     }

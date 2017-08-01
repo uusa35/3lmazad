@@ -37,7 +37,7 @@ class CategoriesTableSeeder extends Seeder
                     if ($fieldExist) {
                         $parent->fields()->save($fieldExist);
                     } else {
-                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'is_modal' => $f['is_modal'], 'collection_name' => $f['collection_name']]);
+                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'is_model' => $f['is_model'], 'collection_name' => $f['collection_name']]);
                         $field->categories()->attach($parent->id);
                         if (count($f['options']) > 1) {
                             foreach ($f['options'] as $k => $v) {

@@ -45,7 +45,6 @@ class AdStore extends FormRequest
      */
     public function rules()
     {
-//        dd($this->request->all());
         return [
             'title' => 'required|max:200', // required
             'description' => 'required|max:1500', // required

@@ -21,7 +21,7 @@ class Ad extends Model
         'active' => 'boolean',
         'featured' => 'boolean'
     ];
-    protected $with = ['user', 'meta', 'deals'];
+    protected $with = ['meta', 'deals', 'user', 'gallery', 'brand'];
 
     /**
      * The "booting" method of the model.
