@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        $elements = Color::all();
+        return view('backend.modules.color.index', compact('elements'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.modules.color.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $element = Color::create($request->all());
+        if($element) {
+            return redirect()->route('backend.color.index')->with('success','success');
+        }
+        return redirect()->route('backend.color.create')->with('error','failure');
     }
 
     /**

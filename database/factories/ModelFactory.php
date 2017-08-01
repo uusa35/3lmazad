@@ -221,7 +221,7 @@ $factory->define(Color::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
-        'code' => $faker->rgbColor,
+        'code' => $faker->hexColor,
     ];
 });
 
