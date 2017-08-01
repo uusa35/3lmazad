@@ -1,8 +1,9 @@
 @if(!$commercials->isEmpty())
     @foreach($commercials as $commercial)
         <div class="product-category commercial-homepage hover-squared">
-            <div class="product-preview__label product-preview__label--right product-preview__label--sale text-center">
-                <span class="mdi mdi-star text-center" style="color : gold;"></span></div>
+            {{--<div class="product-preview__label product-preview__label--right product-preview__label--sale text-center">--}}
+                {{--<span class="mdi mdi-star text-center" style="color : gold;"></span>--}}
+            {{--</div>--}}
             <a href="{{ $commercial->url }}">
                 <img src="{{ asset('storage/uploads/images/thumbnail/'.$commercial->image) }}"
                      class="img-responsive commercial-homepage"

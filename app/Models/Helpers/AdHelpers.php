@@ -23,6 +23,14 @@ trait AdHelpers
             ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
+            ->whereHas('user.roles', function ($q) {
+                return $q;
+            })
+            ->whereHas('deals', function ($q) {
+                return $q->whereHas('plan', function ($q) {
+                    return $q;
+                });
+            })
             ->take($take)->get();
 
     }
@@ -32,7 +40,7 @@ trait AdHelpers
      * @return mixed
      * scope ads that have active and valid free deals only
      */
-    public function scopeHasFreePlans($q)
+    public function scopeHasDealWithFreePlan($q)
     {
         return $q->where(function ($q) {
             return $q->whereHas('deals.plan', function ($q) {
@@ -47,7 +55,7 @@ trait AdHelpers
      * @return mixed
      * scope ads that have active and free deals only
      */
-    public function scopeHasPaidPlans($q)
+    public function scopeHasDealWithPaidPlan($q)
     {
         return $q->where(function ($q) {
             return $q->whereHas('deals.plan', function ($q) {
@@ -64,6 +72,11 @@ trait AdHelpers
     public function getHasValidDealAttribute()
     {
         return $this->deals->count() > 0 ? true : false;
+    }
+
+    public function getHasValidPaidDealAttribute()
+    {
+        return $this->deals->first()->plan->is_paid;
     }
 
     public function getCategoryNameAttribute()

@@ -9,14 +9,13 @@
                              alt="{{ $element->title }}"/>
                     </a>
                     @if($element->featured)
-                        <div class="product-preview__label product-preview__label--left product-preview__label--new">
-                            <span>new</span>
+                        <div class="product-preview__label product-preview__label--left product-preview__label--new featured">
+                            <i class="thumbs outline up icon icon text-center white icon-tag"></i>
                         </div>
                     @endif
-                    @if($element->hasValidDeal)
-                        <div class="product-preview__label product-preview__label--right product-preview__label--sale">
-                        <span>sale<br>-10%
-                        </span>
+                    @if($element->hasValidPaidDeal)
+                        <div class="product-preview__label product-preview__label--right product-preview__label--sale paid">
+                            <i class="star icon text-center white icon-tag"></i>
                         </div>
                     @endif
                 </div>

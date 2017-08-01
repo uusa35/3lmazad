@@ -82,7 +82,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('abuse', 'AbuseReportController');
     Route::resource('comment', 'CommentController');
     Route::resource('auction', 'AuctionController');
-//    Route::resource('image', 'ImageController');
+    Route::resource('color', 'ColorController');
+    Route::resource('size', 'SizeController');
+    Route::resource('image', 'ImageController');
 //    Route::resource('newsletter', 'NewsletterController');
 });
 

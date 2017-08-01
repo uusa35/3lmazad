@@ -44,7 +44,7 @@ class AdController extends Controller
             }
             $ads = $ads->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites');
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
-            $paidAds = $ads->orderBy('created_at', 'asc')->take(12)->get();
+            $paidAds = $ads->hasDealWithPaidPlan()->orderBy('created_at', 'asc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'asc')->paginate(12);
             return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites', 'element'));
         }
