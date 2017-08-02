@@ -9,6 +9,7 @@ class Size extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
+    protected $guarded = [''];
 
     public function ad()
     {

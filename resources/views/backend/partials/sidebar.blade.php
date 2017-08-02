@@ -142,7 +142,7 @@
             <li class="heading">
                 <h3 class="uppercase">Settings Section</h3>
             </li>
-            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq']) }}">
+            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq','gallery','color','size','type']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="title">Settings</span>
@@ -186,76 +186,117 @@
                             <span class="title">Faq</span>
                         </a>
                     </li>
+
                     <li class="nav-item ">
                         <a href="{{ url('backend/translations') }}" class="nav-link ">
                             <span class="title">Translations</span>
                         </a>
                     </li>
-                </ul>
-            </li>
-            <li class="heading">
-                <h3 class="uppercase">Other Settings</h3>
-            </li>
-            <li class="nav-item start {{ activeItem('color') }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-fw fa-male" aria-hidden="true"></i>
-                    <span class="title">Color Section</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item start">
-                        <a href="{{ route('backend.color.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Colors</span>
+
+                    {{--Types--}}
+                    <li class="nav-item start {{ activeItem('type') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-fw fa-male" aria-hidden="true"></i>
+                            <span class="title">Type Section</span>
+                            <span class="arrow"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.type.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Types</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.type.create') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Create New Type</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.size.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Sizes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.size.create') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Create New Size</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item start">
-                        <a href="{{ route('backend.color.create') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Create New Color</span>
+
+                    {{--Color--}}
+                    <li class="nav-item start {{ activeItem('color') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-fw fa-male" aria-hidden="true"></i>
+                            <span class="title">Color Section</span>
+                            <span class="arrow"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.color.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Colors</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.color.create') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Create New Color</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </li>
-            <li class="nav-item start {{ activeItem('size') }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-fw fa-male" aria-hidden="true"></i>
-                    <span class="title">Size Section</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item start">
-                        <a href="{{ route('backend.size.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Sizes</span>
+
+                    {{--Size--}}
+                    <li class="nav-item start {{ activeItem('size') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-fw fa-male" aria-hidden="true"></i>
+                            <span class="title">Size Section</span>
+                            <span class="arrow"></span>
                         </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.size.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Sizes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.size.create') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Create New Size</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item start">
-                        <a href="{{ route('backend.size.create') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Create New Size</span>
+
+                    {{--Galleries & Images--}}
+                    <li class="nav-item start {{ activeItem('image',['gallery']) }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="fa fa-fw fa-male" aria-hidden="true"></i>
+                            <span class="title">Galleries & Images</span>
+                            <span class="arrow"></span>
                         </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item start {{ activeItem('image',['gallery']) }}">
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-fw fa-male" aria-hidden="true"></i>
-                    <span class="title">Galleries & Images Section</span>
-                    <span class="arrow"></span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="nav-item">
-                        <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Galleries</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('backend.image.index') }}" class="nav-link ">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span class="title">Images</span>
-                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Galleries</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('backend.image.index') }}" class="nav-link ">
+                                    <i class="fa fa-fw fa-user"></i>
+                                    <span class="title">Images</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>

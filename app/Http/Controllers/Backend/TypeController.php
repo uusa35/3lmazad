@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Size;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SizeController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-        $elements = Size::all();
-        return view('backend.modules.size.index', compact('elements'));
+        $elements = Type::with('category')->get();
+        return view('backend.modules.type.index', compact('elements'));
     }
 
     /**
@@ -26,7 +26,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        return view('backend.modules.size.create');
+        return view('backend.modules.type.create');
     }
 
     /**
@@ -37,11 +37,11 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        $element = Size::create($request->all());
+        $element = Type::create($request->all());
         if ($element) {
-            return redirect()->route('backend.size.index')->with('success', 'success');
+            return redirect()->route('backend.type.index')->with('success', 'success');
         }
-        return redirect()->route('backend.size.create')->with('error', 'failure');
+        return redirect()->route('backend.type.create')->with('error', 'failure');
     }
 
     /**
@@ -63,8 +63,8 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
-        $element = Size::whereId($id)->first();
-        return view('backend.modules.size.edit', compact('element'));
+        $element = Type::whereId($id)->first();
+        return view('backend.modules.type.edit', compact('element'));
     }
 
     /**
@@ -76,11 +76,11 @@ class SizeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = Size::whereId($id)->first();
+        $element = Type::whereId($id)->first();
         if ($element->update($request->all())) {
-            return redirect()->route('backend.size.index')->with('success', 'success');
+            return redirect()->route('backend.type.index')->with('success', 'success');
         }
-        return redirect()->route('backend.size.edit', $element->id)->with('error', 'failure');
+        return redirect()->route('backend.type.edit', $element->id)->with('error', 'failure');
     }
 
     /**
@@ -91,10 +91,10 @@ class SizeController extends Controller
      */
     public function destroy($id)
     {
-        $element = Size::whereId($id)->first()->delete();
+        $element = Type::whereId($id)->first()->delete();
         if ($element) {
-            return redirect()->route('backend.size.index')->with('success', 'success');
+            return redirect()->route('backend.type.index')->with('success', 'success');
         }
-        return redirect()->route('backend.size.index')->with('error', 'failure');
+        return redirect()->route('backend.type.index')->with('error', 'failure');
     }
 }

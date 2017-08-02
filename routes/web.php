@@ -84,6 +84,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('auction', 'AuctionController');
     Route::resource('color', 'ColorController');
     Route::resource('size', 'SizeController');
+    Route::resource('type', 'TypeController');
     Route::resource('image', 'ImageController');
 //    Route::resource('newsletter', 'NewsletterController');
 });

@@ -17,6 +17,7 @@ $(document).ready(function() {
         // remove all html from brands and models
         $('#options-brand_id').html('');
         $('#options-model_id').html('');
+        $('#options-type_id').html('');
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
             // show only the fields related + set the value to zero + set the text to default
@@ -37,6 +38,17 @@ $(document).ready(function() {
                     `);
                 });
             }
+            if ('types' in data.parent) {
+                data.parent.types.map(b => {
+                    let name = 'name_' + lang;
+                    $('#options-type_id').append(`
+                        <div class="item" data-value="${b.id}" data-text="${b[name]}">
+                            ${b[name]}
+                        </div>
+                    `);
+                });
+            }
+
         }).catch(e =>console.log(e));
     });
 

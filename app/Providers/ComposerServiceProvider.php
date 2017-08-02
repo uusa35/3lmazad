@@ -23,6 +23,8 @@ class ComposerServiceProvider extends ServiceProvider
             'frontend.home', 'frontend.modules.ad.edit',
             'frontend.partials.forms._register',
             'backend.modules.category.assign',
+            'backend.modules.type.create',
+            'backend.modules.type.edit',
         ],
             'App\Services\ViewComposers@getCategories');
         view()->composer([
@@ -65,6 +67,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer([
             'backend.modules.field.create',
             'backend.modules.field.edit',
+            'backend.modules.type.create',
+            'backend.modules.type.edit',
         ],
             'App\Services\ViewComposers@getIcons');
 

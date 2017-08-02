@@ -10,6 +10,7 @@ class Color extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
+    protected $guarded = [''];
 
     public function ads() {
         return $this->hasMany(Ad::class);
