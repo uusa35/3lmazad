@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Requests\Frontend\UserUpdate;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Deal;
 use App\Models\Role;
 use App\Models\User;
+use App\Scopes\ScopeAdHasValidDeal;
+use App\Scopes\ScopeExpired;
 use App\Scopes\ScopeIsSold;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -40,7 +44,7 @@ class UserController extends Controller
     {
         $elements = $this->category->where('parent_id', 0)->whereHas('users', function ($q) {
             return $q->where('featured', true)->whereHas('roles', function ($q) {
-                return $q->where('name','merchant');
+                return $q->where('name', 'merchant');
             });
         })->get();
         return view('frontend.modules.user.merchants-categories', compact('elements'));
@@ -103,12 +107,12 @@ class UserController extends Controller
     public function update(UserUpdate $request, $id)
     {
         $user = auth()->user();
-        $updated = $user->update($request->request->all());
-        if($request->is_merchant) {
-            $role = Role::where('name','merchant')->first();
+        $updated = $user->update($request->except('is_merchant'));
+        if ($request->is_merchant) {
+            $role = Role::where('name', 'merchant')->first();
             $user->roles()->sync($role->id);
         } else {
-            $role = Role::where('name','user')->first();
+            $role = Role::where('name', 'user')->first();
             $user->roles()->sync($role->id);
         }
         if ($updated) {
@@ -119,9 +123,9 @@ class UserController extends Controller
                     ['500', '500'],
                     false);
             }
-            return redirect()->route('account')->with('success', trans('general.user_update_success'));
+            return redirect()->route('account.user')->with('success', trans('general.user_update_success'));
         }
-        return redirect()->route('account')->with('error', trans('general.user_update_failure'));
+        return redirect()->route('account.user')->with('error', trans('general.user_update_failure'));
     }
 
     /**
@@ -164,13 +168,13 @@ class UserController extends Controller
      */
     public function adsList()
     {
-        $elements = Ad::withoutGlobalScope(ScopeIsSold::class)->where('user_id', auth()->user()->id)->withoutTrashed()->with('category', 'meta')->get();
+        $elements = Ad::withoutGlobalScopes([ScopeIsSold::class, ScopeAdHasValidDeal::class])
+            ->where('user_id', auth()->user()->id)
+            ->with(['category', 'meta','deals' => function ($q) {
+                return $q->withoutGlobalScopes();
+            }])
+            ->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
     }
 
-    public function toggleRepublish($id)
-    {
-        $ad = $this->ad->whereId($id)->first();
-        $this->authorize('isOwner', $ad->user_id);
-    }
 }

@@ -24,7 +24,7 @@ class Deal extends Model
     {
         parent::boot();
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
+            if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeExpired());
             }
         }
@@ -47,6 +47,6 @@ class Deal extends Model
 
     public function getIsValidAttribute()
     {
-        return ($this->end_date > Carbon::today()) ? true : false;
+        return $this->end_date > Carbon::now();
     }
 }

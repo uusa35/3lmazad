@@ -40,7 +40,7 @@
                             {{--@if($isAdmin)--}}
                             {{--<li><a href="{{ route('backend.index') }}">Dashboard</a></li>--}}
                             {{--@else--}}
-                            {{--<li><a href="{{ route('account') }}">My Account</a></li>--}}
+                            {{--<li><a href="{{ route('account.user') }}">My Account</a></li>--}}
                             {{--@endif--}}
                         </ul>
                     </div>

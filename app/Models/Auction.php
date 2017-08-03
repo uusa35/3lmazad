@@ -11,6 +11,7 @@ class Auction extends Model
 {
     use LocaleTrait, ModelHelpers;
     public $localeStrings = [''];
+    protected $guarded = [''];
 
     /**
      * The "booting" method of the model.

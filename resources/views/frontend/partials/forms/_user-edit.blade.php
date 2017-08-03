@@ -33,11 +33,11 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-        <label for="phone" class="col-md-4 control-label">{{ trans('general.phone') }}</label>
+    <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+        <label for="phone" class="col-md-4 control-label">{{ trans('general.mobile') }}</label>
 
         <div class="col-md-6">
-            <input id="phone" type="number" class="form-control" name="phone"
+            <input id="mobile" type="number" class="form-control" name="mobile"
                    value="{{ $element->mobile }}">
 
             @if ($errors->has('email'))

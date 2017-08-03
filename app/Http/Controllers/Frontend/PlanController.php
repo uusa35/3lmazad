@@ -26,7 +26,7 @@ class PlanController extends Controller
     public function index()
     {
         $pay_ad_id = session()->get('pay_ad_id');
-        $this->authorize('isOwner',$this->ad->whereId($pay_ad_id)->first()->user_id);
+        $this->authorize('isOwner',$this->ad->withoutGlobalScopes()->whereId($pay_ad_id)->first()->user_id);
         $elements = $this->plan->all();
         return view('frontend.modules.plan.index',compact('elements','pay_ad_id'));
     }

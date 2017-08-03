@@ -23,7 +23,6 @@ class ScopeHasGallery implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $model->has('gallery');
         $builder->has('gallery');
     }
 

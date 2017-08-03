@@ -21,7 +21,7 @@ class Ad extends Model
         'active' => 'boolean',
         'featured' => 'boolean'
     ];
-    protected $with = ['meta', 'deals', 'user', 'gallery', 'brand'];
+    protected $with = ['deals.plan','user'];
 
     /**
      * The "booting" method of the model.
@@ -34,13 +34,12 @@ class Ad extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
+            if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
-                // reference to Deal Model. it shall fetch only valid deals only (which are not expired)
-                static::addGlobalScope(new ScopeAdHasValidDeal());
                 static::addGlobalScope(new ScopeIsSold());
-                static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
+                static::addGlobalScope(new ScopeAdHasValidDeal());
             }
         }
     }
+
 }

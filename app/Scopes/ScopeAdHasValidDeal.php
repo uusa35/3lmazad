@@ -25,9 +25,6 @@ class ScopeAdHasValidDeal implements Scope
     public function apply(Builder $builder, Model $model)
     {
         // once ad is created a free deal will be attached to such ad.
-        $model->whereHas('deals', function ($q) {
-            return $q;
-        });
         $builder->whereHas('deals', function ($q) {
             return $q;
         });

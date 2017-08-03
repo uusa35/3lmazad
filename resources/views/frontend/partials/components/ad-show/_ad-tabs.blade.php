@@ -32,15 +32,20 @@
                             </div>
                         </div>
                     @endforeach
-                    <form class="ui reply form" method="post" action="{{ route('auction.store',['ad_id' => $element->id]) }}">
-                        <div class="field">
-                            <textarea>
-                            </textarea>
-                        </div>
-                        <div class="ui blue labeled submit icon button" style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
-                            <i class="icon edit"></i> {{ trans('general.add_reply') }}
-                        </div>
-                    </form>
+                    @if(auth()->check())
+                        <form class="ui reply form" method="post" action="{{ route('auction.store') }}">
+                            {{ csrf_field() }}
+                            <div class="field">
+                                <textarea name="amount"></textarea>
+                            </div>
+                            <input type="hidden" name="ad_id" value="{{ $element->id }}">
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <button type="submit" class="ui blue labeled submit icon button"
+                                    style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
+                                <i class="icon edit"></i> {{ trans('general.add_auction') }}
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="comments">
@@ -62,15 +67,20 @@
                             </div>
                         </div>
                     @endforeach
-                    <form class="ui reply form" method="post" action="{{ route('comment.store',['ad_id' => $element->id]) }}">
-                        <div class="field">
-                            <textarea>
-                            </textarea>
-                        </div>
-                        <div class="ui blue labeled submit icon button" style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
-                            <i class="icon edit"></i> {{ trans('general.add_reply') }}
-                        </div>
-                    </form>
+                    @if(auth()->check())
+                        <form class="ui reply form" method="post" action="{{ route('comment.store') }}">
+                            {{ csrf_field() }}
+                            <div class="field">
+                                <textarea name="body"></textarea>
+                            </div>
+                            <input type="hidden" name="ad_id" value="{{ $element->id }}">
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <button type="submit" class="ui blue labeled submit icon button"
+                                    style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
+                                <i class="icon edit"></i> {{ trans('general.add_comment') }}
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

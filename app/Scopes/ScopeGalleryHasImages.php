@@ -24,7 +24,6 @@ class ScopeGalleryHasImages implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $model->has('images');
-        $builder->has('images');
     }
 
 }

@@ -45,8 +45,8 @@
                         <span class="label {{ activeLabel($element->valid) }}">{{ activeText($element->valid) }}</span>
                     </td>
                     <td><span class="label label-warning">{{ $element->plan->name }}</span></td>
-                    <td>{{ $element->startDate }}</td>
-                    <td>{{ $element->endDate }}</td>
+                    <td>{{ $element->startsAt }}</td>
+                    <td>{{ $element->endsAt }}</td>
                     <td>{{ $element->reference_id }}</td>
                 </tr>
             @endforeach

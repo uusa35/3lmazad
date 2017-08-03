@@ -28,11 +28,6 @@ class ScopeItemMustHaveUserWithRole implements Scope
                return $q;
             });
         });
-        $model->whereHas('user', function ($q) {
-            return $q->whereHas("roles", function ($q) {
-               return $q;
-            });
-        });
     }
 
 }

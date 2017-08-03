@@ -12,11 +12,14 @@
 Auth::routes();
 
 Route::group(['namespace' => 'Frontend'], function () {
-    Route::group(['middleware' => ['auth'], 'prefix' => 'account'], function () {
+    Route::group(['middleware' => ['auth']], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete', 'index']]);
-        Route::get('/', 'UserController@account')->name('account');
-        Route::get('/ads', 'UserController@adsList')->name('user.account.ads');
-        Route::get('ad/toggle/republish', 'UserController@toggleRepublish')->name('user.account.ad.republish');
+        Route::group(['as' => 'account.'], function () {
+            Route::get('/account', 'UserController@account')->name('user');
+            Route::get('/ads', 'UserController@adsList')->name('user.ads');
+            Route::get('ad/toggle/republish/{id}', 'AdController@getToggleRepublish')->name('ad.republish');
+            Route::post('ad/toggle/republish/{id}', 'AdController@postToggleRepublish')->name('ad.republish');
+        });
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
@@ -28,7 +31,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
     });
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('aboutus', 'HomeController@aboutus')->name('aboutus');
     Route::get('faq', 'HomeController@faq')->name('faq');
     Route::get('terms', 'HomeController@terms')->name('terms');

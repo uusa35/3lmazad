@@ -69,6 +69,11 @@ trait AdHelpers
         return $this->deals->first()->end_date;
     }
 
+    public function getIsExpiredAttribute()
+    {
+        return $this->deals->first()->end_date < Carbon::now();
+    }
+
     public function getHasValidDealAttribute()
     {
         return $this->deals->count() > 0 ? true : false;

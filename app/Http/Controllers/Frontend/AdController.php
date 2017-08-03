@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Visitor;
+use App\Scopes\ScopeAdHasValidDeal;
+use App\Scopes\ScopeExpired;
 use App\Scopes\ScopeIsSold;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -102,12 +104,12 @@ class AdController extends Controller
         ]);
 
         if (!$element) {
-            return redirect()->route('account')->with('error', trans('message.error_ad_store'));
+            return redirect()->route('account.user')->with('error', trans('message.error_ad_store'));
         }
         $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
         $this->saveGallery($element, $request, ['images'], ['600', '450'], false);
 
-        return redirect()->route('account')->with('success', trans('message.success_ad_store'));
+        return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
     }
 
     /**
@@ -118,8 +120,7 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->with('user', 'meta', 'category',
-            'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
+        $element = $this->ad->whereId($id)->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
@@ -127,11 +128,10 @@ class AdController extends Controller
         if (is_null($element)) {
             abort(404, trans('message.ad_missing_our_terms_and_conditions'));
         }
-        /*dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
-        $counter = Visitor::where('ad_id', $element->id)->count();*/
-        $counter = 0;
+        dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
+        $counter = Visitor::where('ad_id', $element->id)->count();
         $element->isOwner ? session()->put('pay_ad_id', $element->id) : null;
-        $paidAds = $this->ad->where('category_id', $element->category_id)->orderBy('created_at', 'asc')->take(12)->get();
+        $paidAds = $this->ad->where('category_id', $element->category_id)->hasDealWithPaidPlan()->orderBy('created_at', 'asc')->take(12)->get();
         return view('frontend.modules.ad.show', compact('element', 'counter', 'paidAds'));
     }
 
@@ -143,7 +143,7 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        $element = Ad::withoutGlobalScopes([ScopeIsSold::class])->whereId($id)->first();
+        $element = Ad::withoutGlobalScopes([ScopeIsSold::class, ScopeAdHasValidDeal::class])->whereId($id)->first();
         return view('frontend.modules.ad.edit', compact('element'));
     }
 
@@ -176,15 +176,34 @@ class AdController extends Controller
 
     public function toggleActivate($id)
     {
-        $ad = $this->ad->whereId($id)->first();
-        $ad->update(['active' => !$ad->active]);
+        $element = $this->ad->whereId($id)->first();
+        $element->update(['active' => !$element->active]);
         return redirect()->back()->with('success', trans('message.process_success'));
     }
 
     public function toggleFeatured($id)
     {
-        $ad = $this->ad->whereId($id)->first();
-        $ad->update(['featured' => !$ad->featured]);
+        $element = $this->ad->whereId($id)->first();
+        $element->update(['featured' => !$element->featured]);
         return redirect()->back()->with('success', trans('message.process_success'));
+    }
+
+    public function getToggleRepublish($id)
+    {
+        $element = $this->ad->withoutGlobalScopes()->whereId($id)->first();
+        $this->authorize('isOwner', $element->user_id);
+        session()->put('pay_ad_id', $element->id);
+//        $deal = $element->deals()->withoutGlobalScopes()->first();
+//        $plan = $deal->plan->first();
+//        if ($plan->is_paid) {
+        return redirect()->route('plan.index');
+//        }
+//        $republishDuration = $element->deals()->first()->plan->ducation;
+//        dd($republishDuration);
+//        $element->update([
+//            'is_sold' => false
+//        ]);
+//        $element->deals->first()->update([
+//            'end_date' => Carbon::now()->addDays($republishDuration)]);
     }
 }

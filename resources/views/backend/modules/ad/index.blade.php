@@ -39,7 +39,7 @@
                     <td><span class="label label-warning">{{ $element->user->type }}</span></td>
                     <td><span class="label label-default">{{ $element->deals->first()->plan->name }}</span></td>
                     <td>{{ $element->created_at->diffForHumans() }}</td>
-                    <td>{{ $element->deals->first()->endDate }}</td>
+                    <td>{{ $element->deals->first()->endsAt }}</td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn green btn-xs btn-outline dropdown-toggle"

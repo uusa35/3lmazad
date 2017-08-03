@@ -10,7 +10,7 @@ class Comment extends Model
 {
     use ModelHelpers;
     public $localeStrings = [''];
-    protected $with = ['user'];
+    protected $guarded = [''];
 
     /**
      * The "booting" method of the model.
@@ -23,7 +23,7 @@ class Comment extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
+            if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeItemMustHaveUserWithRole());
             }
         }

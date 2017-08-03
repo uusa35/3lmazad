@@ -23,9 +23,6 @@ class ScopeUserMustHaveRole implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $model->whereHas('roles', function ($q) {
-            return $q;
-        }, '>', 0);
         $builder->whereHas('roles', function ($q) {
             return $q;
         }, '>', 0);

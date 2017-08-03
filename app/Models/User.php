@@ -10,6 +10,7 @@ use App\Scopes\ScopeUserMustHaveRole;
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Route;
 
 class User extends Authenticatable
 {
@@ -20,9 +21,11 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'mobile', 'is_mobile_visible', 'is_email_visible', 'country_id', 'description', 'avatar', 'active', 'featured'
-    ];
+//    protected $fillable = [
+//        'name', 'email', 'password', 'mobile',
+//        'is_mobile_visible', 'is_email_visible', 'country_id', 'description', 'avatar', 'active', 'featured'
+//    ];
+    protected $guarded = [''];
     public $localeStrings = [''];
 
     /**
@@ -52,9 +55,8 @@ class User extends Authenticatable
     protected static function boot()
     {
         parent::boot();
-
         if (!app()->environment('seeding')) {
-            if (!in_array('backend', request()->segments(), true)) {
+            if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeUserMustHaveRole());
             }

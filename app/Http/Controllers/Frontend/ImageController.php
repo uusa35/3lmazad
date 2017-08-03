@@ -49,7 +49,7 @@ class ImageController extends Controller
     {
         $user = auth()->user();
         $this->saveGallery($user->gallery()->first(), $request, 'images', ['600', '450'], true);
-        return redirect()->route('account')->with('success', trans('message.image_success'));
+        return redirect()->route('account.user')->with('success', trans('message.image_success'));
 
     }
 
@@ -96,8 +96,8 @@ class ImageController extends Controller
     public function destroy($id)
     {
         if ($this->image->whereId($id)->delete()) {
-            return redirect()->route('account')->with('success', trans('message.success_image_destroy'));
+            return redirect()->route('account.user')->with('success', trans('message.success_image_destroy'));
         }
-        return redirect()->route('account')->with('error', trans('message.error_image_destroy'));
+        return redirect()->route('account.user')->with('error', trans('message.error_image_destroy'));
     }
 }
