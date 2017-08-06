@@ -186,6 +186,11 @@
                             <span class="title">Faq</span>
                         </a>
                     </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('backend.term.index') }}" class="nav-link ">
+                            <span class="title">Terms of Condition</span>
+                        </a>
+                    </li>
 
                     <li class="nav-item ">
                         <a href="{{ url('backend/translations') }}" class="nav-link ">

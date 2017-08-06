@@ -71,7 +71,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::get('featured', 'HomeController@toggleFeatured')->name('featured');
     Route::resource('aboutus', 'AboutusController');
     Route::resource('faq', 'FaqController');
-//    Route::resource('terms', 'TermController');
+    Route::resource('term', 'TermsController');
     Route::resource('deal', 'DealController');
     Route::resource('plan', 'PlanController');
     Route::resource('contactus', 'ContactusController');

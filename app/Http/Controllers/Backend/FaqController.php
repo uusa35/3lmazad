@@ -56,7 +56,7 @@ class FaqController extends Controller
      */
     public function show($id)
     {
-        return redirect()->to('/contactus');
+        return redirect()->to('/faq');
     }
 
     /**
@@ -67,7 +67,7 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        $element = Faq::first();
+        $element = Faq::whereId($id)->first();
 
         return view('backend.modules.faq.edit', compact('element'));
     }

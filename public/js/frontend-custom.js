@@ -90,6 +90,7 @@ $(document).ready(function () {
         // remove all html from brands and models
         $('#options-brand_id').html('');
         $('#options-model_id').html('');
+        $('#options-type_id').html('');
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(function (res) {
             return res.data;
@@ -105,6 +106,12 @@ $(document).ready(function () {
                 data.parent.brands.map(function (b) {
                     var name = 'name_' + lang;
                     $('#options-brand_id').append('\n                        <div class="item" data-value="' + b.id + '" data-text="' + b[name] + '">\n                            <img class="ui avatar image" src="storage/uploads/images/thumbnail/' + b.image + '">\n                            ' + b[name] + '\n                        </div>\n                    ');
+                });
+            }
+            if ('types' in data.parent) {
+                data.parent.types.map(function (b) {
+                    var name = 'name_' + lang;
+                    $('#options-type_id').append('\n                        <div class="item" data-value="' + b.id + '" data-text="' + b[name] + '">\n                            ' + b[name] + '\n                        </div>\n                    ');
                 });
             }
         }).catch(function (e) {
@@ -313,6 +320,16 @@ $(document).ready(function () {
         }).catch(function (e) {
             return console.log(e);
         });
+    });
+
+    $('input[name="is_merchant"]').on('click', function (e) {
+        var isMerchant = e.target.value;
+        console.log(isMerchant);
+        if (isMerchant == 1) {
+            $('#category-register').removeClass('hidden');
+        } else {
+            $('#category-register').addClass('hidden');
+        }
     });
 });
 

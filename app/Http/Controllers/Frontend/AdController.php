@@ -120,7 +120,7 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
+        $element = $this->ad->whereId($id)->with('category','color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
@@ -193,17 +193,6 @@ class AdController extends Controller
         $element = $this->ad->withoutGlobalScopes()->whereId($id)->first();
         $this->authorize('isOwner', $element->user_id);
         session()->put('pay_ad_id', $element->id);
-//        $deal = $element->deals()->withoutGlobalScopes()->first();
-//        $plan = $deal->plan->first();
-//        if ($plan->is_paid) {
         return redirect()->route('plan.index');
-//        }
-//        $republishDuration = $element->deals()->first()->plan->ducation;
-//        dd($republishDuration);
-//        $element->update([
-//            'is_sold' => false
-//        ]);
-//        $element->deals->first()->update([
-//            'end_date' => Carbon::now()->addDays($republishDuration)]);
     }
 }

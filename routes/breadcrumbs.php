@@ -51,7 +51,7 @@ Breadcrumbs::register('parent', function ($breadcrumbs, $element) {
     $breadcrumbs->push($element->name, route('ad.index', ['id' => $element->id]));
 });
 Breadcrumbs::register('sub', function ($breadcrumbs, $element) {
-    $breadcrumbs->parent('parent', $element->parent->first());
+    $breadcrumbs->parent('parent', $element->parent);
     $breadcrumbs->push($element->name, route('ad.index', ['id' => $element->id]));
 });
 // search case ad.index
@@ -115,9 +115,4 @@ Breadcrumbs::register('user.edit', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.profile_edit'), route('user.edit', auth()->user()->id));
 });
 
-// account.ads (list of ads from account)
-//Breadcrumbs::register('user.ads', function ($breadcrumbs) {
-//    $breadcrumbs->parent('account');
-//    $breadcrumbs->push(trans('general.ads'), route('user.ads'));
-//});
 

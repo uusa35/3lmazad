@@ -56,7 +56,7 @@ class Filters extends QueryFilters
     public function brand_id()
     {
         var_dump('brand');
-        return $this->builder->where('brand_id', request()->brand);
+        return $this->builder->where('brand_id', request()->brand_id);
     }
 
     public function color_id()

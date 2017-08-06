@@ -36,13 +36,24 @@
                             {{--<a href="page_user_profile_1.html">view all</a>--}}
                         </li>
                         <li>
-                            <a href="{{ route('backend.faq.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Faq</span>
+                            <a href="{{ route('backend.slider.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Slider</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('backend.category.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Parent Category</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('backend.slider.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Slider</span>
+                            <a href="{{ route('backend.field.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.option.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Option Field</span>
                             </a>
                         </li>
                         <li>
@@ -57,18 +68,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('backend.category.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Parent Category</span>
+                            <a href="{{ route('backend.faq.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Faq</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('backend.field.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('backend.option.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Option Field</span>
+                            <a href="{{ route('backend.faq.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Term</span>
                             </a>
                         </li>
                     </ul>

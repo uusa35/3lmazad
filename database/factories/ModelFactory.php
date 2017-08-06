@@ -151,7 +151,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'title' => $faker->sentence(6),
         'price' => $faker->randomFloat(4, 4, 1000),
         'active' => $faker->boolean(100),
-        'is_sold' => $faker->boolean(),
+        'is_sold' => $faker->boolean(false),
         'featured' => $faker->boolean(),
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
         'user_id' => User::all()->random()->id,

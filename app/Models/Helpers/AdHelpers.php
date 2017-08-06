@@ -66,7 +66,7 @@ trait AdHelpers
 
     public function getWillExpireAtAttribute()
     {
-        return $this->deals->first()->end_date;
+        return $this->deals->first()->end_date->diffForHumans();
     }
 
     public function getIsExpiredAttribute()

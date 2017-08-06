@@ -33,7 +33,7 @@
                         </div>
                     @endforeach
                     @if(auth()->check())
-                        <form class="ui reply form" method="post" action="{{ route('auction.store') }}">
+                        <form class="ui reply form disabled" method="post" action="{{ route('auction.store') }}">
                             {{ csrf_field() }}
                             <div class="field">
                                 <textarea name="amount"></textarea>

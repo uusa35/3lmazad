@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Plan;
+use App\Models\Term;
 use App\Models\User;
 use Illuminate\Http\Request;
 
