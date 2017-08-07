@@ -6,7 +6,8 @@
                     data-content="{{ trans("message.parent_cat_ad_create") }}">
                 <option value="0">{{ trans('message.choose_main_category') }}</option>
                 @foreach($categories->where('parent_id',0) as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    {{ $selected = $element->category->parent()->first()->id && $element->category->parent()->first()->id == $category->id ? 'selected' : null }}
+                    <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -19,6 +20,12 @@
             <select id="subCategories-create" name="category_id" class="form-control tooltip-message"
                     data-content="{{ trans("message.sub_cat_ad_create") }}">
                 <option value="0">{{ trans('message.choose_sub_category') }}</option>
+                @if($element)
+                    @foreach($element->category->parent->children as $category)
+                        {{ $selected = $element->category_id == $category->id ? 'selected' : null }}
+                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }}</option>
+                    @endforeach
+                @endif
             </select>
         </div>
     </div>

@@ -40,7 +40,7 @@
         @endif
         @if($element->isOwner)
             <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
-                <div class="card__row--icon__icon"><span class="icon star"></span></div>
+                <div class="card__row--icon__icon"><i class="icon star" style="color: goldenrod;"></i></div>
                 <div class="card__row--icon__text">
                     <div class="card__row__title">{{ trans('general.make_special') }}</div>
                 </div>

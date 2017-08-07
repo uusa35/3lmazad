@@ -5,7 +5,7 @@
 
         <a class="ad-bar-children"><i class="icon calendar"></i>{{  $element->createdDate }}</a>
         <a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->willExpireAt }}</a>
-        @if(!is_null($element->brandName))
+        @if(!is_null($element->brand))
             <a class="ad-bar-children">
                 <img class="ui avatar image" style="width: 10px; height: auto;"
                      src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}

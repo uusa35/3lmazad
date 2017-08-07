@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59984ed71f29a43f9917cf2908b1e387",
+    "content-hash": "0be4dcb13064d7301e84196eadf5b965",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -59,6 +59,47 @@
                 "translator"
             ],
             "time": "2017-06-14T17:55:16+00:00"
+        },
+        {
+            "name": "brotzka/laravel-dotenv-editor",
+            "version": "v2.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Brotzka/laravel-dotenv-editor.git",
+                "reference": "d10926bd3ecc1f98b5e3aed23aae03a48a1edd9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Brotzka/laravel-dotenv-editor/zipball/d10926bd3ecc1f98b5e3aed23aae03a48a1edd9e",
+                "reference": "d10926bd3ecc1f98b5e3aed23aae03a48a1edd9e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brotzka\\DotenvEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Hagen",
+                    "email": "fabianhagen87@gmail.com"
+                }
+            ],
+            "description": "A package for editing the .env file in your Laravel root.",
+            "keywords": [
+                "dotenv",
+                "dotenv-editor",
+                "laravel"
+            ],
+            "time": "2017-05-07T05:39:47+00:00"
         },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",

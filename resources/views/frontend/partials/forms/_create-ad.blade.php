@@ -5,6 +5,7 @@
               enctype="multipart/form-data">
             {{ csrf_field() }}
             <input type="hidden" name="parent" id="parentCategory" value="null">
+            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <!-- Text input http://getbootstrap.com/css/#forms -->
             <div class="form-group">
                 <div class="col-lg-12">
@@ -12,7 +13,7 @@
                            class="control-label col-sm-3">{{ trans('general.title') }}</label>
                     <div class="col-sm-9">
                         <input class="form-control" name="title" value="{{ old('title') }}"
-                               placeholder="{{ trans('general.title') }}" type="text"
+                               placeholder="{{ trans('general.title') }}" type="text" required
                         >
                     </div>
                 </div>
@@ -26,7 +27,9 @@
                         <input class="form-control tooltip-message" name="image"
                                placeholder="{{ trans('general.image') }}"
                                data-content="{{ trans('message.image_ad_create') }}"
-                               type="file"/>
+                               type="file"
+                               required
+                        />
                     </div>
                 </div>
             </div>
@@ -51,6 +54,7 @@
                 <textarea class="form-control tooltip-message" name="description"
                           data-content="{!! trans('message.description_ad_create') !!}"
                           placeholder="{{ trans("general.description_ad_create") }}" maxlength="500"
+                          aria-required="true"
                 >{{ old('description') }}</textarea>
                     </div>
                 </div>
@@ -64,7 +68,8 @@
                         <input class="form-control tooltip-message" name="price" value="{{ old('price') }}"
                                data-content="{!! trans('message.price_ad_create') !!}"
                                placeholder="{{ trans('general.price') }}" type="number"
-                               maxlength="4">
+                               maxlength="4"
+                        >
                     </div>
                 </div>
             </div>

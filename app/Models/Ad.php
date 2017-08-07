@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Helpers\AdHelpers;
 use App\Models\Traits\AdTrait;
 use App\Scopes\ScopeActive;
+use App\Scopes\ScopeAdHasMeta;
 use App\Scopes\ScopeAdHasValidDeal;
 use App\Scopes\ScopeIsSold;
 use App\Scopes\ScopeItemMustHaveUserWithRole;
@@ -37,6 +38,7 @@ class Ad extends Model
             if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeIsSold());
+                static::addGlobalScope(new ScopeAdHasMeta());
                 static::addGlobalScope(new ScopeAdHasValidDeal());
             }
         }

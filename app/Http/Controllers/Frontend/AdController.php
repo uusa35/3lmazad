@@ -6,9 +6,11 @@ use App\Http\Requests\Frontend\AdStore;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Deal;
 use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Visitor;
+use App\Scopes\ScopeAdHasMeta;
 use App\Scopes\ScopeAdHasValidDeal;
 use App\Scopes\ScopeExpired;
 use App\Scopes\ScopeIsSold;
@@ -71,43 +73,26 @@ class AdController extends Controller
      */
     public function store(AdStore $request)
     {
-        $element = $this->ad->create([
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'user_id' => auth()->user()->id,
-            'price' => $request->price,
-            'category_id' => $request->category_id,
-            'area_id' => $request->area_id,
-            'brand_id' => $request->brand_id,
-            'model_id' => $request->model_id,
-            'type_id' => $request->type_id,
-            'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'start_date' => Carbon::today(),
-            'end_date' => Carbon::now()->addDays(Plan::where('is_free', true)->first()->duration)
-        ]);
-
-        $meta = $element->meta()->create([
-            'mobile' => $request->mobile,
-            'is_new' => $request->is_new,
-            'is_automatic' => $request->is_automatic,
-            'manufacturing_year' => $request->manufacturing_year,
-            'mileage' => $request->mileage,
-            'room_no' => $request->room_no,
-            'floor_no' => $request->floor_no,
-            'bathroom_no' => $request->bathroom_no,
-            'rent_type' => $request->rent_type,
-            'building_age' => $request->building_age,
-            'is_furnished' => $request->furnished,
-            'space' => $request->space,
-            'address' => $request->address
-        ]);
+        $element = $this->ad->create(
+            $request->only('title', 'category_id', 'user_id',
+                'price', 'area_id', 'brand_id', 'model_id', 'type_id', 'color_id', 'size_id')
+        );
 
         if (!$element) {
             return redirect()->route('account.user')->with('error', trans('message.error_ad_store'));
         }
+
+        // observer shall create new deal for the new ad.
+        $element->meta()->create(
+            $request->only('mobile', 'is_new', 'is_automatic', 'manufacturing_year', 'description',
+                'mileage', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age',
+                'is_furnished', 'space', 'address')
+        );
+
         $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
-        $this->saveGallery($element, $request, ['images'], ['600', '450'], false);
+        if ($request->hasFile('images')) {
+            $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
+        }
 
         return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
     }
@@ -120,7 +105,7 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->with('category','color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
+        $element = $this->ad->whereId($id)->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
@@ -154,9 +139,34 @@ class AdController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdStore $request, $id)
     {
-        //
+        $element = Ad::whereId($id)->first();
+
+        $updated = $element->update(
+            $request->only('title', 'category_id', 'user_id',
+                'price', 'area_id', 'brand_id', 'model_id', 'type_id', 'color_id', 'size_id')
+        );
+
+        if (!$updated) {
+            return redirect()->route('account.user')->with('error', trans('message.error_ad_store'));
+        }
+
+        // observer shall create new deal for the new ad.
+        $element->meta()->create(
+            $request->only('mobile', 'is_new', 'is_automatic', 'manufacturing_year', 'description',
+                'mileage', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age',
+                'is_furnished', 'space', 'address')
+        );
+
+        $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
+        if ($request->hasFile('images')) {
+            if ($element->gallery->first()->images->count() >= env('MAX_IMAGES')) {
+                return redirect()->route('account.user')->with('error', trans('message.gallery_update_max_images_reached'));
+            };
+            $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
+        }
+        return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
     }
 
     /**

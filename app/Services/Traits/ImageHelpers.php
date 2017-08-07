@@ -146,28 +146,19 @@ trait ImageHelpers
                                 $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
-            if ($request->files->get($inputName)) {
-                foreach ($request->$inputName as $image) {
-                    $imagePath = $image->store('public/uploads/images');
-                    $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-                    $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
-                    foreach ($sizes as $key => $value) {
-                        if ($value === 'large') {
-                            $img->resize($dimensions[0], $dimensions[1]);
-                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
-                        } elseif ($value === 'medium') {
-                            $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
-                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
-                        } elseif ($value === 'thumbnail') {
-                            $img->resize('292', '347');
-                            $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
-                        }
+            if ($request->hasFile($inputName)) {
+                if (count($request[$inputName]) > 1) {
+                    foreach ($request[$inputName] as $image) {
+                        $imagePath = $this->saveImageForGallery($image, $dimensions, $ratio, $sizes, $model);
+                        $model->images()->create([
+                            'image' => $imagePath,
+                        ]);
                     }
+                } else {
+                    $imagePath = $this->saveImageForGallery($request->images[0], $dimensions, $ratio, $sizes, $model);
                     $model->images()->create([
                         'image' => $imagePath,
                     ]);
-                    Storage::delete(public_path('storage/uploads/images/' . $imagePath));
-                    return $imagePath;
                 }
             } else {
                 return null;
@@ -183,5 +174,26 @@ trait ImageHelpers
             $constraint->aspectRatio();
         });
         $img->save(storage_path('app/public/uploads/images/' . $sizeType . '/' . $imagePath));
+    }
+
+    public function saveImageForGallery($image, $dimensions, $ration, $sizes, $model)
+    {
+        $imagePath = $image->store('public/uploads/images');
+        $imagePath = str_replace('public/uploads/images/', '', $imagePath);
+        $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
+        foreach ($sizes as $key => $value) {
+            if ($value === 'large') {
+                $img->resize($dimensions[0], $dimensions[1]);
+                $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
+            } elseif ($value === 'medium') {
+                $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
+                $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
+            } elseif ($value === 'thumbnail') {
+                $img->resize('292', '347');
+                $img->save(public_path('storage/uploads/images/' . $value . '/' . $imagePath));
+            }
+        }
+        Storage::delete(public_path('storage/uploads/images/' . $imagePath));
+        return $imagePath;
     }
 }

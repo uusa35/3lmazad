@@ -157,7 +157,7 @@ class UserController extends Controller
     public function ads($id)
     {
         $element = $this->user->whereId($id)->with('ads')->first();
-        $elements = $element->ads()->paginate(12);
+        $elements = $element->ads()->orderBy('created_at','desc')->paginate(12);
         return view('frontend.modules.user.ads', compact('element', 'elements'));
     }
 
@@ -173,7 +173,7 @@ class UserController extends Controller
             ->with(['category', 'meta','deals' => function ($q) {
                 return $q->withoutGlobalScopes();
             }])
-            ->get();
+            ->orderby('created_at','desc')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
     }
 

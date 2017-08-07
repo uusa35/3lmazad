@@ -21,7 +21,7 @@ class AdStore extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->id == $this->user_id;
     }
 
     /**
@@ -29,14 +29,14 @@ class AdStore extends FormRequest
      *
      * @return array
      */
-    public function messages()
-    {
-        return [
-            '*.numeric' => ':attribute ' . trans('message.error_numeric'),
-            '*.required' => ':attribute ' . trans('message.error_required'),
-            '*.rule' => ':attribute ' . trans('message.error_invalid'),
-        ];
-    }
+//    public function messages()
+//    {
+//        return [
+//            '*.numeric' => ':attribute ' . trans('message.error_numeric'),
+//            '*.required' => ':attribute ' . trans('message.error_required'),
+//            '*.rule' => ':attribute ' . trans('message.error_invalid'),
+//        ];
+//    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -46,9 +46,9 @@ class AdStore extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:200', // required
+            'title' => 'required|max:200|alpha_num', // required
             'description' => 'required|max:1500', // required
-            'image' => 'image', // required
+            'image' => 'required|image', // required
             'images' => 'array|nullable',
             'price' => 'required|numeric', // required
             'category_id' => ['required', Rule::in(Category::all()->pluck('id')->toArray())], // required
@@ -67,7 +67,8 @@ class AdStore extends FormRequest
             'building_age' => 'nullable|digits_between:1,4',
             'is_furnished' => 'nullable|boolean',
             'space' => 'nullable|numeric',
-            'address' => 'nullable|alpha_num',
+            'address' => 'nullable|max:500',
+            'user_id' => 'required|numeric'
         ];
     }
 }

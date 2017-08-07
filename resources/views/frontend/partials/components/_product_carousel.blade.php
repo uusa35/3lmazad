@@ -1,6 +1,7 @@
 <section class="content">
     <div class="container">
-        <h2 class="text-center text-uppercase">{{ isset($header) ? $header : null }}</h2>
+        <div class="divider divider--xs product-info__divider"></div>
+        <h1 class="text-center text-uppercase">{{ isset($header) ? $header : null }}</h1>
         <hr>
         <div class="product-category-carousel mobile-special-arrows animated-arrows slick">
             @if(!$elements->isEmpty())

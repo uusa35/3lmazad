@@ -5,7 +5,7 @@
         <div class="page-logo">
             <a href="{{ route('backend.home') }}">
                 <img src="{{ asset('storage/uploads/images/thumbnail/'.$contactus->logo) }}"
-                         style="max-width: 160px; height: 50px; padding: 0px; margin: 0px;"
+                     style="max-width: 160px; height: 50px; padding: 0px; margin: 0px;"
                      alt="logo" class="img-responsive logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler">
@@ -53,7 +53,8 @@
                         </li>
                         <li>
                             <a href="{{ route('backend.option.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Option Field</span>
+                                <span class="details"><i
+                                            class="fa fa-fw fa-plus-square"></i> Create New Option Field</span>
                             </a>
                         </li>
                         <li>
@@ -300,6 +301,10 @@
                         <li>
                             <a href="{{ url('backend/translations') }}">
                                 <i class="fa fa-fw fa-language"></i> Translations </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('backend/enveditor') }}">
+                                <i class="fa fa-fw fa-gear"></i> Global Settings </a>
                         </li>
                         <li class="divider"></li>
                         <li>

@@ -5,6 +5,8 @@
               enctype="multipart/form-data">
             {{ csrf_field() }}
             <input type="hidden" name="parent" id="parentCategory" value="null">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <!-- Text input http://getbootstrap.com/css/#forms -->
             <div class="form-group">
                 <div class="col-lg-12">
@@ -61,10 +63,11 @@
                     <label for="price"
                            class="control-label col-sm-3">{{ trans('general.price') }}</label>
                     <div class="col-sm-9">
-                        <input class="form-control tooltip-message" name="price" value="{{ $element->price }}"
+                        <input class="form-control tooltip-message" name="price" value="{{ round($element->price) }}"
                                data-content="{!! trans('message.price_ad_create') !!}"
-                               placeholder="{{ trans('general.price') }}" type="number"
-                               maxlength="4">
+                               placeholder="{{ $element->price }}" type="number"
+                               maxlength="4"
+                               >
                     </div>
                 </div>
             </div>

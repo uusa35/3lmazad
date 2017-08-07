@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Ad;
 use App\Models\User;
+use App\Observers\AdObserver;
 use App\Observers\UserObserver;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Fitztrev\QueryTracer\Providers\QueryTracerServiceProvider;
@@ -23,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        User::observe(UserObserver::class);
+        Ad::observe(AdObserver::class);
         Blade::directive('checkTrans', function ($element) {
             !emptyString(trans($element)) ? trans($element) : null;
         });

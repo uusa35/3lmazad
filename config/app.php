@@ -188,7 +188,8 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-        Usama\Tap\TapServiceProvider::class
+        Usama\Tap\TapServiceProvider::class,
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
 
     ],
 
@@ -242,5 +243,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Date' => Jenssegers\Date\Date::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
     ],
 ];
