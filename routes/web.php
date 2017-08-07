@@ -75,7 +75,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('deal', 'DealController');
     Route::resource('plan', 'PlanController');
     Route::resource('contactus', 'ContactusController');
-    Route::resource('slider', 'Slidercontroller');
+    Route::resource('slider', 'SliderController');
     Route::resource('category', 'CategoryController');
     Route::get('assign/category/{id}', 'CategoryController@getAssignField')->name('category.assign');
     Route::post('assign/category/{id}', 'CategoryController@postAssignField')->name('category.assign');
