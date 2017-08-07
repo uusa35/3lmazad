@@ -65,7 +65,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 
 Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'adminOnly']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::resource('user', 'Usercontroller');
+    Route::resource('user', 'UserController');
     Route::resource('ad', 'AdController');
     Route::get('activation', 'HomeController@toggleActivate')->name('activation');
     Route::get('featured', 'HomeController@toggleFeatured')->name('featured');
