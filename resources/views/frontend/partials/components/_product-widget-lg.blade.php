@@ -52,14 +52,6 @@
                     <div class="product-preview__info__title text-center">
                         <h4><a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,'25') }}</a></h4>
                     </div>
-                    @if(is_null($element->color->code))
-                        <ul class="options-swatch options-swatch--color">
-                            {{--<li><a href="#"><span class="swatch-label"><img--}}
-                            {{--src="http://placehold.it/100x100/{{ $element->color->code }}" width="10"--}}
-                            {{--height="10"--}}
-                            {{--alt=""/></span></a></li>--}}
-                        </ul>
-                    @endif
                     <div class="price-box text-center">
                         <span class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span>
                     </div>
@@ -68,7 +60,7 @@
 
                         <div class="product-preview__info__link hidden-xs">
                             <div class="ui small basic icon buttons hidden-xs">
-                                @if(!is_null($element->brandName))
+                                @if(!is_null($element->brand))
                                     <button class="ui button"><i class="file icon"></i> {{ $element->brandName }}
                                     </button>
                                 @endif

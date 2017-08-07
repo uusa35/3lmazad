@@ -193,16 +193,16 @@ $(document).ready(function() {
     $('#category-create').on('change', function(e) {
         // fetch the parent categoryID
         let catId = e.target.value;
-        console.log(catId);
         // remove all sub categories
         $('#subCategories-create').html('');
         $('#input-create-brand_id').html('');
         $('#input-create-brand_id').append(`
-            <option value="0">choose brand</option>
+            <option value=>choose brand</option>
         `);
         $('#input-create-model_id').html('');
         $('div[id^="field-create-"]').addClass('hidden');
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
+            console.log(data.parent);
             data.parent.fields.map(f => {
                 let nameField = 'name_' + lang;
                 $('#field-create-' + f.name).removeClass('hidden');

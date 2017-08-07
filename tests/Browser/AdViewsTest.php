@@ -82,9 +82,9 @@ class AdViewsTest extends DuskTestCase
     public function test_edit_ad()
     {
         $parent = Category::parents()->whereHas('fields', function ($q) {
-            return $q->where('name', 'brand_id');
+            return $q->where('name', 'rent_type');
         })->first();
-        $ad = Ad::where('category_id', $parent->children->first()->id)->where('user_id', '!=', null)->first();
+        $ad = Ad::where('user_id', '!=', null)->first();
 //        dd($ad->user_id);
         $this->browse(function (Browser $browser) use ($parent, $ad) {
             $browser->visit('/home')
@@ -94,21 +94,33 @@ class AdViewsTest extends DuskTestCase
                 ->attach('image', '/Users/usamaahmed/Documents/3lmazad.png')
                 ->attach('images[]', '/Users/usamaahmed/Documents/3lmazad.png')
                 ->type('textarea[name=description]', 'whatever')
-                ->type('input[name=price]', 123)
-                ->type('input[name=mobile]', 123123)
+                ->type('input[name=price]', 333)
+                ->type('input[name=mobile]', 3333)
                 ->select('#category-create', $parent->id)
                 ->waitFor('#subCategories-create')
                 ->select('#subCategories-create', $parent->children()->first()->id)
-                ->pause(100000)
-                ->waitForText('brand_id')
-                ->waitForText('color_id')
-                ->select('#input-create-brand_id', $parent->brands->random()->id)
-                ->select('#input-create-color_id', Color::all()->random()->id)
-                ->select('#input-create-size_id', Color::all()->random()->id)
-                ->value('input[name=manufacturing_year]', '1999')
+                ->waitForText('is_new')->waitForText('room_no')->waitForText('bathroom_no')->waitForText('space')
+//                mobile
+//manufacturing_year
+//mileage
+//room_no
+//floor_no
+//bathroom_no
+//rent_type
+//building_age
+//space
+//address
+//is_new
+//is_automatic
+//is_furnished
                 ->select('#input-create-is_new', 1)
-                ->select('#input-create-is_automatic', 1)
-                ->value('input[name=mileage]', '1000')
+                ->select('#input-create-is_furnished', 1)
+                ->select('#input-create-rent_type', 'daily')
+                ->select('#input-create-room_no', 1)
+                ->select('#input-create-bathroom_no', 1)
+                ->select('#input-create-building_age', 1)
+                ->type('#input-create-floor_no', 1)
+                ->type('#input-create-space', 45)
                 ->select('#area_id', Area::all()->random()->id)
                 ->type('input[name=address]', 'this is test address')
                 ->pause(1000000)

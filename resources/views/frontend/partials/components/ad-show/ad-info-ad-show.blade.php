@@ -11,6 +11,11 @@
                      src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
             </a>
         @endif
+        @if(!is_null($element->color))
+            <a class="ad-bar-children"><i class="icon square" style="color: {{ $element->color->code }};"></i>
+                {{ trans('general.color') }}
+            </a>
+        @endif
         @if(!is_null($element->meta->mileage))
             <a class="ad-bar-children"><i class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
             </a>

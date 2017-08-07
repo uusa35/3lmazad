@@ -30,11 +30,16 @@ Route::get('brand/{id}/models', function ($id) {
 });
 
 Route::get('category/{id}', function ($id) {
-    $parent = Category::whereId($id)->with('fields.options', 'brands', 'children','types')->first();
+    $parent = Category::whereId($id)->with('fields')->first();
     if (!$parent->is_parent) {
-        $parent = $parent->parent()->with('fields.options', 'brands', 'children','types')->first();
+        $parent = $parent->parent()->with('fields')->first();
     }
-    return response()->json(['parent' => $parent], 200);
+    if($parent->fields->where('name','brand_id')->first()) {
+        $parent = Category::whereId($id)->with('fields.options','brands','children','types')->first();
+    } else {
+        $parent = Category::whereId($id)->with('fields.options','children','types')->first();
+    }
+    return response()->json(['parent' => $parent],200);
 
 });
 
