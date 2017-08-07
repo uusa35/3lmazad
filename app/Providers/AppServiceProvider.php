@@ -10,6 +10,7 @@ use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Fitztrev\QueryTracer\Providers\QueryTracerServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laracasts\Generators\GeneratorsServiceProvider;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Ad::observe(AdObserver::class);
         Blade::directive('checkTrans', function ($element) {
             !emptyString(trans($element)) ? trans($element) : null;
