@@ -23,9 +23,9 @@ trait AdHelpers
             ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
-            ->whereHas('user.roles', function ($q) {
-                return $q;
-            })
+//            ->whereHas('user.roles', function ($q) {
+//                return $q;
+//            })
             ->whereHas('deals', function ($q) {
                 return $q->whereHas('plan', function ($q) {
                     return $q;
