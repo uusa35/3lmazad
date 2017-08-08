@@ -83,23 +83,22 @@ class CategoriesTableSeeder extends Seeder
                     });
                 }
             }
-        } elseif (app()->environment('production')) {
+        } elseif (app()->environment('development')) {
             $categories = collect(config('categories'));
-
             foreach ($categories as $category) {
                 //PARENT
                 $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent']]);
 
                 foreach ($category['fields'] as $f) {
-                    $fieldExist = Field::where('name', $f['name'])->first();
+                    $fieldExist = Field::withoutGlobalScopes()->where('name', $f['name'])->first();
                     if ($fieldExist) {
-                        $parent->fields()->save($fieldExist);
+                        $parent->fields()->withoutGlobalScopes()->save($fieldExist);
                     } else {
                         $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'is_model' => $f['is_model'], 'collection_name' => $f['collection_name']]);
-                        $field->categories()->attach($parent->id);
+                        $field->categories()->withoutGlobalScopes()->attach($parent->id);
                         if (count($f['options']) > 1) {
                             foreach ($f['options'] as $k => $v) {
-                                $field->options()->save(factory(Option::class)->create(['name_ar' => $k . '_Ar', 'name_en' => $k . '_En', 'value' => $v]));
+                                $field->options()->withoutGlobalScopes()->save(factory(Option::class)->create(['name_ar' => $k . '_Ar', 'name_en' => $k . '_En', 'value' => $v]));
                             }
                         }
                     }
@@ -119,25 +118,25 @@ class CategoriesTableSeeder extends Seeder
                     // CREATE ADS FOR EACH SUB
                     factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
 
-                        $subCat->ads()->save($ad);
+                        $subCat->ads()->withoutGlobalScopes()->save($ad);
 
                         $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
 
                         // create meta for each ad
-                        $ad->meta()->save(factory(AdMeta::class)->create());
+                        $ad->meta()->withoutGlobalScopes()->save(factory(AdMeta::class)->create());
 
                         // GALLERY FOR EACH ADD
-                        $ad->gallery()->save($gallery);
+                        $ad->gallery()->withoutGlobalScopes()->save($gallery);
                         // IMAGES FOR EACH GALLERY
                         factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
 
                         // COMMENTS FOR EACH AD
-                        $ad->comments()->saveMany(factory(Comment::class, 2)->create());
+                        $ad->comments()->withoutGlobalScopes()->saveMany(factory(Comment::class, 2)->create());
 
                         // Auctions FOR EACH AD
-                        $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
+                        $ad->auctions()->withoutGlobalScopes()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
 
-                        $ad->deals()->saveMany(factory(Deal::class, 1)->create());
+                        $ad->deals()->withoutGlobalScopes()->saveMany(factory(Deal::class, 1)->create());
                     });
                 }
             }

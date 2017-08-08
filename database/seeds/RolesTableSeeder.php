@@ -19,7 +19,6 @@ class RolesTableSeeder extends Seeder
         if(Schema::hasTable('users') && DB::table('users')->count() > 0) {
             foreach ($roles as $k => $v) {
                 factory(Role::class)->create(['name' => $v, 'is_admin' => $v === 'admin' ? true : false])->each(function ($role) {
-                    var_dump($role->id);
                     if ($role->id == 1) {
                         $role->users()->save(User::withoutGlobalScopes()->whereId(1)->first());
                     } else {
