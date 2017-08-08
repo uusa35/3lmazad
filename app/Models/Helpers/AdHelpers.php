@@ -25,7 +25,7 @@ trait AdHelpers
             ->where(['is_sold' => false, 'active' => true])
             ->selectRaw('ads.*, count(*) as ad_count')
             ->join('ad_visitors', 'ads.id', '=', 'ad_visitors.ad_id')
-            ->groupBy('ad_id')// responsible to get the sum of ads returned
+            ->groupBy('ad_visitors.ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
             ->take(15)->pluck('id');
         return $this->whereIn('id',$ids)->get();
