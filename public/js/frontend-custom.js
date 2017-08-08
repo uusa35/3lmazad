@@ -275,6 +275,7 @@ $(document).ready(function () {
     // ad.create categories
     $('#category-create').on('change', function (e) {
         // fetch the parent categoryID
+        console.log('category-create change');
         var catId = e.target.value;
         // remove all sub categories
         $('#subCategories-create').html('');
