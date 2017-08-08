@@ -8,7 +8,6 @@ use App\Scopes\ScopeActive;
 use App\Scopes\ScopeAdHasMeta;
 use App\Scopes\ScopeAdHasValidDeal;
 use App\Scopes\ScopeIsSold;
-use App\Scopes\ScopeItemMustHaveUserWithRole;
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +33,7 @@ class Ad extends Model
     {
         parent::boot();
 
+        dd('stop');
         if (!app()->environment('seeding')) {
             if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
