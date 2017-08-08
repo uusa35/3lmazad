@@ -118,15 +118,15 @@ class CategoriesTableSeeder extends Seeder
                     // CREATE ADS FOR EACH SUB
                     factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
 
-                        $subCat->ads()->withoutGlobalScopes()->save($ad);
+                        $subCat->withoutGlobalScopes()->ads()->withoutGlobalScopes()->save($ad);
 
                         $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
 
                         // create meta for each ad
-                        $ad->meta()->withoutGlobalScopes()->save(factory(AdMeta::class)->create());
+                        $ad->withoutGlobalScopes()->meta()->withoutGlobalScopes()->save(factory(AdMeta::class)->create());
 
                         // GALLERY FOR EACH ADD
-                        $ad->gallery()->withoutGlobalScopes()->save($gallery);
+                        $ad->withoutGlobalScopes()->gallery()->withoutGlobalScopes()->save($gallery);
                         // IMAGES FOR EACH GALLERY
                         factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
 
@@ -136,7 +136,7 @@ class CategoriesTableSeeder extends Seeder
                         // Auctions FOR EACH AD
                         $ad->auctions()->withoutGlobalScopes()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
 
-                        $ad->deals()->withoutGlobalScopes()->saveMany(factory(Deal::class, 1)->create());
+                        $ad->withoutGlobalScopes()->deals()->withoutGlobalScopes()->saveMany(factory(Deal::class, 1)->create());
                     });
                 }
             }
