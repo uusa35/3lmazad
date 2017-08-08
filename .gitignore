@@ -10,5 +10,5 @@ Homestead.yaml
 npm-debug.log
 .env
 resources/assets/html/*
-storage/app
+storage/app/uploads/
 /bower_components
