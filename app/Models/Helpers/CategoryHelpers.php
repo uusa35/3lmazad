@@ -40,7 +40,7 @@ trait CategoryHelpers
 
     public function getIsParentAttribute()
     {
-        return $this->parent_id === 0 ? true : false;
+        return $this->parent_id == 0 ? true : false;
     }
 
     public function getIsSubAttribute()
