@@ -3,6 +3,8 @@
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,17 +16,21 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         $roles = ['admin', 'user', 'merchant'];
-        foreach ($roles as $k => $v) {
-            factory(Role::class)->create(['name' => $v, 'is_admin' => $v === 'admin' ? true : false])->each(function ($role) {
-                var_dump($role->id);
-                if ($role->id == 1) {
-                    $role->users()->save(User::whereId(1)->first());
-                } else {
-                    $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
-                        return $q;
-                    })->take(4)->pluck('id')->toArray());
-                }
-            });
+        if(Schema::hasTable('users') && DB::table('users')->count() > 0) {
+            foreach ($roles as $k => $v) {
+                factory(Role::class)->create(['name' => $v, 'is_admin' => $v === 'admin' ? true : false])->each(function ($role) {
+                    var_dump($role->id);
+                    if ($role->id == 1) {
+                        $role->users()->save(User::whereId(1)->first());
+                    } else {
+                        $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
+                            return $q;
+                        })->take(4)->pluck('id')->toArray());
+                    }
+                });
+            }
+        } else {
+            dd('none');
         }
     }
 }
