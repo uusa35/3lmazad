@@ -19,6 +19,7 @@ class Category extends Model
 {
     use CategoryTrait, CategoryHelpers, LocaleTrait, ModelHelpers;
     public $localeStrings = ['name'];
+    protected $guarded = [''];
 
     /**
      * The "booting" method of the model.
@@ -37,7 +38,6 @@ class Category extends Model
         }
     }
 
-    protected $guarded = [''];
 
     public function parent()
     {
