@@ -47,19 +47,19 @@ class CategoriesTableSeeder extends Seeder
                     }
                 }
                 // BRAND FOR EACH PARENT
-                factory(Brand::class, 6)->create(['category_id' => $parent->id])->each(function ($brand) {
+                factory(Brand::class, 2)->create(['category_id' => $parent->id])->each(function ($brand) {
                     // MODEL FOR EACH BRAND
-                    factory(BrandModel::class, 6)->create(['brand_id' => $brand->id]);
+                    factory(BrandModel::class, 2)->create(['brand_id' => $brand->id]);
                 });
                 // TYPES FOR EACH PARENT
-                factory(Type::class, 5)->create(['category_id' => $parent->id]);
+                factory(Type::class, 2)->create(['category_id' => $parent->id]);
 
                 foreach ($category['sub'] as $sub) {
                     //SUB
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class, 20)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+                    factory(Ad::class, 2)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
 
                         $subCat->ads()->save($ad);
 
