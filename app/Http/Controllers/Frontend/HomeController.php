@@ -39,6 +39,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return 'started';
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         var_dump('1');
         dd($mostVisitedAds);
