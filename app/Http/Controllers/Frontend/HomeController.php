@@ -45,11 +45,11 @@ class HomeController extends Controller
         var_dump('2');
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
         var_dump('3');
+        return 'stop';
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         var_dump('4');
         $sliders = Slider::orderBy('order', 'desc')->get();
         var_dump('5');
-        return 'stop';
         return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed','latestAds'));
     }
 
