@@ -46,11 +46,11 @@ class AdController extends Controller
             } else {
                 $ads = $this->ad->where('category_id', $cat);
             }
-            dd($ads);
             $ads = $ads->with('deals', 'category', 'brand', 'user');
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
             $paidAds = $ads->hasDealWithPaidPlan()->orderBy('created_at', 'desc')->take(12)->get();
             $elements = $ads->orderBy('created_at', 'desc')->paginate(12);
+            dd($paidAds);
             return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites', 'element'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
