@@ -167,4 +167,8 @@ class Filters extends QueryFilters
         return $this->builder->hasValidDeal();
     }
 
+    public function page() {
+        return $this->builder;
+    }
+
 }

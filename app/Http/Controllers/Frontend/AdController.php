@@ -42,6 +42,8 @@ class AdController extends Controller
             $category = $this->category->whereId($cat)->first();
             if ($category->isParent) {
                 $cat = $this->category->whereId($cat)->first()->children()->pluck('id');
+            } else {
+                $cat = [$cat];
             }
             $elements = $this->ad->whereIn('category_id', $cat)->with('meta', 'category', 'brand')->orderBy('created_at', 'desc')->paginate(12);
             $paidAds = $this->ad->whereIn('category_id', $cat)->hasDealWithPaidPlan()->with('meta', 'category', 'brand')->orderBy('created_at', 'desc')->take(12)->get();

@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Date\Date;
 
@@ -59,4 +60,35 @@ trait ModelHelpers
         return $this->area->name;
     }
 
+    public function scopeAdHasMeta($q)
+    {
+        return $q->whereHas('meta', function ($q) {
+            return $q;
+        }, '>', 0);
+    }
+
+    public function scopeAdHasValidDeal($q)
+    {
+        return $q->whereHas('deals', function ($q) {
+            return $q->where('end_date', '>', Carbon::now());
+        }, '>', 0);
+    }
+
+    public function scopeAdHasValidFreeDeal($q)
+    {
+        return $q->whereHas('deals', function ($q) {
+            return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                $q->where('is_paid',false);
+            });
+        }, '>', 0);
+    }
+
+    public function scopeAdHasValidPaidDeal($q)
+    {
+        return $q->whereHas('deals', function ($q) {
+            return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                $q->where('is_paid',true);
+            });
+        }, '>', 0);
+    }
 }

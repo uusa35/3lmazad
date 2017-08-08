@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--@include('frontend.partials.components._bar-pagination-filters')--}}
+                    @include('frontend.partials.components._bar-pagination-filters')
                 </div>
             </div>
         </div>
