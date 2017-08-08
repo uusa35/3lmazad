@@ -276,16 +276,16 @@ $(document).ready(function () {
     $('#category-create').on('change', function (e) {
         // fetch the parent categoryID
         var catId = e.target.value;
-        console.log(catId);
         // remove all sub categories
         $('#subCategories-create').html('');
         $('#input-create-brand_id').html('');
-        $('#input-create-brand_id').append('\n            <option value="0">choose brand</option>\n        ');
+        $('#input-create-brand_id').append('\n            <option value=>choose brand</option>\n        ');
         $('#input-create-model_id').html('');
         $('div[id^="field-create-"]').addClass('hidden');
         return axios.get('api/category/' + catId).then(function (res) {
             return res.data;
         }).then(function (data) {
+            console.log(data.parent);
             data.parent.fields.map(function (f) {
                 var nameField = 'name_' + lang;
                 $('#field-create-' + f.name).removeClass('hidden');
