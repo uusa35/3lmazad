@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/storage
+/public/storage/
 /storage/*.key
 /vendor
 /.idea
@@ -12,5 +12,5 @@ npm-debug.log
 .env.example
 .env.seeding
 resources/assets/html/*
-storage/app/uploads/
+storage/app
 /bower_components
