@@ -15,8 +15,8 @@ class RolesTableSeeder extends Seeder
     {
         $roles = ['admin', 'user', 'merchant'];
         foreach ($roles as $k => $v) {
-            factory(Role::class)->create(['name' => $v, 'is_admin' => $v == 'admin' ? true : false])->each(function ($role) {
-                if ($role->name == 'admin') {
+            factory(Role::class)->create(['name' => $v, 'is_admin' => $v === 'admin' ? true : false])->each(function ($role) {
+                if ($role->id == 1) {
                     $role->users()->attach((User::whereId(1)->first()->id));
                 } else {
                     $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {

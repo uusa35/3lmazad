@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
                 $this->call(AreasTableSeeder::class);
                 $this->call(PlansTableSeeder::class);
                 $this->call(UsersTableSeeder::class);
+                $this->call(RolesTableSeeder::class);
                 $this->call(ColorsTableSeeder::class);
                 $this->call(SizesTableSeeder::class);
                 $this->call(SlidersTableSeeder::class);
@@ -68,7 +69,6 @@ class DatabaseSeeder extends Seeder
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
-                $this->call(RolesTableSeeder::class);
             }
         } else {
             dd('please change the .env environment const to : seeding');
