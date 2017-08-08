@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment('local', 'seeding', 'testing')) {
+        if ($this->app->environment('local', 'seeding', 'testing','production')) {
             $this->app->register(IdeHelperServiceProvider::class);
             $this->app->register(GeneratorsServiceProvider::class);
             $this->app->register(ArtisanViewServiceProvider::class);
