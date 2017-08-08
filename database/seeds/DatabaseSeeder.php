@@ -55,7 +55,6 @@ class DatabaseSeeder extends Seeder
 
         } elseif (app()->environment('production')) {
             if (DB::table('countries')->count() <= 0) {
-                $this->emptyTables($this->tables);
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
