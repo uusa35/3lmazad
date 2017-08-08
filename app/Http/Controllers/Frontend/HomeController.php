@@ -39,17 +39,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mostVisitedAds = $this->ad->getMostVisitedAds();
-        var_dump('1');
-        dd($mostVisitedAds);
+//        $mostVisitedAds = $this->ad->getMostVisitedAds();
+        $mostVisitedAds = collect([]);
         $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
-        var_dump('2');
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
-        var_dump('3');
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
-        var_dump('4');
         $sliders = Slider::orderBy('order', 'desc')->get();
-        var_dump('5');
         return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed','latestAds'));
     }
 

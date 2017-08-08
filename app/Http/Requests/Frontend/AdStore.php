@@ -46,7 +46,7 @@ class AdStore extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:200|alpha_num', // required
+            'title' => 'required|max:200', // required
             'description' => 'required|max:1500', // required
             'image' => 'required|image', // required
             'images' => 'array|nullable',

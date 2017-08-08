@@ -19,7 +19,7 @@ trait AdHelpers
      */
     public function getMostVisitedAds($take = 10)
     {
-        $test = $this->selectRaw('ads.*, count(*) as ad_count')
+        return $this->selectRaw('ads.*, count(*) as ad_count')
             ->join('favorites', 'ads.id', '=', 'favorites.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
@@ -32,7 +32,6 @@ trait AdHelpers
                 });
             })
             ->take($take)->get();
-        dd($test);
     }
 
     /**
