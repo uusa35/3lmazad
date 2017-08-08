@@ -63,11 +63,11 @@ class DatabaseSeeder extends Seeder
                 $this->call(ColorsTableSeeder::class);
                 $this->call(SizesTableSeeder::class);
                 $this->call(SlidersTableSeeder::class);
-                $this->command->info('sliders are done');
-                $this->call(RolesTableSeeder::class);
                 $this->call(ContactusTableSeeder::class);
+                $this->command->info('sliders are done');
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
+                $this->call(RolesTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
             }
         } else {
