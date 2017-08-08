@@ -35,7 +35,7 @@ import magnificPopup from 'magnific-popup';
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = 'http://3lmazad.dev/';
+window.axios.defaults.baseURL = 'http://3lmazad.ideasowners.net/';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
