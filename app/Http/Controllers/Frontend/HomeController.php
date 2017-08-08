@@ -41,11 +41,11 @@ class HomeController extends Controller
     {
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         var_dump('1');
+        dd($mostVisitedAds);
         $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
         var_dump('2');
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
         var_dump('3');
-        return 'stop';
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         var_dump('4');
         $sliders = Slider::orderBy('order', 'desc')->get();
