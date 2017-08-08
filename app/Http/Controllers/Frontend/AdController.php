@@ -38,7 +38,6 @@ class AdController extends Controller
     {
         // if the parent id is there go ahead and make the session
         $cat = request()->id;
-        dd($cat);
         if (!is_null($cat)) {
             $category = $this->category->whereId($cat)->first();
             if ($category->isParent) {
@@ -47,6 +46,7 @@ class AdController extends Controller
             } else {
                 $ads = $this->ad->where('category_id', $cat);
             }
+            dd($ads);
             $ads = $ads->with('deals', 'category', 'brand', 'user');
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
             $paidAds = $ads->hasDealWithPaidPlan()->orderBy('created_at', 'desc')->take(12)->get();
