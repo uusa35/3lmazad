@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder
                 $this->command->info('sliders are done');
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
-                $this->call(RolesTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
+                $this->call(RolesTableSeeder::class);
             }
         } else {
             dd('please change the .env environment const to : seeding');
