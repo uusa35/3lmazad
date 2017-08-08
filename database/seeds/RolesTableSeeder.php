@@ -21,16 +21,16 @@ class RolesTableSeeder extends Seeder
                 factory(Role::class)->create(['name' => $v, 'is_admin' => $v === 'admin' ? true : false])->each(function ($role) {
                     var_dump($role->id);
                     if ($role->id == 1) {
-                        $role->users()->save(User::whereId(1)->first());
+                        $role->users()->save(User::withoutGlobalScopes()->whereId(1)->first());
                     } else {
-                        $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
+                        $role->users()->attach(User::withoutGlobalScopes()->where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
                             return $q;
                         })->take(4)->pluck('id')->toArray());
                     }
                 });
             }
         } else {
-            dd('none');
+            dd('stop here');
         }
     }
 }
