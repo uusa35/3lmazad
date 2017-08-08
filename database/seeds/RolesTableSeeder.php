@@ -21,7 +21,7 @@ class RolesTableSeeder extends Seeder
                 } else {
                     $role->users()->attach(User::where('id', '!=', 1)->whereDoesntHave('roles', function ($q) {
                         return $q;
-                    })->take(5)->pluck('id'));
+                    })->take(4)->pluck('id'));
                 }
             });
         }
