@@ -47,19 +47,19 @@ class CategoriesTableSeeder extends Seeder
                     }
                 }
                 // BRAND FOR EACH PARENT
-                factory(Brand::class, 2)->create(['category_id' => $parent->id])->each(function ($brand) {
+                factory(Brand::class, 6)->create(['category_id' => $parent->id])->each(function ($brand) {
                     // MODEL FOR EACH BRAND
-                    factory(BrandModel::class, 2)->create(['brand_id' => $brand->id]);
+                    factory(BrandModel::class, 6)->create(['brand_id' => $brand->id]);
                 });
                 // TYPES FOR EACH PARENT
-                factory(Type::class, 2)->create(['category_id' => $parent->id]);
+                factory(Type::class, 5)->create(['category_id' => $parent->id]);
 
                 foreach ($category['sub'] as $sub) {
                     //SUB
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class, 2)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+                    factory(Ad::class, 20)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
 
                         $subCat->ads()->save($ad);
 
@@ -83,19 +83,64 @@ class CategoriesTableSeeder extends Seeder
                     });
                 }
             }
-        } elseif (app()->environment() === 'production') {
-            factory(Category::class, 1)->create(['parent_id' => 0, 'name' => 'product'])->each(function ($parent) {
-                $parent->children()->saveMany(factory(Category::class, 1)->create(['parent_id' => $parent->id, 'name' => 'main product cat']))
-                    ->each(function ($child) {
-                        $child->children()->saveMany(factory(Category::class, 1)->create(['parent_id' => $child->id, 'name' => 'sub product cat']));
+        } elseif (app()->environment('production')) {
+            $categories = collect(config('categories'));
+
+            foreach ($categories as $category) {
+                //PARENT
+                $parent = factory(Category::class)->create(['parent_id' => 0, 'name_ar' => $category['parent'], 'name_en' => $category['parent']]);
+
+                foreach ($category['fields'] as $f) {
+                    $fieldExist = Field::where('name', $f['name'])->first();
+                    if ($fieldExist) {
+                        $parent->fields()->save($fieldExist);
+                    } else {
+                        $field = factory(Field::class)->create(['name' => $f['name'], 'type' => $f['type'], 'is_model' => $f['is_model'], 'collection_name' => $f['collection_name']]);
+                        $field->categories()->attach($parent->id);
+                        if (count($f['options']) > 1) {
+                            foreach ($f['options'] as $k => $v) {
+                                $field->options()->save(factory(Option::class)->create(['name_ar' => $k . '_Ar', 'name_en' => $k . '_En', 'value' => $v]));
+                            }
+                        }
+                    }
+                }
+                // BRAND FOR EACH PARENT
+                factory(Brand::class, 2)->create(['category_id' => $parent->id])->each(function ($brand) {
+                    // MODEL FOR EACH BRAND
+                    factory(BrandModel::class, 2)->create(['brand_id' => $brand->id]);
+                });
+                // TYPES FOR EACH PARENT
+                factory(Type::class, 2)->create(['category_id' => $parent->id]);
+
+                foreach ($category['sub'] as $sub) {
+                    //SUB
+                    $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
+
+                    // CREATE ADS FOR EACH SUB
+                    factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+
+                        $subCat->ads()->save($ad);
+
+                        $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
+
+                        // create meta for each ad
+                        $ad->meta()->save(factory(AdMeta::class)->create());
+
+                        // GALLERY FOR EACH ADD
+                        $ad->gallery()->save($gallery);
+                        // IMAGES FOR EACH GALLERY
+                        factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
+
+                        // COMMENTS FOR EACH AD
+                        $ad->comments()->saveMany(factory(Comment::class, 2)->create());
+
+                        // Auctions FOR EACH AD
+                        $ad->auctions()->saveMany(factory(Auction::class, 2)->create(['ad_id' => $ad->id]));
+
+                        $ad->deals()->saveMany(factory(Deal::class, 1)->create());
                     });
-            });
-            factory(Category::class, 1)->create(['parent_id' => 0, 'name' => 'service'])->each(function ($parent) {
-                $parent->children()->saveMany(factory(Category::class, 1)->create(['parent_id' => $parent->id, 'name' => 'main service cat']))
-                    ->each(function ($child) {
-                        $child->children()->saveMany(factory(Category::class, 1)->create(['parent_id' => $child->id, 'name' => 'sub service cat']));
-                    });
-            });
+                }
+            }
         }
     }
 }
