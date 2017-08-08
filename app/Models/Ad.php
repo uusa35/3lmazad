@@ -40,7 +40,6 @@ class Ad extends Model
                 static::addGlobalScope(new ScopeAdHasMeta());
                 static::addGlobalScope(new ScopeAdHasValidDeal());
             }
-            dd('stop again');
         }
     }
 

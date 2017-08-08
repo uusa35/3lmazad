@@ -32,6 +32,7 @@ trait AdHelpers
                 });
             })
             ->take($take)->get();
+        dd($test);
     }
 
     /**
