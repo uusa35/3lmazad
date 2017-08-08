@@ -1,14 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Notes
-|--------------------------------------------------------------------------
-|
-| the model who has the foreign is the one that belongsTo and vise verse :)
-|
-*/
-
 Auth::routes();
 
 Route::group(['namespace' => 'Frontend'], function () {
