@@ -41,15 +41,11 @@ class AdController extends Controller
         if (!is_null($cat)) {
             $category = $this->category->whereId($cat)->first();
             if ($category->isParent) {
-                $subCategories = $this->category->whereId($cat)->first()->children()->pluck('id');
-                $ads = $this->ad->whereIn('category_id', $subCategories)->with('deals', 'category', 'brand', 'user');
-            } else {
-                $ads = $this->ad->where('category_id', $cat);
+                $cat = $this->category->whereId($cat)->first()->children()->pluck('id');
             }
+            $elements = $this->ad->whereIn('category_id', $cat)->with('meta', 'category', 'brand')->orderBy('created_at', 'desc')->paginate(12);
+            $paidAds = $this->ad->whereIn('category_id', $cat)->hasDealWithPaidPlan()->with('meta', 'category', 'brand')->orderBy('created_at', 'desc')->take(12)->get();
             $userFavorites = auth()->check() ? auth()->user()->favorites()->pluck('ad_id')->toArray() : null;
-//            $paidAds = $ads->hasDealWithPaidPlan()->orderBy('created_at', 'desc')->take(12)->get();
-            $paidAds = collect([]);
-            $elements = $ads->orderBy('created_at', 'desc')->paginate(12);
             return view('frontend.modules.ad.index', compact('elements', 'paidAds', 'userFavorites', 'element'));
         }
         return redirect()->home()->with('warning', trans('message.something_wrong'));
