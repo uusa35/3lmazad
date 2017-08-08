@@ -33,7 +33,6 @@ class Ad extends Model
     {
         parent::boot();
 
-        dd('stop');
         if (!app()->environment('seeding')) {
             if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
@@ -41,6 +40,7 @@ class Ad extends Model
                 static::addGlobalScope(new ScopeAdHasMeta());
                 static::addGlobalScope(new ScopeAdHasValidDeal());
             }
+            dd('stop again');
         }
     }
 
