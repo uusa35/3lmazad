@@ -23,7 +23,7 @@ trait AdHelpers
     {
         $ids = DB::table('ads')
             ->where(['is_sold' => false, 'active' => true])
-            ->selectRaw('ads.*, count(*) as ad_count')
+            ->selectRaw('ads.id, count(*) as ad_count')
             ->join('ad_visitors', 'ads.id', '=', 'ad_visitors.ad_id')
             ->groupBy('ads.id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
