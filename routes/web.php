@@ -2,9 +2,9 @@
 
 Auth::routes();
 
-Route::get('test', function () {
-    return 'test';
-});
+//Route::get('test', function () {
+//    return 'test';
+//});
 
 Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['middleware' => ['auth']], function () {
