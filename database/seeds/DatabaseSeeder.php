@@ -64,11 +64,11 @@ class DatabaseSeeder extends Seeder
                 $this->call(SizesTableSeeder::class);
                 $this->call(SlidersTableSeeder::class);
                 $this->command->info('sliders are done');
-                $this->call(CategoriesTableSeeder::class);
                 $this->call(RolesTableSeeder::class);
                 $this->call(ContactusTableSeeder::class);
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
+                $this->call(CategoriesTableSeeder::class);
             }
         } else {
             dd('please change the .env environment const to : seeding');
