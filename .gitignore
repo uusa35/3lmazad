@@ -9,6 +9,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+.env.example
+.env.seeding
 resources/assets/html/*
 storage/app/uploads/
 /bower_components

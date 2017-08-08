@@ -39,6 +39,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return 'works';
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
