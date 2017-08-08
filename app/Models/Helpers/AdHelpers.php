@@ -4,6 +4,7 @@ namespace App\Models\Helpers;
 use App\Models\Ad;
 use App\Services\Search\QueryFilters;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Created by PhpStorm.
@@ -20,11 +21,14 @@ trait AdHelpers
      */
     public function getMostVisitedAds($take = 10)
     {
-        return $this->selectRaw('ads.*, count(*) as ad_count')
+        $ids = DB::table('ads')
+            ->where(['is_sold' => false, 'active' => true])
+            ->selectRaw('ads.*, count(*) as ad_count')
             ->join('ad_visitors', 'ads.id', '=', 'ad_visitors.ad_id')
             ->groupBy('ad_id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
-            ->take($take)->get();
+            ->take(15)->pluck('id');
+        return $this->whereIn('id',$ids)->get();
     }
 
     /**
