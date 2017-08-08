@@ -1,1 +1,0 @@
-$(document).ready(function(){$("#dataTable").DataTable({order:[[0,"desc"]],bPaginate:!0,bLengthChange:!0,bFilter:!0,bInfo:!0,bAutoWidth:!0})});

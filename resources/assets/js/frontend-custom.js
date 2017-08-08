@@ -2,7 +2,7 @@
  * Created by usamaahmed on 5/18/17.
  */
 $(document).ready(function() {
-
+    console.log('jquery is ready ');
     // home (search form)
     var lang = $('#lang').text();
     $('#category').on('change', function() {
