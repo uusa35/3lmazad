@@ -49,6 +49,7 @@ class HomeController extends Controller
         var_dump('4');
         $sliders = Slider::orderBy('order', 'desc')->get();
         var_dump('5');
+        return 'stop';
         return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed','latestAds'));
     }
 
