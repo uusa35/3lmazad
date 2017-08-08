@@ -38,6 +38,7 @@ class AdController extends Controller
     {
         // if the parent id is there go ahead and make the session
         $cat = request()->id;
+        dd($cat);
         if (!is_null($cat)) {
             $category = $this->category->whereId($cat)->first();
             if ($category->isParent) {
