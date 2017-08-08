@@ -11,5 +11,6 @@ $(document).ready(function() {
         "bInfo": true,
         "bAutoWidth": true
     });
+    $('.datepicker').datepicker();
 });
 

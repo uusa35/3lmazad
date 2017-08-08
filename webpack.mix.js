@@ -31,6 +31,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
             './../../metronic_v4.5.6/theme/assets/global/plugins/select2/js/select2.full.min.js',
             './../../metronic_v4.5.6/theme/assets/pages/scripts/components-multi-select.min.js',
             './node_modules/datatables/media/js/jquery.dataTables.min.js',
+            './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/js.cookie.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js',

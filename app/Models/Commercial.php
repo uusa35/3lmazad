@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commercial extends Model
 {
-    use CommercialHelpers, LocaleTrait;
+    use CommercialHelpers, LocaleTrait, ModelHelpers;
     public $localeStrings = ['title', 'description'];
+    protected $guarded = [''];
     protected $dates = ['start_date', 'end_date', 'created_at', 'deleted_at'];
-    protected $casts = ['active'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $casts = ['active' => 'boolean'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     /**
      * The "booting" method of the model.
@@ -28,7 +29,7 @@ class Commercial extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend',request()->segments(), true)) {
+            if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeExpired());
             }
