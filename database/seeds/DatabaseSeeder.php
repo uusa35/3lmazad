@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             $this->call(UsersCategoriesSeeder::class);
             $this->call(AbuseReportsTableSeeder::class);
 
-        } elseif (app()->environment('production')) {
+        } elseif (app()->environment('production','development')) {
             if (DB::table('countries')->count() <= 0) {
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
