@@ -27,7 +27,6 @@ class Filters extends QueryFilters
 
     public function search($search)
     {
-        var_dump('from search');
         return $this->builder->where(function ($q) use ($search) {
             $q->whereHas('meta', function ($q) use ($search) {
                 return $q->where('description', 'like', "%{$search}%");
@@ -37,7 +36,6 @@ class Filters extends QueryFilters
 
     public function parent()
     {
-        var_dump('from parent');
         $subs = $this->category->whereId(request()->parent)->first()->children()->pluck('id')->toArray();
         return $this->sub($subs);
     }
@@ -45,17 +43,14 @@ class Filters extends QueryFilters
     public function sub($subs = null)
     {
         if (request()->has('parent')) {
-            var_dump('parent case from sub');
             return $this->builder->whereIn('category_id', $subs);
         } else {
-            var_dump('one sub case');
             return $this->builder->where('category_id', request()->sub);
         }
     }
 
     public function brand_id()
     {
-        var_dump('brand');
         return $this->builder->where('brand_id', request()->brand_id);
     }
 
@@ -71,19 +66,16 @@ class Filters extends QueryFilters
 
     public function model_id()
     {
-        var_dump('model');
         return $this->builder->where('model_id', request()->model);
     }
 
     public function type()
     {
-        var_dump('type');
         return $this->builder->where('type_id', request()->type);
     }
 
     public function is_new()
     {
-        var_dump('condition');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
                 return $q->where('is_new', request()->is_new);
@@ -112,13 +104,11 @@ class Filters extends QueryFilters
 
     public function area_id()
     {
-        var_dump('area');
         return $this->builder->where('area_id', request()->area);
     }
 
     public function rent_type()
     {
-        var_dump('rent_type');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
                 return $q->where('rent_type', request()->rent_type);
@@ -128,7 +118,6 @@ class Filters extends QueryFilters
 
     public function space()
     {
-        var_dump('space');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
                 return $q->where('space', '>=', request()->space);
@@ -138,7 +127,6 @@ class Filters extends QueryFilters
 
     public function manufacturing_year()
     {
-        var_dump('manufacturing_year');
         return $this->builder->where(function ($q) {
             return $q->whereHas('meta', function ($q) {
                 return $q->where('manufacturing_year', '=>', request()->manufacturing_year);
@@ -157,13 +145,11 @@ class Filters extends QueryFilters
 
     public function have_images()
     {
-        var_dump('have images');
         return $this->builder->where('image', '!=', null);
     }
 
     public function only_premium()
     {
-        var_dump('only premium');
         return $this->builder->hasValidDeal();
     }
 
