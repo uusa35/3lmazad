@@ -78,7 +78,7 @@
                             <div class="products-grid products-listing products-col products-isotope five-in-row">
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
-                                @if($element->isMerchant)
+                                @if($element->isMerchant && !$element->gallery->isEmpty())
                                     <h3 class="text-center">{{ trans('general.user_gallery') }}</h3>
                                     @include('frontend.partials._profile-gallery')
                                 @elseif($element->isUser)
