@@ -4,7 +4,7 @@
     {!! Breadcrumbs::render('user.merchants-categories') !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content top-pad-none nav-submenu hidden-sm">
         <div class="container">
             <div class="divider divider--xs"></div>

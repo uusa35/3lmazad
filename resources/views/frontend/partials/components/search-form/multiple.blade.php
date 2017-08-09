@@ -6,8 +6,8 @@
            data-text="{{ $field->name }}" type="hidden">
     <i class="{{ $field->icon }} icon"></i>
     <span class="text tooltip_message_on_hover"
-          data-content="{{ trans('general.'.$field->name) }}"
-          data-variation="inverted">{{ trans('general.'.$field->name) }}</span>
+          data-content="{{ trans('message.'.$field->label_en) }}"
+          data-variation="inverted">{{ trans('general.'.$field->label_en) }}</span>
     <div class="menu">
         <div class="ui icon search input">
             <i class="search icon"></i>
