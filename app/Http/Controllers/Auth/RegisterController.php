@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -56,6 +58,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'is_merchant' => 'required|boolean',
             'area_id' => 'required|numeric',
+            'category_id' => ['numeric', Rule::in(Category::where('parent_id',0)->pluck('id'))],
             'description' => 'string|max:1000|nullable',
         ]);
     }
@@ -73,6 +76,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'area_id' => $data['area_id'],
+            'category_id' => $data['category_id'],
             'password' => bcrypt($data['password']),
             'description' => $data['description'],
         ]);
