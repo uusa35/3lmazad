@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\Ad;
 use App\Models\User;
 use App\Observers\AdObserver;
-use App\Observers\UserObserver;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Fitztrev\QueryTracer\Providers\QueryTracerServiceProvider;
 use Illuminate\Database\Eloquent\Model;

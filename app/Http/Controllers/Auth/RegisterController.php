@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Gallery;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -88,6 +89,7 @@ class RegisterController extends Controller
     {
         $role = $data['is_merchant'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
         $user->roles()->save($role);
+        $user->gallery()->save(Gallery::create(['galleryable_id' => $user->id,'galleryable_type' => User::class]));
         $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
     }
 }
