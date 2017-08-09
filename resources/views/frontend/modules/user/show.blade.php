@@ -88,7 +88,9 @@
                             </div>
                         </div>
                     </div>
-                    @include('frontend.partials.components._bar-pagination-filters')
+                    @if($element->isUser)
+                        @include('frontend.partials.components._bar-pagination-filters')
+                    @endif
                 </div>
             </div>
         </div>
