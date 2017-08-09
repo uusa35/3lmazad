@@ -1,5 +1,5 @@
 <div class="divider divider--sm"></div>
-@if(!$element->gallery->isEmpty() && $element->gallery->first()->images->count() <= 15 && $element->isOwner)
+@if($element->gallery->first()->images->count() <= 15 && $element->isOwner)
     <div class="text-center">
         <a class="btn btn--wd" href="{{ route('image.create') }}">
             {{ trans('general.ad_more_photo') }}
