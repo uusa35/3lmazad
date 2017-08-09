@@ -142,7 +142,7 @@
             <li class="heading">
                 <h3 class="uppercase">Settings Section</h3>
             </li>
-            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq','gallery','color','size','type']) }}">
+            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq','gallery','color','size','type','commercial']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="title">Settings</span>
@@ -168,7 +168,12 @@
                     </li>
                     <li class="nav-item ">
                         <a href="{{ route('backend.slider.index') }}" class="nav-link ">
-                            <span class="title">Slider</span>
+                            <span class="title">Sliders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('backend.commercial.index') }}" class="nav-link ">
+                            <span class="title">Commercials</span>
                         </a>
                     </li>
                     <li class="nav-item ">

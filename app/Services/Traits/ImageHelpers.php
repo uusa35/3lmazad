@@ -49,9 +49,6 @@ trait ImageHelpers
                         $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
                         foreach ($sizes as $key => $value) {
                             if ($value === 'large') {
-//                                    $img->resize($dimensions[0], $dimensions[1], function ($constraint) {
-//                                        $constraint->aspectRatio();
-//                                    });
                                 $img->resize($dimensions[0], $dimensions[1]);
                                 $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
                             } elseif ($value === 'medium') {

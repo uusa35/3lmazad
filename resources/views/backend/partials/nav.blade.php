@@ -69,6 +69,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('backend.commercial.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Commercial</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('backend.faq.create') }}">
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Faq</span>
                             </a>

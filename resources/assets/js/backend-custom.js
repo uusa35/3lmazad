@@ -11,5 +11,9 @@ $(document).ready(function() {
         "bInfo": true,
         "bAutoWidth": true
     });
+    $('.datepicker').datepicker({
+        autoclose : true,
+        locale: 'ru'
+    });
 });
 
