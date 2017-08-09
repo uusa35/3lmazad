@@ -1,38 +1,71 @@
 @extends('backend.layouts.app')
 @section('content')
-    <div class="clearfix"></div>
-    <div class="portlet-body form">
-        <form role="form" method="post" action="{{ route('backend.category.store') }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="parent_id" value="{{ request()->has('parent_id') ? request()->parent_id : 0}}"/>
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="name_ar" placeholder="..." required>
-                    <label for="form_control_1">Category Arabic Name*</label>
-                    <span class="help-block">Category Name</span>
-                </div>
-            </div>
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="name_en" placeholder="..." required>
-                    <label for="form_control_1">Category English Name*</label>
-                    <span class="help-block">Category Name</span>
-                </div>
-            </div>
 
-            @if(!request()->has('parent_id'))
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase">Create New Category</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form role="form" method="post" class="form-horizontal" action="{{ route('backend.category.store') }}">
                 <div class="form-body">
-                    <div class="md-checkbox">
-                        <input type="checkbox" name="featured" id="checkbox6" class="md-check" value="1">
-                        <label for="checkbox6">
-                            <span></span>
-                            <span class="check"></span>
-                            <span class="box"></span> featured </label>
-                    </div>
-                </div>
-            @endif
+                    {{ csrf_field() }}
+                    <input type="hidden" name="parent_id"
+                           value="{{ request()->has('parent_id') ? request()->parent_id : 0}}"/>
 
-            @include('backend.partials.forms._btn-group')
-        </form>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Category Name Arabic</label>
+                        <div class="col-md-10">
+                            <input type="text" name="name_ar" value="{{ old('name_ar') }}" class="form-control"
+                                   placeholder="Enter text" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Category Name English</label>
+                        <div class="col-md-10">
+                            <input type="text" name="name_en" value="{{ old('name_en') }}" class="form-control"
+                                   placeholder="Enter text" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="icon" class="col-md-2 control-label">{{ trans('general.icon') }}</label>
+                        <div class="col-md-10">
+                            {{ Form::select('icon', $icons,0, ['class' => 'form-control']) }}
+                        </div>
+                    </div>
+
+                    @if(!request()->has('parent_id'))
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">is featured</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="featured" value="1"> is Featured
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">show on home page</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="on_homepage" value="1"> show on home page
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @include('backend.partials.forms._btn-group')
+                </div>
+            </form>
+        </div>
     </div>
 @endsection

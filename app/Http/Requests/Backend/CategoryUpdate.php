@@ -24,7 +24,8 @@ class CategoryUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
+            'name_ar' => 'required|min:3',
+            'name_en' => 'required|min:3',
             'featured' => 'boolean|nullable'
 
         ];

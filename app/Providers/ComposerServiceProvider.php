@@ -69,6 +69,8 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.modules.field.edit',
             'backend.modules.type.create',
             'backend.modules.type.edit',
+            'backend.modules.category.create',
+            'backend.modules.category.edit',
         ],
             'App\Services\ViewComposers@getIcons');
 
