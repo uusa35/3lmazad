@@ -15,7 +15,7 @@
         <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
             <div class="card__row--icon__icon">
                 {{--<img class="img-responsive img-thumbnail" style="max-width: 40px;"--}}
-                     {{--src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">--}}
+                {{--src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">--}}
                 <div class="card__row--icon__icon"><i class="icon user circle outline"></i></div>
             </div>
             <div class="card__row--icon__text">
@@ -51,7 +51,9 @@
             <div class="card__row--icon__text">
                 <div class="card__row__title">{{ $element->categoryName }}</div>
             </div>
-        </a> <a class="card__row card__row--icon">
+        </a>
+        <a class="card__row card__row--icon"
+           href={{ route('report.abuse',['ad_id' => $element->id,'abuser_id' => $element->user_id, 'reporter_id' => auth()->user()->id]) }}>
             <div class="card__row--icon__icon"><i class="icon warning sign red"></i></div>
             <div class="card__row--icon__text">
                 <div class="card__row__title">{{ trans('general.report_abuse') }}</div>

@@ -23,9 +23,7 @@ class ScopeAdHasMeta implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereHas('meta', function ($q) {
-            return $q;
-        });
+        $builder->has('meta')->has('user');
     }
 
 }

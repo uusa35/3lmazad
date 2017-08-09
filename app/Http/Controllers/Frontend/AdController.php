@@ -114,7 +114,7 @@ class AdController extends Controller
         dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
         $counter = Visitor::where('ad_id', $element->id)->count();
         $element->isOwner ? session()->put('pay_ad_id', $element->id) : null;
-        $paidAds = $this->ad->where('category_id', $element->category_id)->hasDealWithPaidPlan()->orderBy('created_at', 'asc')->take(12)->get();
+        $paidAds = $this->ad->where('category_id', $element->category_id)->adHasValidPaidDeal()->orderBy('created_at', 'desc')->take(12)->get();
         return view('frontend.modules.ad.show', compact('element', 'counter', 'paidAds'));
     }
 

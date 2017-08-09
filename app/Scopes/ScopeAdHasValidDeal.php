@@ -26,7 +26,7 @@ class ScopeAdHasValidDeal implements Scope
     {
         // once ad is created a free deal will be attached to such ad.
         $builder->whereHas('deals', function ($q) {
-            return $q;
+            $q->where('end_date', '>', Carbon::now());
         });
     }
 }
