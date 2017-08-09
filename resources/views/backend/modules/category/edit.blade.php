@@ -1,46 +1,71 @@
 @extends('backend.layouts.app')
 @section('content')
-    <div class="clearfix"></div>
-    <div class="portlet-body form">
-        <form role="form" method="post" action="{{ route('backend.category.update',$element->id) }}" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="patch">
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="name" value="{{ $element->name }}" placeholder="...">
-                    <label for="form_control_1">Main Category Name*</label>
-                    <span class="help-block">Please enter Main Category Name</span>
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject font-dark sbold uppercase">Edit Category</span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form role="form" method="post" class="form-horizontal" action="{{ route('backend.category.update',$element->id) }}" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <input type="hidden" name="_method" value="patch">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="parent_id"
+                                   value="{{ request()->has('parent_id') ? request()->parent_id : 0}}"/>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Category Name Arabic</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="name_ar" value="{{ $element->name_ar }}" class="form-control"
+                                           placeholder="Enter text" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Category Name English</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="name_en" value="{{ $element->name_en }}" class="form-control"
+                                           placeholder="Enter text" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="icon" class="col-md-2 control-label">{{ trans('general.icon') }}</label>
+                                <div class="col-md-10">
+                                    {{ Form::select('icon', $icons,$element->icon, ['class' => 'form-control']) }}
+                                </div>
+                            </div>
+
+                            @if(!request()->has('parent_id'))
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">is featured</label>
+                                    <div class="col-md-10">
+                                        <div class="mt-checkbox-list">
+                                            <label class="mt-checkbox">
+                                                <input type="checkbox" name="featured" value="1" {{ $element->featured ? 'checked' : null }}> is Featured
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">show on home page</label>
+                                    <div class="col-md-10">
+                                        <div class="mt-checkbox-list">
+                                            <label class="mt-checkbox">
+                                                <input type="checkbox" name="on_homepage" value="1" {{ $element->on_homepage ? 'checked'  : null }}> show on home page
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @include('backend.partials.forms._btn-group')
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="url" value="{{ $element->url }}" placeholder="...">
-                    <label for="form_control_1">Commercial URL*</label>
-                    <span class="help-block">full link is only allowed ('http://google.com')</span>
-                </div>
-            </div>
-            <div class="form-body">
-                <div class="form-group form-md-line-input">
-                    <input type="file" class="form-control" name="image" placeholder="...">
-                    <label for="form_control_1"> Image*</label>
-                    best fit 1000px * 150px
-                </div>
-            </div>
-
-            <div class="form-body">
-                <div class="md-checkbox">
-                    <input type="checkbox" name="featured" id="checkbox6" class="md-check"
-                           value="1" {{ $element->featured ? 'checked' : null }}>
-                    <label for="checkbox6">
-                        <span></span>
-                        <span class="check"></span>
-                        <span class="box"></span> featured </label>
-                </div>
-            </div>
-
-
-            @include('backend.partials.forms._btn-group')
-        </form>
-    </div>
 @endsection
