@@ -1,5 +1,5 @@
 <div class="divider divider--sm"></div>
-@if($element->gallery->first()->images->count() <= 15 && $element->isOwner)
+@if(!$element->gallery->isEmpty() && $element->gallery->first()->images->count() <= 15 && $element->isOwner)
     <div class="text-center">
         <a class="btn btn--wd" href="{{ route('image.create') }}">
             {{ trans('general.ad_more_photo') }}
@@ -8,7 +8,7 @@
     <div class="divider divider--sm"></div>
 @endif
 <div class="gallery gallery-isotope" id="gallery">
-    @if(!$element->gallery->first()->images->isEmpty())
+    @if(!$element->gallery->isEmpty() && !$element->gallery->first()->images->isEmpty())
         @foreach($element->gallery->first()->images as $image)
             <div class="gallery__item">
                 <div class="gallery__item__image">
