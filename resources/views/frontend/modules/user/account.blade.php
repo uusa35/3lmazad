@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                @if($element->isMerchant && !$element->gallery->isEmpty())
+                @if($element->isMerchant)
                     @include('frontend.partials._profile-gallery')
                 @endif
             </div>
