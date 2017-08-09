@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\AbuseReport;
 use App\Http\Requests\Frontend\NewsletterPost;
 use App\Models\Ad;
 use App\Models\Category;
@@ -14,7 +15,9 @@ use App\Models\Newsletter;
 use App\Models\Slider;
 use App\Models\Term;
 use App\Services\Search\Filters;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -40,11 +43,11 @@ class HomeController extends Controller
     public function index()
     {
         $mostVisitedAds = $this->ad->getMostVisitedAds();
-        $latestAds = $this->ad->orderBy('created_at','desc')->take(10)->get();
-        $commercialsFixed = $this->commercial->fixed()->orderBy('created_at','desc')->take(2)->get();
+        $latestAds = $this->ad->orderBy('created_at', 'desc')->take(10)->get();
+        $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         $sliders = Slider::orderBy('order', 'desc')->get();
-        return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed','latestAds'));
+        return view('frontend.home', compact('sliders', 'commercials', 'mostVisitedAds', 'commercialsFixed', 'commercialsNotFixed', 'latestAds'));
     }
 
     /**
@@ -113,5 +116,24 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'email has been sent');
 
+    }
+
+    public function reportAbuse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'ad_id' => 'required|numeric',
+            'abuser_id' => 'required|numeric',
+            'reporter_id' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', trans('message.report_is_not_submitted'));
+        }
+
+        $element = AbuseReport::create($request->all());
+        if ($element) {
+            return redirect()->back()->with('success', trans('message.report_submitted'));
+        }
+        return redirect()->back()->with('error', trans('message.report_is_not_submitted'));
     }
 }
