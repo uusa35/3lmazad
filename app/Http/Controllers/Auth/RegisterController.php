@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'is_merchant' => 'required|boolean',
             'area_id' => 'required|numeric',
-            'category_id' => ['numeric', Rule::in(Category::where('parent_id',0)->pluck('id'))],
+            'category_id' => ['numeric', Rule::in(Category::where('parent_id',0)->pluck('id')->toArray())],
             'description' => 'string|max:1000|nullable',
         ]);
     }
