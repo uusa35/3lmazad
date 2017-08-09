@@ -53,7 +53,9 @@
                 @include('frontend.partials.components.ad-show.side-ad-show')
             </div>
         </div>
-        @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
+        @if(!$paidAds->isEmpty())
+            @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
+        @endif
         @include('frontend.partials.components.ad-show._ad-tabs')
     </section>
 @endsection

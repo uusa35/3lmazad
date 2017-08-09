@@ -52,11 +52,13 @@
                 <div class="card__row__title">{{ $element->categoryName }}</div>
             </div>
         </a>
-        <a class="card__row card__row--icon"
-           href={{ route('report.abuse',['ad_id' => $element->id,'abuser_id' => $element->user_id, 'reporter_id' => auth()->user()->id]) }}>
-            <div class="card__row--icon__icon"><i class="icon warning sign red"></i></div>
-            <div class="card__row--icon__text">
-                <div class="card__row__title">{{ trans('general.report_abuse') }}</div>
-            </div>
-        </a></div>
+        @if(auth()->check())
+            <a class="card__row card__row--icon"
+               href={{ route('report.abuse',['ad_id' => $element->id,'abuser_id' => $element->user_id, 'reporter_id' => auth()->user()->id]) }}>
+                <div class="card__row--icon__icon"><i class="icon warning sign red"></i></div>
+                <div class="card__row--icon__text">
+                    <div class="card__row__title">{{ trans('general.report_abuse') }}</div>
+                </div>
+            </a></div>
+    @endif
 </div>
