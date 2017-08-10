@@ -53,6 +53,10 @@
                                             <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
                                         </p>
                                         <p>
+                                            <span class="date">{{ trans('general.category')}} :</span>
+                                            <span class="date">{{  $element->category->name }}</span>
+                                        </p>
+                                        <p>
                                             <span class="date">{{ trans('general.description')}} :</span>
                                         </p>
                                     </div>

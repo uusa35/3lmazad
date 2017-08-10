@@ -44,6 +44,11 @@
                                             <span class="date">{{ trans('general.country')}} :</span>
                                             <span class="date">{{  $element->countryName }}</span>
                                         </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.category')}} :</span>
+                                            <span class="date">{{  $element->category->name }}</span>
+                                        </p>
+
                                     </div>
                                     <div class="description">
                                         <p></p>

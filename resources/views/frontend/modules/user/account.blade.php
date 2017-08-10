@@ -49,6 +49,10 @@
                                             <span class="date">{{ trans('general.country')}} :</span>
                                             <span class="date">{{  $element->countryName }}</span>
                                         </p>
+                                        <p>
+                                            <span class="date">{{ trans('general.category')}} :</span>
+                                            <span class="date">{{  $element->category->name }}</span>
+                                        </p>
                                         <div class="ui toggle checkbox mobile" data-user-id="{{ $element->id }}">
                                             <label>{{ trans('general.mobile_visible') }}</label>
                                             <input name="mobile"
