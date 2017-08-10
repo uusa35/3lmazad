@@ -358,7 +358,7 @@ $factory->define(Commercial::class, function (Faker\Generator $faker) {
         'description_ar' => $faker->sentence(),
         'description_en' => $faker->sentence(),
         'url' => $faker->url,
-        'image' => $faker->randomElement(['sample.png', 'sample-2.png']),
+        'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
         'duration' => $faker->randomDigit,
         'start_date' => $faker->dateTimeBetween($faker->randomElement(['now', 'yesterday']), '1 week'),
         'end_date' => $faker->dateTimeBetween('now', '1 week'),

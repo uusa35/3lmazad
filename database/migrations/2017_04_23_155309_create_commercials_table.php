@@ -19,7 +19,7 @@ class CreateCommercialsTable extends Migration
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
             $table->string('url')->nullable();
-            $table->string('image')->default('default.jpg')->nullable();
+            $table->string('image')->default('sample1.jpeg')->nullable();
             $table->integer('duration')->nullable();
             $table->boolean('active')->nullable();
             $table->boolean('is_fixed')->default(0)->nullable();
