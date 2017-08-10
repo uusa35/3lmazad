@@ -14,8 +14,8 @@
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-            'env' => env('APP_ENV')
+            'csrfToken' => csrf_token()
         ]) !!};
     </script>
 </head>
+{{--            'env' => env('APP_ENV')--}}
