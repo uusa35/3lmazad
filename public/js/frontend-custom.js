@@ -83,6 +83,8 @@ $(document).ready(function () {
         var catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
         var catType = $('#cat-' + catId).data('type');
+        console.log(catType);
+        console.log(catId);
         // assign it to the input responsible for the cat --> wont make difference because i check in the api for the sub and main
         $('#cat_input').attr('name', catType);
         // hide all fields to start over
@@ -95,6 +97,7 @@ $(document).ready(function () {
         return axios.get('api/category/' + catId).then(function (res) {
             return res.data;
         }).then(function (data) {
+            console.log(data.parent);
             // show only the fields related + set the value to zero + set the text to default
             data.parent.fields.map(function (f) {
                 $('#' + f.name).removeClass('hidden');

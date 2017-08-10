@@ -1,5 +1,4 @@
 window._ = require('lodash');
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -18,7 +17,6 @@ require('datatables.net');
 require('datatables.net-buttons');
 require('eonasdan-bootstrap-datetimepicker');
 require('moment');
-//window.$ = window.jQuery = require('jquery');
 window.$.fn.transition = require('semantic-ui-transition');
 window.$.fn.dropdown = require('semantic-ui-dropdown');
 window.$.fn.popup = require('semantic-ui-popup');
@@ -36,6 +34,9 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = 'http://3lmazad.ideasowners.net';
+if(window.Laravel.env === 'local') {
+    window.axios.defaults.baseURL = 'http://3lmazad.dev';
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

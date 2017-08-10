@@ -51354,7 +51354,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_magnific_popup__ = __webpack_require__(618);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_magnific_popup___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_magnific_popup__);
 window._ = __webpack_require__(617);
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -51372,7 +51371,6 @@ __webpack_require__(215);
 __webpack_require__(588);
 __webpack_require__(589);
 __webpack_require__(0);
-//window.$ = window.jQuery = require('jquery');
 window.$.fn.transition = __webpack_require__(182);
 window.$.fn.dropdown = __webpack_require__(181);
 window.$.fn.popup = __webpack_require__(742);
@@ -51390,6 +51388,9 @@ window.axios = __webpack_require__(112);
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = 'http://3lmazad.ideasowners.net';
+if (window.Laravel.env === 'local') {
+  window.axios.defaults.baseURL = 'http://3lmazad.dev';
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
