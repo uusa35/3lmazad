@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
                 $this->call(TermsTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
                 $this->call(UsersCategoriesSeeder::class);
+                $this->call(AdVisitorsTableSeeder::class);
             }
         } else {
             dd('please change the .env environment const to : seeding');

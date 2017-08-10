@@ -116,7 +116,7 @@ class CategoriesTableSeeder extends Seeder
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) {
+                    factory(Ad::class, 5)->create(['category_id' => $subCat->id])->each(function ($ad) {
 
                         $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
 
