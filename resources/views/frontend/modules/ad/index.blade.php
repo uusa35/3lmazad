@@ -20,6 +20,7 @@
             @if(isset($paidAds))
                 @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
             @endif
+                <hr>
             <div class="divider divider--xs"></div>
             <div class="filters-row">
                 @include('frontend.partials.components._bar-pagination-filters')
