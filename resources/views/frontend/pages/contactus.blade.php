@@ -96,7 +96,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-3 col-lg-push-9">
+                                <div class="col-lg-9"></div>
+                                <div class="col-lg-3">
                                     <label class="control-label" for="submit"></label>
                                     <input type="submit" class="btn btn--wd form-control"
                                            value="send"/>

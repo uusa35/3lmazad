@@ -46,10 +46,10 @@
                     <td>{{ $element->icon }}</td>
                     <td>{{ $element->type }}</td>
                     <td>
-                        <span class="label {{ activeLabel($element->is_required) }}">required</span>
+                        <span class="label {{ activeLabel($element->is_required) }}">R</span>
                     </td>
                     <td>
-                        <span class="label {{ activeLabel($element->is_model) }}">model</span>
+                        <span class="label {{ activeLabel($element->is_model) }}">M</span>
                     </td>
                     <td>{{ $element->collection_name }}</td>
                     <td>
