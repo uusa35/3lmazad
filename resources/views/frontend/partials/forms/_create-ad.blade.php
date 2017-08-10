@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-lg-10 col-lg-{{ app()->isLocale('ar') ? 'pull' : 'push' }}-1">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
         <form class="form-horizontal" method="POST" id="ad_create"
               action="{{ route('ad.store') }}"
               enctype="multipart/form-data">
