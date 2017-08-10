@@ -58,7 +58,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 //        'settings' => ['certificate' => $faker->name, 'height' => $faker->numberBetween(100, 200)],
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
         'country_id' => 118,
-        'category_id' => $faker->numberBetween(1,10)
+        'category_id' => null
     ];
 });
 
