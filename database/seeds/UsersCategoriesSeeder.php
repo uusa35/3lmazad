@@ -13,9 +13,9 @@ class UsersCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $parents = Category::where('parent_id', 0)->doesntHave('users')->get();
+        $parents = Category::where('parent_id', 0)->get();
         foreach ($parents as $parent) {
-            $users = User::doesntHave('category')->get()->shuffle()->take(3);
+            $users = User::doesntHave('category')->get()->shuffle()->take(10);
             $parent->users()->saveMany($users);
         }
     }
