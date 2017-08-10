@@ -83,6 +83,16 @@
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Term</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Size</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Color</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- END NOTIFICATION DROPDOWN -->
@@ -330,7 +340,10 @@
                 <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-quick-sidebar-toggler">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="{{ url('/logout') }}" class="dropdown-toggle"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                    >
                         <span class="fa fa-sign-out" aria-hidden="true"></span>
                     </a>
                 </li>
