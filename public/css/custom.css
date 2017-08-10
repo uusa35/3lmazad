@@ -43,8 +43,10 @@
   margin-left: auto;
   margin-bottom: 10px;
   width: auto;
-  max-width: 314px;
-  max-height: 200px !important;
+  height: 214px;
+  width: 300px;
+  max-height: 214px;
+  max-width: 300px;
 }
 
 .dropdown-submenu {
