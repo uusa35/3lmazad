@@ -7,9 +7,10 @@
                 <div class="col-md-3 hidden-xs hidden-sm">
                     <h5 class=" text-uppercase mobile-collapse__title">{{ $contactus->name }}</h5>
                     <!--  Logo  -->
-                    <a class="logo logo--footer"
+                    <a class="logo"
                        href="{{ route('home') }}">
-                        <img class="img-responsive" src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}"
+                        <img class="img-responsive logo logo-default"
+                             src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}"
                              alt="{{ $contactus->name }}"/>
                     </a>
                     <!-- End Logo --> </div>
@@ -28,8 +29,6 @@
                         <ul>
                             <li><a href="{{ route('faq') }}">{{ trans('general.faq') }}</a></li>
                             <li><a href="{{ route('terms') }}">{{ trans('general.terms') }}</a></li>
-                            {{--<li><a href="{{ url('account/chat/1') }}">Online support</a></li>--}}
-                            {{--<li><a href="{{ url('account/chat/1') }}">Online support</a></li>--}}
                         </ul>
                     </div>
                 </div>
@@ -37,11 +36,13 @@
                     <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.my_account') }}</h5>
                     <div class="v-links-list mobile-collapse__content">
                         <ul>
-                            {{--@if($isAdmin)--}}
-                            {{--<li><a href="{{ route('backend.index') }}">Dashboard</a></li>--}}
-                            {{--@else--}}
-                            {{--<li><a href="{{ route('account.user') }}">My Account</a></li>--}}
-                            {{--@endif--}}
+                            @if(auth()->check())
+                                <li><a href="{{ route('account.user') }}">{{ trans('general.account') }}</a></li>
+                            @else
+                                <li><a href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
+                                <li><a href="{{ url('password/reset') }}">{{ trans('general.password_forgot') }}</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -65,14 +66,14 @@
             <div class="row">
                 <div class="col-sm-8 col-md-8">
                     {{--<form class="subscribe-form"--}}
-                          {{--action="{{ action('Frontend\HomeController@postNewsletter') }}" method="post">--}}
-                        {{--{{ csrf_field() }}--}}
-                        {{--<label class="subscribe-form__label text-uppercase pull-left">{{ trans('general.subscribe') }}</label>--}}
-                        {{--<input type="text" class="subscribe-form__input input--wd" name="email"--}}
-                               {{--placeholder="{{ trans("general.your_email") }}">--}}
-                        {{--<button class="btn btn--wd text-uppercase wave"><span--}}
-                                    {{--class="hidden-xs">{{ trans('general.subscribe') }}</span><span--}}
-                                    {{--class="icon icon-mail-fill visible-xs"></span></button>--}}
+                    {{--action="{{ action('Frontend\HomeController@postNewsletter') }}" method="post">--}}
+                    {{--{{ csrf_field() }}--}}
+                    {{--<label class="subscribe-form__label text-uppercase pull-left">{{ trans('general.subscribe') }}</label>--}}
+                    {{--<input type="text" class="subscribe-form__input input--wd" name="email"--}}
+                    {{--placeholder="{{ trans("general.your_email") }}">--}}
+                    {{--<button class="btn btn--wd text-uppercase wave"><span--}}
+                    {{--class="hidden-xs">{{ trans('general.subscribe') }}</span><span--}}
+                    {{--class="icon icon-mail-fill visible-xs"></span></button>--}}
                     {{--</form>--}}
                 </div>
                 <div class="col-sm-4 col-md-4">

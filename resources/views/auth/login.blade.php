@@ -7,8 +7,8 @@
 @section('top')
     <section class="content content--fill top-null">
         <div class="container">
-            <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.already_registered') }}</h2>
-            <h6 class="text-uppercase text-center">{{ trans('message.already_registered') }}</h6>
+            <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.login') }}</h2>
+            <h6 class="text-uppercase text-center">{{ trans('message.login_form') }}</h6>
             <div class="divider divider--sm"></div>
             <div class="card card--form"><a href="#" class="icon card--form__icon">
                     <span class="icon-user-circle"></span>
@@ -21,13 +21,13 @@
                     </div>
                 </div>
             </div>
-            <div class="divider divider--md"></div>
-            <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.new_here') }}</h2>
-            <div class="divider divider--xs"></div>
-            <div class="text-center"><a href="{{ route('register') }}"
-                                        class="btn btn--wd text-uppercase wave">{{ trans('general.create_account') }}</a>
-            </div>
-            <div class="divider divider--md"></div>
+            <div class="divider divider--sm"></div>
+            {{--<h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.new_here') }}</h2>--}}
+            {{--<div class="divider divider--xs"></div>--}}
+            {{--<div class="text-center"><a href="{{ route('register') }}"--}}
+                                        {{--class="btn btn--wd text-uppercase wave">{{ trans('general.create_account') }}</a>--}}
+            {{--</div>--}}
+            {{--<div class="divider divider--md"></div>--}}
         </div>
     </section>
 @endsection

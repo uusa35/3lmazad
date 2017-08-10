@@ -38,10 +38,11 @@
                 <div class="col-md-6 col-md-offset-4">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox"
-                                   name="remember" {{ old('remember') ? 'checked' : '' }}>
+
                             {{ trans('general.remember_me') }}
                         </label>
+                        <input type="checkbox"
+                               name="remember" {{ old('remember') ? 'checked' : '' }}>
                     </div>
                 </div>
             </div>
