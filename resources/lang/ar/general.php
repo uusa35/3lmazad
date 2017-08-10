@@ -157,4 +157,9 @@ return array (
   'remember_me' => 'تذكرني',
   'message-ad-show-alert' => 'الموقع غير مسئول عن الأغراض المباعة.',
   'brand_id' => 'الماركة',
+  'login_register' => 'التسجيل / الدخول',
+  'view_ad' => 'مشاهدة الإعلان',
+  'password_forgot' => 'نسيت كلمة المرور',
+  'new_here' => 'مستخدم جديد',
+  'no_ads' => 'لا توجد إعلانات حاليا',
 );

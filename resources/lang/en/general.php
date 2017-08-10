@@ -106,6 +106,7 @@ return array (
   'automatic' => 'Automatic',
   'bathroom_no' => 'Bathroom Number',
   'no_ads' => 'No Ads Found',
+  'view_ad' => 'View Ad',
   'more_images' => 'More Images',
   'cancel' => 'Cancel',
   'submit' => 'Submit',
@@ -158,4 +159,5 @@ return array (
   'choose' => 'Choose',
   'forget_password' => 'Forget Password',
   'brand_id' => 'Brand',
+  'password_forgot' => 'Forgot Your Password',
 );
