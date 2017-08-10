@@ -127,7 +127,7 @@ class CategoriesTableSeeder extends Seeder
                         factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
 
                         // COMMENTS FOR EACH AD
-                        factory(Comment::class)->create(['commentable_id' => $ad->id],'commentable_type' => Ad::class]);
+                        factory(Comment::class)->create(['commentable_id' => $ad->id,'commentable_type' => Ad::class]);
 
                         // Auctions FOR EACH AD
                         factory(Comment::class)->create(['ad_id' => $ad->id]);
