@@ -7,6 +7,7 @@ $(document).ready(function() {
     var lang = $('#lang').text();
     $('#category').on('change', function() {
         // fetch the catId
+        $('#sub-fields').removeClass('hidden');
         let catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
         let catType = $('#cat-' + catId).data('type');

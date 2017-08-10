@@ -39084,6 +39084,10 @@ zoom: 1;
   }
 }
 
+#navbar {
+  border-bottom: 1px solid rgba(196, 196, 196, 0.48);
+}
+
 .search-bar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -39100,8 +39104,6 @@ zoom: 1;
           justify-content: space-between;
   padding: 10px;
   border-radius: 6px;
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
 }
 
 .search-bar > .search-input {

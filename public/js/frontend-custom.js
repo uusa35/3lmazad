@@ -80,6 +80,7 @@ $(document).ready(function () {
     var lang = $('#lang').text();
     $('#category').on('change', function () {
         // fetch the catId
+        $('#sub-fields').removeClass('hidden');
         var catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
         var catType = $('#cat-' + catId).data('type');

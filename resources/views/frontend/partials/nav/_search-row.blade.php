@@ -8,7 +8,7 @@
         @include('frontend.partials.components.search-form._max_field')
     </div>
 
-    <div class="sub-fields" id="sub-fields">
+    <div class="sub-fields hidden" id="sub-fields">
         @foreach($fields->unique() as $field)
             @include('frontend.partials.components.search-form.'.$field->type)
         @endforeach
@@ -19,3 +19,4 @@
         {{ trans('general.search') }}
     </button>
 </form>
+<hr>
