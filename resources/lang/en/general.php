@@ -3,7 +3,7 @@
 return array (
   'register' => 'register',
   'home' => 'home',
-  'login' => 'List of Ads',
+  'login' => 'Login',
   'payment_plans' => 'Payment Plans',
   'create_ad' => 'Create New Ad',
   'merchants_categories' => 'Merchants',
