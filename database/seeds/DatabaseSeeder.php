@@ -65,6 +65,7 @@ class DatabaseSeeder extends Seeder
                 $this->call(SizesTableSeeder::class);
                 $this->call(SlidersTableSeeder::class);
                 $this->call(ContactusTableSeeder::class);
+                $this->call(CommercialsTableSeeder::class);
                 $this->command->info('sliders are done');
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
