@@ -56,6 +56,9 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'avatar' => 'required|mimes:jpg,jpeg,png',
             'mobile' => 'required|string|max:10',
+            'phone' => 'required|string|max:10',
+            'timing' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
             'is_merchant' => 'required|boolean',
             'area_id' => 'required|numeric',
@@ -74,6 +77,9 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'name' => $data['name'],
+            'phone' => $data['phone'],
+            'timing' => $data['timing'],
+            'address' => $data['address'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'area_id' => $data['area_id'],

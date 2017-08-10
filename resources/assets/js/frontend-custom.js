@@ -250,8 +250,10 @@ $(document).ready(function() {
         console.log(isMerchant);
         if (isMerchant == 1) {
             $('#category-register').removeClass('hidden');
+            $('div[class*="merchant-group"]').removeClass('hidden');
         } else {
             $('#category-register').addClass('hidden');
+            $('div[class*="merchant-group"]').addClass('hidden');
         }
     });
 });

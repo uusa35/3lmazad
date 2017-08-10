@@ -19,7 +19,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
         Route::any('setting/email', 'SettingController@toggleEmail')->name('setting.email');
         Route::resource('favorite', 'FavoriteController');
-        Route::get('report/abuse', 'Homecontroller@reportAbuse')->name('report.abuse');
+        Route::get('report/abuse', 'HomeController@reportAbuse')->name('report.abuse');
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
         Route::resource('plan', 'PlanController');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);

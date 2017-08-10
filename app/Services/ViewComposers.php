@@ -37,7 +37,7 @@ class ViewComposers
 
     public function getIcons(View $view)
     {
-        $icons = config('icons');
+        $icons = collect(config('icons'))->sort()->toArray();
         return $view->with(compact('icons'));
     }
 

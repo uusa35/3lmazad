@@ -72,7 +72,7 @@
                 <label for="area" class="col-md-4 control-label">{{ trans('general.area') }}</label>
 
                 <div class="col-md-6">
-                    {{ Form::select('area_id', $areas,0, ['class' => 'form-control']) }}
+                    {{ Form::select('area_id', $areas,0, ['class' => 'form-control','id' => 'area']) }}
                 </div>
             </div>
 
@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <div class="form-group hidden" id="category-register">
+            <div class="form-group hidden merchant-group" id="category-register">
                 <label for="category_id" class="control-label col-sm-4">Choose Main Category</label>
                 <div class="col-sm-6" id="categories">
                     <select name="category_id" class="form-control">
@@ -115,6 +115,44 @@
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group hidden merchant-group {{ $errors->has('address') ? ' has-error' : '' }}" id="address" >
+                <label for="name" class="col-md-4 control-label">{{ trans('general.address') }}</label>
+
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control" name="address"
+                           value="{{ old('address') }}" autofocus>
+
+                    @if ($errors->has('address'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group hidden merchant-group" id="phone">
+                <label for="name" class="col-md-4 control-label">{{ trans('general.office_phone') }}</label>
+
+                <div class="col-md-6">
+                    <input id="mobile" type="text" class="form-control" name="phone"
+                           value="{{ old('phone') }}" number autofocus>
+                </div>
+            </div>
+
+            <div class="form-group hidden merchant-group {{ $errors->has('timing') ? ' has-error' : '' }}" id="timing" >
+                <label for="name" class="col-md-4 control-label">{{ trans('general.timing') }}</label>
+
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control" name="timing" placeholder="{{ trans('message.timing') }}"
+                           value="{{ old('timing') }}" autofocus>
+
+                    <span class="help-block">{{ trans("message.timing") }}</span>
+                    @if ($errors->has('timing'))
+                        <span class="help-block">{{ trans("message.timing") }}<strong>{{ $errors->first('timing') }}</strong></span>
+                    @endif
                 </div>
             </div>
 
