@@ -5,9 +5,9 @@
                 {{--<span class="mdi mdi-star text-center" style="color : gold;"></span>--}}
             {{--</div>--}}
             <a href="{{ $commercial->url }}">
-                <img src="{{ asset('storage/uploads/images/thumbnail/'.$commercial->image) }}"
+                <img src="{{ asset('storage/uploads/images/medium/'.$commercial->image) }}"
                      class="img-responsive commercial-homepage"
-                     data-lazy="{{ asset('storage/uploads/images/thumbnail/'.$commercial->image) }}"
+                     data-lazy="{{ asset('storage/uploads/images/medium/'.$commercial->image) }}"
                      alt="">
             </a>
             <div class="product-category__hover caption"></div>
