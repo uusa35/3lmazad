@@ -1,5 +1,6 @@
 <div class="row">
-    <div class="col-lg-8 col-lg-push-2">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}"
               enctype="multipart/form-data">
             {{ csrf_field() }}
