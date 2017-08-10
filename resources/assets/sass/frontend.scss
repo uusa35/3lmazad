@@ -28,8 +28,11 @@
   padding: 8px;
 }
 
-.commercial-homepage {
-
+.commercial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px;
 }
 
 .home-alert {
@@ -61,8 +64,8 @@
 }
 
 #navbar {
- border-bottom: 1px solid rgba(196, 196, 196, 0.48);
- }
+  border-bottom: 1px solid rgba(196, 196, 196, 0.48);
+}
 
 .search-bar {
   display: flex;
