@@ -8,7 +8,9 @@
             <ul class="product-main-image no-zoom" id="mainProductImg">
                 <li class="product-main-image__item active"><a href="" class="modal-ad-url">
                         <img class="img-responsive img-thumbnail modal-image" src=''
-                             style="width: 60%; max-width: 355px; max-height: 300px;"/></a></li>
+                             style="width: 60%; max-width: 355px; max-height: 300px;"/>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-sm-8">

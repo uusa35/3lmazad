@@ -206,7 +206,7 @@ $(document).ready(function () {
         var fromDate = $(this).data('from-date');
         $('.modal-price').text(price);
         $('.modal-ad-url').attr('href', url);
-        $('.modal-image').attr('src', 'storage/uploads/images/medium/' + image);
+        $('.modal-image').attr('src', image);
         $('.modal-description').text(description);
         $('.modal-title').text(title);
         $('.modal-category').text(category);
