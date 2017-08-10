@@ -3,16 +3,15 @@
      data-position="top center"
      data-tooltip="{{ trans('message.'.$field->name.'_hints') }}"
      id="{{ $field->name }}">
-    <input name="{{ $field->name }}" id="{{ $field->name }}-input" value="0" data-value="0"
+    <input name="test" id="{{ $field->name }}-input" value="0" data-value="0"
            data-text="{{ $field->name }}" type="hidden">
     <i class="{{ $field->icon }} icon"></i>
-    <span class="text tooltip_message_on_hover"
-          data-content="{{ trans('message.'.$field->label_en) }}"
-          data-variation="inverted">{{ trans('general.'.$field->label_en) }}</span>
+    <span class="text">search for item</span>
     <div class="menu">
         <div class="ui icon search input">
             <i class="search icon"></i>
-            <input name="" placeholder="{{ trans('general.search_'.$field->name) }}" type="text"/>
+            {{--searching input text--}}
+            <input name="" type="text"/>
         </div>
         <div class="divider"></div>
         <div class="scrolling menu" id="options-{{ $field->name }}">

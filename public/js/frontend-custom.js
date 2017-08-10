@@ -99,11 +99,13 @@ $(document).ready(function () {
             return res.data;
         }).then(function (data) {
             console.log(data.parent);
+
             // show only the fields related + set the value to zero + set the text to default
             data.parent.fields.map(function (f) {
+                var name = 'label_' + lang;
                 $('#' + f.name).removeClass('hidden');
                 $('#' + f.name).dropdown('set value', 0);
-                $('#' + f.name).dropdown('set text', f.name);
+                $('#' + f.name).dropdown('set text', '' + f[name]);
             });
             // check if there are brands then move to brand_id div for models
             if ('brands' in data.parent) {

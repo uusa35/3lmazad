@@ -24,11 +24,13 @@ $(document).ready(function() {
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
             console.log(data.parent);
+
             // show only the fields related + set the value to zero + set the text to default
             data.parent.fields.map(f => {
+                let name = 'label_'+ lang;
                 $('#' + f.name).removeClass('hidden');
                 $('#' + f.name).dropdown('set value', 0);
-                $('#' + f.name).dropdown('set text', f.name);
+                $('#' + f.name).dropdown('set text', `${f[name]}`);
             });
             // check if there are brands then move to brand_id div for models
             if ('brands' in data.parent) {
