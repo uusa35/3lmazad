@@ -189,7 +189,7 @@ $factory->define(AdMeta::class, function (Faker\Generator $faker) {
         'is_new' => $faker->boolean(),
         'is_furnished' => $faker->boolean(true),
         'is_automatic' => $faker->boolean(),
-        'ad_id' => Ad::whereDoesntHave('meta')->get()->random()->id
+        'ad_id' => $faker->numberBetween(1,100)
     ];
 });
 

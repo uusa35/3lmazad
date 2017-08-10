@@ -116,7 +116,7 @@ class CategoriesTableSeeder extends Seeder
                     $subCat = factory(Category::class)->create(['parent_id' => $parent->id, 'name_en' => $sub, 'name_ar' => $sub]);
 
                     // CREATE ADS FOR EACH SUB
-                    factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) use ($subCat) {
+                    factory(Ad::class, 4)->create(['category_id' => $subCat->id])->each(function ($ad) {
 
                         $gallery = factory(Gallery::class)->create(['galleryable_id' => $ad->id, 'galleryable_type' => Ad::class]);
 
@@ -126,14 +126,16 @@ class CategoriesTableSeeder extends Seeder
                         // IMAGES FOR EACH GALLERY
                         factory(Image::class, 2)->create(['gallery_id' => $gallery->id]);
 
+
                         // COMMENTS FOR EACH AD
-                        factory(Comment::class)->create(['commentable_id' => $ad->id,'commentable_type' => Ad::class]);
+                        factory(Comment::class)->create(['commentable_id' => $ad->id, 'commentable_type' => Ad::class]);
 
                         // Auctions FOR EACH AD
-                        factory(Comment::class)->create(['ad_id' => $ad->id]);
+                        factory(Auction::class)->create(['ad_id' => $ad->id]);
 
                         $ad->deals()->saveMany(factory(Deal::class, 1)->create(['ad_id' => $ad->id]));
                     });
+
                 }
             }
         }
