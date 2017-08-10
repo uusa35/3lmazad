@@ -1,5 +1,6 @@
 <div class="ui floating dropdown labeled icon button search-dropdown tooltip-message hidden fields {{ $field->name }}"
      data-inverted=""
+     data-position="top center"
      data-tooltip="{{ trans('message.'.$field->name.'_hints') }}"
      id="{{ $field->name }}">
     <input name="{{ $field->name }}" id="{{ $field->name }}-input" value="0" data-value="0"

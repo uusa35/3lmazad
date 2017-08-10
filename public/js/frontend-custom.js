@@ -181,10 +181,10 @@ $(document).ready(function () {
 
 
     // tooltip
-    $('.tooltip-message').popup({
-        on: 'hover',
-        position: 'top center'
-    });
+    //$('.tooltip-message').popup({
+    //    on: 'hover',
+    //    position: 'top center'
+    //});
 
     $('.ui.dropdown').dropdown({ allowCategorySelection: true });
     $('.special.cards .image').dimmer({
