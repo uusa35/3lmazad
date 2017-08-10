@@ -4,15 +4,6 @@
 
             <div class="social-links">
                 <ul>
-                    @if(!auth()->check())
-                        <li class="social-links__item"><a
-                                    href="{{ route('login') }}">{{ trans('general.login') }}</a>
-                        </li>
-                    @endif
-                    @if(auth()->check())
-                        <li class="social-links__item"><a
-                                    href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
-                    @endif
                     <li class="social-links__item">
                         <a href="{{ auth()->check() ? route('ad.create') : route('register')}}">
                             {{ trans('general.create_ad') }}
