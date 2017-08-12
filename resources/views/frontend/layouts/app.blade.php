@@ -10,17 +10,19 @@
             @include('frontend.partials.header')
         @show
         <div id="pageContent" class="page-content">
-            <div class="col-lg-12">
-                @include('frontend.partials.notifications')
-                @section('breadcrumbs')
-                @show
-                @section('content')
-                @section('top')
-                @show
-                @section('middle')
-                @show
-                @section('bottom')
-                @show
+            <div class="row">
+                <div class="col-lg-12">
+                    @include('frontend.partials.notifications')
+                    @section('breadcrumbs')
+                    @show
+                    @section('content')
+                    @section('top')
+                    @show
+                    @section('middle')
+                    @show
+                    @section('bottom')
+                    @show
+                </div>
             </div>
         </div>
     </div>
