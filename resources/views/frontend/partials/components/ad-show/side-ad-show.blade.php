@@ -6,12 +6,14 @@
                 {{ trans('general.message-ad-show-alert') }}
             </p>
         </div>
-        <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
-            <div class="card__row--icon__icon"><i class="icon star gold"></i></div>
-            <div class="card__row--icon__text">
-                <div class="card__row__title">{{ trans('general.make_ad_payment')}}</div>
-            </div>
-        </a>
+        @if($element->isOwner && !$element->hasValidPaidDeal)
+            <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
+                <div class="card__row--icon__icon"><i class="icon star" style="color: goldenrod;"></i></div>
+                <div class="card__row--icon__text">
+                    <div class="card__row__title">{{ trans('general.make_special') }}</div>
+                </div>
+            </a>
+        @endif
         <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
             <div class="card__row--icon__icon">
                 {{--<img class="img-responsive img-thumbnail" style="max-width: 40px;"--}}
@@ -35,14 +37,6 @@
                 <div class="card__row--icon__icon"><i class="icon inbox"></i></div>
                 <div class="card__row--icon__text">
                     <div class="">{{ $element->user->email }}</div>
-                </div>
-            </a>
-        @endif
-        @if($element->isOwner)
-            <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
-                <div class="card__row--icon__icon"><i class="icon star" style="color: goldenrod;"></i></div>
-                <div class="card__row--icon__text">
-                    <div class="card__row__title">{{ trans('general.make_special') }}</div>
                 </div>
             </a>
         @endif

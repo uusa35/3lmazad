@@ -17,81 +17,81 @@
             </a>
         @endif
         @if(!is_null($element->meta->mileage))
-            <a class="ad-bar-children"><i class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
+            <a class="ad-bar-children"><i class="wait icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
             </a>
         @endif
-        @if(!is_null($element->meta->manfacturing_year))
-            <a class="ad-bar-children"><i class="upload icon"></i> {{ $element->manufacturing_year }} </a>
-        @endif
-        @if(!is_null($element->meta->condition))
+        @if(!is_null($element->meta->is_new))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
-                {{ $element->meta->condition }}
+                <i class="tag icon"></i>
+                {{ $element->meta->is_new ? trans('general.new') : trans('general.old') }}
             </a>
         @endif
         @if(!is_null($element->meta->manufacturing_year))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="dot circle icon"></i>
                 {{ $element->meta->manufacturing_year }}
             </a>
         @endif
-        @if(!is_null($element->meta->mileage))
+        @if(!is_null($element->meta->is_automatic))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
-                {{ $element->meta->mileage }}
-            </a>
-        @endif
-        @if(!is_null($element->meta->transmission))
-            <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
-                {{ $element->meta->transmission }}
+                <i class="settings icon"></i>
+                {{ trans('general.gear_type') }}
+                {{ $element->meta->is_automatic ? trans('general.automatic') : trans('general.manual')}}
             </a>
         @endif
         @if(!is_null($element->meta->room_no))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="dot circle  icon"></i>
+                {{ trans('general.room_no') }}
                 {{ $element->meta->room_no }}
             </a>
         @endif
         @if(!is_null($element->meta->floor_no))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="dot circle  icon"></i>
+                {{ trans('general.floor_no') }}
                 {{ $element->meta->floor_no }}
             </a>
         @endif
         @if(!is_null($element->meta->bathroom_no))
             <a href="#" class="ad-bar-children">
                 <i class="icon save"></i>
+                {{ trans("general.bathroom_no") }}
                 {{ $element->meta->bathroom_no }}
             </a>
         @endif
         @if(!is_null($element->meta->rent_type))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="icon dot circle"></i>
+                {{ trans('general.rent_type') }}
                 {{ $element->meta->rent_type }}
             </a>
         @endif
         @if(!is_null($element->meta->building_age))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="icon dot circle"></i>
+                {{ trans('general.building_age') }}
                 {{ $element->meta->building_age }}
             </a>
         @endif
         @if(!is_null($element->meta->furnished))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
-                {{ $element->meta->furnished }}
+                <i class="icon dot circle"></i>
+                {{ trans("general.is_furnished") }}
+                {{ $element->meta->furnished ? trans('general.furnished') : trans('general.not_furnished') }}
             </a>
         @endif
         @if(!is_null($element->meta->space))
             <a href="#" class="ad-bar-children">
-                <i class="icon save"></i>
+                <i class="icon dot circle"></i>
+                {{ trans('general.space') }}
                 {{ $element->meta->space }}
             </a>
         @endif
         @if(!is_null($element->meta->address))
             <a href="#" class="">
-                <i class="icon save"></i>
+                <i class="icon dot circle"></i>
+                {{ trans('general.address') }}
                 {{ $element->meta->address }}
             </a>
         @endif
