@@ -7,7 +7,7 @@
     <meta name="author" content="{{ config('app.name') }}">
     {{--<link rel="shortcut icon" href="favicon.ico">--}}
     <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1.0">--}}
     <!-- Web Fonts  -->
     @include('frontend.partials.styles')
     <meta name="csrf-token" content="{{ csrf_token() }}">
