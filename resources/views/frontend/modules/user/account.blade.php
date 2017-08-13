@@ -51,7 +51,7 @@
                                         </p>
                                         <p>
                                             <span class="date">{{ trans('general.category')}} :</span>
-                                            <span class="date">{{  $element->category->name }}</span>
+                                            <span class="date">{{  $element->group->name }}</span>
                                         </p>
                                         <div class="ui toggle checkbox mobile" data-user-id="{{ $element->id }}">
                                             <label>{{ trans('general.mobile_visible') }}</label>
