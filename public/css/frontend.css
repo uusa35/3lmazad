@@ -39070,6 +39070,11 @@ zoom: 1;
   background-color: #a5673f;
 }
 
+.social-links__item {
+  margin: 0px !important;
+  padding: 3px !important;
+}
+
 .home-alert {
   width: 50%;
 }
