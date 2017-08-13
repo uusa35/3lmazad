@@ -3,17 +3,15 @@
 @section('content')
     <section class="content top-null">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="col-lg-3 col-md-12 aside-column text-center commercial">
-                        @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsFixed])
-                    </div>
-                    <div class="col-lg-6 col-md-12 aside-column text-center">
-                        @include('frontend.partials.components.home._slider-sm')
-                    </div>
-                    <div class="col-lg-3 col-md-12 aside-column text-center commercial">
-                        @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsNotFixed])
-                    </div>
+            <div class="col-lg-12">
+                <div class="col-lg-3 col-md-12 aside-column text-center commercial">
+                    @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsFixed])
+                </div>
+                <div class="col-lg-6 col-md-12 aside-column text-center">
+                    @include('frontend.partials.components.home._slider-sm')
+                </div>
+                <div class="col-lg-3 col-md-12 aside-column text-center commercial">
+                    @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsNotFixed])
                 </div>
             </div>
         </div>
