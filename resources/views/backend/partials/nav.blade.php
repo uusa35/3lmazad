@@ -70,7 +70,8 @@
                         </li>
                         <li>
                             <a href="{{ route('backend.commercial.create') }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Commercial</span>
+                                <span class="details"><i
+                                            class="fa fa-fw fa-plus-square"></i> Create New Commercial</span>
                             </a>
                         </li>
                         <li>
@@ -84,12 +85,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route('backend.size.create') }}">
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Size</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ route("backend.color.create") }}">
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Color</span>
                             </a>
                         </li>

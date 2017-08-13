@@ -156,7 +156,8 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item ">
-                                <a href="{{ route('backend.category.index',['type' => 0]) }}" class="nav-link "> Categories </a>
+                                <a href="{{ route('backend.category.index',['type' => 0]) }}" class="nav-link ">
+                                    Categories </a>
                             </li>
                             <li class="nav-item ">
                                 <a href="{{ route('backend.field.index') }}" class="nav-link "> Fields</a>
@@ -187,12 +188,12 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="route('backend.faq.index')" class="nav-link ">
+                        <a href="{{ route('backend.faq.index') }}" class="nav-link ">
                             <span class="title">Faq</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="route('backend.term.index')" class="nav-link ">
+                        <a href="{{ route('backend.term.index') }}" class="nav-link ">
                             <span class="title">Terms of Condition</span>
                         </a>
                     </li>
@@ -211,12 +212,12 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="route('backend.type.index')" class="nav-link ">
+                                <a href="{{ route('backend.type.index') }}" class="nav-link ">
                                     <span class="title">Types</span>
                                 </a>
                             </li>
                             <li class="nav-item start">
-                                <a href="route('backend.type.create')" class="nav-link ">
+                                <a href="{{ route('backend.type.create') }}" class="nav-link ">
                                     <span class="title">Create New Type</span>
                                 </a>
                             </li>
@@ -231,12 +232,12 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="route('backend.color.index')" class="nav-link ">
+                                <a href="{{ route('backend.color.index') }}" class="nav-link ">
                                     <span class="title">Colors</span>
                                 </a>
                             </li>
                             <li class="nav-item start">
-                                <a href="route('backend.color.create')" class="nav-link ">
+                                <a href="{{ route('backend.color.create') }}" class="nav-link ">
                                     <span class="title">Create New Color</span>
                                 </a>
                             </li>
@@ -251,13 +252,33 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="route('backend.size.index')" class="nav-link ">
+                                <a href="{{ route('backend.size.index') }}" class="nav-link ">
                                     <span class="title">Sizes</span>
                                 </a>
                             </li>
                             <li class="nav-item start">
-                                <a href="route('backend.size.create')" class="nav-link ">
+                                <a href="{{ route('backend.size.create') }}" class="nav-link ">
                                     <span class="title">Create New Size</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{--Brands--}}
+                    <li class="nav-item start {{ activeItem('brand') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Brand Section</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.brand.index') }}" class="nav-link ">
+                                    <span class="title">Brands</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.brand.create') }}" class="nav-link ">
+                                    <span class="title">Create New Brand</span>
                                 </a>
                             </li>
                         </ul>
@@ -271,12 +292,12 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="route('backend.gallery.index')" class="nav-link ">
+                                <a href="{{ route('backend.gallery.index') }}" class="nav-link ">
                                     <span class="title">Galleries</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="route('backend.image.index')" class="nav-link ">
+                                <a href="{{ route('backend.image.index') }}" class="nav-link ">
                                     <span class="title">Images</span>
                                 </a>
                             </li>

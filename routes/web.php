@@ -73,6 +73,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('slider', 'SliderController');
     Route::resource('commercial', 'CommercialController');
     Route::resource('category', 'CategoryController');
+    Route::resource('brand', 'BrandController');
     Route::get('assign/category/{id}', 'CategoryController@getAssignField')->name('category.assign');
     Route::post('assign/category/{id}', 'CategoryController@postAssignField')->name('category.assign');
     Route::resource('option', 'OptionController');

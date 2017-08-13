@@ -9,6 +9,7 @@ class Brand extends Model
 {
     use LocaleTrait;
     public $localeStrings = ['name'];
+    protected $guarded = [''];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

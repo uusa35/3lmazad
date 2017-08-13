@@ -25,6 +25,8 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.modules.category.assign',
             'backend.modules.type.create',
             'backend.modules.type.edit',
+            'backend.modules.brand.create',
+            'backend.modules.brand.edit'
         ],
             'App\Services\ViewComposers@getCategories');
 
