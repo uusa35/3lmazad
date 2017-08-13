@@ -39066,6 +39066,10 @@ zoom: 1;
   min-height: 450px;
 }
 
+.header-line {
+  background-color: #a5673f;
+}
+
 .home-alert {
   width: 50%;
 }
@@ -39079,10 +39083,6 @@ zoom: 1;
 }
 
 @media (max-width: 1000px) {
-  body {
-    background-color: yellow !important;
-  }
-
   .search-bar > .dropdown {
     width: 180px;
     max-width: 230px;

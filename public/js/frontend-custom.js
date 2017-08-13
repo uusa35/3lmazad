@@ -330,11 +330,12 @@ $(document).ready(function () {
 
     $('input[name="is_merchant"]').on('click', function (e) {
         var isMerchant = e.target.value;
-        console.log(isMerchant);
         if (isMerchant == 1) {
-            $('#category-register').removeClass('hidden');
+            $('#group-register').removeClass('hidden');
+            $('div[class*="merchant-group"]').removeClass('hidden');
         } else {
-            $('#category-register').addClass('hidden');
+            $('#group-register').addClass('hidden');
+            $('div[class*="merchant-group"]').addClass('hidden');
         }
     });
 });
