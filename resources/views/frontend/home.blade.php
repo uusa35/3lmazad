@@ -3,7 +3,6 @@
 @section('content')
     <section class="content top-null">
         <div class="container">
-            <div class="col-lg-12">
                 <div class="col-lg-3 col-md-12 aside-column text-center commercial">
                     @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsFixed])
                 </div>
@@ -14,7 +13,6 @@
                     @include('frontend.partials.components.home._commercial-ad',['commercials' => $commercialsNotFixed])
                 </div>
             </div>
-        </div>
     </section>
     @include('frontend.partials.components.home._icons_home_page')
     @include('frontend.partials.components._product_carousel',['elements' => $mostVisitedAds,'header' => trans('general.most_visited')])
