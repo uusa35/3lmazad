@@ -4,7 +4,7 @@
     {!! Breadcrumbs::render('user.profile',$element) !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content top-null">
         <div class="container">
             @include('frontend.partials._divider-xs')

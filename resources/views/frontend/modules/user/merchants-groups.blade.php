@@ -4,7 +4,7 @@
     {!! Breadcrumbs::render('user.merchants-groups') !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content top-pad-none nav-submenu hidden-sm">
         <div class="container">
             <div class="alert alert-info">

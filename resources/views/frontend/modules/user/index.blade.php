@@ -5,7 +5,7 @@
     {!! Breadcrumbs::render('user.index',$element) !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content">
         <div class="container">
             <div class="card card--padding">

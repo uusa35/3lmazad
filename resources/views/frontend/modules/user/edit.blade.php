@@ -4,7 +4,7 @@
     {!! Breadcrumbs::render('user.edit') !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content content--fill top-null">
         <div class="container">
             <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.edit_user') }}</h2>

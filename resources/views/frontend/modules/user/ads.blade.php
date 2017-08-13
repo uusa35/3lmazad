@@ -5,7 +5,7 @@
     {!! Breadcrumbs::render('user.ads', $element) !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content top-null">
         <div class="container">
             <div class="divider divider-xs"></div>
