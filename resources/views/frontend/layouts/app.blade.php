@@ -2,9 +2,9 @@
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 @include('frontend.partials.head')
 <body>
+@include('frontend.partials._loading')
+@include('frontend.partials._modal_search')
 <div class="wrapper">
-    @include('frontend.partials._loading')
-    @include('frontend.partials._modal_search')
     @section('header')
         @include('frontend.partials.header')
     @show
@@ -15,7 +15,7 @@
         @section('content')
         @show
     </div>
-    @include('frontend.partials.components.modals._quick-view')
+    {{--@include('frontend.partials.components.modals._quick-view')--}}
 
     @section('footer')
         <div class="divider divider--lg"></div>
