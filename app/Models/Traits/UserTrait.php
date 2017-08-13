@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Deal;
 use App\Models\Gallery;
+use App\Models\Group;
 use App\Models\Role;
 
 /**
@@ -49,9 +50,9 @@ trait UserTrait
         return $this->belongsToMany(Ad::class, 'favorites');
     }
 
-    public function category()
+    public function group()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function gallery()

@@ -32,8 +32,8 @@ class CreateUsersTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
             $table->integer('area_id')->unsigned()->index()->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
-            $table->integer('category_id')->unsigned()->index()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->integer('group_id')->unsigned()->index()->nullable();
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

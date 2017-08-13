@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 $this->call(AreasTableSeeder::class);
             }
             $this->call(PlansTableSeeder::class);
+            $this->call(GroupsTableSeeder::class);
             $this->call(UsersTableSeeder::class);
             $this->command->info('UsersTableseeder is done');
             $this->call(ColorsTableSeeder::class);
@@ -53,11 +54,11 @@ class DatabaseSeeder extends Seeder
             $this->call(UsersCategoriesSeeder::class);
             $this->call(AbuseReportsTableSeeder::class);
 
-        } elseif (app()->environment('production','development')) {
+        } elseif (app()->environment('production', 'development')) {
             if (DB::table('countries')->count() <= 0) {
                 $this->call(CountriesTableSeeder::class);
                 $this->call(AreasTableSeeder::class);
-                $this->call(AreasTableSeeder::class);
+                $this->call(GroupsTableSeeder::class);
                 $this->call(PlansTableSeeder::class);
                 $this->call(UsersTableSeeder::class);
                 $this->call(RolesTableSeeder::class);

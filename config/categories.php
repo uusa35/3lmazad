@@ -97,36 +97,4 @@ return [
             ['name' => 'rent_type', 'type' => 'multiple', 'options' => ['daily' => 'daily', 'weekly' => 'weekly', 'monthly' => 'montly', 'yearly' => 'yearly'],'is_model' => false, 'collection_name' => '']
         ]
     ],
-//    5 => [
-//        'parent' => 'kids',
-//        'sub' => [
-//            'Kids Furniture',
-//            'Strollers - Car Seats',
-//            'Kids Clothing',
-//            'Toys - Games',
-//            'Others - Baby - Kids',
-
-//        ]
-//    ],
-//    6 => [
-//        'parent' => 'jobs',
-//        'sub' => [
-//            'Engineering',
-//            'Admin - Secretary',
-//            'Accounting - Finance',
-//            'Medicine - Nursing',
-//            'Computer - IT',
-//            'Tutoring - Training',
-//            'Sales - Marketing',
-//            'Drivers - Delivery',
-//            'Media - Design - Creative',
-//            'Recruitment - HR',
-//            'Media - Advertising',
-//            'Costumer Service',
-//            'Maids - Home Staff',
-//        ]
-//    ]
 ];
-
-/*'brands' => ['BMW', 'Mistubishi', 'Hyundi', 'Honda']
-'brands' => ['Apple', 'Samsung', 'hwawi', 'sony']*/

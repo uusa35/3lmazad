@@ -69,14 +69,14 @@ Breadcrumbs::register('favorite', function ($breadcrumbs) {
 
 
 // all parent categories
-Breadcrumbs::register('user.merchants-categories', function ($breadcrumbs) {
+Breadcrumbs::register('user.merchants-groups', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('general.merchants_categories'), route('user.merchants-categories'));
+    $breadcrumbs->push(trans('general.merchants_groups'), route('user.merchants-groups'));
 });
 
 // fetch all users according to the parent category from merchant categories // the element is the ParentCategory
 Breadcrumbs::register('user.index', function ($breadcrumbs, $element) {
-    $breadcrumbs->parent('user.merchants-categories');
+    $breadcrumbs->parent('user.merchants-groups');
     $breadcrumbs->push($element->name, route('user.index', ['id' => $element->id]));
 });
 

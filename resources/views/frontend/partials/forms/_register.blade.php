@@ -106,13 +106,13 @@
                 </div>
             </div>
 
-            <div class="form-group hidden merchant-group" id="category-register">
-                <label for="category_id" class="control-label col-sm-4">Choose Main Category</label>
+            <div class="form-group hidden merchant-group" id="group-register">
+                <label for="category_id" class="control-label col-sm-4">{{ trans('general.choose_group') }}</label>
                 <div class="col-sm-6" id="categories">
-                    <select name="category_id" class="form-control">
-                        <option value="main category">Choose Main Category</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <select name="group_id" class="form-control">
+                        <option value="main category">{{ trans('general.choose_group') }}</option>
+                        @foreach($groups as $group)
+                            <option value="{{ $group->id }}">{{ $group->name }}</option>
                         @endforeach
                     </select>
                 </div>

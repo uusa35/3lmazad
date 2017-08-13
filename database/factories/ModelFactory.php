@@ -28,6 +28,7 @@ use App\Models\Faq;
 use App\Models\Favorite;
 use App\Models\Field;
 use App\Models\Gallery;
+use App\Models\Group;
 use App\Models\Image;
 use App\Models\Model;
 use App\Models\Newsletter;
@@ -62,7 +63,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 //        'settings' => ['certificate' => $faker->name, 'height' => $faker->numberBetween(100, 200)],
         'area_id' => Area::where('country_id', '=', 118)->pluck('id')->shuffle()->first(),
         'country_id' => 118,
-        'category_id' => null
+        'group_id' => Group::all()->random()->id
     ];
 });
 
@@ -77,8 +78,8 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
-        'icon' => $faker->randomElement(['remove', 'remove cirlce', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
-            'desktop', 'bus', 'car', 'ship', 'taxi', 'conffee', 'android', 'apple'
+        'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
+            'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
         ]),
         'parent_id' => $faker->numberBetween(0, 10),
         'featured' => $faker->boolean(true),
@@ -89,6 +90,17 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
             }
             return false;
         }
+    ];
+});
+
+$factory->define(Group::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
+            'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
+        ]),
+        'active' => $faker->boolean(true),
     ];
 });
 
@@ -194,7 +206,7 @@ $factory->define(AdMeta::class, function (Faker\Generator $faker) {
         'is_new' => $faker->boolean(),
         'is_furnished' => $faker->boolean(true),
         'is_automatic' => $faker->boolean(),
-        'ad_id' => $faker->numberBetween(1,100)
+        'ad_id' => $faker->numberBetween(1, 100)
     ];
 });
 

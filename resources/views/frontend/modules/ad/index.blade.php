@@ -3,7 +3,7 @@
 
 @section('breadcrumbs')
     @if(isset($element))
-        @if($category->isParent)
+        @if($element->isParent)
             {!! Breadcrumbs::render('parent', $element) !!}
         @else
             {!! Breadcrumbs::render('sub', $element) !!}

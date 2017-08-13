@@ -27,6 +27,12 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.modules.type.edit',
         ],
             'App\Services\ViewComposers@getCategories');
+
+        view()->composer([
+            'frontend.partials.forms._register',
+            'frontend.modules.user.edit',
+        ],
+            'App\Services\ViewComposers@getGroups');
         view()->composer([
             'frontend.partials.nav._search-row',
             'frontend.modules.ad.create',

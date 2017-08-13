@@ -6,6 +6,7 @@ use App\Http\Requests\Frontend\UserUpdate;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Deal;
+use App\Models\Group;
 use App\Models\Role;
 use App\Models\User;
 use App\Scopes\ScopeAdHasValidDeal;
@@ -35,19 +36,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $element = $this->category->whereId(request()->id)->first();
+        $element = Group::whereId(request()->id)->first();
         $elements = $element->users()->featured()->merchants()->orderBy('area_id', 'asc')->get();
         return view('frontend.modules.user.index', compact('element', 'elements'));
     }
 
-    public function merchantsCategories()
+    public function merchantsGroups()
     {
-        $elements = $this->category->where('parent_id', 0)->whereHas('users', function ($q) {
-            return $q->where('featured', true)->whereHas('roles', function ($q) {
-                return $q->where('name', 'merchant');
-            });
-        })->get();
-        return view('frontend.modules.user.merchants-categories', compact('elements'));
+        $elements = Group::with('users')->get();
+        return view('frontend.modules.user.merchants-groups', compact('elements'));
     }
 
     /**
@@ -80,7 +77,7 @@ class UserController extends Controller
     public function show($id)
     {
         $element = $this->user->whereId($id)->with('gallery.images')->first();
-        $elements = $element->ads()->with('deals', 'category', 'brand', 'user', 'color', 'size', 'favorites')->paginate(10);
+        $elements = $element->ads()->orderBy('created_at', 'desc')->with('deals', 'user.group','brand', 'user', 'color', 'size', 'favorites')->paginate(12);
         return view('frontend.modules.user.show', compact('element', 'elements'));
     }
 
@@ -157,7 +154,7 @@ class UserController extends Controller
     public function ads($id)
     {
         $element = $this->user->whereId($id)->with('ads')->first();
-        $elements = $element->ads()->orderBy('created_at','desc')->paginate(12);
+        $elements = $element->ads()->orderBy('created_at', 'desc')->paginate(12);
         return view('frontend.modules.user.ads', compact('element', 'elements'));
     }
 
@@ -170,10 +167,10 @@ class UserController extends Controller
     {
         $elements = Ad::withoutGlobalScopes([ScopeIsSold::class, ScopeAdHasValidDeal::class])
             ->where('user_id', auth()->user()->id)
-            ->with(['category', 'meta','deals' => function ($q) {
+            ->with(['category', 'meta', 'deals' => function ($q) {
                 return $q->withoutGlobalScopes();
             }])
-            ->orderby('created_at','desc')->get();
+            ->orderby('created_at', 'desc')->get();
         return view('frontend.modules.user.ads-list', compact('elements'));
     }
 

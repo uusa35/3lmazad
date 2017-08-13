@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Contactus;
 use App\Models\Country;
 use App\Models\Field;
+use App\Models\Group;
 use App\Models\Post;
 use App\Models\Size;
 use Illuminate\Database\Eloquent\Model;
@@ -41,8 +42,9 @@ class ViewComposers
         return $view->with(compact('icons'));
     }
 
-    public function getFieldTypes(View $view) {
-        $types = Field::getEnumValues('fields','type');
+    public function getFieldTypes(View $view)
+    {
+        $types = Field::getEnumValues('fields', 'type');
         return $view->with(compact('types'));
     }
 
@@ -84,6 +86,12 @@ class ViewComposers
         }])->get()->toArray();
 
         return $view->with(compact('categories'));
+    }
+
+    public function getGroups(View $view)
+    {
+        $groups = Group::get()->toArray();
+        return $view->with(compact($groups));
     }
 
     public function getAllCategoriesWithoutFeatured(View $view)
