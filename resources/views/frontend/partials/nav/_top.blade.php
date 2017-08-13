@@ -1,7 +1,6 @@
 <div class="header-line hidden-xs">
     <div class="container">
         <div class="pull-left">
-
             <div class="social-links">
                 <ul>
                     <li class="social-links__item">
@@ -28,8 +27,8 @@
                 <ul>
                     @if(isset($contactus))
                         @if(!is_null($contactus->facebook_url))
-                            <li class="social-links__item"><a class="icon icon-facebook"
-                                                              href="{{ $contactus->facebook_url }}"></a></li>
+                            <li class="social-links__item">
+                                <a class="icon icon-facebook" href="{{ $contactus->facebook_url }}"></a></li>
                         @endif
                         @if(!is_null($contactus->twitter_url))
                             <li class="social-links__item"><a class="icon icon-twitter"
@@ -44,8 +43,10 @@
                     @endif
                     {{--<li class="social-links__item"><a class="icon icon-linkedin"--}}
                     {{--href="http://www.linkedin.com/"></a></li>--}}
+
                     {{--<li class="social-links__item"><a class="icon icon-pinterest"--}}
                     {{--href="http://www.pinterest.com/"></a></li>--}}
+
                     {{--<li class="social-links__item"><a class="icon icon-mail" href="mailto:mail@google.com"></a></li>--}}
                 </ul>
             </div>

@@ -11,7 +11,7 @@
 @import '../html/css/style-layout4.css';
 //<!-- Custom Fonts -->
 //@import url('https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic');
-//@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+//@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700h');
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
 @import '../../../node_modules/semantic-ui-dropdown/dropdown.min.css';
@@ -36,6 +36,11 @@
 
 .header-line {
   background-color: #a5673f;
+}
+
+.social-links__item {
+  margin: 0px !important;
+  padding:3px !important;
 }
 .home-alert {
   width: 50%;
