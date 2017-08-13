@@ -4,6 +4,7 @@ namespace Tests\Browser;
 
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Group;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -28,10 +29,10 @@ class RegisterPageTest extends DuskTestCase
                 ->select('#area', Area::all()->random()->id)
                 ->type('input[name=mobile]', 123123)
                 ->radio('is_merchant', 1)
-                ->waitForText('Main Category')
+                ->waitForText('choose_group')
                 ->waitForText('office_phone')
                 ->waitForText('timing')
-                ->select('#categories', Category::where('parent_id', 0)->get()->random()->first()->id)
+                ->select('#group-register', Group::all()->random()->first()->id)
                 ->type('input[name=address]', 'address whatever')
                 ->type('input[name=phone]', 12324234)
                 ->type('textarea[name=description]', 'whatever desc')

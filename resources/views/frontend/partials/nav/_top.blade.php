@@ -5,7 +5,7 @@
             <div class="social-links">
                 <ul>
                     <li class="social-links__item">
-                        <a href="{{ auth()->check() ? route('ad.create') : route('register')}}">
+                        <a href="{{ auth()->check() ? route('ad.create') : route('login')}}">
                             {{ trans('general.create_ad') }}
                         </a>
                     </li>

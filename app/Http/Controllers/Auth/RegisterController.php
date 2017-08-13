@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
+use App\Models\Group;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -62,7 +63,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'is_merchant' => 'required|boolean',
             'area_id' => 'required|numeric',
-            'category_id' => ['numeric', Rule::in(Category::where('parent_id',0)->pluck('id')->toArray())],
+            'group_id' => ['numeric', Rule::in(Group::all()->pluck('id')->toArray())],
             'description' => 'string|max:1000|nullable',
         ]);
     }
@@ -83,7 +84,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'area_id' => $data['area_id'],
-            'category_id' => $data['category_id'],
+            'group_id' => $data['group_id'],
             'password' => bcrypt($data['password']),
             'description' => $data['description'],
         ]);
@@ -95,7 +96,7 @@ class RegisterController extends Controller
     {
         $role = $data['is_merchant'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
         $user->roles()->save($role);
-        $user->gallery()->save(Gallery::create(['galleryable_id' => $user->id,'galleryable_type' => User::class]));
+        $user->gallery()->save(Gallery::create(['galleryable_id' => $user->id, 'galleryable_type' => User::class]));
         $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
     }
 }

@@ -160,4 +160,6 @@ return array (
   'forget_password' => 'Forget Password',
   'brand_id' => 'Brand',
   'password_forgot' => 'Forgot Your Password',
+  'merchants-groups' => 'Merchants',
+  'merchants_groups' => 'Merchants',
 );

@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use LocaleTrait, ModelHelpers;
+    public  $localeStrings = ['name'];
     protected $guarded = [''];
-    protected $localeStrings = ['name'];
 
     /**
      * The "booting" method of the model.

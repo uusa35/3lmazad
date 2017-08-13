@@ -90,8 +90,8 @@ class ViewComposers
 
     public function getGroups(View $view)
     {
-        $groups = Group::get()->toArray();
-        return $view->with(compact($groups));
+        $groups = Group::all();
+        return $view->with(compact('groups'));
     }
 
     public function getAllCategoriesWithoutFeatured(View $view)

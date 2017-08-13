@@ -162,4 +162,6 @@ return array (
   'password_forgot' => 'نسيت كلمة المرور',
   'new_here' => 'مستخدم جديد',
   'no_ads' => 'لا توجد إعلانات حاليا',
+  'merchants_groups' => 'دليلك',
+  'merchants-groups' => 'دليلك',
 );
