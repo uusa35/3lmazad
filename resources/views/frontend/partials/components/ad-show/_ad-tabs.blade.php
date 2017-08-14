@@ -40,8 +40,8 @@
                             </div>
                             <input type="hidden" name="ad_id" value="{{ $element->id }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <button type="submit" class="ui blue labeled submit icon button"
-                                    style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
+                            <button type="submit"
+                                    class="ui blue labeled submit icon button col-lg-{{ app()->isLocale('en') ? 'push' : 'pull'}}-10">
                                 <i class="icon edit"></i> {{ trans('general.add_auction') }}
                             </button>
                         </form>
@@ -75,8 +75,7 @@
                             </div>
                             <input type="hidden" name="ad_id" value="{{ $element->id }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <button type="submit" class="ui blue labeled submit icon button"
-                                    style=" {{ app()->isLocale('en') ? 'left : 80%;' : 'right : 80%;' }}">
+                            <button type="submit" class="ui blue labeled submit icon button">
                                 <i class="icon edit"></i> {{ trans('general.add_comment') }}
                             </button>
                         </form>
