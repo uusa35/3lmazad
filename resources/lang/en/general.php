@@ -53,8 +53,6 @@ return array (
   'wish_list' => 'Wish List',
   'merchants-categories' => 'Merchants',
   'kd' => 'KD',
-<<<<<<< HEAD
-=======
   'mobile' => 'Mobile',
   'area' => 'Providence',
   'account_type' => 'Account Type',
@@ -63,7 +61,6 @@ return array (
   'group' => 'Merchant Field',
   'timing' => 'Office Timing',
   'description' => 'Description',
->>>>>>> 9514b10ef9343e8dd5e2fb412144afe6e7b82ad6
   'price_max' => 'Price Max',
   'keyword' => 'Search here ...',
   'filter_by_category' => 'Choose Category ..',
@@ -134,10 +131,7 @@ return array (
   'regular_user' => 'Regular User',
   'password' => 'Password',
   'confirm_password' => 'Confirm Password',
-<<<<<<< HEAD
-=======
   'choose_group' => 'Choose Merchant Group',
->>>>>>> 9514b10ef9343e8dd5e2fb412144afe6e7b82ad6
   'brief' => 'Brief',
   'remember_me' => 'Remember me',
   'ad_more_images_to_gallery' => 'Add more images',

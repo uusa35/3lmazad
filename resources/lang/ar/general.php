@@ -164,10 +164,7 @@ return array (
   'no_ads' => 'لا توجد إعلانات حاليا',
   'merchants_groups' => 'دليلك',
   'merchants-groups' => 'دليلك',
-<<<<<<< HEAD
-=======
   'choose_group' => 'أختر تصنيف التاجر',
   'group' => 'تصنيف التاجر',
   'timing' => 'الدوام',
->>>>>>> 9514b10ef9343e8dd5e2fb412144afe6e7b82ad6
 );
