@@ -39043,6 +39043,12 @@ zoom: 1;
   .container {
     width: 1300px !important;
   }
+
+  .nav-btn-groups {
+    width: 200px;
+    border: none;
+    text-align: center;
+  }
 }
 
 .nav-tabs--wd > li > a,
@@ -39100,6 +39106,10 @@ zoom: 1;
             justify-content: center;
     -ms-flex-wrap: wrap !important;
         flex-wrap: wrap !important;
+  }
+
+  .product-category-carousel {
+    width: 95% !important;
   }
 }
 
@@ -39206,7 +39216,7 @@ span > .text {
 }
 
 .product-preview__image {
-  margin-bottom: 153px !important;
+  margin-bottom: 40px !important;
 }
 
 .title-ad {
