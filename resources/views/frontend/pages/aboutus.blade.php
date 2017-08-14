@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('top')
+@section('content')
     <section class="content">
         <div class="container">
             <h2 class="text-uppercase">About Us</h2>

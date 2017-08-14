@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 
-@section('top')
+@section('content')
         <!-- Contact page body start -->
 <div class="contact-page-area">
     <div class="container">

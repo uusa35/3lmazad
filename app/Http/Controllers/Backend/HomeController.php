@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Term;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -36,5 +37,11 @@ class HomeController extends Controller
             'featured' => !$element->featured
         ]);
         return redirect()->back()->with('success', 'Process Success');
+    }
+
+    public function exportTranslations()
+    {
+        Artisan::call('publish-trans');
+        return redirect()->back()->with('success', 'translations exported');
     }
 }

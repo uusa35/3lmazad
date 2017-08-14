@@ -86,6 +86,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('size', 'SizeController');
     Route::resource('type', 'TypeController');
     Route::resource('image', 'ImageController');
+    Route::get('export/language','HomeController@exportTranslations')->name('export.translations');
 //    Route::resource('newsletter', 'NewsletterController');
 });
 

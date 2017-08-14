@@ -319,6 +319,10 @@
                                 <i class="fa fa-fw fa-language"></i> Translations </a>
                         </li>
                         <li>
+                            <a href="{{ route('backend.export.translations') }}">
+                                <i class="fa fa-fw fa-language"></i> Export Translations</a>
+                        </li>
+                        <li>
                             <a href="{{ url('backend/enveditor') }}">
                                 <i class="fa fa-fw fa-gear"></i> Global Settings </a>
                         </li>
