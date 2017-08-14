@@ -164,6 +164,7 @@ return array (
   'no_ads' => 'لا توجد إعلانات حاليا',
   'merchants_groups' => 'دليلك',
   'merchants-groups' => 'دليلك',
-  'choose_group' => 'أختر المحافظة',
-  'group' => 'المحافظة',
+  'choose_group' => 'أختر تصنيف التاجر',
+  'group' => 'تصنيف التاجر',
+  'timing' => 'الدوام',
 );
