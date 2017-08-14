@@ -23,11 +23,17 @@
   .container {
     width: 1300px !important;
   }
+  .nav-btn-groups {
+    width: 200px;
+    border: none;
+    text-align: center;
+  }
 }
 
 .nav-tabs--wd > li > a, .nav-tabs--wd > li.active > a, .nav-tabs--wd > li.active > a:hover, .nav-tabs--wd > li.active > a:focus {
   padding: 8px;
 }
+
 .commercial {
   display: flex;
   flex-direction: column;
@@ -41,8 +47,9 @@
 
 .social-links__item {
   margin: 0px !important;
-  padding:3px !important;
+  padding: 3px !important;
 }
+
 .home-alert {
   width: 50%;
 }
@@ -64,6 +71,9 @@
   .main-fields, .sub-fields {
     justify-content: center;
     flex-wrap: wrap !important;
+  }
+  .product-category-carousel {
+    width: 95% !important;
   }
 }
 

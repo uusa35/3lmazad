@@ -1,9 +1,9 @@
 <section class="content">
     <div class="container">
         <div class="divider divider--xs product-info__divider"></div>
-        <h1 class="text-center text-uppercase">{{ isset($header) ? $header : null }}</h1>
-        <hr>
-        <div class="product-category-carousel mobile-special-arrows animated-arrows slick">
+        <h1 class="text-center text-uppercase">{{ isset($header) ? $header : null }}
+        </h1>
+        <div class="product-category-carousel slick mobile-special-arrows animated-arrows">
             @if(!$elements->isEmpty())
                 @foreach($elements as $element)
                     <div class="product-category hover-squared">

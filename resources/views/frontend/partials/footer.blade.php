@@ -1,3 +1,4 @@
+<div class="divider divider--lg"></div>
 <footer class="footer">
     <div class="footer__column-links footer__column-links--variant2">
         <div class="back-to-top"><a href="#top" class="btn btn--round btn--round--lg"><span
