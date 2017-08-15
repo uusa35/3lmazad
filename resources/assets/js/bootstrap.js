@@ -33,7 +33,7 @@ import magnificPopup from 'magnific-popup';
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = 'http://3lmazad.ideasowners.net';
+window.axios.defaults.baseURL = 'http://3lmazad.com';
 if(window.Laravel.env == 'local') {
     window.axios.defaults.baseURL = 'http://3lmazad.dev';
 }
