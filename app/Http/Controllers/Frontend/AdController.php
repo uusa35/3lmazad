@@ -103,17 +103,19 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        $element = $this->ad->whereId($id)->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')->with(['comments' => function ($q) {
+        $element = $this->ad->whereId($id)->with(['comments' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
-        }])->first();
+        }])
+//            ->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')
+            ->first();
         if (is_null($element)) {
             abort(404, trans('message.ad_missing_our_terms_and_conditions'));
         }
         dispatch(new CreateNewVisitorForAd($element)); // create counter according to sessionId
         $counter = Visitor::where('ad_id', $element->id)->count();
-        $element->isOwner ? session()->put('pay_ad_id', $element->id) : null;
+        $element->isOwner ? session()->put('pay_ad_id', $element->id) : session()->forget('pay_ad_id');
         $paidAds = $this->ad->where('category_id', $element->category_id)->adHasValidPaidDeal()->orderBy('created_at', 'desc')->take(12)->get();
         return view('frontend.modules.ad.show', compact('element', 'counter', 'paidAds'));
     }

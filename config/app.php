@@ -245,6 +245,7 @@ return [
         'Date' => Jenssegers\Date\Date::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
-        'MobileDetect' => 'Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class'
+        'MobileDetect' => 'Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class',
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 ];
