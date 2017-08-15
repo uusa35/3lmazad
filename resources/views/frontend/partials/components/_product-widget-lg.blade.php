@@ -69,21 +69,23 @@
                                                 class="save icon"></i> {{ $element->meta->mileage }} {{ trans("general.km") }}
                                     </button>
                                 @endif
-                                <button class="ui button"><i class="upload icon"></i> manufacturing year</button>
-                                <button class="ui button"><i class="download icon"></i> test</button>
+                                @if(!is_null($element->meta->manufacturing_year))
+                                    <button class="ui button"><i
+                                                class="upload icon"></i> {{ trans('general.manufacturing_year') }}
+                                    </button>
+                                    <button class="ui button"><i
+                                                class="download icon"></i> {{ $element->manufacturing_year }}</button>
+                                @endif
                             </div>
                             <div class="ui buttons">
                                 <button class="ui white basic button"><i
-                                            class="icon calendar"></i>{{  $element->fromDate }}
+                                            class="icon calendar"></i>{{  $element->deals->first()->startsAt }}
+                                </button>
+                                <button class="ui white basic button"><i
+                                            class="icon calendar"></i>{{  $element->deals->first()->endsAt }}
                                 </button>
                                 <button class="ui white basic button"><i
                                             class="icon arrow-right"></i>{{  $element->categoryName }}</button>
-                                <button class="ui white basic button"><i
-                                            class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}
-                                </button>
-                                <button class="ui white basic button"><i
-                                            class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}
-                                </button>
                             </div>
                         </div>
                     </div>
