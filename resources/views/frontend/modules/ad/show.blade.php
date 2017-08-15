@@ -52,11 +52,11 @@
                     <div class="divider divider--xs"></div>
                 </div>
                 @include('frontend.partials.components.ad-show.side-ad-show')
-                @if(!$paidAds->isEmpty())
-                    @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
-                @endif
             </div>
         </div>
     </section>
+    @if(!$paidAds->isEmpty())
+        @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
+    @endif
     @include('frontend.partials.components.ad-show._ad-tabs')
 @endsection
