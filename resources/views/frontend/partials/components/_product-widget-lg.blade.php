@@ -42,7 +42,7 @@
                                 data-price="{{ $element->price }}"
                                 data-description="{{ $element->meta->description }}"
                                 data-image="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                data-category="{{ $element->categoryName }}"
+                                data-category="{{ $element->group->name }}"
                                 data-from-date="{{ $element->fromDate }}"
                                 data-element="{{ $element }}"
                         >
