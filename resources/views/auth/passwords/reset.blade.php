@@ -4,7 +4,7 @@
     {!! Breadcrumbs::render('reset_password') !!}
 @endsection
 
-@section('top')
+@section('content')
     <section class="content content--fill top-null">
         <div class="container">
             <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.reset_password') }}</h2>
