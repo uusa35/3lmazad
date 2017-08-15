@@ -11,11 +11,12 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.3",
-        "laravel/dusk": "^1.1",
-        "laravelcollective/html": "^5.4",
         "jenssegers/date": "^3.2",
+        "laravel/dusk": "^1.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4",
+        "riverskies/laravel-mobile-detect": "^1.2",
         "tymon/jwt-auth": "^0.5.11"
     },
     "require-dev": {

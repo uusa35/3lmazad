@@ -190,6 +190,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Usama\Tap\TapServiceProvider::class,
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        Riverskies\Laravel\MobileDetect\MobileDetectServiceProvider::class
 
     ],
 
@@ -244,5 +245,6 @@ return [
         'Date' => Jenssegers\Date\Date::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
+        'MobileDetect' => 'Riverskies\Laravel\MobileDetect\Facades\MobileDetect::class'
     ],
 ];
