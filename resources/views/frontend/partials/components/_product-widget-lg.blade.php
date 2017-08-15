@@ -42,7 +42,7 @@
                                 data-price="{{ $element->price }}"
                                 data-description="{{ $element->meta->description }}"
                                 data-image="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                data-category="{{ $element->group->name }}"
+                                data-category="{{ $element->categoryName }}"
                                 data-from-date="{{ $element->fromDate }}"
                                 data-element="{{ $element }}"
                         >
@@ -77,7 +77,7 @@
                                             class="icon calendar"></i>{{  $element->fromDate }}
                                 </button>
                                 <button class="ui white basic button"><i
-                                            class="icon arrow-right"></i>{{  $element->group->name}}</button>
+                                            class="icon arrow-right"></i>{{  $element->categoryName }}</button>
                                 <button class="ui white basic button"><i
                                             class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}
                                 </button>
