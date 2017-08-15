@@ -77,7 +77,7 @@
                                             class="icon calendar"></i>{{  $element->fromDate }}
                                 </button>
                                 <button class="ui white basic button"><i
-                                            class="icon arrow-right"></i>{{  $element->categoryName }}</button>
+                                            class="icon arrow-right"></i>{{  $element->group->name}}</button>
                                 <button class="ui white basic button"><i
                                             class="icon calendar"></i>{{  $element->created_at->diffForHumans() }}
                                 </button>
