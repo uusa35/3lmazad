@@ -50,7 +50,12 @@ class ComposerServiceProvider extends ServiceProvider
         ],
             'App\Services\ViewComposers@getFields');
 
-        view()->composer('*', 'App\Services\ViewComposers@getAreas');
+        view()->composer([
+            'frontend.partials.components.search-form._area_id_field',
+            'backend.modules.area.index',
+            'backend.modules.user.create',
+            'backend.modules.user.edit'
+        ], 'App\Services\ViewComposers@getAreas');
         view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');
         view()->composer(
             [
