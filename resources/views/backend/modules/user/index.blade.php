@@ -53,6 +53,10 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
+                                    <a href="{{ route('backend.user.edit',$element->id) }}">
+                                        <i class="fa fa-fw fa-edit"></i> Edit User</a>
+                                </li>
+                                <li>
                                     <a href="{{ route('backend.activation',['model' => 'user','id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> toggle active</a>
                                 </li>

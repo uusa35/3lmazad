@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" method="POST" action="{{ route('user.update',$element->id) }}"
+<form class="form-horizontal" role="form" method="POST" action="{{ route('backend.user.update',$element->id) }}"
       enctype="multipart/form-data">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT"/>
@@ -75,11 +75,10 @@
 
     <div class="form-group">
         <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
-
         <div class="col-md-3">
             <div class="col-lg-1">
                 <input type="radio" class="" name="is_merchant" value="1" {{ $element->isMerchant ? 'checked' : null }}
-                required disabled>
+                required>
             </div>
             <div class="col-lg-2">
                 <span>{{ trans('general.merchant') }}</span>
@@ -96,24 +95,26 @@
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group" id="group-register">
+    <div class="form-group {{ !$element->isMerchant ? 'hidden' : null }} merchant-group" id="group-register">
         <label for="category_id" class="control-label col-sm-4">{{ trans('general.choose_group') }}</label>
         <div class="col-sm-6" id="categories">
-            <select name="group_id" class="form-control">
-                <option value="main category">{{ trans('general.choose_group') }}</option>
-                @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
-                @endforeach
-            </select>
+            {{--<select name="group_id" class="form-control">--}}
+{{--                <option value="main category">{{ trans('general.choose_group') }}</option>--}}
+                {!! Form::select('group_id', $groups->pluck('name_en','id'),$element->group_id, ['id' => 'group_id','class' => 'form-control','placeholder' => trans('general.choose_group')]) !!}
+                {{--@foreach($groups as $group)--}}
+                    {{--<option value="{{ $group->id }}">{{ $group->name }}</option>--}}
+                {{--@endforeach--}}
+            {{--</select>--}}
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group {{ $errors->has('address') ? ' has-error' : '' }}" id="address" >
+    <div class="form-group {{ !$element->isMerchant ? 'hidden' : null }}  merchant-group {{ $errors->has('address') ? ' has-error' : '' }}"
+         id="address">
         <label for="name" class="col-md-4 control-label">{{ trans('general.address') }}</label>
 
         <div class="col-md-6">
             <input id="name" type="text" class="form-control" name="address"
-                   value="{{ old('address') }}" autofocus>
+                   value="{{ $element->address }}" autofocus>
 
             @if ($errors->has('address'))
                 <span class="help-block">
@@ -123,25 +124,27 @@
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group" id="phone">
+    <div class="form-group {{ !$element->isMerchant ? 'hidden' : null }} merchant-group" id="phone">
         <label for="name" class="col-md-4 control-label">{{ trans('general.office_phone') }}</label>
 
         <div class="col-md-6">
             <input id="mobile" type="text" class="form-control" name="phone"
-                   value="{{ old('phone') }}" number autofocus>
+                   value="{{ $element->phone }}" number autofocus>
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group {{ $errors->has('timing') ? ' has-error' : '' }}" id="timing" >
+    <div class="form-group {{ !$element->isMerchant ? 'hidden' : null }} merchant-group {{ $errors->has('timing') ? ' has-error' : '' }}"
+         id="timing">
         <label for="name" class="col-md-4 control-label">{{ trans('general.timing') }}</label>
 
         <div class="col-md-6">
             <input id="name" type="text" class="form-control" name="timing" placeholder="{{ trans('message.timing') }}"
-                   value="{{ old('timing') }}" autofocus>
+                   value="{{ $element->timing }}" autofocus>
 
             <span class="help-block">{{ trans("message.timing") }}</span>
             @if ($errors->has('timing'))
-                <span class="help-block">{{ trans("message.timing") }}<strong>{{ $errors->first('timing') }}</strong></span>
+                <span class="help-block">{{ trans("message.timing") }}
+                    <strong>{{ $errors->first('timing') }}</strong></span>
             @endif
         </div>
     </div>
@@ -151,10 +154,16 @@
 
         <div class="col-md-6">
             <textarea type="text" class="form-control" name="description" aria-multiline="true"
-                      maxlength="1000"></textarea>
+                      maxlength="1000">
+                {{ $element->description }}
+            </textarea>
         </div>
     </div>
 
-
-    @include('backend.partials.forms._btn-group')
+    <div class="form-group">
+        @include('frontend.partials.forms._btn-group')
+    </div>
 </form>
+
+
+

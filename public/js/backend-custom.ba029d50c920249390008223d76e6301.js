@@ -16,7 +16,7 @@ $(document).ready(function() {
         locale: 'ru'
     });
     $('input[name="is_merchant"]').on('click', function(e) {
-        isMerchant = e.target.value;
+        let isMerchant = e.target.value;
         if (isMerchant == 1) {
             $('#group-register').removeClass('hidden');
             $('div[class*="merchant-group"]').removeClass('hidden');

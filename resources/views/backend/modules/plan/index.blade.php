@@ -46,7 +46,7 @@
                     <td>{{ $element->price}}</td>
                     <td>{{ $element->sale_price }}</td>
                     <td>
-                        <span class="label {{ activeLabel($element->on_sale) }}">{{ activeText($element->on_sale) }}</span>
+                        <span class="label {{ activeLabel($element->on_sale) }}">{{ activeText($element->on_sale,'On Sale') }}</span>
                     </td>
                     <td>
                         <span class="label {{ activeLabel($element->active) }}">{{ activeText($element->active) }}</span>
@@ -54,7 +54,7 @@
                     <td>{{ str_limit($element->description_ar,15,'..') }}</td>
                     <td>{{ str_limit($element->description_en,15,'..') }}</td>
                     <td>
-                        <span class="label {{ activeLabel($element->is_paid) }}">{{ activeText($element->is_paid) }}</span>
+                        <span class="label {{ activeLabel($element->is_paid) }}">{{ activeText($element->is_paid,'Paid') }}</span>
                     </td>
                     <td>
                         <div class="btn-group">
