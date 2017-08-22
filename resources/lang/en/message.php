@@ -2,6 +2,7 @@
 
 return array (
   'choose_main_category' => 'Choose Main Category',
+  'no_preview' => 'There are no items to display !!',
   'max_price_field' => 'Highest Price',
   'category_field' => 'Please Choose Category Field.',
   'area_field' => 'Select Area',
