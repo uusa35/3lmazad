@@ -94,6 +94,16 @@
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Color</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route("backend.area.create") }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Area</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("backend.group.create") }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Group</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- END NOTIFICATION DROPDOWN -->

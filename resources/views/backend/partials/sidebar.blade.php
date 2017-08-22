@@ -182,37 +182,37 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('slider') }}">
                         <a href="{{ route('backend.slider.index') }}" class="nav-link ">
                             <span class="title">Sliders</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('commercial') }}">
                         <a href="{{ route('backend.commercial.index') }}" class="nav-link ">
                             <span class="title">Commercials</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('aboutus') }}">
                         <a href="{{ route('backend.aboutus.index') }}" class="nav-link ">
                             <span class="title">Aboutus</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('contactus') }}">
                         <a href="{{ route('backend.contactus.index') }}" class="nav-link ">
                             <span class="title">Contactus</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('faq') }}">
                         <a href="{{ route('backend.faq.index') }}" class="nav-link ">
                             <span class="title">Faq</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('term') }}">
                         <a href="{{ route('backend.term.index') }}" class="nav-link ">
                             <span class="title">Terms of Condition</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
+                    <li class="nav-item {{ activeItem('area') }}">
                         <a href="{{ route('backend.area.index') }}" class="nav-link ">
                             <span class="title">Providences</span>
                         </a>
