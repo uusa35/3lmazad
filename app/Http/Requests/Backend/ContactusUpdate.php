@@ -13,7 +13,7 @@ class ContactusUpdate extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return auth()->user()->isAdmin;
     }
 
     /**
@@ -26,16 +26,16 @@ class ContactusUpdate extends FormRequest
         return [
             'name_ar' => 'required|min:3',
             'name_en' => 'required|min:3',
-            'facebook_url' => 'url',
-            'twitter_url' => 'url',
-            'instagram_url' => 'url',
-            'youtube_url' => 'url',
-            'phone' => 'numeric',
-            'mobile' => 'numeric',
-            'email' => 'email',
-            'address' => '',
-            'latitude' => 'numeric',
-            'longitude' => 'numeric',
+            'facebook_url' => 'nullable|url',
+            'twitter_url' => 'nullable|url',
+            'instagram_url' => 'nullable|url',
+            'youtube_url' => 'nullable|url',
+            'phone' => 'nullable|numeric',
+            'mobile' => 'nullable|numeric',
+            'email' => 'nullable|email',
+            'address' => 'nullable',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'logo' => 'mimes:jpeg,bmp,png',
         ];
     }
