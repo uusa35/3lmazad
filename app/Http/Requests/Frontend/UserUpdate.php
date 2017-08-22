@@ -13,7 +13,7 @@ class UserUpdate extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->id === request()->user()->id;
+        return (auth()->user()->isAdmin || auth()->user()->id === request()->user()->id);
     }
 
     /**
@@ -28,6 +28,7 @@ class UserUpdate extends FormRequest
             'email' => 'required|string|email|max:255',
             'area_id' => 'required|numeric',
             'avatar' => 'mimes:jpg,jpeg,png',
+            'group_id' => 'nullable|exists:groups,id'
         ];
     }
 }

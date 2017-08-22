@@ -1,7 +1,14 @@
 @extends('backend.layouts.app')
 @section('content')
-    <div class="clearfix"></div>
-    <div class="portlet-body form">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-settings font-dark"></i>
+                <span class="caption-subject font-dark sbold uppercase">Create New Faq</span>
+            </div>
+        </div>
+        <div class="portlet-body form">
+
         <form role="form" method="post" action="{{ route('backend.faq.store') }}">
             {{ csrf_field() }}
             <div class="form-body">

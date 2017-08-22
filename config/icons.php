@@ -190,5 +190,538 @@ return [
     'laptop' => 'laptop',
     'plug' => 'plug',
     'power' => 'power',
+    'bicycle' => 'bicycle',
+    'building' => 'building',
+    'building outline' => 'building outline',
+    'bus' => 'bus',
+    'car' => 'car',
+    'coffee' => 'coffee',
+    'compass' => 'compass',
+    'emergency' => 'emergency',
+    'first aid' => 'first aid',
+    'food' => 'food',
+    'h' => 'h',
+    'hospital' => 'hospital',
+    'hotel' => 'hotel',
+    'location arrow' => 'location arrow',
+    'map' => 'map',
+    'map outline' => 'map outline',
+    'map pin' => 'map pin',
+    'map signs' => 'map signs',
+    'marker' => 'marker',
+    'military' => 'military',
+    'motorcycle' => 'motorcycle',
+    'paw' => 'paw',
+    'ship' => 'ship',
+    'space shuttle' => 'space shuttle',
+    'spoon' => 'spoon',
+    'street view' => 'street view',
+    'subway' => 'subway',
+    'taxi' => 'taxi',
+    'train' => 'train',
+    'television' => 'television',
+    'tree' => 'tree',
+    'university' => 'university',
+    'align center' => 'align center',
+    'align justify' => 'align justify',
+    'align left' => 'align left',
+    'align right' => 'align right',
+    'attach' => 'attach',
+    'bold' => 'bold',
+    'copy' => 'copy',
+    'cut' => 'cut',
+    'font' => 'font',
+    'header' => 'header',
+    'indent' => 'indent',
+    'italic' => 'italic',
+    'linkify' => 'linkify',
+    'list' => 'list',
+    'ordered list' => 'ordered list',
+    'outdent' => 'outdent',
+    'paragraph' => 'paragraph',
+    'paste' => 'paste',
+    'save' => 'save',
+    'strikethrough' => 'strikethrough',
+    'subscript' => 'subscript',
+    'superscript' => 'superscript',
+    'text cursor' => 'text cursor',
+    'text height' => 'text height',
+    'text width' => 'text width',
+    'underline' => 'underline',
+    'unlinkify' => 'unlinkify',
+    'unordered list' => 'unordered list',
+    'american express' => 'american express',
+    'credit card alternative' => 'credit card alternative',
+    'diners club' => 'diners club',
+    'discover' => 'discover',
+    'google wallet' => 'google wallet',
+    'japan credit bureau' => 'japan credit bureau',
+    'mastercard' => 'mastercard',
+    'paypal card' => 'paypal card',
+    'paypal' => 'paypal',
+    'stripe' => 'stripe',
+    'visa' => 'visa',
+    '500px' => '500px',
+    'adn' => 'adn',
+    'amazon' => 'amazon',
+    'android' => 'android',
+    'angellist' => 'angellist',
+    'apple' => 'apple',
+    'bandcamp' => 'bandcamp',
+    'behance' => 'behance',
+    'behance square' => 'behance square',
+    'bitbucket' => 'bitbucket',
+    'bitbucket square' => 'bitbucket square',
+    'black tie' => 'black tie',
+    'buysellads' => 'buysellads',
+    'chrome' => 'chrome',
+    'codepen' => 'codepen',
+    'codiepie' => 'codiepie',
+    'connectdevelop' => 'connectdevelop',
+    'contao' => 'contao',
+    'dashcube' => 'dashcube',
+    'delicious' => 'delicious',
+    'deviantart' => 'deviantart',
+    'digg' => 'digg',
+    'dribbble' => 'dribbble',
+    'dropbox' => 'dropbox',
+    'drupal' => 'drupal',
+    'eercast' => 'eercast',
+    'empire' => 'empire',
+    'envira gallery' => 'envira gallery',
+    'etsy' => 'etsy',
+    'expeditedssl' => 'expeditedssl',
+    'facebook f' => 'facebook f',
+    'facebook' => 'facebook',
+    'facebook square' => 'facebook square',
+    'firefox' => 'firefox',
+    'first order' => 'first order',
+    'flickr' => 'flickr',
+    'font awesome' => 'font awesome',
+    'fonticons' => 'fonticons',
+    'fort awesome' => 'fort awesome',
+    'forumbee' => 'forumbee',
+    'foursquare' => 'foursquare',
+    'free.code.camp' => 'free.code.camp',
+    'gg circle' => 'gg circle',
+    'gg' => 'gg',
+    'git' => 'git',
+    'git square' => 'git square',
+    'github alternate' => 'github alternate',
+    'github' => 'github',
+    'github square' => 'github square',
+    'gitlab' => 'gitlab',
+    'gittip' => 'gittip',
+    'glide g' => 'glide g',
+    'glide' => 'glide',
+    'google' => 'google',
+    'google plus circle' => 'google plus circle',
+    'google plus' => 'google plus',
+    'google plus square' => 'google plus square',
+    'grav' => 'grav',
+    'hacker news' => 'hacker news',
+    'houzz' => 'houzz',
+    'imdb' => 'imdb',
+    'instagram' => 'instagram',
+    'internet explorer' => 'internet explorer',
+    'ioxhost' => 'ioxhost',
+    'joomla' => 'joomla',
+    'jsfiddle' => 'jsfiddle',
+    'lastfm' => 'lastfm',
+    'lastfm square' => 'lastfm square',
+    'leanpub' => 'leanpub',
+    'linkedin' => 'linkedin',
+    'linkedin square' => 'linkedin square',
+    'linode' => 'linode',
+    'linux' => 'linux',
+    'maxcdn' => 'maxcdn',
+    'meanpath' => 'meanpath',
+    'medium' => 'medium',
+    'meetup' => 'meetup',
+    'microsoft edge' => 'microsoft edge',
+    'mixcloud' => 'mixcloud',
+    'modx' => 'modx',
+    'odnoklassniki' => 'odnoklassniki',
+    'odnoklassniki square' => 'odnoklassniki square',
+    'opencart' => 'opencart',
+    'opera' => 'opera',
+    'optinmonster' => 'optinmonster',
+    'pagelines' => 'pagelines',
+    'pied piper alternate' => 'pied piper alternate',
+    'pied piper hat' => 'pied piper hat',
+    'pied piper' => 'pied piper',
+    'pinterest' => 'pinterest',
+    'pinterest' => 'pinterest',
+    'pinterest square' => 'pinterest square',
+    'pocket' => 'pocket',
+    'product hunt' => 'product hunt',
+    'qq' => 'qq',
+    'quora' => 'quora',
+    'ravelry' => 'ravelry',
+    'rebel' => 'rebel',
+    'reddit alien' => 'reddit alien',
+    'reddit' => 'reddit',
+    'reddit square' => 'reddit square',
+    'renren' => 'renren',
+    'safari' => 'safari',
+    'scribd' => 'scribd',
+    'sellsy' => 'sellsy',
+    'shirtsinbulk' => 'shirtsinbulk',
+    'simplybuilt' => 'simplybuilt',
+    'skyatlas' => 'skyatlas',
+    'skype' => 'skype',
+    'slack' => 'slack',
+    'slideshare' => 'slideshare',
+    'snapchat ghost' => 'snapchat ghost',
+    'snapchat' => 'snapchat',
+    'snapchat square' => 'snapchat square',
+    'soundcloud' => 'soundcloud',
+    'spotify' => 'spotify',
+    'stack exchange' => 'stack exchange',
+    'stack overflow' => 'stack overflow',
+    'steam' => 'steam',
+    'steam square' => 'steam square',
+    'stumbleupon circle' => 'stumbleupon circle',
+    'stumbleupon' => 'stumbleupon',
+    'superpowers' => 'superpowers',
+    'telegram' => 'telegram',
+    'tencent weibo' => 'tencent weibo',
+    'themeisle' => 'themeisle',
+    'trello' => 'trello',
+    'tripadvisor' => 'tripadvisor',
+    'tumblr' => 'tumblr',
+    'tumblr square' => 'tumblr square',
+    'twitch' => 'twitch',
+    'twitter' => 'twitter',
+    'twitter square' => 'twitter square',
+    'viacoin' => 'viacoin',
+    'viadeo' => 'viadeo',
+    'viadeo square' => 'viadeo square',
+    'vimeo' => 'vimeo',
+    'vimeo square' => 'vimeo square',
+    'vine' => 'vine',
+    'vk' => 'vk',
+    'wechat' => 'wechat',
+    'weibo' => 'weibo',
+    'whatsapp' => 'whatsapp',
+    'wikipedia' => 'wikipedia',
+    'windows' => 'windows',
+    'wordpress' => 'wordpress',
+    'wpbeginner' => 'wpbeginner',
+    'wpexplorer' => 'wpexplorer',
+    'wpforms' => 'wpforms',
+    'xing' => 'xing',
+    'xing square' => 'xing square',
+    'y combinator' => 'y combinator',
+    'yahoo' => 'yahoo',
+    'yelp' => 'yelp',
+    'yoast' => 'yoast',
+    'youtube' => 'youtube',
+    'youtube play' => 'youtube play',
+    'youtube square' => 'youtube square',
+    'backward' => 'backward',
+    'closed captioning' => 'closed captioning',
+    'eject' => 'eject',
+    'fast backward' => 'fast backward',
+    'fast forward' => 'fast forward',
+    'forward' => 'forward',
+    'music' => 'music',
+    'mute' => 'mute',
+    'pause circle' => 'pause circle',
+    'pause circle outline' => 'pause circle outline',
+    'pause' => 'pause',
+    'play' => 'play',
+    'record' => 'record',
+    'step backward' => 'step backward',
+    'step forward' => 'step forward',
+    'stop circle' => 'stop circle',
+    'stop circle outline' => 'stop circle outline',
+    'stop' => 'stop',
+    'unmute' => 'unmute',
+    'video play' => 'video play',
+    'video play outline' => 'video play outline',
+    'volume down' => 'volume down',
+    'volume off' => 'volume off',
+    'volume up' => 'volume up',
+    'empty heart' => 'empty heart',
+    'empty star' => 'empty star',
+    'frown' => 'frown',
+    'heart' => 'heart',
+    'meh' => 'meh',
+    'smile' => 'smile',
+    'star half empty' => 'star half empty',
+    'star half' => 'star half',
+    'star' => 'star',
+    'thumbs down' => 'thumbs down',
+    'thumbs outline down' => 'thumbs outline down',
+    'thumbs outline up' => 'thumbs outline up',
+    'thumbs up' => 'thumbs up',
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

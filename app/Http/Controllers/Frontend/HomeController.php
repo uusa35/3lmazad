@@ -43,7 +43,7 @@ class HomeController extends Controller
     public function index()
     {
         $mostVisitedAds = $this->ad->getMostVisitedAds();
-        $latestAds = $this->ad->orderBy('created_at', 'desk')->take(15)->get();
+        $latestAds = $this->ad->orderBy('created_at', 'desc')->take(15)->get();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         $sliders = Slider::orderBy('order', 'desc')->get();

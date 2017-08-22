@@ -43,7 +43,8 @@ function activeLabel($element)
     return $element ? 'label-success' : 'label-danger';
 }
 
-function activeText($element)
+function activeText($element, $text = 'Active')
 {
-    return $element ? 'Active' : 'N/A';
+    $element ? $text = $text : $text = 'N/A';
+    return $text;
 }

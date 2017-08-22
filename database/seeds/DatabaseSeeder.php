@@ -51,7 +51,6 @@ class DatabaseSeeder extends Seeder
             $this->call(AdVisitorsTableSeeder::class);
             $this->command->info('before favorites');
             $this->call(FavoritesTableSeeder::class);
-            $this->call(UsersCategoriesSeeder::class);
             $this->call(AbuseReportsTableSeeder::class);
 
         } elseif (app()->environment('production', 'development')) {
@@ -71,7 +70,6 @@ class DatabaseSeeder extends Seeder
                 $this->call(AboutusTableSeeder::class);
                 $this->call(TermsTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
-                $this->call(UsersCategoriesSeeder::class);
                 $this->call(AdVisitorsTableSeeder::class);
             }
         } else {

@@ -78,6 +78,7 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
+        'order' => $faker->numberBetween(1,50),
         'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
             'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
         ]),

@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean('on_homepage')->default(0)->nullable();
             $table->boolean('active')->default(1)->nullable();
             $table->boolean('featured')->default(1);
+            $table->string('order')->default(0)->nullable();
             $table->string('icon')->default('apps')->nullable();
 
             $table->timestamps();

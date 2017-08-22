@@ -88,19 +88,19 @@
             <div class="form-group">
                 <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="col-lg-1">
-                        <input type="radio" class="" name="is_merchant" value="1">
+                        <input type="radio" class="" name="is_merchant" value="1" disabled>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <span>{{ trans('general.merchant') }}</span>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="col-lg-1">
                         <input type="radio" class="" name="is_merchant" value="0" checked>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <span>{{ trans('general.regular_user') }}</span>
                     </div>
                 </div>

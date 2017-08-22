@@ -142,7 +142,7 @@
             <li class="heading">
                 <h3 class="uppercase">Settings Section</h3>
             </li>
-            <li class="nav-item {{ activeItem('category',['option','field','slider','aboutus','contactus','faq','gallery','color','size','type','commercial']) }}">
+            <li class="nav-item {{ activeItem('category',['option','group','area','field','slider','aboutus','contactus','faq','gallery','color','size','type','commercial']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="title">Settings</span>
@@ -164,6 +164,21 @@
                             </li>
                             <li class="nav-item ">
                                 <a href="{{ route('backend.option.index') }}" class="nav-link "> Options </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  {{ activeItem('group') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Groups (Dalelek)</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item ">
+                                <a href="{{ route('backend.group.index') }}" class="nav-link ">
+                                    Groups </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="{{ route('backend.group.create') }}" class="nav-link "> Create Group </a>
                             </li>
                         </ul>
                     </li>
@@ -195,6 +210,11 @@
                     <li class="nav-item ">
                         <a href="{{ route('backend.term.index') }}" class="nav-link ">
                             <span class="title">Terms of Condition</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="{{ route('backend.area.index') }}" class="nav-link ">
+                            <span class="title">Providences</span>
                         </a>
                     </li>
 

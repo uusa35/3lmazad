@@ -33,6 +33,7 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer([
             'frontend.partials.forms._register',
             'frontend.modules.user.edit',
+            'backend.modules.user.edit',
         ],
             'App\Services\ViewComposers@getGroups');
         view()->composer([
@@ -49,7 +50,7 @@ class ComposerServiceProvider extends ServiceProvider
         ],
             'App\Services\ViewComposers@getFields');
 
-        view()->composer('frontend.layouts.app', 'App\Services\ViewComposers@getAreas');
+        view()->composer('*', 'App\Services\ViewComposers@getAreas');
         view()->composer(['frontend.layouts.app', 'backend.layouts.app'], 'App\Services\ViewComposers@getContactusInfo');
         view()->composer(
             [
@@ -79,6 +80,8 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.modules.type.edit',
             'backend.modules.category.create',
             'backend.modules.category.edit',
+            'backend.modules.group.create',
+            'backend.modules.group.edit',
         ],
             'App\Services\ViewComposers@getIcons');
 
