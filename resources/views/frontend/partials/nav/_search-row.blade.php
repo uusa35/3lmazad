@@ -1,7 +1,7 @@
 <form class="search-bar" method="get"
       action="{{ route('search') }}">
     <div class="main-fields">
-        @include('frontend.partials.components.search-form._area_id_field')
+        {{--@include('frontend.partials.components.search-form._area_id_field')--}}
         @include('frontend.partials.components.search-form._category_field')
         @include('frontend.partials.components.search-form._keyword_field')
         {{--@include('frontend.partials.components.search-form._min_field')--}}

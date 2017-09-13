@@ -8,7 +8,7 @@
     <section class="content content--fill top-null">
         <div class="container">
             <h2 class="h-pad-sm text-uppercase text-center">{{ trans('general.create_new_account') }}</h2>
-            <h6 class="text-uppercase text-center">{{ trans('message.create_new_account') }}</h6>
+            {{--<h6 class="text-uppercase text-center">{{ trans('message.create_new_account') }}</h6>--}}
             {{--@include('frontend.partials.components._steps-process')--}}
             <div class="divider divider--sm"></div>
             <div class="card card--form">
