@@ -35,7 +35,7 @@ class RegisterPageTest extends DuskTestCase
 //                ->select('#group-register', Group::all()->random()->first()->id)
 //                ->type('input[name=address]', 'address whatever')
 //                ->type('input[name=phone]', 12324234)
-                ->type('textarea[name=description]', 'whatever desc')
+//                ->type('textarea[name=description]', 'whatever desc')
 //                ->type('input[name=timing]', 'من الساعة ١٢ صباحا وحتى الساعة العاشرة مساءا')
                 ->pause(100000)
                 ->press('التسجيل')
