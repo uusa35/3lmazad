@@ -38,14 +38,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-2 control-label">Category Order</label>
-                                <div class="col-md-10">
-                                    <input type="text" name="order" value="{{ $element->order }}" class="form-control"
-                                           placeholder="Enter text" required>
-                                </div>
-                            </div>
-
                             @if(!request()->has('parent_id'))
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">is featured</label>
