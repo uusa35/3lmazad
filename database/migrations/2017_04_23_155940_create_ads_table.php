@@ -16,7 +16,7 @@ class CreateAdsTable extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->increments('id');
             $table->mediumText('title')->nullable();
-            $table->decimal('price', 6, 3)->unsigned()->nullable();
+            $table->integer('price')->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->boolean('featured')->default(0);
             $table->boolean('is_sold')->default(0);

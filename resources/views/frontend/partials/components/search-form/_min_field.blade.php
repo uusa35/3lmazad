@@ -1,4 +1,4 @@
-<div class="ui right icon input tooltip-message"
+<div class="ui right icon input tooltip-message hidden"
      data-inverted=""
      data-position="top center"
      data-tooltip="{{ trans('message.min_price_field') }}">

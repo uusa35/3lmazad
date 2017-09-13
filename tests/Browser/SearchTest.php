@@ -41,7 +41,7 @@ class SearchTest extends DuskTestCase
         $ad = Ad::whereIn('category_id', $category->children->pluck('id'))->first();
         $this->browse(function (Browser $browser) use ($category, $ad) {
             $browser->visit('/')
-                ->type('@search', strtok($ad->title, ' '))
+//                ->type('@search', strtok($ad->title, ' '))
                 ->mouseover('#category')
                 ->click('#category')
                 ->mouseover('#cat-' . $category->id)
@@ -100,7 +100,7 @@ class SearchTest extends DuskTestCase
         factory(Deal::class)->create(['end_date' => Carbon::now()->subDays(1), 'ad_id' => $ad->id]);
         $this->browse(function (Browser $browser) use ($ad, $parent) {
             $browser->visit('/')
-                ->type('input[name=search]', $ad->title)
+//                ->type('input[name=search]', $ad->title)
                 ->type('input[name=min]', $ad->price - 10)->type('input[name=max]', $ad->price + 10)
                 ->click('#category')
                 ->mouseover('#cat-' . $parent->id)

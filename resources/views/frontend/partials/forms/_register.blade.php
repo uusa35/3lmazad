@@ -60,15 +60,15 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label for="avatar" class="col-md-4 control-label">{{ trans('general.avatar') }}</label>
 
                 <div class="col-md-6">
-                    <input id="avatar" type="file" class="form-control" name="avatar" required>
+                    <input id="avatar" type="file" class="form-control" name="avatar">
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label for="area" class="col-md-4 control-label">{{ trans('general.area') }}</label>
 
                 <div class="col-md-6">
@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group hidden">
                 <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
 
                 <div class="col-md-4">
@@ -110,7 +110,7 @@
                 <label for="category_id" class="control-label col-sm-4">{{ trans('general.choose_group') }}</label>
                 <div class="col-sm-6" id="categories">
                     <select name="group_id" class="form-control">
-                        <option value="main category">{{ trans('general.choose_group') }}</option>
+                        <option value="">{{ trans('general.choose_group') }}</option>
                         @foreach($groups as $group)
                             <option value="{{ $group->id }}">{{ $group->name }}</option>
                         @endforeach

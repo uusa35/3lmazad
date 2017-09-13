@@ -4,8 +4,8 @@
         @include('frontend.partials.components.search-form._area_id_field')
         @include('frontend.partials.components.search-form._category_field')
         @include('frontend.partials.components.search-form._keyword_field')
-        @include('frontend.partials.components.search-form._min_field')
-        @include('frontend.partials.components.search-form._max_field')
+        {{--@include('frontend.partials.components.search-form._min_field')--}}
+        {{--@include('frontend.partials.components.search-form._max_field')--}}
     </div>
 
     <div class="sub-fields hidden" id="sub-fields">

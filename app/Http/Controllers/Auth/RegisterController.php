@@ -55,15 +55,16 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'avatar' => 'required|mimes:jpg,jpeg,png',
-            'mobile' => 'required|string|max:10',
-            'phone' => 'required|string|max:10',
-            'timing' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'avatar' => 'mimes:jpg,jpeg,png|nullable',
+            'mobile' => 'required|numeric',
+            'phone' => 'numeric|nullable',
+            'timing' => 'string|max:255|nullable',
+            'address' => 'string|max:255|nullable',
             'password' => 'required|string|min:6|confirmed',
-            'is_merchant' => 'required|boolean',
-            'area_id' => 'required|numeric',
-            'group_id' => ['numeric', Rule::in(Group::all()->pluck('id')->toArray())],
+            'is_merchant' => 'boolean|nullable',
+            'area_id' => 'numeric|nullable',
+//            'group_id' => ['nullable', Rule::in(Group::all()->pluck('id')->toArray())],
+            'group_id' => 'nullable',
             'description' => 'string|max:1000|nullable',
         ]);
     }
@@ -94,7 +95,7 @@ class RegisterController extends Controller
 
     public function userCreated($data, $user)
     {
-        $role = $data['is_merchant'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
+        $role = isset($data['is_merchant']) && $data['is_merchant'] ? Role::where('name', 'merchant')->first() : Role::where('name', 'user')->first();
         $user->roles()->save($role);
         $user->gallery()->save(Gallery::create(['galleryable_id' => $user->id, 'galleryable_type' => User::class]));
         $this->saveMimes($user, request(), ['avatar'], ['400', '600'], true);
