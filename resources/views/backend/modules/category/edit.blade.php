@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Category Order</label>
                                     <div class="col-md-10">
-                                        <input type="text" name="order" value="{{ old('order') }}" class="form-control"
+                                        <input type="text" name="order" value="{{ $element->order }}" class="form-control"
                                                placeholder="Enter text" required>
                                     </div>
                                 </div>
