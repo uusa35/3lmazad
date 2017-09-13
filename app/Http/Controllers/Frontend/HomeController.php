@@ -112,7 +112,7 @@ class HomeController extends Controller
     {
         $element = Contactus::first();
 
-        $email = Mail::to($element->email)->queue(new \App\Mail\Contactus($request->all(), $element));
+        $email = Mail::to(config('mail.from.address'))->queue(new \App\Mail\Contactus($request->all(), $element));
 
         return redirect()->back()->with('success', 'email has been sent');
 
