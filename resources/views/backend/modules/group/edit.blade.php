@@ -20,6 +20,13 @@
             </div>
 
             <div class="form-group">
+                <label class="col-md-2 control-label">Order</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="order" value="{{ $element->order }}" placeholder="..." />
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="icon" class="col-md-2 control-label">{{ trans('general.icon') }}</label>
 
                 <div class="col-md-10">

@@ -102,6 +102,7 @@ $factory->define(Group::class, function (Faker\Generator $faker) {
             'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
         ]),
         'active' => $faker->boolean(true),
+        'order' => $faker->numberBetween(1,100)
     ];
 });
 

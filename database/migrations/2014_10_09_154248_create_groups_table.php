@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->string('icon')->nullable();
+            $table->string('order')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });
