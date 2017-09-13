@@ -1,6 +1,5 @@
 @extends('backend.layouts.app')
 @section('content')
-
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
@@ -59,6 +58,13 @@
                                         <span></span>
                                     </label>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Category Order</label>
+                            <div class="col-md-10">
+                                <input type="text" name="order" value="{{ old('order') }}" class="form-control"
+                                       placeholder="Enter text" required>
                             </div>
                         </div>
                     @endif

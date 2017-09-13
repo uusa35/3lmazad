@@ -83,7 +83,7 @@ class ViewComposers
     {
         $categories = Category::parents()->with(['children' => function ($q) {
             $q->where('featured', true)->with('children');
-        }])->get()->toArray();
+        }])->orderBy('order','desc')->get()->toArray();
 
         return $view->with(compact('categories'));
     }
@@ -98,7 +98,7 @@ class ViewComposers
     {
         $categories = Category::parents()->with(['children' => function ($q) {
             $q->where('featured', true)->with('children');
-        }])->get()->toArray();
+        }])->orderBy('order','desc')->get()->toArray();
 
         return $view->with(compact('categories'));
     }
@@ -139,7 +139,7 @@ class ViewComposers
     public function getCategories(View $view)
     {
         $category = new Category();
-        $categories = $category->parents()->with('children')->get();
+        $categories = $category->parents()->with('children')->orderBy('order','asc')->get();
         return $view->with(compact('categories'));
     }
 

@@ -30,7 +30,6 @@ class Category extends Model
     protected static function boot()
     {
         parent::boot();
-
         if (!app()->environment('seeding')) {
             if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());

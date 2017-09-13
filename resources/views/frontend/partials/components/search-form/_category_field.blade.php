@@ -7,7 +7,7 @@
     <i class="filter icon"></i>
     <div class="default text">{{ trans('general.filter_by_category') }}</div>
     <div class="ui vertical menu">
-        @foreach($categories->sortByDesc('order') as $category)
+        @foreach($categories as $category)
             <div class="item" id="cat-{{ $category->id  }}" data-type="parent"
                  parent_id="{{ $category->parent_id }}"
                  parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">

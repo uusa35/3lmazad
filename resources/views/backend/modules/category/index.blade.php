@@ -15,8 +15,8 @@
                 <th>Name</th>
                 <th>Sub Categories</th>
                 <th>Fields Related</th>
-                <th>Created At</th>
                 <th>active</th>
+                <th>order</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -26,8 +26,8 @@
                 <th>Name</th>
                 <th>Sub Categories</th>
                 <th>Fields Related</th>
-                <th>Created At</th>
                 <th>active</th>
+                <th>order</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -62,10 +62,10 @@
                             <span class="label label-info">no sub categories</span>
                         @endif
                     </td>
-                    <td>{{ $element->created_at->diffForHumans() }}</td>
                     <td>
                         <span class="label label-lg {{ activeLabel($element->active) }}">Active</span>
                     </td>
+                    <td>{{ $element->order }}</td>
                     <td>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"
