@@ -2,7 +2,7 @@
 @section('content')
     <div class="clearfix"></div>
     <div class="portlet-body form">
-        <form role="form" method="post" action="{{ route('backend.faq.update',$element->id) }}">
+        <form role="form" method="post" action="{{ route('backend.area.update',$element->id) }}">
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="patch">
 

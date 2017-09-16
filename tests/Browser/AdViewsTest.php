@@ -84,7 +84,6 @@ class AdViewsTest extends DuskTestCase
             return $q->where('name', 'rent_type');
         })->first();
         $ad = Ad::where('user_id', '!=', null)->first();
-//        dd($ad->user_id);
         $this->browse(function (Browser $browser) use ($parent, $ad) {
             $browser->visit('/home')
                 ->loginAs(User::whereId($ad->user_id)->first())
@@ -99,19 +98,6 @@ class AdViewsTest extends DuskTestCase
                 ->waitFor('#subCategories-create')
                 ->select('#subCategories-create', $parent->children()->first()->id)
                 ->waitForText('is_new')->waitForText('room_no')->waitForText('bathroom_no')->waitForText('space')
-//                mobile
-//manufacturing_year
-//mileage
-//room_no
-//floor_no
-//bathroom_no
-//rent_type
-//building_age
-//space
-//address
-//is_new
-//is_automatic
-//is_furnished
                 ->select('#input-create-is_new', 1)
                 ->select('#input-create-is_furnished', 1)
                 ->select('#input-create-rent_type', 'daily')
