@@ -96,7 +96,7 @@
                         </li>
                         <li>
                             <a href="{{ route("backend.area.create") }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Area</span>
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Providence</span>
                             </a>
                         </li>
                         <li>
