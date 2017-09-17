@@ -24,9 +24,21 @@
                         <span class="link-name">{{ trans("general.home") }}</span>
                     </a>
                 </li>
+                @guest
+                <li class="menu-large visible-xs">
+                    <a href="{{ route('register') }}" class="dropdown-toggle">
+                        <span class="link-name">{{ trans('general.register') }}</span>
+                    </a>
+                </li>
+                @endguest
                 <li class="menu-large">
                     <a href="{{ route('user.merchants-groups') }}" class="dropdown-toggle">
                         <span class="link-name">{{ trans("general.merchants-groups") }}</span>
+                    </a>
+                </li>
+                <li class="menu-large visible-xs">
+                    <a href="{{ route('ad.create') }}" class="dropdown-toggle">
+                        <span class="link-name">{{ trans('general.create_ad') }}</span>
                     </a>
                 </li>
                 <li class="menu-large">
