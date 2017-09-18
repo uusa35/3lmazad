@@ -51,10 +51,12 @@
                                                     <span class="date">{{ trans('general.country')}} :</span>
                                                     <span class="date">{{  $element->countryName }}</span>
                                                 </p>
-                                                <p>
-                                                    <span class="date">{{ trans('general.category')}} :</span>
-                                                    <span class="date">{{  $element->group->name }}</span>
-                                                </p>
+                                                @if($element->isMerchant)
+                                                    <p>
+                                                        <span class="date">{{ trans('general.category')}} :</span>
+                                                        <span class="date">{{  $element->group->name }}</span>
+                                                    </p>
+                                                @endif
                                                 <div class="ui toggle checkbox mobile"
                                                      data-user-id="{{ $element->id }}">
                                                     <label>{{ trans('general.mobile_visible') }}</label>
