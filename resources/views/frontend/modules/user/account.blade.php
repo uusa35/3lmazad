@@ -82,28 +82,30 @@
                                         <div class="extra">
                                             <div class="account-btns">
                                                 {{--<a class="ui default button tooltip-message" href="#"--}}
-                                                {{--data-tooltip="{{ trans('message.settings') }}" data-inverted="">--}}
+                                                {{--data-content="{{ trans('message.settings') }}" data-inverted="">--}}
                                                 {{--<i class="right settings icon big"--}}
                                                 {{--style="margin: 30px; display: block; clear:both;"></i>--}}
                                                 {{--{{ trans('general.settings') }}--}}
                                                 {{--</a>--}}
                                                 <a class="ui red button tooltip-message"
                                                    href="{{ route('favorite.index') }}"
-                                                   data-tooltip="{{ trans('message.wishlist') }}" data-inverted="">
+                                                   data-content="{{ trans("message.wishlist") }}"
+                                                   data-inverted="">
                                                     <i class="right outline heart icon big"
                                                        style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                                     {{ trans('general.wishlist') }}
                                                 </a>
                                                 <a class="ui pink button tooltip-message"
                                                    href="{{ route("user.ads",$element->id) }}"
-                                                   data-tooltip="{{ trans('message.my_active_ads') }}" data-inverted="">
+                                                   data-content="{{ trans('message.my_active_ads') }}"
+                                                   data-inverted="">
                                                     <i class="right clone icon big"
                                                        style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                                     {{ trans('general.my_active_ads') }}
                                                 </a>
                                                 <a class="ui olive button tooltip-message"
                                                    href="{{ route('account.user.ads') }}"
-                                                   data-tooltip="{{ trans('message.list_of_all_ads') }}"
+                                                   data-content="{{ trans('message.list_of_all_ads') }}"
                                                    data-inverted="">
                                                     <i class="right arrow icon big"
                                                        style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
