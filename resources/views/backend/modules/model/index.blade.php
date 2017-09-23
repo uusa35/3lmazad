@@ -10,8 +10,7 @@
                 <th>name_ar</th>
                 <th>name_en</th>
                 <th>image</th>
-                <th>models</th>
-                <th>category</th>
+                <th>brand_id</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -21,8 +20,7 @@
                 <th>name_ar</th>
                 <th>name_en</th>
                 <th>image</th>
-                <th>models</th>
-                <th>category</th>
+                <th>brand</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -36,16 +34,7 @@
                         <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                              class="img-responsive" style="max-width: 120px;" alt="">
                     </td>
-                    <td>
-                        @if($element->models)
-                            <ul>
-                                @foreach($element->models as $model)
-                                    <li>{{ $model->name }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </td>
-                    <td>{{ !is_null($element->category_id) ? $element->category->name : null}}</td>
+                    <td>{{ !is_null($element->brand_id) ? $element->brand->name : null}}</td>
                     <td>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"
@@ -54,11 +43,11 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
-                                    <a href="{{ route('backend.brand.edit',$element->id) }}">
+                                    <a href="{{ route('backend.model.edit',$element->id) }}">
                                         <i class="fa fa-fw fa-user"></i>edit</a>
                                 </li>
                                 <li>
-                                    <form method="post" action="{{ route('backend.brand.destroy',$element->id) }}">
+                                    <form method="post" action="{{ route('backend.model.destroy',$element->id) }}">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete"/>
                                         <button type="submit" class="btn btn-outline btn-sm red">

@@ -142,7 +142,9 @@
             <li class="heading">
                 <h3 class="uppercase">Settings Section</h3>
             </li>
-            <li class="nav-item {{ activeItem('category',['option','group','area','field','slider','aboutus','contactus','faq','gallery','color','size','type','commercial']) }}">
+            <li class="nav-item {{ activeItem('category',['option','group','area','field',
+            'slider','aboutus','contactus','faq','category',
+            'gallery','color','size','type','commercial','model','brand']) }}">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-fw fa-cogs"></i>
                     <span class="title">Settings</span>
@@ -299,6 +301,26 @@
                             <li class="nav-item start">
                                 <a href="{{ route('backend.brand.create') }}" class="nav-link ">
                                     <span class="title">Create New Brand</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {{--Models--}}
+                    <li class="nav-item start {{ activeItem('model') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Model Section</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.model.index') }}" class="nav-link ">
+                                    <span class="title">Models</span>
+                                </a>
+                            </li>
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.model.create') }}" class="nav-link ">
+                                    <span class="title">Create New Model</span>
                                 </a>
                             </li>
                         </ul>

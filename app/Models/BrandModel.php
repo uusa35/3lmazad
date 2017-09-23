@@ -11,6 +11,7 @@ class BrandModel extends Model
     use LocaleTrait;
     public $localeStrings = ['name'];
     protected $table = 'models';
+    protected $guarded = [''];
 
     public function brand()
     {

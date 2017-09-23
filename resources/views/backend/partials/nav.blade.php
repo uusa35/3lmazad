@@ -47,6 +47,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route("backend.brand.create") }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Brand</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("backend.model.create") }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Model</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('backend.field.create') }}">
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
                             </a>
@@ -104,6 +114,7 @@
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Group</span>
                             </a>
                         </li>
+
                     </ul>
                 </li>
                 <!-- END NOTIFICATION DROPDOWN -->

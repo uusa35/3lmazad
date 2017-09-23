@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Brand;
+use App\Models\BrandModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BrandController extends Controller
+class ModelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $elements = Brand::with('models','category')->get();
-        return view('backend.modules.brand.index', compact('elements'));
+        $elements = BrandModel::with('brand')->get();
+        return view('backend.modules.model.index', compact('elements'));
     }
 
     /**
@@ -26,7 +27,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('backend.modules.brand.create');
+        $brands = Brand::all();
+        return view('backend.modules.model.create',compact('brands'));
     }
 
     /**
@@ -37,12 +39,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $element = Brand::create($request->request->all());
+        $element = BrandModel::create($request->request->all());
         if ($element) {
             $this->saveMimes($element, $request, ['image'], ['200', '200'], false);
-            return redirect()->route('backend.brand.index')->with('success', 'success');
+            return redirect()->route('backend.model.index')->with('success', 'success');
         }
-        return redirect()->route('backend.brand.create')->with('error', 'failure');
+        return redirect()->route('backend.model.create')->with('error', 'failure');
     }
 
     /**
@@ -64,8 +66,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $element = Brand::whereId($id)->first();
-        return view('backend.modules.brand.edit', compact('element'));
+        $element = BrandModel::whereId($id)->with('brand')->first();
+        $brands = Brand::all();
+        return view('backend.modules.model.edit', compact('element','brands'));
     }
 
     /**
@@ -77,14 +80,14 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = Brand::whereId($id)->first();
+        $element = BrandModel::whereId($id)->first();
         if ($element->update($request->except('_token','_method'))) {
             if ($request->hasFile('image')) {
                 $this->saveMimes($element, $request, ['image'], ['200', '200'], false);
             }
-            return redirect()->route('backend.brand.index')->with('success', 'success');
+            return redirect()->route('backend.model.index')->with('success', 'success');
         }
-        return redirect()->route('backend.brand.edit', $element->id)->with('error', 'failure');
+        return redirect()->route('backend.model.edit', $element->id)->with('error', 'failure');
     }
 
     /**
@@ -95,10 +98,10 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $element = Brand::whereId($id)->first()->delete();
+        $element = BrandModel::whereId($id)->first()->delete();
         if ($element) {
-            return redirect()->route('backend.brand.index')->with('success', 'success');
+            return redirect()->route('backend.model.index')->with('success', 'success');
         }
-        return redirect()->route('backend.brand.index')->with('error', 'failure');
+        return redirect()->route('backend.model.index')->with('error', 'failure');
     }
 }
