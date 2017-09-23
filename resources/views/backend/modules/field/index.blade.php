@@ -77,9 +77,9 @@
                                     <a href="{{ route('backend.activation',['model' => 'field', 'id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-user"></i>toggle activation</a>
                                 </li>
-                                @if($element->type === 'multiple')
+                                @if(!$element->is_model)
                                     <li>
-                                        <a href="{{ route('backend.field.edit',$element->id) }}">
+                                        <a href="{{ route('backend.option.create',['field_id' => $element->id]) }}">
                                             <i class="fa fa-fw fa-plus-cirlce"></i>assign options</a>
                                     </li>
                                 @endif

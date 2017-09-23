@@ -6,12 +6,12 @@
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-settings font-dark"></i>
-                <span class="caption-subject font-dark sbold uppercase">Edit Brand</span>
+                <span class="caption-subject font-dark sbold uppercase">Edit Model</span>
             </div>
         </div>
         <div class="portlet-body form">
             <form class="form-horizontal" role="form" method="post"
-                  action="{{ route('backend.brand.update',$element->id) }}"
+                  action="{{ route('backend.model.update',$element->id) }}"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="patch">
@@ -32,17 +32,15 @@
                     </div>
 
                     <div class="form-group" id="">
-                            <label for="category_id" class="control-label col-sm-2">{{ trans("general.category") }}</label>
-                            <div class="col-sm-10">
-                                <select id="category-create" name="category_id" class="form-control tooltip-message"
-                                        data-content="{{ trans("message.parent_cat_ad_create") }}">
-                                    <option value="0">{{ trans('message.choose_main_category') }}</option>
-                                    @foreach($categories->where('parent_id',0) as $category)
-                                        {{ $selected = isset($element) && $element->category->id && $element->category->id == $category->id ? 'selected' : null }}
-                                        <option value="{{ $category->id }}" {{ $selected }}>{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <label for="brand_id" class="control-label col-sm-2">{{ trans("general.brand") }}</label>
+                        <div class="col-sm-10">
+                            <select id="brand_id" name="brand_id" class="form-control" required>
+                                <option value="0">choose brand</option>
+                                @foreach($brands as $brand)
+                                    <option value="{{ $brand->id }}" {{ $brand->id === $element->brand_id ? 'selected'  : null }}>{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
