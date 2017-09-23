@@ -148,7 +148,7 @@ return array (
   'ad_more_photo' => 'إضافه المزيد من الصور',
   'add_auction' => 'إضافه رقم بالمزاد',
   'add_comment' => 'إضافه تعليق',
-  'paid_ads' => 'إعلانات مدفوعة',
+  'paid_ads' => 'إعلانات مميزة',
   'phone' => 'الهاتف',
   'plans_title' => 'عنوان طرق الدفع',
   'report_abuse' => 'بلغ عن إساءه',
