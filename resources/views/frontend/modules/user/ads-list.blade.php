@@ -23,7 +23,7 @@
                         <th>{{ trans('general.price') }}</th>
                         <th>{{ trans('general.is_sold') }}</th>
                         <th>{{ trans('general.ends_at') }}</th>
-                        <th>{{ trans('general.expired') }}</th>
+                        <th>{{ trans('general.expired_deal') }}</th>
                         <th>{{ trans('general.action') }}</th>
                     </tr>
                     </thead>
@@ -35,7 +35,7 @@
                         <th>{{ trans('general.price') }}</th>
                         <th>{{ trans('general.is_sold') }}</th>
                         <th>{{ trans('general.ends_at') }}</th>
-                        <th>{{ trans('general.expired') }}</th>
+                        <th>{{ trans('general.expired_deal') }}</th>
                         <th>{{ trans('general.action') }}</th>
                     </tr>
                     </tfoot>
@@ -78,7 +78,7 @@
                             </td>
                             <td>
                                 <div class="btn-group pull-right">
-                                    <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"
+                                    <button type="button" class="btn btn-success btn-sm btn-outline dropdown-toggle"
                                             data-toggle="dropdown"> {{ trans('general.actions') }}
                                         <i class="fa fa-angle-down"></i>
                                     </button>
