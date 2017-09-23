@@ -14,7 +14,7 @@
                 <div class="divider divider--xs"></div>
                 <table id="dataTable"
                        class="table table-striped table-hover table-condensed table-responsive table-high"
-                       cellspacing="0" style="font-size: x-small !important;">
+                       cellspacing="0" style="font-size: smaller !important;">
                     <thead>
                     <tr>
                         <th>{{ trans('general.id') }}</th>
@@ -47,7 +47,7 @@
                                         src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                                         style="max-width: 90px; height: auto;" alt=""></td>
                             <td class="text-justify">
-                                <div style="min-height: 150px; overflow:auto; min-width: 300px; font-size: smaller;">
+                                <div style="min-height: 150px; overflow:auto; min-width: 300px;">
                                     <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,35)}}</a>
                                     <hr>
                                     <span style="display: block;">{{ trans('general.category') }}
@@ -56,15 +56,15 @@
                                         : {{ $element->createdDate }}</span>
                                     <span style="display: block;">{{ trans('general.expires_in') }}
                                         : {{ $element->deals->first()->endsAt }}</span>
-                                    <span style="display: block; margin-bottom: 10px;">{{ trans('general.active') }} :
-                                        <span class="label label-xs label-{{ $element->active ? 'info' : 'danger' }}">
+                                    <span style="display: block;">{{ trans('general.active') }} :
+                                        {{--<span class="label label-xs label-{{ $element->active ? 'info' : 'danger' }}">--}}
                                         {{ $element->active ? trans('general.active') : trans('general.not_active')}}
-                                        </span>
+                                        {{--</span>--}}
                                      </span>
                                     <span style="display: block;">{{ trans('general.featured') }} :
-                                        <span class="label label-xs label-{{ $element->featured ? 'info' : 'warning' }}">
+                                        {{--<span class="label label-xs label-{{ $element->featured ? 'info' : 'warning' }}">--}}
                                         {{ $element->featured ? trans('general.featured') : trans('general.not_featured')}}
-                                        </span>
+                                        {{--</span>--}}
                                      </span>
                                 </div>
                             </td>
