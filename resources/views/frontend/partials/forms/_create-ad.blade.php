@@ -120,8 +120,29 @@
                     </div>
                 </div>
             </div>
-            <!-- Button http://getbootstrap.com/css/#buttons -->
-            @include('frontend.partials.forms._btn-group')
+            <div class="col-lg-12">
+                <h4>{{ trans('message.make_featured') }}</h4>
+                <hr>
+            </div>
+
+            @foreach($plans as $plan)
+                <div class="form-group">
+                    <div class="col-lg-12 tooltip-message" data-content="">
+                        <label for="plan_id" class="control-label col-sm-3">
+                            {{ $plan->name }}
+                        </label>
+                        <div class="col-sm-1">
+                            <input class="" name="plan_id" value="{{ $plan->id }}"
+                                   type="radio" {{ !$plan->is_paid ? 'checked' : null }}>
+                        </div>
+                        <div class="help-block text-left">
+                            {{ $plan->description  }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                        <!-- Button http://getbootstrap.com/css/#buttons -->
+                @include('frontend.partials.forms._btn-group')
 
         </form>
     </div>

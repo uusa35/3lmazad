@@ -9,6 +9,7 @@ use App\Models\Contactus;
 use App\Models\Country;
 use App\Models\Field;
 use App\Models\Group;
+use App\Models\Plan;
 use App\Models\Post;
 use App\Models\Size;
 use Illuminate\Database\Eloquent\Model;
@@ -83,7 +84,7 @@ class ViewComposers
     {
         $categories = Category::parents()->with(['children' => function ($q) {
             $q->where('featured', true)->with('children');
-        }])->orderBy('order','desc')->get()->toArray();
+        }])->orderBy('order', 'desc')->get()->toArray();
 
         return $view->with(compact('categories'));
     }
@@ -98,7 +99,7 @@ class ViewComposers
     {
         $categories = Category::parents()->with(['children' => function ($q) {
             $q->where('featured', true)->with('children');
-        }])->orderBy('order','desc')->get()->toArray();
+        }])->orderBy('order', 'desc')->get()->toArray();
 
         return $view->with(compact('categories'));
     }
@@ -139,7 +140,7 @@ class ViewComposers
     public function getCategories(View $view)
     {
         $category = new Category();
-        $categories = $category->parents()->with('children')->orderBy('order','asc')->get();
+        $categories = $category->parents()->with('children')->orderBy('order', 'asc')->get();
         return $view->with(compact('categories'));
     }
 
@@ -149,6 +150,12 @@ class ViewComposers
         $colors = Color::all();
         $sizes = Size::all();
         return $view->with(compact('fields', 'colors', 'sizes'));
+    }
+
+    public function getPlans(View $view)
+    {
+        $plans = Plan::all();
+        return $view->with(compact('plans'));
     }
 }
 

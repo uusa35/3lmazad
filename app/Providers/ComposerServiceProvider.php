@@ -94,6 +94,10 @@ class ComposerServiceProvider extends ServiceProvider
             'backend.modules.field.edit',
         ],
             'App\Services\ViewComposers@getFieldTypes');
+
+        view()->composer([
+            'frontend.modules.ad.create',
+        ], 'App\Services\ViewComposers@getPlans');
     }
 
     /**
