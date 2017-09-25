@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         $className = '\App\Models\\' . title_case($request->model);
         $element = new $className();
-        $element = $element->withoutGlobalScopes()->whereId($request->id)->first();
+        $element = $element->whereId($request->id)->first();
         $element->update([
             'active' => !$element->active
         ]);
@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         $className = '\App\Models\\' . title_case($request->model);
         $element = new $className();
-        $element = $element->withoutGloalScopes()->whereId($request->id)->first();
+        $element = $element->whereId($request->id)->first();
         $element->update([
             'featured' => !$element->featured
         ]);
