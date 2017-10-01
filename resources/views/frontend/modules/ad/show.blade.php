@@ -29,7 +29,7 @@
                                  alt="{{ $element->title }}"/></li>
                         @if(!is_null($element->gallery->first()))
                             @foreach($element->gallery->first()->images as $image)
-                                <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$image->thumb) }}"
+                                <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
                                          alt="{{ $element->title }}"/></li>
                             @endforeach
                         @endif
