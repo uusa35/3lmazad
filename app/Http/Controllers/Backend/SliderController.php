@@ -6,6 +6,7 @@ use App\Http\Requests\Backend\SliderStore;
 use App\Http\Requests\Backend\SliderUpdate;
 use App\Models\Slider;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
@@ -37,7 +38,7 @@ class SliderController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SliderStore $request)
+    public function store(Request $request)
     {
         $slider = Slider::create($request->request->all());
         if (!$slider) {
@@ -79,7 +80,7 @@ class SliderController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SliderUpdate $request, $id)
+    public function update(Request $request, $id)
     {
 
         $slider = Slider::whereId($id)->first();

@@ -6,8 +6,15 @@
             {{ csrf_field() }}
             <div class="form-body">
                 <div class="form-group form-md-line-input">
-                    <input type="text" class="form-control" name="title" placeholder="...">
-                    <label for="form_control_1">Slide Title*</label>
+                    <input type="text" class="form-control" name="title_ar" placeholder="...">
+                    <label for="form_control_1">Slide Title Ar *</label>
+                    <span class="help-block">please enter proper title</span>
+                </div>
+            </div>
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <input type="text" class="form-control" name="title_en" placeholder="...">
+                    <label for="form_control_1">Slide Title En*</label>
                     <span class="help-block">please enter proper title</span>
                 </div>
             </div>

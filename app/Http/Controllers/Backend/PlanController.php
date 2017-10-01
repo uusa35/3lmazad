@@ -77,7 +77,11 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $element = Plan::whereId($id)->first()->update($request->all());
+        if($element) {
+            return redirect()->route('backend.plan.index')->with('success', 'Process success');
+        }
+        return redirect()->route('backend.plan.index')->with('error', 'Process Failed');
     }
 
     /**

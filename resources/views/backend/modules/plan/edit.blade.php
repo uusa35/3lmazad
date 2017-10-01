@@ -10,8 +10,9 @@
         </div>
         <div class="portlet-body form">
             <form class="form-horizontal" role="form" method="post"
-                  action="{{ route('backend.plan.edit',$element->id) }}">
+                  action="{{ route('backend.plan.update',$element->id) }}">
                 {{ csrf_field() }}
+                <input type="hidden" name="_method" value="put">
                 <div class="form-body">
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name Ar</label>
