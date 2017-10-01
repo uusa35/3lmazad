@@ -36,6 +36,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = '/';
 if(window.Laravel.env == 'local') {
     window.axios.defaults.baseURL = 'http://3lmazad.dev';
+} else {
+    window.axios.defaults.baseURL = 'http://3almazad.com';
 }
 
 /**

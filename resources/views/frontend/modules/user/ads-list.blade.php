@@ -50,7 +50,7 @@
                                 <div style="min-height: 150px; overflow:auto; min-width: 300px;">
                                     <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,35)}}</a>
                                     <hr>
-                                    <span style="display: block;">{{ trans('general.category') }}UsersC
+                                    <span style="display: block;">{{ trans('general.category') }}
                                         : {{ $element->category->name }}</span>
                                     <span style="display: block;">{{ trans('general.created_at') }}
                                         : {{ $element->createdDate }}</span>
