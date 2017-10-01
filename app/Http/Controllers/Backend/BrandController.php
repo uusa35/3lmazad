@@ -15,7 +15,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $elements = Brand::with('models','category')->get();
+        $elements = Brand::with('models', 'category')->get();
         return view('backend.modules.brand.index', compact('elements'));
     }
 
@@ -78,7 +78,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $element = Brand::whereId($id)->first();
-        if ($element->update($request->except('_token','_method'))) {
+        if ($element->update($request->except('_token', '_method'))) {
             if ($request->hasFile('image')) {
                 $this->saveMimes($element, $request, ['image'], ['200', '200'], false);
             }
@@ -95,10 +95,12 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $element = Brand::whereId($id)->first()->delete();
-        if ($element) {
-            return redirect()->route('backend.brand.index')->with('success', 'success');
+        $element = Brand::whereId($id)->first();
+        if (empty($element->ads)) {
+            $element->delete();
+            return redirect()->route('backend.brand.index')->with('success', 'Deleted successfully');
+        } else {
+            return redirect()->route('backend.brand.index')->with('error', 'You can not delete this brand because there are ads attached to.!!!');
         }
-        return redirect()->route('backend.brand.index')->with('error', 'failure');
     }
 }

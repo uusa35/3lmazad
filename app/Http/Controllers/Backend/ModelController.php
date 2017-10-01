@@ -98,10 +98,11 @@ class ModelController extends Controller
      */
     public function destroy($id)
     {
-        $element = BrandModel::whereId($id)->first()->delete();
-        if ($element) {
+        $element = BrandModel::whereId($id)->first();
+        if (empty($element->ads())) {
+            $element->delete();
             return redirect()->route('backend.model.index')->with('success', 'success');
         }
-        return redirect()->route('backend.model.index')->with('error', 'failure');
+        return redirect()->route('backend.model.index')->with('error', 'failure model has ads attached to it .. u cant delete such model unless you delete all ads attached to');
     }
 }
