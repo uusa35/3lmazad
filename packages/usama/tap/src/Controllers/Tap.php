@@ -13,5 +13,4 @@ abstract class Tap implements PaymentContract
 {
 
 
-
 }
