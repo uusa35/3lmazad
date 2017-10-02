@@ -61,7 +61,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
         './resources/assets/html/vendor/imagesloaded/imagesloaded.pkgd.min.js',
         './resources/assets/html/vendor/countdown/jquery.plugin.min.js',
         './resources/assets/html/vendor/countdown/jquery.countdown.min.js',
-
+        // semantic
+        './../../node_modules/semantic-ui/dist/semantic.min.js',
         //form validation
         './resources/assets/html/vendor/form/jquery.form.js',
         './resources/assets/html/vendor/form/jquery.validate.min.js',

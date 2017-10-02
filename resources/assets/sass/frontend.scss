@@ -14,8 +14,10 @@
 //@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700h');
 //<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
 @import '../html/vendor/rs-plugin/css/settings.css';
-@import '../../../node_modules/semantic-ui-dropdown/dropdown.min.css';
 @import "../../../node_modules/semantic-ui/dist/semantic.min.css";
+@import '../../../node_modules/semantic-ui-dropdown/dropdown.min.css';
+//@import url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/dropdown.css');
+//@import url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css');
 @import "plans-table";
 //<!-- Head Libs -->
 
@@ -67,6 +69,7 @@
   .search-bar > .dropdown {
     width: 180px;
     max-width: 230px;
+    border: 2px solid red;
   }
   .main-fields, .sub-fields {
     justify-content: center;
@@ -93,7 +96,8 @@
 }
 
 .search-bar > .search-input {
-  width: 200px;
+  max-width: 100px;
+  width: auto;
   align-self: flex-end;
 }
 
@@ -124,7 +128,7 @@
 }
 
 .sub-fields > .search-dropdown {
-  width: 20%;
+  //width: 20%;
   max-width: 250px;
   margin-right: 3px !important;
   margin-left: 3px !important;

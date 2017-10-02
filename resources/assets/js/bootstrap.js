@@ -19,7 +19,8 @@ require('eonasdan-bootstrap-datetimepicker');
 require('moment');
 window.$.fn.transition = require('semantic-ui-transition');
 window.$.fn.dropdown = require('semantic-ui-dropdown');
-window.$.fn.popup = require('semantic-ui-popup');
+// i removed this from here as i included the whole semantic js cause it was not showing the sub menu in the main search form
+//window.$.fn.popup = require('semantic-ui-popup');
 window.$.fn.dimmer = require('semantic-ui-dimmer');
 window.$.fn.modal = require('semantic-ui-modal');
 window.$.fn.checkbox = require('semantic-ui-checkbox');

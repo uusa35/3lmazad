@@ -30,16 +30,30 @@
                                 class="languages__item__label">{{ trans('general.ar') }}</span>
                     </a>
                 </li>
-            </ul>
-        </li>
-        @if(auth()->check())
-            <li class='li-col list-user-menu'>
-                <h4>{{ trans('general.account') }}</h4>
-                <ul>
+                @guest
+                <li class="languages__item visible-xs">
+                    <a href="{{ route('login') }}">
+                        {{ trans('general.login') }}
+                    </a>
+                </li>
+                @endguest
+                @if(auth()->check())
                     <li><a href="{{ route('ad.create') }}">{{ trans('general.create_ad') }}</a></li>
                     <li><a href="{{ route('favorite.index') }}">{{ trans('general.wish_list') }}</a></li>
-                </ul>
-            </li>
-        @endif
+                    <li class="languages__item visible-xs">
+                        <a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ trans('general.logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                              style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endif
+            </ul>
+        </li>
     </ul>
 </div>

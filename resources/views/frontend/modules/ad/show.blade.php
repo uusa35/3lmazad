@@ -24,14 +24,18 @@
                     </span>
                     </div>
                     <ul id="singleGallery" class="visible-xs">
-                        <li>
-                            <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                 alt="{{ $element->title }}"/></li>
-                        @if(!is_null($element->gallery->first()))
+                        @if(!$element->gallery->first()->images->isEmpty())
                             @foreach($element->gallery->first()->images as $image)
                                 <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
                                          alt="{{ $element->title }}"/></li>
                             @endforeach
+                        @endif
+                        @if($element->booked)
+                            <img src="{{ asset('images/booked.png') }}" alt="">
+                        @else
+                            <li>
+                                <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                                     alt="{{ $element->title }}"/></li>
                         @endif
                     </ul>
                     <div class="price-box product-info__price"><span
@@ -44,7 +48,7 @@
 
                     <div class="divider divider--xs product-info__divider"></div>
                     <div class="product-info__description" style="min-height: 200px;">
-                        <p>
+                        <p class="text-justified">
                             {!! $element->meta->description !!}
                         </p>
                         @include('frontend.partials.components.ad-show._social-share-btns',['link' => route('ad.show',$element->id)])

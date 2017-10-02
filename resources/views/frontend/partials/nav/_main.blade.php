@@ -41,11 +41,11 @@
                         <span class="link-name">{{ trans('general.create_ad') }}</span>
                     </a>
                 </li>
-                <li class="menu-large">
-                    <a href="{{ route('aboutus') }}" class="dropdown-toggle">
-                        <span class="link-name">{{ trans('general.aboutus') }}</span>
-                    </a>
-                </li>
+                {{--<li class="menu-large">--}}
+                    {{--<a href="{{ route('aboutus') }}" class="dropdown-toggle">--}}
+                        {{--<span class="link-name">{{ trans('general.aboutus') }}</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li class="menu-large">
                     <a href="{{ route('contactus') }}" class="dropdown-toggle">
                         <span class="link-name">{{ trans('general.contactus') }}</span>

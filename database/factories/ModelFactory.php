@@ -111,6 +111,7 @@ $factory->define(Brand::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'order' => $faker->numberBetween(1,20),
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });
@@ -131,6 +132,7 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'order' => $faker->numberBetween(1,20),
         'brand_id' => Brand::all()->random()->id
     ];
 });
@@ -171,6 +173,7 @@ $factory->define(Ad::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(4, 4, 1000),
         'active' => $faker->boolean(100),
         'is_sold' => $faker->boolean(false),
+        'booked' => $faker->boolean(),
         'featured' => $faker->boolean(),
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
         'user_id' => User::all()->random()->id,
@@ -241,6 +244,7 @@ $factory->define(Color::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
         'code' => $faker->hexColor,
+        'order' => $faker->numberBetween(1,20),
     ];
 });
 

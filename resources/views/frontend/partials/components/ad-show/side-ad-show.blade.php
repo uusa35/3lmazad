@@ -14,17 +14,40 @@
                 </div>
             </a>
         @endif
+        @if(auth()->check() && $element->isOwner)
+            <a href="{{ route('ad.booked',$element->id) }}" class="card__row card__row--icon">
+                <div class="card__row--icon__icon"><i class="icon minus circle {{ !$element->booked ?  'red' : 'green'}}"></i></div>
+                <div class="card__row--icon__text">
+                    <div class="card__row__title">{{ $element->booked ? trans('general.unbook') : trans('general.book') }}</div>
+                </div>
+            </a>
+            <a href="{{ route('ad.edit',$element->id) }}" class="card__row card__row--icon">
+                <div class="card__row--icon__icon"><i class="icon edit"></i></div>
+                <div class="card__row--icon__text">
+                    <div class="card__row__title">{{ trans('general.edit') }}</div>
+                </div>
+            </a>
+        @endif
         <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
             <div class="card__row--icon__icon">
-                {{--<img class="img-responsive img-thumbnail" style="max-width: 40px;"--}}
-                {{--src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">--}}
+                @if(!is_null($element->user->avatar))
+                    <img class="img-responsive img-thumbnail" style="max-width: 40px;"
+                         src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">
+                @endif
                 <div class="card__row--icon__icon"><i class="icon user circle outline"></i></div>
             </div>
             <div class="card__row--icon__text">
                 <div class="card__row__title">{{ $element->user->name }}</div>
             </div>
         </a>
-        @if($element->user->is_mobile_visible)
+        @if(is_null($element->meta->mobile))
+            <a href="#" class="card__row card__row--icon">
+                <div class="card__row--icon__icon"><i class="icon mobile"></i></div>
+                <div class="card__row--icon__text">
+                    <div class="card__row__title">{{ $element->user->mobile }}</div>
+                </div>
+            </a>
+        @elseif($element->user->is_mobile_visible)
             <a href="#" class="card__row card__row--icon">
                 <div class="card__row--icon__icon"><i class="icon mobile"></i></div>
                 <div class="card__row--icon__text">
@@ -33,7 +56,7 @@
             </a>
         @endif
         @if($element->user->is_email_visible)
-            <a href="#" class="card__row card__row--icon">
+            <a href="#" class="card__row card__row--icon small">
                 <div class="card__row--icon__icon"><i class="icon inbox"></i></div>
                 <div class="card__row--icon__text">
                     <div class="">{{ $element->user->email }}</div>

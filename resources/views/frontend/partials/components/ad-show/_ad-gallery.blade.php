@@ -1,8 +1,12 @@
 <div class="product-main-image">
     <div class="product-main-image__item">
-        <img class="product-zoom" src='{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}'
-             data-zoom-image="{{ asset('storage/uploads/images/large/'.$element->image) }}"
-        />
+        @if(!$element->booked)
+            <img class="product-zoom" src='{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}'
+                 data-zoom-image="{{ asset('storage/uploads/images/large/'.$element->image) }}"/>
+        @else
+            <img class="product-zoom" src='{{ asset('images/booked.png') }}'
+                 data-zoom-image="{{ asset('storage/uploads/images/large/'.$element->image) }}"/>
+        @endif
     </div>
     <div class="product-main-image__zoom ad-click-gallery"></div>
 </div>

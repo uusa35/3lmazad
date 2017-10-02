@@ -40,6 +40,15 @@
                             <input type='color' name="code" id="customColor" class="form-control"/>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Order</label>
+                        <div class="col-md-10">
+                            <input type="text" name="order" value="{{ $element->order }}" class="form-control"
+                                   placeholder="Enter text" required>
+                        </div>
+                    </div>
+
                     @include('backend.partials.forms._btn-group')
                 </div>
             </form>

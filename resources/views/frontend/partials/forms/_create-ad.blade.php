@@ -11,7 +11,7 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="title"
-                           class="control-label col-sm-3">{{ trans('general.title') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.title') }}*</label>
                     <div class="col-sm-9">
                         <input class="form-control" name="title" value="{{ old('title') }}"
                                placeholder="{{ trans('general.title') }}" type="text" required
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="file"
-                           class="control-label col-sm-3">{{ trans('general.image') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.image') }}*</label>
                     <div class="col-sm-9">
                         <input class="form-control tooltip-message" name="image"
                                placeholder="{{ trans('general.image') }}"
@@ -50,7 +50,7 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="body"
-                           class="control-label col-sm-3">{{ trans('general.description') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.description') }}*</label>
                     <div class="col-sm-9">
                 <textarea class="form-control tooltip-message" name="description"
                           data-content="{!! trans('message.description_ad_create') !!}"
@@ -64,11 +64,12 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="price"
-                           class="control-label col-sm-3">{{ trans('general.price') }}</label>
+                           class="control-label col-sm-3">{{ trans('general.price') }}*</label>
                     <div class="col-sm-9">
                         <input class="form-control tooltip-message" name="price" value="{{ old('price') }}"
                                data-content="{!! trans('message.price_ad_create') !!}"
                                placeholder="{{ trans('general.price') }}" type="number"
+                               required
                                maxlength="4"
                         >
                     </div>
@@ -125,24 +126,37 @@
                 <hr>
             </div>
 
-            @foreach($plans as $plan)
-                <div class="form-group">
-                    <div class="col-lg-12 tooltip-message" data-content="">
-                        <label for="plan_id" class="control-label col-sm-3">
-                            {{ $plan->name }}
-                        </label>
-                        <div class="col-sm-1">
-                            <input class="" name="plan_id" value="{{ $plan->id }}"
-                                   type="radio" {{ !$plan->is_paid ? 'checked' : null }}>
-                        </div>
-                        <div class="help-block text-left">
-                            {{ $plan->description  }}
-                        </div>
+
+            <div class="form-group">
+                <div class="col-lg-12 tooltip-message" data-content="">
+                    <label for="is_paid" class="control-label col-sm-3">
+                        {{ trans('general.featured_ad') }}
+                    </label>
+                    <div class="col-sm-1">
+                        <input class="" name="is_paid" value="1"
+                               type="radio">
+                    </div>
+                    <div class="help-block text-left">
+                        {{ trans('message.featured_ad_message') }}
                     </div>
                 </div>
-                @endforeach
-                        <!-- Button http://getbootstrap.com/css/#buttons -->
-                @include('frontend.partials.forms._btn-group')
+            </div>
+            <div class="form-group">
+                <div class="col-lg-12 tooltip-message" data-content="">
+                    <label for="is_paid" class="control-label col-sm-3">
+                        {{ trans('general.regular_ad') }}
+                    </label>
+                    <div class="col-sm-1">
+                        <input class="" name="is_paid" value="0"
+                               type="radio" checked>
+                    </div>
+                    <div class="help-block text-left">
+                        {{ trans("message.regular_ad_message") }}
+                    </div>
+                </div>
+            </div>
+            <!-- Button http://getbootstrap.com/css/#buttons -->
+            @include('frontend.partials.forms._btn-group')
 
         </form>
     </div>

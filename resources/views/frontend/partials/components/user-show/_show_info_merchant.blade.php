@@ -1,8 +1,10 @@
 <div class="col-lg-12">
-    <div class="col-lg-12 text-center">
-        <img class="text-center img-responsive img-thumbnail img-rounded"
-             src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}">
-    </div>
+    @if(!is_null($element->avatar))
+        <div class="col-lg-12 text-center">
+            <img class="text-center img-responsive img-thumbnail img-rounded"
+                 src="{{ asset('storage/uploads/images/thumbnail/'.$element->avatar) }}">
+        </div>
+    @endif
     <div class="col-lg-12">
         <hr>
         <div class="ui grid center">
@@ -60,9 +62,11 @@
                                     <span class="date"><strong>{{ trans('general.description')}} :</strong></span>
                                 </p>
                             </div>
-                            <div class="description">
-                                <p>{{ $element->description }}</p>
-                            </div>
+                            @if(!is_null($element->description))
+                                <div class="description">
+                                    <p>{{ $element->description }}</p>
+                                </div>
+                            @endif
                             <div class="description col-lg-2 col-lg-push-10">
                                 <a href="{{ route('user.ads',$element->id) }}"
                                    class="btn btn--wd">{{ trans('general.user_ads') }}</a>
