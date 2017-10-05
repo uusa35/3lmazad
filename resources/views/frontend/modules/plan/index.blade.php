@@ -9,7 +9,7 @@
     <section class="content top-null">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-md-offset-2">
+                <div class="col-sm-12">
                     <h2 class="title">{{ trans('general.plans_title') }}</h2>
                     <p class="sub-title">{{ trans('message.plans_message') }}</p>
                 </div>

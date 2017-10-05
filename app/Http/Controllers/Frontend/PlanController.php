@@ -12,10 +12,11 @@ class PlanController extends Controller
 {
     public $plan;
     public $ad;
+
     public function __construct(Plan $plan, Ad $ad)
     {
         $this->plan = $plan;
-        $this->ad= $ad;
+        $this->ad = $ad;
     }
 
     /**
@@ -26,9 +27,12 @@ class PlanController extends Controller
     public function index()
     {
         $pay_ad_id = session()->get('pay_ad_id');
-        $this->authorize('isOwner',$this->ad->withoutGlobalScopes()->whereId($pay_ad_id)->first()->user_id);
+        if (!$pay_ad_id) {
+            return redirect()->route("home")->with('error', 'Unknown error for pay ad id');
+        }
+        $this->authorize('isOwner', $this->ad->withoutGlobalScopes()->whereId($pay_ad_id)->first()->user_id);
         $elements = $this->plan->all();
-        return view('frontend.modules.plan.index',compact('elements','pay_ad_id'));
+        return view('frontend.modules.plan.index', compact('elements', 'pay_ad_id'));
     }
 
     /**
@@ -44,7 +48,7 @@ class PlanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,7 +59,7 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +70,7 @@ class PlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +81,8 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -89,7 +93,7 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
