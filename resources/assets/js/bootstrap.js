@@ -17,13 +17,14 @@ require('datatables.net');
 require('datatables.net-buttons');
 require('eonasdan-bootstrap-datetimepicker');
 require('moment');
+window.$.fn.form = require('semantic-ui-form');
 window.$.fn.transition = require('semantic-ui-transition');
 window.$.fn.dropdown = require('semantic-ui-dropdown');
 // i removed this from here as i included the whole semantic js cause it was not showing the sub menu in the main search form
-//window.$.fn.popup = require('semantic-ui-popup');
+window.$.fn.popup = require('semantic-ui-popup');
 window.$.fn.dimmer = require('semantic-ui-dimmer');
+window.$.fn.checkbox= require('semantic-ui-checkbox');
 window.$.fn.modal = require('semantic-ui-modal');
-window.$.fn.checkbox = require('semantic-ui-checkbox');
 import magnificPopup from 'magnific-popup';
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -35,6 +36,7 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.baseURL = '/';
+console.log(window.Laravel.env);
 if(window.Laravel.env == 'local') {
     window.axios.defaults.baseURL = 'http://3lmazad.dev';
 } else {

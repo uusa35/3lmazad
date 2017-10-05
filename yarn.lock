@@ -6726,9 +6726,9 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
-semantic-ui-checkbox@^2.2.10:
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/semantic-ui-checkbox/-/semantic-ui-checkbox-2.2.10.tgz#4cf3e2791202168ee6ab151df06b888764eda1f6"
+semantic-ui-checkbox@^2.2.12:
+  version "2.2.12"
+  resolved "https://registry.yarnpkg.com/semantic-ui-checkbox/-/semantic-ui-checkbox-2.2.12.tgz#d3b19f0d476a453bdb73ee90f91a2d1ff3394a85"
 
 semantic-ui-dimmer@^2.2.10:
   version "2.2.10"
@@ -6737,6 +6737,10 @@ semantic-ui-dimmer@^2.2.10:
 semantic-ui-dropdown@^2.2.12:
   version "2.2.12"
   resolved "https://registry.yarnpkg.com/semantic-ui-dropdown/-/semantic-ui-dropdown-2.2.12.tgz#aa7d9c036c846e38d036aab0c77b4d2002626c6f"
+
+semantic-ui-form@^2.2.12:
+  version "2.2.12"
+  resolved "https://registry.yarnpkg.com/semantic-ui-form/-/semantic-ui-form-2.2.12.tgz#89959da7836ea80c5ea3f18bd0669c7f53b20d14"
 
 semantic-ui-icon@^2.2.10:
   version "2.2.10"

@@ -35,9 +35,9 @@ Route::get('category/{id}', function ($id) {
         $category= $category->parent()->with('fields')->first();
     }
     if($category->fields->where('name','brand_id')->first()) {
-        $parent = Category::whereId($category->id)->with('fields.options','children','types')->with(['brands', function ($q) {
-            return $q->orderBy('order','asc');
-        }])->first();
+        $parent = Category::whereId($category->id)
+            ->with('fields.options','children','types','brands')
+            ->first();
     } else {
         $parent = Category::whereId($category->id)->with('fields.options','children','types')->first();
     }
