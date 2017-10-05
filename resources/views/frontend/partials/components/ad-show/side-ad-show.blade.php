@@ -15,12 +15,15 @@
             </a>
         @endif
         @if(auth()->check() && $element->isOwner)
-            <a href="{{ route('ad.booked',$element->id) }}" class="card__row card__row--icon">
-                <div class="card__row--icon__icon"><i class="icon minus circle {{ !$element->booked ?  'red' : 'green'}}"></i></div>
-                <div class="card__row--icon__text">
-                    <div class="card__row__title">{{ $element->booked ? trans('general.unbook') : trans('general.book') }}</div>
-                </div>
-            </a>
+            @if($element->user->isMerchant)
+                <a href="{{ route('ad.booked',$element->id) }}" class="card__row card__row--icon">
+                    <div class="card__row--icon__icon"><i
+                                class="icon minus circle {{ !$element->booked ?  'red' : 'green'}}"></i></div>
+                    <div class="card__row--icon__text">
+                        <div class="card__row__title">{{ $element->booked ? trans('general.unbook') : trans('general.book') }}</div>
+                    </div>
+                </a>
+            @endif
             <a href="{{ route('ad.edit',$element->id) }}" class="card__row card__row--icon">
                 <div class="card__row--icon__icon"><i class="icon edit"></i></div>
                 <div class="card__row--icon__text">
