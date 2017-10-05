@@ -42,6 +42,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session()->forget('info');
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->has('category')->orderBy('created_at', 'desc')->take(15)->get();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();
