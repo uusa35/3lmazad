@@ -54,6 +54,15 @@
                             <div class="help-block">best fit 200x200</div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Order</label>
+                        <div class="col-md-10">
+                            <input type="text" name="order" value="{{ old('order') }}" class="form-control"
+                                   placeholder="Enter text" required>
+                        </div>
+                    </div>
+
                     @include('backend.partials.forms._btn-group')
                 </div>
             </form>

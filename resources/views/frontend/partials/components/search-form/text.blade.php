@@ -4,6 +4,6 @@
      data-position="top center"
      data-tooltip="{{ trans('message.'.$field->name) }}">
     <i class="{{ $field->icon }} icon"></i>
-    <input type="text" class="search-input" name="{{ $field->name }}"
+    <input type="text" class="search-input search-input-keyword" name="{{ $field->name }}"
            placeholder="{{ trans('general.'.$field->name) }}"/>
 </div>

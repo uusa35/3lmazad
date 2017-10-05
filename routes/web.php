@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('favorite', 'FavoriteController');
         Route::get('report/abuse', 'HomeController@reportAbuse')->name('report.abuse');
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
+        Route::get('/ad/toggle/booked/{id}','AdController@toggleBooked')->name('ad.booked');
         Route::resource('plan', 'PlanController');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
         Route::resource('image', 'ImageController', ['except' => 'show', 'index']);

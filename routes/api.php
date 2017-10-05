@@ -25,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('brand/{id}/models', function ($id) {
-    $models = Brand::whereId($id)->first()->models()->get()->toArray();
+    $models = Brand::whereId($id)->first()->models()->orderBy('order','asc')->get()->toArray();
     return response()->json(['models' => $models], 200);
 });
 
@@ -35,7 +35,9 @@ Route::get('category/{id}', function ($id) {
         $category= $category->parent()->with('fields')->first();
     }
     if($category->fields->where('name','brand_id')->first()) {
-        $parent = Category::whereId($category->id)->with('fields.options','brands','children','types')->first();
+        $parent = Category::whereId($category->id)->with('fields.options','children','types')->with(['brands', function ($q) {
+            return $q->orderBy('order','asc');
+        }])->first();
     } else {
         $parent = Category::whereId($category->id)->with('fields.options','children','types')->first();
     }
@@ -44,13 +46,13 @@ Route::get('category/{id}', function ($id) {
 });
 
 Route::get('colors', function () {
-    $colors = Color::all()->toArray();
+    $colors = Color::orderBy('order','asc')->get()->toArray();
     $sizes = Size::all()->toArray();
     return response()->json(['colors' => $colors, 'sizes' => $sizes], 200);
 });
 
 Route::get('sizes', function () {
-    $colors = Color::all()->toArray();
+    $colors = Color::orderBy('order','asc')->get()->toArray();
     $sizes = Size::all()->toArray();
     return response()->json(['colors' => $colors, 'sizes' => $sizes], 200);
 });

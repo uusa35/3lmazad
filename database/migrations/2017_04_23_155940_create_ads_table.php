@@ -20,7 +20,8 @@ class CreateAdsTable extends Migration
             $table->boolean('active')->default(1);
             $table->boolean('featured')->default(0);
             $table->boolean('is_sold')->default(0);
-            $table->string('image')->nullable();
+            $table->boolean('booked')->default(0);
+            $table->string('image')->default('logo.png')->nullable();
 
             $table->integer('type_id')->unsigned()->index()->nullable();
             $table->foreign('type_id')->references('id')->on('types');

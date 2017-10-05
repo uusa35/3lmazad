@@ -59,6 +59,15 @@
                         <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}" alt=""
                              class="img-responsive">
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Order</label>
+                        <div class="col-md-10">
+                            <input type="text" name="order" value="{{ $element->order }}" class="form-control"
+                                   placeholder="Enter text" required>
+                        </div>
+                    </div>
+
                     @include('backend.partials.forms._btn-group')
                 </div>
             </form>

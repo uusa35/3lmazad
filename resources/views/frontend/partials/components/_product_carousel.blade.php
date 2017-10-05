@@ -3,8 +3,8 @@
         <div class="divider divider--xs product-info__divider"></div>
         <h1 class="text-center text-uppercase">{{ isset($header) ? $header : null }}
         </h1>
-        <div class="product-category-carousel slick mobile-special-arrows animated-arrows">
-            @if(!$elements->isEmpty())
+        @if(!$elements->isEmpty())
+            <div class="product-category-carousel slick mobile-special-arrows animated-arrows">
                 @foreach($elements as $element)
                     <div class="product-category hover-squared">
                         @if($element->featured)
@@ -39,9 +39,9 @@
                         </div>
                     </div>
                 @endforeach
-            @else
-                <div class="alert alert-info">{{ trans('message.no_preview') }}</div>
-            @endif
-        </div>
+            </div>
+        @else
+            <div class="alert alert-info col-lg-12">{{ trans('message.no_preview') }}</div>
+        @endif
     </div>
 </section>

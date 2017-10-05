@@ -14,7 +14,7 @@
         </ul>
     </div>
 @else
-    <div class="dropdown pull-right"><a href="#"
+    <div class="dropdown pull-right hidden-xs"><a href="#"
                                         class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"
                                         data-toggle="dropdown"><span class="fa fa-fw fa-lg fa-user"></span>
             <span class="hidden-xs">{{ trans('general.welcome').' '.str_limit(auth()->user()->name,15) }}</span>

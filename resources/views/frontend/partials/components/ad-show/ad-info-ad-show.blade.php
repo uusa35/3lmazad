@@ -5,13 +5,13 @@
 
         <a class="ad-bar-children"><i class="icon calendar"></i>{{  $element->createdDate }}</a>
         <a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->willExpireAt }}</a>
-        @if(!is_null($element->brand))
+        @if(!is_null($element->brand_id))
             <a class="ad-bar-children">
                 <img class="ui avatar image" style="width: 10px; height: auto;"
                      src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
             </a>
         @endif
-        @if(!is_null($element->color))
+        @if(!is_null($element->color_id))
             <a class="ad-bar-children"><i class="icon square" style="color: {{ $element->color->code }};"></i>
                 {{ trans('general.color') }}
             </a>
