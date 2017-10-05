@@ -42,7 +42,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404, 'soon payment shall be available');
     }
 
     /**
