@@ -3,6 +3,7 @@ namespace Usama\Tap;
 
 use App\Http\Controllers\Controller;
 use App\Services\TapInvoice;
+use GuzzleHttp\Client;
 
 /**
  * Created by PhpStorm.
@@ -16,7 +17,7 @@ class TapPaymentController extends Controller implements TapContract
     {
         $products = session()->has('cart') ? session()->get('cart') : collect([]);
         $products = $products->reject(function ($value, $key) use ($id) {
-            return $value['UnitID'] == $id;
+            return $value['UnitID'] === $id;
         });
         $products->push([
             "CurrencyCode" => "KWD",
@@ -24,7 +25,7 @@ class TapPaymentController extends Controller implements TapContract
             "Quantity" => 2,
             "TotalPrice" => 2,
             "UnitDesc" => "Astonishing green apple!",
-            "UnitID" => $id,
+            "UnitID" => 'Apple #'.$id,
             "UnitName" => "Green Apple",
             "UnitPrice" => 1,
             "VndID" => ""
@@ -141,15 +142,50 @@ class TapPaymentController extends Controller implements TapContract
             'MerMastDC' => $this->getMerchant(),
         ];
 
-        $client = new \GuzzleHttp\Client();
-        $response = $client->post(config('tap.paymentUrl'), [
-            'body' => json_encode($finalArray, JSON_UNESCAPED_SLASHES),
-            'headers' => [
-                'content-type' => 'application/json'
-            ]
-        ]);
-        $invoice = new TapInvoice($response);
-        return $invoice->storePayment();
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($finalArray, JSON_UNESCAPED_SLASHES),
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/json"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $response = (\GuzzleHttp\json_decode($response));
+            $invoice = new TapInvoice($response);
+            return $invoice->storePayment();
+        }
+
+
+        /// worked for awhile then later after did not work !!!
+//        $client = new \GuzzleHttp\Client();
+//        $response = $client->post(config('tap.paymentUrl'), [
+//            'body' => json_encode($finalArray, JSON_UNESCAPED_SLASHES),
+//            'headers' => [
+//                'content-type' => 'application/json'
+//            ]
+//        ]);
+
+        //after receiving the response
+        //Get the return payment url which redirecting the user after payment process
+        // also get the refrenceID which i can store it within my db
+        // this is something internal to create invoice inside my app
     }
 }
 

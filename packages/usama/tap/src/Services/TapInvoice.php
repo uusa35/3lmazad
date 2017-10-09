@@ -31,8 +31,10 @@ class TapInvoice implements PaymentContract
     {
         // store the cart if you want from session()->get('cart')
         // store the payment results if you want in your DB by accessing to $this->response;
-//        dd(json_decode($this->response->getBody()));
-        return redirect()->home();
+
+        var_dump('from inside the store payment .. or make the invoice');
+        dd($this->response);
+//        return redirect()->home();
 
     }
 }
