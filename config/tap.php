@@ -13,9 +13,9 @@ return [
     'currencyCode' => env('TAP_CURRENCY_CODE', "KWD"), //This is the currency of the invoice you are creating. (Details can be found in "Create a Payment" endpoint)
     "autoReturn" => env('TAP_AUTO_RETURN', "Y"),
     "errorUrl" => env('TAP_ERROR_URL', "https://github.com/nosuchpage"),
-    "langCode" => env('TAP_LANG_CODE', "EN"),
-    "postUrl" => env('TAP_POST_URL', "http://yourdomain.post.com"),
-    "returnUrl" => env('TAP_RETURN_URL', "http://yourdomain.return.com"),
+    "langCode" => env('TAP_LANG_CODE', "AR"),
+    "postUrl" => env('TAP_POST_URL', "http://3almazad.com/payment"),
+    "returnUrl" => env('TAP_RETURN_URL', "http://3almazad.com/test"),
     'referenceId' => '123456',
     'gatewayDefault' => "ALL",
     'paymentUrl' => env('TAP_PAYMENT_URL','http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest')
