@@ -128,7 +128,6 @@ class CategoryController extends Controller
 
     public function postAssignField(Request $request, $id)
     {
-//        dd($request->all());
         $element = Category::whereId($id)->first();
         $element->fields()->sync($request->except('_token'));
         if($element) {

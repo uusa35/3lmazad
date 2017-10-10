@@ -45,7 +45,6 @@ trait AdHelpers
         });
     }
 
-
     /**
      * @param $q
      * @return mixed
