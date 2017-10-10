@@ -169,6 +169,19 @@ class TapPaymentController extends Controller implements TapContract
         } else {
             $response = (\GuzzleHttp\json_decode($response));
             $invoice = new TapInvoice($response);
+            /*
+             * response how it looks
+             * {#966 ▼
+                  +"PaymentURL": "http://live.gotapnow.com/webpay.aspx?ref=210092017100407130&sess=kEh3R7REOFWP0b3BFM6Kkm2O7AQck8Jg"
+                  +"ReferenceID": "210092017100407130"
+                  +"ResponseCode": "0"
+                  +"ResponseMessage": "Success"
+                  +"TapPayURL": "http://live.gotapnow.com/webpay.aspx"
+                }
+             * if the response is success mean the payment is successfully done so update the plan_id , duration , enddate of ad's deal
+             * redirect to the payment url
+             * hit their api to get the order status
+             * */
             return $invoice->storePayment();
         }
 

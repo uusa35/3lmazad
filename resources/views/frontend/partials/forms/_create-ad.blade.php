@@ -121,10 +121,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                <h4>{{ trans('message.make_featured') }}</h4>
-                <hr>
-            </div>
+            {{--<div class="col-lg-12">--}}
+                {{--<h4>{{ trans('message.make_featured') }}</h4>--}}
+                {{--<hr>--}}
+            {{--</div>--}}
 
 
             <div class="form-group">
