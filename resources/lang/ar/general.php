@@ -110,7 +110,7 @@ return array (
   'payment_plans' => 'طرق الدفع',
   'terms' => 'سياسة استخدام الموقع',
   'terms_of_condition' => 'الشروط والأحكام',
-  'title' => 'العنوان',
+  'title' => 'عنوان الإعلان',
   'type' => 'نوع',
   'wishlist' => 'قائمة المفضلة',
   'year' => 'عام',
