@@ -1,4 +1,4 @@
-<?php
+C<?php
 
 use App\Models\AdMeta;
 use App\Models\Auction;

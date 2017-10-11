@@ -18,7 +18,6 @@
                     <hr>
                     @include('frontend.partials.components.user-show._show_info_merchant')
                 @endif
-                <hr>
                 <div class="col-lg-12">
                     <div class="divider divider-xs"></div>
                     <div class="filters-row">
@@ -27,6 +26,11 @@
                             <div class="products-grid products-listing products-col products-isotope four-in-row">
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
+                                @if($element->isMerchant && !$element->menus->isEmpty())
+                                    <h3 class="text-center">{{ trans('general.menu_list') }}</h3>
+                                    <hr>
+                                    @include('frontend.partials._menu')
+                                @endif
                                 @if($element->isMerchant && !$element->gallery->first()->images->isEmpty())
                                     <h3 class="text-center">{{ trans('general.user_gallery') }}</h3>
                                     <hr>

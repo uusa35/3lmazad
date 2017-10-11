@@ -30,11 +30,13 @@ use App\Models\Field;
 use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Image;
+use App\Models\Menu;
 use App\Models\Model;
 use App\Models\Newsletter;
 use App\Models\Option;
 use App\Models\Plan;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\Size;
 use App\Models\Slider;
 use App\Models\Term;
@@ -78,7 +80,7 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
-        'order' => $faker->numberBetween(1,50),
+        'order' => $faker->numberBetween(1, 50),
         'icon' => $faker->randomElement(['remove', 'remove circle', 'shopping basket', 'shopping bag', 'tag', 'tags', 'mobile', 'tablet',
             'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
         ]),
@@ -102,7 +104,7 @@ $factory->define(Group::class, function (Faker\Generator $faker) {
             'desktop', 'bus', 'car', 'ship', 'taxi', 'coffee', 'android', 'apple'
         ]),
         'active' => $faker->boolean(true),
-        'order' => $faker->numberBetween(1,100)
+        'order' => $faker->numberBetween(1, 100)
     ];
 });
 
@@ -111,7 +113,7 @@ $factory->define(Brand::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
-        'order' => $faker->numberBetween(1,20),
+        'order' => $faker->numberBetween(1, 20),
         'category_id' => Category::all()->where('parent_id', false)->random()->id
     ];
 });
@@ -132,7 +134,7 @@ $factory->define(BrandModel::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->word,
         'name_en' => $faker->word,
         'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
-        'order' => $faker->numberBetween(1,20),
+        'order' => $faker->numberBetween(1, 20),
         'brand_id' => Brand::all()->random()->id
     ];
 });
@@ -244,7 +246,7 @@ $factory->define(Color::class, function (Faker\Generator $faker) {
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
         'code' => $faker->hexColor,
-        'order' => $faker->numberBetween(1,20),
+        'order' => $faker->numberBetween(1, 20),
     ];
 });
 
@@ -405,4 +407,25 @@ $factory->define(AbuseReport::class, function (Faker\Generator $faker) {
         'reporter_id' => User::all()->random()->id,
     ];
 });
+
+$factory->define(Menu::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'active' => $faker->boolean(true),
+        'user_id' => User::where('active',true)->get()->random()->id
+    ];
+});
+
+$factory->define(Service::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'image' => 'sample' . $faker->numberBetween(1, 10) . '.jpeg',
+        'price' => $faker->numberBetween(1, 100),
+        'timing' => $faker->sentence(4),
+        'menu_id' => Menu::all()->random()->id
+    ];
+});
+
 

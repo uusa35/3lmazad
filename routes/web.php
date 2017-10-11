@@ -14,6 +14,8 @@ Route::group(['namespace' => 'Frontend'], function () {
             Route::get('/ads', 'UserController@adsList')->name('user.ads');
             Route::get('ad/toggle/republish/{id}', 'AdController@getToggleRepublish')->name('ad.republish');
             Route::post('ad/toggle/republish/{id}', 'AdController@postToggleRepublish')->name('ad.republish');
+            Route::resource('menu', 'MenuController');
+            Route::resource('service', 'ServiceController');
         });
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
@@ -21,10 +23,10 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('favorite', 'FavoriteController');
         Route::get('report/abuse', 'HomeController@reportAbuse')->name('report.abuse');
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
-        Route::get('/ad/toggle/booked/{id}','AdController@toggleBooked')->name('ad.booked');
-        Route::resource('plan', 'PlanController');
+        Route::get('/ad/toggle/booked/{id}', 'AdController@toggleBooked')->name('ad.booked');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
         Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
+        Route::resource('plan', 'PlanController');
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');
@@ -42,6 +44,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::resource('comment', 'CommentController', ['only' => ['store']]);
     Route::resource('ad', 'AdController', ['only' => ['show', 'index']]);
     Route::resource('gallery', 'GalleryController', ['only' => 'show', 'index']);
+    Route::resource('service', 'ServiceController', ['only' => 'show', 'index']);
     /*
      * the following route for both (search + categories menu) === petrolet.dev/search?type=user&main=3&sub=7
      * returns all companies related to main or sub category included within the filter
@@ -76,6 +79,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('slider', 'SliderController');
     Route::resource('commercial', 'CommercialController');
     Route::resource('category', 'CategoryController');
+    Route::resource('menu', 'MenuController');
     Route::resource('brand', 'BrandController');
     Route::resource('model', 'ModelController');
     Route::get('assign/category/{id}', 'CategoryController@getAssignField')->name('category.assign');
@@ -90,7 +94,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('size', 'SizeController');
     Route::resource('type', 'TypeController');
     Route::resource('image', 'ImageController');
-    Route::get('export/language','HomeController@exportTranslations')->name('export.translations');
+    Route::get('export/language', 'HomeController@exportTranslations')->name('export.translations');
 //    Route::resource('newsletter', 'NewsletterController');
 });
 
@@ -108,5 +112,5 @@ if (!app()->environment('production') && Schema::hasTable('users')) {
 
 
 Route::get('test', function () {
-   return 'this is the test route';
+    return 'this is the test route';
 });

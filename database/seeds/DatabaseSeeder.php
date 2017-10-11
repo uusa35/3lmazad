@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             $this->call(CommercialsTableSeeder::class);
             $this->call(CategoriesTableSeeder::class);
             $this->command->info('categories are done');
+            $this->call(MenusTableSeeder::class);
             $this->call(AdVisitorsTableSeeder::class);
             $this->command->info('before favorites');
             $this->call(FavoritesTableSeeder::class);
