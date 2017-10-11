@@ -15,7 +15,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $elements = Menu::with('user')->all();
+        $elements = Menu::with('services','user')->get();
         return view('backend.modules.menu.index', compact('elements'));
     }
 
@@ -83,8 +83,9 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $element = Menu::whereId($id)->with('services')->first();
+        $element->services()->delete();
         if ($element->delete()) {
-            return redirect()->route('backend.menu.index')->with('success', 'menu deleted');
+            return redirect()->route('backend.menu.index')->with('success', 'menu and its services deleted');
         }
         return redirect()->route('backend.menu.index')->with('error', 'menu not deleted');
 

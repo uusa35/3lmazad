@@ -5,7 +5,6 @@
               action="{{ route('account.service.store') }}"
               enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="hidden" name="parent" id="parentCategory" value="null">
             <input type="hidden" name="menu_id" value="{{ request()->menu_id }}">
             <div class="form-group">
                 <div class="col-lg-12">

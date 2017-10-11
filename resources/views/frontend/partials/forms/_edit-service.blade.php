@@ -5,8 +5,8 @@
               action="{{ route('account.service.update',$element->id) }}"
               enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="hidden" name="parent" id="parentCategory" value="null">
             <input type="hidden" name="menu_id" value="{{ $element->menu_id }}">
+            <input type="hidden" name="_method" value="patch">
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="title"
@@ -39,7 +39,6 @@
                                placeholder="{{ trans('general.image') }}"
                                data-content="{{ trans('message.image_edit') }}"
                                type="file"
-                               required
                         />
                     </div>
                 </div>

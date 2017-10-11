@@ -345,6 +345,21 @@
                             </li>
                         </ul>
                     </li>
+
+                    {{--Menus--}}
+                    <li class="nav-item start {{ activeItem('menu') }}">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <span class="title">Menus Section</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item start">
+                                <a href="{{ route('backend.menu.index') }}" class="nav-link ">
+                                    <span class="title">Menus</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
         </ul>

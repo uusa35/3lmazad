@@ -40,9 +40,9 @@ class ServiceController extends Controller
         $element = Service::create($request->request->all());
         if ($element) {
             $this->saveMimes($element, $request, ['image'], ['300', '300'], false);
-            return redirect()->route('account.service.index')->with('success', trans('message.service_created_successfully'));
+            return redirect()->route('account.service.index',['menu_id' => $element->menu_id])->with('success', trans('message.service_created_successfully'));
         }
-        return redirect()->route('account.service.index')->with('error', trans('message.service_created_failure'));
+        return redirect()->route('account.service.index',['menu_id' => request()->menu_id])->with('error', trans('message.service_created_failure'));
     }
 
     /**
@@ -77,14 +77,15 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = Service::whereId($id)->update($request->request->all());
+        $element = Service::whereId($id)->first();
+        $element->update($request->except('image','_method','_token'));
         if ($element) {
             if ($request->hasFile('image')) {
                 $this->saveMimes($element, $request, ['image'], ['300', '300'], false);
             }
-            return redirect()->route('account.service.index')->with('success', trans('message.service_edit_successfully'));
+            return redirect()->route('account.service.index',['menu_id' => $element->menu_id])->with('success', trans('message.service_edit_successfully'));
         }
-        return redirect()->route('account.service.index')->with('error', trans('message.service_edit_failure'));
+        return redirect()->route('account.service.index',['menu_id' => $element->menu_id])->with('error', trans('message.service_edit_failure'));
     }
 
     /**
@@ -96,9 +97,10 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         $element = Service::whereId($id)->first();
+        $menuId = $element->menu_id;
         if ($element->delete()) {
-            return redirect()->route('account.service.index')->with('success', trans('message.service_delete_successfully'));
+            return redirect()->route('account.service.index',['menu_id' => $menuId])->with('success', trans('message.service_delete_successfully'));
         }
-        return redirect()->route('account.service.index')->with('error', trans('message.service_delete_failure'));
+        return redirect()->route('account.service.index',['menu_id' => $menuId])->with('error', trans('message.service_delete_failure'));
     }
 }

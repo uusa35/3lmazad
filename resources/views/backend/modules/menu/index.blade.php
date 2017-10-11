@@ -11,6 +11,7 @@
                 <th>name_en</th>
                 <th>user id</th>
                 <th>active</th>
+                <th>services</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -34,6 +35,14 @@
                         <span class="label {{ activeLabel($element->active) }}">{{ activeText($element->active) }}</span>
                     </td>
                     <td>
+                        <h5>Services : </h5>
+                        <ul>
+                            @foreach($element->services as $service)
+                                <li>{{ $service->name_ar }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>
                         <div class="btn-group">
                             <button type="button" class="btn green btn-xs btn-outline dropdown-toggle"
                                     data-toggle="dropdown"> Actions
@@ -41,8 +50,14 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
-                                    <a href="{{ route('backend.menu.delete',$element->id) }}">
-                                        <i class="fa fa-fw fa-check-circle"></i> delete menu</a>
+                                    <form method="post"
+                                          action="{{ route('backend.menu.destroy',$element->id) }}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <button type="submit" class="btn btn-outline btn-sm red">
+                                            <i class="fa fa-remove"></i> delete menu
+                                        </button>
+                                    </form>
                                 </li>
                                 <li>
                                     <a href="{{ route('backend.activation',['model' => 'menu','id' => $element->id]) }}">
