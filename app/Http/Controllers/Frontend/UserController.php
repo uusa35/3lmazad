@@ -81,7 +81,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $element = $this->user->whereId($id)->with('gallery.images')->first();
+        $element = $this->user->whereId($id)->with('gallery.images','menus.services')->first();
         $elements = $element->ads()->orderBy('created_at', 'desc')->with('deals', 'user.group', 'brand', 'user', 'color', 'size', 'favorites')->paginate(12);
         return view('frontend.modules.user.show', compact('element', 'elements'));
     }

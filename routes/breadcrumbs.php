@@ -116,3 +116,34 @@ Breadcrumbs::register('user.edit', function ($breadcrumbs) {
 });
 
 
+Breadcrumbs::register('account.user.menu', function ($breadcrumbs) {
+    $breadcrumbs->parent('account.user');
+    $breadcrumbs->push(trans('general.menus_list'), route('account.menu.index'));
+});
+
+Breadcrumbs::register('account.user.menu.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('account.user.menu');
+    $breadcrumbs->push(trans('general.menu_create'), route('account.menu.create'));
+});
+
+Breadcrumbs::register('account.user.menu.edit', function ($breadcrumbs,$element) {
+    $breadcrumbs->parent('account.user.menu');
+    $breadcrumbs->push(trans('general.menu_edit'), route('account.menu.edit',$element->id));
+});
+
+Breadcrumbs::register('account.user.menu.service', function ($breadcrumbs) {
+    $breadcrumbs->parent('account.user.menu');
+    $breadcrumbs->push(trans('general.service_list'), route('account.service.index'));
+});
+
+Breadcrumbs::register('account.user.menu.service.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('account.user.menu.service');
+    $breadcrumbs->push(trans('general.service_create'), route('account.service.create'));
+});
+
+Breadcrumbs::register('account.user.menu.service.edit', function ($breadcrumbs,$element) {
+    $breadcrumbs->parent('account.user.menu.service');
+    $breadcrumbs->push(trans('general.service_edit'), route('account.service.edit',$element->id));
+});
+
+

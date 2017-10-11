@@ -111,6 +111,14 @@
                                                        style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
                                                     {{ trans('general.list_of_all_ads') }}
                                                 </a>
+                                                <a class="ui blue button tooltip-message"
+                                                   href="{{ route('account.menu.index') }}"
+                                                   data-content="{{ trans('message.list_of_all_menus') }}"
+                                                   data-inverted="">
+                                                    <i class="right arrow icon big"
+                                                       style="margin: 30px; margin-right: auto; margin-left: auto; display: block; clear:both;"></i>
+                                                    {{ trans('general.list_of_all_menus') }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

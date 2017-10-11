@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Deal;
 use App\Models\Gallery;
 use App\Models\Group;
+use App\Models\Menu;
 use App\Models\Role;
 
 /**
@@ -68,5 +69,10 @@ trait UserTrait
     public function reporter()
     {
         return $this->hasMany(AbuseReport::class);
+    }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
     }
 }
