@@ -168,7 +168,7 @@ class TapPaymentController extends Controller implements TapContract
             echo "cURL Error #:" . $err;
         } else {
             $response = (\GuzzleHttp\json_decode($response));
-            $invoice = new TapInvoice($response);
+//            $invoice = new TapInvoice($response);
             /*
              * response how it looks
              * {#966 ▼
