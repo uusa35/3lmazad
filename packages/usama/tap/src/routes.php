@@ -11,5 +11,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('product/remove/{id}', 'Usama\Tap\TapPaymentController@removeProduct')->name('payment.remove.product');
     Route::get('product/clear', 'Usama\Tap\TapPaymentController@clearProducts')->name('payment.clear.product');
     Route::get('payment', 'Usama\Tap\TapPaymentController@makePayment')->name('payment.create');
+    Route::get('result', 'Usama\Tap\TapPaymentController@result')->name('payment.result');
+    Route::get('error', 'Usama\Tap\TapPaymentController@error')->name('payment.error');
 });
 

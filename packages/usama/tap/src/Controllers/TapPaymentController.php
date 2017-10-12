@@ -4,6 +4,7 @@ namespace Usama\Tap;
 use App\Http\Controllers\Controller;
 use App\Services\TapInvoice;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 /**
  * Created by PhpStorm.
@@ -99,7 +100,7 @@ class TapPaymentController extends Controller implements TapContract
 
     public function getGateWay()
     {
-        return session()->has('gateway') ? [["Name" => session()->get('gateway')]] : [["Name" => config('tap.gatewayDefault')]];
+        return ["Name" => config('tap.gatewayDefault')];
     }
 
     public function getMerchant()
@@ -135,6 +136,7 @@ class TapPaymentController extends Controller implements TapContract
 
     public function makePayment()
     {
+        dd($this->getMerchant());
         $finalArray = [
             'CustomerDC' => $this->getCustomer(),
             'lstProductDC' => $this->getProducts()->values(),
@@ -201,6 +203,18 @@ class TapPaymentController extends Controller implements TapContract
         //Get the return payment url which redirecting the user after payment process
         // also get the refrenceID which i can store it within my db
         // this is something internal to create invoice inside my app
+    }
+
+    public function result(Request $request) {
+        var_dump("from inside results");
+        var_dump("order is done");
+        dd($request);
+    }
+
+    public function error(Request $request) {
+        var_dump("from inside error");
+        var_dump("order error");
+        dd($request);
     }
 }
 
