@@ -136,6 +136,7 @@ class TapPaymentController extends Controller implements TapContract
 
     public function makePayment()
     {
+        dd(config('tap.userName'));
         dd($this->getMerchant());
         $finalArray = [
             'CustomerDC' => $this->getCustomer(),
