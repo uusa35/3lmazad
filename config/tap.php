@@ -6,9 +6,9 @@
  * Time: 5:56 PM
  */
 return [
-    'apiKey' => env('TAP_API_KEY', 'tap7'), //Your API Key Provided by Tap
-    'merchantId' => env('TAP_MERCHANT_ID', 1014), //Your ID provided by Tap
-    'userName' => env('TAP_USERNAME', "test"), //Your Username under TAP.
+    "apiKey" => env('TAP_API_KEY', 'tap7'), //Your API Key Provided by Tap
+    "merchantId" => env('TAP_MERCHANT_ID', '1014'), //Your ID provided by Tap
+    "userName" => env('TAP_USERNAME', "test"), //Your Username under TAP.
     "password" => env('TAP_PASSWORD', "test"),
     'currencyCode' => env('TAP_CURRENCY_CODE', "KWD"), //This is the currency of the invoice you are creating. (Details can be found in "Create a Payment" endpoint)
     "autoReturn" => env('TAP_AUTO_RETURN', "Y"),
@@ -18,6 +18,6 @@ return [
     "returnUrl" => env('TAP_RETURN_URL', "http://yourdomain.return.com"),
     "returnUrl" => env('TAP_RETURN_URL', "http://yourdomain.return.com"),
     'gatewayDefault' => "ALL",
-    'paymentUrl' => env('TAP_PAYMENT_URL','http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest')
+    'paymentUrl' => env('TAP_PAYMENT_URL', 'http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest')
 ];
 
