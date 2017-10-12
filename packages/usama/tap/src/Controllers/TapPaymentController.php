@@ -136,20 +136,16 @@ class TapPaymentController extends Controller implements TapContract
 
     public function makePayment()
     {
-        dd(config('tap.merchantId'));
-        dd($this->getMerchant());
         $finalArray = [
             'CustomerDC' => $this->getCustomer(),
-            'lstProductDC' => $this->getProducts()->values(),
-            'lstGateWayDC' => $this->getGateWay(),
+            'lstProductDC' => $this->getProducts()->toArray(),
+            'lstGateWayDC' => [$this->getGateWay()],
             'MerMastDC' => $this->getMerchant(),
         ];
-
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-//            CURLOPT_URL => "http://tapapi.gotapnow.com/TapWebConnect/Tap/WebPay/PaymentRequest",
             CURLOPT_URL => config('tap.paymentUrl'),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
