@@ -183,6 +183,7 @@ class TapPaymentController extends Controller implements TapContract
              * hit their api to get the order status
              * */
             //$invoice->storePayment();
+            dd($response);
             return redirect()->to($response->PaymentURL);
         }
 
