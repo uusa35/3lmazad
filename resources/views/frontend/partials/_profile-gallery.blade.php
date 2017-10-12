@@ -1,7 +1,7 @@
 <div class="divider divider--sm"></div>
 @if($element->gallery->first()->images->count() <= 15 && $element->isOwner)
     <div class="text-center">
-        <a class="btn btn--wd" href="{{ route('image.create') }}">
+        <a class="btn btn--wd" href="{{ route('account.image.create') }}">
             {{ trans('general.ad_more_photo') }}
         </a>
     </div>
@@ -14,9 +14,9 @@
                 <div class="gallery__item__image">
                     <img src="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}" alt=""/>
                     <div class="gallery__item__image__caption">
-                        {{--<h6>{{ $image->description }}</h6>--}}
+                        <h6>{{ $image->description }}</h6>
                         @if($element->isOwner)
-                            <form action="{{ route('image.destroy',$image->id) }}" method="post">
+                            <form action="{{ route('account.image.destroy',$image->id) }}" method="post">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="delete">
                                 <button class="circular ui icon button red" style="opacity: 0.7;" type="submit"

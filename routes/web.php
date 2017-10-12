@@ -16,6 +16,7 @@ Route::group(['namespace' => 'Frontend'], function () {
             Route::post('ad/toggle/republish/{id}', 'AdController@postToggleRepublish')->name('ad.republish');
             Route::resource('menu', 'MenuController');
             Route::resource('service', 'ServiceController');
+            Route::resource('image', 'ImageController');
         });
         Route::any('setting', 'SettingController@index')->name('setting.index');
         Route::any('setting/mobile', 'SettingController@toggleMobile')->name('setting.mobile');
@@ -25,7 +26,7 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
         Route::get('/ad/toggle/booked/{id}', 'AdController@toggleBooked')->name('ad.booked');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
-        Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
+//        Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
         Route::resource('plan', 'PlanController');
     });
     Route::get('/home', 'HomeController@index')->name('home');

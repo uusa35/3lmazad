@@ -48,8 +48,15 @@ class ImageController extends Controller
     public function store(ImageStore $request)
     {
         $user = auth()->user();
-        $this->saveGallery($user->gallery()->first(), $request, 'images', ['600', '450'], true);
-        return redirect()->route('account.user')->with('success', trans('message.image_success'));
+        $gallery = $user->gallery()->first();
+        $element = $gallery->images()->save(Image::create($request->except('remaining','image')));
+        if($element) {
+            $this->saveMimes($element, $request, ['image'], ['800', '800'], false);
+            return redirect()->route('account.user')->with('success', trans('message.image_success'));
+        }
+//        $this->saveGallery($user->gallery()->first(), $request, 'images', ['600', '450'], true);
+        return redirect()->route('account.user')->with('error', trans('message.image_failure'));
+
 
     }
 

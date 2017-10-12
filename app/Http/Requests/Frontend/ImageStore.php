@@ -38,9 +38,9 @@ class ImageStore extends FormRequest
         return [
             'gallery_id' => 'required|numeric',
             'remaining' => 'numeric|between:1,'.$this->remaining,
-            'images' => 'array|required',
-            'description_ar' => 'alpha_numeric|nullable',
-            'description_en' => 'alpha_numeric|nullable',
+            'image' => 'mimes:jpeg,jpg,bmp,png|required',
+            'description_ar' => 'nullable',
+            'description_en' => 'nullable',
         ];
     }
 }
