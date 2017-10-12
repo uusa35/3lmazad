@@ -25,7 +25,7 @@ class TapPaymentController extends Controller implements TapContract
             "Quantity" => 2,
             "TotalPrice" => 2,
             "UnitDesc" => "Astonishing green apple!",
-            "UnitID" => 'Apple #'.$id,
+            "UnitID" => 'Apple #' . $id,
             "UnitName" => "Green Apple",
             "UnitPrice" => 1,
             "VndID" => ""
@@ -182,7 +182,8 @@ class TapPaymentController extends Controller implements TapContract
              * redirect to the payment url
              * hit their api to get the order status
              * */
-            return $invoice->storePayment();
+            //$invoice->storePayment();
+            return redirect()->to($response->PaymentURL);
         }
 
 
