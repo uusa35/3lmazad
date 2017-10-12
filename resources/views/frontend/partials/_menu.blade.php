@@ -16,7 +16,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th scope="col">{{ trans('general.image') }}</th>
+                                        <th scope="col" class="hidden-xs">{{ trans('general.image') }}</th>
                                         <th scope="col">{{ trans('general.service_name') }}</th>
                                         <th scope="col">{{ trans('general.service_time') }}</th>
                                         <th scope="col">{{ trans('general.price') }}</th>
@@ -25,7 +25,7 @@
                                     <tbody>
                                     @foreach($menu->services as $service)
                                         <tr>
-                                            <td><img src="{{ asset('storage/uploads/images/thumbnail/'.$service->image) }}" class="img-responsive" style="max-height: 60px;" alt=""></td>
+                                            <td class="hidden-xs"><img src="{{ asset('storage/uploads/images/thumbnail/'.$service->image) }}" class="img-responsive" style="max-height: 60px;" alt=""></td>
                                             <td>{{ $service->name }}</td>
                                             <td>{{ $service->timing }}</td>
                                             <td>{{ $service->price }} {{ trans('general.kd') }}</td>
