@@ -1,4 +1,4 @@
-<div class="panel-group" id="sitemap">
+<div class="panel-group hidden-xs" id="sitemap">
     <div class="panel panel-default" role="tablist">
         @foreach($element->menus as $menu)
             @if(!$menu->services->isEmpty())
