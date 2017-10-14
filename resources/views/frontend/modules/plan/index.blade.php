@@ -38,13 +38,15 @@
                                                     </button>
                                                 </form>
                                             @else
-                                                <form method="post" action="{{ route('account.ad.republish') }}">
-                                                    <input type="hidden" name="product_id" value="{{ $ad->id }}">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button class="btn btn-info" type="submit">
-                                                        {{ trans('general.choose') }}
-                                                    </button>
-                                                </form>
+                                                @if(!$ad->deals->first()->isValid)
+                                                    <form method="post" action="{{ route('account.ad.republish') }}">
+                                                        <input type="hidden" name="product_id" value="{{ $ad->id }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <button class="btn btn-info" type="submit">
+                                                            {{ trans('general.choose') }}
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             @endif
                                         </li>
                                     </ul>
