@@ -36,6 +36,6 @@ class TapInvoice implements PaymentContract
         $deal = Deal::withoutGlobalScopes()->whereId($this->dealId)->first();
         // make all other deals for the same ad_id is invlid except this deal
         $deals = Deal::where(['ad_id' => $deal->ad_id])->where('id','!=',$deal->id)->delete();
-        $deal->update(['reference_id' => $this->response->ReferenceID,'valid' => true]);
+        $deal->update(['reference_id' => $this->response->ReferenceID]);
     }
 }
