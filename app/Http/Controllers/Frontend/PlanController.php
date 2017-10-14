@@ -26,13 +26,13 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $pay_ad_id = session()->get('pay_ad_id');
-        if (!$pay_ad_id) {
+        $pay_product_id = session()->get('pay_product_id');
+        if (!$pay_product_id) {
             return redirect()->route("home")->with('error', 'Unknown error for pay ad id');
         }
-        $this->authorize('isOwner', $this->ad->withoutGlobalScopes()->whereId($pay_ad_id)->first()->user_id);
+        $this->authorize('isOwner', $this->ad->withoutGlobalScopes()->whereId($pay_product_id)->first()->user_id);
         $elements = $this->plan->all();
-        $ad = Ad::whereId($pay_ad_id)->first();
+        $ad = Ad::withoutGlobalScopes()->whereId($pay_product_id)->first();
         return view('frontend.modules.plan.index', compact('elements', 'ad'));
     }
 

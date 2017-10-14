@@ -7,7 +7,7 @@
  */
 
 Route::group(['middleware' => 'web'], function () {
-    Route::get('payment', 'Usama\Tap\TapPaymentController@makePayment')->name('payment.create');
+    Route::get('payment/{dealId}', 'Usama\Tap\TapPaymentController@makePayment')->name('payment.create');
     Route::get('result', 'Usama\Tap\TapPaymentController@result')->name('payment.result');
     Route::get('error', 'Usama\Tap\TapPaymentController@error')->name('payment.error');
 });

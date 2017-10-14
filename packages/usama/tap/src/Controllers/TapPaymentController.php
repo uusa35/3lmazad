@@ -3,8 +3,8 @@ namespace Usama\Tap;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
+use App\Models\Deal;
 use App\Models\Plan;
-use App\Services\TapInvoice;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -52,7 +52,7 @@ class TapPaymentController extends Controller implements TapContract
         return hash_hmac('sha256', $this->setHashString(), config('tap.apiKey'));
     }
 
-    public function makePayment()
+    public function makePayment($dealId)
     {
         $finalArray = [
             'CustomerDC' => session()->get('customer'),
@@ -86,7 +86,7 @@ class TapPaymentController extends Controller implements TapContract
             echo "cURL Error #:" . $err;
         } else {
             $response = (\GuzzleHttp\json_decode($response));
-//            $invoice = new TapInvoice($response);
+            $invoice = new TapInvoice($response, $dealId);
             /*
              * response how it looks
              * {#966 ▼
@@ -100,39 +100,20 @@ class TapPaymentController extends Controller implements TapContract
              * redirect to the payment url
              * hit their api to get the order status
              * */
-            //$invoice->storePayment();
-            dd($response);
+            $invoice->storePayment();
             return redirect()->to($response->PaymentURL);
         }
-
-
-        /// worked for awhile then later after did not work !!!
-//        $client = new \GuzzleHttp\Client();
-//        $response = $client->post(config('tap.paymentUrl'), [
-//            'body' => json_encode($finalArray, JSON_UNESCAPED_SLASHES),
-//            'headers' => [
-//                'content-type' => 'application/json'
-//            ]
-//        ]);
-
-        //after receiving the response
-        //Get the return payment url which redirecting the user after payment process
-        // also get the refrenceID which i can store it within my db
-        // this is something internal to create invoice inside my app
     }
 
     public function result(Request $request)
     {
-        var_dump("from inside results");
-        var_dump("order is done");
-        dd($request);
+        $deal = Deal::withoutGlobalScopes()->where(['reference_id' => $request->ref])->first()->update(['valid' => true]);
+        return redirect()->home()->with('success', trans('message.payment_success'));
     }
 
     public function error(Request $request)
     {
-        var_dump("from inside error");
-        var_dump("order error");
-        dd($request);
+        return redirect()->home()->with('error', trans('message.payment_failure'));
     }
 }
 

@@ -15,5 +15,5 @@ interface TapContract {
     public function getMerchant();
     public function setHashString();
     public function getHashString();
-    public function makePayment();
+    public function makePayment($dealId);
 }

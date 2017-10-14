@@ -74,7 +74,7 @@
                             </td>
                             <td>{{ $element->deals->first()->endsAt }}</td>
                             <td>
-                                <span class="label label-xs label-{{ $element->isExpired ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
+                                <span class="label label-xs label-{{ !$element->deals->first()->valid ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
                             </td>
                             <td>
                                 <div class="btn-group pull-right">
@@ -87,9 +87,9 @@
                                             <a href="{{ route('ad.edit',$element->id) }}">
                                                 <i class="icon edit"></i>{{ trans('general.edit') }}</a>
                                         </li>
-                                        @if($element->isExpired)
+                                        @if(!$element->deals->first()->isValid)
                                             <li>
-                                                <a href="{{ route('account.ad.republish',$element->id) }}">
+                                                <a href="{{ url('ad/republish/'.$element->id) }}">
                                                     <i class="icon refresh"></i>{{ trans('general.republish') }}</a>
                                             </li>
                                         @endif

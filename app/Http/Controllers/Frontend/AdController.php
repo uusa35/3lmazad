@@ -92,7 +92,7 @@ class AdController extends Controller
             $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
         }
         if ($request->is_paid) {
-            session()->put('pay_ad_id',$element->id);
+            session()->put('pay_ad_id', $element->id);
             return redirect()->route('plan.index');
         }
         return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
@@ -208,11 +208,39 @@ class AdController extends Controller
         return redirect()->back()->with('success', trans('message.process_success'));
     }
 
-    public function getToggleRepublish($id)
+    public function getRepublishFree($id)
     {
         $element = $this->ad->withoutGlobalScopes()->whereId($id)->first();
         $this->authorize('isOwner', $element->user_id);
-        session()->put('pay_ad_id', $element->id);
+        session()->put('pay_product_id', $element->id);
         return redirect()->route('plan.index');
+    }
+
+    public function postRepublishFree(Request $request)
+    {
+        $ad = $this->ad->withoutGlobalScopes()->whereId($request->product_id)->first();
+        // get all deals related to the ad withoutglobalscopes
+        $deals = $ad->deals()->withoutGlobalScopes()->get();
+        // if there are more than one deal then delete all .. create new free one
+        if ($deals->isEmpty()) {
+            $deals->withoutGlobalScopes()->delete();
+            Deal::create([
+                'start_date' => Carbon::today(),
+                'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
+                'plan_id' => Plan::where('is_paid', false)->first()->id,
+                'valid' => true
+            ]);
+        } else {
+            // if there is only one then update it
+            $deal = Deal::withoutGlobalScopes()->where('ad_id', $request->product_id)->first();
+            $deal->update([
+                'start_date' => Carbon::today(),
+                'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
+                'plan_id' => Plan::where('is_paid', false)->first()->id,
+                'valid' => true
+            ]);
+        }
+        return redirect()->home()->with('success', trans('message.ad_republished_successfully'));
+
     }
 }

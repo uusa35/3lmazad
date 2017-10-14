@@ -5,17 +5,19 @@
  * Date: 7/16/17
  * Time: 6:27 PM
  */
-namespace App\Services;
+namespace Usama\Tap;
 
-use Usama\Tap\PaymentContract;
+
+use App\Models\Deal;
 
 class TapInvoice implements PaymentContract
 {
 
-    public $response;
+    public $deal;
 
-    public function __construct($response)
+    public function __construct($response,$dealId)
     {
+        $this->dealId = $dealId;
         $this->response = $response;
     }
 
@@ -31,10 +33,9 @@ class TapInvoice implements PaymentContract
     {
         // store the cart if you want from session()->get('cart')
         // store the payment results if you want in your DB by accessing to $this->response;
-
-        var_dump('from inside the store payment .. or make the invoice');
-        dd($this->response);
-//        return redirect()->home();
-
+        $deal = Deal::withoutGlobalScopes()->whereId($this->dealId)->first();
+        // make all other deals for the same ad_id is invlid except this deal
+        $deals = Deal::where(['ad_id' => $deal->ad_id])->where('id','!=',$deal->id)->delete();
+        $deal->update(['reference_id' => $this->response->ReferenceID,'valid' => true]);
     }
 }

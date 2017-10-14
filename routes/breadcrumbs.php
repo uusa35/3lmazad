@@ -38,6 +38,11 @@ Breadcrumbs::register('cart', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.cart'), route('cart.add'));
 });
 
+// checkout
+Breadcrumbs::register('checkout', function ($breadcrumbs) {
+    $breadcrumbs->parent('cart');
+    $breadcrumbs->push(trans('general.checkout'), route('checkout.index'));
+});
 
 //ad.show
 Breadcrumbs::register('ad.show', function ($breadcrumbs, $element) {

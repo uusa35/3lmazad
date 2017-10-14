@@ -51,4 +51,5 @@ class Deal extends Model
     {
         return ($this->end_date > Carbon::now() && $this->valid) ? true : false;
     }
+
 }
