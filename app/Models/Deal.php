@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Scopes\ScopeExpired;
+use App\Scopes\ScopeValid;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,7 @@ class Deal extends Model
         if (!app()->environment('seeding')) {
             if (!in_array('backend',request()->segments(), true)) {
                 static::addGlobalScope(new ScopeExpired());
+                static::addGlobalScope(new ScopeValid());
             }
         }
     }
@@ -47,6 +49,6 @@ class Deal extends Model
 
     public function getIsValidAttribute()
     {
-        return $this->end_date > Carbon::now();
+        return ($this->end_date > Carbon::now() && $this->valid) ? true : false;
     }
 }

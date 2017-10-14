@@ -8,6 +8,7 @@ use App\Scopes\ScopeActive;
 use App\Scopes\ScopeAdHasMeta;
 use App\Scopes\ScopeAdHasValidDeal;
 use App\Scopes\ScopeIsSold;
+use App\Scopes\ScopeValid;
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

@@ -24,14 +24,16 @@ class AdObserver
      */
     public function created(Ad $ad)
     {
-        if (!app()->environment('seeding')) {
+//        if (!app()->environment('seeding')) {
             $ad->deals()->save(Deal::create([
                 'start_date' => Carbon::today(),
                 'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
-                'plan_id' => Plan::where('is_paid', false)->first()->id
+                'plan_id' => Plan::where('is_paid', false)->first()->id,
+                'valid' => true,
+                'reference_id' => rand(11111111,99999999)
             ]));
             $ad->gallery()->save(new Gallery());
-        }
+//        }
     }
 
     /**

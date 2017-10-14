@@ -74,6 +74,11 @@ trait AdHelpers
         return $this->deals->count() > 0 ? true : false;
     }
 
+    public function getHasValidFreeDealAttribute()
+    {
+        return !$this->deals->first()->plan->is_paid;
+    }
+
     public function getHasValidPaidDealAttribute()
     {
         return $this->deals->first()->plan->is_paid;

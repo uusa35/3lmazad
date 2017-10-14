@@ -10,16 +10,10 @@ use Illuminate\Http\Request;
  */
 
 interface TapContract {
-    public function addProduct($id);
-    public function removeProduct($id);
-    public function setTotalPrice($products);
-    public function getTotalPrice();
-    public function setHashString();
-    public function getHashString();
-    public function getCustomer();
-    public function setCustomer();
-    public function setGateWay();
+
     public function getGateWay();
     public function getMerchant();
+    public function setHashString();
+    public function getHashString();
     public function makePayment();
 }

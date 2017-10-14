@@ -26,9 +26,16 @@ Breadcrumbs::register('reset_password', function ($breadcrumbs) {
     $breadcrumbs->push(trans('general.reset_password'), route('password.request'));
 });
 
+// plan.index
 Breadcrumbs::register('plan', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push(trans('general.payment_plans'), route('plan.index'));
+});
+
+// cart.index
+Breadcrumbs::register('cart', function ($breadcrumbs) {
+    $breadcrumbs->parent('plan');
+    $breadcrumbs->push(trans('general.cart'), route('cart.add'));
 });
 
 

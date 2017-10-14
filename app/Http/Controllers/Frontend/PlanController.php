@@ -32,7 +32,8 @@ class PlanController extends Controller
         }
         $this->authorize('isOwner', $this->ad->withoutGlobalScopes()->whereId($pay_ad_id)->first()->user_id);
         $elements = $this->plan->all();
-        return view('frontend.modules.plan.index', compact('elements', 'pay_ad_id'));
+        $ad = Ad::whereId($pay_ad_id)->first();
+        return view('frontend.modules.plan.index', compact('elements', 'ad'));
     }
 
     /**

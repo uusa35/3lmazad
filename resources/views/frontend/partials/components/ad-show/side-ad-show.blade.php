@@ -6,7 +6,7 @@
                 {{ trans('general.message-ad-show-alert') }}
             </p>
         </div>
-        @if($element->isOwner && !$element->hasValidPaidDeal)
+        @if($element->isOwner && $element->hasValidFreeDeal)
             <a href="{{ route('plan.index') }}" class="card__row card__row--icon">
                 <div class="card__row--icon__icon"><i class="icon star" style="color: goldenrod;"></i></div>
                 <div class="card__row--icon__text">

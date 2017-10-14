@@ -26,8 +26,12 @@ Route::group(['namespace' => 'Frontend'], function () {
         Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
         Route::get('/ad/toggle/booked/{id}', 'AdController@toggleBooked')->name('ad.booked');
         Route::resource('gallery', 'GalleryController', ['except' => 'show', 'index']);
-//        Route::resource('image', 'ImageController', ['except' => 'show', 'index']);
         Route::resource('plan', 'PlanController');
+        Route::post('cart/add', 'CartController@addToCart')->name('cart.add');
+        Route::post('cart/remove', 'CartController@removeFromCart')->name('cart.remove');
+        Route::post('cart/clear', 'CartController@clearCart')->name('cart.clear');
+        Route::post('cart/customer', 'CartController@setCustomer')->name('cart.customer');
+        Route::get('checkout', 'CheckoutController@index')->name('checkout.index');
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home');

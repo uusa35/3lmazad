@@ -23,10 +23,29 @@
                                         <li class="header">{{ $element->name }}</li>
                                         <li class="grey price-box__old">{{ $element->price }} {{ trans('general.kwd') }}</li>
                                         @if($element->on_sale)
-                                        <li class="blue on-sale price-box__new">{{ $element->sale_price }} {{ trans('general.kwd') }}</li>
+                                            <li class="blue on-sale price-box__new">{{ $element->sale_price }} {{ trans('general.kwd') }}</li>
                                         @endif
-                                        <li>{{ trans('general.duration') }} : {{ $element->duration }} {{ trans('general.days') }}</li>
-                                        <li class="grey"><a href="{{ route('plan.create') }}" class="btn btn-info">{{ trans('general.choose') }}</a></li>
+                                        <li>{{ trans('general.duration') }}
+                                            : {{ $element->duration }} {{ trans('general.days') }}</li>
+                                        <li class="grey">
+                                            <form method="post" action="{{ route('cart.add') }}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="product_id" value="{{ $ad->id }}">
+                                                <input type="hidden" name="plan_id" value="{{ $element->id }}">
+                                                <button class="btn btn-info" type="submit">
+                                                    {{ trans('general.choose') }}
+                                                </button>
+                                            </form>
+                                            {{--<a href="{{ route('payment.add.product',[--}}
+                                            {{--'product_id' => $ad->id,--}}
+                                            {{--'price' => ,--}}
+                                            {{--'name' => $ad->title,--}}
+                                            {{--'image' => $ad->image,--}}
+                                            {{--'plan_id' => $element->id,--}}
+                                            {{--]) }}" class="btn btn-info"--}}
+                                            {{--{{ !$element->is_paid ? 'disabled' : null }}--}}
+                                            {{-->{{ trans('general.choose') }}</a>--}}
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
