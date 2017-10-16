@@ -80,7 +80,7 @@ class ContactusController extends Controller
             return redirect()->route('backend.contactus.index')->with('error','contactus error');
         }
 
-        $this->saveMimes($contactus, $request, ['logo'], ['300', '300'], true);
+        $this->saveMimes($contactus, $request, ['logo'], ['200', '70'], true);
 
         return redirect()->route('backend.contactus.index')->with('success','contactus updated');
     }
