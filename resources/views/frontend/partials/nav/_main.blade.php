@@ -6,11 +6,11 @@
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
                 <!--  Logo  --> <a class="logo" href="{{ route('home') }}">
                     <img class="logo logo-default img-responsive text-center"
-                         src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}" alt=""/>
+                         src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}" alt=""/>
                     <img class="logo logo-mobile img-responsive text-center"
-                         src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}" alt=""/>
+                         src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}" alt=""/>
                     <img class="logo logo-transparent img-responsive text-center"
-                         src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}" alt=""/>
+                         src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}" alt=""/>
                 </a>
                 @endif
                         <!-- End Logo -->
