@@ -11,7 +11,7 @@
                     <a class="logo"
                        href="{{ route('home') }}">
                         <img class="img-responsive logo logo-default"
-                             src="{{ asset('storage/uploads/images/medium/'.$contactus->logo) }}"
+                             src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}"
                              alt="{{ $contactus->name }}"/>
                     </a>
                     <!-- End Logo --> </div>
