@@ -114,8 +114,3 @@ if (!app()->environment('production') && Schema::hasTable('users')) {
         return redirect()->home();
     });
 }
-
-
-Route::get('test', function () {
-    return 'this is the test route';
-});
