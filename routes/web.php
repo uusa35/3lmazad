@@ -2,10 +2,6 @@
 
 Auth::routes();
 
-//Route::get('test', function () {
-//    return 'test';
-//});
-
 Route::group(['namespace' => 'Frontend'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::resource('user', 'UserController', ['except' => ['create', 'store', 'delete', 'index']]);
