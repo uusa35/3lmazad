@@ -9,7 +9,8 @@ Route::group(['namespace' => 'Frontend'], function () {
             Route::get('/account', 'UserController@account')->name('user');
             Route::get('/ads', 'UserController@adsList')->name('user.ads');
             Route::get('ad/republish/{id}', 'AdController@getRepublishFree')->name('ad.republish');
-            Route::post('ad/republish', 'AdController@postRepublishFree')->name('ad.republish');
+            // not used for now
+//            Route::post('ad/republish', 'AdController@postRepublishFree')->name('ad.republish');
             Route::resource('menu', 'MenuController');
             Route::resource('service', 'ServiceController');
             Route::resource('image', 'ImageController');
