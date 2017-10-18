@@ -4,7 +4,7 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="{{ route('backend.home') }}">
-                <img src="{{ asset('storage/uploads/images/thumbnail/'.$contactus->logo) }}"
+                <img src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}"
                      style="max-width: 160px; height: 50px; padding: 0px; margin: 0px;"
                      alt="logo" class="img-responsive logo-default"/>
             </a>
