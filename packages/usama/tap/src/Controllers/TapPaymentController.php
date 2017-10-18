@@ -113,6 +113,7 @@ class TapPaymentController extends Controller implements TapContract
 
     public function error(Request $request)
     {
+        $deal = Deal::withoutGlobalScopes()->where(['reference_id' => $request->ref])->first()->delete();
         return redirect()->home()->with('error', trans('message.payment_failure'));
     }
 }

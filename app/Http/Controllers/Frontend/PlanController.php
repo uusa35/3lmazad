@@ -30,7 +30,7 @@ class PlanController extends Controller
         if (!$pay_product_id) {
             return redirect()->route("home")->with('error', 'Unknown error for pay ad id');
         }
-        $ad = $this->ad->whereId($pay_product_id)->with('deals')->first();
+        $ad = Ad::withoutGlobalScopes()->whereId($pay_product_id)->with('deals')->first();
         if (!$ad) {
             return abort(404, trans('message.error'));
         }

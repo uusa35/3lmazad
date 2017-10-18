@@ -75,7 +75,7 @@
                                 </td>
                                 <td>{{ $element->deals->first()->endsAt }}</td>
                                 <td>
-                                    <span class="label label-xs label-{{ !$element->deals->first()->valid ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
+                                    <span class="label label-xs label-{{ !$element->deals->first()->isValid ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
                                 </td>
                                 <td>
                                     <div class="btn-group pull-right">

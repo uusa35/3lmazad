@@ -212,8 +212,13 @@ class AdController extends Controller
     {
         $element = $this->ad->withoutGlobalScopes()->whereId($id)->first();
         $this->authorize('isOwner', $element->user_id);
-        session()->put('pay_product_id', $element->id);
-        return redirect()->route('plan.index');
+        // for now i will just renew the deal that already expired
+        $deal = $element->deals()->withoutGlobalScopes()->first();
+        $plan = $deal->plan()->first();
+        $deal->update(['valid' => true, 'end_date' => Carbon::now()->addDays($plan->duration)]);
+        return redirect()->route('account.user.ads')->with('success', trans('message.republish_success'));
+//        session()->put('pay_product_id', $element->id);
+//        return redirect()->route('plan.index');
     }
 
     public function postRepublishFree(Request $request)

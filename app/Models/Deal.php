@@ -49,7 +49,7 @@ class Deal extends Model
 
     public function getIsValidAttribute()
     {
-        return ($this->end_date > Carbon::now() && $this->valid) ? true : false;
+        return $this->end_date > Carbon::now() && $this->valid ? true : false;
     }
 
 }
