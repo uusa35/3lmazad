@@ -24,13 +24,15 @@ class AdObserver
      */
     public function created(Ad $ad)
     {
-            $ad->deals()->save(Deal::create([
-                'start_date' => Carbon::today(),
-                'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
-                'plan_id' => Plan::where('is_paid', false)->first()->id,
-                'valid' => true
-            ]));
-            $ad->gallery()->save(new Gallery());
+        $plan = Plan::where('is_paid', false)->first();
+        $ad->deals()->save(Deal::create([
+            'start_date' => Carbon::today(),
+            'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
+            'plan_id' => $plan->id,
+            'valid' => true,
+            'duration' => $plan->duration
+        ]));
+        $ad->gallery()->save(new Gallery());
     }
 
     /**

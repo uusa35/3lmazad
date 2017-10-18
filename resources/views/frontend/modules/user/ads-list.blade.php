@@ -41,15 +41,16 @@
                     </tfoot>
                     <tbody>
                     @foreach($elements as $element)
-                        <tr class="{{ $element->active ? 'active' : 'danger'}}">
-                            <td>{{ $element->id }}</td>
-                            <td class="text-center"><img
-                                        src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                        style="max-width: 90px; height: auto;" alt=""></td>
-                            <td class="text-justify">
-                                <div style="min-height: 150px; overflow:auto; min-width: 300px;">
-                                    <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,35)}}</a>
-                                    <hr>
+                        @if(!$element->deals->isEmpty())
+                            <tr class="{{ $element->active ? 'active' : 'danger'}}">
+                                <td>{{ $element->id }}</td>
+                                <td class="text-center"><img
+                                            src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
+                                            style="max-width: 90px; height: auto;" alt=""></td>
+                                <td class="text-justify">
+                                    <div style="min-height: 150px; overflow:auto; min-width: 300px;">
+                                        <a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,35)}}</a>
+                                        <hr>
                                     <span style="display: block;">{{ trans('general.category') }}
                                         : {{ $element->category->name }}</span>
                                     <span style="display: block;">{{ trans('general.created_at') }}
@@ -66,48 +67,49 @@
                                         {{ $element->featured ? trans('general.featured') : trans('general.not_featured')}}
                                         {{--</span>--}}
                                      </span>
-                                </div>
-                            </td>
-                            <td>{{ $element->price }}</td>
-                            <td>
-                                <span class="label label-xs label-{{ $element->is_sold ? 'success' : 'default' }}">{{ $element->is_sold ? trans('general.sold') : trans('general.not_sold')}}</span>
-                            </td>
-                            <td>{{ $element->deals->first()->endsAt }}</td>
-                            <td>
-                                <span class="label label-xs label-{{ !$element->deals->first()->valid ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
-                            </td>
-                            <td>
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-success btn-sm btn-outline dropdown-toggle"
-                                            data-toggle="dropdown"> {{ trans('general.actions') }}
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li>
-                                            <a href="{{ route('ad.edit',$element->id) }}">
-                                                <i class="icon edit"></i>{{ trans('general.edit') }}</a>
-                                        </li>
-                                        @if(!$element->deals->first()->isValid)
+                                    </div>
+                                </td>
+                                <td>{{ $element->price }}</td>
+                                <td>
+                                    <span class="label label-xs label-{{ $element->is_sold ? 'success' : 'default' }}">{{ $element->is_sold ? trans('general.sold') : trans('general.not_sold')}}</span>
+                                </td>
+                                <td>{{ $element->deals->first()->endsAt }}</td>
+                                <td>
+                                    <span class="label label-xs label-{{ !$element->deals->first()->valid ? 'danger' : 'info' }}">{{ trans('general.valid_deal') }}</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-success btn-sm btn-outline dropdown-toggle"
+                                                data-toggle="dropdown"> {{ trans('general.actions') }}
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
                                             <li>
-                                                <a href="{{ url('ad/republish/'.$element->id) }}">
-                                                    <i class="icon refresh"></i>{{ trans('general.republish') }}</a>
+                                                <a href="{{ route('ad.edit',$element->id) }}">
+                                                    <i class="icon edit"></i>{{ trans('general.edit') }}</a>
                                             </li>
-                                        @endif
-                                        <li>
-                                            <form method="post" action="{{ route('ad.destroy',$element->id) }}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="delete"/>
-                                                <button type="submit" class="btn btn-sm"
-                                                        style="background-color: transparent; margin: auto; border: none; width: auto; text-align: {{ app()->isLocale('ar') ? 'right' : 'left'}};">
-                                                    <i class="icon remove"></i>
-                                                    {{ trans('general.delete') }}
-                                                </button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                                            @if(!$element->deals->first()->isValid)
+                                                <li>
+                                                    <a href="{{ url('ad/republish/'.$element->id) }}">
+                                                        <i class="icon refresh"></i>{{ trans('general.republish') }}</a>
+                                                </li>
+                                            @endif
+                                            <li>
+                                                <form method="post" action="{{ route('ad.destroy',$element->id) }}">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="_method" value="delete"/>
+                                                    <button type="submit" class="btn btn-sm"
+                                                            style="background-color: transparent; margin: auto; border: none; width: auto; text-align: {{ app()->isLocale('ar') ? 'right' : 'left'}};">
+                                                        <i class="icon remove"></i>
+                                                        {{ trans('general.delete') }}
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
