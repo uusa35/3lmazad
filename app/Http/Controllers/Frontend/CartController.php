@@ -26,9 +26,9 @@ class CartController extends Controller
         if ($validate->fails()) {
             return redirect()->route('home')->withErrors($validate);
         }
-
-        $user = User::whereId(auth()->user()->id)->first();
         $product = Ad::whereId($request->product_id)->first();
+        $user = User::whereId(auth()->user()->id)->first();
+
         $plan = Plan::whereId($request->plan_id)->first();
         session()->put('pay_product_id', $request->product_id);
         session()->put('pay_plan_id', $request->plan_id);

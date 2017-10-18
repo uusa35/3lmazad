@@ -30,9 +30,12 @@ class PlanController extends Controller
         if (!$pay_product_id) {
             return redirect()->route("home")->with('error', 'Unknown error for pay ad id');
         }
-        $this->authorize('isOwner', $this->ad->withoutGlobalScopes()->whereId($pay_product_id)->first()->user_id);
+        $ad = $this->ad->whereId($pay_product_id)->with('deals')->first();
+        if (!$ad) {
+            return abort(404, trans('message.error'));
+        }
+        $this->authorize('isOwner', $ad->user_id);
         $elements = $this->plan->all();
-        $ad = Ad::withoutGlobalScopes()->whereId($pay_product_id)->with('deals')->first();
         return view('frontend.modules.plan.index', compact('elements', 'ad'));
     }
 
