@@ -1,10 +1,11 @@
 <nav class="navbar navbar-wd" id="navbar">
     <div class="container">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" id="slide-nav"><span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span></button>
+            <!--  Logo  -->
             @if(isset($contactus))
-                <button type="button" class="navbar-toggle" id="slide-nav"><span class="icon-bar"></span> <span
-                            class="icon-bar"></span> <span class="icon-bar"></span></button>
-                <!--  Logo  --> <a class="logo" href="{{ route('home') }}">
+                <a class="logo" href="{{ route('home') }}">
                     <img class="logo logo-default img-responsive text-center"
                          src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}" alt=""/>
                     <img class="logo logo-mobile img-responsive text-center"
@@ -12,8 +13,7 @@
                     <img class="logo logo-transparent img-responsive text-center"
                          src="{{ asset('storage/uploads/images/large/'.$contactus->logo) }}" alt=""/>
                 </a>
-                @endif
-                        <!-- End Logo -->
+            @endif
         </div>
         {{--SEARCH FORM--}}
         <div class="pull-left search-focus-fade" id="slidemenu" style="display: flex; justify-content: flex-end;">
@@ -42,9 +42,9 @@
                     </a>
                 </li>
                 {{--<li class="menu-large">--}}
-                    {{--<a href="{{ route('aboutus') }}" class="dropdown-toggle">--}}
-                        {{--<span class="link-name">{{ trans('general.aboutus') }}</span>--}}
-                    {{--</a>--}}
+                {{--<a href="{{ route('aboutus') }}" class="dropdown-toggle">--}}
+                {{--<span class="link-name">{{ trans('general.aboutus') }}</span>--}}
+                {{--</a>--}}
                 {{--</li>--}}
                 <li class="menu-large">
                     <a href="{{ route('contactus') }}" class="dropdown-toggle">
