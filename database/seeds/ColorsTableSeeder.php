@@ -12,6 +12,6 @@ class ColorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Color::class,10)->create();
+        factory(Color::class,1)->create();
     }
 }

@@ -12,6 +12,6 @@ class AdVisitorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Visitor::class, 80)->create();
+        factory(Visitor::class, 1)->create();
     }
 }

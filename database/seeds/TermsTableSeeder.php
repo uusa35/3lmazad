@@ -12,6 +12,6 @@ class TermsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Term::class, 10)->create();
+        factory(Term::class, 1)->create();
     }
 }
