@@ -49,8 +49,8 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
     return [
         'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'email' => 'fahadalhajrey97@hotmail.com',
+        'password' => $password ?: $password = bcrypt('297020901156GH'),
         'active' => 1,
         'is_mobile_visible' => 1,
         'is_email_visible' => 1,
