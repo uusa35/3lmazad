@@ -13,7 +13,7 @@
                  parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
-                @desktop
+                @notmobile
                 <div class="ui right pointing dropdown menu">
                     @foreach($category->children as $sub)
                         <div class="item" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
@@ -23,7 +23,7 @@
                         </div>
                     @endforeach
                 </div>
-                @enddesktop
+                @endnotmobile
             </div>
         @endforeach
     </div>
