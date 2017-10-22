@@ -12,4 +12,6 @@ return array (
   'no_preview' => 'لا توجد عناصر للعرض !!!',
   'wishlist' => 'قائمة المفضلة',
   'list_of_all_menus' => 'قائمة المنيو',
+  'featured_ad_message' => 'إعلان مميز',
+  'price_ad_create' => 'السعر',
 );

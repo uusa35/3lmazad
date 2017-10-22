@@ -12,4 +12,6 @@ return array (
   'merchants_message_page' => 'Merchants , Companies Grouped according to different Categories & fields. kindly visit our page contact us for more information.',
   'brand_id_hints' => 'Brands You want to search about.',
   'list_of_all_menus' => 'List of Menus',
+  'price_ad_create' => 'Price',
+  'featured_ad_message' => 'Ad Featured',
 );
