@@ -14,7 +14,7 @@
         @endforeach
     </div>
 
-    <button class="ui labeled icon brown button search-input" type="submit">
+    <button class="ui labeled icon brown button search-input default-bg-orange" type="submit">
         <i class="search icon"></i>
         {{ trans('general.search') }}
     </button>

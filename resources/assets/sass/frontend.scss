@@ -43,8 +43,24 @@
   min-height: 450px;
 }
 
-.header-line {
-  background-color: #a5673f;
+.header-line, .default-bg-orange {
+  background-color: #f06742 !important;
+}
+
+.default-bg-grey {
+  background-color: #676767 !important;
+}
+
+.default-color-grey {
+  color: #676767 !important;
+}
+
+.default-color-orange {
+  color: #f06742 !important;
+}
+
+.default-color-white {
+  color : white !important;
 }
 
 .social-links__item {

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-wd" id="navbar">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header default-bg-orange">
             <button type="button" class="navbar-toggle" id="slide-nav"><span class="icon-bar"></span> <span
                         class="icon-bar"></span> <span class="icon-bar"></span></button>
             <!--  Logo  -->

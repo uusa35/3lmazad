@@ -56,23 +56,23 @@ class DatabaseSeeder extends Seeder
 
         } elseif (app()->environment('production', 'development')) {
             if (DB::table('countries')->count() <= 0) {
-//                $this->call(CountriesTableSeeder::class);
-//                $this->call(AreasTableSeeder::class);
-//                $this->call(GroupsTableSeeder::class);
-//                $this->call(PlansTableSeeder::class);
-//                $this->call(UsersTableSeeder::class);
-//                $this->call(RolesTableSeeder::class);
-//                $this->call(ColorsTableSeeder::class);
-//                $this->call(SizesTableSeeder::class);
-//                $this->call(SlidersTableSeeder::class);
-//                $this->call(ContactusTableSeeder::class);
-//                $this->call(CommercialsTableSeeder::class);
-//                $this->command->info('sliders are done');
-//                $this->call(MenusTableSeeder::class);
-//                $this->call(AboutusTableSeeder::class);
-//                $this->call(TermsTableSeeder::class);
+                $this->call(CountriesTableSeeder::class);
+                $this->call(AreasTableSeeder::class);
+                $this->call(GroupsTableSeeder::class);
+                $this->call(PlansTableSeeder::class);
+                $this->call(UsersTableSeeder::class);
+                $this->call(RolesTableSeeder::class);
+                $this->call(ColorsTableSeeder::class);
+                $this->call(SizesTableSeeder::class);
+                $this->call(SlidersTableSeeder::class);
+                $this->call(ContactusTableSeeder::class);
+                $this->call(CommercialsTableSeeder::class);
+                $this->command->info('sliders are done');
+                $this->call(MenusTableSeeder::class);
+                $this->call(AboutusTableSeeder::class);
+                $this->call(TermsTableSeeder::class);
                 $this->call(CategoriesTableSeeder::class);
-//                $this->call(AdVisitorsTableSeeder::class);
+                $this->call(AdVisitorsTableSeeder::class);
             } else {
                 $this->call(CategoriesTableSeeder::class);
             }
