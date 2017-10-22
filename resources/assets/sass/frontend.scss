@@ -32,15 +32,23 @@
   }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 760px) {
   .logo-mobile {
     background-color: black
+  }
+  .menu-element-text {
+    color: white !important;
   }
 }
 
 
+
 .nav-tabs--wd > li > a, .nav-tabs--wd > li.active > a, .nav-tabs--wd > li.active > a:hover, .nav-tabs--wd > li.active > a:focus {
   padding: 8px;
+}
+
+.menu-element-text {
+  color: #676767;
 }
 
 .commercial {
@@ -59,6 +67,10 @@
 
 .default-bg-grey {
   background-color: #676767 !important;
+}
+
+.price-box__new {
+  color : #f06742 !important;
 }
 
 .default-color-grey {

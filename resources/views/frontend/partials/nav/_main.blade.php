@@ -21,24 +21,24 @@
             <ul class="nav navbar-nav">
                 <li class="menu-large">
                     <a href="{{ route('home') }}" class="dropdown-toggle">
-                        <span class="link-name default-color-grey">{{ trans("general.home") }}</span>
+                        <span class="link-name menu-element-text">{{ trans("general.home") }}</span>
                     </a>
                 </li>
                 @guest
                 <li class="menu-large visible-xs">
                     <a href="{{ route('register') }}" class="dropdown-toggle">
-                        <span class="link-name default-color-grey">{{ trans('general.register') }}</span>
+                        <span class="link-name menu-element-text">{{ trans('general.register') }}</span>
                     </a>
                 </li>
                 @endguest
                 <li class="menu-large">
                     <a href="{{ route('user.merchants-groups') }}" class="dropdown-toggle">
-                        <span class="link-name default-color-grey">{{ trans("general.merchants-groups") }}</span>
+                        <span class="link-name menu-element-text">{{ trans("general.merchants-groups") }}</span>
                     </a>
                 </li>
                 <li class="menu-large visible-xs">
                     <a href="{{ route('ad.create') }}" class="dropdown-toggle">
-                        <span class="link-name default-color-grey">{{ trans('general.create_ad') }}</span>
+                        <span class="link-name menu-element-text">{{ trans('general.create_ad') }}</span>
                     </a>
                 </li>
                 {{--<li class="menu-large">--}}
@@ -48,7 +48,7 @@
                 {{--</li>--}}
                 <li class="menu-large">
                     <a href="{{ route('contactus') }}" class="dropdown-toggle">
-                        <span class="link-name default-color-grey">{{ trans('general.contactus') }}</span>
+                        <span class="link-name menu-element-text">{{ trans('general.contactus') }}</span>
                     </a>
                 </li>
             </ul>
