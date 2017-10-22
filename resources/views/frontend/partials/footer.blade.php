@@ -3,6 +3,7 @@
     <footer class="footer">
         <div class="footer__column-links footer__column-links--variant2" style="color : white">
             <div class="back-to-top"><a href="#top"
+                                        
                                         class="btn btn--round btn--round--lg default-bg-orange"><span
                             class="icon-arrow-up"></span></a></div>
             <div class="container">
