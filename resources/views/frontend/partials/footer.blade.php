@@ -1,8 +1,9 @@
 <div class="divider divider--lg"></div>
 @if(isset($contactus))
     <footer class="footer">
-        <div class="footer__column-links footer__column-links--variant2">
-            <div class="back-to-top"><a href="#top" class="btn btn--round btn--round--lg"><span
+        <div class="footer__column-links footer__column-links--variant2 default-bg-grey" style="color : white">
+            <div class="back-to-top"><a class="default-color-white" href="#top"
+                                        class="btn btn--round btn--round--lg default-bg-orange"><span
                             class="icon-arrow-up"></span></a></div>
             <div class="container">
                 <div class="row">
@@ -20,8 +21,10 @@
                         <h5 class="text-uppercase mobile-collapse__title">{{ trans('general.info') }} </h5>
                         <div class="v-links-list mobile-collapse__content">
                             <ul>
-                                <li><a href="{{ route('aboutus') }}">{{ trans('general.aboutus') }}</a></li>
-                                <li><a href="{{ route('contactus') }}">{{ trans('general.contactus') }}</a></li>
+                                <li><a class="default-color-white"
+                                       href="{{ route('aboutus') }}">{{ trans('general.aboutus') }}</a></li>
+                                <li><a class="default-color-white"
+                                       href="{{ route('contactus') }}">{{ trans('general.contactus') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -29,8 +32,10 @@
                         <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.terms') }}</h5>
                         <div class="v-links-list mobile-collapse__content">
                             <ul>
-                                <li><a href="{{ route('faq') }}">{{ trans('general.faq') }}</a></li>
-                                <li><a href="{{ route('terms') }}">{{ trans('general.terms') }}</a></li>
+                                <li><a class="default-color-white"
+                                       href="{{ route('faq') }}">{{ trans('general.faq') }}</a></li>
+                                <li><a class="default-color-white"
+                                       href="{{ route('terms') }}">{{ trans('general.terms') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -39,10 +44,13 @@
                         <div class="v-links-list mobile-collapse__content">
                             <ul>
                                 @if(auth()->check())
-                                    <li><a href="{{ route('account.user') }}">{{ trans('general.account') }}</a></li>
+                                    <li><a class="default-color-white"
+                                           href="{{ route('account.user') }}">{{ trans('general.account') }}</a></li>
                                 @else
-                                    <li><a href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
-                                    <li><a href="{{ url('password/reset') }}">{{ trans('general.password_forgot') }}</a>
+                                    <li><a class="default-color-white"
+                                           href="{{ route('register') }}">{{ trans('general.register') }}</a></li>
+                                    <li><a class="default-color-white"
+                                           href="{{ url('password/reset') }}">{{ trans('general.password_forgot') }}</a>
                                     </li>
                                 @endif
                             </ul>
@@ -52,18 +60,23 @@
                         <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.our_info') }}</h5>
                         <div class="v-links-list mobile-collapse__content">
                             <ul>
-                                <li class="icon icon-home">{{ $contactus->address }}</li>
-                                <li class="icon icon-telephone">{{ $contactus->phone }}</li>
+                                <li class="icon icon-home"><span
+                                            class="default-color-white">{{ $contactus->address }}</span></li>
+                                <li class="icon icon-telephone"><span
+                                            class="default-color-white">{{ $contactus->phone }}</span></li>
                                 <li class="icon icon-mail"><a
-                                            href="mailto:{{ $contactus->email }}">{{ $contactus->email }}</a></li>
-                                <li class="icon icon-telephone"><a href="#">{{ $contactus->mobile }}</a></li>
+                                            href="mailto:{{ $contactus->email }}"><span
+                                                class="default-color-white">{{ $contactus->email }}</span></a></li>
+                                <li class="icon icon-telephone"><a class="default-color-white"
+                                                                   href="#"><span
+                                                class="default-color-white">{{ $contactus->mobile }}</span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer__subscribe footer__subscribe--variant2">
+        <div class="footer__subscribe footer__subscribe--variant2 default-bg-orange">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-8">
@@ -86,41 +99,41 @@
         </div>
         {{--<div class="footer__settings visible-xs">--}}
         {{--<div class="container text-center">--}}
-        {{--<div class="dropdown pull-left"><a href="#"--}}
+        {{--<div class="dropdown pull-left"><a class="default-color-white" href="#"--}}
         {{--class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"--}}
         {{--data-toggle="dropdown" aria-expanded="false"><span--}}
         {{--class="header__dropdowns__button__symbol">$</span></a>--}}
         {{--<ul class="dropdown-menu animated fadeIn" role="menu">--}}
-        {{--<li class="currency__item currency__item--active"><a href="#">$ USA Dollar</a></li>--}}
-        {{--<li class="currency__item"><a href="#">€ Euro</a></li>--}}
-        {{--<li class="currency__item"><a href="#">£ British Pound</a></li>--}}
+        {{--<li class="currency__item currency__item--active"><a class="default-color-white" href="#">$ USA Dollar</a></li>--}}
+        {{--<li class="currency__item"><a class="default-color-white" href="#">€ Euro</a></li>--}}
+        {{--<li class="currency__item"><a class="default-color-white" href="#">£ British Pound</a></li>--}}
         {{--</ul>--}}
         {{--</div>--}}
-        {{--<div class="dropdown pull-left"><a href="#"--}}
+        {{--<div class="dropdown pull-left"><a class="default-color-white" href="#"--}}
         {{--class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"--}}
         {{--data-toggle="dropdown" aria-expanded="false"><span class="flag"><img--}}
         {{--src="images/flags/gb.png" alt=""></span></a>--}}
         {{--<ul class="dropdown-menu animated fadeIn languages languages--flag" role="menu">--}}
-        {{--<li class="languages__item languages__item--active"><a href="#"><span--}}
+        {{--<li class="languages__item languages__item--active"><a class="default-color-white" href="#"><span--}}
         {{--class="languages__item__flag flag"><img src="images/flags/gb.png"--}}
         {{--alt=""></span><span--}}
         {{--class="languages__item__label">En</span></a></li>--}}
-        {{--<li class="languages__item"><a href="#"><span class="languages__item__flag flag"><img--}}
+        {{--<li class="languages__item"><a class="default-color-white" href="#"><span class="languages__item__flag flag"><img--}}
         {{--src="images/flags/de.png" alt=""></span><span--}}
         {{--class="languages__item__label">De</span></a></li>--}}
-        {{--<li class="languages__item"><a href="#"><span class="languages__item__flag flag"><img--}}
+        {{--<li class="languages__item"><a class="default-color-white" href="#"><span class="languages__item__flag flag"><img--}}
         {{--src="images/flags/fr.png" alt=""></span><span--}}
         {{--class="languages__item__label">Fr</span></a></li>--}}
         {{--</ul>--}}
         {{--</div>--}}
-        {{--<div class="dropdown pull-left"><a href="#"--}}
+        {{--<div class="dropdown pull-left"><a class="default-color-white" href="#"--}}
         {{--class="btn dropdown-toggle btn--links--dropdown header__dropdowns__button"--}}
         {{--data-toggle="dropdown" aria-expanded="false">Account</a>--}}
         {{--<ul class="dropdown-menu animated fadeIn" role="menu">--}}
-        {{--<li><a href="#">Account</a></li>--}}
-        {{--<li><a href="#">Wishlist</a></li>--}}
-        {{--<li><a href="#">Compare</a></li>--}}
-        {{--<li><a href="#">Checkout</a></li>--}}
+        {{--<li><a class="default-color-white" href="#">Account</a></li>--}}
+        {{--<li><a class="default-color-white" href="#">Wishlist</a></li>--}}
+        {{--<li><a class="default-color-white" href="#">Compare</a></li>--}}
+        {{--<li><a class="default-color-white" href="#">Checkout</a></li>--}}
         {{--</ul>--}}
         {{--</div>--}}
         {{--</div>--}}

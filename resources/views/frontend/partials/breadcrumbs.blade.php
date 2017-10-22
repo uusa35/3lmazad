@@ -1,6 +1,6 @@
 <!-- Breadcrumb section -->
 @if (isset($breadcrumbs))
-    <section class="breadcrumbs breadcrumbs-boxed">
+    <section class="breadcrumbs breadcrumbs-boxed hidden-xs">
         <div class="container">
             <ol class="breadcrumb breadcrumb--wd pull-left">
                 @foreach ($breadcrumbs as $breadcrumb)
