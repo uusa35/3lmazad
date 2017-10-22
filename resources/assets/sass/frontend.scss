@@ -32,6 +32,13 @@
   }
 }
 
+@media (max-width: 590px) {
+  .logo-mobile {
+    background-color: black
+  }
+}
+
+
 .nav-tabs--wd > li > a, .nav-tabs--wd > li.active > a, .nav-tabs--wd > li.active > a:hover, .nav-tabs--wd > li.active > a:focus {
   padding: 8px;
 }
@@ -43,7 +50,10 @@
   min-height: 450px;
 }
 
-.header-line, .default-bg-orange {
+.header-line {
+  background-color: #f06742 !important;
+}
+.default-bg-orange {
   background-color: #f06742 !important;
 }
 

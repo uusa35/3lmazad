@@ -20,13 +20,13 @@
                             <div class="col-lg-6">
                                 <div class="text-center">
                                     <a href="{{ url('/password/reset') }}"
-                                       class="btn btn--wd text-uppercase wave btn-blue">{{ trans('general.forget_ur_password') }}</a>
+                                       class="btn btn--wd text-uppercase wave btn-blue default-bg-orange">{{ trans('general.forget_ur_password') }}</a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="text-center">
                                     <a href="{{ route('register') }}"
-                                       class="btn btn--wd text-uppercase wave btn-green">{{ trans('general.register') }}</a>
+                                       class="btn btn--wd text-uppercase wave btn-green default-bg-orange">{{ trans('general.register') }}</a>
                                 </div>
                             </div>
                         </div>

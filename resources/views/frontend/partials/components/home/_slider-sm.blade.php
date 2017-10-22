@@ -5,9 +5,12 @@
                      class="slider-img"/>
                 <div class="single-slider__text">
                     {{--<h2><strong></strong></h2>--}}
-                    <h3>{{ $slider->title }}</h3>
-                    {{--<h4>the New & Exiting 2016 Collection</h4>--}}
-                    <a href="{{ $slider->url }}" class="btn btn--wd btn--lg text-uppercase">{{ $slider->title }}</a>
+                    @if(!is_null($slider->title))
+                        <h3>{{ $slider->title }}</h3>
+                    @endif
+                    @if(!is_null($slider->url))
+                        <a href="{{ $slider->url }}" class="btn btn--wd btn--lg text-uppercase">{{ $slider->title }}</a>
+                    @endif
                 </div>
             </li>
         @endforeach

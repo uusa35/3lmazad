@@ -168,7 +168,7 @@
 
             <div class="form-group">
                 <div class="col-md-6 pull-right">
-                    <button type="submit" class="btn btn--wd">
+                    <button type="submit" class="btn btn--wd default-bg-orange">
                         {{ trans('general.register') }}
                     </button>
                 </div>

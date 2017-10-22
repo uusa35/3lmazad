@@ -49,7 +49,7 @@
 
             <div class="form-group">
                 <div class="col-md-8 col-md-offset-4">
-                    <button type="submit" class="btn btn--wd">
+                    <button type="submit" class="btn btn--wd default-bg-orange">
                         {{ trans("general.login") }}
                     </button>
                 </div>
