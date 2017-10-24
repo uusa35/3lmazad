@@ -45,9 +45,9 @@ class BackupDB extends Command
 
         $dbName = env('DB_DATABASE');
 
-        $extention = storage_path('app/dbBackups/');
+        $extention = storage_path('app/public/');
 
-        $fileName = $extention . 'petrolet-' . Carbon::now()->format('d-m-Y');
+        $fileName = $extention . '3almazad-' . Carbon::now()->format('d-m-Y');
 
 
         $command = "mysqldump -e -f -u$username -p$password $dbName > $fileName.sql";
