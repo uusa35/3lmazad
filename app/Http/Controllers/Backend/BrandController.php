@@ -96,7 +96,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $element = Brand::whereId($id)->first();
-        if (empty($element->ads)) {
+        if ($element->ads->isEmpty()) {
             $element->delete();
             return redirect()->route('backend.brand.index')->with('success', 'Deleted successfully');
         } else {
