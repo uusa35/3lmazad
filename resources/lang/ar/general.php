@@ -168,4 +168,10 @@ return array (
   'group' => 'تصنيف التاجر',
   'timing' => 'الدوام',
   'gear_type' => 'جير',
+  '_forget_password' => 'فقدان كلمة مرور',
+  'add_new_menu' => 'اضافة منيو جديد',
+  'apartment' => 'شقة',
+  'auctions_comments' => 'تعليقات المزاد',
+  'regular_ad' => 'اعلان عادي',
+  'featured_ad' => 'إعلان مميز',
 );

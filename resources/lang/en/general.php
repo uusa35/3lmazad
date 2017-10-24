@@ -166,4 +166,10 @@ return array (
   'make_ad_payment' => 'Make Your Ad Premium',
   'forget_password' => 'Forget Password',
   'brand_id' => 'Brand',
+  '_forget_password' => 'Lost Password',
+  'auctions_comments' => 'Auction Comments',
+  'regular_ad' => 'Regular Ad',
+  'apartment' => 'Apartment',
+  'add_new_menu' => 'Add New Menu',
+  'featured_ad' => 'Featured Ad',
 );

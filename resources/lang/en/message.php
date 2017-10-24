@@ -13,5 +13,7 @@ return array (
   'brand_id_hints' => 'Brands You want to search about.',
   'list_of_all_menus' => 'List of Menus',
   'price_ad_create' => 'Price',
-  'featured_ad_message' => 'Ad Featured',
+  'image_ad_create' => 'ستكون الصورة الرئيسية',
+  'featured_ad_message' => 'Featured Ad',
+  'regular_ad_message' => 'Free',
 );
