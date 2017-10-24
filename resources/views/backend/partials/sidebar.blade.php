@@ -55,18 +55,18 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item ">
-                        <a href="{{ route('backend.ad.index') }}" class="nav-link ">
-                            <span class="title">All Valid Ads</span>
+                        <a href="{{ route('backend.ad.index',['type' => 'all']) }}" class="nav-link ">
+                            <span class="title">All Ads</span>
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a href="{{ route('backend.ad.index',['type' => 'all']) }}" class="nav-link ">
-                            <span class="title">All Valid</span>
+                        <a href="{{ route('backend.ad.index') }}" class="nav-link ">
+                            <span class="title">Only Valid Ads</span>
                         </a>
                     </li>
                     <li class="nav-item ">
                         <a href="{{ route('backend.ad.index',['type' => 'free']) }}" class="nav-link ">
-                            <span class="title">Valid Free Ads</span>
+                            <span class="title">Only Valid Free Ads</span>
                         </a>
                     </li>
                     <li class="nav-item  {{ activeItem('ad') }} ">
