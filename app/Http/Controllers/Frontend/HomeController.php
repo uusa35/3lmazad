@@ -42,7 +42,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!auth()->check() && auth()->user()->id === 1) {
+        if (!auth()->check()) {
             return abort(404, 'Website is under maintenance. will come back soon !!');
         }
         $mostVisitedAds = $this->ad->getMostVisitedAds();
