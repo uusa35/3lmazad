@@ -50,7 +50,11 @@
                         </button>
                     </div>
                     <div class="product-preview__info__title text-center">
-                        <h4><a href="{{ route('ad.show',$element->id) }}">{{ str_limit($element->title,'25') }}</a></h4>
+                        <h4>
+                            <a href="{{ route('ad.show',$element->id) }}" class="default-color-grey">
+                                {{ str_limit($element->title,'25') }}
+                            </a>
+                        </h4>
                     </div>
                     <div class="price-box text-center">
                         <span class="price-box__new">{{ $element->price }} {{ trans('general.kd') }}</span>
