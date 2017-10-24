@@ -37,9 +37,17 @@
                         <span class="label {{ activeLabel($element->active) }}">{{ activeText($element->active) }}</span>
                     </td>
                     <td><span class="label label-warning">{{ $element->user->type }}</span></td>
-                    <td><span class="label label-default">{{ $element->deals->first()->plan->name }}</span></td>
+                    @if(!$element->deals->isEmpty())
+                        <td><span class="label label-default">{{ $element->deals->first()->plan->name }}</span></td>
+                    @else
+                        <td>no deal</td>
+                    @endif
                     <td>{{ $element->created_at->diffForHumans() }}</td>
-                    <td>{{ $element->deals->first()->endsAt }}</td>
+                    @if(!$element->deals->isEmpty())
+                        <td>{{ $element->deals->first()->endsAt }}</td>
+                    @else
+                        <td>no deal</td>
+                    @endif
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn green btn-xs btn-outline dropdown-toggle"
@@ -60,7 +68,8 @@
                                         <i class="fa fa-fw fa-check-circle"></i> View Ad</a>
                                 </li>
                                 <li>
-                                    <form method="post" action="{{ route('backend.ad.destroy',$element->id) }}" class="col-lg-12">
+                                    <form method="post" action="{{ route('backend.ad.destroy',$element->id) }}"
+                                          class="col-lg-12">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete"/>
                                         <button type="submit" class="btn btn-outline btn-sm red">

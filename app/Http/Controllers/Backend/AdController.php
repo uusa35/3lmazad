@@ -25,7 +25,7 @@ class AdController extends Controller
     public function index()
     {
         if (request()->type === 'all') {
-            $elements = $this->ad->wihtoutGlobalScopes()->with('deals.plan')->get();
+            $elements = Ad::withoutGlobalScopes()->with('deals.plan')->get();
         } else {
             $elements = $this->ad->with('deals.plan')->whereHas('deals', function ($q) {
                 if (request()->type === 'due') {
