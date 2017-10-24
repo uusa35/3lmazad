@@ -15,7 +15,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        session()->flash('info','يرجى عدم إدخال أي بيانات حقيقية حيث أن الموقع في مرحلة الاختبار ');
         return view('backend.home');
     }
 
