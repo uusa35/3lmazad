@@ -34,11 +34,13 @@ class TapInvoice implements PaymentContract
         // store the cart if you want from session()->get('cart')
         // store the payment results if you want in your DB by accessing to $this->response;
         $deal = Deal::withoutGlobalScopes()->whereId($this->dealId)->first();
-        // make all other deals for the same ad_id is invlid except this deal
-        $deals = Deal::where(['ad_id' => $deal->ad_id])->where('id','!=',$deal->id)->get();
-        foreach($deals as $d) {
-            $d->update(['valid' => false]);
-        }
+        // make all other deals for the same ad_id is invalid except this deal
+        // review
+        // i shall not deactivate all free deals unless the result it will come with full payment success !!
+//        $deals = Deal::where(['ad_id' => $deal->ad_id])->where('id','!=',$deal->id)->get();
+//        foreach($deals as $d) {
+//            $d->update(['valid' => false]);
+//        }
         $deal->update(['reference_id' => $this->response->ReferenceID]);
     }
 }

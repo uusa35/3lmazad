@@ -42,9 +42,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!auth()->check()) {
-            return abort(404, 'Website is under maintenance. will come back soon !!');
-        }
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->has('category')->orderBy('created_at', 'desc')->take(15)->get();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();

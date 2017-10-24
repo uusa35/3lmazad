@@ -96,9 +96,7 @@ class TapPaymentController extends Controller implements TapContract
                   +"ResponseMessage": "Success"
                   +"TapPayURL": "http://live.gotapnow.com/webpay.aspx"
                 }
-             * if the response is success mean the payment is successfully done so update the plan_id , duration , enddate of ad's deal
-             * redirect to the payment url
-             * hit their api to get the order status
+             * store the payment and update it with the refrence
              * */
             $invoice->storePayment();
             return redirect()->to($response->PaymentURL);
@@ -107,7 +105,13 @@ class TapPaymentController extends Controller implements TapContract
 
     public function result(Request $request)
     {
-        $deal = Deal::withoutGlobalScopes()->where(['reference_id' => $request->ref])->first()->update(['valid' => true]);
+        // once the result is success .. get the deal from refrence then delete all other free deals related to such ad.
+        $deal = Deal::withoutGlobalScopes()->where(['reference_id' => $request->ref])->first();
+        $freePlan = Plan::withoutGlobalScopes()->where('is_paid',false)->pluck('id')->toArray();
+        // delete all valid free deals for such ad.
+        $freeDeals = Ad::withoutGlobalScopes()->whereId($deal->ad_id)->first()->deals()->whereIn('plan_id',$freePlan)->delete();
+        // validate the deal
+        $deal->update(['valid' => true]);
         return redirect()->home()->with('success', trans('message.payment_success'));
     }
 
