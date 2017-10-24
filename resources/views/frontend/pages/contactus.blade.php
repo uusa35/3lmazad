@@ -26,7 +26,7 @@
                     <div class="row">
                         <!-- contact info -->
                         <div class="col-lg-3 col-xs-12 col-sm-12">
-                            <h3>{{ title_case('contactus information') }}</h3>
+                            <h3>{{ trans('general.contactus') }}</h3>
                             <p>
                                 @if(!is_null(trim($element->address)))
                                     <span class="glyphicon glyphicon-home"></span> {{ $element->address }}<br/>
@@ -63,7 +63,7 @@
                         {{--contact us form--}}
                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                             <div class="contact-form">
-                                <h3><i class="fa fa-envelope-o"></i> Contact us</h3>
+                                <h3><i class="fa fa-envelope-o"></i>{{ trans('general.contactus_form') }}</h3>
 
                                 {!! Form::open(['url' => '/contactus', 'method' => 'post','class'=>'form-vertical']) !!}
                                 <div class="form-group">
