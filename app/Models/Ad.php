@@ -22,7 +22,7 @@ class Ad extends Model
         'active' => 'boolean',
         'featured' => 'boolean'
     ];
-    protected $with = ['deals.plan','user'];
+    protected $with = ['deals.plan', 'user'];
 
     /**
      * The "booting" method of the model.
@@ -35,13 +35,23 @@ class Ad extends Model
         parent::boot();
 
         if (!app()->environment('seeding')) {
-            if (!in_array('backend',request()->segments(), true)) {
+            if (!in_array('backend', request()->segments(), true)) {
                 static::addGlobalScope(new ScopeActive());
                 static::addGlobalScope(new ScopeIsSold());
                 static::addGlobalScope(new ScopeAdHasMeta());
                 static::addGlobalScope(new ScopeAdHasValidDeal());
             }
         }
+        static::deleting(function ($ad) { // before delete() method call this
+            $ad->deals()->delete();
+            $ad->comments()->delete();
+            $ad->auctions()->delete();
+            $ad->vistors()->delete();
+            $ad->favorites()->delete();
+            $ad->meta()->delete();
+            $ad->gallery()->first()->images()->delete();
+            $ad->gallery()->delete();
+        });
     }
 
 }

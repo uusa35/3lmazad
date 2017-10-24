@@ -59,6 +59,15 @@
                                     <a href="{{ route('ad.show',$element->id) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> View Ad</a>
                                 </li>
+                                <li>
+                                    <form method="post" action="{{ route('backend.ad.destroy',$element->id) }}" class="col-lg-12">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <button type="submit" class="btn btn-outline btn-sm red">
+                                            <i class="fa fa-remove"></i>delete ad
+                                        </button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </td>
