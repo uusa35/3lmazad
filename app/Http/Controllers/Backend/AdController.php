@@ -121,7 +121,7 @@ class AdController extends Controller
     public
     function destroy($id)
     {
-        $ad = Ad::whereId($id)->first();
+        $ad = Ad::withoutGlobalScopes()->whereId($id)->first();
         $ad->delete();
         return redirect()->back()->with('success', 'ad deleted');
     }
