@@ -106,8 +106,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
  * second : user
  * */
 //if (!app()->environment('production') && Schema::hasTable('users')) {
-    Route::get('/logmein/{id}', function ($id) {
-        Auth::loginUsingId($id);
-        return redirect()->home();
-    });
+Route::get('/logmein/{id}', function ($id) {
+    Auth::loginUsingId($id);
+    return redirect()->home();
+});
 //}

@@ -27,7 +27,6 @@ class Filters extends QueryFilters
 
     public function search($search)
     {
-        var_dump('from search');
         return $this->builder->where(function ($q) use ($search) {
             $q->whereHas('meta', function ($q) use ($search) {
                 return $q->where('description', 'like', "%{$search}%");
@@ -37,7 +36,6 @@ class Filters extends QueryFilters
 
     public function parent()
     {
-        var_dump('from parent');
         $subs = $this->category->whereId(request()->parent)->first()->children()->pluck('id')->toArray();
         return $this->sub($subs);
     }
@@ -47,32 +45,27 @@ class Filters extends QueryFilters
         if (request()->has('parent')) {
             return $this->builder->whereIn('category_id', $subs);
         } else {
-            var_dump('from sub'.request()->sub);
             return $this->builder->where('category_id', request()->sub);
         }
     }
 
     public function brand_id()
     {
-        var_dump('brand_id'.request()->brand_id);
         return $this->builder->where('brand_id', request()->brand_id);
     }
 
     public function color_id()
     {
-        var_dump('color_id'.request()->color_id);
         return $this->builder->where('color_id', request()->color_id);
     }
 
     public function size_id()
     {
-        var_dump('size_id'.request()->size_id);
         return $this->builder->where('size_id', request()->size_id);
     }
 
     public function model_id()
     {
-        var_dump('model_id'.request()->model);
         return $this->builder->where('model_id', request()->model);
     }
 

@@ -27,7 +27,7 @@ class AdController extends Controller
         if (request()->type === 'all') {
             $elements = Ad::withoutGlobalScopes()->with('deals.plan')->get();
         } else {
-            $elements = $this->ad->with('deals.plan')->whereHas('deals', function ($q) {
+            $elements = $this->ad->whereHas('deals', function ($q) {
                 if (request()->type === 'due') {
                     return $q->where('end_date', '<', Carbon::now())->whereHas('plan', function ($q) {
                         return $q->where('is_paid', true);
@@ -47,7 +47,7 @@ class AdController extends Controller
                 return $q->whereHas('roles', function ($q) {
                     return $q;
                 });
-            })->get();
+            })->with('deals.plan')->get();
         }
         return view('backend.modules.ad.index', compact('elements'));
     }

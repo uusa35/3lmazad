@@ -42,6 +42,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!auth()->check() && auth()->user()->id === 1) {
+            return abort(404, 'Website is under maintenance. will come back soon !!');
+        }
         $mostVisitedAds = $this->ad->getMostVisitedAds();
         $latestAds = $this->ad->has('category')->orderBy('created_at', 'desc')->take(15)->get();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();
@@ -57,7 +60,8 @@ class HomeController extends Controller
      */
     public function search(Filters $filters)
     {
-        $validator = validator(request()->all(), ['search' => 'nullable', 'parent' => 'required_without:sub', 'sub' => 'required_without:parent']);
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+//        'parent' => 'required_without:sub', 'sub' => 'required_without:parent'
         if ($validator->fails()) {
             return redirect()->home()->withErrors($validator->messages());
         }
