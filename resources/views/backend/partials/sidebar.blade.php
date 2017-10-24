@@ -60,6 +60,11 @@
                         </a>
                     </li>
                     <li class="nav-item ">
+                        <a href="{{ route('backend.ad.index',['type' => 'all']) }}" class="nav-link ">
+                            <span class="title">All Valid</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
                         <a href="{{ route('backend.ad.index',['type' => 'free']) }}" class="nav-link ">
                             <span class="title">Valid Free Ads</span>
                         </a>

@@ -24,27 +24,31 @@ class AdController extends Controller
      */
     public function index()
     {
-        $elements = $this->ad->with('deals.plan')->whereHas('deals', function ($q) {
-            if (request()->type === 'due') {
-                return $q->where('end_date', '<', Carbon::now())->whereHas('plan', function ($q) {
-                    return $q->where('is_paid', true);
+        if (request()->type === 'all') {
+            $elements = $this->ad->with('deals.plan')->all();
+        } else {
+            $elements = $this->ad->with('deals.plan')->whereHas('deals', function ($q) {
+                if (request()->type === 'due') {
+                    return $q->where('end_date', '<', Carbon::now())->whereHas('plan', function ($q) {
+                        return $q->where('is_paid', true);
+                    });
+                } elseif (request()->type === 'paid') {
+                    return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                        return $q->where('is_paid', true);
+                    });
+                } elseif (request()->type === 'free') {
+                    return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                        return $q->where('is_paid', false);
+                    });
+                } else {
+                    return $q->where('end_date', '>', Carbon::now());
+                }
+            })->whereHas('user', function ($q) {
+                return $q->whereHas('roles', function ($q) {
+                    return $q;
                 });
-            } elseif (request()->type === 'paid') {
-                return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
-                    return $q->where('is_paid', true);
-                });
-            } elseif (request()->type === 'free') {
-                return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
-                    return $q->where('is_paid', false);
-                });
-            } else {
-                return $q->where('end_date', '>', Carbon::now());
-            }
-        })->whereHas('user', function ($q) {
-            return $q->whereHas('roles', function ($q) {
-                return $q;
-            });
-        })->get();
+            })->get();
+        }
         return view('backend.modules.ad.index', compact('elements'));
     }
 
@@ -119,6 +123,6 @@ class AdController extends Controller
     {
         $ad = Ad::whereId($id)->first();
         $ad->deals()->delete();
-        return redirect()->back()->with('success','ad deleted');
+        return redirect()->back()->with('success', 'ad deleted');
     }
 }
