@@ -46,7 +46,7 @@ class Ad extends Model
             $ad->deals()->delete();
             $ad->comments()->delete();
             $ad->auctions()->delete();
-            $ad->vistors()->delete();
+            $ad->visitors()->delete();
             $ad->favorites()->delete();
             $ad->meta()->delete();
             $ad->gallery()->first()->images()->delete();
