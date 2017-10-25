@@ -34,7 +34,7 @@
         <a href="{{ route('user.show',$element->user_id) }}" class="card__row card__row--icon">
             <div class="card__row--icon__icon">
                 @if(!is_null($element->user->avatar))
-                    <img class="img-responsive img-thumbnail" style="max-width: 40px;"
+                    <img class="img-responsive img-thumbnail" style="max-width: 40px; max-height; 40px;"
                          src="{{ asset('storage/uploads/images/thumbnail/'.$element->user->avatar) }}" alt="">
                 @endif
                 <div class="card__row--icon__icon"><i class="icon user circle outline"></i></div>

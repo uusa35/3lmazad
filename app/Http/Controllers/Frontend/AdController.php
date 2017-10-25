@@ -92,7 +92,7 @@ class AdController extends Controller
             $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
         }
         if ($request->is_paid) {
-            session()->put('pay_ad_id', $element->id);
+            session()->put('pay_product_id', $element->id);
             return redirect()->route('plan.index');
         }
         return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
