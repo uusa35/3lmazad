@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="name" value="{{ $element->name }}" class="form-control" placeholder="Enter text" required>
+                            <input type="text" disabled name="name" value="{{ $element->name }}" class="form-control" placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
