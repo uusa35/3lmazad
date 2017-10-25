@@ -96,19 +96,21 @@
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group" id="group-register">
-        <label for="category_id" class="control-label col-sm-4">{{ trans('general.choose_group') }}</label>
-        <div class="col-sm-6" id="categories">
-            <select name="group_id" class="form-control">
-                <option value="main category">{{ trans('general.choose_group') }}</option>
-                @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
-                @endforeach
-            </select>
+    @if(auth()->user()->isAdmin)
+        <div class="form-group hidden merchant-group" id="group-register">
+            <label for="category_id" class="control-label col-sm-4">{{ trans('general.choose_group') }}</label>
+            <div class="col-sm-6" id="categories">
+                <select name="group_id" class="form-control">
+                    <option value="main category">{{ trans('general.choose_group') }}</option>
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
+    @endif
 
-    <div class="form-group hidden merchant-group {{ $errors->has('address') ? ' has-error' : '' }}" id="address" >
+    <div class="form-group hidden merchant-group {{ $errors->has('address') ? ' has-error' : '' }}" id="address">
         <label for="name" class="col-md-4 control-label">{{ trans('general.address') }}</label>
 
         <div class="col-md-6">
@@ -132,7 +134,7 @@
         </div>
     </div>
 
-    <div class="form-group hidden merchant-group {{ $errors->has('timing') ? ' has-error' : '' }}" id="timing" >
+    <div class="form-group hidden merchant-group {{ $errors->has('timing') ? ' has-error' : '' }}" id="timing">
         <label for="name" class="col-md-4 control-label">{{ trans('general.timing') }}</label>
 
         <div class="col-md-6">
@@ -141,7 +143,8 @@
 
             <span class="help-block">{{ trans("message.timing") }}</span>
             @if ($errors->has('timing'))
-                <span class="help-block">{{ trans("message.timing") }}<strong>{{ $errors->first('timing') }}</strong></span>
+                <span class="help-block">{{ trans("message.timing") }}
+                    <strong>{{ $errors->first('timing') }}</strong></span>
             @endif
         </div>
     </div>

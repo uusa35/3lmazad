@@ -1,4 +1,4 @@
-<div class="col-lg-12 hidden-xs">
+<div class="col-lg-12">
     <div class="ad-bar-details">
         <a class="ad-bar-children"><i class="icon {{ $element->category->icon }}"></i><span
                     class="text-uppercase">{{  $element->categoryName }}</span></a>
