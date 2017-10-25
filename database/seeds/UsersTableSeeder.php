@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 1)->create()->each(function ($user) {
+        factory(User::class, app()->environment('production') ? 2 : 5)->create()->each(function ($user) {
             $gallery = factory(Gallery::class)->create(['galleryable_id' => $user->id, 'galleryable_type' => User::class]);
             $user->gallery()->save($gallery);
             $gallery->images()->saveMany(factory(Image::class, 1)->create());
