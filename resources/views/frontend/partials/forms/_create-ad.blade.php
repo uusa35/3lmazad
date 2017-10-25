@@ -31,6 +31,9 @@
                                type="file"
                                required
                         />
+                        <div class="help-block text-left">
+                            Best fit 800*800
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,6 +46,9 @@
                         <input class="form-control tooltip-message" name="images[]"
                                data-content="{!! trans('message.images_ad_create') !!}"
                                placeholder="images" type="file" multiple/>
+                        <div class="help-block text-left">
+                            Best fit 800*800
+                        </div>
                     </div>
                 </div>
             </div>

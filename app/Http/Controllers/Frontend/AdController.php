@@ -80,14 +80,14 @@ class AdController extends Controller
             return redirect()->route('account.user')->with('error', trans('message.error_ad_store'));
         }
 
-        // observer shall create new deal for the new ad.
+        // observer shall create new free deal for the new ad.
         $element->meta()->create(
             $request->only('mobile', 'is_new', 'is_automatic', 'manufacturing_year', 'description',
                 'mileage', 'room_no', 'floor_no', 'bathroom_no', 'rent_type', 'building_age',
                 'is_furnished', 'space', 'address')
         );
 
-        $this->saveMimes($element, $request, ['image'], ['600', '450'], false);
+        $this->saveMimes($element, $request, ['image'], ['800', '800'], false);
         if ($request->hasFile('images')) {
             $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
         }
