@@ -15,7 +15,6 @@
         @section('content')
         @show
     </div>
-    @include('frontend.partials.components.modals._quick-view')
 </div>
 @section('footer')
     <div class="hidden" id="lang">{{ app()->getLocale() }}</div>
@@ -24,5 +23,6 @@
 @section('scripts')
     @include('frontend.partials.scripts')
 @show
+@include('frontend.partials.components.modals._quick-view')
 </body>
 </html>

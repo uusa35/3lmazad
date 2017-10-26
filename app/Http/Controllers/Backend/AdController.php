@@ -33,7 +33,7 @@ class AdController extends Controller
                         return $q->where('is_paid', true);
                     });
                 } elseif (request()->type === 'paid') {
-                    return $q->where('end_date', '>', Carbon::now())->whereHas('plan', function ($q) {
+                    return $q->where('end_date', '>', Carbon::now())->where('valid',true)->whereHas('plan', function ($q) {
                         return $q->where('is_paid', true);
                     });
                 } elseif (request()->type === 'free') {
