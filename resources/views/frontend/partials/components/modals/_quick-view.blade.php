@@ -24,21 +24,21 @@
                 <div class="divider divider--xs product-info__divider"></div>
                 <div class="product-info__description modal-description {{ app()->isLocale('ar') ? 'text-right' : 'text-left' }}"></div>
                 <div class="ui buttons">
-                    <button class="ui white basic button"><i class="icon calendar"></i>
-                        <span class="modal-from-date"></span>
-                    </button>
-                    <button class="ui white basic button">
-                        <i class="icon arrow-right"></i>
-                        <span class="modal-category"></span>
-                    </button>
-                    <button class="ui white basic button">
-                        <i class="icon calendar"></i>
-                        <span class="modal-created_at"></span>
-                    </button>
-                    <button class="ui white basic button">
-                        <i class="icon calendar"></i>
-                        another testing place
-                    </button>
+                    {{--<button class="ui white basic button"><i class="icon calendar"></i>--}}
+                        {{--<span class="modal-from-date"></span>--}}
+                    {{--</button>--}}
+                    {{--<button class="ui white basic button">--}}
+                        {{--<i class="icon arrow-right"></i>--}}
+                        {{--<span class="modal-category"></span>--}}
+                    {{--</button>--}}
+                    {{--<button class="ui white basic button">--}}
+                        {{--<i class="icon calendar"></i>--}}
+                        {{--<span class="modal-created_at"></span>--}}
+                    {{--</button>--}}
+                    {{--<button class="ui white basic button">--}}
+                        {{--<i class="icon calendar"></i>--}}
+                        {{--another testing place--}}
+                    {{--</button>--}}
                 </div>
                 <div class="divider divider--xs product-info__divider"></div>
 
