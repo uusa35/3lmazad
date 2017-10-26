@@ -61,16 +61,24 @@
                         <h5 class=" text-uppercase mobile-collapse__title">{{ trans('general.our_info') }}</h5>
                         <div class="v-links-list mobile-collapse__content">
                             <ul>
-                                <li class="icon icon-home"><span
-                                            class="default-color-white">{{ $contactus->address }}</span></li>
-                                <li class="icon icon-telephone"><span
-                                            class="default-color-white">{{ $contactus->phone }}</span></li>
-                                <li class="icon icon-mail"><a
-                                            href="mailto:{{ $contactus->email }}"><span
-                                                class="default-color-white">{{ $contactus->email }}</span></a></li>
-                                <li class="icon icon-telephone"><a class="default-color-white"
-                                                                   href="#"><span
-                                                class="default-color-white">{{ $contactus->mobile }}</span></a></li>
+                                @if(!empty($contactus->address))
+                                    <li class="icon icon-home"><span
+                                                class="default-color-white">{{ $contactus->address }}</span></li>
+                                @endif
+                                @if(!empty($contactus->phone))
+                                    <li class="icon icon-telephone"><span
+                                                class="default-color-white">{{ $contactus->phone }}</span></li>
+                                @endif
+                                @if(!empty($contactus->email))
+                                    <li class="icon icon-mail"><a
+                                                href="mailto:{{ $contactus->email }}"><span
+                                                    class="default-color-white">{{ $contactus->email }}</span></a></li>
+                                @endif
+                                @if(!empty($contactus->mobile))
+                                    <li class="icon icon-telephone"><a class="default-color-white"
+                                                                       href="#"><span
+                                                    class="default-color-white">{{ $contactus->mobile }}</span></a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
