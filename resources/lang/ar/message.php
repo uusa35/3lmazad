@@ -26,4 +26,6 @@ return array (
   'plans_message' => 'خطط التمييز',
   'address_hints' => 'معلومات اختيارية',
   'edit_user' => 'بياناتك الشخصية',
+  'login_form' => 'بيانات المستخدم',
+  'reset_password' => 'في حالة الفقدان',
 );

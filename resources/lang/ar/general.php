@@ -61,7 +61,7 @@ return array (
   'edit_user' => 'تعديل معلومات المستخدم',
   'email' => 'البريد الإلكتروني',
   'email_visible' => 'إظهار البريد الإلكتروني',
-  'en' => 'الإنجليزية',
+  'en' => 'English',
   'ends_at' => 'ينتهي في',
   'expired' => 'ينتهي في',
   'expires_in' => 'ينتهي في',
@@ -186,4 +186,5 @@ return array (
   'pay' => 'ادفع الآن',
   'clear_cart' => 'Cancel',
   'cart' => 'المشتريات',
+  'contactus_form' => 'للإقتراحات او الشكاوى',
 );

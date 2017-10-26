@@ -58,7 +58,7 @@ return array (
   'search' => 'Search',
   'language' => 'Language',
   'en' => 'English',
-  'ar' => 'Arabic',
+  'ar' => 'العربية',
   'wish_list' => 'Wish List',
   'merchants-groups' => 'Merchants',
   'kd' => 'KD',
@@ -184,4 +184,5 @@ return array (
   'featured_ad' => 'Featured Ad',
   'model_id' => 'Model',
   'color_id' => 'Color',
+  'contactus_form' => 'For Suggestions & Problems',
 );

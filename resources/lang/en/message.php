@@ -13,6 +13,8 @@ return array (
   'brand_id_hints' => 'Brands You want to search about.',
   'list_of_all_menus' => 'List of Menus',
   'parent_cat_ad_create' => 'What is it ?',
+  'login_form' => 'Login Info',
+  'reset_password' => 'Reset Password',
   'sub_cat_ad_create' => 'Sub AD',
   'price_ad_create' => 'Price',
   'image_ad_create' => 'ستكون الصورة الرئيسية',
