@@ -89,6 +89,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-8">
+                        تم التطوير والبرمجة بواسطة
+                        <a href="http://ideasowners.net" style="color : yellow; ">شركة أصحاب أفكار.</a>
                         {{--<form class="subscribe-form"--}}
                         {{--action="{{ action('Frontend\HomeController@postNewsletter') }}" method="post">--}}
                         {{--{{ csrf_field() }}--}}
