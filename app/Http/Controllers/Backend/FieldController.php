@@ -26,6 +26,7 @@ class FieldController extends Controller
      */
     public function create()
     {
+        abort(404,'featured disabled.');
         return view('backend.modules.field.create');
     }
 
