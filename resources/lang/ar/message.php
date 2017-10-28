@@ -2,7 +2,7 @@
 
 return array (
   'category_field' => 'أختر التصنيف المراد البحث عنه.',
-  'brand_id_hints' => 'الماركات الخاصه بكل تصنيف',
+  'brand_id_hints' => 'الشركة / المحافظة',
   'area_field' => 'اختر منطقة البحث',
   'choose_main_category' => 'أختر التصنيف المطلوب',
   'choose_sub_category' => 'اختيار التصنيف الفرعي',
@@ -13,7 +13,7 @@ return array (
   'wishlist' => 'قائمة المفضلة',
   'list_of_all_menus' => 'قائمة المنيو',
   'price_ad_create' => 'السعر',
-  'image_ad_create' => 'Main Image',
+  'image_ad_create' => 'الصورة الرئيسية',
   'featured_ad_message' => 'بمقابل',
   'regular_ad_message' => 'مجانا',
   'create_ad' => 'الرجاء مراجعة الإعلان قبل نشره',
@@ -28,4 +28,7 @@ return array (
   'edit_user' => 'بياناتك الشخصية',
   'login_form' => 'بيانات المستخدم',
   'reset_password' => 'في حالة الفقدان',
+  'model_id_hints' => 'الموديل / المنطقة',
+  'color_id_hints' => 'اختيار اللون',
+  'manufacturing_year' => 'مثال : 2015',
 );
