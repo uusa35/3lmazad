@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         $elements = Group::with(['users' => function ($q) {
             return $q->featured()->merchants();
-        }])->orderBy('order','asc')->get();
+        }])->orderBy('order','order')->get();
         $activeGroups = Group::whereHas('users', function ($q) {
             return $q->featured()->merchants();
         })->pluck('id')->toArray();
