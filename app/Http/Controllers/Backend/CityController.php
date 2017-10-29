@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Field;
+use App\Models\Area;
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FieldController extends Controller
+class cityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $elements = Field::with('options')->orderBy('created_at', 'desc')->get();
-        return view('backend.modules.field.index', compact('elements'));
+        $elements = City::with('area')->get();
+        return view('backend.modules.city.index', compact('elements'));
     }
 
     /**
@@ -26,8 +27,8 @@ class FieldController extends Controller
      */
     public function create()
     {
-        abort('404','error occured');
-        return view('backend.modules.field.create');
+        $areas = Area::pluck('name_ar','id')->toArray();
+        return view('backend.modules.city.create',compact('areas'));
     }
 
     /**
@@ -38,11 +39,11 @@ class FieldController extends Controller
      */
     public function store(Request $request)
     {
-        $element = Field::create($request->all());
+        $element = City::create($request->all());
         if ($element) {
-            return redirect()->route('backend.field.index')->with('success', 'success !!');
+            return redirect()->route('backend.city.index')->with('success', 'process success');
         }
-        return redirect()->route('backend.field.create')->with('error', 'failure !!');
+        return redirect()->route('backend.city.index')->with('error', 'process failure');
     }
 
     /**
@@ -64,8 +65,9 @@ class FieldController extends Controller
      */
     public function edit($id)
     {
-        $element = Field::whereId($id)->first();
-        return view('backend.modules.field.edit', compact('element'));
+        $element = City::whereId($id)->first();
+        $areas = Area::pluck('name_ar','id')->toArray();
+        return view('backend.modules.city.edit', compact('element','areas'));
     }
 
     /**
@@ -77,11 +79,12 @@ class FieldController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = Field::whereId($id)->first()->update($request->all());
-        if ($element) {
-            return redirect()->route('backend.field.index')->with('success', 'saved !!');
+        $element = City::whereId($id)->first();
+        if ($element->update($request->request->all())) {
+            return redirect()->route('backend.city.index')->with('success', 'process success');
         }
-        return redirect()->route('backend.field.edit')->with('error', 'not saved !!');
+        return redirect()->route('backend.city.edit', $id)->with('error', 'process failure');
+
     }
 
     /**
@@ -92,6 +95,10 @@ class FieldController extends Controller
      */
     public function destroy($id)
     {
-
+        $element = City::whereId($id)->first()->delete();
+        if ($element) {
+            return redirect()->route('backend.city.index')->with('success', 'process success');
+        }
+        return redirect()->route('backend.city.index')->with('error', 'process failure');
     }
 }

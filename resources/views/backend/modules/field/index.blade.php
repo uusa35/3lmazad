@@ -17,6 +17,7 @@
                 <th>coll_name</th>
                 <th>options</th>
                 <th>active</th>
+                <th>order</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -33,6 +34,7 @@
                 <th>coll_name</th>
                 <th>options</th>
                 <th>active</th>
+                <th>order</th>
                 <th>Action</th>
             </tr>
             </tfoot>
@@ -62,6 +64,7 @@
                     <td>
                         <span class="label {{ activeLabel($element->active) }}">active</span>
                     </td>
+                    <td>{{ $element->order }}</td>
                     <td>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn green btn-sm btn-outline dropdown-toggle"

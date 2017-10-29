@@ -146,9 +146,9 @@ class ViewComposers
 
     public function getFields(View $view)
     {
-        $fields = Field::all();
+        $fields = Field::orderby('order','asc')->get();
         $colors = Color::orderBy('order','asc')->get();
-        $sizes = Size::all();
+        $sizes = Size::orderBy('id','asc')->get();
         return $view->with(compact('fields', 'colors', 'sizes'));
     }
 

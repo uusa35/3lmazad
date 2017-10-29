@@ -74,6 +74,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
     Route::resource('faq', 'FaqController');
     Route::resource('term', 'TermsController');
     Route::resource('area', 'AreaController');
+    Route::resource('city', 'CityController');
     Route::resource('group', 'GroupController');
     Route::resource('deal', 'DealController');
     Route::resource('plan', 'PlanController');

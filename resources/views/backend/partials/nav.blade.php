@@ -106,7 +106,12 @@
                         </li>
                         <li>
                             <a href="{{ route("backend.area.create") }}">
-                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Providence</span>
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Area</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("backend.city.create") }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New City</span>
                             </a>
                         </li>
                         <li>

@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Order</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="order" placeholder="..." />
+                            <input type="text" class="form-control" name="order" placeholder="ex 01,02,..." />
                         </div>
                     </div>
 

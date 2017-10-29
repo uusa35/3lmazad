@@ -28,7 +28,7 @@ $(document).ready(function() {
 
             // show only the fields related + set the value to zero + set the text to default
             data.parent.fields.map(f => {
-                let name = 'label_'+ lang;
+                let name = 'label_' + lang;
                 $('#' + f.name).removeClass('hidden');
                 $('#' + f.name).dropdown('set value', 0);
                 $('#' + f.name).dropdown('set text', `${f[name]}`);
@@ -63,6 +63,7 @@ $(document).ready(function() {
     $('#brand_id').on('change', function() {
         let brandId = $('.brand_id').dropdown('get value');
         $('#options-model_id').html('');
+        $('#option-text-val-model_id').text('الموديل');
         axios.get('api/brand/' + brandId + '/models').then(res => res.data).then(data => {
             let name = 'name_' + lang;
             data.models.map(m => {
@@ -79,7 +80,6 @@ $(document).ready(function() {
     // for the create-form
     $('#input-create-color_id').ready(function() {
         return axios.get('api/colors').then(res => res.data).then(data => {
-            console.log(data);
             let name = 'name_' + lang;
             data.colors.map(c => {
                 $('#input-create-color_id').append(`
@@ -94,6 +94,7 @@ $(document).ready(function() {
             });
         }).catch(e => console.log(e));
     });
+
     // for the search-form
     $('#options-color_id').ready(function() {
         console.log('read color id started')
@@ -113,6 +114,39 @@ $(document).ready(function() {
                             ${s[name]}
                         </div>
                 `);
+            });
+        }).catch(e => console.log(e));
+    });
+
+    $('#options-area_id').ready(function() {
+        console.log('from area input div');
+        return axios.get('api/areas').then(r => r.data).then(data => {
+            let name = 'name_' + lang;
+            data.areas.map(c => {
+                $('#options-area_id').append(`
+                <div class="item" data-value="${c.id}" data-text="${c[name]}">
+                            ${c[name]}
+                        </div>
+                `);
+            });
+        })
+    });
+
+
+    // home (search form) : after fetching brands .. prepare the models related
+    $('#area_id').on('change', function() {
+        let areaId = $('.area_id').dropdown('get value');
+        $('#options-city_id').html('');
+        $('#option-text-val-city_id').text('المدينة');
+        axios.get('api/area/' + areaId + '/cities').then(res => res.data).then(data => {
+            let name = 'name_' + lang;
+            console.log('the cities',data.cities);
+            data.cities.map(m => {
+                $('#options-city_id').append(`
+                        <div class="item" data-value="${m.id}" data-text="${m[name]}">
+                            ${m[name]}
+                        </div>
+                        `);
             });
         }).catch(e => console.log(e));
     });
