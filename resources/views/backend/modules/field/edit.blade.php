@@ -54,7 +54,7 @@
                             <label for="type" class="col-md-2 control-label">{{ trans('general.type') }}</label>
 
                             <div class="col-md-10">
-                                {{ Form::select('type', $types,$element->type, ['class' => 'form-control','disabled' => 'disabled']) }}
+                                {{ Form::select('type', $types,$element->type, ['class' => 'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -62,7 +62,7 @@
                             <div class="col-md-10">
                                 <div class="mt-checkbox-list">
                                     <label class="mt-checkbox">
-                                        <input type="checkbox" name="is_required" disabled
+                                        <input type="checkbox" name="is_required"
                                                value="1" {{ $element->is_required ? 'checked' : null }}> is Required
                                         <span></span>
                                     </label>
@@ -74,7 +74,7 @@
                             <div class="col-md-10">
                                 <div class="mt-checkbox-list">
                                     <label class="mt-checkbox">
-                                        <input type="checkbox" name="is_model" disabled
+                                        <input type="checkbox" name="is_model"
                                                value="1" {{ $element->is_model ? 'checked' : null }}> is modal
                                         <span></span>
                                     </label>
@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Collection Name</label>
                             <div class="col-md-10">
-                                <input type="text" name="collection_name" disabled
+                                <input type="text" name="collection_name"
                                        value="{{ $element->collection_name }}" class="form-control"
                                        placeholder="Enter text">
                             </div>
