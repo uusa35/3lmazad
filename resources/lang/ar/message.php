@@ -31,4 +31,5 @@ return array (
   'model_id_hints' => 'الموديل',
   'color_id_hints' => 'اختيار اللون',
   'manufacturing_year' => 'مثال : 2015',
+  'create_menu' => 'إنشاء قائمة اسعار جديدة',
 );

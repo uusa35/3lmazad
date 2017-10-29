@@ -21,6 +21,7 @@ return array (
   'you_r_registered_with_name' => 'Your Membership',
   'address_hints' => 'Optional Info',
   'edit_user' => 'Your Info',
+  'create_menu' => 'Create New Menu',
   'create_ad' => 'Please Review Your Ad Before Publish it',
   'plans_message' => 'Plans',
   'payment_success' => 'Payment Success',
