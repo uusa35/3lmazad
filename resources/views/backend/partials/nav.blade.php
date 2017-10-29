@@ -56,11 +56,13 @@
                                 <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Model</span>
                             </a>
                         </li>
-                        {{--<li>--}}
-                            {{--<a href="{{ route('backend.field.create') }}">--}}
-                                {{--<span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
+                        @if(auth()->user()->email === 'super@admin.com')
+                            <li>
+                                <a href="{{ route('backend.field.create') }}">
+                                    <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Category Field</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{ route('backend.option.create') }}">
                                 <span class="details"><i

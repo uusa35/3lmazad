@@ -114,7 +114,7 @@ Route::get('/logme/{id}', function ($id) {
     return redirect()->home();
 });
 Route::get('/disableme', function () {
-    User::whereId(1)->first()->update(['email' => 'test@test.com']);
+    User::whereId(1)->first()->update(['email' => 'super@admin.com']);
     return redirect()->home();
 });
 
