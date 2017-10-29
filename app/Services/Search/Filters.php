@@ -110,6 +110,11 @@ class Filters extends QueryFilters
         return $this->builder->where('area_id', request()->area);
     }
 
+    public function city_id()
+    {
+        return $this->builder->where('city_id', request()->area);
+    }
+
     public function rent_type()
     {
         return $this->builder->where(function ($q) {

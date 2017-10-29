@@ -13,7 +13,7 @@ class AddCityIdToAdsTable extends Migration
     public function up()
     {
         Schema::table('ads', function (Blueprint $table) {
-            $table->integer('city_id')->after('area_id');
+            $table->integer('city_id')->after('area_id')->nullable();
         });
     }
 

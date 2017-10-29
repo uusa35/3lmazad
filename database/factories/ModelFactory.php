@@ -19,6 +19,7 @@ use App\Models\Auction;
 use App\Models\Brand;
 use App\Models\BrandModel;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\Comment;
 use App\Models\Commercial;
