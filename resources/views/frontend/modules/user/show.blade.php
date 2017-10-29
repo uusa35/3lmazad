@@ -27,7 +27,7 @@
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
                                 {{--<div class="products-grid products-listing products-col products-isotope four-in-row row-view no-transition">--}}
                                 @if($element->isMerchant && !$element->menus->isEmpty() && !$element->menus->first()->services->isEmpty())
-                                    <div class="hidden-xs">
+                                    <div>
                                         <h3 class="text-center">{{ trans('general.menu_list') }}</h3>
                                         <hr>
                                         @include('frontend.partials._menu')
