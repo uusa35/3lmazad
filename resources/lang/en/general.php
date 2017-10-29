@@ -165,7 +165,7 @@ return array (
   'merchants-categories' => 'Merchants',
   'make_ad_payment' => 'Make Your Ad Premium',
   'forget_password' => 'Forget Password',
-  'brand_id' => 'Brand Or City',
+  'brand_id' => 'Brand',
   'reset_password' => 'Reset Password',
   'cart' => 'Cart',
   'menus_list' => 'Menues List',

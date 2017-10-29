@@ -10,7 +10,7 @@ return array (
   'choose_sub_category' => 'Choose Sub Category',
   'wishlist' => 'Wish List',
   'merchants_message_page' => 'Merchants , Companies Grouped according to different Categories & fields. kindly visit our page contact us for more information.',
-  'brand_id_hints' => 'Brand / City',
+  'brand_id_hints' => 'Brand',
   'list_of_all_menus' => 'List of Menus',
   'parent_cat_ad_create' => 'What is it ?',
   'login_form' => 'Login Info',
@@ -28,7 +28,7 @@ return array (
   'featured_ad_message' => 'Featured Ad',
   'regular_ad_message' => 'Free',
   'mobile_ad_create' => 'Ad Owner No.',
-  'model_id_hints' => 'Model / Area',
+  'model_id_hints' => 'Model',
   'color_id_hints' => 'Pick a color',
   'manufacturing_year' => 'Ex. 2015',
 );
