@@ -2,7 +2,7 @@
 
 return array (
   'category_field' => 'أختر التصنيف المراد البحث عنه.',
-  'brand_id_hints' => 'الشركة / المحافظة',
+  'brand_id_hints' => 'الشركة',
   'area_field' => 'اختر منطقة البحث',
   'choose_main_category' => 'أختر التصنيف المطلوب',
   'choose_sub_category' => 'اختيار التصنيف الفرعي',
@@ -28,7 +28,7 @@ return array (
   'edit_user' => 'بياناتك الشخصية',
   'login_form' => 'بيانات المستخدم',
   'reset_password' => 'في حالة الفقدان',
-  'model_id_hints' => 'الموديل / المنطقة',
+  'model_id_hints' => 'الموديل',
   'color_id_hints' => 'اختيار اللون',
   'manufacturing_year' => 'مثال : 2015',
 );
