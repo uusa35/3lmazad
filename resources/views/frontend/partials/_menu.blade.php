@@ -18,7 +18,7 @@
                                     <tr>
                                         <th scope="col hidden-xs" class="hidden-xs">{{ trans('general.image') }}</th>
                                         <th scope="col">{{ trans('general.service_name') }}</th>
-                                        <th scope="col hidden-xs">{{ trans('general.service_time') }}</th>
+                                        <th scope="col">{{ trans('general.service_time') }}</th>
                                         <th scope="col">{{ trans('general.price') }}</th>
                                     </tr>
                                     </thead>
@@ -27,7 +27,7 @@
                                         <tr>
                                             <td class="hidden-xs"><img src="{{ asset('storage/uploads/images/thumbnail/'.$service->image) }}" class="img-responsive" style="max-height: 60px;" alt=""></td>
                                             <td>{{ $service->name }}</td>
-                                            <td class="hidden-xs">{{ $service->timing }}</td>
+                                            <td>{{ $service->timing }}</td>
                                             <td>{{ $service->price }} {{ trans('general.kd') }}</td>
                                         </tr>
                                     @endforeach
