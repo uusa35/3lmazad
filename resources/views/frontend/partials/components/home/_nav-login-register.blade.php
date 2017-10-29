@@ -25,6 +25,7 @@
                     @if(auth()->check())
                         @if(auth()->user()->isAdmin)
                             <li><a href="{{ route('backend.home') }}">{{ trans('general.dashboard') }}</a></li>
+                            <li><a href="{{ route('account.user') }}">{{ trans('general.account') }}</a></li>
                             <li><a href="{{ url('backend/translations') }}">{{ trans('general.translations') }}</a></li>
                         @else
                             <li>
