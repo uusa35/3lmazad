@@ -3,6 +3,7 @@ namespace App\Models\Traits;
 
 use App\Models\AdMeta;
 use App\Models\BrandModel;
+use App\Models\City;
 use App\Models\Deal;
 use App\Models\Area;
 use App\Models\Auction;
@@ -49,6 +50,11 @@ trait AdTrait
     public function area()
     {
         return $this->belongsTo(Area::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function category()

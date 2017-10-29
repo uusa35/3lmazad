@@ -88,6 +88,20 @@
                 {{ $element->meta->space }}
             </a>
         @endif
+        @if(!is_null($element->area_id))
+            <a href="#" class="ad-bar-children">
+                <i class="icon dot circle"></i>
+                {{ trans('general.area') }}
+                {{ $element->area->name }}
+            </a>
+        @endif
+        @if(!is_null($element->city_id))
+            <a href="#" class="ad-bar-children">
+                <i class="icon dot circle"></i>
+                {{ trans('general.city') }}
+                {{ $element->city->name }}
+            </a>
+        @endif
         @if(!is_null($element->meta->address))
             <a href="#" class="">
                 <i class="icon dot circle"></i>

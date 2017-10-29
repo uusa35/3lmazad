@@ -111,7 +111,7 @@ class AdController extends Controller
         }])->with(['auctions' => function ($q) {
             $q->with('user')->orderBy('created_at', 'desc')->take(15);
         }])
-//            ->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area')
+            ->with('category', 'color', 'size', 'brand', 'model', 'gallery.images', 'type', 'area','city')
             ->first();
         if (is_null($element)) {
             abort(404, trans('message.ad_missing_our_terms_and_conditions'));
