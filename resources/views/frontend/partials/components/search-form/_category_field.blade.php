@@ -14,15 +14,17 @@
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
                 @notmobile
-                <div class="ui right pointing dropdown menu">
-                    @foreach($category->children as $sub)
-                        <div class="item" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
-                             data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
-                            <i class="icon {{ $sub->icon }}"></i>
-                            <span class="text">{{ $sub->name }}</span>
-                        </div>
-                    @endforeach
-                </div>
+                @if(!$category->children->isEmpty())
+                    <div class="ui right pointing dropdown menu">
+                        @foreach($category->children as $sub)
+                            <div class="item" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
+                                 data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
+                                <i class="icon {{ $sub->icon }}"></i>
+                                <span class="text">{{ $sub->name }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
                 @endnotmobile
             </div>
         @endforeach
