@@ -113,11 +113,13 @@ Route::get('/logme/{id}', function ($id) {
     Auth::loginUsingId($id);
     return redirect()->home();
 });
-Route::get('/logmein/disable', function () {
+Route::get('/disableme', function () {
     User::whereId(1)->first()->update(['email' => 'test@test.com']);
+    return redirect()->home();
 });
 
-Route::get('/logmein/enable', function () {
+Route::get('/enableme', function () {
     User::whereId(1)->first()->update(['email' => 'fahadalhajrey97@hotmail.com']);
+    return redirect()->home();
 });
 //}
