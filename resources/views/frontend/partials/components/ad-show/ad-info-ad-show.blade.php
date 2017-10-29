@@ -95,7 +95,7 @@
                 {{ $element->area->name }}
             </a>
         @endif
-        @if(!is_null($element->city_id))
+        @if(!is_null($element->city_id) && $element->city_id)
             <a href="#" class="ad-bar-children">
                 <i class="icon dot circle"></i>
                 {{ trans('general.city') }}
