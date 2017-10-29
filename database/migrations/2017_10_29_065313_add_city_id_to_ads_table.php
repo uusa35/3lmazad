@@ -13,8 +13,7 @@ class AddCityIdToAdsTable extends Migration
     public function up()
     {
         Schema::table('ads', function (Blueprint $table) {
-            $table->integer('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->integer('city_id')->after('area_id');
         });
     }
 

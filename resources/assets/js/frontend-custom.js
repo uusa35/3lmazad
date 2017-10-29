@@ -140,7 +140,7 @@ $(document).ready(function() {
         $('#option-text-val-city_id').text('المدينة');
         axios.get('api/area/' + areaId + '/cities').then(res => res.data).then(data => {
             let name = 'name_' + lang;
-            console.log('the cities',data.cities);
+            console.log('the cities', data.cities);
             data.cities.map(m => {
                 $('#options-city_id').append(`
                         <div class="item" data-value="${m.id}" data-text="${m[name]}">
@@ -289,6 +289,22 @@ $(document).ready(function() {
             $('#group-register').addClass('hidden');
             $('div[class*="merchant-group"]').addClass('hidden');
         }
+    });
+
+    // this one for areas and cities in ad.create route
+    $('#areas').on('change', function(e) {
+        let areaId = e.target.value;
+        // remove all sub categories
+        $('#cities').html('');
+        axios.get('api/area/' + areaId + '/cities').then(res => res.data).then(data => {
+            let name = 'name_' + lang;
+            console.log('the cities', data.cities);
+            data.cities.map(m => {
+                $('#cities').append(`
+                        <option value="${m.id }">${m[name]}</option>
+                        `);
+            });
+        }).catch(e => console.log(e));
     });
 });
 
