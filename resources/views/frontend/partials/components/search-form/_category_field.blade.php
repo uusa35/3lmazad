@@ -13,7 +13,7 @@
                  parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
-                {{--@notmobile--}}
+                @notmobile
                 @if(!$category->children->isEmpty())
                     <div class="ui right pointing dropdown menu">
                         @foreach($category->children as $sub)
@@ -25,7 +25,7 @@
                         @endforeach
                     </div>
                 @endif
-                {{--@endnotmobile--}}
+                @endnotmobile
             </div>
         @endforeach
     </div>
