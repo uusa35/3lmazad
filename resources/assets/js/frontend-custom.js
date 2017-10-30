@@ -3,12 +3,13 @@
  */
 $(document).ready(function() {
     console.log('jquery is ready ');
-    $(".ui.dropdown").dropdown({transition: 'none'});
+    //$(".ui.dropdown").dropdown({transition: 'none'});
     // home (search form)
     var lang = $('#lang').text();
 
-    $('#category').dropdown('setting','onChange', function() {
+    $('#category').on('change', function() {
         // fetch the catId
+        alert('changed');
         $('#sub-fields').removeClass('hidden');
         let catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
