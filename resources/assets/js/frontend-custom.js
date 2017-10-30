@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
     console.log('jquery is ready ');
-    $('.ui.dropdown').dropdown();
+    $(".ui.dropdown").dropdown({transition: 'none'});
     // home (search form)
     var lang = $('#lang').text();
     $('#category').on('change', function() {
