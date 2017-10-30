@@ -9,13 +9,10 @@ $(document).ready(function() {
 
     $('#category').on('change', function() {
         // fetch the catId
-        alert('changed');
         $('#sub-fields').removeClass('hidden');
         let catId = $('.dropdown.category').dropdown('get value');
         // fetch the cat type
         let catType = $('#cat-' + catId).data('type');
-        console.log(catType);
-        console.log(catId);
         // assign it to the input responsible for the cat --> wont make difference because i check in the api for the sub and main
         $('#cat_input').attr('name', catType);
         // hide all fields to start over
@@ -26,8 +23,6 @@ $(document).ready(function() {
         $('#options-type_id').html('');
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
-            console.log(data.parent);
-
             // show only the fields related + set the value to zero + set the text to default
             data.parent.fields.map(f => {
                 let name = 'label_' + lang;
