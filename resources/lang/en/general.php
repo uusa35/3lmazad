@@ -87,7 +87,7 @@ return array (
   'room_no' => 'room number',
   'floor_no' => 'Floor No',
   'bathroom_no' => 'Bathroom Number',
-  'rent_type' => 'Rent Type',
+  'rent_type' => 'Use ?',
   'building_age' => 'Building Age',
   'furnished' => 'Furnished',
   'not_furnished' => 'Not Furnished',

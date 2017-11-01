@@ -23,7 +23,7 @@ return array (
   'price_min' => 'أقل سعر',
   'register' => 'التسجيل',
   'register_membership' => 'تسجيل عضوية',
-  'rent_type' => 'نوع الإيجار',
+  'rent_type' => 'الغرض',
   'reset_password' => 'تغيير كلمة المرور',
   'price_max' => 'أعلى سعر',
   'most_visited' => 'الأكثر إنتشاراً',
