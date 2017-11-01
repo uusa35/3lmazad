@@ -27,15 +27,15 @@
                         @if(!$element->gallery->first()->images->isEmpty())
                             @foreach($element->gallery->first()->images as $image)
                                 <li><img src="{{ asset('storage/uploads/images/thumbnail/'.$image->image) }}"
-                                         alt="{{ $element->title }}"/></li>
+                                         alt="{{ $element->title }} - {{ trans('general.app_name') }} - {{ trans('general.app_keywords') }} }}"/></li>
                             @endforeach
                         @endif
                         @if($element->booked)
-                            <img src="{{ asset('images/booked.png') }}" alt="">
+                            <img src="{{ asset('images/booked.png') }}" alt=" {{ $element->title  }} - {{ trans('general.app_name') }} - {{ trans('general.app_keywords') }} }}">
                         @else
                             <li>
                                 <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                     alt="{{ $element->title }}"/></li>
+                                     alt="{{ $element->title }}  - {{ trans('general.app_name') }} - {{ trans('general.app_keywords') }} }}"/></li>
                         @endif
                     </ul>
                     <div class="price-box product-info__price"><span
