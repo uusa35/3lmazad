@@ -224,4 +224,8 @@ return array (
   'model_id' => 'Model Or Area',
   'color_id' => 'Color',
   'contactus_form' => 'For Suggestions & Problems',
+  'app_name' => '3almazad - Kuwait - Auctions - Ads - Buy - Sell',
+  'app_author' => 'Ideasowners - Usama Ahmed Mohammad',
+  'app_description' => 'Kuwait , Auctions , Ad , Ads, Buy , Sell, Cars',
+  'app_keywords' => 'Kuwait, Auctions, Auction, Buy, Sell, Gulf, Arabic, Car, Cars, Electronics , Mazad',
 );
