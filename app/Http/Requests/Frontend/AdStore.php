@@ -68,7 +68,9 @@ class AdStore extends FormRequest
             'is_furnished' => 'nullable|boolean',
             'space' => 'nullable|numeric',
             'address' => 'nullable|max:500',
-            'user_id' => 'required|numeric'
+            'user_id' => 'required|numeric',
+            'area_id' => 'required|numeric',
+            'city_id' => 'required|numeric'
         ];
     }
 }
