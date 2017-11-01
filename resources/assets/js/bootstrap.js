@@ -35,6 +35,7 @@ import magnificPopup from 'magnific-popup';
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 window.axios.defaults.baseURL = '/';
 console.log(window.Laravel.env);
 if(window.Laravel.env == 'local') {
