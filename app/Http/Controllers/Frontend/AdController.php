@@ -73,7 +73,7 @@ class AdController extends Controller
     {
         $element = $this->ad->create(
             $request->only('title', 'category_id', 'user_id',
-                'price', 'area_id', 'brand_id', 'model_id', 'type_id', 'color_id', 'size_id')
+                'price', 'area_id', 'brand_id', 'model_id', 'type_id', 'color_id', 'size_id','area_id','city_id')
         );
 
         if (!$element) {
