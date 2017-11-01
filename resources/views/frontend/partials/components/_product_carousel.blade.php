@@ -22,7 +22,7 @@
                         <a href="{{ route('ad.show',$element->id) }}">
                             <img src="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
                                  data-lazy="{{ asset('storage/uploads/images/thumbnail/'.$element->image) }}"
-                                 alt="{{ $element->title }}">
+                                 alt="{{ $element->title }} - {{ trans('general.app_name') }} - {{ trans("general.app_keywords") }}">
                         </a>
                         <div class="product-category__hover caption"></div>
                         <div class="product-category__info">
