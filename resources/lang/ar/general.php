@@ -174,7 +174,7 @@ return array (
   'auctions_comments' => 'تعليقات المزاد',
   'regular_ad' => 'اعلان عادي',
   'featured_ad' => 'إعلان مميز',
-  'model_id' => 'الموديل او المنطقة',
+  'model_id' => 'الموديل',
   'color_id' => 'اللون',
   'user_registered' => 'بيانات الحساب المستخدم',
   'billing_information' => 'معلومات الفوترة',
