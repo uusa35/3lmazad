@@ -26,7 +26,7 @@ class FieldController extends Controller
      */
     public function create()
     {
-        abort('404','error occured');
+        abort('404', 'error occured');
         return view('backend.modules.field.create');
     }
 
@@ -77,7 +77,9 @@ class FieldController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = Field::whereId($id)->first()->update($request->all());
+        $element = Field::whereId($id)->first();
+        $element->update($request->all());
+        !$request->has('is_modal') ? $element->update(['is_modal' => 0]) : null;
         if ($element) {
             return redirect()->route('backend.field.index')->with('success', 'saved !!');
         }
