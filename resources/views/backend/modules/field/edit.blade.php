@@ -82,6 +82,30 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-2 control-label">searchable</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="searchable"
+                                               value="1" {{ $element->searchable ? 'checked' : null  }}> searchable
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">in_form</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="in_form"
+                                               value="1" {{ $element->in_form ? 'checked' : null  }}> in create ad form
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-2 control-label">Collection Name</label>
                             <div class="col-md-10">
                                 <input type="text" name="collection_name"

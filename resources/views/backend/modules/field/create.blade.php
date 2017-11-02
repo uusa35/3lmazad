@@ -15,19 +15,22 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control"
+                                   placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">label Ar</label>
                         <div class="col-md-10">
-                            <input type="text" name="label_ar" value="{{ old('label_ar') }}" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="label_ar" value="{{ old('label_ar') }}" class="form-control"
+                                   placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">label En</label>
                         <div class="col-md-10">
-                            <input type="text" name="label_en" value="{{ old('label_en') }}" class="form-control" placeholder="Enter text" required>
+                            <input type="text" name="label_en" value="{{ old('label_en') }}" class="form-control"
+                                   placeholder="Enter text" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,28 +47,52 @@
                             {{ Form::select('type', $types,0, ['class' => 'form-control']) }}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">is_required</label>
-                        <div class="col-md-10">
-                            <div class="mt-checkbox-list">
-                                <label class="mt-checkbox">
-                                    <input type="checkbox" name="is_required" value="1"> is Required
-                                    <span></span>
-                                </label>
+                    @if(auth()->user()->email === 'super@admin.com')
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">is_required</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="is_required" value="1"> is Required
+                                        <span></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">is_model</label>
-                        <div class="col-md-10">
-                            <div class="mt-checkbox-list">
-                                <label class="mt-checkbox">
-                                    <input type="checkbox" name="is_model" value="1"> is model
-                                    <span></span>
-                                </label>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">is_model</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="is_model" value="1"> is model
+                                        <span></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">searchable</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="searchable" value="1"> searchable
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">in_form</label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox">
+                                        <input type="checkbox" name="in_form" value="1"> in create ad form
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label class="col-md-2 control-label">Collection Name</label>
                         <div class="col-md-10">

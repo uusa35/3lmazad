@@ -24,11 +24,14 @@ $(document).ready(function() {
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
             // show only the fields related + set the value to zero + set the text to default
+            console.log('date from category search', data);
             data.parent.fields.map(f => {
-                let name = 'label_' + lang;
-                $('#' + f.name).removeClass('hidden');
-                $('#' + f.name).dropdown('set value', 0);
-                $('#' + f.name).dropdown('set text', `${f[name]}`);
+                if (f.searchable) {
+                    let name = 'label_' + lang;
+                    $('#' + f.name).removeClass('hidden');
+                    $('#' + f.name).dropdown('set value', 0);
+                    $('#' + f.name).dropdown('set text', `${f[name]}`);
+                }
             });
             // check if there are brands then move to brand_id div for models
             if ('brands' in data.parent) {
@@ -243,8 +246,10 @@ $(document).ready(function() {
             console.log(data.parent);
             data.parent.fields.map(f => {
                 let nameField = 'name_' + lang;
-                $('#field-create-' + f.name).removeClass('hidden');
-                $('#input-create-' + f.name).val(nameField);
+                if (f.in_form) {
+                    $('#field-create-' + f.name).removeClass('hidden');
+                    $('#input-create-' + f.name).val(nameField);
+                }
             });
             data.parent.children.map(m => {
                 let name = 'name_' + lang;

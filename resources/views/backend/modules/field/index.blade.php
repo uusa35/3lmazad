@@ -11,10 +11,7 @@
                 <th>label_ar</th>
                 <th>label_en</th>
                 <th>icon</th>
-                <th>type</th>
-                <th>is_required</th>
-                <th>is_modal</th>
-                <th>coll_name</th>
+                <th>is_model</th>
                 <th>options</th>
                 <th>active</th>
                 <th>order</th>
@@ -28,10 +25,7 @@
                 <th>label_ar</th>
                 <th>label_en</th>
                 <th>icon</th>
-                <th>type</th>
-                <th>is_required</th>
-                <th>is_modal</th>
-                <th>coll_name</th>
+                <th>is_model</th>
                 <th>options</th>
                 <th>active</th>
                 <th>order</th>
@@ -46,14 +40,9 @@
                     <td>{{ $element->label_ar }}</td>
                     <td>{{ $element->label_en }}</td>
                     <td>{{ $element->icon }}</td>
-                    <td>{{ $element->type }}</td>
-                    <td>
-                        <span class="label {{ activeLabel($element->is_required) }}">R</span>
-                    </td>
                     <td>
                         <span class="label {{ activeLabel($element->is_model) }}">M</span>
                     </td>
-                    <td>{{ $element->collection_name }}</td>
                     <td>
                         <ul>
                             @foreach($element->options as $option)
