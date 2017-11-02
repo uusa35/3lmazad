@@ -79,7 +79,7 @@ class FieldController extends Controller
     {
         $element = Field::whereId($id)->first();
         $element->update($request->all());
-        !$request->has('is_modal') ? $element->update(['is_modal' => 0]) : null;
+        !$request->has('is_modal') ? $element->update(['is_model' => 0]) : null;
         if ($element) {
             return redirect()->route('backend.field.index')->with('success', 'saved !!');
         }
