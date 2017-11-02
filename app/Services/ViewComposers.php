@@ -140,15 +140,17 @@ class ViewComposers
     public function getCategories(View $view)
     {
         $category = new Category();
-        $categories = $category->parents()->with('children')->orderBy('order', 'asc')->get();
+        $categories = $category->parents()->whereHas('children', function ($q) {
+            return $q;
+        }, '>', 0)->with('children')->orderBy('order', 'asc')->get();
         return $view->with(compact('categories'));
     }
 
     public function getFields(View $view)
     {
-        $fields = Field::orderby('order','asc')->get();
-        $colors = Color::orderBy('order','asc')->get();
-        $sizes = Size::orderBy('id','asc')->get();
+        $fields = Field::orderby('order', 'asc')->get();
+        $colors = Color::orderBy('order', 'asc')->get();
+        $sizes = Size::orderBy('id', 'asc')->get();
         return $view->with(compact('fields', 'colors', 'sizes'));
     }
 

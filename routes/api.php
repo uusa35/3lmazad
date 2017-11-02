@@ -32,7 +32,9 @@ Route::get('brand/{id}/models', function ($id) {
 Route::get('category/{id}', function ($id) {
     $category = Category::whereId($id)->with('fields')->first();
     if (!$category->is_parent) {
-        $category = $category->parent()->with('fields')->first();
+        $category = $category->parent()->whereHas('children', function ($q) {
+            return $q;
+        },'>',0)->with('fields')->first();
     }
     if ($category->fields->where('name', 'brand_id')->first()) {
         $parent = Category::whereId($category->id)
