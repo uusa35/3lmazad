@@ -73,28 +73,32 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
+    @if(!auth()->user()->isAdmin)
+        <div class="form-group">
+            <label for="role_id" class="col-md-4 control-label">{{ trans('general.account_type') }}</label>
 
-        <div class="col-md-3">
-            <div class="col-lg-1">
-                <input type="radio" class="" name="is_merchant" value="1" {{ $element->isMerchant ? 'checked' : null }}
-                required disabled>
+            <div class="col-md-3">
+                <div class="col-lg-1">
+                    <input type="radio" class="" name="is_merchant" value="1"
+                           {{ $element->isMerchant ? 'checked' : null }}
+                           required disabled>
+                </div>
+                <div class="col-lg-2">
+                    <span>{{ trans('general.merchant') }}</span>
+                </div>
             </div>
-            <div class="col-lg-2">
-                <span>{{ trans('general.merchant') }}</span>
+            <div class="col-md-3">
+                <div class="col-lg-1">
+                    <input type="radio" class="" name="is_merchant" value="0"
+                           {{ !$element->isMerchant ? 'checked' : null }}
+                           required>
+                </div>
+                <div class="col-lg-2">
+                    <span>{{ trans('general.regular_user') }}</span>
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="col-lg-1">
-                <input type="radio" class="" name="is_merchant" value="0" {{ !$element->isMerchant ? 'checked' : null }}
-                required>
-            </div>
-            <div class="col-lg-2">
-                <span>{{ trans('general.regular_user') }}</span>
-            </div>
-        </div>
-    </div>
+    @endif
 
     <div class="form-group hidden merchant-group {{ $errors->has('address') ? ' has-error' : '' }}" id="address">
         <label for="name" class="col-md-4 control-label">{{ trans('general.address') }}</label>
