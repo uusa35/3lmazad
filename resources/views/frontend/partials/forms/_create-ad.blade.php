@@ -112,6 +112,7 @@
                             @foreach($allAreas as $area)
                                 <option value="{{ $area->id }}">{{ $area->name }}</option>
                             @endforeach
+
                         </select>
                     </div>
                 </div>

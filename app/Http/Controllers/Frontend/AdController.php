@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\Frontend\AdStore;
+use App\Http\Requests\Frontend\AdUpdate;
 use App\Jobs\CreateNewVisitorForAd;
 use App\Models\Ad;
 use App\Models\Category;
@@ -142,9 +143,9 @@ class AdController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AdStore $request, $id)
+    public function update(AdUpdate $request, $id)
     {
-        $element = Ad::whereId($id)->first();
+        $element = Ad::withoutGlobalScopes()->whereId($id)->first();
 
         $updated = $element->update(
             $request->only('title', 'category_id', 'user_id',
@@ -180,11 +181,11 @@ class AdController extends Controller
      */
     public function destroy($id)
     {
-        $element = $this->ad->whereId($id)->first();
+        $element = $this->ad->withoutGlobalScopes()->whereId($id)->first();
         if ($element->delete()) {
-            return redirect()->route('user.account.ads')->with('success', trans('message.delete_success'));
+            return redirect()->route('account.user.ads')->with('success', trans('message.delete_success'));
         }
-        return redirect()->route('user.account.ads')->with('error', trans('message.delete_failure'));
+        return redirect()->route('account.user.ads')->with('error', trans('message.delete_failure'));
     }
 
     public function toggleActivate($id)
