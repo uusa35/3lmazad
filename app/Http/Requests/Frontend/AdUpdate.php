@@ -27,7 +27,7 @@ class AdUpdate extends FormRequest
     {
         return [
             'title' => 'required|max:200', // required
-            'description' => 'required|max:1500', // required
+            'description' => 'max:1500', // required
             'image' => 'image', // required
             'images' => 'array',
             'price' => 'required|numeric', // required
@@ -45,7 +45,7 @@ class AdUpdate extends FormRequest
             'rent_type' => ['nullable', Rule::in(AdMeta::getEnumValues('ad_metas', 'rent_type'))],
             'building_age' => 'nullable|digits_between:1,4',
             'is_furnished' => 'nullable|boolean',
-            'space' => 'numeric|nullable',
+            'space' => 'nullable',
             'address' => 'max:500|nullable',
             'user_id' => 'numeric',
 //            'area_id' => 'required|numeric|exists:areas,id',
