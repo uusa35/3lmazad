@@ -43,7 +43,7 @@
                                                    required
                                             />
                                             <div class="help-block text-left">
-                                                Best fit 800*800
+                                                {{ trans('general.best_fit') .' '. trans('general.image_create_best_fit') }}} }}
                                             </div>
                                         </div>
                                     </div>
