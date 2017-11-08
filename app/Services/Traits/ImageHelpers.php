@@ -49,7 +49,7 @@ trait ImageHelpers
                         $imagePath = str_replace('public/uploads/images/', '', $imagePath);
                         $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
                         $watermark = Image::make(asset('images/logo.png'));
-                        $logo ? $img->insert($watermark->resize(10,10),'bottom-left',5,5) : null ;
+                        $logo ? $img->insert($watermark->resize(50,50),'bottom-left',5,5) : null ;
                         foreach ($sizes as $key => $value) {
                             if ($value === 'large') {
                                 $img->resize($dimensions[0], $dimensions[1]);
