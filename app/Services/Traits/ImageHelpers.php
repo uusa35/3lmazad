@@ -32,7 +32,8 @@ trait ImageHelpers
                               $inputNames = ['pdf'],
                               $dimensions = ['1052', '1320'],
                               $ratio = true,
-                              $sizes = ['large', 'medium', 'thumbnail'])
+                              $sizes = ['large', 'medium', 'thumbnail'],
+                              $logo = true)
     {
         try {
             foreach ($inputNames as $key => $inputName) {
@@ -47,6 +48,8 @@ trait ImageHelpers
                         $imagePath = $request->$inputName->store('public/uploads/images');
                         $imagePath = str_replace('public/uploads/images/', '', $imagePath);
                         $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
+                        $watermark = Image::make(asset('images/logo.png'));
+                        $logo ? $img->insert($watermark->resize(10,10),'bottom-left',5,5) : null ;
                         foreach ($sizes as $key => $value) {
                             if ($value === 'large') {
                                 $img->resize($dimensions[0], $dimensions[1]);

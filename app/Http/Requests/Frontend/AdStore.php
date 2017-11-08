@@ -47,10 +47,10 @@ class AdStore extends FormRequest
     {
         return [
             'title' => 'required|max:200', // required
-            'description' => 'required|max:1500', // required
+            'description' => 'max:1500', // required
             'image' => 'required|image', // required
             'images' => 'array|nullable',
-            'price' => 'required|numeric', // required
+            'price' => 'nullable', // required
             'category_id' => 'required|exists:categories,id', // required
             'mobile' => 'numeric|nullable',
             'area_id' => 'nullable|exists:areas,id',
@@ -66,7 +66,7 @@ class AdStore extends FormRequest
             'rent_type' => ['nullable', Rule::in(AdMeta::getEnumValues('ad_metas', 'rent_type'))],
             'building_age' => 'nullable|digits_between:1,4',
             'is_furnished' => 'nullable|boolean',
-            'space' => 'nullable|numeric',
+            'space' => 'nullable',
             'address' => 'nullable|max:500',
             'user_id' => 'required|numeric',
             'area_id' => 'required|numeric',

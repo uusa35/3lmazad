@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Area;
+use App\Models\City;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -20,7 +21,9 @@ class AreasTableSeeder extends Seeder
                 'name_ar' => isset($obj->name_ar) ? $obj->name_ar : 'null',
                 'name_en' => isset($obj->name_en) ? $obj->name_en : 'null',
                 'country_id' => isset($obj->country_id) ? $obj->country_id : 'null'
-            ]);
+            ])->each(function ($a) {
+                $a->cities()->saveMany(factory(City::class, 5)->create());
+            });
         }
     }
 }

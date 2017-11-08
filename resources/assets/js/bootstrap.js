@@ -43,6 +43,8 @@ if(window.Laravel.env == 'local') {
     window.axios.defaults.baseURL = 'http://3almazad.com';
 }
 
+console.log('current URL',window.axios.defaults.baseURL);
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

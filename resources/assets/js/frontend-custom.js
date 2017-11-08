@@ -27,6 +27,7 @@ $(document).ready(function() {
             console.log('date from category search', data);
             data.parent.fields.map(f => {
                 if (f.searchable) {
+                    console.log('#' + f.name);
                     let name = 'label_' + lang;
                     $('#' + f.name).removeClass('hidden');
                     $('#' + f.name).dropdown('set value', 0);

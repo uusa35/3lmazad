@@ -147,6 +147,8 @@ $factory->define(Field::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'active' => true,
         'is_model' => true,
+        'searchable' => true,
+        'in_form' => true,
         'label_ar' => function ($array) {
             return $array['name'];
         },
@@ -426,6 +428,14 @@ $factory->define(Service::class, function (Faker\Generator $faker) {
         'price' => $faker->numberBetween(1, 100),
         'timing' => $faker->sentence(4),
         'menu_id' => Menu::all()->random()->id
+    ];
+});
+
+$factory->define(City::class, function (Faker\Generator $faker) {
+    return [
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'area_id' => Area::all()->random()->id
     ];
 });
 

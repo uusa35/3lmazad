@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use App\Models\Ad;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Color;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -43,29 +44,36 @@ class AdViewsTest extends DuskTestCase
         $parent = Category::parents()->whereHas('fields', function ($q) {
             return $q->where('name', 'brand_id');
         })->first();
-
-        $this->browse(function (Browser $browser) use ($parent) {
+        $areaId = Area::all()->random()->id;
+        $this->browse(function (Browser $browser) use ($parent, $areaId) {
             $browser->visit('/home')
-                ->loginAs(User::find(10))
+                ->loginAs(User::find(1))
                 ->visit('ad/create')
+                ->waitFor('input[name=title]')
                 ->type('input[name=title]', 'something')
                 ->attach('image', '/Users/usamaahmed/Documents/logo.png')
-                ->attach('images[]', '/Users/usamaahmed/Documents/logo.png')
-                ->type('textarea[name=description]', 'whatever')
-                ->type('input[name=price]', 20000)
-                ->type('input[name=mobile]', 123123)
                 ->select('#category-create', $parent->id)
                 ->waitFor('#subCategories-create')
                 ->select('#subCategories-create', $parent->children()->first()->id)
-                ->waitForText('choose brand')
+                ->pause(10000000)
+                ->waitFor('#input-create-brand_id')
                 ->select('#input-create-brand_id', $parent->brands->random()->id)
                 ->select('#input-create-color_id', Color::all()->random()->id)
                 ->select('#input-create-size_id', Color::all()->random()->id)
+                ->waitFor('input[name=manufacturing_year]')
                 ->value('input[name=manufacturing_year]', '1999')
                 ->select('#input-create-is_new', 1)
                 ->select('#input-create-is_automatic', 1)
                 ->value('input[name=mileage]', '1000')
-                ->select('#area_id', Area::all()->random()->id)
+                ->waitFor('#areas')
+                ->select('#areas', $areaId)
+                ->waitFor('#cities')
+                ->select('#cities', City::where('area_id', $areaId)->get()->random()->id)
+                ->attach('images[]', '/Users/usamaahmed/Documents/logo.png')
+                ->type('input[name=price]', 200)
+                ->type('input[name=mobile]', 234829384)
+                ->waitFor('textarea[name=description]')
+                ->type('textarea[name=description]', 'whatever')
                 ->type('input[name=address]', 'this is test address')
                 ->pause(1000000)
                 ->press('general.submit');
