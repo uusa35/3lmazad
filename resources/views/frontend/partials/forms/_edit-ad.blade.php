@@ -45,6 +45,9 @@
                                 </div>
 
                                 @include('frontend.partials.components.create-ad-form._categories-dropdown')
+                                <div class="help-block text-left">
+                                    {{ trans('message.reselect_cat') }}
+                                </div>
 
                                 <div id="sub-fields-create">
                                     @foreach($fields->unique() as $field)

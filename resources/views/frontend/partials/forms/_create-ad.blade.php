@@ -167,7 +167,7 @@
                                     <div class="col-lg-12">
                                         <label for="body"
                                                class="control-label col-sm-3">{{ trans('general.description') }}
-                                            *</label>
+                                            </label>
                                         <div class="col-sm-9">
                 <textarea class="form-control tooltip-message" name="description"
                           data-content="{!! trans('message.description_ad_create') !!}"
