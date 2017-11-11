@@ -228,4 +228,8 @@ return array (
   'app_author' => 'Ideasowners - Usama Ahmed Mohammad',
   'app_description' => 'Kuwait , Auctions , Ad , Ads, Buy , Sell, Cars',
   'app_keywords' => 'Kuwait, Auctions, Auction, Buy, Sell, Gulf, Arabic, Car, Cars, Electronics , Mazad',
+  'not_required_date' => 'Not Required Info',
+  'required_date' => 'Required Info',
+  'best_fit' => 'Image best fit is',
+  'image_create_best_fit' => '800 x 800',
 );
