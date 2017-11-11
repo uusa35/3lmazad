@@ -40,6 +40,7 @@
                                                    placeholder="{{ trans('general.image') }}"
                                                    data-content="{{ trans('message.image_ad_create') }}"
                                                    type="file"
+                                                   accept="image/*"
                                                    required
                                             />
                                             <div class="help-block text-left">
