@@ -13,9 +13,8 @@
                  parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
-                {{--@notmobile--}}
                 @if(!$category->children->isEmpty())
-                        <div class="ui grid composer screen only pointing dropdown menu">
+                        <div class="ui grid computer only pointing dropdown menu" id="subCatElements">
                             @foreach($category->children as $sub)
                                 <div class="item computer only" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
                                      data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
@@ -25,7 +24,6 @@
                             @endforeach
                         </div>
                 @endif
-                {{--@endnotmobile--}}
             </div>
         @endforeach
     </div>

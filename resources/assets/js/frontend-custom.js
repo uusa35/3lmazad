@@ -2,7 +2,21 @@
  * Created by usamaahmed on 5/18/17.
  */
 $(document).ready(function() {
-    console.log('jquery is ready ');
+    // mobile detect
+
+
+    if (navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+    ) {
+        $('#subCatElements').remove();
+    }
+
+
     //$(".ui.dropdown").dropdown({transition: 'none'});
     // home (search form)
     var lang = $('#lang').text();
@@ -24,10 +38,10 @@ $(document).ready(function() {
         // fetch the brands only + all sub fields related to catID
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
             // show only the fields related + set the value to zero + set the text to default
-            console.log('date from category search', data);
+            //console.log('date from category search', data);
             data.parent.fields.map(f => {
                 if (f.searchable) {
-                    console.log('#' + f.name);
+                    //console.log('#' + f.name);
                     let name = 'label_' + lang;
                     $('#' + f.name).removeClass('hidden');
                     $('#' + f.name).dropdown('set value', 0);
@@ -98,7 +112,6 @@ $(document).ready(function() {
 
     // for the search-form
     $('#options-color_id').ready(function() {
-        console.log('read color id started')
         return axios.get('api/colors').then(res => res.data).then(data => {
             let name = 'name_' + lang;
             data.colors.map(c => {
@@ -120,7 +133,6 @@ $(document).ready(function() {
     });
 
     $('#options-area_id').ready(function() {
-        console.log('from area input div');
         return axios.get('api/areas').then(r => r.data).then(data => {
             let name = 'name_' + lang;
             data.areas.map(c => {
@@ -233,7 +245,6 @@ $(document).ready(function() {
     // ad.create categories
     $('#category-create').on('change', function(e) {
         // fetch the parent categoryID
-        console.log('category-create change');
         let catId = e.target.value;
         // remove all sub categories
         $('#subCategories-create').html('');
@@ -244,7 +255,7 @@ $(document).ready(function() {
         $('#input-create-model_id').html('');
         $('div[id^="field-create-"]').addClass('hidden');
         return axios.get('api/category/' + catId).then(res => res.data).then(data => {
-            console.log(data.parent);
+            //console.log(data.parent);
             data.parent.fields.map(f => {
                 let nameField = 'name_' + lang;
                 if (f.in_form) {
