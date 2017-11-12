@@ -24,6 +24,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .scripts([
             './../../metronic_v4.5.6/theme/assets/global/plugins/respond.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/excanvas.min.js',
+            './node_modules/jquery/dist/jquery.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/jquery.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap/js/bootstrap.min.js',
             './../../metronic_v4.5.6/theme/assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js',
@@ -67,8 +68,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
         //
         './resources/assets/html/js/custom.js',
         './resources/assets/html/vendor/rs-plugin/js/jquery.themepunch.tools.min.js',
-        // semantic
-        //'./../../node_modules/semantic-ui/dist/semantic.min.js',
     ], 'public/js/frontend.js')
     .js('resources/assets/js/frontend-custom.js', 'public/js');
 

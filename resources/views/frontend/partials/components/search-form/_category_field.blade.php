@@ -13,19 +13,19 @@
                  parentId="{{ $category->id }}" data-text="{{ $category->name }}" data-value="{{ $category->id }}">
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
-                @notmobile
+                {{--@notmobile--}}
                 @if(!$category->children->isEmpty())
-                    <div class="ui right pointing dropdown menu">
-                        @foreach($category->children as $sub)
-                            <div class="item" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
-                                 data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
-                                <i class="icon {{ $sub->icon }}"></i>
-                                <span class="text">{{ $sub->name }}</span>
-                            </div>
-                        @endforeach
-                    </div>
+                        <div class="ui grid composer screen only pointing dropdown menu">
+                            @foreach($category->children as $sub)
+                                <div class="item computer only" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
+                                     data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
+                                    <i class="icon {{ $sub->icon }}"></i>
+                                    <span class="text">{{ $sub->name }}</span>
+                                </div>
+                            @endforeach
+                        </div>
                 @endif
-                @endnotmobile
+                {{--@endnotmobile--}}
             </div>
         @endforeach
     </div>
