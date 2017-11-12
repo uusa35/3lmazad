@@ -13,7 +13,8 @@ $(document).ready(function() {
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)
     ) {
-        $('#subCatElements').remove();
+        $('div[id*="subCatElements"]').remove();
+        console.log('mobile case');
     }
 
 

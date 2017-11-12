@@ -14,9 +14,9 @@
                 <i class="icon {{ $category->icon }}"></i>
                 {{ $category->name }}
                 @if(!$category->children->isEmpty())
-                        <div class="ui grid computer only pointing dropdown menu" id="subCatElements">
+                        <div class="ui grid pointing dropdown menu" id="subCatElements-{{ $category->id }}">
                             @foreach($category->children as $sub)
-                                <div class="item computer only" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
+                                <div class="item" id="cat-{{ $sub->id }}" data-type="sub" parentId="{{ $sub->parent_id}}"
                                      data-text="{{ $sub->name }}" data-value="{{ $sub->id }}">
                                     <i class="icon {{ $sub->icon }}"></i>
                                     <span class="text">{{ $sub->name }}</span>
