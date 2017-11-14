@@ -69,21 +69,21 @@
                                 <div class="form-group">
                                     <div class="col-lg-4">
                                         <label class="control-label" for="name">name</label>
-                                        {!! Form::text('name', null, ['class' => 'form-control','placeholder'=> 'name', 'required']) !!}
+                                        {!! Form::text('name', null, ['class' => 'form-control','placeholder'=> 'name', 'required' => 'required']) !!}
                                     </div>
                                     <div class="col-lg-4">
                                         <label class="control-label" for="email">email</label>
-                                        {!! Form::text('email', null, ['class' => 'form-control', 'placeholder'=> 'email', 'required' ]) !!}
+                                        {!! Form::text('email', null, ['class' => 'form-control', 'placeholder'=> 'email', 'required' => 'required' ]) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-4">
                                         <label class="control-label" for="subject">subject</label>
-                                        {!! Form::text('subject', null, ['class' => 'form-control','placeholder'=> 'subject', 'required' ]) !!}
+                                        {!! Form::text('subject', null, ['class' => 'form-control','placeholder'=> 'subject', 'required' => 'required' ]) !!}
                                     </div>
                                     <div class="col-lg-4">
                                         <label class="control-label" for="phone">phone</label>
-                                        {!! Form::text('phone', null, ['class' => 'form-control','placeholder'=> 'phone', 'required' ]) !!}
+                                        {!! Form::text('phone', null, ['class' => 'form-control','placeholder'=> 'phone', 'required' => 'required' ]) !!}
                                     </div>
                                     {{--<div class="col-lg-4">--}}
                                     {{--<label class="col-lg-12 control-label"--}}
@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <label class="control-label" for="content">content</label>
-                                        {!! Form::textarea('content', null, ['class'=>'form-control','cols'=>30,'rows'=>5,'placeholder'=> trans('general.content') , 'required']) !!}
+                                        {!! Form::textarea('content', null, ['class'=>'form-control','cols'=>30,'rows'=>5,'placeholder'=> trans('general.content') , 'required' => 'required']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group">

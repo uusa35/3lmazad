@@ -29,7 +29,7 @@ class AdObserver
             'start_date' => Carbon::today(),
             'end_date' => Carbon::now()->addDays(Plan::where('is_paid', false)->first()->duration),
             'plan_id' => $plan->id,
-            'valid' => true,
+            'valid' => true,Register,
             'duration' => $plan->duration
         ]));
         $ad->gallery()->save(new Gallery());
