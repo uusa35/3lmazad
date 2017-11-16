@@ -17,6 +17,7 @@ return array (
   'ad_republished_successfully' => 'Ad Republished Successfully',
   'image_success' => 'Image Succseded',
   'image_failure' => 'Image Failed',
+  'comment_store_success' => 'Comment Succseded',
   'error' => 'Error',
   'parent_cat_ad_create' => 'What is it ?',
   'login_form' => 'Login Info',
