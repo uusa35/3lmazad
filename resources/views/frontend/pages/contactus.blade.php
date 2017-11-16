@@ -43,17 +43,17 @@
                                 @endif
                                 @if(!is_null($element->twitter_url) && trim($element->twitter_url))
                                     <span class="glyphicon glyphicon-globe"></span>
-                                    <a href="{{ $element->twitter_url }}">{{ trans('general.twitter') }}</a>
+                                    <a href="{{ $element->twitter_url }}" target="_blank">{{ trans('general.twitter') }}</a>
                                     <br/>
                                 @endif
                                 @if(!is_null($element->instagram_url) && trim($element->instagram_url))
                                     <span class="glyphicon glyphicon-globe"></span>
-                                    <a href="{{ $element->instagram_url }}"> {{ $element->instagram_url }}</a>
+                                    <a href="{{ $element->instagram_url }}" target="_blank"> {{ $element->instagram_url }}</a>
                                     <br/>
                                 @endif
                                 @if(!is_null($element->youtube_channel) && trim($element->youtube_channel))
                                     <span class="glyphicon glyphicon-globe"></span>
-                                    <span><a href="{{ $element->youtube_channel }}">
+                                    <span><a href="{{ $element->youtube_channel }}" target="_blank">
                                             {{ $element->youtube_channel }}
                                         </a>
                                     </span>
