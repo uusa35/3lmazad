@@ -8,7 +8,7 @@
         {{--@include('frontend.partials.components.search-form._max_field')--}}
     </div>
 
-    <div class="sub-fields hidden" id="sub-fields">
+    <div class="sub-fields hidden hidden-xs" id="sub-fields">
         @foreach($fields->unique() as $field)
             @include('frontend.partials.components.search-form.'.$field->type)
         @endforeach
