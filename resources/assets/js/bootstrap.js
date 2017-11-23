@@ -40,10 +40,8 @@ window.axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 if(window.Laravel.env == 'local') {
     window.axios.defaults.baseURL = 'http://3lmazad.dev';
 } else {
-    window.axios.defaults.baseURL = 'http://3almazad.com';
+    window.axios.defaults.baseURL = '/';
 }
-
-console.log('current URL',window.axios.defaults.baseURL);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
