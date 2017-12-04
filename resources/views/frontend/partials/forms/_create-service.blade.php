@@ -20,10 +20,10 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="title"
-                           class="control-label col-sm-3">{{ trans('general.name_en') }}*</label>
+                           class="control-label col-sm-3">{{ trans('general.name_en') }}</label>
                     <div class="col-sm-9">
                         <input class="form-control" name="name_en" value="{{ old('name_en') }}"
-                               placeholder="{{ trans('general.name_en') }}" type="text" required
+                               placeholder="{{ trans('general.name_en') }}" type="text"
                         >
                     </div>
                 </div>
@@ -32,13 +32,12 @@
             <div class="form-group">
                 <div class="col-lg-12">
                     <label for="file"
-                           class="control-label col-sm-3">{{ trans('general.image') }}* 300x300</label>
+                           class="control-label col-sm-3">{{ trans('general.image') }} 300x300</label>
                     <div class="col-sm-9">
                         <input class="form-control tooltip-message" name="image"
                                placeholder="{{ trans('general.image') }}"
                                data-content="{{ trans('message.image_ad_create') }}"
                                type="file"
-                               required
                         />
                     </div>
                 </div>

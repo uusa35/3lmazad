@@ -79,6 +79,14 @@
                 <div class="card__row--icon__text">
                     <div class="card__row__title">{{ trans('general.report_abuse') }}</div>
                 </div>
-            </a></div>
-    @endif
+            </a>
+        @endif
+        <a class="card__row card__row--icon"
+           href="#">
+            <div class="card__row--icon__icon"><i class="icon eye"></i></div>
+            <div class="card__row--icon__text">
+                <div class="card__row__title">{{ trans('general.views_counter') }}   {{ $counter }}</div>
+            </div>
+        </a>
+    </div>
 </div>

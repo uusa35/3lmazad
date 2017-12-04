@@ -90,7 +90,7 @@ class AdController extends Controller
 
         $this->saveMimes($element, $request, ['image'], ['800', '800'], false);
         if ($request->hasFile('images')) {
-            $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
+            $this->saveGallery($element->gallery()->first(), $request, 'images', ['600', '450'], false);
         }
         if ($request->is_paid) {
             session()->put('pay_product_id', $element->id);
@@ -168,7 +168,7 @@ class AdController extends Controller
             if ($element->gallery->first()->images->count() >= env('MAX_IMAGES')) {
                 return redirect()->route('account.user')->with('error', trans('message.gallery_update_max_images_reached'));
             };
-            $this->saveGallery($element->gallery()->first(), $request, ['images'], ['600', '450'], false);
+            $this->saveGallery($element->gallery()->first(), $request, 'images', ['600', '450'], false);
         }
         return redirect()->route('account.user')->with('success', trans('message.success_ad_store'));
     }

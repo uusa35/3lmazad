@@ -3,7 +3,7 @@
         <label for="{{ $field->name }}"
                class="control-label col-sm-3">{{ trans('general.'.$field->name) }}</label>
         <div class="col-sm-9">
-            <input id="input-create-{{ $field->name }}" class="form-control" name="{{ $field->name }}"
+            <input type="number" id="input-create-{{ $field->name }}" class="form-control" name="{{ $field->name }}"
                    value="{{ old($field->name) }}"
                    placeholder="{{ trans('general.'.$field->name) }}" type="{{ $field->type }}">
         </div>

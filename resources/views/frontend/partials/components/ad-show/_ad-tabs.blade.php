@@ -51,6 +51,7 @@
             <div role="tabpanel" class="tab-pane active" id="comments">
                 <div class="ui comments">
                     <h3 class="ui dividing header">{{ trans('general.auctions_comments') }}</h3>
+                    <h5 class="ui header">{{ trans('message.auctions_comments_message') }}</h5>
                     @foreach($element->comments as $comment)
                         <div class="comment">
                             <a class="avatar">

@@ -29,6 +29,7 @@
                                 @if($element->isMerchant && !$element->menus->isEmpty() && !$element->menus->first()->services->isEmpty())
                                     <div>
                                         <h3 class="text-center">{{ trans('general.menu_list') }}</h3>
+                                        <h5 class="text-center">{{ trans('message.menu_list_message') }}</h5>
                                         <hr>
                                         @include('frontend.partials._menu')
                                     </div>
@@ -38,9 +39,11 @@
                                     <hr>
                                     @include('frontend.partials._profile-gallery')
                                 @endif
-                                <h3 class="text-center">{{ trans('general.user_ads') }}</h3>
-                                <hr>
-                                @include('frontend.partials.components._product-widget-lg')
+                                @if(!$element->ads->isEmpty())
+                                    <h3 class="text-center">{{ trans('general.user_ads') }}</h3>
+                                    <hr>
+                                    @include('frontend.partials.components._product-widget-lg')
+                                @endif
                             </div>
                         </div>
                     </div>

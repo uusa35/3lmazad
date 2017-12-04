@@ -94,6 +94,11 @@ trait AdHelpers
         return $this->brand->name;
     }
 
+    public function getModelNameAttribute()
+    {
+        return $this->model->name;
+    }
+
     public function getIsOwnerAttribute()
     {
         return auth()->check() && auth()->user()->id === $this->user_id ? true : false;

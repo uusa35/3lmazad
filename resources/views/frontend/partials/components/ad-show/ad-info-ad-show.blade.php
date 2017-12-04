@@ -3,12 +3,16 @@
         <a class="ad-bar-children"><i class="icon {{ $element->category->icon }}"></i><span
                     class="text-uppercase">{{  $element->categoryName }}</span></a>
 
-        <a class="ad-bar-children"><i class="icon calendar"></i>{{  $element->createdDate }}</a>
-        <a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->willExpireAt }}</a>
         @if(!is_null($element->brand_id))
             <a class="ad-bar-children">
                 <img class="ui avatar image" style="width: 10px; height: auto;"
                      src="{{ asset('storage/uploads/images/thumbnail/'.$element->brand->image) }}"/> {{ $element->brandName }}
+            </a>
+        @endif
+        @if(!is_null($element->model_id))
+            <a class="ad-bar-children">
+                <img class="ui avatar image" style="width: 10px; height: auto;"
+                     src="{{ asset('storage/uploads/images/thumbnail/'.$element->model->image) }}"/> {{ $element->modelName }}
             </a>
         @endif
         @if(!is_null($element->color_id))
@@ -102,6 +106,9 @@
                 {{ $element->city->name }}
             </a>
         @endif
+        <a class="ad-bar-children"><i class="icon calendar"></i>{{  $element->createdDate }}</a>
+        <a class="ad-bar-children"><i class="icon eye"></i>{{ trans('general.views_counter') }} {{  $counter }}</a>
+        {{--<a class="ad-bar-children"><i class="icon delete calendar"></i>{{  $element->willExpireAt }}</a>--}}
         @if(!is_null($element->meta->address))
             <a href="#" class="">
                 <i class="icon dot circle"></i>

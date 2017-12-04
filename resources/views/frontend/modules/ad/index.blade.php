@@ -19,6 +19,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    @include('frontend.partials.components._brands_ad_index')
+                </div>
+                <div class="col-lg-12">
                     @if(isset($paidAds))
                         @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
                     @endif

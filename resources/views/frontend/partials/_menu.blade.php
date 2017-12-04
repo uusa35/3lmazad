@@ -2,13 +2,13 @@
     <div class="panel panel-default" role="tablist">
         @foreach($element->menus as $menu)
             @if(!$menu->services->isEmpty())
-                <div class="panel-heading" role="tab">
+                <div class="panel-heading" role="tab" style="border: 1px solid grey;">
                     <h4 class="panel-title"><a role="button" data-toggle="collapse" href="#menu-{{ $menu->id }}">
                             {{ $menu->name }} </a>
                     </h4>
                 </div>
                 <div id="menu-{{ $menu->id }}"
-                     class="panel-collapse collapse {{ $element->menus->first()->id == $menu->id ? 'in' : null }}"
+                     class="panel-collapse collapse"
                      role="tabpanel">
                     <div class="panel-body">
                         <div class="row">

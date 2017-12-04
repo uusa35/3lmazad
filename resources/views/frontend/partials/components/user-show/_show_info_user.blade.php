@@ -31,13 +31,15 @@
                             <span class="date">{{  $element->isMerchant ? trans('general.merchant') : trans('general.user') }}</span>
                         </p>
                     </div>
-                    <div class="description">
-                        <p>{{ $element->description }}</p>
-                    </div>
-                    <div class="description col-lg-2 col-lg-push-10">
-                        <a href="{{ route('user.ads',$element->id) }}"
-                           class="btn btn--wd">{{ trans('general.user_ads') }}</a>
-                    </div>
+                    @if($element->description->count() > 1)
+                        <div class="description">
+                            <p>{{ $element->description }}</p>
+                        </div>
+                    @endif
+                    {{--<div class="description col-lg-2 col-lg-push-10">--}}
+                    {{--<a href="{{ route('user.ads',$element->id) }}"--}}
+                    {{--class="btn btn--wd">{{ trans('general.user_ads') }}</a>--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
