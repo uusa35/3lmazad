@@ -6,6 +6,7 @@ use App\Http\Requests\Frontend\UserUpdate;
 use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -47,6 +48,30 @@ class UserController extends Controller
         return redirect()->back()->with('warning', 'user is not featured now');
     }
 
+
+    public function create()
+    {
+        return view('backend.modules.user.create');
+    }
+
+    public function store(Request $request) {
+        if ($request->is_merchant) {
+            $user = User::create($request->except('is_merchant'));
+            $role = Role::where('name', 'merchant')->first();
+            $user->roles()->sync($role->id);
+        }
+        if ($user) {
+            if ($request->hasFile('avatar')) {
+                $this->saveMimes($user,
+                    $request,
+                    ['avatar'],
+                    ['500', '500'],
+                    false);
+            }
+            return redirect()->route('backend.user.index', ['type' => $user->roles->first()->name])->with('success', 'saved .. success');
+        }
+        return redirect()->route('backend.user.create')->with('error', 'user not save successfully')->withInputs();
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,9 +110,9 @@ class UserController extends Controller
                     ['500', '500'],
                     false);
             }
-            return redirect()->route('backend.user.index',['type' => $user->roles->first()->name])->with('success', trans('general.user_update_success'));
+            return redirect()->route('backend.user.index', ['type' => $user->roles->first()->name])->with('success', trans('general.user_update_success'));
         }
-        return redirect()->route('backend.user.edit',$id)->with('error', trans('general.user_update_failure'))->withInputs();
+        return redirect()->route('backend.user.edit', $id)->with('error', trans('general.user_update_failure'))->withInputs();
     }
 
 }

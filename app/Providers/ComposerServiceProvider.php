@@ -31,8 +31,8 @@ class ComposerServiceProvider extends ServiceProvider
 
         view()->composer([
             'frontend.partials.forms._register',
-            'frontend.modules.user.edit',
             'backend.modules.user.edit',
+            'backend.modules.user.create',
         ],
             'App\Services\ViewComposers@getGroups');
         view()->composer([

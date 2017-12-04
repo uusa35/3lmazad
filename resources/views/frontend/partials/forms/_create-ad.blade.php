@@ -65,7 +65,7 @@
                                         <label for="area_id" class="control-label col-sm-3">{{ trans('general.area') }}
                                             *</label>
                                         <div class="col-sm-9">
-                                            <select id="areas" name="area_id" class="form-control" required>
+                                            <select id="areas" name="area_id" class="form-control">
                                                 <option value="">{{ trans('general.area') }}</option>
                                                 @foreach($allAreas as $area)
                                                     <option value="{{ $area->id }}">{{ $area->name }}</option>
@@ -81,7 +81,7 @@
                                         <label for="city_id" class="control-label col-sm-3">{{ trans('general.city') }}
                                             *</label>
                                         <div class="col-sm-9">
-                                            <select id="cities" name="city_id" class="form-control" required>
+                                            <select id="cities" name="city_id" class="form-control">
                                                 <option value="">{{ trans('general.city') }}</option>
                                             </select>
                                         </div>

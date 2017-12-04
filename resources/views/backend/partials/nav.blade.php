@@ -32,8 +32,14 @@
                     <ul class="dropdown-menu">
                         <li class="external">
                             <h3>
-                                <span class="bold">Create New Items</h3>
+                                <span class="bold">Create New Items</span>
+                            </h3>
                             {{--<a href="page_user_profile_1.html">view all</a>--}}
+                        </li>
+                        <li>
+                            <a href="{{ route('backend.user.create') }}">
+                                <span class="details"><i class="fa fa-fw fa-plus-square"></i> Create New Merchant</span>
+                            </a>
                         </li>
                         <li>
                             <a href="{{ route('backend.slider.create') }}">

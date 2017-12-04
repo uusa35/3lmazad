@@ -64,6 +64,12 @@
                                     <a href="{{ route('backend.featured',['model' => 'user','id' => $element->id]) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> toggle featured</a>
                                 </li>
+                                @if($element->isMerchant)
+                                    <li>
+                                        <a href="{{ url('logme/'.$element->id) }}">
+                                            <i class="fa fa-fw fa-check-circle"></i> Log with user</a>
+                                    </li>
+                                @endif
                                 <li>
                                     <a href="{{ route('user.show',$element->id) }}">
                                         <i class="fa fa-fw fa-check-circle"></i> View User</a>
