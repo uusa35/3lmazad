@@ -61,51 +61,6 @@
 
 
                                 <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <label for="area_id" class="control-label col-sm-3">{{ trans('general.area') }}
-                                            *</label>
-                                        <div class="col-sm-9">
-                                            <select id="areas" name="area_id" class="form-control">
-                                                <option value="">{{ trans('general.area') }}</option>
-                                                @foreach($allAreas as $area)
-                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
-                                                @endforeach
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                        <label for="city_id" class="control-label col-sm-3">{{ trans('general.city') }}
-                                            *</label>
-                                        <div class="col-sm-9">
-                                            <select id="cities" name="city_id" class="form-control">
-                                                <option value="">{{ trans('general.city') }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-checkout" role="tablist">
-                <div class="panel-heading active" role="tab">
-                    <h4 class="panel-title"><a role="button" data-toggle="collapse" href="#collapseTow">
-                            {{ trans('general.not_required_date') }}
-                        </a></h4>
-                    <div class="panel-heading__number">2.</div>
-                </div>
-                <div id="collapseTow" class="panel-collapse collapse" role="tabpanel">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                                <div class="form-group">
                                     <div class="col-lg-12 tooltip-message" data-content="">
                                         <label for="is_paid" class="control-label col-sm-3">
                                             {{ trans('general.featured_ad') }}
@@ -133,6 +88,23 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-checkout" role="tablist">
+                <div class="panel-heading active" role="tab">
+                    <h4 class="panel-title"><a role="button" data-toggle="collapse" href="#collapseTow">
+                            {{ trans('general.not_required_date') }}
+                        </a></h4>
+                    <div class="panel-heading__number">2.</div>
+                </div>
+                <div id="collapseTow" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12">
 
                                 <div class="form-group">
                                     <div class="col-lg-12">
@@ -145,6 +117,34 @@
                                                    placeholder="{{ trans('general.mobile') }}"
                                                    type="number"
                                                    maxlength="10">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="area_id" class="control-label col-sm-3">{{ trans('general.area') }}
+                                            *</label>
+                                        <div class="col-sm-9">
+                                            <select id="areas" name="area_id" class="form-control">
+                                                <option value="">{{ trans('general.area') }}</option>
+                                                @foreach($allAreas as $area)
+                                                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="city_id" class="control-label col-sm-3">{{ trans('general.city') }}
+                                            *</label>
+                                        <div class="col-sm-9">
+                                            <select id="cities" name="city_id" class="form-control">
+                                                <option value="">{{ trans('general.city') }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

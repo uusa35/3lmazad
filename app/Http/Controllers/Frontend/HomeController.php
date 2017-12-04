@@ -42,8 +42,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mostVisitedAds = $this->ad->getMostVisitedAds();
-        $latestAds = $this->ad->has('category')->orderBy('created_at', 'desc')->take(15)->get();
+        $mostVisitedAds = $this->ad->getMostVisitedAds()->reverse();
+        $latestAds = $this->ad->has('category')->orderBy('created_at', 'desc')->take(15)->get()->reverse();
         $commercialsFixed = $this->commercial->fixed()->orderBy('created_at', 'desc')->take(2)->get();
         $commercialsNotFixed = $this->commercial->notFixed()->inRandomOrder()->take(2)->get();
         $sliders = Slider::orderBy('order', 'desc')->get();
