@@ -101,7 +101,7 @@
                         </a></h4>
                     <div class="panel-heading__number">2.</div>
                 </div>
-                <div id="collapseTow" class="panel-collapse collapse" role="tabpanel">
+                <div id="collapseTow" class="panel-collapse collapse {{ $errors->count() > 0 ? 'in' : null }}" role="tabpanel">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-12">
