@@ -232,4 +232,5 @@ return array (
   'required_date' => 'Required Info',
   'best_fit' => 'Image best fit is',
   'image_create_best_fit' => '800 x 800',
+  'views_counter' => 'Views',
 );

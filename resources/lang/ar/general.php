@@ -234,4 +234,5 @@ return array (
   'not_required_date' => 'بيانات غير إلزامية',
   'best_fit' => 'أفضل مقاس للصورة هو',
   'image_create_best_fit' => '٨٠٠ × ٨٠٠',
+  'views_counter' => 'المشاهدات',
 );
