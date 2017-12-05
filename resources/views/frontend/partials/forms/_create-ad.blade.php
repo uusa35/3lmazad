@@ -124,7 +124,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <label for="area_id" class="control-label col-sm-3">{{ trans('general.area') }}
-                                            *</label>
+                                            </label>
                                         <div class="col-sm-9">
                                             <select id="areas" name="area_id" class="form-control">
                                                 <option value="">{{ trans('general.area') }}</option>
@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <label for="city_id" class="control-label col-sm-3">{{ trans('general.city') }}
-                                            *</label>
+                                            </label>
                                         <div class="col-sm-9">
                                             <select id="cities" name="city_id" class="form-control">
                                                 <option value="">{{ trans('general.city') }}</option>
