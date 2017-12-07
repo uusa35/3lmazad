@@ -19,7 +19,7 @@ trait AdHelpers
      * @return mixed
      * $this is the class
      */
-    public function getMostVisitedAds($take = 50)
+    public function getMostVisitedAds($take = 30)
     {
         $ids = DB::table('ads')
             ->where(['is_sold' => false, 'active' => true])
