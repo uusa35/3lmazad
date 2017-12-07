@@ -50,4 +50,5 @@ return array (
   'area_id_hints' => 'Ex: Hawally',
   'city_id_hints' => 'Ex : Al-Nuzha',
   'reselect_cat' => 'Editing your add must be followed with re-assigning your parent / sub category.',
+  'auctions_comments_message' => 'Auction + No.',
 );
