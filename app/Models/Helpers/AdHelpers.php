@@ -19,7 +19,7 @@ trait AdHelpers
      * @return mixed
      * $this is the class
      */
-    public function getMostVisitedAds($take = 15)
+    public function getMostVisitedAds($take = 50)
     {
         $ids = DB::table('ads')
             ->where(['is_sold' => false, 'active' => true])
@@ -28,7 +28,6 @@ trait AdHelpers
             ->groupBy('ads.id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
             ->take($take)->pluck('id')->toArray();
-        dd($ids);
         return $this->whereIn('id', $ids)->get();
     }
 
