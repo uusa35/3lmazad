@@ -28,6 +28,7 @@ trait AdHelpers
             ->groupBy('ads.id')// responsible to get the sum of ads returned
             ->orderBy('ad_count', 'DESC')
             ->take($take)->pluck('id')->toArray();
+        dd($ids);
         return $this->whereIn('id', $ids)->get();
     }
 
