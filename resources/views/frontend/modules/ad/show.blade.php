@@ -59,7 +59,7 @@
             </div>
         </div>
     </section>
-    @if(!$paidAds->isEmpty())
+    @if(!$paidAds->isEmpty() && count($paidAds) > 2)
         @include('frontend.partials.components._product_carousel',['elements' => $paidAds,'header' => trans('general.paid_ads')])
     @endif
     @include('frontend.partials.components.ad-show._ad-tabs')
