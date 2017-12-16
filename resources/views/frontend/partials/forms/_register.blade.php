@@ -6,7 +6,7 @@
             {{ csrf_field() }}
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{ trans('general.name') }}</label>
+                <label for="name" class="col-md-4 control-label">{{ trans('general.name') }}*</label>
 
                 <div class="col-md-6">
                     <input id="name" type="text" class="form-control" name="name"
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <label for="email" class="col-md-4 control-label">{{ trans('general.email') }}</label>
+                <label for="email" class="col-md-4 control-label">{{ trans('general.email') }}*</label>
 
                 <div class="col-md-6">
                     <input id="email" type="email" class="form-control" name="email"
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password" class="col-md-4 control-label">{{ trans('general.password') }}</label>
+                <label for="password" class="col-md-4 control-label">{{ trans('general.password') }}*</label>
 
                 <div class="col-md-6">
                     <input id="password" type="password" class="form-control" name="password" required>
@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label for="password-confirm"
-                       class="col-md-4 control-label">{{ trans('general.confirm_password') }}</label>
+                       class="col-md-4 control-label">{{ trans('general.confirm_password') }}*</label>
 
                 <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control"
