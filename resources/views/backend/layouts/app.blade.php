@@ -9,7 +9,7 @@
     @section('styles')
         @include('backend.partials.styles')
     @show
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('images/logo.ico') }}"/>
 </head>
 
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
