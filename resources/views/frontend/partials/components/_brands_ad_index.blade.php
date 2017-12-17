@@ -5,12 +5,12 @@
                 <ul class="nav nav-justified">
                     {{--http://3almazad.com/search?parent=1&search=&area_id=0&city_id=0&brand_id=11&rent_type=0&model_id=0&is_new=0&is_automatic=0&color_id=0&size_id=0&manufacturing_year=&mileage=&is_furnished=0&floor_no=&building_age=0&bathroom_no=0&room_no=&type_id=0&space=--}}
                     @foreach($element->brands as $b)
-                        {!! $loop->index % 12 === 0 ? '</br>' : null !!}
+                        {{--{!! $loop->index % 12 === 0 ? '</br>' : null !!}--}}
                             <li class="text-center">
                                 <a href="{{ route('search',['parent' => $element->id,'brand_id' => $b->id]) }}"
-                                   style="display: flex; width: 100px; height: 100px; flex-direction: row; flex-wrap: wrap; justify-content : space-around; alignItems: center">
+                                   style="text-align: center;">
                                     <img class="img-responsive img-circle"
-                                         style="width: 50px; height: 50px; margin: 5px;"
+                                         style="width : 100px; height: 100px; text-align: center; margin-right: auto;margin-left: auto;margin-bottom: 10px;"
                                          src="{{ asset('storage/uploads/images/thumbnail/'.$b->image) }}"
                                          alt="{{ $b->name_ar . $b->name_en }}"
                                     />
