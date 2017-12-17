@@ -8,7 +8,7 @@
                 <label for="email" class="col-md-4 control-label">{{ trans("general.email") }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="text" class="form-control" name="mobile"
+                    <input id="email" type="text" class="form-control" name="email"
                            value="{{ old('email') }}"
                            required autofocus {{ session()->get('make_disabled') }}>
 
