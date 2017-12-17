@@ -5,7 +5,7 @@
                 <ul class="nav nav-justified">
                     {{--http://3almazad.com/search?parent=1&search=&area_id=0&city_id=0&brand_id=11&rent_type=0&model_id=0&is_new=0&is_automatic=0&color_id=0&size_id=0&manufacturing_year=&mileage=&is_furnished=0&floor_no=&building_age=0&bathroom_no=0&room_no=&type_id=0&space=--}}
                     @foreach($element->brands as $b)
-                        @if($loop <= 10)
+                        @if($loop->index <= 10)
                             <li class="text-center">
                                 <a href="{{ route('search',['parent' => $element->id,'brand_id' => $b->id]) }}"
                                    style="text-align: center;">
@@ -27,7 +27,7 @@
                 <ul class="nav nav-justified">
                     {{--http://3almazad.com/search?parent=1&search=&area_id=0&city_id=0&brand_id=11&rent_type=0&model_id=0&is_new=0&is_automatic=0&color_id=0&size_id=0&manufacturing_year=&mileage=&is_furnished=0&floor_no=&building_age=0&bathroom_no=0&room_no=&type_id=0&space=--}}
                     @foreach($element->brands as $b)
-                        @if($loop > 10 && $loop <= 20)
+                        @if($loop->index > 10 && $loop->index <= 20)
                             <li class="text-center">
                                 <a href="{{ route('search',['parent' => $element->id,'brand_id' => $b->id]) }}"
                                    style="text-align: center;">
