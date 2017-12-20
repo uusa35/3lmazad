@@ -205,6 +205,7 @@ return array (
   'civil_id' => 'Civil ID No.',
   'pay' => 'Pay',
   'clear_cart' => 'Cancel',
+  'valid_deal' => 'Valid Deal',
   'list_of_all_menus' => 'List Of Ads',
   'user_profile' => 'User\'s Profile',
   'merchant_profile' => 'User Profile',
@@ -233,4 +234,6 @@ return array (
   'best_fit' => 'Image best fit is',
   'image_create_best_fit' => '800 x 800',
   'views_counter' => 'Views',
+  'city' => 'City',
+  'address_details' => 'Address',
 );
