@@ -36,9 +36,9 @@
                                         <label for="file"
                                                class="control-label col-sm-3">{{ trans('general.image') }}*</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control tooltip-message" name="image"
+                                            <input class="form-control" name="image"
                                                    placeholder="{{ trans('general.image') }}"
-                                                   data-content="{{ trans('message.image_ad_create') }}"
+                                                   {{--data-content="{{ trans('message.image_ad_create') }}"--}}
                                                    type="file"
                                                    accept="image/*"
                                                    required
