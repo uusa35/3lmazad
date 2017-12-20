@@ -121,6 +121,7 @@ class AdController extends Controller
         $counter = Visitor::where('ad_id', $element->id)->count();
         $element->isOwner ? session()->put('pay_product_id', $element->id) : session()->forget('pay_product_id');
         $paidAds = $this->ad->where('category_id', $element->category_id)->adHasValidPaidDeal()->orderBy('created_at', 'desc')->take(12)->get();
+        dd($paidAds);
         return view('frontend.modules.ad.show', compact('element', 'counter', 'paidAds'));
     }
 
