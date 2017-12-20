@@ -4,6 +4,10 @@
         {{--@include('frontend.partials.components.search-form._area_id_field')--}}
         @include('frontend.partials.components.search-form._category_field')
         @include('frontend.partials.components.search-form._keyword_field')
+        <button class="ui labeled icon brown button search-input default-bg-orange" type="submit">
+            <i class="search icon"></i>
+            {{ trans('general.search') }}
+        </button>
         {{--@include('frontend.partials.components.search-form._min_field')--}}
         {{--@include('frontend.partials.components.search-form._max_field')--}}
     </div>
@@ -14,9 +18,5 @@
         @endforeach
     </div>
 
-    <button class="ui labeled icon brown button search-input default-bg-orange" type="submit">
-        <i class="search icon"></i>
-        {{ trans('general.search') }}
-    </button>
 </form>
 <hr>
